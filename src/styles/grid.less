@@ -1,0 +1,50 @@
+@import "./vars.less";
+
+/**
+ * generates .grid .row and .col-* classes
+ * @spacing  Margins on the sides and between columns
+ * @ncol     Number of columns in a layout
+ * @ncol-max Maximum number for .col-[n] classes to generate.
+ */
+.generateGrid(@spacing, @ncol, @ncol-max) {
+    .grid {
+        .row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding-left: @spacing / 2;
+            padding-right: @spacing / 2;
+        }
+
+        [class^="col-"] {
+            flex-grow: 1;
+            flex-shrink: 0;
+            overflow: hidden;
+            &> * {
+                margin: @vu @spacing / 2;
+            }
+        }
+
+        .generateCols(@counter) when (@counter > 0) {
+
+            @width: (min(@counter, @ncol) / @ncol ) * 100;
+            .col-@{counter} {
+                flex-basis: ~"@{width}%";
+            }
+            .generateCols((@counter - 1));
+        }
+        .generateCols(@ncol-max);
+    }
+}
+
+@media @screen-large {
+    .generateGrid(@spacing-large, @ncol, @ncol);
+}
+
+@media @screen-medium {
+    .generateGrid(@spacing-medium, @ncol, @ncol);
+}
+
+@media @screen-small {
+    .generateGrid(@spacing-small, @ncol-small, @ncol);
+}

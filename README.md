@@ -1,4 +1,4 @@
-# ds
+# Portail Design System
 
 ## Project setup
 ```

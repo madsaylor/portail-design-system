@@ -1,27 +1,28 @@
 @import "./vars.less";
 
 .main-content {
-    margin: 0 auto;
-    justify-content: center;
-    max-width: @main-max-width;
+  margin: 0;
+  padding-top: @vu * 3;
+  max-width: @main-max-width;
 }
 
 .main-sidebar {
-    min-height: 100vh;
-    box-sizing: border-box;
-    position: absolute;
-    min-width:  @sidebar-width;
-    max-width:  @sidebar-width;
+  min-height: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  min-width:  @sidebar-width;
+  max-width:  @sidebar-width;
 }
 
 @media @show-sidebar {
-    .main-content {
-        padding-left: @sidebar-width;
-    }
+  .main-content {
+    padding-left: @sidebar-width;
+  }
 }
 
 @media @hide-sidebar {
-    .main-sidebar {
-        display: none;
-    }
+  .main-sidebar {
+    display: none;
+  }
 }

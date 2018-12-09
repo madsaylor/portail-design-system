@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/sidebar/outline-help_outline-24px</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M7.3,12.2 L8.7,12.2 L8.7,10.8 L7.3,10.8 L7.3,12.2 Z M8,1 C4.136,1 1,4.136 1,8 C1,11.864 4.136,15 8,15 C11.864,15 15,11.864 15,8 C15,4.136 11.864,1 8,1 Z M8,13.6 C4.913,13.6 2.4,11.087 2.4,8 C2.4,4.913 4.913,2.4 8,2.4 C11.087,2.4 13.6,4.913 13.6,8 C13.6,11.087 11.087,13.6 8,13.6 Z M8,3.8 C6.453,3.8 5.2,5.053 5.2,6.6 L6.6,6.6 C6.6,5.83 7.23,5.2 8,5.2 C8.77,5.2 9.4,5.83 9.4,6.6 C9.4,8 7.3,7.825 7.3,10.1 L8.7,10.1 C8.7,8.525 10.8,8.35 10.8,6.6 C10.8,5.053 9.547,3.8 8,3.8 Z" id="path-1"></path>
+    </defs>
+    <g id="icons/sidebar/outline-help_outline-24px" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g fill-rule="nonzero"></g>
+        <g id="colors/dark" mask="url(#mask-2)" fill="#3F4352">
+            <rect id="color" x="0" y="0" width="16" height="16"></rect>
+        </g>
+    </g>
+</svg>

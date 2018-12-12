@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="less">
-@import "../styles/vars.less";
+@import "~@/styles/vars";
 
 .group-name {
   text-transform: capitalize;

@@ -37,9 +37,9 @@ export default {
 </script>
 
 <style lang="less">
-@import './styles/main.less';
-@import './styles/grid.less';
-@import './styles/vars.less';
+@import './styles/main';
+@import './styles/grid';
+@import './styles/vars';
 
 body {
   .font-desktop-body-medium-dark();

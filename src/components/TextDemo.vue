@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style lang="less">
-@import '../styles/vars.less';
+@import '~@/styles/vars';
 
 .font-style-demo {
   margin-bottom: @vu * 2;

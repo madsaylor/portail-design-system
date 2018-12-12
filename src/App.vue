@@ -7,9 +7,6 @@
       <div class="row-col">
         <h1>Portail v3 Design System</h1>
       </div>
-      <!-- <pre v-highlightjs><code class="javascript">
-        const s = new Date().toString()
-      </code></pre> -->
 
       <GridDemo></GridDemo>
       <ColorsDemo></ColorsDemo>
@@ -20,10 +17,10 @@
 </template>
 
 <script>
-import GridDemo from './components/GridDemo.vue'
-import ColorsDemo from './components/ColorsDemo.vue'
-import TextDemo from './components/TextDemo.vue'
-import IconsDemo from './components/IconsDemo.vue'
+import GridDemo from './demos/GridDemo.vue'
+import ColorsDemo from './demos/ColorsDemo.vue'
+import TextDemo from './demos/TextDemo.vue'
+import IconsDemo from './demos/IconsDemo.vue'
 
 export default {
   name: 'app',

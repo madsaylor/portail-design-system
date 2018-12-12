@@ -6,14 +6,12 @@
       To embed the font into a webpage, copy this code into the &lt;head&gt;
       of your HTML document.:
       <pre v-highlightjs=linkSnippet><code class="html"></code></pre>
-      Use the following CSS rules to specify these families:
-      <pre v-highlightjs=useSnippet><code class="css"></code></pre>
+
       <h2>Font Styles</h2>
       <div
         v-for="fontStyle in fontStyles"
         :class="['card', 'font-style-demo', fontStyle]"
-      >.{{ fontStyle }}()</span>
-    </div>
+      >.{{ fontStyle }}()</div>
     </div>
   </div>
 </template>
@@ -23,22 +21,37 @@ export default {
   data: () => ({
     linkSnippet: ('<link href="https://fonts.googleapis.com/css?family=' +
                   'Asap:400,400i,500,600,600i,700,700i" rel="stylesheet">'),
-    useSnippet: `font-family: 'Asap', sans-serif;`,
     fontStyles: [
+      'font-button-big',
+      'font-button-normal',
+      'font-button-normal-alt',
       'font-desktop-body-medium-dark',
+      'font-desktop-body-medium-dark-center',
       'font-desktop-body-medium-dark-right',
       'font-desktop-body-medium-gray',
+      'font-desktop-body-medium-gray-center',
       'font-desktop-body-medium-light-gray',
+      'font-desktop-body-medium-light-gray-center',
       'font-desktop-body-medium-primary',
+      'font-desktop-body-medium-primary-center',
+      'font-desktop-body-regular-accent',
       'font-desktop-body-regular-dark',
+      'font-desktop-body-regular-dark-center',
       'font-desktop-body-regular-gray',
+      'font-desktop-body-regular-gray-center',
+      'font-desktop-components-field-helper-default',
+      'font-desktop-components-field-helper-error',
       'font-desktop-h-2-dark',
       'font-desktop-h-3-dark',
       'font-desktop-small-italic-gray',
+      'font-desktop-small-medium-accent-center',
       'font-desktop-small-medium-dark',
+      'font-desktop-small-medium-dark-center',
       'font-desktop-small-regular-dark',
+      'font-desktop-small-regular-dark-center',
       'font-desktop-small-regular-dark-right',
       'font-desktop-small-regular-gray',
+      'font-desktop-small-regular-gray-center',
       'font-desktop-small-regular-gray-right',
       'font-desktop-small-regular-light-gray',
       'font-desktop-x-small-regular-gray',
@@ -52,11 +65,24 @@ export default {
 
 .font-style-demo {
   margin-bottom: @vu * 2;
-  height: @vu * 8;
 }
 
+.font-button-big {
+  .font-button-big();
+  &.card { background: @color-black; }
+}
+.font-button-normal {
+  .font-button-normal();
+  &.card { background: @color-black; }
+}
+.font-button-normal-alt {
+  .font-button-normal-alt();
+}
 .font-desktop-body-medium-dark {
   .font-desktop-body-medium-dark();
+}
+.font-desktop-body-medium-dark-center {
+  .font-desktop-body-medium-dark-center();
 }
 .font-desktop-body-medium-dark-right {
   .font-desktop-body-medium-dark-right();
@@ -64,17 +90,41 @@ export default {
 .font-desktop-body-medium-gray {
   .font-desktop-body-medium-gray();
 }
+.font-desktop-body-medium-gray-center {
+  .font-desktop-body-medium-gray-center();
+}
 .font-desktop-body-medium-light-gray {
   .font-desktop-body-medium-light-gray();
+}
+.font-desktop-body-medium-light-gray-center {
+  .font-desktop-body-medium-light-gray-center();
 }
 .font-desktop-body-medium-primary {
   .font-desktop-body-medium-primary();
 }
+.font-desktop-body-medium-primary-center {
+  .font-desktop-body-medium-primary-center();
+}
+.font-desktop-body-regular-accent {
+  .font-desktop-body-regular-accent();
+}
 .font-desktop-body-regular-dark {
   .font-desktop-body-regular-dark();
 }
+.font-desktop-body-regular-dark-center {
+  .font-desktop-body-regular-dark-center();
+}
 .font-desktop-body-regular-gray {
   .font-desktop-body-regular-gray();
+}
+.font-desktop-body-regular-gray-center {
+  .font-desktop-body-regular-gray-center();
+}
+.font-desktop-components-field-helper-default {
+  .font-desktop-components-field-helper-default();
+}
+.font-desktop-components-field-helper-error {
+  .font-desktop-components-field-helper-error();
 }
 .font-desktop-h-2-dark {
   .font-desktop-h-2-dark();
@@ -85,17 +135,29 @@ export default {
 .font-desktop-small-italic-gray {
   .font-desktop-small-italic-gray();
 }
+.font-desktop-small-medium-accent-center {
+  .font-desktop-small-medium-accent-center();
+}
 .font-desktop-small-medium-dark {
   .font-desktop-small-medium-dark();
 }
+.font-desktop-small-medium-dark-center {
+  .font-desktop-small-medium-dark-center();
+}
 .font-desktop-small-regular-dark {
   .font-desktop-small-regular-dark();
+}
+.font-desktop-small-regular-dark-center {
+  .font-desktop-small-regular-dark-center();
 }
 .font-desktop-small-regular-dark-right {
   .font-desktop-small-regular-dark-right();
 }
 .font-desktop-small-regular-gray {
   .font-desktop-small-regular-gray();
+}
+.font-desktop-small-regular-gray-center {
+  .font-desktop-small-regular-gray-center();
 }
 .font-desktop-small-regular-gray-right {
   .font-desktop-small-regular-gray-right();

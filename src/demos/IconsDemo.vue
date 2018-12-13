@@ -13,7 +13,7 @@
 
 <script>
 
-let context = require.context('../icons', true, /\.svg$/)
+let context = require.context('@/icons', true, /\.svg$/)
 let icons = context.keys()
 
 export default {

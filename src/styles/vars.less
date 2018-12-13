@@ -13,7 +13,6 @@
 @main-max-width: 1280px;
 @hide-sidebar: ~"only screen and (max-width: 1024px)";
 @show-sidebar: ~"only screen and (min-width: 1025px)";
-@sidebar-width: 280px;
 
 // Grid
 @ncol: 12;  // number of columns
@@ -22,3 +21,16 @@
 @spacing-large: 40px;  // space on the sides and between columns
 @spacing-medium: 28px;
 @spacing-small: 12px;
+
+// Components
+// Card (list item)
+@card-shadow: 0 1px 1px 0 rgba(0,0,0,0.12);
+@card-br: 2px;
+@card-padding: @vu * 5.5 24px;
+
+// Sidebar
+@sidebar-width: 280px;
+@sidebar-shadow: 1px 0 2px 0 rgba(0,0,0,0.06);
+@sidebar-item-height: @vu * 16;
+@sidebar-item-padding: @vu * 5 20px @vu * 5 16px;
+@sidebar-item-shadow: inset 0 -1px 0 0 @color-gray-100;

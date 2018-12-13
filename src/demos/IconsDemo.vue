@@ -30,8 +30,9 @@ export default {
 
 .icon-demo {
   margin-bottom: @vu * 2;
-  height: @vu * 6;
   img {
+    height: @vu * 6;
+    vertical-align: bottom;
     margin-right: @vu;
   }
 }

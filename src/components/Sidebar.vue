@@ -8,7 +8,11 @@
       :class="['item', {active: item.active}]"
       v-for="item in items"
     >
-      <i :style="{backgroundImage: `url('${ item.icon }')`}"></i>
+      <div
+        alt="example"
+        class="icon"
+        v-html="item.icon"
+      />
       <span class="title">
         {{ item.title }}
       </span>
@@ -18,21 +22,22 @@
 </template>
 
 <script>
+console.log(require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-assignment-24px.svg'))
 export default {
   name: 'sidebar',
   props: {
     items: {
       type: Array,
       default: () => [{
-        icon: require('@/icons/sidebar/outline-assignment-24px.svg'),
+        icon: require('!svg-inline-loader?idPrefix!@/icons/sidebar/outline-assignment-24px.svg'),
         title: 'Lorem Ipsum',
         active: true,
         badge: 2,
       }, {
-        icon: require('@/icons/sidebar/outline-receipt-24px.svg'),
+        icon: require('!svg-inline-loader?idPrefix!@/icons/sidebar/outline-receipt-24px.svg'),
         title: 'Dolor Sit Amet',
       }, {
-        icon: require('@/icons/sidebar/outline-group-24px.svg'),
+        icon: require('!svg-inline-loader?idPrefix!@/icons/sidebar/outline-group-24px.svg'),
         title: 'Consectetur',
         children: [{
           title: 'Sed do eiusmod',
@@ -40,7 +45,7 @@ export default {
           title: 'Tempor incididunt',
         }],
       }, {
-        icon: require('@/icons/sidebar/outline-work_outline-24px.svg'),
+        icon: require('!svg-inline-loader?idPrefix!@/icons/sidebar/outline-work_outline-24px.svg'),
         title: 'Adipiscing Elit',
       }],
     }
@@ -76,16 +81,24 @@ export default {
 
     .font-desktop-body-medium-dark();
     &.active {
-      .font-desktop-body-medium-primary()
+      .font-desktop-body-medium-primary();
+      svg * {
+        fill: @color-brand;
+      }
     }
 
-    i {
+    .icon {
       display: inline-block;
-      width: 16px;
-      height: 16px;
+      height: 24px;
+
       margin-right: 12px;
       margin-top: 4px;
       margin-bottom: 4px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 }

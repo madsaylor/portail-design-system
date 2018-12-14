@@ -10,6 +10,7 @@
     "url": "git+https://github.com/betao-dev/portail-design-system.git"
   },
   "scripts": {
+    "beforeStart": "npm run build",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name ds ./src/lib.js",
     "build-demo": "vue-cli-service build",

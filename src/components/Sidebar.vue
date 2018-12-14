@@ -22,22 +22,21 @@
 </template>
 
 <script>
-console.log(require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-assignment-24px.svg'))
 export default {
   name: 'sidebar',
   props: {
     items: {
       type: Array,
       default: () => [{
-        icon: require('!svg-inline-loader?idPrefix!@/icons/sidebar/outline-assignment-24px.svg'),
+        icon: require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-assignment-24px.svg'),
         title: 'Lorem Ipsum',
         active: true,
         badge: 2,
       }, {
-        icon: require('!svg-inline-loader?idPrefix!@/icons/sidebar/outline-receipt-24px.svg'),
+        icon: require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-receipt-24px.svg'),
         title: 'Dolor Sit Amet',
       }, {
-        icon: require('!svg-inline-loader?idPrefix!@/icons/sidebar/outline-group-24px.svg'),
+        icon: require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-group-24px.svg'),
         title: 'Consectetur',
         children: [{
           title: 'Sed do eiusmod',
@@ -45,7 +44,7 @@ export default {
           title: 'Tempor incididunt',
         }],
       }, {
-        icon: require('!svg-inline-loader?idPrefix!@/icons/sidebar/outline-work_outline-24px.svg'),
+        icon: require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-work_outline-24px.svg'),
         title: 'Adipiscing Elit',
       }],
     }
@@ -54,7 +53,7 @@ export default {
 </script>
 
 <style lang="less">
-@import '~@/styles/vars';
+@import '../styles/vars';
 
 .sidebar {
   background-color: @color-white;

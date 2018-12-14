@@ -1,5 +1,5 @@
 module.exports = {
-  baseUrl: process.env.NODE_ENV === 'production'
+  baseUrl: process.env.npm_lifecycle_event === 'build-demo'
     ? '/portail-design-system/'
     : '/'
 }

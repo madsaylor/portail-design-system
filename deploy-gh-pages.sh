@@ -4,7 +4,7 @@
 set -e
 
 # build
-npm run build
+npm run build-demo
 
 # deploy
 cd dist

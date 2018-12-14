@@ -1,16 +1,26 @@
 {
-  "name": "ds",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@betao/ds",
+  "version": "0.0.0",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/betao-dev/portail-design-system.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build --target lib --name ds ./src/lib.js",
+    "build-demo": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "release": "release-it"
   },
-  "dependencies": {
-    "vue": "^2.5.17",
-    "vue-highlightjs": "^1.3.3"
-  },
+  "main": "./dist/ds.common.js",
+  "files": [
+    "dist/*",
+    "public/*",
+    "src/*",
+    "*.json",
+    "*.js"
+  ],
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-eslint": "^3.1.1",
@@ -18,8 +28,14 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "release-it": "^9.0.0",
     "svg-inline-loader": "^0.8.0",
+    "vue": "^2.5.17",
+    "vue-highlightjs": "^1.3.3",
     "vue-template-compiler": "^2.5.17"
+  },
+  "peerDependencies": {
+    "vue": "^2.0"
   },
   "eslintConfig": {
     "root": true,

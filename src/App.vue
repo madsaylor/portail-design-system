@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="main">
+  <div id="app" class="main-container">
     <sidebar></sidebar>
     <div class="main-content grid">
       <div class="row-col">
@@ -35,11 +35,6 @@ export default {
 @import './styles/main';
 @import './styles/grid';
 @import './styles/vars';
-
-body {
-  .font-desktop-body-medium-dark();
-  background: @color-gray-100;
-}
 
 code {
   padding: 20px !important;

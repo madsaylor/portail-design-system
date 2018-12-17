@@ -28,15 +28,15 @@ export default {
     items: {
       type: Array,
       default: () => [{
-        icon: require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-assignment-24px.svg'),
+        icon: require('!svg-inline-loader!../icons/assignment_outline.svg'),
         title: 'Lorem Ipsum',
         active: true,
         badge: 2,
       }, {
-        icon: require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-receipt-24px.svg'),
+        icon: require('!svg-inline-loader!../icons/receipt_outline.svg'),
         title: 'Dolor Sit Amet',
       }, {
-        icon: require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-group-24px.svg'),
+        icon: require('!svg-inline-loader!../icons/group_outline.svg'),
         title: 'Consectetur',
         children: [{
           title: 'Sed do eiusmod',
@@ -44,7 +44,7 @@ export default {
           title: 'Tempor incididunt',
         }],
       }, {
-        icon: require('!svg-inline-loader?idPrefix!../icons/sidebar/outline-work_outline-24px.svg'),
+        icon: require('!svg-inline-loader!../icons/work_outline.svg'),
         title: 'Adipiscing Elit',
       }],
     }
@@ -60,10 +60,11 @@ export default {
   box-shadow: @sidebar-shadow;
   box-sizing: border-box;
   height: 100%;
-  max-width:  @sidebar-width;
+  left: 0;
+  width:  @sidebar-width;
   min-height: 100%;
-  min-width:  @sidebar-width;
   position: fixed;
+  top: 0;
 
   .header, .item {
     box-sizing: border-box;
@@ -81,7 +82,7 @@ export default {
     .font-desktop-body-medium-dark();
     &.active {
       .font-desktop-body-medium-primary();
-      svg * {
+      svg {
         fill: @color-brand;
       }
     }

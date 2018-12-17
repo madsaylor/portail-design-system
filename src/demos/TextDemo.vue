@@ -69,11 +69,11 @@ export default {
 
 .font-button-big {
   .font-button-big();
-  &.card { background: @color-black; }
+  &.card { background: @color-brand; }
 }
 .font-button-normal {
   .font-button-normal();
-  &.card { background: @color-black; }
+  &.card { background: @color-brand; }
 }
 .font-button-normal-alt {
   .font-button-normal-alt();

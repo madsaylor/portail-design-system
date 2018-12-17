@@ -26,6 +26,7 @@
         <pre v-highlightjs="usageLess"><code class="less"></code></pre>
 
         <h2>Main layout</h2>
+        <pre v-highlightjs="usageLayout"><code class="html"></code></pre>
 
       </div>
 
@@ -49,9 +50,34 @@ import TextDemo from './demos/TextDemo.vue'
 import IconsDemo from './demos/IconsDemo.vue'
 
 let usageJs = `
-import ds from '@betao/ds' // => Vue components
-import '@betao/ds/css'     // => Load prebuild css
-`
+import components from '@betao/ds' // Vue components
+import '@betao/ds/css'     // Load prebuild css
+`.slice(1)
+
+let usageLess = `
+@import '~@betao/ds/vars';
+
+.some-class {
+  /* For list of color variables see Colors */
+  color: @color-black;
+  /* For list of font mixins see Font Styles */
+  .font-desktop-body-medium-dark-center();
+}
+`.slice(1)
+
+let usageLayout = `
+<!-- Root element -->
+<div id="app" class="main-container">
+  <!-- Sidebar component -->
+  <div class="sidebar">
+    <!-- ... -->
+  </div>
+  <!-- Rest of the app -->
+  <div class="main-container">
+    <!-- ... -->
+  </div>
+</div>
+`.slice(1)
 
 
 export default {
@@ -64,17 +90,9 @@ export default {
   },
   data: () => ({
     installation: `$ npm install "@betao/ds" --save`,
-    usageJs: (
-      `import ds from '@betao/ds' // => Vue components` + '\n' +
-      `import '@betao/ds/css'     // => Load prebuild css`
-    ),
-    usageLess: (
-      `@import '~@betao/ds/vars';` + '\n' +
-      `` + '\n' +
-      `.some-class {` + '\n' +
-      `  .font-desktop-body-medium-dark-center()` + '\n' +
-      `}`
-    ),
+    usageJs: usageJs,
+    usageLess: usageLess,
+    usageLayout: usageLayout,
   })
 }
 </script>

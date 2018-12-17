@@ -18,11 +18,15 @@
         </a>
         <h2>Installation</h2>
         <pre v-highlightjs="installation"><code class="bash"></code></pre>
+
         <h2>Usage</h2>
         In javascript:
         <pre v-highlightjs="usageJs"><code class="js"></code></pre>
-        In Less:
+        In Less (variables and font mixins):
         <pre v-highlightjs="usageLess"><code class="less"></code></pre>
+
+        <h2>Main layout</h2>
+
       </div>
 
       <GridDemo></GridDemo>
@@ -44,6 +48,12 @@ import ColorsDemo from './demos/ColorsDemo.vue'
 import TextDemo from './demos/TextDemo.vue'
 import IconsDemo from './demos/IconsDemo.vue'
 
+let usageJs = `
+import ds from '@betao/ds' // => Vue components
+import '@betao/ds/css'     // => Load prebuild css
+`
+
+
 export default {
   name: 'app',
   components: {
@@ -56,7 +66,7 @@ export default {
     installation: `$ npm install "@betao/ds" --save`,
     usageJs: (
       `import ds from '@betao/ds' // => Vue components` + '\n' +
-      `import '@betao/ds/css' // => Load prebuild css`
+      `import '@betao/ds/css'     // => Load prebuild css`
     ),
     usageLess: (
       `@import '~@betao/ds/vars';` + '\n' +

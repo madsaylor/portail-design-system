@@ -5,6 +5,15 @@
   .font-desktop-body-medium-dark();
   background: @color-gray-100;
 
+  a {
+    .font-desktop-body-medium-primary();
+    text-decoration: none;
+
+    &:hover, &:active {
+      text-decoration: underline;
+    }
+  }
+
   svg {
     fill: @color-black;
   }

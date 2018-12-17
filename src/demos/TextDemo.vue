@@ -8,10 +8,13 @@
       <pre v-highlightjs=linkSnippet><code class="html"></code></pre>
 
       <h2>Font Styles</h2>
-      <div
-        v-for="fontStyle in fontStyles"
-        :class="['card', 'font-style-demo', fontStyle]"
-      >.{{ fontStyle }}()</div>
+    </div>
+    <div class="row">
+      <div class="col-6" v-for="fontStyle in fontStyles">
+        <div :class="['card', 'font-style-demo', fontStyle]">
+          .{{ fontStyle }}()
+        </div>
+      </div>
     </div>
   </div>
 </template>

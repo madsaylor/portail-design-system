@@ -1,11 +1,15 @@
 <template>
   <div class="grid">
-    <div class="row-col">
-      <h2>Icons</h2>
-      <div class="card icon-demo" v-for="icon in icons">
-        <img :src="context(icon)">
-        icons/{{ icon.slice(2) }}
-        <br>
+    <div class="row">
+      <div class="col-12">
+        <h2>Icons</h2>
+      </div>
+      <div class="col-6" v-for="icon in icons">
+        <div class="card icon-demo" >
+          <div class="icon" v-html="context(icon)"></div>
+          icons/{{ icon.slice(2) }}
+          <br>
+        </div>
       </div>
     </div>
   </div>
@@ -30,10 +34,13 @@ export default {
 
 .icon-demo {
   margin-bottom: @vu * 2;
-  img {
-    height: @vu * 6;
+
+  .icon {
+    display: inline-block;
     vertical-align: bottom;
-    margin-right: @vu;
+    height: 24px;
+    width: 24px;
+    padding-right: 24px;
   }
 }
 

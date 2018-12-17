@@ -18,6 +18,10 @@
     "release": "release-it"
   },
   "main": "./dist/ds.common.js",
+  "browser": {
+    "css": "./dist/ds.css",
+    "vars.less": "./src/styles/vars.less"
+  },
   "files": [
     "dist/*",
     "public/*",

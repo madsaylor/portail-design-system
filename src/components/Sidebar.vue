@@ -28,15 +28,15 @@ export default {
     items: {
       type: Array,
       default: () => [{
-        icon: require('!svg-inline-loader!../icons/assignment_outline.svg'),
+        icon: require('../icons/assignment_outline.svg'),
         title: 'Lorem Ipsum',
         active: true,
         badge: 2,
       }, {
-        icon: require('!svg-inline-loader!../icons/receipt_outline.svg'),
+        icon: require('../icons/receipt_outline.svg'),
         title: 'Dolor Sit Amet',
       }, {
-        icon: require('!svg-inline-loader!../icons/group_outline.svg'),
+        icon: require('../icons/group_outline.svg'),
         title: 'Consectetur',
         children: [{
           title: 'Sed do eiusmod',
@@ -44,7 +44,7 @@ export default {
           title: 'Tempor incididunt',
         }],
       }, {
-        icon: require('!svg-inline-loader!../icons/work_outline.svg'),
+        icon: require('../icons/work_outline.svg'),
         title: 'Adipiscing Elit',
       }],
     }

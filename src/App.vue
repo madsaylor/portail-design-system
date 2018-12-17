@@ -18,6 +18,11 @@
         </a>
         <h2>Installation</h2>
         <pre v-highlightjs="installation"><code class="bash"></code></pre>
+        <h2>Usage</h2>
+        In javascript:
+        <pre v-highlightjs="usageJs"><code class="js"></code></pre>
+        In Less:
+        <pre v-highlightjs="usageLess"><code class="less"></code></pre>
       </div>
 
       <GridDemo></GridDemo>
@@ -48,7 +53,18 @@ export default {
     IconsDemo,
   },
   data: () => ({
-    installation: `$ npm install "@betao/ds" --save`
+    installation: `$ npm install "@betao/ds" --save`,
+    usageJs: (
+      `import ds from '@betao/ds' // => Vue components` + '\n' +
+      `import '@betao/ds/css' // => Load prebuild css`
+    ),
+    usageLess: (
+      `@import '~@betao/ds/vars';` + '\n' +
+      `` + '\n' +
+      `.some-class {` + '\n' +
+      `  .font-desktop-body-medium-dark-center()` + '\n' +
+      `}`
+    ),
   })
 }
 </script>

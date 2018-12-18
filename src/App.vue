@@ -10,7 +10,7 @@
         </a>
         |
         <a href="https://projects.invisionapp.com/dsm/betao/portail-v-3">
-          Invision (desktop)
+          Invision (DSM)
         </a>
         |
         <a href="https://www.npmjs.com/package/@betao/ds">
@@ -101,6 +101,15 @@ export default {
 @import './styles/main';
 @import './styles/grid';
 @import './styles/vars';
+
+
+/* "Reset" */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
 
 code {
   padding: 20px !important;

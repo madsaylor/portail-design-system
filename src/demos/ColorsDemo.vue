@@ -2,7 +2,6 @@
   <div class="grid">
     <div class="row-col">
       <h2>Colors</h2>
-      <h3>Usage</h3>
       <pre v-highlightjs="usageLess"><code class="less"></code></pre>
     </div>
     <div class="row-col" v-for="(group, groupName) in colors">

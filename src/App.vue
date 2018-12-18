@@ -28,6 +28,12 @@
         <h2>Main layout</h2>
         <pre v-highlightjs="usageLayout"><code class="html"></code></pre>
 
+        <h2>Vertical Rhythm</h2>
+        Vertical Rhythm is used to guide in aligning all the objects on the
+        screen vertically.
+        <br/>
+        All object are aligned vertically using 4px (@vu less variable) as a
+        core unit.
       </div>
 
       <GridDemo></GridDemo>

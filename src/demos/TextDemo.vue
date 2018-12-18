@@ -6,8 +6,11 @@
       To embed the font into a webpage, copy this code into the &lt;head&gt;
       of your HTML document.:
       <pre v-highlightjs=linkSnippet><code class="html"></code></pre>
+      <h2>Font mixins</h2>
+      <h3>Usage with Less</h3>
+      <pre v-highlightjs="usageLess"><code class="less"></code></pre>
 
-      <h2>Font Styles</h2>
+      <h3>Style list</h3>
     </div>
     <div class="row">
       <div class="col-6" v-for="fontStyle in fontStyles">
@@ -18,12 +21,22 @@
     </div>
   </div>
 </template>
+
 <script>
+let usageLess = `
+@import '~@betao/ds/vars';
+
+.some-class {
+  .font-desktop-body-medium-dark-center();
+}
+`.slice(1)
+
 export default {
   name: 'TextDemo',
   data: () => ({
     linkSnippet: ('<link href="https://fonts.googleapis.com/css?family=' +
                   'Asap:400,400i,500,600,600i,700,700i" rel="stylesheet">'),
+    usageLess,
     fontStyles: [
       'font-button-big',
       'font-button-normal',

@@ -90,9 +90,9 @@ export default {
   },
   data: () => ({
     installation: `$ npm install "@betao/ds" --save`,
-    usageJs: usageJs,
-    usageLess: usageLess,
-    usageLayout: usageLayout,
+    usageJs,
+    usageLess,
+    usageLayout,
   })
 }
 </script>

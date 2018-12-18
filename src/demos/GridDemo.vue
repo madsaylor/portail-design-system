@@ -51,7 +51,6 @@
 </template>
 
 <script>
-
 let usageLayout = `
 <!-- Grid container -->
 <div class="grid">

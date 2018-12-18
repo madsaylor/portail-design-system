@@ -1,8 +1,8 @@
 <template>
   <div class="grid">
+    <div class="row-col"><h2>Icons</h2></div>
     <div class="row">
       <div class="col-12">
-        <h2>Icons</h2>
       </div>
       <div class="col-6" v-for="icon in icons">
         <div class="card icon-demo" >

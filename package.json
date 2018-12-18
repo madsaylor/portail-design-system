@@ -10,16 +10,19 @@
     "url": "git+https://github.com/betao-dev/portail-design-system.git"
   },
   "scripts": {
-    "prerelease": "npm run build",
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name ds ./src/lib.js",
     "build-demo": "vue-cli-service build",
+    "build-icons": "vue-cli-service build --target lib --name icons --dest ./dist/icons ./src/icons/index.js",
     "lint": "vue-cli-service lint",
-    "release": "release-it"
+    "postbuild": "npm run build-icons",
+    "prerelease": "npm run build",
+    "release": "release-it",
+    "serve": "vue-cli-service serve"
   },
   "main": "./dist/ds.common.js",
   "browser": {
     "css": "./dist/ds.css",
+    "icons": "./dist/icons/icons.common.js",
     "vars.less": "./src/styles/vars.less"
   },
   "files": [

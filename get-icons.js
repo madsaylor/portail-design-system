@@ -38,7 +38,7 @@ const ICONS_TO_GET = [
   ['filter_list', 'baseline'],
   ['group', 'outline'],
   ['help', 'baseline'],
-  ['help', 'outline'],
+  ['help_outline', 'baseline'],
   ['info', 'baseline'],
   ['insert_chart', 'baseline'],
   ['lock', 'baseline'],
@@ -53,7 +53,7 @@ const ICONS_TO_GET = [
   ['send', 'baseline'],
   ['stars', 'outline'],
   ['today', 'baseline'],
-  ['work', 'outline'],
+  ['work_outline', 'baseline'],
 ]
 
 // Get svg download link

@@ -8,47 +8,55 @@
       :class="['item', {active: item.active}]"
       v-for="item in items"
     >
-      <div
-        alt="example"
-        class="icon"
-        v-html="item.icon"
-      />
-      <span class="title">
-        {{ item.title }}
-      </span>
+      <div class="icon" v-html="icons[item.icon] || item.icon"></div>
+      <div class="title">{{ item.title }}</div>
     </div>
 
   </div>
 </template>
 
 <script>
+import icons from '../icons'
+
 export default {
   name: 'sidebar',
   props: {
     items: {
       type: Array,
       default: () => [{
-        icon: require('../icons/assignment_outline.svg'),
+        icon: 'assignment_outline',
         title: 'Lorem Ipsum',
         active: true,
         badge: 2,
       }, {
-        icon: require('../icons/receipt_outline.svg'),
-        title: 'Dolor Sit Amet',
-      }, {
-        icon: require('../icons/group_outline.svg'),
-        title: 'Consectetur',
+        icon: 'receipt_outline',
+        title: 'Lorem Ipsum',
         children: [{
-          title: 'Sed do eiusmod',
+          title: 'Lorem Ipsum',
         }, {
-          title: 'Tempor incididunt',
+          title: 'Lorem Ipsum',
         }],
       }, {
-        icon: require('../icons/work_outline.svg'),
-        title: 'Adipiscing Elit',
+        icon: 'group_outline',
+        title: 'Lorem Ipsum',
+      }, {
+        icon: 'work_outline',
+        title: 'Lorem Ipsum',
+      }, {
+        icon: 'assessment_outline',
+        title: 'Lorem Ipsum',
+      }, {
+        icon: 'new_releases_outline',
+        title: 'Lorem Ipsum',
+      }, {
+        icon: 'help_outline',
+        title: 'Lorem Ipsum',
       }],
     }
   },
+  data: () => ({
+    icons,
+  })
 }
 </script>
 
@@ -59,17 +67,17 @@ export default {
   background-color: @color-white;
   box-shadow: @sidebar-shadow;
   box-sizing: border-box;
-  height: 100%;
   left: 0;
-  width:  @sidebar-width;
   min-height: 100%;
   position: fixed;
   top: 0;
+  width:  @sidebar-width;
 
   .header, .item {
-    box-sizing: border-box;
     box-shadow: @sidebar-item-shadow;
+    box-sizing: border-box;
     height: @sidebar-item-height;
+    padding: @sidebar-item-padding;
   }
 
   .header {
@@ -77,28 +85,31 @@ export default {
   }
 
   .item {
-    padding: @sidebar-item-padding;
+    .font-desktop-body-regular-dark();
+    align-items: center;
+    display: flex;
 
-    .font-desktop-body-medium-dark();
     &.active {
-      .font-desktop-body-medium-primary();
-      svg {
+      .font-desktop-body-regular-accent();
+      .icon svg {
         fill: @color-brand;
       }
     }
 
     .icon {
-      display: inline-block;
       height: 24px;
-
-      margin-right: 12px;
-      margin-top: 4px;
-      margin-bottom: 4px;
+      width: 16px;
 
       svg {
-        width: 16px;
-        height: 16px;
+        fill: @color-gray-400;
+        height: 18.5px;
+        margin: 3px 0 2px -1.5px;
+        width: 18.5px;
       }
+    }
+
+    .title {
+      padding-left: 12px;
     }
   }
 }

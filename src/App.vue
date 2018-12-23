@@ -73,7 +73,7 @@ let usageLess = `
 
 let usageLayout = `
 <!-- Root element -->
-<div id="app" class="main-container">
+<div class="main-container">
   <!-- Sidebar component -->
   <div class="sidebar">
     <!-- ... -->

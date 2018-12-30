@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="main-container">
-    <sidebar></sidebar>
+    <sidebar
+      @item:click="log"
+    ></sidebar>
     <div class="main-content grid">
       <div class="row-col">
         <h1>Portail v3 Design System</h1>
@@ -99,7 +101,10 @@ export default {
     usageJs,
     usageLess,
     usageLayout,
-  })
+  }),
+  methods: {
+    log: console.log,
+  }
 }
 </script>
 

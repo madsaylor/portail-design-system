@@ -3,6 +3,7 @@
     <sidebar
       @item:click="sidebarClick"
       :items="sidebarItems"
+      :activeKey="(item, index) => item.title"
       :active.sync="sidebarActiveItem"
     ></sidebar>
     <div class="main-content grid">
@@ -100,6 +101,8 @@ let sidebarIcons = [
   'help_outline',
 ]
 
+let docHeaders = []
+
 export default {
   name: 'app',
   components: {
@@ -117,10 +120,25 @@ export default {
     sidebarActiveItem: 0,
   }),
   methods: {
-    sidebarClick: (item, index) => window.location.hash = item.title,
+    sidebarClick(item, index) {
+      window.location.hash = item.title
+    },
+    handleScroll() {
+      let vh = (window.innerHeight || document.documentElement.clientHeight)
+      for (var i = 0; i < docHeaders.length; i++) {
+        let rect = docHeaders[i].getBoundingClientRect()
+        if (rect.top >= 0 && rect.bottom <= vh) {
+          this.sidebarActiveItem = docHeaders[i].id
+          break
+        }
+      }
+    },
+  },
+  beforeMount () {
+    window.addEventListener('scroll', this.handleScroll);
   },
   mounted() {
-    let docHeaders = document.querySelectorAll('h2')
+    docHeaders = document.querySelectorAll('h2')
     let sidebarItems = []
     for (var i = 0; i < docHeaders.length; i++) {
       docHeaders[i].id = docHeaders[i].innerText
@@ -130,6 +148,9 @@ export default {
       })
     }
     this.sidebarItems = sidebarItems
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>

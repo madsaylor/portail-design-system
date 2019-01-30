@@ -122,7 +122,7 @@ export default {
     sidebarActiveChild: 0,
   }),
   methods: {
-    sidebarClick(item, index) {
+    sidebarClick(item) {
       window.location.hash = item.hash
     },
     handleScroll() {
@@ -147,8 +147,8 @@ export default {
     let parentHeader = null;
     let children = []
 
-    for (var i = 0; i < docHeaders.length; i++) {
-      if (docHeaders[i].tagName === 'H2') {
+    for (var i = 0; i <= docHeaders.length; i++) {
+      if (docHeaders[i] === undefined || docHeaders[i].tagName === 'H2') {
         if (parentHeader != null) {
           sidebarItems.push({
             icon: sidebarIcons[sidebarItems.length % sidebarIcons.length],
@@ -156,6 +156,9 @@ export default {
             hash: parentHeader.id,
             children,
           })
+        }
+        if (docHeaders[i] === undefined) {
+          break
         }
         docHeaders[i].id = docHeaders[i].innerText
         parentHeader = docHeaders[i]

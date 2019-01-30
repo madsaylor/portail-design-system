@@ -48,18 +48,19 @@
             <div class="title">{{ item.title }}</div>
           </li>
 
-          <li
-            v-if="activeKey(item, index) === active"
-            v-for="(child, childIndex) in item.children"
-            :class="[
-              'item',
-              'child-item',
-              {active: activeKey(child, childIndex) === activeChild}
-            ]"
-            @click="itemClick(child, index, childIndex)"
-          >
-            {{ child.title }}
-          </li>
+          <template v-if="activeKey(item, index) === active">
+            <li
+              v-for="(child, childIndex) in item.children"
+              :class="[
+                'item',
+                'child-item',
+                {active: activeKey(child, childIndex) === activeChild}
+              ]"
+              @click="itemClick(child, index, childIndex)"
+            >
+              {{ child.title }}
+            </li>
+          </template>
         </template>
       </ul>
 

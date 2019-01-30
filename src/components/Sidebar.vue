@@ -1,5 +1,5 @@
 <!--
-  TODO: children, badges
+  TODO: badges
 
   Usage:
 
@@ -7,6 +7,7 @@
     :items="[...]"                     - Array of items to render
     :activeKey="(item, index) => ..."  - Value for "is active" check
     :active.sync="active"              - Value for active item
+    :activeChild.sync="activeChild"    - Value for active child item
     @item:click="(item, index) => ..." - Click event
   ></sidebar>
 
@@ -23,6 +24,8 @@
     :active - Any. Value depending on the activeKey property for currently
       active item. Supports .sync modifier
 
+    :activeChild - Any. Same as active, but for child element
+
   Events:
 
     @item:click - Function. Click on the sidebar's item
@@ -36,14 +39,28 @@
       </div>
 
       <ul class="items">
-        <li
-          v-for="(item, index) in items"
-          :class="['item', {active: activeKey(item, index) === active}]"
-          @click="itemClick(item, index)"
-        >
-          <div class="icon" v-html="icons[item.icon] || item.icon"></div>
-          <div class="title">{{ item.title }}</div>
-        </li>
+        <template v-for="(item, index) in items">
+          <li
+            :class="['item', {active: activeKey(item, index) === active}]"
+            @click="itemClick(item, index)"
+          >
+            <div class="icon" v-html="icons[item.icon] || item.icon"></div>
+            <div class="title">{{ item.title }}</div>
+          </li>
+
+          <li
+            v-if="activeKey(item, index) === active"
+            v-for="(child, childIndex) in item.children"
+            :class="[
+              'item',
+              'child-item',
+              {active: activeKey(child, childIndex) === activeChild}
+            ]"
+            @click="itemClick(child, index, childIndex)"
+          >
+            {{ child.title }}
+          </li>
+        </template>
       </ul>
 
       <div class="footer"><slot name="footer"></slot></div>
@@ -67,15 +84,22 @@ export default {
     },
     active: {
       default: 0,
-    }
+    },
+    activeChild: {
+      default: 0,
+    },
   },
   data: () => ({
     icons,
   }),
   methods: {
-    itemClick: function (item, index) {
-      this.$emit('update:active', this.activeKey(item, index))
-      this.$emit('item:click', item, index)
+    itemClick: function (item, index, childIndex) {
+      if (childIndex != null) {
+        this.$emit('update:activeChild', this.activeKey(item, childIndex))
+      } else {
+        this.$emit('update:active', this.activeKey(item, index))
+      }
+      this.$emit('item:click', item, index, childIndex)
     }
   }
 }
@@ -128,6 +152,11 @@ export default {
     align-items: center;
     display: flex;
     transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &.child-item {
+      .font-desktop-body-medium-gray();
+      padding-left: 50px
+    }
 
     &.active {
       .font-desktop-body-regular-accent();

@@ -3,8 +3,9 @@
     <sidebar
       @item:click="sidebarClick"
       :items="sidebarItems"
-      :activeKey="(item, index) => item.title"
+      :activeKey="(item, index) => item.hash"
       :active.sync="sidebarActiveItem"
+      :activeChild.sync="sidebarActiveChild"
     ></sidebar>
     <div class="main-content grid">
       <div class="row-col">
@@ -118,17 +119,19 @@ export default {
     usageLayout,
     sidebarItems: [],
     sidebarActiveItem: 0,
+    sidebarActiveChild: 0,
   }),
   methods: {
     sidebarClick(item, index) {
-      window.location.hash = item.title
+      window.location.hash = item.hash
     },
     handleScroll() {
       let vh = (window.innerHeight || document.documentElement.clientHeight)
       for (var i = 0; i < docHeaders.length; i++) {
         let rect = docHeaders[i].getBoundingClientRect()
         if (rect.top >= 0 && rect.bottom <= vh) {
-          this.sidebarActiveItem = docHeaders[i].id
+          this.sidebarActiveItem = docHeaders[i].id.split(' - ')[0]
+          this.sidebarActiveChild = docHeaders[i].id
           break
         }
       }
@@ -138,14 +141,32 @@ export default {
     window.addEventListener('scroll', this.handleScroll);
   },
   mounted() {
-    docHeaders = document.querySelectorAll('h2')
+    // Compile sidebar items automatically from h2 and h3 headers
+    docHeaders = document.querySelectorAll('h2, h3')
     let sidebarItems = []
+    let parentHeader = null;
+    let children = []
+
     for (var i = 0; i < docHeaders.length; i++) {
-      docHeaders[i].id = docHeaders[i].innerText
-      sidebarItems.push({
-        icon: sidebarIcons[i % sidebarIcons.length],
-        title: docHeaders[i].innerText,
-      })
+      if (docHeaders[i].tagName === 'H2') {
+        if (parentHeader != null) {
+          sidebarItems.push({
+            icon: sidebarIcons[sidebarItems.length % sidebarIcons.length],
+            title: parentHeader.innerText,
+            hash: parentHeader.id,
+            children,
+          })
+        }
+        docHeaders[i].id = docHeaders[i].innerText
+        parentHeader = docHeaders[i]
+        children = []
+      } else {  // if H3
+        docHeaders[i].id = parentHeader.id + ' - ' + docHeaders[i].innerText
+        children.push({
+          title: docHeaders[i].innerText,
+          hash: docHeaders[i].id,
+        })
+      }
     }
     this.sidebarItems = sidebarItems
   },

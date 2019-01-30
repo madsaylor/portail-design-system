@@ -11,4 +11,8 @@ context.keys().forEach(key => {
   components[componentName] = component.default || component
 })
 
+// Require styles so they are extracted in lib.css
+require('./styles/main.less')
+require('./styles/grid.less')
+
 export default components

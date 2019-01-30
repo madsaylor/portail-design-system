@@ -86,7 +86,7 @@ let usageLayout = `
     <!-- ... -->
   </div>
   <!-- Rest of the app -->
-  <div class="main-container">
+  <div class="main-content">
     <!-- ... -->
   </div>
 </div>

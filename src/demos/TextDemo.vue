@@ -6,7 +6,7 @@
       To embed the font into a webpage, copy this code into the &lt;head&gt;
       of your HTML document.:
       <pre v-highlightjs=linkSnippet><code class="html"></code></pre>
-      <h2>Font mixins</h2>
+      <h2>Font Mixins</h2>
       <h3>Usage with Less</h3>
       <pre v-highlightjs="usageLess"><code class="less"></code></pre>
 

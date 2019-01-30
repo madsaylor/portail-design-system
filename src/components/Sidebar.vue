@@ -1,4 +1,6 @@
 <!--
+  TODO: children, badges
+
   Usage:
 
   <sidebar
@@ -57,50 +59,14 @@ export default {
   props: {
     items: {
       type: Array,
-      default: () => [{
-        icon: 'assignment_outline',
-        title: 'Lorem Ipsum',
-        value: 'lorem/ipsum1',
-        badge: 2,
-      }, {
-        icon: 'receipt_outline',
-        title: 'Lorem Ipsum',
-        value: 'lorem/ipsum2',
-        children: [{
-          title: 'Lorem Ipsum',
-          value: 'lorem/ipsum3',
-        }, {
-          title: 'Lorem Ipsum',
-          value: 'lorem/ipsum4',
-        }],
-      }, {
-        icon: 'group_outline',
-        title: 'Lorem Ipsum',
-        value: 'lorem/ipsum5',
-      }, {
-        icon: 'work_outline',
-        title: 'Lorem Ipsum',
-        value: 'lorem/ipsum6',
-      }, {
-        icon: 'assessment_outline',
-        title: 'Lorem Ipsum',
-        value: 'lorem/ipsum7',
-      }, {
-        icon: 'new_releases_outline',
-        title: 'Lorem Ipsum',
-        value: 'lorem/ipsum8',
-      }, {
-        icon: 'help_outline',
-        title: 'Lorem Ipsum',
-        value: 'lorem/ipsum9',
-      }],
+      required: true,
     },
     activeKey: {
       type: Function,
       default: (item, index) => index,
     },
     active: {
-      default: 0
+      default: 0,
     }
   },
   data: () => ({

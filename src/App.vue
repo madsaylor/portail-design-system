@@ -1,7 +1,8 @@
 <template>
   <div id="app" class="main-container">
     <sidebar
-      @item:click="log"
+      @item:click="sidebarClick"
+      :items="sidebarItems"
       :active.sync="sidebarActiveItem"
     ></sidebar>
     <div class="main-content grid">
@@ -19,6 +20,7 @@
         <a href="https://www.npmjs.com/package/@betao/ds">
           NPM package
         </a>
+
         <h2>Installation</h2>
         <pre v-highlightjs="installation"><code class="bash"></code></pre>
 
@@ -28,7 +30,7 @@
         In Less (variables and font mixins):
         <pre v-highlightjs="usageLess"><code class="less"></code></pre>
 
-        <h2>Main layout</h2>
+        <h2>Main Layout</h2>
         <pre v-highlightjs="usageLayout"><code class="html"></code></pre>
 
         <h2>Vertical Rhythm</h2>
@@ -88,6 +90,15 @@ let usageLayout = `
 </div>
 `.slice(1)
 
+let sidebarIcons = [
+  'assignment_outline',
+  'receipt_outline',
+  'group_outline',
+  'work_outline',
+  'assessment_outline',
+  'new_releases_outline',
+  'help_outline',
+]
 
 export default {
   name: 'app',
@@ -102,10 +113,23 @@ export default {
     usageJs,
     usageLess,
     usageLayout,
+    sidebarItems: [],
     sidebarActiveItem: 0,
   }),
   methods: {
-    log: console.log,
+    sidebarClick: (item, index) => window.location.hash = item.title,
+  },
+  mounted() {
+    let docHeaders = document.querySelectorAll('h2')
+    let sidebarItems = []
+    for (var i = 0; i < docHeaders.length; i++) {
+      docHeaders[i].id = docHeaders[i].innerText
+      sidebarItems.push({
+        icon: sidebarIcons[i % sidebarIcons.length],
+        title: docHeaders[i].innerText,
+      })
+    }
+    this.sidebarItems = sidebarItems
   }
 }
 </script>

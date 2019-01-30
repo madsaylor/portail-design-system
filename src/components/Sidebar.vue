@@ -1,14 +1,29 @@
 <!--
-  <sidebar
-    :items="[...]"  - Array of items to render
-    @item:click="(item, index) => ..."
+  Usage:
 
+  <sidebar
+    :items="[...]"                     - Array of items to render
+    :activeKey="(item, index) => ..."  - Value for "is active" check
+    :active.sync="active"              - Value for active item
+    @item:click="(item, index) => ..." - Click event
   ></sidebar>
 
-  Items format:
+  Properties:
 
-  ...
+    :items - Array<Object>, required. Items to display on the sidebar.
+      Each item should have a `title` property with displayed name and an
+      .icon property that can be either a string with an icon name, like `'arrow_right'` or a string with svg code `'<svg>...</svg>'`
 
+    :activeKey - Function. Allows you to override value determining
+      the active item. Values are compared with `===` operator. By default
+      item's index is used
+
+    :active - Any. Value depending on the activeKey property for currently
+      active item. Supports .sync modifier
+
+  Events:
+
+    @item:click - Function. Click on the sidebar's item
  -->
 
 <template>
@@ -20,9 +35,9 @@
 
       <ul class="items">
         <li
-          :class="['item', {active: item.active}]"
           v-for="(item, index) in items"
-          @click="$emit('item:click', item, index)"
+          :class="['item', {active: activeKey(item, index) === active}]"
+          @click="itemClick(item, index)"
         >
           <div class="icon" v-html="icons[item.icon] || item.icon"></div>
           <div class="title">{{ item.title }}</div>
@@ -46,7 +61,6 @@ export default {
         icon: 'assignment_outline',
         title: 'Lorem Ipsum',
         value: 'lorem/ipsum1',
-        active: true,
         badge: 2,
       }, {
         icon: 'receipt_outline',
@@ -81,11 +95,23 @@ export default {
         value: 'lorem/ipsum9',
       }],
     },
-
+    activeKey: {
+      type: Function,
+      default: (item, index) => index,
+    },
+    active: {
+      default: 0
+    }
   },
   data: () => ({
     icons,
-  })
+  }),
+  methods: {
+    itemClick: function (item, index) {
+      this.$emit('update:active', this.activeKey(item, index))
+      this.$emit('item:click', item, index)
+    }
+  }
 }
 </script>
 

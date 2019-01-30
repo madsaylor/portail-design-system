@@ -2,6 +2,7 @@
   <div id="app" class="main-container">
     <sidebar
       @item:click="log"
+      :active.sync="sidebarActiveItem"
     ></sidebar>
     <div class="main-content grid">
       <div class="row-col">
@@ -101,6 +102,7 @@ export default {
     usageJs,
     usageLess,
     usageLayout,
+    sidebarActiveItem: 0,
   }),
   methods: {
     log: console.log,

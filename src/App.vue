@@ -7,9 +7,10 @@
       :active.sync="sidebarActiveItem"
       :activeChild.sync="sidebarActiveChild"
     ></sidebar>
+    <app-header>Portail v3 Design System</app-header>
     <div class="main-content grid">
+
       <div class="row-col">
-        <h1>Portail v3 Design System</h1>
         Links:
         <a href="https://github.com/betao-dev/portail-design-system">
           Github Repo
@@ -57,10 +58,14 @@
 </template>
 
 <script>
+import Sidebar from './components/Sidebar.vue'
+import AppHeader from './components/AppHeader.vue'
+
 import GridDemo from './demos/GridDemo.vue'
 import ColorsDemo from './demos/ColorsDemo.vue'
 import TextDemo from './demos/TextDemo.vue'
 import IconsDemo from './demos/IconsDemo.vue'
+
 
 let usageJs = `
 import components from '@betao/ds' // Vue components
@@ -107,6 +112,8 @@ let docHeaders = []
 export default {
   name: 'app',
   components: {
+    AppHeader,
+    Sidebar,
     GridDemo,
     ColorsDemo,
     TextDemo,

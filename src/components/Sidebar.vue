@@ -1,21 +1,34 @@
 <!--
-  TODO: badges
+  Side menu with header and footer
+
+  TODO:
+    Mobile collaps/toggle
+    Badges
+    Hidden|disabled items
+    Disable entrire sidebar
+    Header slot
+    Tabselect
+    Arrows for elements with subitems
+    Hyperlinks support?
+    Animations?
 
   Usage:
 
-  <sidebar
-    :items="[...]"                     - Array of items to render
-    :activeKey="(item, index) => ..."  - Value for "is active" check
-    :active.sync="active"              - Value for active item
-    :activeChild.sync="activeChild"    - Value for active child item
-    @item:click="(item, index) => ..." - Click event
-  ></sidebar>
+    <sidebar
+      :items="[...]"                     - Array of items to render
+      :activeKey="(item, index) => ..."  - Value for "is active" check
+      :active.sync="active"              - Value for active item
+      :activeChild.sync="activeChild"    - Value for active child item
+      :open="sidebarOpen"                - Is it opened for the mobile view
+      @item:click="(item, index) => ..." - Click event
+    ></sidebar>
 
   Properties:
 
     :items - Array<Object>, required. Items to display on the sidebar.
       Each item should have a `title` property with displayed name and an
-      .icon property that can be either a string with an icon name, like `'arrow_right'` or a string with svg code `'<svg>...</svg>'`
+      `icon` property that can be either a string with an icon name, like
+      `'arrow_right'` or a string with svg code `'<svg>...</svg>'`
 
     :activeKey - Function. Allows you to override value determining
       the active item. Values are compared with `===` operator. By default
@@ -29,7 +42,7 @@
   Events:
 
     @item:click - Function. Click on the sidebar's item
- -->
+-->
 
 <template>
   <div class="sidebar-conainer">
@@ -42,15 +55,22 @@
         <template v-for="(item, index) in items">
           <li
             :class="['item', {active: activeKey(item, index) === active}]"
+            :key="activeKey(item, index)"
             @click="itemClick(item, index)"
           >
-            <div class="icon" v-html="icons[item.icon] || item.icon"></div>
+            <icon
+              v-if="item.icon"
+              :source="item.icon"
+              size="18px"
+              padding="6px 0"
+            />
             <div class="title">{{ item.title }}</div>
           </li>
 
           <template v-if="activeKey(item, index) === active">
             <li
               v-for="(child, childIndex) in item.children"
+              :key="activeKey(child, childIndex)"
               :class="[
                 'item',
                 'child-item',
@@ -70,7 +90,7 @@
 </template>
 
 <script>
-import icons from '../icons'
+import Icon from './Icon.vue'
 
 export default {
   name: 'sidebar',
@@ -90,9 +110,9 @@ export default {
       default: 0,
     },
   },
-  data: () => ({
-    icons,
-  }),
+  components: {
+    Icon,
+  },
   methods: {
     itemClick: function (item, index, childIndex) {
       if (childIndex != null) {
@@ -155,8 +175,8 @@ export default {
     transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     &.child-item {
-      .font-desktop-body-medium-gray();
-      padding-left: 50px
+      .font-desktop-body-regular-gray();
+      padding-left: 50px;
     }
 
     &.active {
@@ -177,14 +197,11 @@ export default {
     }
 
     .icon {
-      height: 24px;
-      width: 16px;
-
       svg {
         fill: @color-gray-400;
-        height: 18.5px;
-        margin: 3px 0 2px -1.5px;
-        width: 18.5px;
+        // height: 18.5px;
+        // margin: 3px 0 2px -1.5px;
+        // width: 18.5px;
       }
     }
 
@@ -204,6 +221,12 @@ export default {
 @media @hide-sidebar {
   .sidebar-conainer {
     display: none;
+  }
+}
+
+@media @show-sidebar {
+  body {
+    padding-left: @sidebar-width;
   }
 }
 </style>

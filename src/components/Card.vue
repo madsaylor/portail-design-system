@@ -1,7 +1,12 @@
+<!--
+  Basic styled component: background, padding, shadow.
+
+  Usage:
+
+    <card>Hello world!</card>
+-->
 <template>
-  <div class="card">
-    <slot></slot>
-  </div>
+  <div class="card"><slot></slot></div>
 </template>
 
 <script>

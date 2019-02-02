@@ -196,6 +196,10 @@ html, body {
   min-height: 100%;
 }
 
+.main-content {
+  padding-bottom: 200px;
+}
+
 code {
   padding: 20px !important;
 }

@@ -2,6 +2,9 @@
   <div class="grid">
     <div class="row-col">
       <h2>Icons</h2>
+
+      See also: <a href="#Components - Icon">Icon component</a>
+
       <pre v-highlightjs="usageJs"><code class="js"></code></pre>
 
     </div>
@@ -25,7 +28,6 @@ import icons from '@betao/ds/icons'
 
 icons['arrow_right'] // => '<svg>...</svg>' code
 `.slice(1)
-
 
 let context = require.context('@/icons', true, /\.svg$/)
 let icons = context.keys()
@@ -54,5 +56,4 @@ export default {
     padding-right: 24px;
   }
 }
-
 </style>

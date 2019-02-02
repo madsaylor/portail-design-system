@@ -61,7 +61,8 @@ let iconUrl = (icon, style='baseline') =>
   `https://material.io/tools/icons/static/icons/${style}-${icon}-24px.svg`
 
 // Path to save to save
-let iconFilePath = (icon, style='baseline') => path.resolve(
+let iconFilePath = (icon, style='baseline') =>
+  path.resolve(
     DEST_FOLDER,
     style === 'baseline' ? `${icon}.svg` : `${icon}_${style}.svg`
   )

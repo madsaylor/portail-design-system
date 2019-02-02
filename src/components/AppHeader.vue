@@ -44,11 +44,4 @@ export default {
     }
   }
 }
-
-@media @show-sidebar {
-  .app-header {
-    padding-left: @sidebar-width;
-  }
-}
-
 </style>

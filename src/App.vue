@@ -48,11 +48,7 @@
       <ColorsDemo></ColorsDemo>
       <TextDemo></TextDemo>
       <IconsDemo></IconsDemo>
-
-      <div class="row-col">
-        <h2>Components</h2>
-        TODO
-      </div>
+      <ComponentsDemo></ComponentsDemo>
     </div>
   </div>
 </template>
@@ -65,11 +61,12 @@ import GridDemo from './demos/GridDemo.vue'
 import ColorsDemo from './demos/ColorsDemo.vue'
 import TextDemo from './demos/TextDemo.vue'
 import IconsDemo from './demos/IconsDemo.vue'
+import ComponentsDemo from './demos/ComponentsDemo.vue'
 
 
 let usageJs = `
 import components from '@betao/ds' // Vue components
-import '@betao/ds/css'     // Load prebuild css
+import '@betao/ds/css'             // Load prebuilt css
 `.slice(1)
 
 let usageLess = `
@@ -118,6 +115,7 @@ export default {
     ColorsDemo,
     TextDemo,
     IconsDemo,
+    ComponentsDemo,
   },
   data: () => ({
     installation: `$ npm install "@betao/ds" --save`,
@@ -195,10 +193,8 @@ export default {
 /* "Reset" */
 html, body {
   margin: 0;
-  padding: 0;
   min-height: 100%;
 }
-
 
 code {
   padding: 20px !important;

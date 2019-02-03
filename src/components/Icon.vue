@@ -7,6 +7,7 @@
       source="account_circle"  - Icon name or <svg>...</svg> code
       size="16px"              - Icon size
       padding="4px 2px"        - Outher element padding
+      color="brand"            - Color name or CSS value
     />
 
     Instead of using the source property for the icon name, it can be passed
@@ -23,6 +24,8 @@
 
     padding - String. Must be valid css value. Padding around the svg
 
+    color - String. Color variable name or a CSS value
+
   Events:
 
     ...
@@ -36,12 +39,14 @@
       height: size,
       width: size,
       padding: padding,
+      fill: COLORS[color] || color
     }"
   ></span>
 </template>
 
 <script>
 import icons from '../icons'
+import {COLORS} from '../styles/vars'
 
 export default {
   name: 'Icon',
@@ -57,9 +62,14 @@ export default {
       type: String,
       default: '0'
     },
+    color: {
+      type: String,
+      default: 'black'
+    },
   },
   data: () => ({
     icons,
+    COLORS,
   }),
   computed: {
     code() {
@@ -78,21 +88,18 @@ export default {
 </script>
 
 <style lang="less">
+@import '../styles/vars';
+
 .icon {
   display: inline-block;
   vertical-align: bottom;
 
   svg {
+    height: inherit;
+    width: inherit;
+    vertical-align: top;
     user-drag: none;
     user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-
-    vertical-align: top;
-    width: inherit;
-    height: inherit;
   }
 }
 </style>

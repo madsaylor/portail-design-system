@@ -63,6 +63,7 @@
               :source="item.icon"
               size="18px"
               padding="6px 0"
+              color="gray-400"
             />
             <div class="title">{{ item.title }}</div>
           </li>
@@ -194,15 +195,6 @@ export default {
     &:active {
       background-color: @color-gray-200;
       cursor: pointer;
-    }
-
-    .icon {
-      svg {
-        fill: @color-gray-400;
-        // height: 18.5px;
-        // margin: 3px 0 2px -1.5px;
-        // width: 18.5px;
-      }
     }
 
     .title {

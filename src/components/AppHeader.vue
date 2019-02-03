@@ -1,3 +1,15 @@
+<!--
+  Page header
+
+  Usage:
+
+    <AppHeader>
+      <MenuButton slot="left" />
+      Hello, World!
+      <AccountMenu slot="right" />
+    </AppHeader>
+-->
+
 <template>
   <div class="app-header">
     <div class="left-slot">
@@ -26,7 +38,7 @@ export default {
 .app-header {
   background-color: @color-white;
   height: @app-header-height;
-  box-shadow: inset 0 -1px 0 0 #E6E7EB;
+  box-shadow: inset 0 -1px 0 0 @color-gray-200;
   display: flex;
 
   .title {

@@ -33,7 +33,7 @@ let context = require.context('@/icons', true, /\.svg$/)
 let icons = context.keys()
 
 export default {
-  name: 'icons-demo',
+  name: 'IconsDemo',
   data: () => ({
     usageJs,
     icons,

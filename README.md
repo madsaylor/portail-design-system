@@ -29,7 +29,8 @@ npm run lint
 
 ## Adding new components
 
-1. Create a new ***Component*.vue** file in src/components using this template:
+1. Create a new ***MyComponent*.vue** file in src/components using this
+  template:
 
 
 ```vue
@@ -38,13 +39,13 @@ npm run lint
 
   Usage:
 
-    <my-component
+    <MyComponent
       :prop1="..."  - Short description of prop1
       :prop2="..."  - Short description of prop2
       @event="..."  - Short description of event
     >
       Hello, World!
-    </my-component>
+    </MyComponent>
 
   Properties:
 
@@ -63,7 +64,7 @@ npm run lint
 
 <script>
 export default {
-  name: 'my-component',
+  name: 'MyComponent',
   props: {
     ...
   },
@@ -81,34 +82,32 @@ export default {
 
 ```
 
-2. Create a new ***Component*Demo.vue** file in src/demos/components with
+2. Create a new ***MyComponent*Demo.vue** file in src/demos/components with
 this template:
 
 ```vue
 <template>
   <div class="row-col">
-    <h3>Component</h3>
+    <h3>MyComponent</h3>
 
     Description
 
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
-    <my-component>Hello, World!</my-component>
+    <MyComponent>Hello, World!</MyComponent>
   </div>
 </template>
 
 <script>
-import Component from '../../components/Component.vue'
+import MyComponent from '../../components/MyComponent.vue'
 
 let usage = `
-<my-component :prop1="..." :prop2="..." @event="...">
-  Hello, World!
-</my-component>
+<MyComponent>Hello, World!</MyComponent>
 `.slice(1)
 
 export default {
-  name: 'ComponentDemo',
-  components: {Component},
+  name: 'MyComponentDemo',
+  components: {MyComponent},
   data: () => ({usage}),
 }
 </script>

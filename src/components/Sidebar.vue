@@ -14,14 +14,14 @@
 
   Usage:
 
-    <sidebar
+    <Sidebar
       :items="[...]"                     - Array of items to render
       :activeKey="(item, index) => ..."  - Value for "is active" check
       :active.sync="active"              - Value for active item
       :activeChild.sync="activeChild"    - Value for active child item
       :open="sidebarOpen"                - Is it opened for the mobile view
       @item:click="(item, index) => ..." - Click event
-    ></sidebar>
+    ></Sidebar>
 
   Properties:
 
@@ -58,7 +58,7 @@
             :key="activeKey(item, index)"
             @click="itemClick(item, index)"
           >
-            <icon
+            <Icon
               v-if="item.icon"
               :source="item.icon"
               size="18px"
@@ -93,7 +93,7 @@
 import Icon from './Icon.vue'
 
 export default {
-  name: 'sidebar',
+  name: 'Sidebar',
   props: {
     items: {
       type: Array,

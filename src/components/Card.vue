@@ -3,7 +3,7 @@
 
   Usage:
 
-    <card>Hello world!</card>
+    <Card>Hello, World!</Card>
 -->
 <template>
   <div class="card"><slot></slot></div>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'card',
+  name: 'Card',
 }
 </script>
 

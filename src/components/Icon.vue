@@ -3,7 +3,7 @@
 
   Usage:
 
-    <icon
+    <Icon
       source="account_circle"  - Icon name or <svg>...</svg> code
       size="16px"              - Icon size
       padding="4px 2px"        - Outher element padding
@@ -44,7 +44,7 @@
 import icons from '../icons'
 
 export default {
-  name: 'icon',
+  name: 'Icon',
   props: {
     source: {
       type: String,
@@ -71,6 +71,7 @@ export default {
           return icons[key]
         }
       }
+      throw 'Icon code is missing'
     }
   },
 }

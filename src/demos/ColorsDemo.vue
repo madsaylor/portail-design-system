@@ -24,7 +24,7 @@ let usageLess = `
 `.slice(1)
 
 export default {
-  name: 'colors-demo',
+  name: 'ColorsDemo',
   data: () => ({
     usageLess,
     colors: {

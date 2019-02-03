@@ -33,7 +33,7 @@ new MyComponent(...).$mount('#mount-point')
 `.slice(1)
 
 export default {
-  name: 'components-demo',
+  name: 'ComponentsDemo',
   data: () => ({
     usageJs,
     componentDemos,

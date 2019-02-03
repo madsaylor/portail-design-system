@@ -77,7 +77,7 @@ let usageLayout = `
 `.slice(1)
 
 export default {
-  name: 'grid-demo',
+  name: 'GridDemo',
   data: () => ({
     usageLayout,
   }),

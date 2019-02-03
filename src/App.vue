@@ -1,13 +1,13 @@
 <template>
   <div id="app" class="main-container">
-    <sidebar
+    <Sidebar
       @item:click="sidebarClick"
       :items="sidebarItems"
       :activeKey="(item, index) => item.hash"
       :active.sync="sidebarActiveItem"
       :activeChild.sync="sidebarActiveChild"
-    ></sidebar>
-    <app-header>Portail v3 Design System</app-header>
+    ></Sidebar>
+    <AppHeader>Portail v3 Design System</AppHeader>
     <div class="main-content grid">
 
       <div class="row-col">
@@ -107,7 +107,7 @@ let sidebarIcons = [
 let docHeaders = []
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     AppHeader,
     Sidebar,

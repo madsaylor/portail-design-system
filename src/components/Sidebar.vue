@@ -19,7 +19,7 @@
       :activeKey="(item, index) => ..."  - Value for "is active" check
       :active.sync="active"              - Value for active item
       :activeChild.sync="activeChild"    - Value for active child item
-      :open="sidebarOpen"                - Is it opened for the mobile view
+      :opened="sidebarOpened"            - Is it opened (in mobile view)
       @item:click="(item, index) => ..." - Click event
     ></Sidebar>
 
@@ -45,7 +45,7 @@
 -->
 
 <template>
-  <div class="sidebar-conainer">
+  <div :class="['sidebar-conainer', {opened}]">
     <div class="sidebar">
       <div class="header">
         <slot name="header">Sidebar header</slot>
@@ -110,6 +110,7 @@ export default {
     activeChild: {
       default: 0,
     },
+    opened: Boolean,
   },
   components: {
     Icon,
@@ -123,7 +124,20 @@ export default {
       }
       this.$emit('item:click', item, index, childIndex)
     }
-  }
+  },
+  mounted() {
+    // Close sidebar on an outside click
+    this.$el.parentNode.addEventListener('click', event => {
+      let el = event.target
+      while (el.parentNode) {
+        if (el === this.$el) {
+          return
+        }
+        el = el.parentNode
+      }
+      this.$emit('update:opened', false)
+    }, true)
+  },
 }
 </script>
 
@@ -211,7 +225,7 @@ export default {
 }
 
 @media @hide-sidebar {
-  .sidebar-conainer {
+  .sidebar-conainer:not(.opened) {
     display: none;
   }
 }
@@ -219,6 +233,9 @@ export default {
 @media @show-sidebar {
   body {
     padding-left: @sidebar-width;
+  }
+  #open-sidebar-button {
+    display: none;
   }
 }
 </style>

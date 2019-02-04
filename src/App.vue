@@ -6,8 +6,15 @@
       :activeKey="(item, index) => item.hash"
       :active.sync="sidebarActiveItem"
       :activeChild.sync="sidebarActiveChild"
+      :opened.sync="sidebarOpened"
     ></Sidebar>
-    <AppHeader>Portail v3 Design System</AppHeader>
+    <AppHeader>
+      <Button
+        id="open-sidebar-button" slot="left" icon="menu" plain
+        @click="sidebarOpened = !sidebarOpened"
+       />
+      Portail v3 Design System
+    </AppHeader>
     <div class="main-content grid">
 
       <div class="row-col">
@@ -56,6 +63,7 @@
 <script>
 import Sidebar from './components/Sidebar.vue'
 import AppHeader from './components/AppHeader.vue'
+import Button from './components/Button.vue'
 
 import GridDemo from './demos/GridDemo.vue'
 import ColorsDemo from './demos/ColorsDemo.vue'
@@ -125,6 +133,7 @@ export default {
     sidebarItems: [],
     sidebarActiveItem: 0,
     sidebarActiveChild: 0,
+    sidebarOpened: false,
   }),
   methods: {
     sidebarClick(item) {

@@ -12,17 +12,11 @@
 
 <template>
   <div class="app-header">
-    <div class="left-slot">
-      <slot name="left"></slot>
-    </div>
-
+    <slot name="left"></slot>
     <div class="title">
       <slot></slot>
     </div>
-
-    <div class="right-slot">
-      <slot name="right"></slot>
-    </div>
+    <slot name="right"></slot>
   </div>
 </template>
 
@@ -40,6 +34,7 @@ export default {
   height: @app-header-height;
   box-shadow: inset 0 -1px 0 0 @color-gray-200;
   display: flex;
+  align-items: stretch;
 
   .title {
     flex: 1 0 auto;

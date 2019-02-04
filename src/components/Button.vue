@@ -15,7 +15,10 @@
 -->
 
 <template>
-  <button :class="['button', {primary, big, alt, plain}]">
+  <button
+    :class="['button', {primary, big, alt, plain}]"
+    @click="event => $emit('click', event)"
+  >
     <Icon
       v-if="icon"
       :class="{'icon-left': hasLabel}"
@@ -56,7 +59,7 @@ export default {
     hasLabel() {
       return !!this.$slots.default
     },
-  }
+  },
 }
 </script>
 

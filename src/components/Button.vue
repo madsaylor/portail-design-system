@@ -1,10 +1,6 @@
 <!--
   Button with an optional icon and different styles
 
-  TODO:
-    Current implementation seems a bit over-engineered. Give it another look
-    later
-
   Usage:
 
     <Button
@@ -21,13 +17,13 @@
 <template>
   <button :class="['button', {primary, big, alt, plain}]">
     <Icon
-      class="icon-left"
       v-if="icon"
+      :class="{'icon-left': hasLabel}"
       :source="icon"
       :size="big ? '28px' : '24px'"
       :color="primary ? 'white' : alt ? 'brand' : 'black'"
     />
-    <span class="label"><slot></slot></span>
+    <slot></slot>
     <Icon
       class="icon-right"
       v-if="iconRight"
@@ -57,6 +53,9 @@ export default {
     primary() {
       return !(this.alt || this.plain)
     },
+    hasLabel() {
+      return !!this.$slots.default
+    },
   }
 }
 </script>
@@ -65,34 +64,32 @@ export default {
 @import '../styles/vars';
 
 .button {
-  display: inline-block;
-  box-sizing: border-box;
-  border: none;
-  background: none;
-  margin: 0;
-  cursor: pointer;
-  transition: background 250ms ease-in-out;
-  -webkit-appearance: none;
   -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border-radius: 3px;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  transition: background 250ms ease-in-out;
 
-  .label {
-    display: inline-block;
-    min-width: 5px;
-    &:not(:empty) {
-      padding: 4px 10px;
-    }
+  padding: 10px 16px;
+  &.big {
+    padding: 14px 24px;
   }
 
+  .icon {
+    margin: -4px;
+  }
   .icon-left {
-    margin-right: -5px;
+    margin-left: -10px;
+    margin-right: 5px;
   }
   .icon-right {
-    margin-left: -5px;
-  }
-
-  &.primary, &.alt {
-    padding: 6px;
-    border-radius: 3px;
+    margin-right: -10px;
+    margin-left: 5px;
   }
 
   &.primary {
@@ -101,7 +98,6 @@ export default {
 
     &.big {
       .font-button-big();
-      padding: 10px 14px;
     }
 
     &:hover, &:focus {
@@ -110,11 +106,6 @@ export default {
 
     &:active {
       background: darken(@color-brand, 10%);
-    }
-
-    &:focus {
-      outline: 1px dashed @color-gray-500;
-      outline-offset: -2px;
     }
   }
 
@@ -135,7 +126,7 @@ export default {
   }
 
   &:focus {
-    outline: 1px dashed @color-gray-200;
+    outline: 1px dashed @color-gray-400;
     outline-offset: -2px;
   }
 }

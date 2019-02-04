@@ -16,9 +16,10 @@
       <Button icon="menu" big></Button>&nbsp;
       <Button icon="menu" plain></Button>&nbsp;
       <Button icon="menu"></Button>&nbsp;
-      <button class="button primary"><span class="label">
+      <!-- OR -->
+      <button class="button primary">
         Button Label
-      </span></button>
+      </button>
     </div>
 
   </div>
@@ -28,20 +29,20 @@
 import Button from '../../components/Button.vue'
 
 let usage = `
-<Button big>Big</Button>
-<Button icon="add">Left Icon</Button>
-<Button icon-right="expand_more">Right Icon</Button>
-<Button alt>Alt</Button>
-<Button icon="add" alt>Alt icon</Button>
-<Button plain>Plain </Button>
-<Button icon="menu" big plain></Button>
-<Button icon="menu" big></Button>
-<Button icon="menu" plain></Button>
-<Button icon="menu"></Button>
+<Button big>Big</Button>&nbsp;
+<Button icon="add">Left Icon</Button>&nbsp;
+<Button icon-right="expand_more">Right Icon</Button>&nbsp;
+<Button alt>Alt</Button>&nbsp;
+<Button icon="add" alt>Alt icon</Button>&nbsp;
+<Button plain>Plain </Button>&nbsp;
+<Button icon="menu" big plain></Button>&nbsp;
+<Button icon="menu" big></Button>&nbsp;
+<Button icon="menu" plain></Button>&nbsp;
+<Button icon="menu"></Button>&nbsp;
 <!-- OR -->
-<button class="button primary"><span class="label">
+<button class="button primary">
   Button Label
-</span></button>
+</button>
 `.slice(1)
 
 export default {

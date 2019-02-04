@@ -25,10 +25,6 @@
     padding - String. Must be valid css value. Padding around the svg
 
     color - String. Color variable name or a CSS value
-
-  Events:
-
-    ...
 -->
 
 <template>

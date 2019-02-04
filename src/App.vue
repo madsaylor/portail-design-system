@@ -152,10 +152,8 @@ export default {
       }
     },
   },
-  beforeMount () {
-    window.addEventListener('scroll', this.handleScroll);
-  },
   mounted() {
+    window.addEventListener('scroll', this.handleScroll);
     // Compile sidebar items automatically from h2 and h3 headers
     docHeaders = document.querySelectorAll('h2, h3')
     let sidebarItems = []
@@ -203,6 +201,7 @@ export default {
 /* "Reset" */
 html, body {
   margin: 0;
+  padding: 0;
   min-height: 100%;
 }
 

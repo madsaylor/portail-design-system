@@ -95,6 +95,9 @@ import Icon from './Icon.vue'
 
 export default {
   name: 'Sidebar',
+  components: {
+    Icon,
+  },
   props: {
     items: {
       type: Array,
@@ -112,22 +115,17 @@ export default {
     },
     opened: Boolean,
   },
-  components: {
-    Icon,
-  },
   methods: {
-    itemClick: function (item, index, childIndex) {
+    itemClick(item, index, childIndex) {
       if (childIndex != null) {
         this.$emit('update:activeChild', this.activeKey(item, childIndex))
       } else {
         this.$emit('update:active', this.activeKey(item, index))
       }
       this.$emit('item:click', item, index, childIndex)
-    }
-  },
-  mounted() {
-    // Close sidebar on an outside click
-    this.$el.parentNode.addEventListener('click', event => {
+    },
+    outsideClick(event) {
+      // Close sidebar on an outside click
       let el = event.target
       while (el.parentNode) {
         if (el === this.$el) {
@@ -136,7 +134,14 @@ export default {
         el = el.parentNode
       }
       this.$emit('update:opened', false)
-    }, true)
+    },
+  },
+  mounted() {
+    document.addEventListener('click', this.outsideClick, true)
+    this.$el.parentNode.classList.add('sidebar-padding')
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.outsideClick, true)
   },
 }
 </script>
@@ -231,7 +236,7 @@ export default {
 }
 
 @media @show-sidebar {
-  body {
+  .sidebar-padding {
     padding-left: @sidebar-width;
   }
   #open-sidebar-button {

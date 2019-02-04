@@ -4,9 +4,9 @@
   Usage:
 
     <AppHeader>
-      <MenuButton slot="left" />
+      <MenuButton #left />
       Hello, World!
-      <AccountMenu slot="right" />
+      <AccountMenu #right />
     </AppHeader>
 -->
 

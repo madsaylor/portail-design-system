@@ -5,9 +5,9 @@
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
     <AppHeader>
-      <Button slot="left" icon="menu" plain />
+      <Button #left icon="menu" plain />
       Hello, World!
-      <Button slot="right" icon="account_circle" plain />
+      <Button #right icon="account_circle" plain />
     </AppHeader>
   </div>
 </template>
@@ -18,9 +18,9 @@ import Button from '../../components/Button.vue'
 
 let usage = `
 <AppHeader>
-  <Button slot="left" icon="menu" plain />
+  <Button #left icon="menu" plain />
   Hello, World!
-  <Button slot="right" icon="account_circle" plain />
+  <Button #right icon="account_circle" plain />
 </AppHeader>
 `.slice(1)
 

@@ -10,7 +10,7 @@
     ></Sidebar>
     <AppHeader>
       <Button
-        id="open-sidebar-button" slot="left" icon="menu" plain
+        id="open-sidebar-button" #left icon="menu" plain
         @click="sidebarOpened = !sidebarOpened"
        />
       Portail v3 Design System

@@ -17,7 +17,7 @@
 <template>
   <button
     :class="['button', {primary, big, alt, plain}]"
-    @click="event => $emit('click', event)"
+    @click="event => {$emit('click', event)}"
   >
     <Icon
       v-if="icon"

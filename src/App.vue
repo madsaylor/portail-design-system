@@ -118,6 +118,7 @@ export default {
   name: 'App',
   components: {
     AppHeader,
+    Button,
     Sidebar,
     GridDemo,
     ColorsDemo,

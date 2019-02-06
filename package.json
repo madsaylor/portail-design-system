@@ -39,6 +39,8 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.13.0",
     "eslint-plugin-vue": "^5.1.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "release-it": "^10.0.7",
     "svg-inline-loader": "^0.8.0",
     "vue": "^2.6.0",

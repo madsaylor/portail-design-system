@@ -5,6 +5,7 @@
     Button with an optional icon and different styles
 
     <pre v-highlightjs="usage"><code class="html"></code></pre>
+
     <div style="line-height: 64px">
       <Button big>Big</Button>&nbsp;
       <Button icon="add">Left Icon</Button>&nbsp;

@@ -4,7 +4,7 @@
   Usage:
 
     <Calendar
-      :value=new Date('2019-1-1') - value which will be set as selected
+      :startDate=new Date('2019-1-1') - value which will be set as selected when calendar initialised
       :locale='en-en' - calendar localisation
       :has-range='true' - defines whether a calendar has a range of date available
         for selection
@@ -14,13 +14,11 @@
 
     Properties:
 
-      value - Date. Start Date of the calendar, default is current Date.
+      startDate - Date. Start Date of the calendar as it initialises, default is current Date.
 
       locale - String. Language used in calendar. Default is French.
 
-      has-range - Boolean. Defines if a calendar selection range is limited. Default is false.
-
-      range - Object. Range of days from which a user can select date.
+      range - Object {min, max}. Range of days from which a user can select date.
 
     Events:
 
@@ -31,25 +29,31 @@
 <template>
   <div class="calendar-component">
     <div class="calendar-header">
-      <div class="calendar-select">
-        <i @click="performChange(-1)">
-          <span class="left"></span>
-        </i>
-        <span class="calendar-label"
-              @click="monthGrid = !monthGrid"
-        >{{headerLabel}}</span>
-        <i @click="performChange(1)">
-          <span class="right"></span>
-        </i>
+      <div class="calendar-year-label">{{ !monthGrid ? year : ' ' }}</div>
+      <div class="calendar-label" @click="monthGrid = !monthGrid">{{ headerLabel }}</div>
+      <div class="calendar-buttons">
+        <button
+          @click="!prevViewOutOfRange && switchDateView(-1)"
+          :class="{disabled: prevViewOutOfRange}"
+        >
+          <span class="arrow-left"></span>
+        </button>
+        <button
+          @click="!nextViewOutOfRange && switchDateView(1)"
+          :class="{disabled: nextViewOutOfRange}"
+        >
+          <span class="arrow-right"></span>
+        </button>
       </div>
     </div>
 
-    <GridSelect
-      :items="gridItems"
-      :labels-top="gridLabels"
-      v-model="selected"
-      :height="'246px'"
-    ></GridSelect>
+    <div class="calendar-body">
+      <GridSelect
+        :items="gridItems"
+        :labels-top="gridLabels"
+        v-model="selected"
+      ></GridSelect>
+    </div>
 
   </div>
 </template>
@@ -63,7 +67,7 @@ export default {
     GridSelect
   },
   props: {
-    value: {
+    startDate: {
       type: Date,
       default: () => new Date()
     },
@@ -71,24 +75,14 @@ export default {
       type: String,
       default: 'fr-fr'
     },
-    hasRange: {
-      type: Boolean,
-      default: false
-    },
     range: {
-      type: Object,
-      default: () => {
-        return {
-          min: -180,
-          max: 30
-        }
-      }
+      type: Object
     }
   },
   data () {
     return {
-      displayed: new Date(),
-      selected: this.value,
+      displayed: new Date(this.startDate),
+      selected: new Date(this.startDate),
       dateRange: {
         min: null,
         max: null
@@ -96,12 +90,22 @@ export default {
       monthGrid: false
     }
   },
-  mounted () {
-    this.hasRange && this.setRange()
+  created () {
+    this.range && this.setRange()
   },
   computed: {
+    nextViewOutOfRange () {
+      return this.range &&
+      (!this.monthGrid ? this.displayed.getMonth() === this.dateRange.max.getMonth()
+        : this.displayed.getFullYear() === this.dateRange.max.getFullYear())
+    },
+    prevViewOutOfRange () {
+      return this.range &&
+        (!this.monthGrid ? this.displayed.getMonth() === this.dateRange.min.getMonth()
+          : this.displayed.getFullYear() === this.dateRange.min.getFullYear())
+    },
     headerLabel () {
-      return this.monthGrid ? this.year : `${this.monthName}, ${this.year}`
+      return this.monthGrid ? this.year : this.monthName
     },
     year () {
       return this.displayed.getFullYear()
@@ -151,7 +155,7 @@ export default {
           if (day.getMonth() !== this.month) {
             day.class = 'other-month'
           }
-          if (this.hasRange && this.outOfRange(date)) {
+          if (this.range && this.outOfRange(date)) {
             day.disabled = true
           }
           week.push(day)
@@ -199,6 +203,9 @@ export default {
         for (let j = 0; j < 3; j++) {
           let month = new Date(date)
           month.displayValue = (date.toLocaleString(this.locale, {month: 'long'}))
+          if (this.range && this.outOfRangeMonth(month)) {
+            month.disabled = true
+          }
           quarter.push(month)
           date.setMonth(date.getMonth() + 1)
         }
@@ -208,7 +215,7 @@ export default {
     }
   },
   methods: {
-    performChange (shift) {
+    switchDateView (shift) {
       this.monthGrid ? this.changeYear(shift) : this.changeMonth(shift)
     },
     changeMonth (shift) {
@@ -217,16 +224,17 @@ export default {
     },
     changeYear (shift) {
       this.displayed.setFullYear(this.year + shift)
+      this.displayed.setMonth(shift > 0 ? 0 : 11)
       this.displayed = new Date(this.displayed)
     },
     setRange () {
       /* how to determine the min/max month and date knowing that is 180 days before and 30 after current date */
       /* get miliseconds of now */
-      const now = new Date().getTime()
+      const now = this.startDate.getTime()
       /* convert minRange to miliseconds */
       const daysToSec = 24 * 60 * 60 * 1000
-      const minRange = (this.range.min || -180) * daysToSec
-      const maxRange = (this.range.max || 30) * daysToSec
+      const minRange = (this.range.min) * daysToSec
+      const maxRange = (this.range.max) * daysToSec
       const minDate = new Date(now + minRange)
       const maxDate = new Date(now + maxRange)
       this.dateRange.min = minDate
@@ -236,6 +244,13 @@ export default {
       const min = date < this.dateRange.min
       const max = date > this.dateRange.max
       return min || max
+    },
+    outOfRangeMonth (date) {
+      const monthMaxYear = date.getFullYear() === this.dateRange.max.getFullYear()
+      const monthMinYear = date.getFullYear() === this.dateRange.min.getFullYear()
+      const monthInMaxYear = monthMaxYear && (date.getMonth() === this.dateRange.max.getMonth())
+      const monthInMinYear = monthMinYear && (date.getMonth() === this.dateRange.min.getMonth())
+      return this.outOfRange(date) && (!monthInMaxYear && !monthInMinYear)
     }
   },
   watch: {
@@ -262,62 +277,93 @@ export default {
 @import '../styles/vars';
 
 .calendar-component {
-  width: 320px;
-  height: 308px;
+  width: 336px;
+  height: 336px;
   position: absolute;
   z-index: 9999;
   background-color: @color-white;
   text-align: center;
   border-radius: @btn-border-radius;
 
+  @media screen and (max-width: 375px) {
+    width: 320px;
+  }
+
   .calendar-header {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-top: 12px;
+    align-items: flex-start;
+    position: relative;
+    padding: 20px 24px 0 24px;
 
-    .calendar-select {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 200px;
-      margin: 4px auto 8px;
+    .calendar-year-label {
+      font-size: 14px;
+      color: @color-gray-500;
+      height: 24px;
+    }
+
+    .calendar-label {
+      padding-bottom: 1px;
+      font-size: 16px;
+      font-weight: 500;
       text-transform: capitalize;
-      color: @color-gray-600;
+      color: @color-black;
+      cursor: pointer;
+    }
 
-      .calendar-label {
-        padding-bottom: 1px;
-        font-size: 16px;
-        font-weight: 500;
-      }
+    .calendar-buttons {
+      position: absolute;
+      right: 24px;
+      bottom: 0;
 
-      span {
-        cursor: pointer;
-      }
+      button {
+        margin-left: 8px;
+        padding-left: 8px;
+        height: 24px;
+        width: 24px;
+        border: 1px solid lightgray;
+        background-color: @color-gray-200;
+        border-radius: 2px;
+        opacity: 0.5;
+        transition: opacity 100ms ease-in-out;
 
-      i {
-        background-color: #f6f6f6;
-        border-radius: 50%;
-        position: relative;
-        cursor: pointer;
-        padding: 8px;
+        &:focus{
+          outline: none;
+        }
 
-        span {
+        &.disabled {
+          opacity: 0.2;
+        }
+
+        &:hover:not(.disabled) {
+          background-color: @color-gray-200 !important;
+          cursor: pointer;
+          opacity: 1;
+        }
+
+        .arrow-left, .arrow-right {
+          width: 0;
+          height: 0;
+          border-style: solid;
           display: block;
-          border: solid @color-gray-600;
-          border-width: 0 2px 2px 0;
-          padding: 3px;
+        }
 
-          &.left {
-            transform: rotate(135deg) translate(-1px);
-          }
+        .arrow-left {
+          border-width: 5px 5px 5px 0;
+          border-color: transparent #000000 transparent transparent;
+        }
 
-          &.right {
-            transform: rotate(-45deg);
-          }
+        .arrow-right {
+          border-width: 5px 0 5px 5px;
+          border-color: transparent transparent transparent #000000;
         }
       }
     }
+  }
+
+  .calendar-body {
+    padding: 8px 16px 0 16px;
+    height: 245px;
   }
 }
 </style>

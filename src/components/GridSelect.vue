@@ -6,8 +6,6 @@
     <GridSelect
       :items=gridItems - items to be rendered *required
       :labels-top=gridLabels - headings for cells *optional
-      :width='320px' - override default width
-      :height='320px' - override default height
     ></GridSelect>
 
     Properties:
@@ -19,10 +17,6 @@
 
     labelsTop - Array[x]. Grid headings to be rendered.
 
-    width - String. Width of the element. Default: 100%.
-
-    height - String. Height of the element. Default: 100%.
-
     Events:
 
     input - emitted when a new item is selected in component
@@ -30,13 +24,7 @@
 
 <template>
   <div class="grid-select-wrapper">
-    <table
-      class="grid-select-table"
-      :style="{
-        width: width,
-        height: height
-      }"
-    >
+    <table class="grid-select-table">
       <tr v-if="labelsTop" class="grid-labels-top">
         <th v-for="label in labelsTop" class="grid-label">
           {{ label }}
@@ -79,14 +67,6 @@ export default {
     labelsTop: Array,
     value: {
       default: {}
-    },
-    width: {
-      type: String,
-      default: '100%'
-    },
-    height: {
-      type: String,
-      default: '100%'
     }
   },
   methods: {
@@ -101,14 +81,18 @@ export default {
 @import '../styles/vars';
 
 .grid-select-wrapper {
+  width: 100%;
+  height: 100%;
 
   .grid-select-table {
+    width: 100%;
+    height: 100%;
 
     .grid-labels-top {
-      color: @color-brand;
+      color: @color-gray-500;
       text-transform: uppercase;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 500!important;
 
       .grid-label {
         padding-bottom: 4px;
@@ -121,7 +105,7 @@ export default {
       .grid-item {
         font-size: 14px;
         font-weight: 500;
-        color: @color-gray-600;
+        color: @color-black;
         cursor: pointer;
         transition: transform .1s ease-in-out;
         text-align: center;
@@ -141,9 +125,9 @@ export default {
 
           span {
             background-color: @color-brand;
-            border-radius: 50%;
-            width: 76%;
-            height: 100%;
+            border-radius: 2px;
+            width: 66%;
+            height: 84%;
             position: absolute;
             left: 50%;
             top: 50%;

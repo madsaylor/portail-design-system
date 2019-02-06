@@ -10,8 +10,6 @@
         :items="gridItems"
         :labels-top="gridLabels"
         v-model="selected"
-        width="50%"
-        height="100%"
         ></GridSelect>
     </div>
   </div>
@@ -25,7 +23,6 @@ let usage = `
   :items="gridItems"
   :labels-top="gridLabels"
   v-model="selected"
-  width="50%"
 ></GridSelect>
 `.slice(1)
 
@@ -63,5 +60,7 @@ export default {
 </script>
 
 <style scoped>
-
+ .grid-select-demo {
+   width: 50%;
+ }
 </style>

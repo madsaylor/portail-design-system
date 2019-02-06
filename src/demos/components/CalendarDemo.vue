@@ -17,8 +17,8 @@
           <h4>With range</h4>
           <Calendar
             v-model="dateSelected2"
-            :has-range="true"
-            :range="{min: -30, max: 30}"
+            :start-date="new Date('2010-1-1')"
+            :range="{min: -30, max: 10}"
           ></Calendar>
         </div>
       </div>
@@ -32,8 +32,8 @@ import Calendar from '../../components/Calendar'
 let usage = `
 <Calendar
   v-model="dateSelected"
-  :has-range="true"
-  :range="{min: -30, max: 30}"
+  :range="{min: -30, max: 10}"
+  :startDate="new Date('2010-1-1')"
 ></Calendar>`
 .slice(1)
 
@@ -59,14 +59,14 @@ export default {
 
   .calendar-no-range {
     position: relative;
-    height: 320px;
-    width: 320px;
+    height: 400px;
+    width: 336px;
   }
 
   .calendar-range {
     position: relative;
-    height: 320px;
-    width: 320px;
+    height: 400px;
+    width: 336px;
   }
 }
 </style>

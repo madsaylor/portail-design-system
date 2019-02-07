@@ -1,26 +1,26 @@
 <template>
   <div class="grid grid-select-demo">
     <div class="row-col">
-      <h3>Calendar</h3>
+      <h3>Datepicker</h3>
 
-      Custom datepicker-like component.
+      Datepicker with min/max selection limit.
 
       <pre v-highlightjs="usage"><code class="html"></code></pre>
 
-      <div class="calendar-demo-wrapper">
-        <div class="calendar-no-range">
+      <div class="datepicker-demo-wrapper">
+        <div class="datepicker-no-range">
           <h4>Without range</h4>
-          <Calendar
+          <Datepicker
             v-model="dateSelected"
-          ></Calendar>
+          ></Datepicker>
         </div>
-        <div class="calendar-range">
+        <div class="datepicker-range">
           <h4>With range</h4>
-          <Calendar
+          <Datepicker
             v-model="dateSelected2"
             :start-date="new Date('2010-1-1')"
             :range="{min: -30, max: 10}"
-          ></Calendar>
+          ></Datepicker>
         </div>
       </div>
     </div>
@@ -28,20 +28,20 @@
 </template>
 
 <script>
-import Calendar from '../../components/Calendar'
+import Datepicker from '../../components/Datepicker'
 
 let usage = `
-<Calendar
+<Datepicker
   v-model="dateSelected"
   :range="{min: -30, max: 10}"
   :startDate="new Date('2010-1-1')"
-></Calendar>`
+></Datepicker>`
 .slice(1)
 
 export default {
-  name: "CalendarDemo",
+  name: "DatepickerDemo",
   components: {
-    Calendar
+    Datepicker
   },
   data() {
     return {
@@ -54,17 +54,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.calendar-demo-wrapper {
+.datepicker-demo-wrapper {
   display: flex;
   justify-content: space-around;
 
-  .calendar-no-range {
+  .datepicker-no-range {
     position: relative;
     height: 400px;
     width: 336px;
   }
 
-  .calendar-range {
+  .datepicker-range {
     position: relative;
     height: 400px;
     width: 336px;

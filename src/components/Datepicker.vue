@@ -1,37 +1,37 @@
 <!--
-  Custom datepicker-like calendar component.
+  Datepicker with min/max selection limit.
 
   Usage:
 
-    <Calendar
-      :startDate=new Date('2019-1-1') - value which will be set as selected when calendar initialised
-      :locale='en-en' - calendar localisation
-      :has-range='true' - defines whether a calendar has a range of date available
+    <Datepicker
+      :startDate=new Date('2019-1-1') - value which will be set as selected when datepicker initialised
+      :locale='en-en' - datepicker localisation
+      :has-range='true' - defines whether a datepicker has a range of date available
         for selection
       :range='{min: -180, max: 30}' - range in days from the start for selection
-      @update:selected='closeCalendar' - emitted when a new date is selected
-    ></Calendar>
+      @update:selected='closedatepicker' - emitted when a new date is selected
+    />
 
   Properties:
 
-    startDate - Date. Start Date of the calendar as it initialises, default is current Date.
+    startDate - Date. Start Date of the datepicker as it initialises, default is current Date.
 
-    locale - String. Language used in calendar. Default is French.
+    locale - String. Language used in datepicker. Default is French.
 
     range - Object {min, max}. Range of days from which a user can select date.
 
   Events:
 
-    update:selected - emitted when user chooses new date from the calendar component.
+    update:selected - emitted when user chooses new date from the datepicker component.
       Return an object with preformatted date as well as a Date Object.
 -->
 
 <template>
-  <div class="calendar-component">
-    <div class="calendar-header">
-      <div class="calendar-year-label">{{ !monthGrid ? year : ' ' }}</div>
-      <div class="calendar-label" @click="monthGrid = !monthGrid">{{ headerLabel }}</div>
-      <div class="calendar-buttons">
+  <div class="datepicker-component">
+    <div class="datepicker-header">
+      <div class="datepicker-year-label">{{ !monthGrid ? year : ' ' }}</div>
+      <div class="datepicker-label" @click="monthGrid = !monthGrid">{{ headerLabel }}</div>
+      <div class="datepicker-buttons">
         <button
           @click="!prevViewOutOfRange && switchDateView(-1)"
           :class="{disabled: prevViewOutOfRange}"
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="calendar-body">
+    <div class="datepicker-body">
       <GridSelect
         :items="gridItems"
         :labels-top="gridLabels"
@@ -62,7 +62,7 @@
 import GridSelect from './GridSelect'
 
 export default {
-  name: 'BaseCalendar',
+  name: 'Datepicker',
   components: {
     GridSelect
   },
@@ -276,7 +276,7 @@ export default {
 <style lang="less" scoped>
 @import '../styles/vars';
 
-.calendar-component {
+.datepicker-component {
   width: 336px;
   height: 336px;
   position: absolute;
@@ -289,20 +289,20 @@ export default {
     width: 320px;
   }
 
-  .calendar-header {
+  .datepicker-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     position: relative;
     padding: 20px 24px 0 24px;
 
-    .calendar-year-label {
+    .datepicker-year-label {
       font-size: 14px;
       color: @color-gray-500;
       height: 24px;
     }
 
-    .calendar-label {
+    .datepicker-label {
       padding-bottom: 1px;
       font-size: 16px;
       font-weight: 500;
@@ -311,7 +311,7 @@ export default {
       cursor: pointer;
     }
 
-    .calendar-buttons {
+    .datepicker-buttons {
       position: absolute;
       right: 24px;
       bottom: 0;
@@ -361,7 +361,7 @@ export default {
     }
   }
 
-  .calendar-body {
+  .datepicker-body {
     padding: 8px 16px 0 16px;
     height: 245px;
   }

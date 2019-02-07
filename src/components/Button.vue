@@ -76,7 +76,7 @@ export default {
   cursor: pointer;
   display: inline-block;
   margin: 0;
-  transition: background 250ms ease-in-out;
+  transition: background 100ms ease-in-out;
 
   padding: 10px 16px;
   &.big {
@@ -129,8 +129,8 @@ export default {
   }
 
   &:focus {
-    outline: 1px dashed @color-gray-400;
-    outline-offset: -2px;
+    outline: 1px solid @color-white;
+    outline-offset: -4px;
   }
 }
 </style>

@@ -45,7 +45,7 @@
 -->
 
 <template>
-  <div :class="['sidebar-conainer', {opened}]">
+  <div :class="['sidebar-container', {opened}]">
     <div class="sidebar">
       <div class="header">
         <slot name="header">Sidebar header</slot>
@@ -149,7 +149,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.sidebar-conainer {
+.sidebar-container {
   bottom: 0;
   box-shadow: @sidebar-shadow;
   box-sizing: border-box;

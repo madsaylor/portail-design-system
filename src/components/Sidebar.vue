@@ -230,7 +230,7 @@ export default {
 }
 
 @media @hide-sidebar {
-  .sidebar-conainer:not(.opened) {
+  .sidebar-container:not(.opened) {
     display: none;
   }
 }

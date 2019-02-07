@@ -96,26 +96,26 @@ export default {
   }
 
   &.primary {
-    .font-button-normal();
-    background: @color-brand;
+    .font-components-button-normal();
+    background: @color-primary;
 
     &.big {
-      .font-button-big();
+      .font-components-button-big();
     }
 
     &:hover, &:focus {
-      background: darken(@color-brand, 5%);
+      background: darken(@color-primary, 5%);
     }
 
     &:active {
-      background: darken(@color-brand, 10%);
+      background: darken(@color-primary, 10%);
     }
   }
 
   &.alt {
-    .font-button-normal-alt();
+    .font-components-button-normal-alt();
     background: @color-white;
-    border: 1px solid @color-brand;
+    border: 1px solid @color-primary;
   }
 
   &.alt, &.plain {

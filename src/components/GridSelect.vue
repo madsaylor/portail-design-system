@@ -105,7 +105,7 @@ export default {
       .grid-item {
         font-size: 14px;
         font-weight: 500;
-        color: @color-black;
+        color: @color-dark;
         cursor: pointer;
         transition: transform .1s ease-in-out;
         text-align: center;
@@ -124,7 +124,7 @@ export default {
           position: relative;
 
           span {
-            background-color: @color-brand;
+            background-color: @color-primary;
             border-radius: 2px;
             width: 66%;
             height: 84%;

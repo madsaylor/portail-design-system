@@ -202,7 +202,7 @@ export default {
     &.active {
       .font-desktop-body-regular-accent();
       .icon svg {
-        fill: @color-brand;
+        fill: @color-primary;
       }
     }
 

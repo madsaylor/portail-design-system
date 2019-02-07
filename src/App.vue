@@ -82,7 +82,7 @@ let usageLess = `
 
 .some-class {
   /* For list of color variables see Colors */
-  color: @color-black;
+  color: @color-dark;
   /* For list of font mixins see Font Styles */
   .font-desktop-body-medium-dark-center();
 }

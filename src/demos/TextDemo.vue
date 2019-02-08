@@ -2,7 +2,7 @@
   <div class="grid">
     <div class="row-col">
       <h2>Fonts</h2>
-      <h3>Lato</h3>
+      <h3>Cabin</h3>
       To embed the font into a webpage, copy this code into the &lt;head&gt;
       of your HTML document:
       <pre v-highlightjs=linkSnippet><code class="html"></code></pre>
@@ -36,7 +36,7 @@ export default {
   data: () => ({
     linkSnippet: (
       '<link href="https://fonts.googleapis.com/css?family=' +
-      'Lato:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">'
+      'Cabin:400,400i,500,600,700" rel="stylesheet">'
     ),
     usageLess,
     fontStyles: [
@@ -82,6 +82,7 @@ export default {
       'font-desktop-x-small-regular-accent',
       'font-desktop-x-small-regular-dark',
       'font-desktop-x-small-regular-gray',
+      'font-desktop-x-small-regular-gray-right',
     ],
   }),
 }
@@ -221,5 +222,8 @@ export default {
 }
 .font-desktop-x-small-regular-gray {
   .font-desktop-x-small-regular-gray();
+}
+.font-desktop-x-small-regular-gray-right {
+  .font-desktop-x-small-regular-gray-right();
 }
 </style>

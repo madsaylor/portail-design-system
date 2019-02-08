@@ -1,3 +1,23 @@
+<!--
+  Tooltip element with different animations and positioning
+
+  Usage:
+
+    <Input
+      :visible=''
+      :top=''
+      :animation=''
+    />
+
+  Properties:
+
+    // TODO
+
+  Events:
+
+    // TODO
+-->
+
 <template>
   <div :class="[
     'tooltip-wrapper',

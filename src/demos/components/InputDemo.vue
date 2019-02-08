@@ -2,18 +2,28 @@
   <div class="row-col">
     <h3>Input</h3>
 
-    Input with an ability to set icon and validation.
+    A styled input with an ability to set icon and validation.
 
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
     <div class="input-component-demo">
       <Input
-        placeholder="Placeholder"
+        placeholder="Maximum 10 characters"
         icon-right="search"
-        top-title="Evaluez votre client"
-        :validators="validators"
+        top-title="Input with right icon and help"
         help="Some info"
-        @updated:input="logInput"
+        :validators="validators"
+      ></Input>
+      <Input
+        placeholder="Placeholder"
+        icon="today"
+        top-title="Input with left icon and bottom help"
+        :bottom-help="{label: 'bottom help', text: 'This is bottom help tooltip'}"
+      ></Input>
+      <Input
+        placeholder="Disabled"
+        top-title="Disabled input"
+        disabled
       ></Input>
     </div>
 
@@ -36,21 +46,22 @@ export default {
     usage,
     validators: [
       {
-        message: 'Maximum length is 25 characters',
+        message: 'Maximum length is 10 characters',
         validator: (value) => {
-          return value.length <= 25
+          return value.length <= 10
         }
       },
     ]
-  }),
-  methods: {
-    logInput (e) {
-      console.log(e)
-    }
-  }
+  })
 }
 </script>
 
 <style lang="less" scoped>
+.input-component-demo {
+  display: flex;
 
+  .input-component-wrapper:not(:first-child) {
+    margin-left: 30px;
+  }
+}
 </style>

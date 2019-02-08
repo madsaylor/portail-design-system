@@ -1,10 +1,18 @@
 <!--
-  Input with an ability to set icon and validation
+  A styled input with an ability to set icon and validation
 
   Usage:
 
     <Input
-      :prop=''
+      :placeholder=''
+      :type=''
+      :validator=''
+      :top-title=''
+      :disabled=''
+      :icon=''
+      :icon-right=''
+      :help=''
+      :bottom-help=''
     />
 
   Properties:
@@ -15,11 +23,12 @@
 
     // TODO
 -->
+
 <template>
   <div class="input-component-wrapper">
     <div v-if="topTitle" class="top-title">{{topTitle}}</div>
     <div class="input-field-wrapper">
-      <div class="inner-wrapper">
+      <div :class="['inner-wrapper', {'has-icon-help': help}]">
         <Icon
           v-if="icon"
           class="icon-left"
@@ -44,8 +53,7 @@
           :color="COLORS['gray-400']"
         />
       </div>
-      <div
-        class="icon-help"
+      <div class="icon-help"
         @mouseover="tooltipVisible = true"
         @mouseleave="tooltipVisible = false"
       >
@@ -57,6 +65,14 @@
         />
         <Tooltip v-html="help" :visible="tooltipVisible"></Tooltip>
       </div>
+    </div>
+    <div v-if="bottomHelp" class="bottom-help-wrapper">
+      <span
+        class="bottom-help"
+        @mouseover="tooltipBottomVisible = true"
+        @mouseleave="tooltipBottomVisible = false"
+      >{{`? ${bottomHelp.label}`}}</span>
+      <Tooltip v-html="'asdadwdadawd'" :visible="tooltipBottomVisible"></Tooltip>
     </div>
     <ul class="error-list" v-if="!fieldValid">
       <li class="error-message" v-for="error in errors">
@@ -82,17 +98,22 @@ export default {
       type: String,
       default: 'text'
     },
+    validators: {
+      type: Array,
+      default: () => []
+    },
     topTitle: String,
     disabled: Boolean,
     icon: String,
     iconRight: String,
     help: String,
-    validators: Array,
-    tooltipVisible: Boolean
+    bottomHelp: Object
   },
   components: {Tooltip, Icon},
   data: () => ({
     COLORS,
+    tooltipVisible: false,
+    tooltipBottomVisible: false,
     inputValue: '',
     errors: []
   }),
@@ -101,11 +122,15 @@ export default {
       return this.disabled ? 'lock' : this.iconRight
     },
     fieldValid () {
-      this.errors = []
-      this.validators.forEach((validator) => {
-        !validator.validator(this.inputValue) && this.errors.push(validator.message)
-      })
-      return this.errors.length === 0
+      if (this.validators.length !== 0) {
+        this.errors = []
+        this.validators.forEach((validator) => {
+          !validator.validator(this.inputValue) && this.errors.push(validator.message)
+        })
+        return this.errors.length === 0
+      } else {
+        return true
+      }
     }
   },
   watch: {
@@ -127,6 +152,20 @@ export default {
   display: inline-block;
   position: relative;
 
+  .error-list {
+    margin: 0;
+    list-style: none;
+    color: @color-red;
+    font-size: 14px;
+    padding-left: 10px;
+  }
+
+  .top-title {
+    color: @color-gray-500;
+    font-size: 14px;
+    line-height: 2;
+  }
+
   .input-field-wrapper {
     display: flex;
     align-items: center;
@@ -142,6 +181,10 @@ export default {
     .inner-wrapper {
       display: inline-block;
       position: relative;
+
+      &.has-icon-help {
+        margin-right: 10px;
+      }
 
       input {
         font-size: 16px;
@@ -194,18 +237,18 @@ export default {
     }
   }
 
-  .error-list {
-    margin: 0;
-    list-style: none;
-    color: @color-red;
-    font-size: 14px;
+  .bottom-help-wrapper {
+    display: inline-block;
+    position: relative;
     padding-left: 10px;
-  }
 
-  .top-title {
-    color: @color-gray-500;
-    font-size: 14px;
-    line-height: 2;
+    .bottom-help {
+      font-size: 12px;
+      color: @color-gray-500;
+      border-bottom: 1px dashed @color-gray-500;
+      line-height: 1;
+      cursor: pointer;
+    }
   }
 }
 </style>

@@ -4,10 +4,11 @@
   Usage:
 
     <Button
-      :big="true"             - Big button
-      :alt="boolean"          - Alt button
-      :plain="boolean"        - Plain button
-      :icon="account_circle"  - Left icon
+      :big="true"             - Bigger button
+      :alt="boolean"          - Alternative design
+      :plain="boolean"        - Close to no styling
+      :disabled="boolean"     - Disabled
+      :icon="account_circle"  - Left or the only icon
       :icon-right="edit    "  - Right icon
     >
       Button label
@@ -17,6 +18,7 @@
 <template>
   <button
     :class="['button', {primary, big, alt, plain}]"
+    :disabled="disabled"
     @click="event => {$emit('click', event)}"
   >
     <Icon
@@ -47,6 +49,7 @@ export default {
     big: Boolean,
     alt: Boolean,
     plain: Boolean,
+    disabled: Boolean,
     icon: String,
     iconRight: String,
   },
@@ -131,6 +134,15 @@ export default {
   &:focus {
     outline: 1px solid @color-white;
     outline-offset: -4px;
+  }
+
+  &:disabled {
+    background: @color-gray-300;
+    color: @color-gray-100;
+    cursor: initial;
+    &:hover {
+      background: @color-gray-300;
+    }
   }
 }
 </style>

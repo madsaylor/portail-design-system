@@ -69,10 +69,10 @@
           :class="{
           'has-icon': icon,
           'has-icon-right': iconRight,
-          'error': !fieldValid
+          'error': errors.length
         }"
           v-model="inputValue"
-        ></input>
+        />
         <Icon
           v-if="rightIcon"
           class="icon-right"
@@ -80,7 +80,7 @@
           :color="COLORS['gray-400']"
         />
       </div>
-      <div class="icon-help"
+      <div class="icon-help-wrapper"
         @mouseover="tooltipVisible = true"
         @mouseleave="tooltipVisible = false"
       >
@@ -99,9 +99,9 @@
         @mouseover="tooltipBottomVisible = true"
         @mouseleave="tooltipBottomVisible = false"
       >{{`? ${bottomHelp.label}`}}</span>
-      <Tooltip v-html="'asdadwdadawd'" :visible="tooltipBottomVisible"></Tooltip>
+      <Tooltip v-html="bottomHelp.text" :visible="tooltipBottomVisible"></Tooltip>
     </div>
-    <ul class="error-list" v-if="!fieldValid">
+    <ul class="error-list" v-if="errors.length">
       <li class="error-message" v-for="error in errors">
         {{ error }}
       </li>
@@ -141,30 +141,26 @@ export default {
     COLORS,
     tooltipVisible: false,
     tooltipBottomVisible: false,
-    inputValue: '',
-    errors: []
+    inputValue: ''
   }),
   computed: {
     rightIcon () {
       return this.disabled ? 'lock' : this.iconRight
     },
-    fieldValid () {
-      if (this.validators.length !== 0) {
-        this.errors = []
-        this.validators.forEach((validator) => {
-          !validator.validator(this.inputValue) && this.errors.push(validator.message)
-        })
-        return this.errors.length === 0
-      } else {
-        return true
-      }
+    errors () {
+      return this.validators.reduce((acc, validator) => {
+        if (!validator.validator(this.inputValue)) {
+          acc.push(validator.message);
+        }
+        return acc;
+      }, [])
     }
   },
   watch: {
     inputValue (newValue) {
       const emittedObject = {
         value: newValue,
-        error: !this.fieldValid
+        error: !!this.errors.length
       }
       this.$emit('updated:input', emittedObject)
     }
@@ -197,7 +193,7 @@ export default {
     display: flex;
     align-items: center;
 
-    .icon-help {
+    .icon-help-wrapper {
       position: relative;
 
       .icon {

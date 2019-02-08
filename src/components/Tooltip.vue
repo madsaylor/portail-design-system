@@ -1,12 +1,10 @@
 <!--
-  Tooltip element with different animations and positioning
+  Tooltip element
 
   Usage:
 
-    <Input
+    <Tooltip
       :visible=''
-      :top=''
-      :animation=''
     />
 
   Properties:
@@ -21,12 +19,8 @@
 <template>
   <div :class="[
     'tooltip-wrapper',
-    animation,
-    {
-      'visible': visible,
-      'top': top
-    }
-  ]">
+    'fade-in',{'visible': visible,}]"
+    lef="tooltip">
     <slot></slot>
   </div>
 </template>
@@ -35,12 +29,7 @@
 export default {
   name: "Tooltip",
   props: {
-    visible: Boolean,
-    top: Boolean,
-    animation: {
-      type: String,
-      default: 'fade-in'
-    }
+    visible: Boolean
   }
 }
 </script>
@@ -71,10 +60,6 @@ export default {
 
   &.fade-in {
     .animation(fadein 0.5s);
-  }
-
-  &.bounce {
-    .animation(bounce 0.5s);
   }
 }
 </style>

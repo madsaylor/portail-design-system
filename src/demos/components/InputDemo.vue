@@ -13,18 +13,18 @@
         top-title="Input with right icon and help"
         help="Some info"
         :validators="validators"
-      ></Input>
+      />
       <Input
         placeholder="Placeholder"
         icon="today"
         top-title="Input with left icon and bottom help"
         :bottom-help="{label: 'bottom help', text: 'This is bottom help tooltip'}"
-      ></Input>
+      />
       <Input
         placeholder="Disabled"
         top-title="Disabled input"
         disabled
-      ></Input>
+      />
     </div>
 
   </div>
@@ -40,18 +40,18 @@ let usage = `
   top-title="Input with right icon and help"
   help="Some info"
   :validators="validators"
-></Input>
+/>
 <Input
   placeholder="Placeholder"
   icon="today"
   top-title="Input with left icon and bottom help"
   :bottom-help="{label: 'bottom help', text: 'This is bottom help tooltip'}"
-  ></Input>
+/>
 <Input
   placeholder="Disabled"
   top-title="Disabled input"
   disabled
-></Input>`
+/>`
 .slice(1)
 
 export default {

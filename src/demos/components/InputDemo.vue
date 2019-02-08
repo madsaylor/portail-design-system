@@ -12,7 +12,8 @@
         icon-right="search"
         top-title="Evaluez votre client"
         :validators="validators"
-        help="huihu8dasu8hduashduoashduo"
+        help="Some info"
+        @updated:input="logInput"
       ></Input>
     </div>
 
@@ -42,6 +43,11 @@ export default {
       },
     ]
   }),
+  methods: {
+    logInput (e) {
+      console.log(e)
+    }
+  }
 }
 </script>
 

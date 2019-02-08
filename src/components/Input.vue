@@ -38,20 +38,24 @@
           v-model="inputValue"
         ></input>
         <Icon
-          v-if="iconRight"
+          v-if="rightIcon"
           class="icon-right"
-          :source="iconRight"
+          :source="rightIcon"
           :color="COLORS['gray-400']"
         />
       </div>
-      <div class="icon-help">
+      <div
+        class="icon-help"
+        @mouseover="tooltipVisible = true"
+        @mouseleave="tooltipVisible = false"
+      >
         <Icon
           v-if="help"
           class="icon-help"
           source="help"
-          :color="COLORS['gray-400']"
-          :title="help"
+          :color="!tooltipVisible ? COLORS['gray-400'] : COLORS['black']"
         />
+        <Tooltip v-html="help" :visible="tooltipVisible"></Tooltip>
       </div>
     </div>
     <ul class="error-list" v-if="!fieldValid">
@@ -63,7 +67,8 @@
 </template>
 
 <script>
-import Icon from './Icon.vue'
+import Icon from './Icon'
+import Tooltip from './Tooltip'
 import {COLORS} from '../styles/vars'
 
 export default {
@@ -82,21 +87,34 @@ export default {
     icon: String,
     iconRight: String,
     help: String,
-    validators: Array
+    validators: Array,
+    tooltipVisible: Boolean
   },
-  components: {Icon},
+  components: {Tooltip, Icon},
   data: () => ({
     COLORS,
     inputValue: '',
     errors: []
   }),
   computed: {
+    rightIcon () {
+      return this.disabled ? 'lock' : this.iconRight
+    },
     fieldValid () {
       this.errors = []
       this.validators.forEach((validator) => {
         !validator.validator(this.inputValue) && this.errors.push(validator.message)
       })
       return this.errors.length === 0
+    }
+  },
+  watch: {
+    inputValue (newValue) {
+      const emittedObject = {
+        value: newValue,
+        error: !this.fieldValid
+      }
+      this.$emit('updated:input', emittedObject)
     }
   }
 }
@@ -114,7 +132,7 @@ export default {
     align-items: center;
 
     .icon-help {
-      padding-left: 10px;
+      position: relative;
 
       .icon {
         cursor: pointer;

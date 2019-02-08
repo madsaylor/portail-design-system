@@ -4,23 +4,18 @@
   Usage:
 
     <Tooltip
-      :visible=''
+      :visible='tooltipVisible' - defines whether to show tooltip
     />
 
   Properties:
 
-    // TODO
-
-  Events:
-
-    // TODO
+    visible - Boolean. When set to true tooltip is shown.
 -->
 
 <template>
   <div :class="[
     'tooltip-wrapper',
-    'fade-in',{'visible': visible,}]"
-    lef="tooltip">
+    'fade-in',{'visible': visible,}]">
     <slot></slot>
   </div>
 </template>

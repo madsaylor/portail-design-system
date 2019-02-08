@@ -4,24 +4,51 @@
   Usage:
 
     <Input
-      :placeholder=''
-      :type=''
-      :validator=''
-      :top-title=''
-      :disabled=''
-      :icon=''
-      :icon-right=''
-      :help=''
-      :bottom-help=''
+      :placeholder='Placeholder' - Text displayed as placeholder value
+      :type='email'              - Input type
+      :validators='validators'   - Array of validators
+      :top-title='Title'         - Title at the top
+      :disabled='true'           - Disables input
+      :icon='search'             - Icon name on the left of the input
+      :icon-right='today'        - Icon name on the right of the input
+      :help='Some help text'     - Shown when hovering help icon
+      :bottom-help='bottomHelp'  - Object of bottom help
+      @updated:input             - Emitted when an input value changes
     />
 
   Properties:
 
-    // TODO
+    placeholder - String. Sets html input tag's placeholder
+
+    type - String. Sets html input tag's type
+
+    validators - Array[Object]. Array of validator Objects. Each Object must have two fields:
+      message (String) - Error message that will be displayed if a validation failed.
+      validator (function) - Function that takes input value as an argument and implements
+        validation logic.
+
+    topTitle - String. Text that will be displayed as a label for input.
+
+    disabled - Boolean. Defines if an input is disabled.
+
+    icon - String (icon name or <svg>...</svg> code). Sets the icon displayed in the input
+      on the left
+
+    iconRight - String (icon name or <svg>...</svg> code). Sets the icon displayed in the input
+      on the right
+
+    help - String or html code. When set this will add a help icon on the right of the input
+      which when hovered will display a tooltip with received prop content.
+
+    bottomHelp - Object. Will display a help text with a tooltip on hover at the bottom of the input.
+      Object must contain two fields:
+      label (String) - Text of help label.
+      text (String or html code) - Content of the tooltip
 
   Events:
 
-    // TODO
+    updated:input - Emitted when an input value changes. Emits an Object that contains new input value
+      and a flag whether input has validation error.
 -->
 
 <template>
@@ -248,6 +275,10 @@ export default {
       border-bottom: 1px dashed @color-gray-500;
       line-height: 1;
       cursor: pointer;
+
+      &:hover {
+        color: @color-black;
+      }
     }
   }
 }

@@ -4,12 +4,12 @@
   Usage:
 
     <Datepicker
-      :startDate=new Date('2019-1-1') - value which will be set as selected when datepicker initialised
-      :locale='en-en' - datepicker localisation
-      :has-range='true' - defines whether a datepicker has a range of date available
-        for selection
-      :range='{min: -180, max: 30}' - range in days from the start for selection
-      @update:selected='closedatepicker' - emitted when a new date is selected
+      :startDate=new Date('2019-1-1')    - Value which will be set as selected when datepicker initialised
+      :locale='en-en'                    - Datepicker localisation
+      :has-range='true'                  - Defines whether a datepicker has a range of date available
+                                           for selection
+      :range='{min: -180, max: 30}'      - Range in days from the start for selection
+      @update:selected='closedatepicker' - Emitted when a new date is selected
     />
 
   Properties:

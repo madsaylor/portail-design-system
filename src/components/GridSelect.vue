@@ -4,7 +4,7 @@
   Usage:
 
     <GridSelect
-      :items=gridItems - items to be rendered *required
+      :items=gridItems       - items to be rendered *required
       :labels-top=gridLabels - headings for cells *optional
     ></GridSelect>
 

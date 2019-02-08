@@ -35,7 +35,22 @@ import Input from '../../components/Input'
 
 let usage = `
 <Input
-
+  placeholder="Maximum 10 characters"
+  icon-right="search"
+  top-title="Input with right icon and help"
+  help="Some info"
+  :validators="validators"
+></Input>
+<Input
+  placeholder="Placeholder"
+  icon="today"
+  top-title="Input with left icon and bottom help"
+  :bottom-help="{label: 'bottom help', text: 'This is bottom help tooltip'}"
+  ></Input>
+<Input
+  placeholder="Disabled"
+  top-title="Disabled input"
+  disabled
 ></Input>`
 .slice(1)
 

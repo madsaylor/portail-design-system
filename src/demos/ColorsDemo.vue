@@ -36,7 +36,7 @@ export default {
         'color-gray-500',
       ],
       primary: [
-        'color-black',
+        'color-dark',
         'color-primary',
         'color-white',
       ],
@@ -64,7 +64,7 @@ export default {
   &.color-gray-300 {background: @color-gray-300; color: @color-dark;}
   &.color-gray-400 {background: @color-gray-400; color: @color-dark;}
   &.color-gray-500 {background: @color-gray-500; color: @color-white;}
-  &.color-black {background: @color-dark; color: @color-white;}
+  &.color-dark {background: @color-dark; color: @color-white;}
   &.color-primary {background: @color-primary; color: @color-white;}
   &.color-white {background: @color-white; color: @color-dark;}
   &.color-blue {background: @color-blue; color: @color-white;}

@@ -20,8 +20,10 @@
       :active.sync="active"              - Value for active item
       :activeChild.sync="activeChild"    - Value for active child item
       :opened="sidebarOpened"            - Is it opened (in mobile view)
-      @item:click="(item, index) => ..." - Click event
-    ></Sidebar>
+      @item:click="(...) => ..."         - Click on a sidebar item
+    >
+
+    </Sidebar>
 
   Properties:
 
@@ -41,7 +43,11 @@
 
   Events:
 
-    @item:click - Function. Click on the sidebar's item
+    @item:click - Click on the sidebar's item. Arguments:
+      item       - Object from items array
+      index      - index of the object in the items array
+      childIndex - index of the child in the item.children array or null
+      event      - click event
 -->
 
 <template>
@@ -56,7 +62,7 @@
           <li
             :class="['item', {active: activeKey(item, index) === active}]"
             :key="activeKey(item, index)"
-            @click="itemClick(item, index)"
+            @click="itemClick(item, index, null, $event)"
           >
             <Icon
               v-if="item.icon"
@@ -116,13 +122,13 @@ export default {
     opened: Boolean,
   },
   methods: {
-    itemClick(item, index, childIndex) {
-      if (childIndex != null) {
-        this.$emit('update:activeChild', this.activeKey(item, childIndex))
-      } else {
-        this.$emit('update:active', this.activeKey(item, index))
-      }
-      this.$emit('item:click', item, index, childIndex)
+    itemClick(item, index, childIndex, event) {
+      this.$emit('update:active', this.activeKey(item, index))
+      this.$emit(
+        'update:activeChild',
+        childIndex || this.activeKey(item, childIndex)
+      )
+      this.$emit('item:click', item, index, childIndex, event)
     },
     outsideClick(event) {
       // Close sidebar on an outside click

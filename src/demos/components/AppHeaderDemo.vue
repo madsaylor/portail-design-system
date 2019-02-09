@@ -5,9 +5,13 @@
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
     <AppHeader>
-      <Button #left icon="menu" plain />
+      <template #left>
+        <Button icon="menu" plain />
+      </template>
       Hello, World!
-      <Button #right icon="account_circle" plain />
+      <template #right>
+        <Button icon="account_circle" plain />
+      </template>
     </AppHeader>
   </div>
 </template>
@@ -18,9 +22,13 @@ import Button from '../../components/Button.vue'
 
 let usage = `
 <AppHeader>
-  <Button #left icon="menu" plain />
+  <template #left>
+    <Button icon="menu" plain />
+  </template>
   Hello, World!
-  <Button #right icon="account_circle" plain />
+  <template #right>
+    <Button icon="account_circle" plain />
+  </template>
 </AppHeader>
 `.slice(1)
 

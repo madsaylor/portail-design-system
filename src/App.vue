@@ -9,10 +9,12 @@
       :opened.sync="sidebarOpened"
     ></Sidebar>
     <AppHeader>
-      <Button
-        id="open-sidebar-button" #left icon="menu" plain
-        @click="sidebarOpened = !sidebarOpened"
-       />
+      <template #left>
+        <Button
+          id="open-sidebar-button" icon="menu" plain
+          @click="sidebarOpened = !sidebarOpened"
+        />
+      </template>
       Portail v3 Design System
     </AppHeader>
     <div class="main-content grid">

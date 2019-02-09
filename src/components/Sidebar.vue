@@ -236,8 +236,11 @@ export default {
 }
 
 @media @hide-sidebar {
+  .sidebar-container {
+    transition: left 100ms ease-in-out;
+  }
   .sidebar-container:not(.opened) {
-    display: none;
+    left: -@sidebar-width;
   }
 }
 

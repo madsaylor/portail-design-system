@@ -140,7 +140,10 @@ export default {
   }),
   methods: {
     sidebarClick(item) {
-      window.location.hash = item.hash
+      if (!item.children || !item.children.length) {
+        window.location.hash = item.hash
+        this.sidebarOpened = false
+      }
     },
     handleScroll() {
       let vh = (window.innerHeight || document.documentElement.clientHeight)

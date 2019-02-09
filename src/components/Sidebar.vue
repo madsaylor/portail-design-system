@@ -2,10 +2,7 @@
   Side menu with header and footer
 
   TODO:
-    Mobile collaps/toggle
     Badges
-    Hidden|disabled items
-    Disable entrire sidebar
     Header slot
     Tabselect
     Arrows for elements with subitems
@@ -20,6 +17,7 @@
       :active.sync="active"              - Value for active item
       :activeChild.sync="activeChild"    - Value for active child item
       :opened="sidebarOpened"            - Is it opened (in mobile view)
+      :disabled="bool"                   - Disable the entire sidebar
       @item:click="(...) => ..."         - Click on a sidebar item
     >
 
@@ -60,7 +58,10 @@
       <ul class="items">
         <template v-for="(item, index) in items">
           <li
-            :class="['item', {active: activeKey(item, index) === active}]"
+            :class="['item', {
+              active: activeKey(item, index) === active,
+              disabled: disabled || item.disabled
+            }]"
             :key="activeKey(item, index)"
             @click="itemClick(item, index, null, $event)"
           >
@@ -80,11 +81,10 @@
             <li
               v-for="(child, childIndex) in item.children"
               :key="activeKey(child, childIndex)"
-              :class="[
-                'item',
-                'child-item',
-                {active: activeKey(child, childIndex) === activeChild}
-              ]"
+              :class="['item', 'child-item', {
+                active: activeKey(child, childIndex) === activeChild,
+                disabled: disabled || child.disabled
+              }]"
               @click="itemClick(child, index, childIndex)"
             >
               {{ child.title }}
@@ -122,9 +122,13 @@ export default {
       default: 0,
     },
     opened: Boolean,
+    disabled: Boolean,
   },
   methods: {
     itemClick(item, index, childIndex, event) {
+      if (this.disabled || item.disabled) {
+        return
+      }
       this.$emit('update:active', this.activeKey(item, index))
       this.$emit(
         'update:activeChild',
@@ -215,6 +219,18 @@ export default {
       }
     }
 
+    &.disabled {
+      background: @color-gray-100;
+      color: @color-gray-400;
+      cursor: initial;
+      .icon svg {
+        fill: @color-gray-400;
+      }
+      &:hover {
+        background: @color-gray-100;
+      }
+    }
+
     &:hover, &:focus  {
       background: darken(@color-white, 5%);
     }
@@ -222,6 +238,7 @@ export default {
     &:active {
       background: darken(@color-white, 10%);
     }
+
 
     .title {
       padding-left: 12px;

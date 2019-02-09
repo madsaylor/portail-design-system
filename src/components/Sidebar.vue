@@ -73,8 +73,10 @@
             />
             <div class="title">{{ item.title }}</div>
           </li>
-
-          <template v-if="activeKey(item, index) === active">
+          <section :class="[
+            'children',
+            {opened: activeKey(item, index) === active},
+          ]">
             <li
               v-for="(child, childIndex) in item.children"
               :key="activeKey(child, childIndex)"
@@ -87,7 +89,7 @@
             >
               {{ child.title }}
             </li>
-          </template>
+          </section>
         </template>
       </ul>
 
@@ -197,8 +199,9 @@ export default {
   .item {
     .font-desktop-body-regular-dark();
     align-items: center;
+    cursor: pointer;
     display: flex;
-    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: background-color .1s ease-in-out;
 
     &.child-item {
       .font-desktop-body-regular-gray();
@@ -212,18 +215,25 @@ export default {
       }
     }
 
-    &:hover {
-      background-color: @color-gray-100;
-      cursor: pointer;
+    &:hover, &:focus  {
+      background: darken(@color-white, 5%);
     }
 
     &:active {
-      background-color: @color-gray-200;
-      cursor: pointer;
+      background: darken(@color-white, 10%);
     }
 
     .title {
       padding-left: 12px;
+    }
+  }
+
+  .children {
+    transition: max-height .1s ease;
+    max-height: 1000px;
+    overflow: hidden;
+    &:not(.opened) {
+      max-height: 0;
     }
   }
 
@@ -237,10 +247,10 @@ export default {
 
 @media @hide-sidebar {
   .sidebar-container {
-    transition: left 100ms ease-in-out;
-  }
-  .sidebar-container:not(.opened) {
-    left: -@sidebar-width;
+    transition: left .1s ease;
+    &:not(.opened) {
+      left: -@sidebar-width;
+    }
   }
 }
 

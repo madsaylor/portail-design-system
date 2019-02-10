@@ -2,7 +2,6 @@
   Side menu with header and footer
 
   TODO:
-    Badges
     Arrows for elements with subitems
     Hyperlinks support?
 
@@ -29,7 +28,8 @@
           title: String,           - Displayed name
           icon: ?String,           - Icon name or svg code (See Icon.vue)
           children: ?Array<Item>,  - Submenu items
-          disabled: ?Boolean       - Is the item disabled
+          disabled: ?Boolean,      - Is the item disabled
+          badge: ?{text, color},   - Badge on the right of the element
         }, {
           ...
         }}
@@ -84,6 +84,12 @@
               color="gray-400"
             />
             <div class="title">{{ item.title }}</div>
+            <div v-if="item.badge" class="badge" :style="{
+              'background-color':
+                COLORS[item.badge.color] || item.badge.color || 'red',
+            }">
+              {{item.badge.text}}
+            </div>
           </li>
           <section :class="[
             'children',
@@ -118,6 +124,7 @@
 
 <script>
 import Icon from './Icon.vue'
+import {COLORS} from '../styles/vars'
 
 export default {
   name: 'Sidebar',
@@ -142,6 +149,7 @@ export default {
     opened: Boolean,
     disabled: Boolean,
   },
+  data: () => ({COLORS}),
   methods: {
     itemClick(item, index, childIndex, event) {
       if (this.disabled || item.disabled) {
@@ -258,9 +266,27 @@ export default {
       background: darken(@color-white, 10%);
     }
 
-
     .title {
       padding-left: 12px;
+      flex: 1 0 auto;
+    }
+
+    .badge {
+      height: 20px;
+      min-width: 20px;
+      margin: 2px;
+      padding: 2px 6px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      font-family: Cabin;
+      font-size: 12px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: normal;
+      text-align: center;
+      color: @color-white;
     }
   }
 

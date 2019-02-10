@@ -189,6 +189,12 @@ export default {
         })
       }
     }
+    sidebarItems[0].badge = {text: 2, color: 'red'}
+    sidebarItems[sidebarItems.length - 1].badge = {
+      text: 'New',
+      color: 'primary'
+    }
+
     this.sidebarItems = sidebarItems
   },
   beforeDestroy () {

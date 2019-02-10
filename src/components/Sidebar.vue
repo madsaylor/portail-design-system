@@ -3,7 +3,6 @@
 
   TODO:
     Badges
-    Tabselect
     Arrows for elements with subitems
     Hyperlinks support?
 
@@ -73,6 +72,8 @@
               disabled: disabled || item.disabled
             }]"
             :key="activeKey(item, index)"
+            :tabindex="!disabled && !item.disabled && 0"
+            @keypress.enter.space.prevent="itemClick(item, index, null, $event)"
             @click="itemClick(item, index, null, $event)"
           >
             <Icon
@@ -95,7 +96,14 @@
                 active: activeKey(child, childIndex) === activeChild,
                 disabled: disabled || child.disabled
               }]"
-              @click="itemClick(child, index, childIndex)"
+              :tabindex="
+                !disabled &&
+                activeKey(item, index) === active &&
+                !child.disabled &&
+                0
+              "
+              @keypress.enter.space.prevent="itemClick(child, index, childIndex, $event)"
+              @click="itemClick(child, index, childIndex, $event)"
             >
               {{ child.title }}
             </li>
@@ -243,6 +251,7 @@ export default {
 
     &:hover, &:focus  {
       background: darken(@color-white, 5%);
+      outline: none;
     }
 
     &:active {

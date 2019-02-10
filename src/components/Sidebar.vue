@@ -1,10 +1,6 @@
 <!--
   Side menu with header and footer
 
-  TODO:
-    Arrows for elements with subitems
-    Hyperlinks support?
-
   Usage:
 
     <Sidebar
@@ -30,6 +26,7 @@
           children: ?Array<Item>,  - Submenu items
           disabled: ?Boolean,      - Is the item disabled
           badge: ?{text, color},   - Badge on the right of the element
+          href: ?String            - Optional hyperlink
         }, {
           ...
         }}
@@ -64,13 +61,14 @@
         <slot name="header">Sidebar header</slot>
       </div>
 
-      <ul class="items">
+      <div class="items">
         <template v-for="(item, index) in items">
-          <li
+          <a
             :class="['item', {
               active: activeKey(item, index) === active,
               disabled: disabled || item.disabled
             }]"
+            :href="item.href"
             :key="activeKey(item, index)"
             :tabindex="!disabled && !item.disabled && 0"
             @keypress.enter.space.prevent="itemClick(item, index, null, $event)"
@@ -83,25 +81,35 @@
               padding="6px 0"
               color="gray-400"
             />
+
             <div class="title">{{ item.title }}</div>
+
             <div v-if="item.badge" class="badge" :style="{
               'background-color':
-                COLORS[item.badge.color] || item.badge.color || 'red',
+                disabled || item.disabled ?
+                  COLORS['gray-300'] :
+                  COLORS[item.badge.color] || item.badge.color || 'red',
             }">
               {{item.badge.text}}
             </div>
-          </li>
+
+            <Icon
+              v-if="item.children && item.children.length"
+              expand_more
+            />
+          </a>
           <section :class="[
             'children',
             {opened: activeKey(item, index) === active},
           ]">
-            <li
+            <a
               v-for="(child, childIndex) in item.children"
               :key="activeKey(child, childIndex)"
               :class="['item', 'child-item', {
                 active: activeKey(child, childIndex) === activeChild,
                 disabled: disabled || child.disabled
               }]"
+              :href="item.href"
               :tabindex="
                 !disabled &&
                 activeKey(item, index) === active &&
@@ -112,10 +120,10 @@
               @click="itemClick(child, index, childIndex, $event)"
             >
               {{ child.title }}
-            </li>
+            </a>
           </section>
         </template>
-      </ul>
+      </div>
 
       <div class="footer"><slot name="footer"></slot></div>
     </div>
@@ -231,17 +239,24 @@ export default {
     align-items: center;
     cursor: pointer;
     display: flex;
-    transition: background-color .1s ease-in-out;
+    transition: all .1s ease-in-out;
 
     &.child-item {
       .font-desktop-body-regular-gray();
       padding-left: 50px;
     }
 
+    .icon[expand_more] {
+      transition: transform .1s ease;
+    }
+
     &.active {
       .font-desktop-body-regular-accent();
       .icon svg {
         fill: @color-primary;
+      }
+      .icon[expand_more] {
+        transform: rotate(180deg);
       }
     }
 
@@ -259,6 +274,7 @@ export default {
 
     &:hover, &:focus  {
       background: darken(@color-white, 5%);
+      text-decoration: none;
       outline: none;
     }
 

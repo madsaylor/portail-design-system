@@ -3,11 +3,9 @@
 
   TODO:
     Badges
-    Header slot
     Tabselect
     Arrows for elements with subitems
     Hyperlinks support?
-    Animations?
 
   Usage:
 
@@ -25,23 +23,35 @@
 
   Properties:
 
-    :items - Array<Object>, required. Items to display on the sidebar.
-      Each item should have a `title` property with displayed name and an
-      `icon` property that can be either a string with an icon name, like
-      `'arrow_right'` or a string with svg code `'<svg>...</svg>'`
+    items - Array<Object>, required. Items to display on the sidebar. Where
+      objects look like:
 
-    :activeKey - Function. Allows you to override value determining
+        :items="[{
+          title: String,           - Displayed name
+          icon: ?String,           - Icon name or svg code (See Icon.vue)
+          children: ?Array<Item>,  - Submenu items
+          disabled: ?Boolean       - Is the item disabled
+        }, {
+          ...
+        }}
+
+    activeKey - Function. Allows you to override value determining
       the active item. Values are compared with `===` operator. By default
       item's index is used
 
-    :active - Any. Value depending on the activeKey property for currently
-      active item. Supports .sync modifier
+    active - Any. Index (can be changed with activeKey property) for the
+      currently active item. Supports .sync modifier
 
-    :activeChild - Any. Same as active, but for child element
+    activeChild - Any. Same as active, but for child element
+
+    opened - Boolean. Is sidebar shown in the mobile view. Supports .sync
+      modifier that let's the component close itself (when user clicks outside)
+
+    disabled - Boolean. Disables the entire component
 
   Events:
 
-    @item:click - Click on the sidebar's item. Arguments:
+    item:click - Click on the sidebar's item. Arguments:
       item       - Object from items array
       index      - index of the object in the items array
       childIndex - index of the child in the item.children array or null

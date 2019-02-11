@@ -13,7 +13,8 @@
       :icon-right='today'        - Icon name on the right of the input
       :help='Some help text'     - Shown when hovering help icon
       :bottom-help='bottomHelp'  - Object of bottom help
-      @updated:input             - Emitted when an input value changes
+      v-model='value'            - Binds value property to input
+      @validation                - Emits whether input has errors
     />
 
   Properties:
@@ -47,8 +48,8 @@
 
   Events:
 
-    updated:input - Emitted when an input value changes. Emits an Object that contains new input value
-      and a flag whether input has validation error.
+    validation - Emitted when an input value changes. Emits true/false which tells if an input has
+      validation errors.
 -->
 
 <template>
@@ -114,6 +115,9 @@ import {COLORS} from '../styles/vars'
 export default {
   name: "Input",
   props: {
+    value: {
+      type: [String, Number]
+    },
     placeholder: {
       type: String,
       default: ''
@@ -137,9 +141,11 @@ export default {
   data: () => ({
     COLORS,
     tooltipVisible: false,
-    tooltipBottomVisible: false,
-    inputValue: ''
+    tooltipBottomVisible: false
   }),
+  mounted() {
+    this.$emit('validation', !!this.errors.length)
+  },
   computed: {
     rightIcon () {
       return this.disabled ? 'lock' : this.iconRight
@@ -151,15 +157,15 @@ export default {
         }
         return acc;
       }, [])
-    }
-  },
-  watch: {
-    inputValue (newValue) {
-      const emittedObject = {
-        value: newValue,
-        error: !!this.errors.length
+    },
+    inputValue: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit('validation', !!this.errors.length)
+        this.$emit('input', value)
       }
-      this.$emit('updated:input', emittedObject)
     }
   }
 }

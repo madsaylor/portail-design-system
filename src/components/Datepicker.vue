@@ -307,7 +307,7 @@ export default {
       font-size: 16px;
       font-weight: 500;
       text-transform: capitalize;
-      color: @color-black;
+      color: @color-dark;
       cursor: pointer;
     }
 

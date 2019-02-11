@@ -4,10 +4,11 @@
   Usage:
 
     <Button
-      :big="true"             - Big button
-      :alt="boolean"          - Alt button
-      :plain="boolean"        - Plain button
-      :icon="account_circle"  - Left icon
+      :big="true"             - Bigger button
+      :alt="boolean"          - Alternative design
+      :plain="boolean"        - Close to no styling
+      :disabled="boolean"     - Disabled
+      :icon="account_circle"  - Left or the only icon
       :icon-right="edit    "  - Right icon
     >
       Button label
@@ -17,6 +18,7 @@
 <template>
   <button
     :class="['button', {primary, big, alt, plain}]"
+    :disabled="disabled"
     @click="event => {$emit('click', event)}"
   >
     <Icon
@@ -47,6 +49,7 @@ export default {
     big: Boolean,
     alt: Boolean,
     plain: Boolean,
+    disabled: Boolean,
     icon: String,
     iconRight: String,
   },
@@ -76,7 +79,7 @@ export default {
   cursor: pointer;
   display: inline-block;
   margin: 0;
-  transition: background 250ms ease-in-out;
+  transition: background .1s ease-in-out;
 
   padding: 10px 16px;
   &.big {
@@ -96,26 +99,26 @@ export default {
   }
 
   &.primary {
-    .font-button-normal();
-    background: @color-brand;
+    .font-components-button-normal();
+    background: @color-primary;
 
     &.big {
-      .font-button-big();
+      .font-components-button-big();
     }
 
     &:hover, &:focus {
-      background: darken(@color-brand, 5%);
+      background: darken(@color-primary, 5%);
     }
 
     &:active {
-      background: darken(@color-brand, 10%);
+      background: darken(@color-primary, 10%);
     }
   }
 
   &.alt {
-    .font-button-normal-alt();
+    .font-components-button-normal-alt();
     background: @color-white;
-    border: 1px solid @color-brand;
+    border: 1px solid @color-primary;
   }
 
   &.alt, &.plain {
@@ -129,8 +132,17 @@ export default {
   }
 
   &:focus {
-    outline: 1px dashed @color-gray-400;
-    outline-offset: -2px;
+    outline: 1px solid @color-primary;
+    outline-offset: -4px;
+  }
+
+  &:disabled {
+    background: @color-gray-300;
+    color: @color-gray-100;
+    cursor: initial;
+    &:hover {
+      background: @color-gray-300;
+    }
   }
 }
 </style>

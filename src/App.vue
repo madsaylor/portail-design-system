@@ -9,10 +9,12 @@
       :opened.sync="sidebarOpened"
     ></Sidebar>
     <AppHeader>
-      <Button
-        id="open-sidebar-button" #left icon="menu" plain
-        @click="sidebarOpened = !sidebarOpened"
-       />
+      <template #left>
+        <Button
+          id="open-sidebar-button" icon="menu" plain
+          @click="sidebarOpened = !sidebarOpened"
+        />
+      </template>
       Portail v3 Design System
     </AppHeader>
     <div class="main-content grid">
@@ -82,7 +84,7 @@ let usageLess = `
 
 .some-class {
   /* For list of color variables see Colors */
-  color: @color-black;
+  color: @color-dark;
   /* For list of font mixins see Font Styles */
   .font-desktop-body-medium-dark-center();
 }
@@ -138,7 +140,10 @@ export default {
   }),
   methods: {
     sidebarClick(item) {
-      window.location.hash = item.hash
+      if (!item.children || !item.children.length) {
+        window.location.hash = item.hash
+        this.sidebarOpened = false
+      }
     },
     handleScroll() {
       let vh = (window.innerHeight || document.documentElement.clientHeight)
@@ -184,6 +189,12 @@ export default {
         })
       }
     }
+    sidebarItems[0].badge = {text: 2, color: 'red'}
+    sidebarItems[sidebarItems.length - 1].badge = {
+      text: 'New',
+      color: 'primary'
+    }
+
     this.sidebarItems = sidebarItems
   },
   beforeDestroy () {

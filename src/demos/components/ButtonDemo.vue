@@ -13,6 +13,7 @@
       <Button alt>Alt</Button>&nbsp;
       <Button icon="add" alt>Alt icon</Button>&nbsp;
       <Button plain>Plain </Button>&nbsp;
+      <Button disabled>Disabled</Button>&nbsp;
       <Button icon="menu" big plain></Button>&nbsp;
       <Button icon="menu" big></Button>&nbsp;
       <Button icon="menu" plain></Button>&nbsp;
@@ -36,6 +37,7 @@ let usage = `
 <Button alt>Alt</Button>&nbsp;
 <Button icon="add" alt>Alt icon</Button>&nbsp;
 <Button plain>Plain </Button>&nbsp;
+<Button disabled>Disabled</Button>&nbsp;
 <Button icon="menu" big plain></Button>&nbsp;
 <Button icon="menu" big></Button>&nbsp;
 <Button icon="menu" plain></Button>&nbsp;

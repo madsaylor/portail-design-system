@@ -7,285 +7,26 @@
     Colors:
 */
 
-/* Grays */
-@color-gray-100: #f7f8fa;
-@color-gray-200: #e6e7eb;
-@color-gray-300: #cfd0d4;
-@color-gray-400: #babcc2;
-@color-gray-500: #838795;
-
 /* Primary Colors */
-@color-black: #3f4352;
-@color-brand: #1eb386;
+@color-primary: #1eb386;
+@color-dark: #3f4352;
 @color-white: #ffffff;
 
 /* System Colors */
-@color-blue-green: #4a7a91;
 @color-red: #fb4545;
+@color-blue: #4a7a91;
 @color-yellow: #fcc138;
+
+/* Gray Colors */
+@color-gray-500: #838795;
+@color-gray-400: #babcc2;
+@color-gray-300: #e6e7eb;
+@color-gray-200: #f4f6fb;
+@color-gray-100: #f7f8fa;
 
 /*
     Font Styles:
 */
-
-/* button/big font style */
-@font-button-big-font-size: 18px;
-@font-button-big-line-height: 20px;
-@font-button-big-text-align: center;
-@font-button-big-color: #ffffff;
-@font-button-big-letter-spacing: 0.4px;
-@font-button-big-text-transform: uppercase;
-@font-button-big-font-style: normal;
-@font-button-big-font-weight: 600;
-@font-button-big-font-family: Asap;
-
-.font-button-big() {
-  font-size: @font-button-big-font-size;
-  line-height: @font-button-big-line-height;
-  text-align: @font-button-big-text-align;
-  color: @font-button-big-color;
-  letter-spacing: @font-button-big-letter-spacing;
-  text-transform: @font-button-big-text-transform;
-  font-style: @font-button-big-font-style;
-  font-weight: @font-button-big-font-weight;
-  font-family: @font-button-big-font-family;
-}
-
-/* button/normal font style */
-@font-button-normal-font-size: 14px;
-@font-button-normal-line-height: 16px;
-@font-button-normal-text-align: center;
-@font-button-normal-color: #ffffff;
-@font-button-normal-letter-spacing: 0.4px;
-@font-button-normal-text-transform: uppercase;
-@font-button-normal-font-style: normal;
-@font-button-normal-font-weight: 600;
-@font-button-normal-font-family: Asap;
-
-.font-button-normal() {
-  font-size: @font-button-normal-font-size;
-  line-height: @font-button-normal-line-height;
-  text-align: @font-button-normal-text-align;
-  color: @font-button-normal-color;
-  letter-spacing: @font-button-normal-letter-spacing;
-  text-transform: @font-button-normal-text-transform;
-  font-style: @font-button-normal-font-style;
-  font-weight: @font-button-normal-font-weight;
-  font-family: @font-button-normal-font-family;
-}
-
-/* button/normal-alt font style */
-@font-button-normal-alt-font-size: 14px;
-@font-button-normal-alt-line-height: 16px;
-@font-button-normal-alt-text-align: center;
-@font-button-normal-alt-color: #1eb386;
-@font-button-normal-alt-letter-spacing: 0.4px;
-@font-button-normal-alt-text-transform: uppercase;
-@font-button-normal-alt-font-style: normal;
-@font-button-normal-alt-font-weight: 600;
-@font-button-normal-alt-font-family: Asap;
-
-.font-button-normal-alt() {
-  font-size: @font-button-normal-alt-font-size;
-  line-height: @font-button-normal-alt-line-height;
-  text-align: @font-button-normal-alt-text-align;
-  color: @font-button-normal-alt-color;
-  letter-spacing: @font-button-normal-alt-letter-spacing;
-  text-transform: @font-button-normal-alt-text-transform;
-  font-style: @font-button-normal-alt-font-style;
-  font-weight: @font-button-normal-alt-font-weight;
-  font-family: @font-button-normal-alt-font-family;
-}
-
-/* desktop/body/medium/dark font style */
-@font-desktop-body-medium-dark-font-size: 16px;
-@font-desktop-body-medium-dark-line-height: 24px;
-@font-desktop-body-medium-dark-text-align: left;
-@font-desktop-body-medium-dark-color: #3f4352;
-@font-desktop-body-medium-dark-font-style: normal;
-@font-desktop-body-medium-dark-font-weight: 500;
-@font-desktop-body-medium-dark-font-family: Asap;
-
-.font-desktop-body-medium-dark() {
-  font-size: @font-desktop-body-medium-dark-font-size;
-  line-height: @font-desktop-body-medium-dark-line-height;
-  text-align: @font-desktop-body-medium-dark-text-align;
-  color: @font-desktop-body-medium-dark-color;
-  font-style: @font-desktop-body-medium-dark-font-style;
-  font-weight: @font-desktop-body-medium-dark-font-weight;
-  font-family: @font-desktop-body-medium-dark-font-family;
-}
-
-/* desktop/body/medium/dark-center font style */
-@font-desktop-body-medium-dark-center-font-size: 16px;
-@font-desktop-body-medium-dark-center-line-height: 24px;
-@font-desktop-body-medium-dark-center-text-align: center;
-@font-desktop-body-medium-dark-center-color: #3f4352;
-@font-desktop-body-medium-dark-center-font-style: normal;
-@font-desktop-body-medium-dark-center-font-weight: 500;
-@font-desktop-body-medium-dark-center-font-family: Asap;
-
-.font-desktop-body-medium-dark-center() {
-  font-size: @font-desktop-body-medium-dark-center-font-size;
-  line-height: @font-desktop-body-medium-dark-center-line-height;
-  text-align: @font-desktop-body-medium-dark-center-text-align;
-  color: @font-desktop-body-medium-dark-center-color;
-  font-style: @font-desktop-body-medium-dark-center-font-style;
-  font-weight: @font-desktop-body-medium-dark-center-font-weight;
-  font-family: @font-desktop-body-medium-dark-center-font-family;
-}
-
-/* desktop/body/medium/dark-right font style */
-@font-desktop-body-medium-dark-right-font-size: 16px;
-@font-desktop-body-medium-dark-right-line-height: 24px;
-@font-desktop-body-medium-dark-right-text-align: right;
-@font-desktop-body-medium-dark-right-color: #3f4352;
-@font-desktop-body-medium-dark-right-font-style: normal;
-@font-desktop-body-medium-dark-right-font-weight: 500;
-@font-desktop-body-medium-dark-right-font-family: Asap;
-
-.font-desktop-body-medium-dark-right() {
-  font-size: @font-desktop-body-medium-dark-right-font-size;
-  line-height: @font-desktop-body-medium-dark-right-line-height;
-  text-align: @font-desktop-body-medium-dark-right-text-align;
-  color: @font-desktop-body-medium-dark-right-color;
-  font-style: @font-desktop-body-medium-dark-right-font-style;
-  font-weight: @font-desktop-body-medium-dark-right-font-weight;
-  font-family: @font-desktop-body-medium-dark-right-font-family;
-}
-
-/* desktop/body/medium/gray font style */
-@font-desktop-body-medium-gray-font-size: 16px;
-@font-desktop-body-medium-gray-line-height: 24px;
-@font-desktop-body-medium-gray-text-align: left;
-@font-desktop-body-medium-gray-color: #838795;
-@font-desktop-body-medium-gray-font-style: normal;
-@font-desktop-body-medium-gray-font-weight: 500;
-@font-desktop-body-medium-gray-font-family: Asap;
-
-.font-desktop-body-medium-gray() {
-  font-size: @font-desktop-body-medium-gray-font-size;
-  line-height: @font-desktop-body-medium-gray-line-height;
-  text-align: @font-desktop-body-medium-gray-text-align;
-  color: @font-desktop-body-medium-gray-color;
-  font-style: @font-desktop-body-medium-gray-font-style;
-  font-weight: @font-desktop-body-medium-gray-font-weight;
-  font-family: @font-desktop-body-medium-gray-font-family;
-}
-
-/* desktop/body/medium/gray-center font style */
-@font-desktop-body-medium-gray-center-font-size: 16px;
-@font-desktop-body-medium-gray-center-line-height: 24px;
-@font-desktop-body-medium-gray-center-text-align: center;
-@font-desktop-body-medium-gray-center-color: #838795;
-@font-desktop-body-medium-gray-center-font-style: normal;
-@font-desktop-body-medium-gray-center-font-weight: 500;
-@font-desktop-body-medium-gray-center-font-family: Asap;
-
-.font-desktop-body-medium-gray-center() {
-  font-size: @font-desktop-body-medium-gray-center-font-size;
-  line-height: @font-desktop-body-medium-gray-center-line-height;
-  text-align: @font-desktop-body-medium-gray-center-text-align;
-  color: @font-desktop-body-medium-gray-center-color;
-  font-style: @font-desktop-body-medium-gray-center-font-style;
-  font-weight: @font-desktop-body-medium-gray-center-font-weight;
-  font-family: @font-desktop-body-medium-gray-center-font-family;
-}
-
-/* desktop/body/medium/lightGray font style */
-@font-desktop-body-medium-light-gray-font-size: 16px;
-@font-desktop-body-medium-light-gray-line-height: 24px;
-@font-desktop-body-medium-light-gray-text-align: left;
-@font-desktop-body-medium-light-gray-color: #babcc2;
-@font-desktop-body-medium-light-gray-font-style: normal;
-@font-desktop-body-medium-light-gray-font-weight: 500;
-@font-desktop-body-medium-light-gray-font-family: Asap;
-
-.font-desktop-body-medium-light-gray() {
-  font-size: @font-desktop-body-medium-light-gray-font-size;
-  line-height: @font-desktop-body-medium-light-gray-line-height;
-  text-align: @font-desktop-body-medium-light-gray-text-align;
-  color: @font-desktop-body-medium-light-gray-color;
-  font-style: @font-desktop-body-medium-light-gray-font-style;
-  font-weight: @font-desktop-body-medium-light-gray-font-weight;
-  font-family: @font-desktop-body-medium-light-gray-font-family;
-}
-
-/* desktop/body/medium/lightGray-center font style */
-@font-desktop-body-medium-light-gray-center-font-size: 16px;
-@font-desktop-body-medium-light-gray-center-line-height: 24px;
-@font-desktop-body-medium-light-gray-center-text-align: center;
-@font-desktop-body-medium-light-gray-center-color: #babcc2;
-@font-desktop-body-medium-light-gray-center-font-style: normal;
-@font-desktop-body-medium-light-gray-center-font-weight: 500;
-@font-desktop-body-medium-light-gray-center-font-family: Asap;
-
-.font-desktop-body-medium-light-gray-center() {
-  font-size: @font-desktop-body-medium-light-gray-center-font-size;
-  line-height: @font-desktop-body-medium-light-gray-center-line-height;
-  text-align: @font-desktop-body-medium-light-gray-center-text-align;
-  color: @font-desktop-body-medium-light-gray-center-color;
-  font-style: @font-desktop-body-medium-light-gray-center-font-style;
-  font-weight: @font-desktop-body-medium-light-gray-center-font-weight;
-  font-family: @font-desktop-body-medium-light-gray-center-font-family;
-}
-
-/* desktop/body/medium/primary font style */
-@font-desktop-body-medium-primary-font-size: 16px;
-@font-desktop-body-medium-primary-line-height: 24px;
-@font-desktop-body-medium-primary-text-align: left;
-@font-desktop-body-medium-primary-color: #1eb386;
-@font-desktop-body-medium-primary-font-style: normal;
-@font-desktop-body-medium-primary-font-weight: 500;
-@font-desktop-body-medium-primary-font-family: Asap;
-
-.font-desktop-body-medium-primary() {
-  font-size: @font-desktop-body-medium-primary-font-size;
-  line-height: @font-desktop-body-medium-primary-line-height;
-  text-align: @font-desktop-body-medium-primary-text-align;
-  color: @font-desktop-body-medium-primary-color;
-  font-style: @font-desktop-body-medium-primary-font-style;
-  font-weight: @font-desktop-body-medium-primary-font-weight;
-  font-family: @font-desktop-body-medium-primary-font-family;
-}
-
-/* desktop/body/medium/primary-center font style */
-@font-desktop-body-medium-primary-center-font-size: 16px;
-@font-desktop-body-medium-primary-center-line-height: 24px;
-@font-desktop-body-medium-primary-center-text-align: center;
-@font-desktop-body-medium-primary-center-color: #1eb386;
-@font-desktop-body-medium-primary-center-font-style: normal;
-@font-desktop-body-medium-primary-center-font-weight: 500;
-@font-desktop-body-medium-primary-center-font-family: Asap;
-
-.font-desktop-body-medium-primary-center() {
-  font-size: @font-desktop-body-medium-primary-center-font-size;
-  line-height: @font-desktop-body-medium-primary-center-line-height;
-  text-align: @font-desktop-body-medium-primary-center-text-align;
-  color: @font-desktop-body-medium-primary-center-color;
-  font-style: @font-desktop-body-medium-primary-center-font-style;
-  font-weight: @font-desktop-body-medium-primary-center-font-weight;
-  font-family: @font-desktop-body-medium-primary-center-font-family;
-}
-
-/* desktop/body/regular/accent font style */
-@font-desktop-body-regular-accent-font-size: 16px;
-@font-desktop-body-regular-accent-line-height: 24px;
-@font-desktop-body-regular-accent-text-align: left;
-@font-desktop-body-regular-accent-color: #1eb386;
-@font-desktop-body-regular-accent-font-style: normal;
-@font-desktop-body-regular-accent-font-weight: 400;
-@font-desktop-body-regular-accent-font-family: Asap;
-
-.font-desktop-body-regular-accent() {
-  font-size: @font-desktop-body-regular-accent-font-size;
-  line-height: @font-desktop-body-regular-accent-line-height;
-  text-align: @font-desktop-body-regular-accent-text-align;
-  color: @font-desktop-body-regular-accent-color;
-  font-style: @font-desktop-body-regular-accent-font-style;
-  font-weight: @font-desktop-body-regular-accent-font-weight;
-  font-family: @font-desktop-body-regular-accent-font-family;
-}
 
 /* desktop/body/regular/dark font style */
 @font-desktop-body-regular-dark-font-size: 16px;
@@ -294,7 +35,7 @@
 @font-desktop-body-regular-dark-color: #3f4352;
 @font-desktop-body-regular-dark-font-style: normal;
 @font-desktop-body-regular-dark-font-weight: 400;
-@font-desktop-body-regular-dark-font-family: Asap;
+@font-desktop-body-regular-dark-font-family: Cabin, Arial, Helvetica, Sans-Serif;
 
 .font-desktop-body-regular-dark() {
   font-size: @font-desktop-body-regular-dark-font-size;
@@ -306,215 +47,6 @@
   font-family: @font-desktop-body-regular-dark-font-family;
 }
 
-/* desktop/body/regular/dark-center font style */
-@font-desktop-body-regular-dark-center-font-size: 16px;
-@font-desktop-body-regular-dark-center-line-height: 24px;
-@font-desktop-body-regular-dark-center-text-align: center;
-@font-desktop-body-regular-dark-center-color: #3f4352;
-@font-desktop-body-regular-dark-center-font-style: normal;
-@font-desktop-body-regular-dark-center-font-weight: 400;
-@font-desktop-body-regular-dark-center-font-family: Asap;
-
-.font-desktop-body-regular-dark-center() {
-  font-size: @font-desktop-body-regular-dark-center-font-size;
-  line-height: @font-desktop-body-regular-dark-center-line-height;
-  text-align: @font-desktop-body-regular-dark-center-text-align;
-  color: @font-desktop-body-regular-dark-center-color;
-  font-style: @font-desktop-body-regular-dark-center-font-style;
-  font-weight: @font-desktop-body-regular-dark-center-font-weight;
-  font-family: @font-desktop-body-regular-dark-center-font-family;
-}
-
-/* desktop/body/regular/gray font style */
-@font-desktop-body-regular-gray-font-size: 16px;
-@font-desktop-body-regular-gray-line-height: 24px;
-@font-desktop-body-regular-gray-text-align: left;
-@font-desktop-body-regular-gray-color: #838795;
-@font-desktop-body-regular-gray-font-style: normal;
-@font-desktop-body-regular-gray-font-weight: 400;
-@font-desktop-body-regular-gray-font-family: Asap;
-
-.font-desktop-body-regular-gray() {
-  font-size: @font-desktop-body-regular-gray-font-size;
-  line-height: @font-desktop-body-regular-gray-line-height;
-  text-align: @font-desktop-body-regular-gray-text-align;
-  color: @font-desktop-body-regular-gray-color;
-  font-style: @font-desktop-body-regular-gray-font-style;
-  font-weight: @font-desktop-body-regular-gray-font-weight;
-  font-family: @font-desktop-body-regular-gray-font-family;
-}
-
-/* desktop/body/regular/gray-center font style */
-@font-desktop-body-regular-gray-center-font-size: 16px;
-@font-desktop-body-regular-gray-center-line-height: 24px;
-@font-desktop-body-regular-gray-center-text-align: center;
-@font-desktop-body-regular-gray-center-color: #838795;
-@font-desktop-body-regular-gray-center-font-style: normal;
-@font-desktop-body-regular-gray-center-font-weight: 400;
-@font-desktop-body-regular-gray-center-font-family: Asap;
-
-.font-desktop-body-regular-gray-center() {
-  font-size: @font-desktop-body-regular-gray-center-font-size;
-  line-height: @font-desktop-body-regular-gray-center-line-height;
-  text-align: @font-desktop-body-regular-gray-center-text-align;
-  color: @font-desktop-body-regular-gray-center-color;
-  font-style: @font-desktop-body-regular-gray-center-font-style;
-  font-weight: @font-desktop-body-regular-gray-center-font-weight;
-  font-family: @font-desktop-body-regular-gray-center-font-family;
-}
-
-/* desktop/components/fieldHelper/default font style */
-@font-desktop-components-field-helper-default-font-size: 11px;
-@font-desktop-components-field-helper-default-line-height: 12px;
-@font-desktop-components-field-helper-default-text-align: left;
-@font-desktop-components-field-helper-default-color: #838795;
-@font-desktop-components-field-helper-default-font-style: normal;
-@font-desktop-components-field-helper-default-font-weight: 400;
-@font-desktop-components-field-helper-default-font-family: Asap;
-
-.font-desktop-components-field-helper-default() {
-  font-size: @font-desktop-components-field-helper-default-font-size;
-  line-height: @font-desktop-components-field-helper-default-line-height;
-  text-align: @font-desktop-components-field-helper-default-text-align;
-  color: @font-desktop-components-field-helper-default-color;
-  font-style: @font-desktop-components-field-helper-default-font-style;
-  font-weight: @font-desktop-components-field-helper-default-font-weight;
-  font-family: @font-desktop-components-field-helper-default-font-family;
-}
-
-/* desktop/components/fieldHelper/error font style */
-@font-desktop-components-field-helper-error-font-size: 11px;
-@font-desktop-components-field-helper-error-line-height: 12px;
-@font-desktop-components-field-helper-error-text-align: left;
-@font-desktop-components-field-helper-error-color: #fb4545;
-@font-desktop-components-field-helper-error-font-style: normal;
-@font-desktop-components-field-helper-error-font-weight: 400;
-@font-desktop-components-field-helper-error-font-family: Asap;
-
-.font-desktop-components-field-helper-error() {
-  font-size: @font-desktop-components-field-helper-error-font-size;
-  line-height: @font-desktop-components-field-helper-error-line-height;
-  text-align: @font-desktop-components-field-helper-error-text-align;
-  color: @font-desktop-components-field-helper-error-color;
-  font-style: @font-desktop-components-field-helper-error-font-style;
-  font-weight: @font-desktop-components-field-helper-error-font-weight;
-  font-family: @font-desktop-components-field-helper-error-font-family;
-}
-
-/* desktop/h2/dark font style */
-@font-desktop-h-2-dark-font-size: 24px;
-@font-desktop-h-2-dark-line-height: 24px;
-@font-desktop-h-2-dark-text-align: left;
-@font-desktop-h-2-dark-color: #3f4352;
-@font-desktop-h-2-dark-font-style: normal;
-@font-desktop-h-2-dark-font-weight: 400;
-@font-desktop-h-2-dark-font-family: Asap;
-
-.font-desktop-h-2-dark() {
-  font-size: @font-desktop-h-2-dark-font-size;
-  line-height: @font-desktop-h-2-dark-line-height;
-  text-align: @font-desktop-h-2-dark-text-align;
-  color: @font-desktop-h-2-dark-color;
-  font-style: @font-desktop-h-2-dark-font-style;
-  font-weight: @font-desktop-h-2-dark-font-weight;
-  font-family: @font-desktop-h-2-dark-font-family;
-}
-
-/* desktop/h3/dark font style */
-@font-desktop-h-3-dark-font-size: 18px;
-@font-desktop-h-3-dark-line-height: 24px;
-@font-desktop-h-3-dark-text-align: left;
-@font-desktop-h-3-dark-color: #3f4352;
-@font-desktop-h-3-dark-font-style: normal;
-@font-desktop-h-3-dark-font-weight: 500;
-@font-desktop-h-3-dark-font-family: Asap;
-
-.font-desktop-h-3-dark() {
-  font-size: @font-desktop-h-3-dark-font-size;
-  line-height: @font-desktop-h-3-dark-line-height;
-  text-align: @font-desktop-h-3-dark-text-align;
-  color: @font-desktop-h-3-dark-color;
-  font-style: @font-desktop-h-3-dark-font-style;
-  font-weight: @font-desktop-h-3-dark-font-weight;
-  font-family: @font-desktop-h-3-dark-font-family;
-}
-
-/* desktop/small/italic/gray font style */
-@font-desktop-small-italic-gray-font-size: 14px;
-@font-desktop-small-italic-gray-line-height: 20px;
-@font-desktop-small-italic-gray-text-align: left;
-@font-desktop-small-italic-gray-color: #838795;
-@font-desktop-small-italic-gray-font-style: italic;
-@font-desktop-small-italic-gray-font-weight: 400;
-@font-desktop-small-italic-gray-font-family: Asap;
-
-.font-desktop-small-italic-gray() {
-  font-size: @font-desktop-small-italic-gray-font-size;
-  line-height: @font-desktop-small-italic-gray-line-height;
-  text-align: @font-desktop-small-italic-gray-text-align;
-  color: @font-desktop-small-italic-gray-color;
-  font-style: @font-desktop-small-italic-gray-font-style;
-  font-weight: @font-desktop-small-italic-gray-font-weight;
-  font-family: @font-desktop-small-italic-gray-font-family;
-}
-
-/* desktop/small/medium/accent-center font style */
-@font-desktop-small-medium-accent-center-font-size: 14px;
-@font-desktop-small-medium-accent-center-line-height: 20px;
-@font-desktop-small-medium-accent-center-text-align: center;
-@font-desktop-small-medium-accent-center-color: #1eb386;
-@font-desktop-small-medium-accent-center-font-style: normal;
-@font-desktop-small-medium-accent-center-font-weight: 500;
-@font-desktop-small-medium-accent-center-font-family: Asap;
-
-.font-desktop-small-medium-accent-center() {
-  font-size: @font-desktop-small-medium-accent-center-font-size;
-  line-height: @font-desktop-small-medium-accent-center-line-height;
-  text-align: @font-desktop-small-medium-accent-center-text-align;
-  color: @font-desktop-small-medium-accent-center-color;
-  font-style: @font-desktop-small-medium-accent-center-font-style;
-  font-weight: @font-desktop-small-medium-accent-center-font-weight;
-  font-family: @font-desktop-small-medium-accent-center-font-family;
-}
-
-/* desktop/small/medium/dark font style */
-@font-desktop-small-medium-dark-font-size: 14px;
-@font-desktop-small-medium-dark-line-height: 20px;
-@font-desktop-small-medium-dark-text-align: left;
-@font-desktop-small-medium-dark-color: #3f4352;
-@font-desktop-small-medium-dark-font-style: normal;
-@font-desktop-small-medium-dark-font-weight: 500;
-@font-desktop-small-medium-dark-font-family: Asap;
-
-.font-desktop-small-medium-dark() {
-  font-size: @font-desktop-small-medium-dark-font-size;
-  line-height: @font-desktop-small-medium-dark-line-height;
-  text-align: @font-desktop-small-medium-dark-text-align;
-  color: @font-desktop-small-medium-dark-color;
-  font-style: @font-desktop-small-medium-dark-font-style;
-  font-weight: @font-desktop-small-medium-dark-font-weight;
-  font-family: @font-desktop-small-medium-dark-font-family;
-}
-
-/* desktop/small/medium/dark-center font style */
-@font-desktop-small-medium-dark-center-font-size: 14px;
-@font-desktop-small-medium-dark-center-line-height: 20px;
-@font-desktop-small-medium-dark-center-text-align: center;
-@font-desktop-small-medium-dark-center-color: #3f4352;
-@font-desktop-small-medium-dark-center-font-style: normal;
-@font-desktop-small-medium-dark-center-font-weight: 500;
-@font-desktop-small-medium-dark-center-font-family: Asap;
-
-.font-desktop-small-medium-dark-center() {
-  font-size: @font-desktop-small-medium-dark-center-font-size;
-  line-height: @font-desktop-small-medium-dark-center-line-height;
-  text-align: @font-desktop-small-medium-dark-center-text-align;
-  color: @font-desktop-small-medium-dark-center-color;
-  font-style: @font-desktop-small-medium-dark-center-font-style;
-  font-weight: @font-desktop-small-medium-dark-center-font-weight;
-  font-family: @font-desktop-small-medium-dark-center-font-family;
-}
-
 /* desktop/small/regular/dark font style */
 @font-desktop-small-regular-dark-font-size: 14px;
 @font-desktop-small-regular-dark-line-height: 20px;
@@ -522,7 +54,7 @@
 @font-desktop-small-regular-dark-color: #3f4352;
 @font-desktop-small-regular-dark-font-style: normal;
 @font-desktop-small-regular-dark-font-weight: 400;
-@font-desktop-small-regular-dark-font-family: Asap;
+@font-desktop-small-regular-dark-font-family: Cabin, Arial, Helvetica, Sans-Serif;
 
 .font-desktop-small-regular-dark() {
   font-size: @font-desktop-small-regular-dark-font-size;
@@ -534,44 +66,6 @@
   font-family: @font-desktop-small-regular-dark-font-family;
 }
 
-/* desktop/small/regular/dark-center font style */
-@font-desktop-small-regular-dark-center-font-size: 14px;
-@font-desktop-small-regular-dark-center-line-height: 20px;
-@font-desktop-small-regular-dark-center-text-align: center;
-@font-desktop-small-regular-dark-center-color: #3f4352;
-@font-desktop-small-regular-dark-center-font-style: normal;
-@font-desktop-small-regular-dark-center-font-weight: 400;
-@font-desktop-small-regular-dark-center-font-family: Asap;
-
-.font-desktop-small-regular-dark-center() {
-  font-size: @font-desktop-small-regular-dark-center-font-size;
-  line-height: @font-desktop-small-regular-dark-center-line-height;
-  text-align: @font-desktop-small-regular-dark-center-text-align;
-  color: @font-desktop-small-regular-dark-center-color;
-  font-style: @font-desktop-small-regular-dark-center-font-style;
-  font-weight: @font-desktop-small-regular-dark-center-font-weight;
-  font-family: @font-desktop-small-regular-dark-center-font-family;
-}
-
-/* desktop/small/regular/dark-right font style */
-@font-desktop-small-regular-dark-right-font-size: 14px;
-@font-desktop-small-regular-dark-right-line-height: 20px;
-@font-desktop-small-regular-dark-right-text-align: right;
-@font-desktop-small-regular-dark-right-color: #3f4352;
-@font-desktop-small-regular-dark-right-font-style: normal;
-@font-desktop-small-regular-dark-right-font-weight: 400;
-@font-desktop-small-regular-dark-right-font-family: Asap;
-
-.font-desktop-small-regular-dark-right() {
-  font-size: @font-desktop-small-regular-dark-right-font-size;
-  line-height: @font-desktop-small-regular-dark-right-line-height;
-  text-align: @font-desktop-small-regular-dark-right-text-align;
-  color: @font-desktop-small-regular-dark-right-color;
-  font-style: @font-desktop-small-regular-dark-right-font-style;
-  font-weight: @font-desktop-small-regular-dark-right-font-weight;
-  font-family: @font-desktop-small-regular-dark-right-font-family;
-}
-
 /* desktop/small/regular/gray font style */
 @font-desktop-small-regular-gray-font-size: 14px;
 @font-desktop-small-regular-gray-line-height: 20px;
@@ -579,7 +73,7 @@
 @font-desktop-small-regular-gray-color: #838795;
 @font-desktop-small-regular-gray-font-style: normal;
 @font-desktop-small-regular-gray-font-weight: 400;
-@font-desktop-small-regular-gray-font-family: Asap;
+@font-desktop-small-regular-gray-font-family: Cabin, Arial, Helvetica, Sans-Serif;
 
 .font-desktop-small-regular-gray() {
   font-size: @font-desktop-small-regular-gray-font-size;
@@ -591,42 +85,80 @@
   font-family: @font-desktop-small-regular-gray-font-family;
 }
 
-/* desktop/small/regular/gray-center font style */
-@font-desktop-small-regular-gray-center-font-size: 14px;
-@font-desktop-small-regular-gray-center-line-height: 20px;
-@font-desktop-small-regular-gray-center-text-align: center;
-@font-desktop-small-regular-gray-center-color: #838795;
-@font-desktop-small-regular-gray-center-font-style: normal;
-@font-desktop-small-regular-gray-center-font-weight: 400;
-@font-desktop-small-regular-gray-center-font-family: Asap;
+/* desktop/small/italic/gray font style */
+@font-desktop-small-italic-gray-font-size: 14px;
+@font-desktop-small-italic-gray-line-height: 20px;
+@font-desktop-small-italic-gray-text-align: left;
+@font-desktop-small-italic-gray-color: #838795;
+@font-desktop-small-italic-gray-font-style: normal;
+@font-desktop-small-italic-gray-font-weight: 400;
+@font-desktop-small-italic-gray-font-family: Cabin, Arial, Helvetica, Sans-Serif;
 
-.font-desktop-small-regular-gray-center() {
-  font-size: @font-desktop-small-regular-gray-center-font-size;
-  line-height: @font-desktop-small-regular-gray-center-line-height;
-  text-align: @font-desktop-small-regular-gray-center-text-align;
-  color: @font-desktop-small-regular-gray-center-color;
-  font-style: @font-desktop-small-regular-gray-center-font-style;
-  font-weight: @font-desktop-small-regular-gray-center-font-weight;
-  font-family: @font-desktop-small-regular-gray-center-font-family;
+.font-desktop-small-italic-gray() {
+  font-size: @font-desktop-small-italic-gray-font-size;
+  line-height: @font-desktop-small-italic-gray-line-height;
+  text-align: @font-desktop-small-italic-gray-text-align;
+  color: @font-desktop-small-italic-gray-color;
+  font-style: @font-desktop-small-italic-gray-font-style;
+  font-weight: @font-desktop-small-italic-gray-font-weight;
+  font-family: @font-desktop-small-italic-gray-font-family;
 }
 
-/* desktop/small/regular/gray-right font style */
-@font-desktop-small-regular-gray-right-font-size: 14px;
-@font-desktop-small-regular-gray-right-line-height: 20px;
-@font-desktop-small-regular-gray-right-text-align: right;
-@font-desktop-small-regular-gray-right-color: #838795;
-@font-desktop-small-regular-gray-right-font-style: normal;
-@font-desktop-small-regular-gray-right-font-weight: 400;
-@font-desktop-small-regular-gray-right-font-family: Asap;
+/* desktop/h2/dark font style */
+@font-desktop-h-2-dark-font-size: 24px;
+@font-desktop-h-2-dark-line-height: 28px;
+@font-desktop-h-2-dark-text-align: left;
+@font-desktop-h-2-dark-color: #3f4352;
+@font-desktop-h-2-dark-font-style: normal;
+@font-desktop-h-2-dark-font-weight: 600;
+@font-desktop-h-2-dark-font-family: Cabin, Arial, Helvetica, Sans-Serif;
 
-.font-desktop-small-regular-gray-right() {
-  font-size: @font-desktop-small-regular-gray-right-font-size;
-  line-height: @font-desktop-small-regular-gray-right-line-height;
-  text-align: @font-desktop-small-regular-gray-right-text-align;
-  color: @font-desktop-small-regular-gray-right-color;
-  font-style: @font-desktop-small-regular-gray-right-font-style;
-  font-weight: @font-desktop-small-regular-gray-right-font-weight;
-  font-family: @font-desktop-small-regular-gray-right-font-family;
+.font-desktop-h-2-dark() {
+  font-size: @font-desktop-h-2-dark-font-size;
+  line-height: @font-desktop-h-2-dark-line-height;
+  text-align: @font-desktop-h-2-dark-text-align;
+  color: @font-desktop-h-2-dark-color;
+  font-style: @font-desktop-h-2-dark-font-style;
+  font-weight: @font-desktop-h-2-dark-font-weight;
+  font-family: @font-desktop-h-2-dark-font-family;
+}
+
+/* desktop/body/medium/dark font style */
+@font-desktop-body-medium-dark-font-size: 16px;
+@font-desktop-body-medium-dark-line-height: 24px;
+@font-desktop-body-medium-dark-text-align: left;
+@font-desktop-body-medium-dark-color: #3f4352;
+@font-desktop-body-medium-dark-font-style: normal;
+@font-desktop-body-medium-dark-font-weight: 400;
+@font-desktop-body-medium-dark-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-dark() {
+  font-size: @font-desktop-body-medium-dark-font-size;
+  line-height: @font-desktop-body-medium-dark-line-height;
+  text-align: @font-desktop-body-medium-dark-text-align;
+  color: @font-desktop-body-medium-dark-color;
+  font-style: @font-desktop-body-medium-dark-font-style;
+  font-weight: @font-desktop-body-medium-dark-font-weight;
+  font-family: @font-desktop-body-medium-dark-font-family;
+}
+
+/* desktop/h3/dark font style */
+@font-desktop-h-3-dark-font-size: 18px;
+@font-desktop-h-3-dark-line-height: 24px;
+@font-desktop-h-3-dark-text-align: left;
+@font-desktop-h-3-dark-color: #3f4352;
+@font-desktop-h-3-dark-font-style: normal;
+@font-desktop-h-3-dark-font-weight: 400;
+@font-desktop-h-3-dark-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-h-3-dark() {
+  font-size: @font-desktop-h-3-dark-font-size;
+  line-height: @font-desktop-h-3-dark-line-height;
+  text-align: @font-desktop-h-3-dark-text-align;
+  color: @font-desktop-h-3-dark-color;
+  font-style: @font-desktop-h-3-dark-font-style;
+  font-weight: @font-desktop-h-3-dark-font-weight;
+  font-family: @font-desktop-h-3-dark-font-family;
 }
 
 /* desktop/small/regular/lightGray font style */
@@ -636,7 +168,7 @@
 @font-desktop-small-regular-light-gray-color: #babcc2;
 @font-desktop-small-regular-light-gray-font-style: normal;
 @font-desktop-small-regular-light-gray-font-weight: 400;
-@font-desktop-small-regular-light-gray-font-family: Asap;
+@font-desktop-small-regular-light-gray-font-family: Cabin, Arial, Helvetica, Sans-Serif;
 
 .font-desktop-small-regular-light-gray() {
   font-size: @font-desktop-small-regular-light-gray-font-size;
@@ -648,6 +180,101 @@
   font-family: @font-desktop-small-regular-light-gray-font-family;
 }
 
+/* desktop/body/regular/gray font style */
+@font-desktop-body-regular-gray-font-size: 16px;
+@font-desktop-body-regular-gray-line-height: 24px;
+@font-desktop-body-regular-gray-text-align: left;
+@font-desktop-body-regular-gray-color: #838795;
+@font-desktop-body-regular-gray-font-style: normal;
+@font-desktop-body-regular-gray-font-weight: 400;
+@font-desktop-body-regular-gray-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-regular-gray() {
+  font-size: @font-desktop-body-regular-gray-font-size;
+  line-height: @font-desktop-body-regular-gray-line-height;
+  text-align: @font-desktop-body-regular-gray-text-align;
+  color: @font-desktop-body-regular-gray-color;
+  font-style: @font-desktop-body-regular-gray-font-style;
+  font-weight: @font-desktop-body-regular-gray-font-weight;
+  font-family: @font-desktop-body-regular-gray-font-family;
+}
+
+/* desktop/small/medium/dark font style */
+@font-desktop-small-medium-dark-font-size: 14px;
+@font-desktop-small-medium-dark-line-height: 20px;
+@font-desktop-small-medium-dark-text-align: left;
+@font-desktop-small-medium-dark-color: #3f4352;
+@font-desktop-small-medium-dark-font-style: normal;
+@font-desktop-small-medium-dark-font-weight: 400;
+@font-desktop-small-medium-dark-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-medium-dark() {
+  font-size: @font-desktop-small-medium-dark-font-size;
+  line-height: @font-desktop-small-medium-dark-line-height;
+  text-align: @font-desktop-small-medium-dark-text-align;
+  color: @font-desktop-small-medium-dark-color;
+  font-style: @font-desktop-small-medium-dark-font-style;
+  font-weight: @font-desktop-small-medium-dark-font-weight;
+  font-family: @font-desktop-small-medium-dark-font-family;
+}
+
+/* desktop/body/medium/primary font style */
+@font-desktop-body-medium-primary-font-size: 16px;
+@font-desktop-body-medium-primary-line-height: 24px;
+@font-desktop-body-medium-primary-text-align: left;
+@font-desktop-body-medium-primary-color: #1eb386;
+@font-desktop-body-medium-primary-font-style: normal;
+@font-desktop-body-medium-primary-font-weight: 400;
+@font-desktop-body-medium-primary-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-primary() {
+  font-size: @font-desktop-body-medium-primary-font-size;
+  line-height: @font-desktop-body-medium-primary-line-height;
+  text-align: @font-desktop-body-medium-primary-text-align;
+  color: @font-desktop-body-medium-primary-color;
+  font-style: @font-desktop-body-medium-primary-font-style;
+  font-weight: @font-desktop-body-medium-primary-font-weight;
+  font-family: @font-desktop-body-medium-primary-font-family;
+}
+
+/* desktop/body/medium/gray font style */
+@font-desktop-body-medium-gray-font-size: 16px;
+@font-desktop-body-medium-gray-line-height: 24px;
+@font-desktop-body-medium-gray-text-align: left;
+@font-desktop-body-medium-gray-color: #838795;
+@font-desktop-body-medium-gray-font-style: normal;
+@font-desktop-body-medium-gray-font-weight: 400;
+@font-desktop-body-medium-gray-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-gray() {
+  font-size: @font-desktop-body-medium-gray-font-size;
+  line-height: @font-desktop-body-medium-gray-line-height;
+  text-align: @font-desktop-body-medium-gray-text-align;
+  color: @font-desktop-body-medium-gray-color;
+  font-style: @font-desktop-body-medium-gray-font-style;
+  font-weight: @font-desktop-body-medium-gray-font-weight;
+  font-family: @font-desktop-body-medium-gray-font-family;
+}
+
+/* desktop/body/medium/lightGray font style */
+@font-desktop-body-medium-light-gray-font-size: 16px;
+@font-desktop-body-medium-light-gray-line-height: 24px;
+@font-desktop-body-medium-light-gray-text-align: left;
+@font-desktop-body-medium-light-gray-color: #babcc2;
+@font-desktop-body-medium-light-gray-font-style: normal;
+@font-desktop-body-medium-light-gray-font-weight: 400;
+@font-desktop-body-medium-light-gray-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-light-gray() {
+  font-size: @font-desktop-body-medium-light-gray-font-size;
+  line-height: @font-desktop-body-medium-light-gray-line-height;
+  text-align: @font-desktop-body-medium-light-gray-text-align;
+  color: @font-desktop-body-medium-light-gray-color;
+  font-style: @font-desktop-body-medium-light-gray-font-style;
+  font-weight: @font-desktop-body-medium-light-gray-font-weight;
+  font-family: @font-desktop-body-medium-light-gray-font-family;
+}
+
 /* desktop/xSmall/regular/gray font style */
 @font-desktop-x-small-regular-gray-font-size: 12px;
 @font-desktop-x-small-regular-gray-line-height: 16px;
@@ -655,7 +282,7 @@
 @font-desktop-x-small-regular-gray-color: #838795;
 @font-desktop-x-small-regular-gray-font-style: normal;
 @font-desktop-x-small-regular-gray-font-weight: 400;
-@font-desktop-x-small-regular-gray-font-family: Asap;
+@font-desktop-x-small-regular-gray-font-family: Cabin, Arial, Helvetica, Sans-Serif;
 
 .font-desktop-x-small-regular-gray() {
   font-size: @font-desktop-x-small-regular-gray-font-size;
@@ -665,4 +292,571 @@
   font-style: @font-desktop-x-small-regular-gray-font-style;
   font-weight: @font-desktop-x-small-regular-gray-font-weight;
   font-family: @font-desktop-x-small-regular-gray-font-family;
+}
+
+/* desktop/body/medium/dark-right font style */
+@font-desktop-body-medium-dark-right-font-size: 16px;
+@font-desktop-body-medium-dark-right-line-height: 24px;
+@font-desktop-body-medium-dark-right-text-align: right;
+@font-desktop-body-medium-dark-right-color: #3f4352;
+@font-desktop-body-medium-dark-right-font-style: normal;
+@font-desktop-body-medium-dark-right-font-weight: 400;
+@font-desktop-body-medium-dark-right-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-dark-right() {
+  font-size: @font-desktop-body-medium-dark-right-font-size;
+  line-height: @font-desktop-body-medium-dark-right-line-height;
+  text-align: @font-desktop-body-medium-dark-right-text-align;
+  color: @font-desktop-body-medium-dark-right-color;
+  font-style: @font-desktop-body-medium-dark-right-font-style;
+  font-weight: @font-desktop-body-medium-dark-right-font-weight;
+  font-family: @font-desktop-body-medium-dark-right-font-family;
+}
+
+/* desktop/small/regular/dark-right font style */
+@font-desktop-small-regular-dark-right-font-size: 14px;
+@font-desktop-small-regular-dark-right-line-height: 20px;
+@font-desktop-small-regular-dark-right-text-align: right;
+@font-desktop-small-regular-dark-right-color: #3f4352;
+@font-desktop-small-regular-dark-right-font-style: normal;
+@font-desktop-small-regular-dark-right-font-weight: 400;
+@font-desktop-small-regular-dark-right-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-regular-dark-right() {
+  font-size: @font-desktop-small-regular-dark-right-font-size;
+  line-height: @font-desktop-small-regular-dark-right-line-height;
+  text-align: @font-desktop-small-regular-dark-right-text-align;
+  color: @font-desktop-small-regular-dark-right-color;
+  font-style: @font-desktop-small-regular-dark-right-font-style;
+  font-weight: @font-desktop-small-regular-dark-right-font-weight;
+  font-family: @font-desktop-small-regular-dark-right-font-family;
+}
+
+/* desktop/small/regular/gray-right font style */
+@font-desktop-small-regular-gray-right-font-size: 14px;
+@font-desktop-small-regular-gray-right-line-height: 20px;
+@font-desktop-small-regular-gray-right-text-align: right;
+@font-desktop-small-regular-gray-right-color: #838795;
+@font-desktop-small-regular-gray-right-font-style: normal;
+@font-desktop-small-regular-gray-right-font-weight: 400;
+@font-desktop-small-regular-gray-right-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-regular-gray-right() {
+  font-size: @font-desktop-small-regular-gray-right-font-size;
+  line-height: @font-desktop-small-regular-gray-right-line-height;
+  text-align: @font-desktop-small-regular-gray-right-text-align;
+  color: @font-desktop-small-regular-gray-right-color;
+  font-style: @font-desktop-small-regular-gray-right-font-style;
+  font-weight: @font-desktop-small-regular-gray-right-font-weight;
+  font-family: @font-desktop-small-regular-gray-right-font-family;
+}
+
+/* components/button/normal-alt font style */
+@font-components-button-normal-alt-font-size: 14px;
+@font-components-button-normal-alt-line-height: 16px;
+@font-components-button-normal-alt-text-align: center;
+@font-components-button-normal-alt-color: #1eb386;
+@font-components-button-normal-alt-letter-spacing: 0.4px;
+@font-components-button-normal-alt-text-transform: uppercase;
+@font-components-button-normal-alt-font-style: normal;
+@font-components-button-normal-alt-font-weight: bold;
+@font-components-button-normal-alt-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-components-button-normal-alt() {
+  font-size: @font-components-button-normal-alt-font-size;
+  line-height: @font-components-button-normal-alt-line-height;
+  text-align: @font-components-button-normal-alt-text-align;
+  color: @font-components-button-normal-alt-color;
+  letter-spacing: @font-components-button-normal-alt-letter-spacing;
+  text-transform: @font-components-button-normal-alt-text-transform;
+  font-style: @font-components-button-normal-alt-font-style;
+  font-weight: @font-components-button-normal-alt-font-weight;
+  font-family: @font-components-button-normal-alt-font-family;
+}
+
+/* desktop/body/medium/dark-center font style */
+@font-desktop-body-medium-dark-center-font-size: 16px;
+@font-desktop-body-medium-dark-center-line-height: 24px;
+@font-desktop-body-medium-dark-center-text-align: center;
+@font-desktop-body-medium-dark-center-color: #3f4352;
+@font-desktop-body-medium-dark-center-font-style: normal;
+@font-desktop-body-medium-dark-center-font-weight: 400;
+@font-desktop-body-medium-dark-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-dark-center() {
+  font-size: @font-desktop-body-medium-dark-center-font-size;
+  line-height: @font-desktop-body-medium-dark-center-line-height;
+  text-align: @font-desktop-body-medium-dark-center-text-align;
+  color: @font-desktop-body-medium-dark-center-color;
+  font-style: @font-desktop-body-medium-dark-center-font-style;
+  font-weight: @font-desktop-body-medium-dark-center-font-weight;
+  font-family: @font-desktop-body-medium-dark-center-font-family;
+}
+
+/* components/fieldHelper/default font style */
+@font-components-field-helper-default-font-size: 11px;
+@font-components-field-helper-default-line-height: 12px;
+@font-components-field-helper-default-text-align: left;
+@font-components-field-helper-default-color: #838795;
+@font-components-field-helper-default-font-style: normal;
+@font-components-field-helper-default-font-weight: 400;
+@font-components-field-helper-default-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-components-field-helper-default() {
+  font-size: @font-components-field-helper-default-font-size;
+  line-height: @font-components-field-helper-default-line-height;
+  text-align: @font-components-field-helper-default-text-align;
+  color: @font-components-field-helper-default-color;
+  font-style: @font-components-field-helper-default-font-style;
+  font-weight: @font-components-field-helper-default-font-weight;
+  font-family: @font-components-field-helper-default-font-family;
+}
+
+/* components/fieldHelper/error font style */
+@font-components-field-helper-error-font-size: 11px;
+@font-components-field-helper-error-line-height: 12px;
+@font-components-field-helper-error-text-align: left;
+@font-components-field-helper-error-color: #fb4545;
+@font-components-field-helper-error-font-style: normal;
+@font-components-field-helper-error-font-weight: 400;
+@font-components-field-helper-error-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-components-field-helper-error() {
+  font-size: @font-components-field-helper-error-font-size;
+  line-height: @font-components-field-helper-error-line-height;
+  text-align: @font-components-field-helper-error-text-align;
+  color: @font-components-field-helper-error-color;
+  font-style: @font-components-field-helper-error-font-style;
+  font-weight: @font-components-field-helper-error-font-weight;
+  font-family: @font-components-field-helper-error-font-family;
+}
+
+/* components/button/big font style */
+@font-components-button-big-font-size: 18px;
+@font-components-button-big-line-height: 20px;
+@font-components-button-big-text-align: center;
+@font-components-button-big-color: #ffffff;
+@font-components-button-big-letter-spacing: 0.4px;
+@font-components-button-big-text-transform: uppercase;
+@font-components-button-big-font-style: normal;
+@font-components-button-big-font-weight: bold;
+@font-components-button-big-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-components-button-big() {
+  font-size: @font-components-button-big-font-size;
+  line-height: @font-components-button-big-line-height;
+  text-align: @font-components-button-big-text-align;
+  color: @font-components-button-big-color;
+  letter-spacing: @font-components-button-big-letter-spacing;
+  text-transform: @font-components-button-big-text-transform;
+  font-style: @font-components-button-big-font-style;
+  font-weight: @font-components-button-big-font-weight;
+  font-family: @font-components-button-big-font-family;
+}
+
+/* components/button/normal font style */
+@font-components-button-normal-font-size: 14px;
+@font-components-button-normal-line-height: 16px;
+@font-components-button-normal-text-align: center;
+@font-components-button-normal-color: #ffffff;
+@font-components-button-normal-letter-spacing: 0.4px;
+@font-components-button-normal-text-transform: uppercase;
+@font-components-button-normal-font-style: normal;
+@font-components-button-normal-font-weight: bold;
+@font-components-button-normal-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-components-button-normal() {
+  font-size: @font-components-button-normal-font-size;
+  line-height: @font-components-button-normal-line-height;
+  text-align: @font-components-button-normal-text-align;
+  color: @font-components-button-normal-color;
+  letter-spacing: @font-components-button-normal-letter-spacing;
+  text-transform: @font-components-button-normal-text-transform;
+  font-style: @font-components-button-normal-font-style;
+  font-weight: @font-components-button-normal-font-weight;
+  font-family: @font-components-button-normal-font-family;
+}
+
+/* desktop/body/regular/accent font style */
+@font-desktop-body-regular-accent-font-size: 16px;
+@font-desktop-body-regular-accent-line-height: 24px;
+@font-desktop-body-regular-accent-text-align: left;
+@font-desktop-body-regular-accent-color: #1eb386;
+@font-desktop-body-regular-accent-font-style: normal;
+@font-desktop-body-regular-accent-font-weight: 400;
+@font-desktop-body-regular-accent-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-regular-accent() {
+  font-size: @font-desktop-body-regular-accent-font-size;
+  line-height: @font-desktop-body-regular-accent-line-height;
+  text-align: @font-desktop-body-regular-accent-text-align;
+  color: @font-desktop-body-regular-accent-color;
+  font-style: @font-desktop-body-regular-accent-font-style;
+  font-weight: @font-desktop-body-regular-accent-font-weight;
+  font-family: @font-desktop-body-regular-accent-font-family;
+}
+
+/* desktop/small/regular/dark-center font style */
+@font-desktop-small-regular-dark-center-font-size: 14px;
+@font-desktop-small-regular-dark-center-line-height: 20px;
+@font-desktop-small-regular-dark-center-text-align: center;
+@font-desktop-small-regular-dark-center-color: #3f4352;
+@font-desktop-small-regular-dark-center-font-style: normal;
+@font-desktop-small-regular-dark-center-font-weight: 400;
+@font-desktop-small-regular-dark-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-regular-dark-center() {
+  font-size: @font-desktop-small-regular-dark-center-font-size;
+  line-height: @font-desktop-small-regular-dark-center-line-height;
+  text-align: @font-desktop-small-regular-dark-center-text-align;
+  color: @font-desktop-small-regular-dark-center-color;
+  font-style: @font-desktop-small-regular-dark-center-font-style;
+  font-weight: @font-desktop-small-regular-dark-center-font-weight;
+  font-family: @font-desktop-small-regular-dark-center-font-family;
+}
+
+/* desktop/small/regular/gray-center font style */
+@font-desktop-small-regular-gray-center-font-size: 14px;
+@font-desktop-small-regular-gray-center-line-height: 20px;
+@font-desktop-small-regular-gray-center-text-align: center;
+@font-desktop-small-regular-gray-center-color: #838795;
+@font-desktop-small-regular-gray-center-font-style: normal;
+@font-desktop-small-regular-gray-center-font-weight: 400;
+@font-desktop-small-regular-gray-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-regular-gray-center() {
+  font-size: @font-desktop-small-regular-gray-center-font-size;
+  line-height: @font-desktop-small-regular-gray-center-line-height;
+  text-align: @font-desktop-small-regular-gray-center-text-align;
+  color: @font-desktop-small-regular-gray-center-color;
+  font-style: @font-desktop-small-regular-gray-center-font-style;
+  font-weight: @font-desktop-small-regular-gray-center-font-weight;
+  font-family: @font-desktop-small-regular-gray-center-font-family;
+}
+
+/* desktop/body/regular/dark-center font style */
+@font-desktop-body-regular-dark-center-font-size: 16px;
+@font-desktop-body-regular-dark-center-line-height: 24px;
+@font-desktop-body-regular-dark-center-text-align: center;
+@font-desktop-body-regular-dark-center-color: #3f4352;
+@font-desktop-body-regular-dark-center-font-style: normal;
+@font-desktop-body-regular-dark-center-font-weight: 400;
+@font-desktop-body-regular-dark-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-regular-dark-center() {
+  font-size: @font-desktop-body-regular-dark-center-font-size;
+  line-height: @font-desktop-body-regular-dark-center-line-height;
+  text-align: @font-desktop-body-regular-dark-center-text-align;
+  color: @font-desktop-body-regular-dark-center-color;
+  font-style: @font-desktop-body-regular-dark-center-font-style;
+  font-weight: @font-desktop-body-regular-dark-center-font-weight;
+  font-family: @font-desktop-body-regular-dark-center-font-family;
+}
+
+/* desktop/body/regular/gray-center font style */
+@font-desktop-body-regular-gray-center-font-size: 16px;
+@font-desktop-body-regular-gray-center-line-height: 24px;
+@font-desktop-body-regular-gray-center-text-align: center;
+@font-desktop-body-regular-gray-center-color: #838795;
+@font-desktop-body-regular-gray-center-font-style: normal;
+@font-desktop-body-regular-gray-center-font-weight: 400;
+@font-desktop-body-regular-gray-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-regular-gray-center() {
+  font-size: @font-desktop-body-regular-gray-center-font-size;
+  line-height: @font-desktop-body-regular-gray-center-line-height;
+  text-align: @font-desktop-body-regular-gray-center-text-align;
+  color: @font-desktop-body-regular-gray-center-color;
+  font-style: @font-desktop-body-regular-gray-center-font-style;
+  font-weight: @font-desktop-body-regular-gray-center-font-weight;
+  font-family: @font-desktop-body-regular-gray-center-font-family;
+}
+
+/* desktop/body/medium/primary-center font style */
+@font-desktop-body-medium-primary-center-font-size: 16px;
+@font-desktop-body-medium-primary-center-line-height: 24px;
+@font-desktop-body-medium-primary-center-text-align: center;
+@font-desktop-body-medium-primary-center-color: #1eb386;
+@font-desktop-body-medium-primary-center-font-style: normal;
+@font-desktop-body-medium-primary-center-font-weight: 400;
+@font-desktop-body-medium-primary-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-primary-center() {
+  font-size: @font-desktop-body-medium-primary-center-font-size;
+  line-height: @font-desktop-body-medium-primary-center-line-height;
+  text-align: @font-desktop-body-medium-primary-center-text-align;
+  color: @font-desktop-body-medium-primary-center-color;
+  font-style: @font-desktop-body-medium-primary-center-font-style;
+  font-weight: @font-desktop-body-medium-primary-center-font-weight;
+  font-family: @font-desktop-body-medium-primary-center-font-family;
+}
+
+/* desktop/body/medium/gray-center font style */
+@font-desktop-body-medium-gray-center-font-size: 16px;
+@font-desktop-body-medium-gray-center-line-height: 24px;
+@font-desktop-body-medium-gray-center-text-align: center;
+@font-desktop-body-medium-gray-center-color: #838795;
+@font-desktop-body-medium-gray-center-font-style: normal;
+@font-desktop-body-medium-gray-center-font-weight: 400;
+@font-desktop-body-medium-gray-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-gray-center() {
+  font-size: @font-desktop-body-medium-gray-center-font-size;
+  line-height: @font-desktop-body-medium-gray-center-line-height;
+  text-align: @font-desktop-body-medium-gray-center-text-align;
+  color: @font-desktop-body-medium-gray-center-color;
+  font-style: @font-desktop-body-medium-gray-center-font-style;
+  font-weight: @font-desktop-body-medium-gray-center-font-weight;
+  font-family: @font-desktop-body-medium-gray-center-font-family;
+}
+
+/* desktop/body/medium/lightGray-center font style */
+@font-desktop-body-medium-light-gray-center-font-size: 16px;
+@font-desktop-body-medium-light-gray-center-line-height: 24px;
+@font-desktop-body-medium-light-gray-center-text-align: center;
+@font-desktop-body-medium-light-gray-center-color: #babcc2;
+@font-desktop-body-medium-light-gray-center-font-style: normal;
+@font-desktop-body-medium-light-gray-center-font-weight: 400;
+@font-desktop-body-medium-light-gray-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-body-medium-light-gray-center() {
+  font-size: @font-desktop-body-medium-light-gray-center-font-size;
+  line-height: @font-desktop-body-medium-light-gray-center-line-height;
+  text-align: @font-desktop-body-medium-light-gray-center-text-align;
+  color: @font-desktop-body-medium-light-gray-center-color;
+  font-style: @font-desktop-body-medium-light-gray-center-font-style;
+  font-weight: @font-desktop-body-medium-light-gray-center-font-weight;
+  font-family: @font-desktop-body-medium-light-gray-center-font-family;
+}
+
+/* desktop/small/medium/dark-center font style */
+@font-desktop-small-medium-dark-center-font-size: 14px;
+@font-desktop-small-medium-dark-center-line-height: 20px;
+@font-desktop-small-medium-dark-center-text-align: center;
+@font-desktop-small-medium-dark-center-color: #3f4352;
+@font-desktop-small-medium-dark-center-font-style: normal;
+@font-desktop-small-medium-dark-center-font-weight: 400;
+@font-desktop-small-medium-dark-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-medium-dark-center() {
+  font-size: @font-desktop-small-medium-dark-center-font-size;
+  line-height: @font-desktop-small-medium-dark-center-line-height;
+  text-align: @font-desktop-small-medium-dark-center-text-align;
+  color: @font-desktop-small-medium-dark-center-color;
+  font-style: @font-desktop-small-medium-dark-center-font-style;
+  font-weight: @font-desktop-small-medium-dark-center-font-weight;
+  font-family: @font-desktop-small-medium-dark-center-font-family;
+}
+
+/* desktop/small/medium/accent-center font style */
+@font-desktop-small-medium-accent-center-font-size: 14px;
+@font-desktop-small-medium-accent-center-line-height: 20px;
+@font-desktop-small-medium-accent-center-text-align: center;
+@font-desktop-small-medium-accent-center-color: #1eb386;
+@font-desktop-small-medium-accent-center-font-style: normal;
+@font-desktop-small-medium-accent-center-font-weight: 400;
+@font-desktop-small-medium-accent-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-medium-accent-center() {
+  font-size: @font-desktop-small-medium-accent-center-font-size;
+  line-height: @font-desktop-small-medium-accent-center-line-height;
+  text-align: @font-desktop-small-medium-accent-center-text-align;
+  color: @font-desktop-small-medium-accent-center-color;
+  font-style: @font-desktop-small-medium-accent-center-font-style;
+  font-weight: @font-desktop-small-medium-accent-center-font-weight;
+  font-family: @font-desktop-small-medium-accent-center-font-family;
+}
+
+/* desktop/small/medium/dark-right font style */
+@font-desktop-small-medium-dark-right-font-size: 14px;
+@font-desktop-small-medium-dark-right-line-height: 20px;
+@font-desktop-small-medium-dark-right-text-align: right;
+@font-desktop-small-medium-dark-right-color: #3f4352;
+@font-desktop-small-medium-dark-right-font-style: normal;
+@font-desktop-small-medium-dark-right-font-weight: 500;
+@font-desktop-small-medium-dark-right-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-medium-dark-right() {
+  font-size: @font-desktop-small-medium-dark-right-font-size;
+  line-height: @font-desktop-small-medium-dark-right-line-height;
+  text-align: @font-desktop-small-medium-dark-right-text-align;
+  color: @font-desktop-small-medium-dark-right-color;
+  font-style: @font-desktop-small-medium-dark-right-font-style;
+  font-weight: @font-desktop-small-medium-dark-right-font-weight;
+  font-family: @font-desktop-small-medium-dark-right-font-family;
+}
+
+/* desktop/small/regular/accent-center font style */
+@font-desktop-small-regular-accent-center-font-size: 14px;
+@font-desktop-small-regular-accent-center-line-height: 20px;
+@font-desktop-small-regular-accent-center-text-align: center;
+@font-desktop-small-regular-accent-center-color: #1eb386;
+@font-desktop-small-regular-accent-center-font-style: normal;
+@font-desktop-small-regular-accent-center-font-weight: 400;
+@font-desktop-small-regular-accent-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-regular-accent-center() {
+  font-size: @font-desktop-small-regular-accent-center-font-size;
+  line-height: @font-desktop-small-regular-accent-center-line-height;
+  text-align: @font-desktop-small-regular-accent-center-text-align;
+  color: @font-desktop-small-regular-accent-center-color;
+  font-style: @font-desktop-small-regular-accent-center-font-style;
+  font-weight: @font-desktop-small-regular-accent-center-font-weight;
+  font-family: @font-desktop-small-regular-accent-center-font-family;
+}
+
+/* desktop/small/regular/accent font style */
+@font-desktop-small-regular-accent-font-size: 14px;
+@font-desktop-small-regular-accent-line-height: 20px;
+@font-desktop-small-regular-accent-text-align: left;
+@font-desktop-small-regular-accent-color: #1eb386;
+@font-desktop-small-regular-accent-font-style: normal;
+@font-desktop-small-regular-accent-font-weight: 400;
+@font-desktop-small-regular-accent-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-small-regular-accent() {
+  font-size: @font-desktop-small-regular-accent-font-size;
+  line-height: @font-desktop-small-regular-accent-line-height;
+  text-align: @font-desktop-small-regular-accent-text-align;
+  color: @font-desktop-small-regular-accent-color;
+  font-style: @font-desktop-small-regular-accent-font-style;
+  font-weight: @font-desktop-small-regular-accent-font-weight;
+  font-family: @font-desktop-small-regular-accent-font-family;
+}
+
+/* components/tab/active font style */
+@font-components-tab-active-font-size: 13px;
+@font-components-tab-active-line-height: 16px;
+@font-components-tab-active-text-align: center;
+@font-components-tab-active-color: #3f4352;
+@font-components-tab-active-text-transform: uppercase;
+@font-components-tab-active-font-style: normal;
+@font-components-tab-active-font-weight: 500;
+@font-components-tab-active-font-family: Lato;
+
+.font-components-tab-active() {
+  font-size: @font-components-tab-active-font-size;
+  line-height: @font-components-tab-active-line-height;
+  text-align: @font-components-tab-active-text-align;
+  color: @font-components-tab-active-color;
+  text-transform: @font-components-tab-active-text-transform;
+  font-style: @font-components-tab-active-font-style;
+  font-weight: @font-components-tab-active-font-weight;
+  font-family: @font-components-tab-active-font-family;
+}
+
+/* components/tab/inactive font style */
+@font-components-tab-inactive-font-size: 13px;
+@font-components-tab-inactive-line-height: 16px;
+@font-components-tab-inactive-text-align: center;
+@font-components-tab-inactive-color: #838795;
+@font-components-tab-inactive-text-transform: uppercase;
+@font-components-tab-inactive-font-style: normal;
+@font-components-tab-inactive-font-weight: 400;
+@font-components-tab-inactive-font-family: Lato;
+
+.font-components-tab-inactive() {
+  font-size: @font-components-tab-inactive-font-size;
+  line-height: @font-components-tab-inactive-line-height;
+  text-align: @font-components-tab-inactive-text-align;
+  color: @font-components-tab-inactive-color;
+  text-transform: @font-components-tab-inactive-text-transform;
+  font-style: @font-components-tab-inactive-font-style;
+  font-weight: @font-components-tab-inactive-font-weight;
+  font-family: @font-components-tab-inactive-font-family;
+}
+
+/* desktop/xSmall/regular/dark font style */
+@font-desktop-x-small-regular-dark-font-size: 12px;
+@font-desktop-x-small-regular-dark-line-height: 16px;
+@font-desktop-x-small-regular-dark-text-align: left;
+@font-desktop-x-small-regular-dark-color: #3f4352;
+@font-desktop-x-small-regular-dark-font-style: normal;
+@font-desktop-x-small-regular-dark-font-weight: 400;
+@font-desktop-x-small-regular-dark-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-x-small-regular-dark() {
+  font-size: @font-desktop-x-small-regular-dark-font-size;
+  line-height: @font-desktop-x-small-regular-dark-line-height;
+  text-align: @font-desktop-x-small-regular-dark-text-align;
+  color: @font-desktop-x-small-regular-dark-color;
+  font-style: @font-desktop-x-small-regular-dark-font-style;
+  font-weight: @font-desktop-x-small-regular-dark-font-weight;
+  font-family: @font-desktop-x-small-regular-dark-font-family;
+}
+
+/* desktop/xSmall/regular/accent font style */
+@font-desktop-x-small-regular-accent-font-size: 12px;
+@font-desktop-x-small-regular-accent-line-height: 16px;
+@font-desktop-x-small-regular-accent-text-align: left;
+@font-desktop-x-small-regular-accent-color: #1eb386;
+@font-desktop-x-small-regular-accent-font-style: normal;
+@font-desktop-x-small-regular-accent-font-weight: 400;
+@font-desktop-x-small-regular-accent-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-x-small-regular-accent() {
+  font-size: @font-desktop-x-small-regular-accent-font-size;
+  line-height: @font-desktop-x-small-regular-accent-line-height;
+  text-align: @font-desktop-x-small-regular-accent-text-align;
+  color: @font-desktop-x-small-regular-accent-color;
+  font-style: @font-desktop-x-small-regular-accent-font-style;
+  font-weight: @font-desktop-x-small-regular-accent-font-weight;
+  font-family: @font-desktop-x-small-regular-accent-font-family;
+}
+
+/* desktop/h2/dark-center font style */
+@font-desktop-h-2-dark-center-font-size: 24px;
+@font-desktop-h-2-dark-center-line-height: 28px;
+@font-desktop-h-2-dark-center-text-align: center;
+@font-desktop-h-2-dark-center-color: #3f4352;
+@font-desktop-h-2-dark-center-font-style: normal;
+@font-desktop-h-2-dark-center-font-weight: 600;
+@font-desktop-h-2-dark-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-h-2-dark-center() {
+  font-size: @font-desktop-h-2-dark-center-font-size;
+  line-height: @font-desktop-h-2-dark-center-line-height;
+  text-align: @font-desktop-h-2-dark-center-text-align;
+  color: @font-desktop-h-2-dark-center-color;
+  font-style: @font-desktop-h-2-dark-center-font-style;
+  font-weight: @font-desktop-h-2-dark-center-font-weight;
+  font-family: @font-desktop-h-2-dark-center-font-family;
+}
+
+/* desktop/h3/dark-center font style */
+@font-desktop-h-3-dark-center-font-size: 18px;
+@font-desktop-h-3-dark-center-line-height: 24px;
+@font-desktop-h-3-dark-center-text-align: center;
+@font-desktop-h-3-dark-center-color: #3f4352;
+@font-desktop-h-3-dark-center-font-style: normal;
+@font-desktop-h-3-dark-center-font-weight: 400;
+@font-desktop-h-3-dark-center-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-h-3-dark-center() {
+  font-size: @font-desktop-h-3-dark-center-font-size;
+  line-height: @font-desktop-h-3-dark-center-line-height;
+  text-align: @font-desktop-h-3-dark-center-text-align;
+  color: @font-desktop-h-3-dark-center-color;
+  font-style: @font-desktop-h-3-dark-center-font-style;
+  font-weight: @font-desktop-h-3-dark-center-font-weight;
+  font-family: @font-desktop-h-3-dark-center-font-family;
+}
+
+/* desktop/xSmall/regular/gray-right font style */
+@font-desktop-x-small-regular-gray-right-font-size: 12px;
+@font-desktop-x-small-regular-gray-right-line-height: 16px;
+@font-desktop-x-small-regular-gray-right-text-align: right;
+@font-desktop-x-small-regular-gray-right-color: #838795;
+@font-desktop-x-small-regular-gray-right-font-style: normal;
+@font-desktop-x-small-regular-gray-right-font-weight: 400;
+@font-desktop-x-small-regular-gray-right-font-family: Cabin, Arial, Helvetica, Sans-Serif;
+
+.font-desktop-x-small-regular-gray-right() {
+  font-size: @font-desktop-x-small-regular-gray-right-font-size;
+  line-height: @font-desktop-x-small-regular-gray-right-line-height;
+  text-align: @font-desktop-x-small-regular-gray-right-text-align;
+  color: @font-desktop-x-small-regular-gray-right-color;
+  font-style: @font-desktop-x-small-regular-gray-right-font-style;
+  font-weight: @font-desktop-x-small-regular-gray-right-font-weight;
+  font-family: @font-desktop-x-small-regular-gray-right-font-family;
 }

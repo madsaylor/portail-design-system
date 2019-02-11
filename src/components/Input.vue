@@ -60,24 +60,22 @@
           v-if="icon"
           class="icon-left"
           :source="icon"
-          :color="COLORS['gray-400']"
         />
         <input
           :type="type"
           :placeholder="placeholder"
           :disabled="disabled"
           :class="{
-          'has-icon': icon,
-          'has-icon-right': iconRight,
-          'error': errors.length
-        }"
+            'has-icon': icon,
+            'has-icon-right': iconRight,
+            'error': errors.length
+          }"
           v-model="inputValue"
         />
         <Icon
           v-if="rightIcon"
           class="icon-right"
           :source="rightIcon"
-          :color="COLORS['gray-400']"
         />
       </div>
       <div class="icon-help-wrapper"
@@ -88,7 +86,6 @@
           v-if="help"
           class="icon-help"
           source="help"
-          :color="!tooltipVisible ? COLORS['gray-400'] : COLORS['black']"
         />
         <Tooltip v-html="help" :visible="tooltipVisible"></Tooltip>
       </div>
@@ -196,8 +193,13 @@ export default {
     .icon-help-wrapper {
       position: relative;
 
-      .icon {
+      .icon-help {
         cursor: pointer;
+        fill: @color-gray-400!important;
+
+        &:hover {
+          fill: @color-dark!important;
+        }
       }
     }
 
@@ -214,7 +216,7 @@ export default {
         padding: 10px;
         border-radius: @input-border-radius;
         border: 1px solid @color-gray-200;
-        color: @color-black;
+        color: @color-dark;
         width: 100%;
         box-sizing: border-box;
 
@@ -230,8 +232,12 @@ export default {
           border-color: @color-red;
         }
 
+        &:disabled {
+          user-select: none;
+        }
+
         &:focus:not(.error) {
-          border-color: @color-brand;
+          border-color: @color-primary;
         }
 
         &:focus {
@@ -248,6 +254,7 @@ export default {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+        fill: @color-gray-400!important;
       }
 
       .icon-left {
@@ -273,7 +280,7 @@ export default {
       cursor: pointer;
 
       &:hover {
-        color: @color-black;
+        color: @color-dark;
       }
     }
   }

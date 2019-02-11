@@ -35,7 +35,7 @@ export default {
 .tooltip-wrapper {
   color: @color-white;
   padding: 8px;
-  background-color: @color-black;
+  background-color: @color-dark;
   font-size: 12px;
   border-radius: @tooltip-border-radius;
   position: absolute;

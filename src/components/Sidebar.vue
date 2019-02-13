@@ -55,7 +55,7 @@
 -->
 
 <template>
-  <div :class="['sidebar-container', {opened}]">
+  <div :class="['sidebar-container', {opened, disabled}]">
     <div class="sidebar">
       <div class="header">
         <slot name="header">Sidebar header</slot>
@@ -209,11 +209,18 @@ export default {
 .sidebar {
   background-color: @color-white;
   height: 100%;
-  overflow-y: scroll;
-  width:  @sidebar-width + 20px; // hide scrollbar
   display: flex;
   flex-direction: column;
+  width:  @sidebar-width + 20px;  //
+  overflow-y: scroll;             //
+  & > * {                         // Hiding scrollbar
+    max-width: @sidebar-width;    //
+  }                               //
 
+
+  &.disabled {
+    background: @color-gray-100;
+  }
 
   .header, .item {
     box-shadow: @sidebar-item-shadow;

@@ -4,12 +4,12 @@
   Usage:
 
     <Datepicker
-      :startDate=new Date('2019-1-1') - value which will be set as selected when datepicker initialised
-      :locale='en-en' - datepicker localisation
-      :has-range='true' - defines whether a datepicker has a range of date available
-        for selection
-      :range='{min: -180, max: 30}' - range in days from the start for selection
-      @update:selected='closedatepicker' - emitted when a new date is selected
+      :startDate=new Date('2019-1-1')    - Value which will be set as selected when datepicker initialised
+      :locale='en-en'                    - Datepicker localisation
+      :has-range='true'                  - Defines whether a datepicker has a range of date available
+                                           for selection
+      :range='{min: -180, max: 30}'      - Range in days from the start for selection
+      @update:selected='closedatepicker' - Emitted when a new date is selected
     />
 
   Properties:
@@ -87,7 +87,8 @@ export default {
         min: null,
         max: null
       },
-      monthGrid: false
+      monthGrid: false,
+      fromMonthScreen: false
     }
   },
   created () {
@@ -260,13 +261,19 @@ export default {
         this.displayed = new Date(this.displayed)
         this.selected = new Date(oldValue)
         this.monthGrid = false
+        this.fromMonthScreen = true
       } else {
-        const selected = {
-          view: `${('0' + newValue.getDate()).slice(-2)}/${('0' + (newValue.getMonth() + 1)).slice(-2)}/${newValue.getFullYear()}`,
-          api: `${newValue.getFullYear()}-${newValue.getMonth() + 1}-${newValue.getDate()}`,
-          rawDate: newValue
+        // We don't want to emit value if we selected month from month view
+        if (!this.fromMonthScreen) {
+          const selected = {
+            view: `${('0' + newValue.getDate()).slice(-2)}/${('0' + (newValue.getMonth() + 1)).slice(-2)}/${newValue.getFullYear()}`,
+            api: `${newValue.getFullYear()}-${newValue.getMonth() + 1}-${newValue.getDate()}`,
+            rawDate: newValue
+          }
+          this.$emit('update:selected', selected)
+        } else {
+          this.fromMonthScreen = false
         }
-        this.$emit('update:selected', selected)
       }
     }
   }

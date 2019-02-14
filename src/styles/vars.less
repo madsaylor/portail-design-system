@@ -1,5 +1,6 @@
 @import "../fonts/lato.less";
 @import "./style-params.less";
+@import "./mixins.less";
 
 // Breakpoints
 @screen-large: ~"only screen and (min-width: 961px)";
@@ -42,3 +43,27 @@
 @app-header-height-small: @vu * 12;
 @app-header-title-padding: @vu * 5 24px;   // 20px 24px
 @app-header-title-padding-small: @vu * 3;  // 12px
+
+// Input
+@input-border-radius: 2px;
+
+// Tooltip
+@tooltip-border-radius: 2px;
+
+// Animations
+.keyframes(fadein; {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+});
+
+.keyframes(bounce; {
+  0%   {
+    transform-origin: top left;
+    transform: scale(1);   }
+  50%  {
+    transform-origin: top left;
+    transform: scale(1.2); }
+  100% {
+    transform-origin: top left;
+    transform: scale(1);   }
+});

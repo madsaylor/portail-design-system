@@ -4,7 +4,7 @@
   Usage:
 
     <GridSelect
-      :items=gridItems - items to be rendered *required
+      :items=gridItems       - items to be rendered *required
       :labels-top=gridLabels - headings for cells *optional
     ></GridSelect>
 
@@ -36,9 +36,9 @@
           v-for="item in row"
           class="grid-item"
           :class="[{
-          disabled: item.disabled,
-          selected: item == value,
-        }, item.class]"
+            disabled: item.disabled,
+            selected: item == value,
+          }, item.class]"
           :tabindex="!item.disabled && 0"
           @click="!item.disabled && select(item)"
           @keypress.space.prevent="select(item)"

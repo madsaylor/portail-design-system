@@ -26,7 +26,7 @@
       :class="{'icon-left': hasLabel}"
       :source="icon"
       :size="big ? '28px' : '24px'"
-      :color="primary ? 'white' : alt ? 'brand' : 'black'"
+      :color="primary ? 'white' : alt ? 'primary' : 'dark'"
     />
     <slot></slot>
     <Icon
@@ -34,7 +34,7 @@
       v-if="iconRight"
       :source="iconRight"
       :size="big ? '28px' : '24px'"
-      :color="primary ? 'white' : alt ? 'brand' : 'black'"
+      :color="primary ? 'white' : alt ? 'primary' : 'dark'"
     />
   </button>
 </template>

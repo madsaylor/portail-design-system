@@ -2,13 +2,18 @@
   <div class="grid">
     <div class="row-col">
       <h2>Fonts</h2>
-      <h3>Cabin</h3>
-      To embed the font into a webpage, copy this code into the &lt;head&gt;
-      of your HTML document:
-      <pre v-highlightjs=linkSnippet><code class="html"></code></pre>
-      <h2>Font Mixins</h2>
-      <h3>Usage with Less</h3>
-      <pre v-highlightjs="usageLess"><code class="less"></code></pre>
+
+      <h3>Lato</h3>
+      The font is linked trough css. Available specimens:<br/>
+
+      <div class="font-demo">
+        <div style="font-weight: 300">300 Light</div>
+        <div style="font-weight: 400">400 Regular</div>
+        <div style="font-weight: 500">500 Medium</div>
+        <div style="font-weight: 600">600 Semi-Bold</div>
+        <div style="font-weight: 700">700 Bold</div>
+        <div style="font-weight: 800">800 Extra-Bold</div>
+      </div>
 
       <h3>Style list</h3>
     </div>
@@ -43,6 +48,10 @@ export default {
       'font-components-button-big',
       'font-components-button-normal',
       'font-components-button-normal-alt',
+      'font-components-button-normal-alt-center',
+      'font-components-button-normal-alt-dark',
+      'font-components-button-normal-center',
+      'font-components-button-normal-right',
       'font-components-field-helper-default',
       'font-components-field-helper-error',
       'font-components-tab-active',
@@ -91,6 +100,12 @@ export default {
 <style lang="less">
 @import '~@/styles/vars';
 
+.font-demo {
+  font-family: Lato;
+  font-size: 36px;
+  line-height: 40px;
+}
+
 .font-style-demo {
   margin-bottom: @vu * 2;
 }
@@ -105,6 +120,18 @@ export default {
 }
 .font-components-button-normal-alt {
   .font-components-button-normal-alt();
+}
+.font-components-button-normal-alt-center {
+  .font-components-button-normal-alt-center();
+}
+.font-components-button-normal-alt-dark {
+  .font-components-button-normal-alt-dark();
+}
+.font-components-button-normal-center {
+  .font-components-button-normal-center();
+}
+.font-components-button-normal-right {
+  .font-components-button-normal-right();
 }
 .font-components-field-helper-default {
   .font-components-field-helper-default();

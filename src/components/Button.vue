@@ -132,8 +132,7 @@ export default {
   }
 
   &:focus {
-    outline: 1px solid @color-primary;
-    outline-offset: -4px;
+    outline: none;
   }
 
   &:disabled {

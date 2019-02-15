@@ -14,7 +14,6 @@
         <div style="font-weight: 500">500 Medium</div>
         <div style="font-weight: 600">600 Semi-Bold</div>
         <div style="font-weight: 700">700 Bold</div>
-        <div style="font-weight: 800">800 Extra-Bold</div>
       </div>
 
       <h3>Style list</h3>

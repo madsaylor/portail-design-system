@@ -1,23 +1,16 @@
-@weights: 300, 400, 500, 600, 700, 800;
-
+@weights-normal: 400, 500, 600, 700, 800;
 @filenames-normal:
-    Lato-Light,
     Lato-Regular,
     Lato-Medium,
     Lato-Semibold,
     Lato-Bold,
     Lato-Heavy;
 
-@filenames-italic:
-    Lato-LightItalic,
-    Lato-Italic,
-    Lato-MediumItalic,
-    Lato-SemiboldItalic,
-    Lato-BoldItalic,
-    Lato-HeavyItalic;
+@weights-italic: 400;
+@filenames-italic: Lato-Italic;
 
-.genFaces(@counter, @font-style, @filenames) when (@counter > 0) {
-  .genFaces((@counter - 1), @font-style, @filenames);
+.genFaces(@counter, @font-style, @weights, @filenames) when (@counter > 0) {
+  .genFaces((@counter - 1), @font-style, @weights, @filenames);
   @font-face {
     font-family: 'Lato';
     @filename: extract(@filenames, @counter);
@@ -31,5 +24,5 @@
     text-rendering: optimizeLegibility;
   }
 }
-.genFaces(length(@weights), normal, @filenames-normal);
-// .genFaces(length(@weights), italic, @filenames-italic);
+.genFaces(length(@weights-normal), normal, @weights-normal, @filenames-normal);
+.genFaces(length(@weights-italic), italic, @weights-italic, @filenames-italic);

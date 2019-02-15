@@ -7,8 +7,10 @@
       The font is linked trough css. Available specimens:<br/>
 
       <div class="font-demo">
-        <div style="font-weight: 300">300 Light</div>
         <div style="font-weight: 400">400 Regular</div>
+        <div style="font-weight: 400; font-style: italic">
+          400 Regular Italic
+        </div>
         <div style="font-weight: 500">500 Medium</div>
         <div style="font-weight: 600">600 Semi-Bold</div>
         <div style="font-weight: 700">700 Bold</div>
@@ -51,9 +53,6 @@ export default {
       'font-components-button-normal-alt-center',
       'font-components-button-normal-alt-dark',
       'font-components-button-normal-center',
-      'font-components-button-normal-right',
-      'font-components-field-helper-default',
-      'font-components-field-helper-error',
       'font-components-tab-active',
       'font-components-tab-inactive',
       'font-desktop-body-medium-dark',
@@ -129,15 +128,6 @@ export default {
 }
 .font-components-button-normal-center {
   .font-components-button-normal-center();
-}
-.font-components-button-normal-right {
-  .font-components-button-normal-right();
-}
-.font-components-field-helper-default {
-  .font-components-field-helper-default();
-}
-.font-components-field-helper-error {
-  .font-components-field-helper-error();
 }
 .font-components-tab-active {
   .font-components-tab-active();

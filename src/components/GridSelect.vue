@@ -1,59 +1,61 @@
 <!--
-  Component for displaying grid of items with ability to select one.
+  Render items in a table with optional labels at the top and an ability
+  to select an item. Used in the Datepicker component
 
   Usage:
 
     <GridSelect
-      :items=gridItems       - items to be rendered *required
-      :labels-top=gridLabels - headings for cells *optional
+      :items="[[...], ...]"  - Items to be rendered
+      :labels-top="[...]"    - Headings for the columns
+      v-model="selected"     - Selected item
     ></GridSelect>
 
   Properties:
 
-    items - Array[x,y] of Objects, required. Each object can have:
-      displayValue - will be used in rendering if provided
-      class - which will be appended to item class name
-      disabled - make item not selectable
+    items - Array<Array<any>>, required. Items to be rendered in the grid.
+      Where each items may have:
 
-    labelsTop - Array[x]. Grid headings to be rendered.
+        title - String. Will be used in rendering if provided, otherwise
+          item will be rendered as {{ item }}. Also, a scoped slot can be
+          used for even finer control of item representation
 
-  Events:
+        disabled - Boolean. Makes item not selectable
 
-    input - emitted when a new item is selected in component
+    labelsTop - Array<string>. Table header items.
+
+  Model:
+
+    Selected value is updated through v-model directive on mouse click, enter
+    or space key. During rendering "selected" class is added to item that
+    satisfies === comparison with the v-model value.
 -->
 
 <template>
-  <div class="grid-select-wrapper">
-    <table class="grid-select-table">
-      <tr v-if="labelsTop" class="grid-labels-top">
-        <th v-for="label in labelsTop" class="grid-label">
-          {{ label }}
-        </th>
-      </tr>
+  <table class="grid-select">
+    <tr v-if="labelsTop" class="labels-top">
+      <th v-for="label in labelsTop">
+        {{ label }}
+      </th>
+    </tr>
 
-      <tr v-for="row in items" class="grid-row">
-        <td
-          v-for="item in row"
-          class="grid-item"
-          :class="[{
-            disabled: item.disabled,
-            selected: item == value,
-          }, item.class]"
-          :tabindex="!item.disabled && 0"
-          @click="!item.disabled && select(item)"
-          @keypress.space.prevent="select(item)"
-          :style="{width: `${100 / row.length}%`}"
-        >
-          <span>
-            <slot v-bind:item="item">
-              {{ item.displayValue || item }}
-            </slot>
-          </span>
-        </td>
-      </tr>
-    </table>
-
-  </div>
+    <tr v-for="row in items" class="row">
+      <td
+        v-for="item in row"
+        :class="['item', {
+          disabled: item.disabled,
+          selected: item === value,
+        }, item.class]"
+        :tabindex="!item.disabled && 0"
+        @click="!item.disabled && select(item)"
+        @keypress.enter.space.prevent="select(item)"
+        :style="{width: itemWidth}"
+      >
+        <slot v-bind="{item}">
+          {{ item.title || item }}
+        </slot>
+      </td>
+    </tr>
+  </table>
 </template>
 
 <script>
@@ -65,83 +67,72 @@ export default {
       required: true
     },
     labelsTop: Array,
-    value: {
-      default: {}
+    value: Object,
+  },
+  computed: {
+    itemWidth() {
+      return 100 / this.items[0].length + '%'
     }
   },
   methods: {
     select(item) {
       this.$emit('input', item)
     }
-  }
+  },
 }
 </script>
 
 <style lang="less" scoped>
 @import '../styles/vars';
 
-.grid-select-wrapper {
+.grid-select {
   width: 100%;
   height: 100%;
 
-  .grid-select-table {
-    width: 100%;
-    height: 100%;
+  .labels-top th {
+    color: @color-gray-500;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    padding-bottom: 4px;
+    text-align: center;
+    text-transform: uppercase;
+  }
 
-    .grid-labels-top {
-      color: @color-gray-500;
-      text-transform: uppercase;
-      font-size: 16px;
-      font-weight: 500!important;
+  .row {
+    .item {
+      border-radius: 2px;
+      color: @color-dark;
+      font-family: Lato;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 2px;
+      text-align: center;
+      transition: background .1s ease-in-out;
+      user-select: none;
 
-      .grid-label {
-        padding-bottom: 4px;
-        text-align: center;
-      }
-    }
-
-    .grid-row {
-
-      .grid-item {
-        font-size: 14px;
-        font-weight: 500;
-        color: @color-dark;
+      &:not(.disabled) {
         cursor: pointer;
-        transition: transform .1s ease-in-out;
-        text-align: center;
 
-        &:hover {
-          transform: scale(1.2);
+        &:hover,
+        &:focus {
+          background: darken(@color-white, 5%);
+          outline: none;
         }
 
-        &.disabled,
-        &.other-month {
-          opacity: 0.5;
+        &:active {
+          background: darken(@color-white, 10%);
         }
 
         &.selected {
           color: @color-white;
-          position: relative;
-
-          span {
-            background-color: @color-primary;
-            border-radius: 2px;
-            width: 66%;
-            height: 84%;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transition: translateXY(50%, 50%);
-            transform: translate(-50%, -50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+          background-color: @color-primary;
         }
+      }
 
-        &:focus{
-          outline: none;
-        }
+      &.disabled {
+        color: @color-gray-400;
       }
     }
   }

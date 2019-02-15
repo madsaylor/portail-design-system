@@ -8,7 +8,7 @@
  */
 .generateGrid(@spacing, @ncol, @ncol-max) {
   .grid {
-    .row {
+    > .row {
       display: flex;
       align-items: stretch;
       flex-direction: row;
@@ -19,11 +19,11 @@
 
     // <div class="row-col">...</div> is a "shortcut" to
     // <div class="row"><div class="col-12">...</div></div>
-    .row-col {
+    > .row-col {
       padding: @vu @spacing;
     }
 
-    [class^="col-"] {
+    > .row > [class^="col-"] {
       display: flex;
       flex-grow: 1;
       flex-shrink: 0;
@@ -38,7 +38,7 @@
     .generateCols(@counter) when (@counter > 0) {
 
       @width: (min(@counter, @ncol) / @ncol ) * 100;
-      .col-@{counter} {
+      > .row > .col-@{counter} {
         flex-basis: ~"@{width}%";
       }
       .generateCols((@counter - 1));

@@ -3,15 +3,25 @@
     <div class="row-col">
       <h3>GridSelect</h3>
 
-      Component for displaying grid of items with ability to select one.
-
+      Render items in a table with optional labels at the top and an ability
+      to select an item. Used in the Datepicker component
       <pre v-highlightjs="usage"><code class="html"></code></pre>
 
       <GridSelect
-        :items="gridItems"
-        :labels-top="gridLabels"
+        :items="[[1, 2, 3], [4, {title: 5, disabled: true}, 6], [7, 8, 9]]"
+        :labels-top="['A', 'B', 'C']"
         v-model="selected"
       ></GridSelect>
+
+      <!-- Using scoped slot -->
+      <GridSelect
+        :items="[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"
+        :labels-top="['A', 'B', 'C']"
+        v-model="selected"
+        #default="{item}"
+      >
+        {{ item + 10 }}
+      </GridSelect>
     </div>
   </div>
 </template>
@@ -21,10 +31,20 @@ import GridSelect from '../../components/GridSelect'
 
 let usage = `
 <GridSelect
-  :items="gridItems"
-  :labels-top="gridLabels"
+  :items="[[1, 2, 3], [4, {title: 5, disabled: true}, 6], [7, 8, 9]]"
+  :labels-top="['A', 'B', 'C']"
   v-model="selected"
 ></GridSelect>
+
+<!-- Using scoped slot -->
+<GridSelect
+  :items="[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"
+  :labels-top="['A', 'B', 'C']"
+  v-model="selected"
+  #default="{item}"
+>
+  {{ item + 10 }}
+</GridSelect>
 `.slice(1)
 
 export default {
@@ -36,32 +56,13 @@ export default {
   components: {
     GridSelect,
   },
-  computed: {
-    gridItems() {
-      let items = []
-      for (let i = 0; i < 4; i++) {
-        let row = []
-        for (let j = 0; j < 6; j++) {
-          let item = {j}
-          item.displayValue = j.toString()
-          if (j === 0) {
-            item.disabled = true
-          }
-          row.push(item)
-        }
-        items.push(row)
-      }
-      return items
-    },
-    gridLabels() {
-      return ['th1', 'th2', 'th3', 'th4', 'th5', 'th6']
-    }
-  }
 }
 </script>
 
 <style scoped>
-  .grid-select-demo {
-    width: 50%;
-  }
+.grid-select {
+  display: inline-table;
+  margin: 10px;
+  width: 300px;
+}
 </style>

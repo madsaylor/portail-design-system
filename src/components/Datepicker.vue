@@ -4,97 +4,253 @@
   Usage:
 
     <Datepicker
-      :startDate=new Date('2019-1-1')    - Value which will be set as selected when datepicker initialised
-      :locale='en-en'                    - Datepicker localisation
-      :has-range='true'                  - Defines whether a datepicker has a range of date available
-                                           for selection
-      :range='{min: -180, max: 30}'      - Range in days from the start for selection
-      @update:selected='closedatepicker' - Emitted when a new date is selected
+      :lang="'en-en'"  - BCP 47 localization code
+      :min="minDate"   - earliest selectable day
+      :max="manDate"   - upper bound for the selection
+      v-model="date"   - selected date
     />
 
   Properties:
 
-    startDate - Date. Start Date of the datepicker as it initialises, default is current Date.
+    lang - String. BCP 47 code. Language to be used in the datepicker
+      for month names and weekday labels. Can be set globally with
+      $root.locale. This property overrides global setting
 
-    locale - String. Language used in datepicker. Default is French.
+    min - Date. Optional earliest selectable day
 
-    range - Object {min, max}. Range of days from which a user can select date.
+    max - Date. Optional latest selectable day
 
-  Events:
+  Model:
 
-    update:selected - emitted when user chooses new date from the datepicker component.
-      Return an object with preformatted date as well as a Date Object.
+    Selected Date is updated through v-model directive
 -->
 
 <template>
-  <div class="datepicker-component">
-    <div class="datepicker-header">
-      <div class="datepicker-year-label">{{ !monthGrid ? year : ' ' }}</div>
-      <div class="datepicker-label" @click="monthGrid = !monthGrid">{{ headerLabel }}</div>
-      <div class="datepicker-buttons">
-        <button
-          @click="!prevViewOutOfRange && switchDateView(-1)"
-          :class="{disabled: prevViewOutOfRange}"
+  <div class="datepicker">
+    <div class="header">
+      <div class="labels">
+        <div
+          :class="['decade', {
+            'hidden': view === 'day' || view === 'month',
+            'label-main': view === 'year',
+          }]"
+          @click="view = 'month'"
         >
-          <span class="arrow-left"></span>
-        </button>
-        <button
-          @click="!nextViewOutOfRange && switchDateView(1)"
-          :class="{disabled: nextViewOutOfRange}"
+          {{ decade }}
+        </div>
+        <div
+          :class="['year', {
+            'hidden': view === 'year',
+            'label-sup': view === 'day',
+            'label-main': view === 'month',
+          }]"
+          @click="view = 'year'"
         >
-          <span class="arrow-right"></span>
-        </button>
+          {{ year }}
+        </div>
+
+        <div
+          :class="['year', {
+            'hidden': view === 'month' || view === 'year',
+            'label-main': view === 'day',
+          }]"
+          @click="view = 'month'"
+        >
+          {{ monthName }}
+        </div>
+      </div>
+      <div class="buttons">
+        <Button
+          plain icon="arrow_left" @click="shift(-1)" :disabled="!canShiftBack"
+        ></Button>
+        <Button
+          plain icon="arrow_right" @click="shift(1)" :disabled="!canShiftForward"
+        ></Button>
       </div>
     </div>
 
-    <div class="datepicker-body">
+    <div class="body">
       <GridSelect
-        :items="gridItems"
-        :labels-top="gridLabels"
+        v-if="view === 'day'"
+        :items="days"
+        :labels-top="weekLabels"
+        :selected-key="date => date.getTime()"
         v-model="selected"
       ></GridSelect>
-    </div>
 
+      <GridSelect
+        v-if="view === 'month'"
+        :items="months"
+        :selected-key="date => date.getFullYear() + '-' + date.getMonth()"
+        :value="selected"
+        @input="selectMonth"
+        #default="{item}"
+      >
+        <span class="grid-item-big">{{item.title}}</span>
+      </GridSelect>
+
+      <GridSelect
+        v-if="view === 'year'"
+        :items="years"
+        :selected-key="date => date.getFullYear()"
+        :value="selected"
+        @input="selectYear"
+        #default="{item}"
+      >
+        <span class="grid-item-big">{{item.title}}</span>
+      </GridSelect>
+    </div>
   </div>
 </template>
 
 <script>
 import GridSelect from './GridSelect'
+import Button from './Button'
 
 export default {
   name: 'Datepicker',
   components: {
-    GridSelect
+    GridSelect,
+    Button,
   },
   props: {
+    lang: String,
+    max: Date,
+    min: Date,
+    value: {
+      type: Date,
+      default: () => new Date(),
+    },
+    // ---------------------------------------------------------------------
     startDate: {
       type: Date,
       default: () => new Date()
     },
-    locale: {
-      type: String,
-      default: 'fr-fr'
-    },
     range: {
       type: Object
     }
+    // ---------------------------------------------------------------------
   },
-  data () {
+  data() {
     return {
-      displayed: new Date(this.startDate),
-      selected: new Date(this.startDate),
+      displayed: new Date(this.value),
+      view: 'day',
+
+      // -------------------------------------------------------------------
+      selected: new Date(this.value),
+      selected: new Date(this.value),
       dateRange: {
         min: null,
         max: null
       },
       monthGrid: false,
-      fromMonthScreen: false
+      fromMonthScreen: false,
+      advDisabled: false,
+      recDisabled: false,
+      canShiftForward: true,
+      canShiftBack: true,
     }
   },
   created () {
     this.range && this.setRange()
   },
   computed: {
+    locale() {
+      return this.lang || this.$root.locale || 'fr-fr'
+    },
+    decade() {
+      let start = Math.floor(this.displayed.getFullYear() / 10) * 10
+      return `${start} — ${start + 9}`
+    },
+    year() {
+      return this.displayed.getFullYear()
+    },
+    month() {
+      return this.displayed.getMonth()
+    },
+    monthName() {
+      return this.displayed.toLocaleString(this.locale, {month: 'long'})
+    },
+    /**
+     * Days for the day selection grid for the displayed month
+     * @return {Array<Array<Date>>} 6 by 7 nested array
+     */
+    days () {
+      let date = new Date(this.displayed)
+      date.setDate(1)
+      date.setDate(2 - (date.getDay() || 7))  // first displayed Monday
+      let days = []
+      for (let i = 0; i < 6; i++) {
+        let week = []
+        for (let j = 0; j < 7; j++) {
+          let day = new Date(date)
+          day.title = day.getDate()
+          if (day.getMonth() !== this.month) {
+            day.class = 'other-month'
+          }
+          if (this.range && this.outOfRange(date)) {
+            day.disabled = true
+          }
+          week.push(day)
+          date.setDate(date.getDate() + 1)
+        }
+        days.push(week)
+      }
+      return days
+    },
+    /**
+     * months for the month selection grid for the displayed year
+     * @return {Array<Array<Object>>} 3 by 4 nested array
+     */
+    months () {
+      let date = new Date(this.displayed)
+      date.setMonth(0)
+      let months = []
+      for (let i = 0; i < 4; i++) {
+        let quarter = []
+        for (let j = 0; j < 3; j++) {
+          let month = new Date(date)
+          month.title = (month.toLocaleString(this.locale, {month: 'long'}))
+          if (this.range && this.outOfRangeMonth(month)) {
+            month.disabled = true
+          }
+          quarter.push(month)
+          date.setMonth(date.getMonth() + 1)
+        }
+        months.push(quarter)
+      }
+      return months
+    },
+    /**
+     * years for the year selection grid for the displayed decade
+     * @return {Array<Array<Object>>} 3 by 4 nested array
+     */
+    years () {
+      let date = new Date(this.displayed)
+      date.setFullYear(Math.floor(date.getFullYear() / 10) * 10)
+      let years = []
+      for (let i = 0; i < 3; i++) {
+        let row = []
+        for (let j = 0; j < 3; j++) {
+          let year = new Date(date)
+          year.title = year.getFullYear()
+          row.push(year)
+          date.setFullYear(date.getFullYear() + 1)
+        }
+        years.push(row)
+      }
+      let lastYear = new Date(date)
+      lastYear.title = lastYear.getFullYear()
+
+      years.push([
+        {title: '', disabled: true, getFullYear: () => null},
+        lastYear,
+        {title: '', disabled: true, getFullYear: () => null},
+      ])
+      return years
+    },
+
+    //----------------------------------------------------------------------
     nextViewOutOfRange () {
       return this.range &&
       (!this.monthGrid ? this.displayed.getMonth() === this.dateRange.max.getMonth()
@@ -107,15 +263,6 @@ export default {
     },
     headerLabel () {
       return this.monthGrid ? this.year : this.monthName
-    },
-    year () {
-      return this.displayed.getFullYear()
-    },
-    month () {
-      return this.displayed.getMonth()
-    },
-    monthName () {
-      return this.displayed.toLocaleString(this.locale, {month: 'long'})
     },
     gridItems () {
       if (this.monthGrid) {
@@ -139,83 +286,32 @@ export default {
       }
       return labels
     },
-    /**
-     * Days for the day selection grid for the currently displayed month
-     * @return {Array<Array<Object>>} 6 by 7 nested array
-     */
-    days () {
-      this.displayed.setDate(1)  // if it become 31 than it can skip months when switching
-      let date = new Date(this.displayed)
-      date.setDate(2 - (date.getDay() || 7))  // first displayed monday
-      let days = []
-      for (let i = 0; i < 6; i++) {
-        let week = []
-        for (let j = 0; j < 7; j++) {
-          let day = new Date(date)
-          day.displayValue = day.getDate()
-          if (day.getMonth() !== this.month) {
-            day.class = 'other-month'
-          }
-          if (this.range && this.outOfRange(date)) {
-            day.disabled = true
-          }
-          week.push(day)
-          date.setDate(date.getDate() + 1)
-        }
-        days.push(week)
-      }
-
-      // Put selected date in the grid so it's recognised as selected
-      if (
-        this.selected &&
-        this.selected.valueOf() >= days[0][0].valueOf() &&
-        this.selected.valueOf() <= days[5][6].valueOf()
-      ) {
-        for (let i = 0; i < 6; i++) {
-          for (let c = 0; c < 7; c++) {
-            if (days[i][c].getDate() === this.selected.getDate() &&
-              days[i][c].getMonth() === this.selected.getMonth() &&
-              days[i][c].getFullYear() === this.selected.getFullYear()) {
-              days[i][c] = this.selected
-              days[i][c].displayValue = this.selected.getDate()
-              if (days[i][c].getMonth() !== this.month) {
-                days[i][c].class = 'other-month'
-              } else {
-                days[i][c].class = ''
-              }
-              break
-            }
-          }
-        }
-      }
-      return days
-    },
-    /**
-     * months for the month selection grid for the current year
-     * @return {Array<Array<Object>>} 3 by 4 nested array
-     */
-    months () {
-      this.displayed.setDate(1)
-      let date = new Date(this.displayed)
-      date.setMonth(0)
-      let months = []
-      for (let i = 0; i < 4; i++) {
-        let quarter = []
-        for (let j = 0; j < 3; j++) {
-          let month = new Date(date)
-          month.displayValue = (date.toLocaleString(this.locale, {month: 'long'}))
-          if (this.range && this.outOfRangeMonth(month)) {
-            month.disabled = true
-          }
-          quarter.push(month)
-          date.setMonth(date.getMonth() + 1)
-        }
-        months.push(quarter)
-      }
-      return months
-    }
   },
   methods: {
+    selectMonth(item) {
+      this.displayed = item
+      this.view = 'day'
+    },
+    selectYear(item) {
+      this.displayed = item
+      this.view = 'month'
+    },
+    shift(delta) {
+      switch(this.view) {
+        case 'day':
+          this.displayed.setMonth(this.month + delta)
+          this.displayed = new Date(this.displayed)
+          break
+        case 'month':
+          this.displayed.setFullYear(this.year + delta)
+          this.displayed = new Date(this.displayed)
+          break
+        case 'year':
+          this.displayed.setFullYear(this.year + delta * 10)
+          this.displayed = new Date(this.displayed)
+          break
+      }
+    },
     switchDateView (shift) {
       this.monthGrid ? this.changeYear(shift) : this.changeMonth(shift)
     },
@@ -280,97 +376,98 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '../styles/vars';
 
-.datepicker-component {
-  width: 336px;
-  height: 336px;
-  position: absolute;
-  z-index: 9999;
+.datepicker {
   background-color: @color-white;
-  text-align: center;
-  border-radius: @btn-border-radius;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  height: 336px;
+  padding: 20px 13.5px;
+  width: 336px;
+  display: flex;
+  flex-direction: column;
 
-  @media screen and (max-width: 375px) {
-    width: 320px;
-  }
-
-  .datepicker-header {
+  .header {
+    padding: 0 10.5px;
+    height: 64px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
-    padding: 20px 24px 0 24px;
 
-    .datepicker-year-label {
-      font-size: 14px;
-      color: @color-gray-500;
-      height: 24px;
-    }
+    .labels {
+      flex: 1 0 auto;
+      position: relative;
 
-    .datepicker-label {
-      padding-bottom: 1px;
-      font-size: 16px;
-      font-weight: 500;
-      text-transform: capitalize;
-      color: @color-dark;
-      cursor: pointer;
-    }
+      * {
+        transition: all .1s ease;
+      }
+      .hidden {
+        display: none;
+      }
 
-    .datepicker-buttons {
-      position: absolute;
-      right: 24px;
-      bottom: 0;
+      .label-sup {
+        .font-desktop-small-regular-gray();
+        position: absolute;
+        top: 0px;
+      }
 
-      button {
-        margin-left: 8px;
-        padding-left: 8px;
-        height: 24px;
-        width: 24px;
-        border: 1px solid lightgray;
-        background-color: @color-gray-200;
-        border-radius: 2px;
-        opacity: 0.5;
-        transition: opacity 100ms ease-in-out;
-
-        &:focus{
-          outline: none;
-        }
-
-        &.disabled {
-          opacity: 0.2;
-        }
-
-        &:hover:not(.disabled) {
-          background-color: @color-gray-200 !important;
-          cursor: pointer;
-          opacity: 1;
-        }
-
-        .arrow-left, .arrow-right {
-          width: 0;
-          height: 0;
-          border-style: solid;
-          display: block;
-        }
-
-        .arrow-left {
-          border-width: 5px 5px 5px 0;
-          border-color: transparent #000000 transparent transparent;
-        }
-
-        .arrow-right {
-          border-width: 5px 0 5px 5px;
-          border-color: transparent transparent transparent #000000;
-        }
+      .label-main {
+        .font-desktop-body-medium-dark();
+        text-transform: capitalize;
+        position: absolute;
+        top: 20px;
       }
     }
+
+    // Design:
+    .buttons {
+      padding-top: 18px;
+      button {
+        height: 24px;
+        width: 24px;
+        box-sizing: border-box;
+        padding: 0;
+        margin-left: 8px;
+        border: 1px solid #E1E2E6;
+        background-color: #F2F4F7;
+        border-radius: 0;
+      }
+    }
+
+    // Proposal:
+    // .buttons {
+    //   button {
+    //     height: 44px;
+    //     width: 44px;
+    //     margin-left: 8px;
+    //     .icon {
+    //       margin-left: -6px;
+    //     }
+    //   }
+    // }
   }
 
-  .datepicker-body {
-    padding: 8px 16px 0 16px;
-    height: 245px;
+  .body {
+    height: 232px;
+    width: 308px;
+
+    .grid-select .item-cell .item.other-month {
+      color: @color-gray-400;
+    }
+    .grid-select .item-cell.selected .item.other-month {
+      color: @color-white;
+      background-color: fade(@color-primary, 50%);
+    }
+
+    .grid-item-big {
+      .font-desktop-body-medium-dark();
+      text-transform: capitalize;
+      padding: 4px;
+    }
+    .item-cell.selected .grid-item-big {
+      color: @color-white;
+    }
   }
 }
 </style>

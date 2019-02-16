@@ -4,13 +4,13 @@
   Usage:
 
     <Sidebar
-      :items="[...]"                     - Array of items to render
-      :activeKey="(item, index) => ..."  - Value for "is active" check
-      :active.sync="active"              - Value for active item
-      :activeChild.sync="activeChild"    - Value for active child item
-      :opened="sidebarOpened"            - Is it opened (in mobile view)
-      :disabled="bool"                   - Disable the entire sidebar
-      @item:click="(...) => ..."         - Click on a sidebar item
+      :items="[...]"                      - Array of items to render
+      :active-key="(item, index) => ..."  - Value for "is active" check
+      :active.sync="active"               - Value for active item
+      :active-child.sync="activeChild"    - Value for active child item
+      :opened="sidebarOpened"             - Is it opened (in mobile view)
+      :disabled="bool"                    - Disable the entire sidebar
+      @item:click="(...) => ..."          - Click on a sidebar item
     >
 
     </Sidebar>

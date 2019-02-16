@@ -5,9 +5,10 @@
   Usage:
 
     <GridSelect
-      :items="[[...], ...]"  - Items to be rendered
-      :labels-top="[...]"    - Headings for the columns
-      v-model="selected"     - Selected item
+      :items="[[...], ...]"        - Items to be rendered
+      :labels-top="[...]"          - Headings for the columns
+      :selected-key="item => ..."  - Override for "is selected" key
+      v-model="selected"           - Selected item
     ></GridSelect>
 
   Properties:
@@ -21,13 +22,18 @@
 
         disabled - Boolean. Makes item not selectable
 
-    labelsTop - Array<string>. Table header items.
+        class - String or Array<String> cutom classes to add to the element
+
+    labelsTop - Array<string>. Table header items
+
+    selectedKey - Function. Key to compare for is selected check
 
   Model:
 
     Selected value is updated through v-model directive on mouse click, enter
     or space key. During rendering "selected" class is added to item that
-    satisfies === comparison with the v-model value.
+    satisfies === comparison with the v-model. Value for the check can be
+    overridden with selectedKey property
 -->
 
 <template>
@@ -41,18 +47,20 @@
     <tr v-for="row in items" class="row">
       <td
         v-for="item in row"
-        :class="['item', {
+        :class="['item-cell', {
           disabled: item.disabled,
-          selected: item === value,
-        }, item.class]"
+          selected: selectedKey(item) === selectedKey(value),
+        }]"
         :tabindex="!item.disabled && 0"
         @click="!item.disabled && select(item)"
         @keypress.enter.space.prevent="select(item)"
         :style="{width: itemWidth}"
       >
-        <slot v-bind="{item}">
-          {{ item.title || item }}
-        </slot>
+        <span :class="['item', ...item.class]">
+          <slot v-bind="{item}">
+            {{ item.title || item }}
+          </slot>
+        </span>
       </td>
     </tr>
   </table>
@@ -67,7 +75,11 @@ export default {
       required: true
     },
     labelsTop: Array,
-    value: Object,
+    selectedKey: {
+      type: Function,
+      default: item => item,
+    },
+    value: null,
   },
   computed: {
     itemWidth() {
@@ -82,57 +94,68 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '../styles/vars';
 
 .grid-select {
   width: 100%;
   height: 100%;
+  border-collapse: collapse;
 
   .labels-top th {
     color: @color-gray-500;
-    font-family: Lato;
+    font-family: @font-family;
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
-    padding-bottom: 4px;
+    padding-top: 2px;
+    padding-bottom: 8px;
     text-align: center;
     text-transform: uppercase;
   }
 
   .row {
-    .item {
-      border-radius: 2px;
-      color: @color-dark;
-      font-family: Lato;
-      font-size: 14px;
-      line-height: 20px;
-      padding: 2px;
+    .item-cell {
       text-align: center;
-      transition: background .1s ease-in-out;
-      user-select: none;
+      > .item {
+        border-radius: 2px;
+        box-sizing: border-box;
+        color: @color-dark;
+        display: inline-block;
+        font-family: @font-family;
+        font-size: 14px;
+        line-height: 24px;
+        min-width: 24px;
+        padding: 0 2px;
+        text-align: center;
+        transition: all .1s ease-in-out;
+        user-select: none;
+      }
 
       &:not(.disabled) {
         cursor: pointer;
 
-        &:hover,
-        &:focus {
+        &:hover > .item,
+        &:focus > .item {
           background: darken(@color-white, 5%);
-          outline: none;
         }
 
-        &:active {
+        &:active > .item {
           background: darken(@color-white, 10%);
         }
 
-        &.selected {
+        &.selected > .item {
           color: @color-white;
           background-color: @color-primary;
         }
       }
 
-      &.disabled {
+      &.disabled > .item {
         color: @color-gray-400;
+      }
+
+      &:focus {
+        outline: none;
       }
     }
   }

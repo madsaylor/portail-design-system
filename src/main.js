@@ -4,6 +4,7 @@ import 'highlight.js/styles/monokai.css'
 
 import App from './App.vue'
 
+
 // import and globally register every component form /components
 let context = require.context('./components', true, /.*\.vue$/)
 context.keys().forEach(key => {
@@ -22,4 +23,5 @@ Vue.use(VueHighlightJS)
 
 new Vue({
   render: h => h(App),
+  data: { locale: 'fr-fr' },
 }).$mount('#app')

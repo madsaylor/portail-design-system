@@ -7,22 +7,21 @@
 
       <pre v-highlightjs="usage"><code class="html"></code></pre>
 
-      <div class="datepicker-demo-wrapper">
-        <div class="datepicker-no-range">
-          <h4>Without range</h4>
-          <Datepicker
-            v-model="dateSelected"
-          ></Datepicker>
-        </div>
-        <div class="datepicker-range">
-          <h4>With range</h4>
-          <Datepicker
-            v-model="dateSelected2"
-            :start-date="new Date('2010-1-1')"
-            :range="{min: -30, max: 10}"
-          ></Datepicker>
-        </div>
-      </div>
+      Localization support:
+
+      <span v-for="lang in ['fr-fr', 'en-us', 'sv-se', 'ru-ru', 'ja-ja']">
+        <input type="radio" :id="lang" :value="lang" v-model="$root.locale">
+        <label :for="lang">{{ lang }}</label>
+      </span>
+
+      <br/>
+
+      Selected date: {{ dateSelected }}
+
+      <Datepicker
+        :start-date="new Date('2018-8-8')"
+        v-model="dateSelected"
+      ></Datepicker>
     </div>
   </div>
 </template>
@@ -47,27 +46,11 @@ export default {
     return {
       dateSelected: new Date(),
       dateSelected2: new Date(),
-      usage
+      usage,
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-.datepicker-demo-wrapper {
-  display: flex;
-  justify-content: space-around;
-
-  .datepicker-no-range {
-    position: relative;
-    height: 400px;
-    width: 336px;
-  }
-
-  .datepicker-range {
-    position: relative;
-    height: 400px;
-    width: 336px;
-  }
-}
 </style>

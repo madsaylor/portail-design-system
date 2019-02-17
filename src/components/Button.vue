@@ -26,7 +26,6 @@
       :class="{'icon-left': hasLabel}"
       :source="icon"
       :size="big ? '28px' : '24px'"
-      :color="primary ? 'white' : alt ? 'primary' : 'dark'"
     />
     <slot></slot>
     <Icon
@@ -34,7 +33,6 @@
       v-if="iconRight"
       :source="iconRight"
       :size="big ? '28px' : '24px'"
-      :color="primary ? 'white' : alt ? 'primary' : 'dark'"
     />
   </button>
 </template>
@@ -113,12 +111,19 @@ export default {
     &:active {
       background: darken(@color-primary, 10%);
     }
+
+    .icon {
+      fill: @color-white;
+    }
   }
 
   &.alt {
     .font-components-button-normal-alt();
     background: @color-white;
     border: 1px solid @color-primary;
+    .icon {
+      fill: @color-primary;
+    }
   }
 
   &.alt, &.plain {
@@ -139,6 +144,11 @@ export default {
     background: @color-gray-300;
     color: @color-gray-100;
     cursor: initial;
+
+    .icon {
+      fill: @color-gray-100;
+    }
+
     &:hover {
       background: @color-gray-300;
     }

@@ -19,7 +19,8 @@
       Selected date: {{ dateSelected }}
 
       <Datepicker
-        :start-date="new Date('2018-8-8')"
+        :min="new Date('2002-02-10')"
+        :max="new Date('2017-07-21')"
         v-model="dateSelected"
       ></Datepicker>
     </div>
@@ -31,11 +32,11 @@ import Datepicker from '../../components/Datepicker'
 
 let usage = `
 <Datepicker
+  :min="new Date('2002-02-10')"
+  :max="new Date('2017-07-21')"
   v-model="dateSelected"
-  :range="{min: -30, max: 10}"
-  :startDate="new Date('2010-1-1')"
-></Datepicker>`
-.slice(1)
+></Datepicker>
+`.slice(1)
 
 export default {
   name: "DatepickerDemo",
@@ -44,7 +45,7 @@ export default {
   },
   data() {
     return {
-      dateSelected: new Date(),
+      dateSelected: new Date('2006-02-12'),
       dateSelected2: new Date(),
       usage,
     }

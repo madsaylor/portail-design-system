@@ -30,30 +30,30 @@
     <div class="header">
       <div class="labels">
         <div
-          :class="['decade', {
+          :class="{
             'hidden': view === 'day' || view === 'month',
             'label-main': view === 'year',
-          }]"
+          }"
           @click="view = 'month'"
         >
           {{ decade }}
         </div>
         <div
-          :class="['year', {
+          :class="{
             'hidden': view === 'year',
             'label-sup': view === 'day',
             'label-main': view === 'month',
-          }]"
+          }"
           @click="view = 'year'"
         >
           {{ year }}
         </div>
 
         <div
-          :class="['year', {
+          :class="{
             'hidden': view === 'month' || view === 'year',
             'label-main': view === 'day',
-          }]"
+          }"
           @click="view = 'month'"
         >
           {{ monthName }}
@@ -71,33 +71,13 @@
 
     <div class="body">
       <GridSelect
-        v-if="view === 'day'"
-        :items="days"
-        :labels-top="weekLabels"
-        :selected-key="date => date.getTime()"
-        v-model="selected"
-      ></GridSelect>
-
-      <GridSelect
-        v-if="view === 'month'"
-        :items="months"
-        :selected-key="date => date.getFullYear() + '-' + date.getMonth()"
-        :value="selected"
-        @input="selectMonth"
+        :items="{'day': days, 'month': months, 'year': years}[view]"
+        :labels-top="view === 'day' ? weekLabels : null"
+        :value="value"
+        @input="select"
         #default="{item}"
       >
-        <span class="grid-item-big">{{item.title}}</span>
-      </GridSelect>
-
-      <GridSelect
-        v-if="view === 'year'"
-        :items="years"
-        :selected-key="date => date.getFullYear()"
-        :value="selected"
-        @input="selectYear"
-        #default="{item}"
-      >
-        <span class="grid-item-big">{{item.title}}</span>
+        <span :class="{'grid-item-big': view !== 'day'}">{{item.title}}</span>
       </GridSelect>
     </div>
   </div>
@@ -121,34 +101,11 @@ export default {
       type: Date,
       default: () => new Date(),
     },
-    // ---------------------------------------------------------------------
-    startDate: {
-      type: Date,
-      default: () => new Date()
-    },
-    range: {
-      type: Object
-    }
-    // ---------------------------------------------------------------------
   },
   data() {
     return {
       displayed: new Date(this.value),
       view: 'day',
-
-      // -------------------------------------------------------------------
-      selected: new Date(this.value),
-      selected: new Date(this.value),
-      dateRange: {
-        min: null,
-        max: null
-      },
-      monthGrid: false,
-      fromMonthScreen: false,
-      advDisabled: false,
-      recDisabled: false,
-      canShiftForward: true,
-      canShiftBack: true,
     }
   },
   created () {
@@ -175,7 +132,7 @@ export default {
      * Days for the day selection grid for the displayed month
      * @return {Array<Array<Date>>} 6 by 7 nested array
      */
-    days () {
+    days() {
       let date = new Date(this.displayed)
       date.setDate(1)
       date.setDate(2 - (date.getDay() || 7))  // first displayed Monday
@@ -185,12 +142,25 @@ export default {
         for (let j = 0; j < 7; j++) {
           let day = new Date(date)
           day.title = day.getDate()
+          day.key = day.getTime()
+
           if (day.getMonth() !== this.month) {
             day.class = 'other-month'
           }
-          if (this.range && this.outOfRange(date)) {
-            day.disabled = true
+
+          if (this.min != null) {
+            day.setHours(23, 59, 59, 999)
+            if (day.getTime() < this.min.getTime()) {
+              day.disabled = true
+            }
           }
+          if (this.max != null) {
+            day.setHours(0, 0, 0, 0)
+            if (day.getTime() > this.max.getTime()) {
+              day.disabled = true
+            }
+          }
+
           week.push(day)
           date.setDate(date.getDate() + 1)
         }
@@ -199,10 +169,10 @@ export default {
       return days
     },
     /**
-     * months for the month selection grid for the displayed year
+     * Months for the month selection grid for the displayed year
      * @return {Array<Array<Object>>} 3 by 4 nested array
      */
-    months () {
+    months() {
       let date = new Date(this.displayed)
       date.setMonth(0)
       let months = []
@@ -211,9 +181,24 @@ export default {
         for (let j = 0; j < 3; j++) {
           let month = new Date(date)
           month.title = (month.toLocaleString(this.locale, {month: 'long'}))
-          if (this.range && this.outOfRangeMonth(month)) {
-            month.disabled = true
+          month.key = month.getFullYear() + '-' + month.getMonth()
+
+          if (this.min != null) {
+            month.setMonth(month.getMonth() + 1)
+            month.setDate(0)
+            month.setHours(23, 59, 59, 999)
+            if (month.getTime() < this.min.getTime()) {
+              month.disabled = true
+            }
           }
+          if (this.max != null) {
+            month.setDate(1)
+            month.setHours(0, 0, 0, 0)
+            if (month.getTime() > this.max.getTime()) {
+              month.disabled = true
+            }
+          }
+
           quarter.push(month)
           date.setMonth(date.getMonth() + 1)
         }
@@ -222,156 +207,123 @@ export default {
       return months
     },
     /**
-     * years for the year selection grid for the displayed decade
+     * Years for the year selection grid for the displayed decade
      * @return {Array<Array<Object>>} 3 by 4 nested array
      */
-    years () {
+    years() {
       let date = new Date(this.displayed)
       date.setFullYear(Math.floor(date.getFullYear() / 10) * 10)
       let years = []
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 4; i++) {
         let row = []
         for (let j = 0; j < 3; j++) {
           let year = new Date(date)
-          year.title = year.getFullYear()
+          year.key = year.title = year.getFullYear()
+
+          if (this.min != null) {
+            year.setMonth(12)
+            year.setDate(0)
+            year.setHours(23, 59, 59, 999)
+            if (year.getTime() < this.min.getTime()) {
+              year.disabled = true
+            }
+          }
+          if (this.max != null) {
+            year.setMonth(0)
+            year.setDate(1)
+            year.setHours(0, 0, 0, 0)
+            if (year.getTime() > this.max.getTime()) {
+              year.disabled = true
+            }
+          }
+
           row.push(year)
           date.setFullYear(date.getFullYear() + 1)
         }
         years.push(row)
       }
-      let lastYear = new Date(date)
-      lastYear.title = lastYear.getFullYear()
-
-      years.push([
-        {title: '', disabled: true, getFullYear: () => null},
-        lastYear,
-        {title: '', disabled: true, getFullYear: () => null},
-      ])
+      years[3] = [
+        {title: '', disabled: true, key: -Infinity},
+        years[3][0],
+        {title: '', disabled: true, key: Infinity},
+      ]
       return years
     },
-
-    //----------------------------------------------------------------------
-    nextViewOutOfRange () {
-      return this.range &&
-      (!this.monthGrid ? this.displayed.getMonth() === this.dateRange.max.getMonth()
-        : this.displayed.getFullYear() === this.dateRange.max.getFullYear())
-    },
-    prevViewOutOfRange () {
-      return this.range &&
-        (!this.monthGrid ? this.displayed.getMonth() === this.dateRange.min.getMonth()
-          : this.displayed.getFullYear() === this.dateRange.min.getFullYear())
-    },
-    headerLabel () {
-      return this.monthGrid ? this.year : this.monthName
-    },
-    gridItems () {
-      if (this.monthGrid) {
-        return this.months
-      }
-      return this.days
-    },
-    gridLabels () {
-      if (this.monthGrid) {
-        return null
-      }
-      return this.weekLabels
-    },
-    weekLabels () {
+    weekLabels() {
       let labels = []
       let date = new Date()
-      date.setDate(date.getDate() - date.getDay() + 1)  // set date to monday
+      date.setDate(date.getDate() - date.getDay() + 1)  // set date to Monday
       for (let i = 1; i < 8; i++) {
         labels.push(date.toLocaleString(this.locale, {weekday: 'long'})[0])
         date.setDate(date.getDate() + 1)
       }
       return labels
     },
+    /**
+     * Maximum and minimum date value for the current view
+     * @return {[type]} [description]
+     */
+    bounds() {
+      let min = new Date(this.displayed)
+      let max = new Date(this.displayed)
+
+      if (this.view === 'year') {
+        min.setFullYear(this.years[0][0].getFullYear())
+        max.setFullYear(this.years[3][1].getFullYear())
+      }
+
+      if (this.view !== 'day') {
+        min.setMonth(0)
+        max.setMonth(11)
+      }
+
+      min.setDate(1)
+      min.setHours(0, 0, 0, 0)
+
+      max.setMonth(max.getMonth() + 1)
+      max.setDate(0)
+      max.setHours(23, 59, 59, 999)
+
+      return {min, max}
+    },
+    canShiftForward() {
+      if (this.max == null) {
+        return true
+      }
+      return this.bounds.max.getTime() < this.max.getTime()
+    },
+    canShiftBack() {
+      if (this.min == null) {
+        return true
+      }
+      return this.bounds.min.getTime() > this.min.getTime()
+    },
   },
   methods: {
-    selectMonth(item) {
+    select(item) {
       this.displayed = item
-      this.view = 'day'
-    },
-    selectYear(item) {
-      this.displayed = item
-      this.view = 'month'
+      if (this.view === 'year') {
+        this.view = 'month'
+      }
+      else if (this.view === 'month') {
+        this.view = 'day'
+      }
+      else if (this.view === 'day') {
+        this.$emit('input', item)
+      }
     },
     shift(delta) {
-      switch(this.view) {
-        case 'day':
-          this.displayed.setMonth(this.month + delta)
-          this.displayed = new Date(this.displayed)
-          break
-        case 'month':
-          this.displayed.setFullYear(this.year + delta)
-          this.displayed = new Date(this.displayed)
-          break
-        case 'year':
-          this.displayed.setFullYear(this.year + delta * 10)
-          this.displayed = new Date(this.displayed)
-          break
+      if (this.view === 'day') {
+        this.displayed.setMonth(this.month + delta)
       }
-    },
-    switchDateView (shift) {
-      this.monthGrid ? this.changeYear(shift) : this.changeMonth(shift)
-    },
-    changeMonth (shift) {
-      this.displayed.setMonth(this.month + shift)
+      else if (this.view === 'month') {
+        this.displayed.setFullYear(this.year + delta)
+      }
+      else if (this.view === 'year') {
+        this.displayed.setFullYear(this.year + delta * 10)
+      }
       this.displayed = new Date(this.displayed)
     },
-    changeYear (shift) {
-      this.displayed.setFullYear(this.year + shift)
-      this.displayed.setMonth(shift > 0 ? 0 : 11)
-      this.displayed = new Date(this.displayed)
-    },
-    setRange () {
-      /* how to determine the min/max month and date knowing that is 180 days before and 30 after current date */
-      /* get miliseconds of now */
-      const now = this.startDate.getTime()
-      /* convert minRange to miliseconds */
-      const daysToSec = 24 * 60 * 60 * 1000
-      const minRange = (this.range.min) * daysToSec
-      const maxRange = (this.range.max) * daysToSec
-      const minDate = new Date(now + minRange)
-      const maxDate = new Date(now + maxRange)
-      this.dateRange.min = minDate
-      this.dateRange.max = maxDate
-    },
-    outOfRange (date) {
-      const min = date < this.dateRange.min
-      const max = date > this.dateRange.max
-      return min || max
-    },
-    outOfRangeMonth (date) {
-      const monthMaxYear = date.getFullYear() === this.dateRange.max.getFullYear()
-      const monthMinYear = date.getFullYear() === this.dateRange.min.getFullYear()
-      const monthInMaxYear = monthMaxYear && (date.getMonth() === this.dateRange.max.getMonth())
-      const monthInMinYear = monthMinYear && (date.getMonth() === this.dateRange.min.getMonth())
-      return this.outOfRange(date) && (!monthInMaxYear && !monthInMinYear)
-    }
-  },
-  watch: {
-    selected (newValue, oldValue) {
-      if (this.monthGrid) {
-        this.displayed.setMonth(newValue.getMonth())
-        this.displayed = new Date(this.displayed)
-        this.selected = new Date(oldValue)
-        this.monthGrid = false
-        this.fromMonthScreen = true
-      } else {
-        // We don't want to emit value if we selected month from month view
-        if (!this.fromMonthScreen) {
-          const selected = {
-            view: `${('0' + newValue.getDate()).slice(-2)}/${('0' + (newValue.getMonth() + 1)).slice(-2)}/${newValue.getFullYear()}`,
-            api: `${newValue.getFullYear()}-${newValue.getMonth() + 1}-${newValue.getDate()}`,
-            rawDate: newValue
-          }
-          this.$emit('update:selected', selected)
-        } else {
-          this.fromMonthScreen = false
-        }
-      }
-    }
   }
 }
 </script>
@@ -402,6 +354,7 @@ export default {
       * {
         transition: all .1s ease;
       }
+
       .hidden {
         display: none;
       }
@@ -420,7 +373,7 @@ export default {
       }
     }
 
-    // Design:
+    // Buttons as designed:
     .buttons {
       padding-top: 18px;
       button {
@@ -432,10 +385,17 @@ export default {
         border: 1px solid #E1E2E6;
         background-color: #F2F4F7;
         border-radius: 0;
+
+        &:disabled {
+          opacity: 0.5;
+          .icon {
+            fill: @color-dark;
+          }
+        }
       }
     }
 
-    // Proposal:
+    // // Proposal:
     // .buttons {
     //   button {
     //     height: 44px;
@@ -443,6 +403,10 @@ export default {
     //     margin-left: 8px;
     //     .icon {
     //       margin-left: -6px;
+    //     }
+
+    //     &:disabled {
+    //       background: @color-white;
     //     }
     //   }
     // }
@@ -460,10 +424,13 @@ export default {
       background-color: fade(@color-primary, 50%);
     }
 
-    .grid-item-big {
+    .item-cell .grid-item-big {
       .font-desktop-body-medium-dark();
       text-transform: capitalize;
       padding: 4px;
+    }
+    .item-cell.disabled .grid-item-big {
+      color: @color-gray-400;
     }
     .item-cell.selected .grid-item-big {
       color: @color-white;

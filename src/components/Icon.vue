@@ -58,10 +58,7 @@ export default {
       type: String,
       default: '0'
     },
-    color: {
-      type: String,
-      default: 'black'
-    },
+    color: String,
   },
   data: () => ({
     icons,

@@ -5,10 +5,9 @@
   Usage:
 
     <GridSelect
-      :items="[[...], ...]"        - Items to be rendered
-      :labels-top="[...]"          - Headings for the columns
-      :selected-key="item => ..."  - Override for "is selected" key
-      v-model="selected"           - Selected item
+      :items="[[...], ...]"    - Items to be rendered
+      :labels-top="[...]"      - Headings for the columns
+      v-model="selected"       - Selected item
     ></GridSelect>
 
   Properties:
@@ -24,9 +23,10 @@
 
         class - String or Array<String> cutom classes to add to the element
 
-    labelsTop - Array<string>. Table header items
+        key - String or Number. Value for is selected check and :key value
+          for v-for
 
-    selectedKey - Function. Key to compare for is selected check
+    labelsTop - Array<string>. Table header items
 
   Model:
 
@@ -47,9 +47,11 @@
     <tr v-for="row in items" class="row">
       <td
         v-for="item in row"
+        :key="item.key !== undefined ? item.key : item"
         :class="['item-cell', {
           disabled: item.disabled,
-          selected: selectedKey(item) === selectedKey(value),
+          selected:
+            item.key !== undefined ? item.key === value.key : item === value,
         }]"
         :tabindex="!item.disabled && 0"
         @click="!item.disabled && select(item)"
@@ -75,10 +77,6 @@ export default {
       required: true
     },
     labelsTop: Array,
-    selectedKey: {
-      type: Function,
-      default: item => item,
-    },
     value: null,
   },
   computed: {

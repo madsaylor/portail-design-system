@@ -368,6 +368,7 @@ export default {
         .font-desktop-small-regular-gray();
         position: absolute;
         top: 0px;
+        cursor: pointer;
       }
 
       .label-main {
@@ -375,6 +376,7 @@ export default {
         text-transform: capitalize;
         position: absolute;
         top: 20px;
+        cursor: pointer;
       }
     }
 

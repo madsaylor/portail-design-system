@@ -109,6 +109,7 @@ export default {
     padding-bottom: 8px;
     text-align: center;
     text-transform: uppercase;
+    user-select: none;
   }
 
   .row {

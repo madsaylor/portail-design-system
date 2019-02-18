@@ -324,7 +324,12 @@ export default {
       }
       this.displayed = new Date(this.displayed)
     },
-  }
+  },
+  watch: {
+    value(date) {
+      date.key = date.getTime()
+    }
+  },
 }
 </script>
 

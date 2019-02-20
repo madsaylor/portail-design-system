@@ -1,3 +1,8 @@
+// Styles that aren't part of components
+require('./fonts/lato.css')
+require('./styles/main.less')
+require('./styles/grid.less')
+
 // Entry file for the library build
 // import and export every component form /components
 let context = require.context('./components', false, /.*\.vue$/)
@@ -10,9 +15,5 @@ context.keys().forEach(key => {
 
   components[componentName] = component.default || component
 })
-
-// Require styles so they are extracted in lib.css
-require('./styles/main.less')
-require('./styles/grid.less')
 
 export default components

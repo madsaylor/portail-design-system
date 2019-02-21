@@ -41,7 +41,7 @@
     activeChild - Any. Same as active, but for child element
 
     opened - Boolean. Is sidebar shown in the mobile view. Supports .sync
-      modifier that let's the component close itself (when user clicks outside)
+      modifier that lets the component close itself (when user clicks outside)
 
     disabled - Boolean. Disables the entire component
 

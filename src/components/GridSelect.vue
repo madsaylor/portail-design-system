@@ -47,7 +47,6 @@
     <tr v-for="row in items" class="row">
       <td
         v-for="item in row"
-        :key="item.key !== undefined ? item.key : item"
         :class="['item-cell', {
           disabled: item.disabled,
           selected:

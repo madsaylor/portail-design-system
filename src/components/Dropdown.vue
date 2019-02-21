@@ -104,6 +104,10 @@ export default {
     targetElement() {
       let element = this.target
 
+      if (element == null) {
+        element = document.body
+      }
+
       if (element.length) {
         element = element[0]
       }
@@ -236,6 +240,25 @@ export default {
 
       setTimeout(done, this.transitionTime)
     },
-  }
+    /**
+     * Close dropdown on an outside click
+     */
+    outsideClick(event) {
+      let el = event.target
+      while (el.parentNode) {
+        if (el === this.$el || el === this.targetElement) {
+          return
+        }
+        el = el.parentNode
+      }
+      this.$emit('update:opened', false)
+    },
+  },
+  mounted() {
+    document.addEventListener('click', this.outsideClick, true)
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.outsideClick, true)
+  },
 }
 </script>

@@ -14,7 +14,7 @@
     </Button>
     <Dropdown
       :target="$refs.dropButton"
-      :opened="dropdownOpened"
+      :opened.sync="dropdownOpened"
       :position="position"
     >
       <div class="position-menu">

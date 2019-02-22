@@ -382,7 +382,7 @@ export default {
 
     // Buttons as designed:
     .buttons {
-      padding-top: 18px;
+      margin-top: 20px;
       button {
         height: 24px;
         width: 24px;
@@ -392,6 +392,12 @@ export default {
         border: 1px solid #E1E2E6;
         background-color: #F2F4F7;
         border-radius: 0;
+
+        .icon {
+          position: relative;
+          top: 0;
+          left: 0;
+        }
 
         &:disabled {
           opacity: 0.5;

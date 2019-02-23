@@ -7,6 +7,9 @@
       :target="myButton"      - Element to dropdown next to
       :position="'top-left'"  - Where to open relative to the target
       :opened="menuOpened"    - Is dropdown opened
+      :just-fade-in="true"    - Change the enter animation to just fade in
+      :just-fade-out="true"   - Change the leave animation to just fade out
+      :just-fade="true"       - Change both
     >
       Dropdown content...
     </Dropdown>
@@ -78,6 +81,9 @@ export default {
   name: 'Dropdown',
   props: {
     target: null,
+    justFade: Boolean,
+    justFadeIn: Boolean,
+    justFadeOut: Boolean,
     position: {
       type: String,
       validator(value) {
@@ -105,7 +111,7 @@ export default {
       let element = this.target
 
       if (element == null) {
-        element = document.body
+        return
       }
 
       if (element.length) {
@@ -129,7 +135,8 @@ export default {
       if (this.contentRect == null || this.targetRect == null) {
         return {position: 'absolute'}
       }
-      // Get fresh targetRect in case window got scrolled since the last update
+      // Get a fresh targetRect in case the window got scrolled
+      // after the last update
       let targetRect = this.targetElement.getBoundingClientRect()
       let left = targetRect.left + window.pageXOffset
       let top = targetRect.top + window.pageYOffset
@@ -182,6 +189,7 @@ export default {
       if (this.contentRect == null || this.targetRect == null) {
         return 'matrix(1, 0, 0, 1, 0, 0)'
       }
+
       let targetWidth = this.targetRect.width
       let targetHeight = this.targetRect.height
       let contentWidth = this.contentRect.width
@@ -191,10 +199,12 @@ export default {
       let scaleY = targetHeight / contentHeight
 
       let translateX = (
-        this.targetRect.left - this.contentRect.left - contentWidth / 2 + targetWidth / 2
+        this.targetRect.left - this.contentRect.left -
+        contentWidth / 2 + targetWidth / 2
       )
       let translateY = (
-        this.targetRect.top - this.contentRect.top - contentHeight / 2 + targetHeight / 2
+        this.targetRect.top - this.contentRect.top -
+        contentHeight / 2 + targetHeight / 2
       )
 
       return `matrix(
@@ -213,9 +223,17 @@ export default {
     beforeEnter(el) {
       el.style.opacity = '0'
     },
-    enter: function (el, done) {
+
+    enter(el, done) {
       this.targetRect = this.targetElement.getBoundingClientRect()
       this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
+
+      setTimeout(done, this.transitionTime)
+
+      if (this.justFade || this.justFadeIn) {
+        el.style.opacity = '1'
+        return
+      }
 
       el.style.transform = this.transformationMatrix
       el.style.display = 'none'
@@ -228,18 +246,22 @@ export default {
 
       el.style.transform = 'none'
       el.style.opacity = '1'
+    },
+
+    leave(el, done) {
+      this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
 
       setTimeout(done, this.transitionTime)
-    },
-    leave: function (el, done) {
-      this.targetRect = this.targetElement.getBoundingClientRect()
-      this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
+
+      if (this.justFade || this.justFadeOut) {
+        el.style.opacity = '0'
+        return
+      }
 
       el.style.transform = this.transformationMatrix
       el.style.opacity = '0'
-
-      setTimeout(done, this.transitionTime)
     },
+
     /**
      * Close dropdown on an outside click
      */

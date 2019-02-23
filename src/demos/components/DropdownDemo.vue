@@ -1,23 +1,20 @@
 <template>
-  <div class="row-col">
+  <div class="row-col dropdown-demo">
     <h3>Dropdown</h3>
 
     Dropdown that can hold different things
 
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
-    <Button
-      ref="dropButton"
-      @click="dropdownOpened = !dropdownOpened"
-    >
-      Position
+    <Button ref="dropButton" @click="dropdownOpened = !dropdownOpened">
+      Choose position
     </Button>
     <Dropdown
       :target="$refs.dropButton"
       :opened.sync="dropdownOpened"
       :position="position"
     >
-      <div class="position-menu">
+      <div class="dropdown-content">
         Position:<br />
 
         <template v-for="option in positions">
@@ -27,6 +24,37 @@
         </template>
       </div>
     </Dropdown>
+
+    <Button ref="dropButton2" @click="dropdown2Opened = !dropdown2Opened">
+      Simple animation
+    </Button>
+    <Dropdown
+      :target="$refs.dropButton2"
+      :opened.sync="dropdown2Opened"
+      :position="position"
+      just-fade
+    >
+      <div class="dropdown-content">
+        Hello!
+      </div>
+    </Dropdown>
+
+    <a class="hover-me"
+      ref="hoverMe"
+      @mouseover="dropdown3Opened = true"
+      @mouseleave="dropdown3Opened = false"
+    >Hover me!</a>
+    <Dropdown
+      :target="$refs.hoverMe"
+      :opened.sync="dropdown3Opened"
+      :position="position"
+      just-fade-in
+    >
+      <div class="dropdown-content">
+        Good job!
+      </div>
+    </Dropdown>
+
   </div>
 </template>
 
@@ -35,26 +63,15 @@ import Button from '../../components/Button.vue'
 import Dropdown from '../../components/Dropdown.vue'
 
 let usage = `
-<Button
-  ref="dropButton"
-  @click="dropdownOpened = !dropdownOpened"
->
+<Button ref="dropButton" @click="dropdownOpened = !dropdownOpened">
   Position
 </Button>
 <Dropdown
   :target="$refs.dropButton"
-  :opened="dropdownOpened"
+  :opened.sync="dropdownOpened"
   :position="position"
 >
-  <div class="position-menu">
-    Position:<br />
-
-    <template v-for="option in positions">
-      <input type="radio" :id="option" :value="option" v-model="position">
-      <label :for="option">{{ option }}</label>
-      <br />
-    </template>
-  </div>
+  ...
 </Dropdown>
 `.slice(1)
 
@@ -64,6 +81,9 @@ export default {
   data: () => ({
     usage,
     dropdownOpened: false,
+    dropdown2Opened: false,
+    dropdown3Opened: false,
+    dropdown4Opened: false,
     position: 'bottom-right',
     positions: [
       'bottom-left',
@@ -83,12 +103,28 @@ export default {
 }
 </script>
 
-<style>
-.position-menu {
-  display: inline-block;
-  border-radius: 2px;
-  box-shadow: 0 2px 12px 1px rgba(0,0,0,0.2);
-  padding: 20px;
-  background: white;
+<style lang="less" scoped>
+@import '../../styles/vars';
+
+.dropdown-demo {
+
+  .button {
+    margin-right: 8px
+  }
+
+  .dropdown-content {
+    display: inline-block;
+    border-radius: 2px;
+    box-shadow: 0 2px 12px 1px rgba(0,0,0,0.2);
+    padding: 20px;
+    background: white;
+  }
+
+  .hover-me {
+    border: 1px dashed @color-primary;
+    border-radius: 3px;
+    box-sizing: border-box;
+    padding: 10px;
+  }
 }
 </style>

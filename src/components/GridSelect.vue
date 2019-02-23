@@ -126,7 +126,7 @@ export default {
         min-width: 24px;
         padding: 0 2px;
         text-align: center;
-        transition: all .1s ease-in-out;
+        transition: background .1s ease-in-out;
         user-select: none;
       }
 

@@ -202,6 +202,7 @@ export default {
   left: 0;
   overflow: hidden;
   position: fixed;
+  z-index: 1;
   top: 0;
   width:  @sidebar-width;
 }

@@ -7,7 +7,7 @@
       :placeholder='Placeholder' - Text displayed as placeholder value
       :type='email'              - Input type
       :validators='validators'   - Array of validators
-      :top-title='Title'         - Title at the top
+      :top-label='label'         - label at the top
       :disabled='true'           - Disables input
       :icon='search'             - Icon name on the right of the input
       :help='Some help text'     - Shown when hovering help icon
@@ -27,7 +27,7 @@
       validator (function) - Function that takes input value as an argument and implements
         validation logic.
 
-    topTitle - String. Text that will be displayed as a label for input.
+    label - String. Text that will be displayed as a label for input.
 
     disabled - Boolean. Defines if an input is disabled.
 
@@ -49,98 +49,76 @@
 -->
 
 <template>
-  <div class="input-component-wrapper">
-    <div v-if="topTitle" class="top-title">{{topTitle}}</div>
-    <div class="input-field-wrapper">
-      <div :class="['inner-wrapper', {'has-icon-help': help}]">
-        <input
-          :type="type"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          :class="{
-            'has-icon': rightIcon,
-            'error': errors.length
-          }"
-          v-model="inputValue"
-        />
-        <Icon
-          v-if="rightIcon"
-          class="icon-right"
-          :source="rightIcon"
-        />
-      </div>
-      <div class="icon-help-wrapper"
-        @mouseover="tooltipVisible = true"
-        @mouseleave="tooltipVisible = false"
+  <div :class="['input', {sm, md, lg}]">
+    <label class="label">
+      <div class="label-text">{{label}}</div>
+      <input
+        v-bind="{type, disabled, placeholder}"
+        :class="{'has-icon': icon, 'error': errors.length}"
+        v-model="inputValue"
+      />
+    </label>
+
+    <Icon color="gray-500" v-if="icon" :source="icon"/>
+
+    <div class="drawer">
+      <ul class="error-list" v-if="errors.length">
+        <li class="error-message" v-for="error in errors">
+          {{ error }}
+        </li>
+      </ul>
+
+      <div
+        v-if="help" class="help-label" ref="helpLabel"
+        @mouseover="helpVisible = true"
       >
-        <Icon
-          v-if="help"
-          class="icon-help"
-          source="help"
-        />
-        <Tooltip v-html="help" :visible="tooltipVisible"></Tooltip>
+        {{ helpLabel }}
+        <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible">
+          <div class="help-content" v-html="help"></div>
+        </Dropdown>
       </div>
     </div>
-    <div v-if="bottomHelp" class="bottom-help-wrapper">
-      <span
-        class="bottom-help"
-        @mouseover="tooltipBottomVisible = true"
-        @mouseleave="tooltipBottomVisible = false"
-      >{{`? ${bottomHelp.label}`}}</span>
-      <Tooltip v-html="bottomHelp.text" :visible="tooltipBottomVisible"></Tooltip>
-    </div>
-    <ul class="error-list" v-if="errors.length">
-      <li class="error-message" v-for="error in errors">
-        {{ error }}
-      </li>
-    </ul>
   </div>
 </template>
 
 <script>
 import Icon from './Icon'
 import Tooltip from './Tooltip'
-import {COLORS} from '../styles/vars'
+import Dropdown from './Dropdown'
 
 export default {
   name: "Input",
+  components: {Tooltip, Dropdown, Icon},
   props: {
-    value: {
-      type: [String, Number]
-    },
-    placeholder: {
+    // General
+    disabled: Boolean,
+    help: String,
+    helpLabel: {
       type: String,
-      default: ''
+      default: '? explication'
     },
+    icon: String,
+    label: String,
+    lg: Boolean,
+    md: Boolean,
+    sm: Boolean,
+    placeholder: String,
     type: {
       type: String,
       default: 'text'
     },
-    validators: {
-      type: Array,
-      default: () => []
-    },
-    topTitle: String,
-    disabled: Boolean,
-    icon: String,
-    help: String,
-    bottomHelp: Object
+    validators: Array,
+    value: null,
   },
-  components: {Tooltip, Icon},
   data: () => ({
-    COLORS,
-    tooltipVisible: false,
-    tooltipBottomVisible: false
+    helpVisible: false,
   }),
   mounted() {
     this.$emit('validation', !!this.errors.length)
   },
   computed: {
-    rightIcon () {
-      return this.disabled ? 'lock' : this.icon
-    },
     errors () {
-      if (this.validators.length) {
+      if (this.validators && this.validators.length) {
         return this.validators.reduce((acc, validator) => {
           if (!validator.validator(this.inputValue)) {
             acc.push(validator.message);
@@ -166,114 +144,92 @@ export default {
 <style lang="less" scoped>
 @import '../styles/vars';
 
-.input-component-wrapper {
-  display: inline-block;
+.input {
   position: relative;
+  display: inline-block;
+  width: 100%;
+
+  &.sm {
+    width: 144px;
+  }
+  &.md {
+    width: 252px;
+  }
+  &.lg {
+    width: 464px;
+  }
+
+  .label-text {
+    height: 16px;
+    margin-bottom: 4px;
+    .font-desktop-x-small-regular-gray()
+  }
+
+  input {
+    padding: 8px 12px;
+    box-sizing: border-box;
+    border: 1px solid #e1e2e6;
+    border-radius: 2px;
+    background-color: @color-white;
+    width: 100%;
+    .font-desktop-small-regular-dark();
+
+    &.has-icon {
+      padding-right: 30px;
+    }
+
+    &::placeholder {
+      .font-desktop-small-regular-gray();
+    }
+
+    &:focus:not(.error) {
+      border-color: @color-primary;
+    }
+    &:focus {
+      outline: none;
+    }
+
+    &.error {
+      border-color: @color-red;
+    }
+
+    &:disabled {
+      border: 1px solid #f2f4f7;
+    }
+    &:disabled,
+    &:disabled::placeholder {
+      .font-desktop-small-regular-light-gray();
+    }
+  }
+
+  .icon {
+    position: absolute;
+    margin-left: -30px; // 24 + 6, icon size and padding
+    margin-top: 6px;    // center the 24px icon in the 36px input
+  }
+
+  .drawer {
+    box-sizing: border-box;
+    font-size: 11px;
+    line-height: 12px;
+    padding: 3px 12px;
+    position: absolute;
+    width: 100%;
+  }
 
   .error-list {
-    margin: 0;
-    list-style: none;
     color: @color-red;
-    font-size: 14px;
-    padding-left: 10px;
+    font-family: @font-family;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
-  .top-title {
-    .font-desktop-small-regular-gray-right();
-    line-height: 2;
-    text-align: left;
-  }
-
-  .input-field-wrapper {
-    display: flex;
-    align-items: center;
-
-    .icon-help-wrapper {
-      position: relative;
-
-      .icon-help {
-        cursor: pointer;
-        fill: @color-gray-400!important;
-
-        &:hover {
-          fill: @color-dark!important;
-        }
-      }
-    }
-
-    .inner-wrapper {
-      display: inline-block;
-      position: relative;
-      width: 100%;
-
-      &.has-icon-help {
-        margin-right: 10px;
-      }
-
-      input {
-        .font-desktop-body-regular-dark();
-        padding: 8px 10px;
-        border-radius: @input-border-radius;
-        border: 1px solid @color-gray-200;
-        width: 100%;
-        box-sizing: border-box;
-
-        @media @screen-large {
-          font-size: 14px;
-        }
-
-        &.has-icon {
-          padding-right: 40px;
-        }
-
-        &.error {
-          border-color: @color-red;
-        }
-
-        &:disabled {
-          user-select: none;
-        }
-
-        &:focus:not(.error) {
-          border-color: @color-primary;
-        }
-
-        &:focus {
-          outline: none;
-        }
-
-        &::placeholder {
-          color: @color-gray-500;
-        }
-      }
-
-      .icon-right {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        fill: @color-gray-400!important;
-      }
-
-      .icon-right {
-        right: 8px;
-      }
-    }
-  }
-
-  .bottom-help-wrapper {
-    display: inline-block;
-    position: relative;
-    padding-left: 10px;
-
-    .bottom-help {
-      .font-desktop-x-small-regular-gray();
-      border-bottom: 1px dashed @color-gray-500;
-      cursor: pointer;
-
-      &:hover {
-        color: @color-dark;
-      }
-    }
+  .help-label {
+    cursor: pointer;
+    color: @color-gray-500;
+    font-family: @font-family;
+    text-decoration: underline dashed;
   }
 }
 </style>

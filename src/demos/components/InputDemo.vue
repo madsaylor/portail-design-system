@@ -1,5 +1,5 @@
 <template>
-  <div class="row-col">
+  <div class="row-col input-demo">
     <h3>Input</h3>
 
     A styled input with an ability to set icon and validation.
@@ -33,34 +33,40 @@
       pre-defined by the layout and they always have 16px margin between them.
     </p>
 
-    <p>
-      Font size for inputs is 16px on mobile and 14px on screens sizes > 961px to
-      avoid zooming in behaviour on mobile devices on click
-    </p>
-
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
     <div class="input-component-demo">
+      Model value: {{ textValue }}<br />
+      <Input sm label="Small" v-model="textValue"/>
+      <Input md label="Medium" v-model="textValue"/>
+      <Input lg label="Large" v-model="textValue"/>
       <Input
-        placeholder="Maximum 10 characters"
+        md
+        help="This is an explation of what the field is used for."
         icon="search"
-        top-title="Input with icon and help"
-        help="Some info"
-        v-model="inputValue"
-        :validators="validators"
+        label="Icon, placeholder and help text"
+        placeholder="Search"
+        v-model="textValue"
+      />
+      <Input
+        md
+        disabled
+        label="Disabled input"
+        placeholder="Disabled"
+        v-model="textValue"
+      />
+      <Input
+        md
+        label="Input with errors"
+        :validators="demoValidators"
+        v-model="textValue"
       />
       <Input
         placeholder="Placeholder"
         icon="today"
         v-model="inputValue2"
-        top-title="Input with icon and bottom help"
+        label="Input with icon and bottom help"
         :bottom-help="{label: 'bottom help', text: 'This is bottom help tooltip'}"
-      />
-      <Input
-        placeholder="Disabled"
-        v-model="inputValue3"
-        top-title="Disabled input"
-        disabled
       />
     </div>
 
@@ -74,7 +80,7 @@ let usage = `
 <Input
   placeholder="Maximum 10 characters"
   icon="search"
-  top-title="Input with icon and help"
+  title="Input with icon and help"
   help="Some info"
   v-model="inputValue"
   :validators="validators"
@@ -83,13 +89,13 @@ let usage = `
 <Input
   placeholder="Placeholder"
   icon="today"
-  top-title="Input with icon and bottom help"
+  title="Input with icon and bottom help"
   v-model="inputValue2"
   :bottom-help="{label: 'bottom help', text: 'This is bottom help tooltip'}"
 />
 <Input
   placeholder="Disabled"
-  top-title="Disabled input"
+  title="Disabled input"
   v-model="inputValue3"
   disabled
 />`
@@ -100,15 +106,22 @@ export default {
   components: {Input},
   data: () => ({
     usage,
+    textValue: '',
     inputValue: 'Input with validator',
     inputValue2: '',
     inputValue3: '',
-    validators: [
+    demoValidators: [
       {
-        message: 'Maximum length is 10 characters',
-        validator: (value) => {
-          return value.length <= 10
-        }
+        message: 'Error message',
+        validator: (value) => false
+      },
+      {
+        message: `
+          Long error message: Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Nam mollis ullamcorper rutrum. Pellentesque
+          rutrum consectetur nulla, eget euismod justo vehicula
+        `,
+        validator: (value) => false
       },
     ]
   })
@@ -116,11 +129,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.input-component-demo {
-  display: flex;
-
-  .input-component-wrapper:not(:first-child) {
-    margin-left: 30px;
+.input-demo {
+  .input {
+    margin-right: 32px;
+    margin-bottom: 60px;
   }
 }
 </style>

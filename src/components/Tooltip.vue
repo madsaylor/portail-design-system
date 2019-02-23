@@ -37,7 +37,7 @@ export default {
   padding: 8px;
   background-color: @color-dark;
   font-size: 12px;
-  border-radius: @tooltip-border-radius;
+  border-radius: 2px;
   position: absolute;
   display: none;
   max-width: 286px;

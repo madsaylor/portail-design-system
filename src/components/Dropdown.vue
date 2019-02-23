@@ -94,7 +94,8 @@ export default {
           'left-bottom',                  'right-bottom',
           'bottom-left', 'bottom-middle', 'bottom-right',
         ].indexOf(value) !== -1
-      }
+      },
+      default: 'bottom-right',
     },
     opened: Boolean,
   },
@@ -180,7 +181,15 @@ export default {
         case 'bottom':
       }
 
-      return {position: 'absolute', top: top + 'px', left: left + 'px'}
+      // Offset for non-static parents if needed
+      let el = this.$el.offsetParent
+      while (el && el.offsetParent) {
+        left -= el.offsetLeft
+        top -= el.offsetTop
+        el = el.offsetParent
+      }
+
+      return {position: 'absolute', left: left + 'px', top: top + 'px'}
     },
     /**
      * 2D transformation matrix for CSS transform parameter
@@ -249,6 +258,7 @@ export default {
     },
 
     leave(el, done) {
+      this.targetRect = this.targetElement.getBoundingClientRect()
       this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
 
       setTimeout(done, this.transitionTime)

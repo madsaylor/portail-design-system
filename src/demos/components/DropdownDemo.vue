@@ -83,7 +83,6 @@ export default {
     dropdownOpened: false,
     dropdown2Opened: false,
     dropdown3Opened: false,
-    dropdown4Opened: false,
     position: 'bottom-right',
     positions: [
       'bottom-left',

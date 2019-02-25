@@ -6,26 +6,11 @@
 
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
-    <div class="tooltip-component-demo">
-      <div class="hover-to-see"
-        @mouseover="tooltipVisibleHover = true"
-        @mouseleave="tooltipVisibleHover = false"
-      >
-        Hover me to see a tooltip
-        <Tooltip :visible="tooltipVisibleHover">
-          <h3 class="white-text">H3</h3>
-          <span>I have a slot!</span>
-        </Tooltip>
-      </div>
-      <div class="click-to-see"
-           @click="tooltipVisibleClick = !tooltipVisibleClick"
-      >
-        {{tooltipVisibleClick ? 'Click me to hide a tooltip' : 'Click me to see a tooltip'}}
-        <Tooltip :visible="tooltipVisibleClick">
-          Some information
-        </Tooltip>
-      </div>
-    </div>
+    <Tooltip>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+      scelerisque sit amet velit vitae tristique. Nullam congue in lorem in
+      aliquam. Sed euismod nisl a ex commodo, non aliquet lacus mattis.
+    </Tooltip>
   </div>
 </template>
 
@@ -33,9 +18,12 @@
 import Tooltip from '../../components/Tooltip'
 
 let usage = `
-<Tooltip :visible="tooltipVisibleHover">
-<Tooltip :visible="tooltipVisibleClick">`
-.slice(1)
+<Tooltip>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+  scelerisque sit amet velit vitae tristique. Nullam congue in lorem in
+  aliquam. Sed euismod nisl a ex commodo, non aliquet lacus mattis.
+</Tooltip>
+`.slice(1)
 
 export default {
   name: "TooltipDemo",

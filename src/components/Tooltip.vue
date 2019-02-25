@@ -1,21 +1,13 @@
 <!--
-  Tooltip element
+  Styled tooltip component
 
   Usage:
 
-    <Tooltip
-      :visible='tooltipVisible' - defines whether to show tooltip
-    />
-
-  Properties:
-
-    visible - Boolean. When set to true tooltip is shown.
+    <Tooltip>Helpful info</Tooltip>
 -->
 
 <template>
-  <div :class="[
-    'tooltip-wrapper',
-    'fade-in',{'visible': visible,}]">
+  <div class="tooltip">
     <slot></slot>
   </div>
 </template>
@@ -32,29 +24,14 @@ export default {
 <style lang="less" scoped>
 @import '../styles/vars';
 
-.tooltip-wrapper {
-  color: @color-white;
-  padding: 8px;
+.tooltip {
   background-color: @color-dark;
-  font-size: 12px;
   border-radius: 2px;
-  position: absolute;
-  display: none;
-  max-width: 286px;
-  white-space: nowrap;
-  left: 50%;
-  transform: translateX(-50%);
-
-  &.visible {
-    display: block;
-  }
-
-  &:not(.top) {
-    margin-top: 10px;
-  }
-
-  &.fade-in {
-    .animation(fadein 0.5s);
-  }
+  color: @color-white;
+  font-family: @font-family;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 8px;
+  width: 270px;
 }
 </style>

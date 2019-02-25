@@ -71,12 +71,14 @@
 
 
       <span
-        v-if="help" class="help-label" ref="helpLabel"
+        v-if="help && !errors.length"
+        class="help-label"
+        ref="helpLabel"
         @mouseover="helpVisible = true"
       >
         {{ helpLabel }}
         <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible">
-          <div class="help-content" v-html="help"></div>
+          <Tooltip v-html="help" />
         </Dropdown>
       </span>
     </div>
@@ -100,10 +102,11 @@
 import Datepicker from './Datepicker'
 import Dropdown from './Dropdown'
 import Icon from './Icon'
+import Tooltip from './Tooltip'
 
 export default {
   name: "Input",
-  components: {Datepicker, Dropdown, Icon},
+  components: {Datepicker, Dropdown, Icon, Tooltip},
   props: {
     // General
     disabled: Boolean,

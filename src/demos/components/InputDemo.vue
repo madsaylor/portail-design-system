@@ -36,7 +36,7 @@
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
     <div class="input-component-demo">
-      Model value: {{ textValue }}<br />
+      Basic inputs:<br />
       <Input sm label="Small" v-model="textValue"/>
       <Input md label="Medium" v-model="textValue"/>
       <Input lg label="Large" v-model="textValue"/>
@@ -49,7 +49,7 @@
         v-model="textValue"
       />
       <Input
-        md
+        sm
         disabled
         label="Disabled input"
         placeholder="Disabled"
@@ -61,15 +61,33 @@
         :validators="demoValidators"
         v-model="textValue"
       />
+      <br />
+
+      Date inputs:<br />
       <Input
-        placeholder="Placeholder"
-        icon="today"
-        v-model="inputValue2"
-        label="Input with icon and bottom help"
-        :bottom-help="{label: 'bottom help', text: 'This is bottom help tooltip'}"
+        sm
+        type="date"
+        label="Date input"
+        v-model="dateValue"
+      />
+      <Input
+        sm
+        type="date"
+        label="Min and max dates"
+        placeholder="Date"
+        :minDate="new Date('2019-02-16')"
+        :maxDate="new Date('2019-02-25')"
+        v-model="dateValue2"
+      />
+      <Input
+        sm
+        type="date"
+        label="N days min/max range"
+        placeholder="Date"
+        :dateRange="{min: 5, max: 10}"
+        v-model="dateValue3"
       />
     </div>
-
   </div>
 </template>
 
@@ -107,13 +125,13 @@ export default {
   data: () => ({
     usage,
     textValue: '',
-    inputValue: 'Input with validator',
-    inputValue2: '',
-    inputValue3: '',
+    dateValue: new Date(),
+    dateValue2: null,
+    dateValue3: null,
     demoValidators: [
       {
-        message: 'Error message',
-        validator: (value) => false
+        message: 'The field is required',
+        validator: value => !!value
       },
       {
         message: `
@@ -121,7 +139,7 @@ export default {
           adipiscing elit. Nam mollis ullamcorper rutrum. Pellentesque
           rutrum consectetur nulla, eget euismod justo vehicula
         `,
-        validator: (value) => false
+        validator: () => false
       },
     ]
   })

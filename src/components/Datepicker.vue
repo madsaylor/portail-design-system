@@ -389,14 +389,19 @@ export default {
         box-sizing: border-box;
         padding: 0;
         margin-left: 8px;
-        border: 1px solid #E1E2E6;
-        background-color: #F2F4F7;
+        border: 1px solid @color-gray-300;
+        background-color: @color-gray-200;
         border-radius: 0;
 
         .icon {
           position: relative;
           top: 0;
           left: 0;
+        }
+
+        &:focus {
+          border: 1px solid darken(@color-gray-300, 5%);
+          background-color: darken(@color-gray-200, 5%);
         }
 
         &:disabled {
@@ -429,7 +434,7 @@ export default {
     height: 232px;
     width: 308px;
 
-    .grid-select .item-cell .item.other-month {
+    .grid-select .item-cell:not(.disabled) .item.other-month {
       color: @color-gray-400;
     }
     .grid-select .item-cell.selected .item.other-month {

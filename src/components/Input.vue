@@ -53,22 +53,24 @@
     <label class="label">
       <div class="label-text">{{label}}</div>
       <input
-        v-bind="{type, disabled, placeholder}"
-        :class="{'has-icon': icon, 'error': errors.length}"
+        v-bind="inputAttrs"
+        :class="{'has-icon': icon_, 'error': errors.length}"
         v-model="inputValue"
+        ref="input"
+        @focus="inputFocus"
+        @click="inputFocus"
       />
     </label>
 
-    <Icon color="gray-500" v-if="icon" :source="icon"/>
+    <Icon v-if="icon_" color="gray-500" :source="icon_" />
 
     <div class="drawer">
-      <ul class="error-list" v-if="errors.length">
-        <li class="error-message" v-for="error in errors">
-          {{ error }}
-        </li>
-      </ul>
+      <span v-if="errors.length" class="error-message">
+        {{ errors[0] }}
+      </span>
 
-      <div
+
+      <span
         v-if="help" class="help-label" ref="helpLabel"
         @mouseover="helpVisible = true"
       >
@@ -76,19 +78,32 @@
         <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible">
           <div class="help-content" v-html="help"></div>
         </Dropdown>
-      </div>
+      </span>
     </div>
+
+    <Dropdown
+      v-if="type === 'date'"
+      :target="$refs.input"
+      :opened.sync="datepickerVisible"
+      position="bottom-middle"
+    >
+      <Datepicker
+        :min="datepickerMin"
+        :max="datepickerMax"
+        v-model="datepickerValue"
+      ></Datepicker>
+    </Dropdown>
   </div>
 </template>
 
 <script>
-import Icon from './Icon'
-import Tooltip from './Tooltip'
+import Datepicker from './Datepicker'
 import Dropdown from './Dropdown'
+import Icon from './Icon'
 
 export default {
   name: "Input",
-  components: {Tooltip, Dropdown, Icon},
+  components: {Datepicker, Dropdown, Icon},
   props: {
     // General
     disabled: Boolean,
@@ -99,6 +114,7 @@ export default {
     },
     icon: String,
     label: String,
+    lang: String,
     lg: Boolean,
     md: Boolean,
     sm: Boolean,
@@ -109,15 +125,42 @@ export default {
     },
     validators: Array,
     value: null,
+
+    // For type="date"
+    minDate: Date,
+    maxDate: Date,
+    dateRangeStart: {
+      type: Date,
+      default: () => new Date(),
+    },
+    dateRange: Object,  // For example {min: 30, max: 180}
   },
   data: () => ({
     helpVisible: false,
+    datepickerVisible: false,
   }),
   mounted() {
     this.$emit('validation', !!this.errors.length)
   },
   computed: {
-    errors () {
+    inputAttrs() {
+      return {
+        type: this.type === 'date' ? 'text' : this.type,
+        placeholder: this.placeholder,
+        disabled: this.disabled,
+        readonly: this.type === 'date',
+      }
+    },
+    icon_() {
+      if (this.type === 'date') {
+        return 'today'
+      }
+      return this.icon
+    },
+    locale() {
+      return this.lang || this.$root.locale || 'fr-fr'
+    },
+    errors() {
       if (this.validators && this.validators.length) {
         return this.validators.reduce((acc, validator) => {
           if (!validator.validator(this.inputValue)) {
@@ -130,14 +173,68 @@ export default {
     },
     inputValue: {
       get() {
+        if (this.type === 'date') {
+          if (!this.value || isNaN(this.value)) {
+            return ''
+          }
+
+          return this.value.toLocaleDateString(this.locale)
+        }
+
         return this.value
+      },
+      set(value) {
+        if (this.type === 'date') {
+          return
+        }
+
+        this.$emit('validation', !!this.errors.length)
+        this.$emit('input', value)
+      }
+    },
+    datepickerValue: {
+      get() {
+        if (this.value && !isNaN(this.value)) {
+          return this.value
+        }
+        let date = new Date()
+        if (this.datepickerMax && date.getTime() > this.datepickerMax.getTime()) {
+          return this.datepickerMax
+        }
+        if (this.datepickerMin && date.getTime() < this.datepickerMin.getTime()) {
+          return this.datepickerMin
+        }
+        return date
       },
       set(value) {
         this.$emit('validation', !!this.errors.length)
         this.$emit('input', value)
       }
-    }
-  }
+    },
+    datepickerMin() {
+      if (this.dateRange && this.dateRange.min != null) {
+        let minDate = new Date(this.dateRangeStart)
+        minDate.setDate(minDate.getDate() - this.dateRange.min)
+        return minDate
+      }
+      return this.minDate
+    },
+    datepickerMax() {
+      if (this.dateRange && this.dateRange.max != null) {
+        let maxDate = new Date(this.dateRangeStart)
+        maxDate.setDate(maxDate.getDate() + this.dateRange.max)
+        return maxDate
+      }
+      return this.maxDate
+    },
+  },
+  methods: {
+    inputFocus() {
+      if (this.type === 'date') {
+        this.datepickerVisible = true
+      }
+    },
+  },
 }
 </script>
 
@@ -168,7 +265,7 @@ export default {
   input {
     padding: 8px 12px;
     box-sizing: border-box;
-    border: 1px solid #e1e2e6;
+    border: 1px solid @color-gray-300;
     border-radius: 2px;
     background-color: @color-white;
     width: 100%;
@@ -203,6 +300,7 @@ export default {
   }
 
   .icon {
+    pointer-events: none;
     position: absolute;
     margin-left: -30px; // 24 + 6, icon size and padding
     margin-top: 6px;    // center the 24px icon in the 36px input
@@ -215,14 +313,20 @@ export default {
     padding: 3px 12px;
     position: absolute;
     width: 100%;
+
   }
 
-  .error-list {
+  .error-message {
     color: @color-red;
     font-family: @font-family;
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
   }
 
   .help-label {
@@ -230,6 +334,15 @@ export default {
     color: @color-gray-500;
     font-family: @font-family;
     text-decoration: underline dashed;
+  }
+
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button,
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+    color: rgba(0,0,0,0);
+    opacity:0;
   }
 }
 </style>

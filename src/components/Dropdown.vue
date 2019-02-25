@@ -298,12 +298,23 @@ export default {
       }
       this.$emit('update:opened', false)
     },
+
+    /**
+     * Close dropdown when the Escape key is pressed
+     */
+    escapePress(event) {
+      if (event.code === "Escape") {
+        this.$emit('update:opened', false)
+      }
+    },
   },
   mounted() {
     document.addEventListener('click', this.outsideClick, true)
+    document.addEventListener('keydown', this.escapePress)
   },
   beforeDestroy() {
     document.removeEventListener('click', this.outsideClick, true)
+    document.removeEventListener('keydown', this.escapePress)
   },
 }
 </script>

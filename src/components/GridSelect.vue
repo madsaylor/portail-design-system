@@ -54,7 +54,7 @@
         }]"
         :tabindex="!item.disabled && 0"
         @click="!item.disabled && select(item)"
-        @keypress.enter.space.prevent="select(item)"
+        @keydown.enter.space.prevent="select(item)"
         :style="{width: itemWidth}"
       >
         <span :class="['item', ...item.class]">
@@ -149,7 +149,7 @@ export default {
       }
 
       &.disabled > .item {
-        color: @color-gray-400;
+        color: @color-gray-300;
       }
 
       &:focus {

@@ -17,9 +17,9 @@
 
 <template>
   <button
+    v-on="$listeners"
     :class="['button', {primary, big, alt, plain}]"
     :disabled="disabled"
-    @click="event => {$emit('click', event)}"
   >
     <Icon
       v-if="icon"

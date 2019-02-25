@@ -31,6 +31,7 @@
   <span
     class="icon"
     v-html="code"
+    v-on="$listeners"
     :style="{
       height: size,
       width: size,

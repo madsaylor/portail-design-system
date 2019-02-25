@@ -103,6 +103,7 @@ export default {
     transitionTime: 100,
     contentRect: null,
     targetRect: null,
+    offsetParent: null,
   }),
   computed: {
     /**
@@ -130,7 +131,7 @@ export default {
       return element
     },
     /**
-     * Style vars for absolute postion of the component
+     * Style vars for absolute position of the component
      */
     positionStyle() {
       if (this.contentRect == null || this.targetRect == null) {
@@ -141,6 +142,7 @@ export default {
       let targetRect = this.targetElement.getBoundingClientRect()
       let left = targetRect.left + window.pageXOffset
       let top = targetRect.top + window.pageYOffset
+
       let targetHeight = this.targetRect.height
       let targetWidth = this.targetRect.width
       let contentHeight = this.contentRect.height
@@ -181,15 +183,20 @@ export default {
         case 'bottom':
       }
 
-      // Offset for non-static parents if needed
-      let el = this.$el.offsetParent
-      while (el && el.offsetParent) {
+      // Offset for non-static-positioned parents if needed
+      let el = this.offsetParent
+      while (el) {
         left -= el.offsetLeft
         top -= el.offsetTop
         el = el.offsetParent
       }
 
-      return {position: 'absolute', left: left + 'px', top: top + 'px'}
+      return {
+        position: 'absolute',
+        left: left + 'px',
+        top: top + 'px',
+        'z-index': 2,
+      }
     },
     /**
      * 2D transformation matrix for CSS transform parameter
@@ -227,34 +234,40 @@ export default {
     /**
      * Transition methods:
      * For enter transition we first render an invisible dropdown to get
-     * content's height and width
+     * content's height, width and .offsetParent for positioning
      */
     beforeEnter(el) {
       el.style.opacity = '0'
     },
 
     enter(el, done) {
+      this.offsetParent = el.offsetParent
       this.targetRect = this.targetElement.getBoundingClientRect()
       this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
 
       setTimeout(done, this.transitionTime)
 
-      if (this.justFade || this.justFadeIn) {
+      // The timeout and the second contentRect assignment below aren't
+      // generally needed by fix the slightly off first-time opening animation
+      setTimeout(() => {
+        this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
+        if (this.justFade || this.justFadeIn) {
+          el.style.opacity = '1'
+          return
+        }
+
+        el.style.transform = this.transformationMatrix
+        el.style.display = 'none'
+
+        el.offsetHeight  // Forcing layout update
+
+        el.style.display = 'block'
+
+        el.offsetHeight  // Forcing layout update
+
+        el.style.transform = 'none'
         el.style.opacity = '1'
-        return
-      }
-
-      el.style.transform = this.transformationMatrix
-      el.style.display = 'none'
-
-      el.offsetHeight  // Forcing layout update
-
-      el.style.display = 'block'
-
-      el.offsetHeight  // Forcing layout update
-
-      el.style.transform = 'none'
-      el.style.opacity = '1'
+      }, 0)
     },
 
     leave(el, done) {

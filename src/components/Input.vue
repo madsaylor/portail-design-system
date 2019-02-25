@@ -210,6 +210,7 @@ export default {
         return date
       },
       set(value) {
+        this.datepickerVisible = false
         this.$emit('validation', !!this.errors.length)
         this.$emit('input', value)
       }
@@ -257,6 +258,11 @@ export default {
   }
   &.lg {
     width: 464px;
+  }
+  @media @screen-small {
+    &.lg {
+      width: 296px;
+    }
   }
 
   .label-text {

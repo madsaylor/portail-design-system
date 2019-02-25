@@ -183,6 +183,18 @@ export default {
         case 'bottom':
       }
 
+      // Check if it goes beyond the screen and readjust accordingly
+      if ((contentWidth + margin * 2) > window.innerWidth) {
+        left = (window.innerWidth - contentWidth) / 2  // Center
+      }
+      else if (left < margin) {
+        left = margin
+      }
+      else if (left + contentWidth + margin > window.innerWidth) {
+        left = window.innerWidth - contentWidth - margin
+      }
+
+
       // Offset for non-static-positioned parents if needed
       let el = this.offsetParent
       while (el) {

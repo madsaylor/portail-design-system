@@ -93,12 +93,12 @@
     <Icon v-if="icon_" color="gray-400" :source="icon_" />
 
     <div class="drawer">
-      <span v-if="errors.length" class="error-message">
+      <span v-show="errors.length" class="error-message">
         {{ errors[0] }}
       </span>
 
       <span
-        v-if="help && !errors.length"
+        v-show="help && !errors.length"
         class="help-label"
         ref="helpLabel"
         @mouseover="helpVisible = true"

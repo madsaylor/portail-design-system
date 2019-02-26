@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/monokai.css'
 
+import './utils/patch-ios-safari-click'
+
 import './fonts/lato.css'
 import App from './App.vue'
 

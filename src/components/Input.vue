@@ -279,7 +279,7 @@ export default {
   width: 100%;
 
   &.standalone {
-    margin-right: 32px
+    margin-right: 32px;
   }
 
   &.sm {

@@ -95,29 +95,58 @@
 import Input from '../../components/Input'
 
 let usage = `
+Basic inputs:<br />
+<Input sm label="Small" v-model="textValue"/>
+<Input md label="Medium" v-model="textValue"/>
+<Input lg label="Large" v-model="textValue"/>
 <Input
-  placeholder="Maximum 10 characters"
+  md
+  help="This is an explation of what the field is used for."
   icon="search"
-  title="Input with icon and help"
-  help="Some info"
-  v-model="inputValue"
-  :validators="validators"
-  @validation="logError($event)"
+  label="Icon, placeholder and help text"
+  placeholder="Search"
+  v-model="textValue"
 />
 <Input
-  placeholder="Placeholder"
-  icon="today"
-  title="Input with icon and bottom help"
-  v-model="inputValue2"
-  :bottom-help="{label: 'bottom help', text: 'This is bottom help tooltip'}"
-/>
-<Input
-  placeholder="Disabled"
-  title="Disabled input"
-  v-model="inputValue3"
+  sm
   disabled
-/>`
-.slice(1)
+  label="Disabled input"
+  placeholder="Disabled"
+  v-model="textValue"
+/>
+<Input
+  md
+  label="Input with errors"
+  :validators="demoValidators"
+  v-model="textValue"
+/>
+<br />
+
+Date inputs:<br />
+<Input
+  sm
+  type="date"
+  label="Date input"
+  v-model="dateValue"
+/>
+<Input
+  sm
+  type="date"
+  label="Min and max dates"
+  placeholder="Date"
+  :minDate="new Date('2019-02-16')"
+  :maxDate="new Date('2019-02-25')"
+  v-model="dateValue2"
+/>
+<Input
+  sm
+  type="date"
+  label="N days min/max range"
+  placeholder="Date"
+  :dateRange="{min: 5, max: 10}"
+  v-model="dateValue3"
+/>
+`.slice(1)
 
 export default {
   name: "InputDemo",

@@ -4,43 +4,71 @@
   Usage:
 
     <Input
-      :placeholder='Placeholder' - Text displayed as placeholder value
-      :type='email'              - Input type
-      :validators='validators'   - Array of validators
-      :top-label='label'         - label at the top
-      :disabled='true'           - Disables input
-      :icon='search'             - Icon name on the right of the input
-      :help='Some help text'     - Shown when hovering help icon
-      :bottom-help='bottomHelp'  - Object of bottom help
-      v-model='value'            - Binds value property to input
-      @validation                - Emits whether input has errors
+      :disabled="true"            - Disables input
+      :help="'Some help text'"    - Shown when hovering help label
+      :helpLabel="'Show help'"    - Text for the help label
+      :icon="'search'""           - Icon name or svg code
+      :label="'My Input'"         - Label at the top of the input
+      :lang="'en-en'"             - BCP 47 localization code
+      :lg="false"                 - Large size
+      :md="false"                 - Medium size
+      :sm="false"                 - Small size
+      :placeholder='Placeholder'  - Text used as the placeholder
+      :type='email'               - Input type
+      :validators='validators'    - Array of validators
+
+      :minDate=" pastDate"        - Earliest date for the datepicker
+      :maxDate="futureDate"       - Latest date for the datepicker
+      :dateRangeStart="today"     - Starting point for the dateRange
+      :dateRange="{min: 30}"      - N days in past/future date range
+
+      v-model='value'             - Binds value property to input
+      @validation                 - Emits whether input has errors
     />
 
   Properties:
 
-    placeholder - String. Sets html input tag's placeholder
+    disabled - Boolean. Is input disabled. Passed directly to the input
 
-    type - String. Sets html input tag's type
+    help - String. Text for the tooltip at the bottom of the input
+
+    helpLabel - String. Text for the tooltip label
+
+    icon - String. Icon name for icons from src/icons folder or an svg code
+
+    label - String. Label at the top of the input
+
+    lang - String. BCP 47 code. Language to be used in the datepicker
+      for month names and weekday labels. Can be set globally with
+      $root.locale. This property overrides global setting
+
+    lg - Boolean. Large size - 464px
+
+    md - Boolean. Medium size - 252px
+
+    sm - Boolean. Small size -  144px
+
+    placeholder - String. Passed directly to the input
+
+    type - String. Passed to the input with type_ computed property.
+      <Input type="date" /> results in <input type="text" />
 
     validators - Array[Object]. Array of validator Objects. Each Object must have two fields:
       message (String) - Error message that will be displayed if a validation failed.
       validator (function) - Function that takes input value as an argument and implements
         validation logic.
 
-    label - String. Text that will be displayed as a label for input.
+    minDate - Date. Earliest selectable day for the datepicker
 
-    disabled - Boolean. Defines if an input is disabled.
+    maxDate - Date. Latest selectable day for the datepicker
 
-    icon - String (icon name or <svg>...</svg> code). Sets the icon displayed in the input
-      on the right
+    dateRangeStart - Date. Point of reference for the dateRange property
 
-    help - String or html code. When set this will add a help icon on the right of the input
-      which when hovered will display a tooltip with received prop content.
-
-    bottomHelp - Object. Will display a help text with a tooltip on hover at the bottom of the input.
-      Object must contain two fields:
-      label (String) - Text of help label.
-      text (String or html code) - Content of the tooltip
+    dateRange - Object. An alternative to minDate/maxDate:
+      :dateRange="{
+        min: 10,  - 10 calendar days in the past from the dateRangeStart
+        max: 20,  - 20 calendar days in the future from the dateRangeStart
+      }"
 
   Events:
 
@@ -68,7 +96,6 @@
       <span v-if="errors.length" class="error-message">
         {{ errors[0] }}
       </span>
-
 
       <span
         v-if="help && !errors.length"

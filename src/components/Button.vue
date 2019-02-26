@@ -85,6 +85,7 @@ export default {
   }
 
   .icon {
+    fill: @color-dark;
     margin: -4px;
   }
   .icon-left {

@@ -60,12 +60,12 @@
         </div>
       </div>
       <div class="buttons">
-        <Button
-          plain icon="arrow_left" @click="shift(-1)" :disabled="!canShiftBack"
-        ></Button>
-        <Button
-          plain icon="arrow_right" @click="shift(1)" :disabled="!canShiftForward"
-        ></Button>
+        <button @click="shift(-1)" :disabled="!canShiftBack">
+          <Icon arrow_left color="dark" size="32px"></Icon>
+        </button>
+        <button @click="shift(1)":disabled="!canShiftForward">
+          <Icon arrow_right color="dark" size="32px"></Icon>
+        </button>
       </div>
     </div>
 
@@ -85,13 +85,12 @@
 
 <script>
 import GridSelect from './GridSelect'
-import Button from './Button'
+import Icon from './Icon'
 
 export default {
   name: 'Datepicker',
   components: {
     GridSelect,
-    Button,
   },
   props: {
     lang: String,
@@ -382,26 +381,33 @@ export default {
 
     // Buttons as designed:
     .buttons {
-      margin-top: 20px;
+      margin-top: 6px;
+
       button {
-        height: 24px;
-        width: 24px;
+        height: 32px;
+        width: 32px;
         box-sizing: border-box;
         padding: 0;
-        margin-left: 8px;
+        margin-left: 12px;
         border: 1px solid @color-gray-300;
         background-color: @color-gray-200;
         border-radius: 0;
 
         .icon {
-          position: relative;
-          top: 0;
-          left: 0;
+          margin: -1px;
         }
 
         &:focus {
-          border: 1px solid darken(@color-gray-300, 5%);
-          background-color: darken(@color-gray-200, 5%);
+          background-color: darken(@color-gray-200, 2%);
+          outline: none;
+        }
+
+        &:hover {
+          background-color: @color-gray-300;
+        }
+
+        &:active {
+          background-color: darken(@color-gray-300, 2%);
         }
 
         &:disabled {
@@ -412,22 +418,6 @@ export default {
         }
       }
     }
-
-    // // Proposal:
-    // .buttons {
-    //   button {
-    //     height: 44px;
-    //     width: 44px;
-    //     margin-left: 8px;
-    //     .icon {
-    //       margin-left: -6px;
-    //     }
-
-    //     &:disabled {
-    //       background: @color-white;
-    //     }
-    //   }
-    // }
   }
 
   .body {

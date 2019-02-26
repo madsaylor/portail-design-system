@@ -149,7 +149,6 @@ export default {
 <style lang="less" scoped>
 .input-demo {
   .input {
-    margin-right: 32px;
     margin-bottom: 60px;
   }
 }

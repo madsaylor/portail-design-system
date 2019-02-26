@@ -77,7 +77,7 @@
 -->
 
 <template>
-  <div :class="['input', {sm, md, lg}]">
+  <div :class="['input', {sm, md, lg, standalone: sm || md || lg}]">
     <label class="label">
       <div class="label-text">{{label}}</div>
       <input
@@ -90,7 +90,7 @@
       />
     </label>
 
-    <Icon v-if="icon_" color="gray-500" :source="icon_" />
+    <Icon v-if="icon_" color="gray-400" :source="icon_" />
 
     <div class="drawer">
       <span v-if="errors.length" class="error-message">
@@ -104,7 +104,7 @@
         @mouseover="helpVisible = true"
       >
         {{ helpLabel }}
-        <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible">
+        <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible" just-fade>
           <Tooltip v-html="help" />
         </Dropdown>
       </span>
@@ -115,6 +115,7 @@
       :target="$refs.input"
       :opened.sync="datepickerVisible"
       position="bottom-middle"
+      just-fade
     >
       <Datepicker
         :min="datepickerMin"
@@ -276,6 +277,10 @@ export default {
   position: relative;
   display: inline-block;
   width: 100%;
+
+  &.standalone {
+    margin-right: 32px
+  }
 
   &.sm {
     width: 144px;

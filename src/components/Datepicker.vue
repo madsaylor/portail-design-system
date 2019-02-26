@@ -402,12 +402,14 @@ export default {
           outline: none;
         }
 
-        &:hover {
-          background-color: @color-gray-300;
-        }
+        &:not(:disabled) {
+          &:hover {
+            background-color: @color-gray-300;
+          }
 
-        &:active {
-          background-color: darken(@color-gray-300, 2%);
+          &:active {
+            background-color: darken(@color-gray-300, 2%);
+          }
         }
 
         &:disabled {

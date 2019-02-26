@@ -63,7 +63,7 @@
         <button @click="shift(-1)" :disabled="!canShiftBack">
           <Icon arrow_left color="dark" size="32px"></Icon>
         </button>
-        <button @click="shift(1)":disabled="!canShiftForward">
+        <button @click="shift(1)" :disabled="!canShiftForward">
           <Icon arrow_right color="dark" size="32px"></Icon>
         </button>
       </div>
@@ -91,6 +91,7 @@ export default {
   name: 'Datepicker',
   components: {
     GridSelect,
+    Icon,
   },
   props: {
     lang: String,

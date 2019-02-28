@@ -98,7 +98,7 @@
       </span>
 
       <span
-        v-show="help && !inputErrors.length && touched"
+        v-show="help && !(inputErrors.length && touched)"
         class="help-label"
         ref="helpLabel"
         @mouseover="helpVisible = true"

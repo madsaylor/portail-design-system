@@ -190,6 +190,9 @@ export default {
       return this.icon
     },
     locale() {
+      if (this.$root === this) {
+        return this.lang || 'fr-fr'
+      }
       return this.lang || this.$root.locale || 'fr-fr'
     },
     inputErrors() {

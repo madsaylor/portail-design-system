@@ -247,7 +247,7 @@ export default {
     },
     dateRangeStart_() {
       return this.dateRangeStart || new Date()
-    }
+    },
     datepickerMin() {
       if (this.dateRange && this.dateRange.min != null) {
         let minDate = new Date(this.dateRangeStart_)

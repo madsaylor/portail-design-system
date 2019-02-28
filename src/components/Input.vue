@@ -160,11 +160,8 @@ export default {
     // For type="date"
     minDate: Date,
     maxDate: Date,
-    dateRangeStart: {
-      type: Date,
-      default: () => new Date(),
-    },
-    dateRange: Object,  // For example {min: 30, max: 180}
+    dateRangeStart: Date,  // will be new Date() if not set
+    dateRange: Object,     // For example {min: 30, max: 180}
   },
   data: () => ({
     helpVisible: false,
@@ -248,9 +245,12 @@ export default {
         this.$emit('input', value)
       }
     },
+    dateRangeStart_() {
+      return this.dateRangeStart || new Date()
+    }
     datepickerMin() {
       if (this.dateRange && this.dateRange.min != null) {
-        let minDate = new Date(this.dateRangeStart)
+        let minDate = new Date(this.dateRangeStart_)
         minDate.setDate(minDate.getDate() - this.dateRange.min)
         return minDate
       }
@@ -258,7 +258,7 @@ export default {
     },
     datepickerMax() {
       if (this.dateRange && this.dateRange.max != null) {
-        let maxDate = new Date(this.dateRangeStart)
+        let maxDate = new Date(this.dateRangeStart_)
         maxDate.setDate(maxDate.getDate() + this.dateRange.max)
         return maxDate
       }

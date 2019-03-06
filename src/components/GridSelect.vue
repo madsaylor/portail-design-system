@@ -44,7 +44,7 @@
       </th>
     </tr>
 
-    <tr v-for="row in items" class="row">
+    <tr v-for="row in items" class="grid-select-row">
       <td
         v-for="item in row"
         :class="['item-cell', {
@@ -112,7 +112,7 @@ export default {
     user-select: none;
   }
 
-  .row {
+  .grid-select-row {
     .item-cell {
       text-align: center;
       > .item {

@@ -78,8 +78,8 @@
 
 <template>
   <div :class="['input', {sm, md, lg, standalone: sm || md || lg}]">
-    <label class="label">
-      <div class="label-text">{{label}}</div>
+    <label>
+      <div class="label-text">{{ label }}</div>
       <input
         v-bind="inputAttrs"
         :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"

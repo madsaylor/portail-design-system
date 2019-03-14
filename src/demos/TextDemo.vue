@@ -52,6 +52,7 @@ export default {
       'font-components-button-normal-alt-center',
       'font-components-button-normal-alt-dark',
       'font-components-button-normal-center',
+      'font-components-button-normal-right',
       'font-components-tab-active',
       'font-components-tab-inactive',
       'font-desktop-body-medium-dark',
@@ -127,6 +128,11 @@ export default {
 }
 .font-components-button-normal-center {
   .font-components-button-normal-center();
+  &.card { background: @color-primary; }
+}
+.font-components-button-normal-right {
+  .font-components-button-normal-right();
+  &.card { background: @color-primary; }
 }
 .font-components-tab-active {
   .font-components-tab-active();

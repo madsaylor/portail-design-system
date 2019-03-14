@@ -159,10 +159,12 @@ export default {
     dateValue3: null,
     demoValidators: [
       {
+        name: 'required',
         message: 'The field is required',
         validator: value => !!value
       },
       {
+        name: 'long-error',
         message: `
           Long error message: Lorem ipsum dolor sit amet, consectetur
           adipiscing elit. Nam mollis ullamcorper rutrum. Pellentesque

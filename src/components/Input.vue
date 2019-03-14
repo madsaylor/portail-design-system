@@ -170,7 +170,7 @@ export default {
     touched: false
   }),
   mounted() {
-    this.$emit('validation', !this.inputErrors.length)
+    this.$emit('validation', this.validation)
   },
   computed: {
     inputAttrs() {
@@ -193,16 +193,40 @@ export default {
       }
       return this.lang || this.$root.locale || 'fr-fr'
     },
-    inputErrors() {
-      if (this.validators && this.validators.length) {
-        return this.validators.reduce((acc, validator) => {
-          if (!validator.validator(this.inputValue)) {
-            acc.push(validator.message);
-          }
-          return acc;
-        }, [])
+
+    /**
+     * Validation data for the current value and validators
+     * this.validation -> [
+     *   [
+     *     'required',  // validator.name
+     *     true         // is valid
+     *   ],
+     *   ...
+     * ]
+     */
+    validation() {
+      if (!this.validators || !this.validators.length) {
+        return []
       }
-      return [];
+
+      let data = []
+      for (var i = 0; i < this.validators.length; i++) {
+        data.push([
+          this.validators[i].name,
+          this.validators[i].validator(this.inputValue),
+        ])
+      }
+      return data
+    },
+
+    inputErrors() {
+      let errors = []
+      for (var i = 0; i < this.validation.length; i++) {
+        if (!this.validation[i][1]) {
+          errors.push(this.validators[i].message)
+        }
+      }
+      return errors
     },
     inputValue: {
       get() {
@@ -272,7 +296,7 @@ export default {
   },
   watch: {
     value() {
-      this.$emit('validation', !this.inputErrors.length)
+      this.$emit('validation', this.validation)
     }
   }
 }

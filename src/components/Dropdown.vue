@@ -301,6 +301,9 @@ export default {
      * Close dropdown on an outside click
      */
     outsideClick(event) {
+      if (!this.opened) {
+        return
+      }
       let el = event.target
       while (el.parentNode) {
         if (el === this.$el || el === this.targetElement) {
@@ -315,7 +318,7 @@ export default {
      * Close dropdown when the Escape key is pressed
      */
     escapePress(event) {
-      if (event.code === "Escape") {
+      if (event.code === "Escape" && this.opened) {
         this.$emit('update:opened', false)
       }
     },

@@ -172,6 +172,9 @@ export default {
     },
     outsideClick(event) {
       // Close sidebar on an outside click
+      if (!this.opened) {
+        return
+      }
       let el = event.target
       while (el.parentNode) {
         if (el === this.$el) {

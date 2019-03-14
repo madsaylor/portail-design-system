@@ -87,6 +87,7 @@
         ref="input"
         @focus="inputFocus"
         @click="inputFocus"
+        @blur="touched = true"
       />
     </label>
 
@@ -220,7 +221,6 @@ export default {
           return
         }
 
-        this.touched = true
         this.$emit('validation', !!this.inputErrors.length)
         this.$emit('input', value)
       }
@@ -281,7 +281,6 @@ export default {
 .input {
   position: relative;
   display: inline-block;
-  width: 100%;
 
   &.standalone {
     margin-right: 32px;

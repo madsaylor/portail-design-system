@@ -42,7 +42,7 @@
       <Input lg label="Large" v-model="textValue"/>
       <Input
         md
-        help="This is an explation of what the field is used for."
+        help="This is an explanation of what the field is used for."
         icon="search"
         label="Icon, placeholder and help text"
         placeholder="Search"

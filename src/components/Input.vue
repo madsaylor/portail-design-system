@@ -222,7 +222,6 @@ export default {
         }
 
         this.$emit('input', value)
-        this.$emit('validation', !this.inputErrors.length)
       }
     },
     datepickerValue: {
@@ -242,7 +241,6 @@ export default {
       set(value) {
         this.datepickerVisible = false
         this.$emit('input', value)
-        this.$emit('validation', !this.inputErrors.length)
       }
     },
     dateRangeStart_() {
@@ -272,6 +270,11 @@ export default {
       }
     },
   },
+  watch: {
+    value() {
+      this.$emit('validation', !this.inputErrors.length)
+    }
+  }
 }
 </script>
 

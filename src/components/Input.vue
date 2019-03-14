@@ -170,7 +170,7 @@ export default {
     touched: false
   }),
   mounted() {
-    this.$emit('validation', !!this.inputErrors.length)
+    this.$emit('validation', !this.inputErrors.length)
   },
   computed: {
     inputAttrs() {
@@ -221,8 +221,8 @@ export default {
           return
         }
 
-        this.$emit('validation', !!this.inputErrors.length)
         this.$emit('input', value)
+        this.$emit('validation', !this.inputErrors.length)
       }
     },
     datepickerValue: {
@@ -241,8 +241,8 @@ export default {
       },
       set(value) {
         this.datepickerVisible = false
-        this.$emit('validation', !!this.inputErrors.length)
         this.$emit('input', value)
+        this.$emit('validation', !this.inputErrors.length)
       }
     },
     dateRangeStart_() {

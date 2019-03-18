@@ -20,33 +20,37 @@
       dropdown should be opened (usually the element that triggers open)
 
     position - String. Where dropdown should be placed relatively to the
-      target. Formated as 'primaryAlignment-secondaryAlignment':
+      target. Formated as 'primaryAlignment-secondaryAlignment', except for
+      one special value - 'modal':
 
-                  top-left      top-middle     top-right
-                    +--------------------------------+
-                    |       |                |       |
-                    |       |                |       |
-      left-top      |       |                |       |     right-top
-       +------------------+ |                | +------------------+
-       |            |     | |                | |     |            |
-       |            |     | |                | |     |            |
-       |            |     | |                | |     |            |
-       |            +--------------------------------+            |
-       +------------------+ +----------------+ +------------------+
-       |                  | |                | |                  |
-      left-center         | |     Target     | |        right-center
-       |                  | |                | |                  |
-       +------------------+ +----------------+ +------------------+
-       |            +--------------------------------+            |
-       |            |     | |                | |     |            |
-       |            |     | |                | |     |            |
-       |            |     | |                | |     |            |
-       +------------------+ |                | +------------------+
-      left-bottom   |       |                |       |   right-bottom
-                    |       |                |       |
-                    |       |                |       |
-                    +--------------------------------+
-                bottom-left   bottom-middle   bottom-right
+      +--- modal --------------------------------------------------------+
+      |              top-left      top-middle     top-right          | X |
+      |                +--------------------------------+            +---+
+      |                |       |                |       |                |
+      |                |       |                |       |                |
+      |  left-top      |       |                |       |     right-top  |
+      |   +------------------+ |                | +------------------+   |
+      |   |            |     | |                | |     |            |   |
+      |   |            |     | |                | |     |            |   |
+      |   |            |     | |                | |     |            |   |
+      |   |            +--------------------------------+            |   |
+      |   +------------------+ +----------------+ +------------------+   |
+      |   |                  | |                | |                  |   |
+      |  left-center         | |     Target     | |        right-center  |
+      |   |                  | |                | |                  |   |
+      |   +------------------+ +----------------+ +------------------+   |
+      |   |            +--------------------------------+            |   |
+      |   |            |     | |                | |     |            |   |
+      |   |            |     | |                | |     |            |   |
+      |   |            |     | |                | |     |            |   |
+      |   +------------------+ |                | +------------------+   |
+      |  left-bottom   |       |                |       |   right-bottom |
+      |                |       |                |       |                |
+      |                |       |                |       |                |
+      |                +--------------------------------+                |
+      |            bottom-left   bottom-middle   bottom-right            |
+      |                                                                  |
+      +------------------------------------------------------------------+
 
     opened - Boolean. Is dropdown shown. Supports .sync modifier that
       lets the component close itself (when user clicks outside)
@@ -60,17 +64,15 @@
   >
     <div v-if="opened" class="dropdown" :style="{
       ...positionStyle,
-      transition: `
-        transform ${transitionTime}ms ease-out,
-        opacity ${transitionTime}ms ease-out
-      `,
+      transition: `opacity ${transitionTime}ms ease-out`,
     }">
-      <div ref="dropdownContent">
-        <slot>
-          <div class="example-menu">
-            Example Menu
-          </div>
-        </slot>
+      <div class="backdrop" v-if="position === 'modal'">
+
+      </div>
+      <div class="dropdown-content" ref="dropdownContent" :style="{
+        transition: `transform ${transitionTime}ms ease-out`,
+      }">
+        <slot></slot>
       </div>
     </div>
   </transition>
@@ -88,6 +90,7 @@ export default {
       type: String,
       validator(value) {
         return [
+          'modal',
           'top-left',    'top-middle',    'top-right',
           'left-top',                     'right-top',
           'left-center',                  'right-center',
@@ -107,7 +110,7 @@ export default {
   }),
   computed: {
     /**
-     * Target element to "attach" the component to
+     * Target element to "attach" the dropdown to (visually)
      */
     targetElement() {
       let element = this.target
@@ -148,6 +151,12 @@ export default {
       let contentHeight = this.contentRect.height
       let contentWidth = this.contentRect.width
 
+      if (this.position === 'modal') {
+        left = (window.innerWidth - contentWidth) / 2 + window.pageXOffset
+        top = (window.innerHeight - contentHeight) / 2  + window.pageYOffset
+        return {left: left + 'px', top: top + 'px'}
+      }
+
       let margin = 4
       let [primaryAlignment, secondaryAlignment] = this.position.split('-')
 
@@ -183,7 +192,7 @@ export default {
         case 'bottom':
       }
 
-      // Check if it goes beyond the screen and readjust accordingly
+      // Check if it goes beyond the screen (horizontally) and adjust if needed
       if ((contentWidth + margin * 2) > window.innerWidth) {
         left = (window.innerWidth - contentWidth) / 2  // Center
       }
@@ -194,7 +203,6 @@ export default {
         left = window.innerWidth - contentWidth - margin
       }
 
-
       // Offset for non-static-positioned parents if needed
       let el = this.offsetParent
       while (el) {
@@ -204,10 +212,8 @@ export default {
       }
 
       return {
-        position: 'absolute',
         left: left + 'px',
         top: top + 'px',
-        'z-index': 2,
       }
     },
     /**
@@ -268,7 +274,7 @@ export default {
           return
         }
 
-        el.style.transform = this.transformationMatrix
+        this.$refs.dropdownContent.style.transform = this.transformationMatrix
         el.style.display = 'none'
 
         el.offsetHeight  // Forcing layout update
@@ -277,7 +283,7 @@ export default {
 
         el.offsetHeight  // Forcing layout update
 
-        el.style.transform = 'none'
+        this.$refs.dropdownContent.style.transform = 'none'
         el.style.opacity = '1'
       }, 0)
     },
@@ -293,7 +299,7 @@ export default {
         return
       }
 
-      el.style.transform = this.transformationMatrix
+      this.$refs.dropdownContent.style.transform = this.transformationMatrix
       el.style.opacity = '0'
     },
 
@@ -333,3 +339,29 @@ export default {
   },
 }
 </script>
+
+<style lang="less" scoped>
+@import '../styles/vars';
+
+.dropdown {
+  position: absolute;
+  z-index: @z-index-max - 2;
+}
+
+.backdrop {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transform: none;
+  z-index: @z-index-max - 1;
+  background: black;
+  opacity: 0.5;
+}
+
+.dropdown-content {
+  position: relative;
+  z-index: @z-index-max;
+}
+</style>

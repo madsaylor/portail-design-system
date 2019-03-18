@@ -66,9 +66,11 @@
       ...positionStyle,
       transition: `opacity ${transitionTime}ms ease-out`,
     }">
-      <div class="backdrop" v-if="position === 'modal'">
-
-      </div>
+      <div
+        v-if="position === 'modal'"
+        class="backdrop"
+        @click="$emit('update:opened', false) && null"
+      ></div>
       <div class="dropdown-content" ref="dropdownContent" :style="{
         transition: `transform ${transitionTime}ms ease-out`,
       }">
@@ -346,22 +348,23 @@ export default {
 .dropdown {
   position: absolute;
   z-index: @z-index-max - 2;
-}
 
-.backdrop {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  transform: none;
-  z-index: @z-index-max - 1;
-  background: black;
-  opacity: 0.5;
-}
+  .backdrop {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    transform: none;
+    z-index: @z-index-max - 1;
+    background: black;
+    opacity: 0.5;
 
-.dropdown-content {
-  position: relative;
-  z-index: @z-index-max;
+  }
+
+  .dropdown-content {
+    position: relative;
+    z-index: @z-index-max;
+  }
 }
 </style>

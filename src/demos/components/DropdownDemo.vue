@@ -42,7 +42,6 @@
     <a class="hover-me"
       ref="hoverMe"
       @mouseover="dropdown3Opened = true"
-      @mouseleave="dropdown3Opened = false"
     >Hover me!</a>
     <Dropdown
       :target="$refs.hoverMe"

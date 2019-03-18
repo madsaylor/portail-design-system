@@ -78,6 +78,8 @@
         max: 20,  - 20 calendar days in the future from the dateRangeStart
       }"
 
+    datepickerPosition - String. Forwarded to datepicker dropdown position
+
                             --- Select ---
 
     options - Array<Object>. Options for select. Each item is bound to an
@@ -89,6 +91,10 @@
     validation - Emitted when the input value changes. The event payload is
       an array of the following structure:
         [['validator.name', isValid], ...]
+
+  Model:
+
+    Input value is updated through v-model directive
 -->
 
 <template>
@@ -143,7 +149,7 @@
       v-if="type === 'date'"
       :target="$refs.input"
       :opened.sync="datepickerVisible"
-      position="bottom-middle"
+      :position="datepickerPosition"
       just-fade
     >
       <Datepicker
@@ -191,6 +197,10 @@ export default {
     maxDate: Date,
     dateRangeStart: Date,  // will be new Date() if not set
     dateRange: Object,     // For example {min: 30, max: 180}
+    datepickerPosition: {
+      type: String,
+      default: 'bottom-middle',
+    },
 
     // For type="select"
     options: Array,

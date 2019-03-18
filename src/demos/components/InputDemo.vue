@@ -87,6 +87,14 @@
         :dateRange="{min: 5, max: 10}"
         v-model="dateValue3"
       />
+      <Input
+        sm
+        type="date"
+        label="Modal"
+        datepickerPosition="modal"
+        placeholder="Date"
+        v-model="dateValue"
+      />
       <br />
 
       Select:<br />

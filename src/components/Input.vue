@@ -23,10 +23,11 @@
       :dateRange="{min: 30}"      - N days in past/future date range
 
       v-model='value'             - Binds value property to input
-      @validation                 - Emits whether input has errors
+      @validation                 - Emits validation result
     />
 
   Properties:
+                            --- General ---
 
     disabled - Boolean. Is input disabled. Passed directly to the input
 
@@ -53,10 +54,17 @@
     type - String. Passed to the input with type_ computed property.
       <Input type="date" /> results in <input type="text" />
 
-    validators - Array[Object]. Array of validator Objects. Each Object must have two fields:
-      message (String) - Error message that will be displayed if a validation failed.
-      validator (function) - Function that takes input value as an argument and implements
-        validation logic.
+    validators - Array<Object>. Array of validator Objects. Each Object should
+      have three fields:
+        name (String) - Validator id
+        message (String) - Error message that shown when validation fails
+        validator (function) - Function that takes input value as an argument
+          and returns true/false
+
+      When multiple validators fail, only one error is displayed, determined
+      by their order in the array
+
+                             --- Date ---
 
     minDate - Date. Earliest selectable day for the datepicker
 
@@ -70,17 +78,26 @@
         max: 20,  - 20 calendar days in the future from the dateRangeStart
       }"
 
+                            --- Select ---
+
+    options - Array<Object>. Options for select. Each item is bound to an
+      <option> element. Additionaly a .title property can be set to change
+      the displayed value
+
   Events:
 
-    validation - Emitted when an input value changes. Emits true/false which tells if an input has
-      validation errors.
+    validation - Emitted when the input value changes. The event payload is
+      an array of the following structure:
+        [['validator.name', isValid], ...]
 -->
 
 <template>
   <div :class="['input', {sm, md, lg, standalone: sm || md || lg}]">
     <label>
       <div class="label-text">{{ label }}</div>
+
       <input
+        v-if="type === 'text' || type === 'date'"
         v-bind="inputAttrs"
         :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
         v-model="inputValue"
@@ -89,6 +106,17 @@
         @click="inputFocus"
         @blur="touched = true"
       />
+
+      <select
+        v-if="type === 'select'"
+        :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
+        v-model="inputValue"
+        placeholder="placeholder"
+      >
+        <option v-for="option in options" v-bind="option">
+          {{ option.title || option.value }}
+        </option>
+      </select>
     </label>
 
     <Icon v-if="icon_" color="gray-400" :source="icon_" />
@@ -163,6 +191,9 @@ export default {
     maxDate: Date,
     dateRangeStart: Date,  // will be new Date() if not set
     dateRange: Object,     // For example {min: 30, max: 180}
+
+    // For type="select"
+    options: Array,
   },
   data: () => ({
     helpVisible: false,
@@ -185,6 +216,9 @@ export default {
       if (this.type === 'date') {
         return 'today'
       }
+      if (this.type === 'select') {
+        return 'expand_more'
+      }
       return this.icon
     },
     locale() {
@@ -193,7 +227,6 @@ export default {
       }
       return this.lang || this.$root.locale || 'fr-fr'
     },
-
     /**
      * Validation data for the current value and validators
      * this.validation -> [
@@ -218,7 +251,6 @@ export default {
       }
       return data
     },
-
     inputErrors() {
       let errors = []
       for (var i = 0; i < this.validation.length; i++) {
@@ -334,7 +366,7 @@ export default {
     .font-desktop-x-small-regular-gray()
   }
 
-  input {
+  input, select {
     padding: 8px 12px;
     box-sizing: border-box;
     border: 1px solid @color-gray-300;
@@ -368,6 +400,13 @@ export default {
     &:disabled,
     &:disabled::placeholder {
       .font-desktop-small-regular-light-gray();
+    }
+  }
+
+  select {
+    appearance: none;
+    &::-ms-expand {
+      display: none;
     }
   }
 

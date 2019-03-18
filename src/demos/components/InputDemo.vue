@@ -87,6 +87,21 @@
         :dateRange="{min: 5, max: 10}"
         v-model="dateValue3"
       />
+      <br />
+
+      Select:<br />
+      <Input
+        md
+        type="select"
+        placeholder="Select a value"
+        v-model="textValue"
+        :options="[{
+          title: 'Hello',
+          value: 1,
+        }, {
+          value: 'World',
+        }]"
+      />
     </div>
   </div>
 </template>

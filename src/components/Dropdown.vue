@@ -109,6 +109,8 @@ export default {
     contentRect: null,
     targetRect: null,
     offsetParent: null,
+    freezeScrollX: 0,
+    freezeScrollY: 0,
   }),
   computed: {
     /**
@@ -156,53 +158,54 @@ export default {
       if (this.position === 'modal') {
         left = (window.innerWidth - contentWidth) / 2 + window.pageXOffset
         top = (window.innerHeight - contentHeight) / 2  + window.pageYOffset
-        return {left: left + 'px', top: top + 'px'}
       }
+      else {
+        let margin = 4
+        let [primaryAlignment, secondaryAlignment] = this.position.split('-')
 
-      let margin = 4
-      let [primaryAlignment, secondaryAlignment] = this.position.split('-')
+        switch (primaryAlignment) {
+          case 'top':
+            top -= contentHeight + margin
+            break
+          case 'left':
+            left -= contentWidth + margin
+            break
+          case 'right':
+            left += targetWidth + margin
+            break
+          case 'bottom':
+            top += targetHeight + margin
+        }
 
-      switch (primaryAlignment) {
-        case 'top':
-          top -= contentHeight + margin
-          break
-        case 'left':
-          left -= contentWidth + margin
-          break
-        case 'right':
-          left += targetWidth + margin
-          break
-        case 'bottom':
-          top += targetHeight + margin
-      }
+        switch (secondaryAlignment) {
+          case 'left':
+            left -= contentWidth - targetWidth
+            break
+          case 'middle':
+            left -= (contentWidth - targetWidth) / 2
+            break
+          case 'right':
+            break
+          case 'top':
+            top -= contentHeight - targetHeight
+            break
+          case 'center':
+            top -= (contentHeight - targetHeight) / 2
+            break
+          case 'bottom':
+        }
 
-      switch (secondaryAlignment) {
-        case 'left':
-          left -= contentWidth - targetWidth
-          break
-        case 'middle':
-          left -= (contentWidth - targetWidth) / 2
-          break
-        case 'right':
-          break
-        case 'top':
-          top -= contentHeight - targetHeight
-          break
-        case 'center':
-          top -= (contentHeight - targetHeight) / 2
-          break
-        case 'bottom':
-      }
-
-      // Check if it goes beyond the screen (horizontally) and adjust if needed
-      if ((contentWidth + margin * 2) > window.innerWidth) {
-        left = (window.innerWidth - contentWidth) / 2  // Center
-      }
-      else if (left < margin) {
-        left = margin
-      }
-      else if (left + contentWidth + margin > window.innerWidth) {
-        left = window.innerWidth - contentWidth - margin
+        // Check if it goes beyond the screen (horizontally)
+        // and adjust accordingly if needed
+        if ((contentWidth + margin * 2) > window.innerWidth) {
+          left = (window.innerWidth - contentWidth) / 2  // Center
+        }
+        else if (left < margin) {
+          left = margin
+        }
+        else if (left + contentWidth + margin > window.innerWidth) {
+          left = window.innerWidth - contentWidth - margin
+        }
       }
 
       // Offset for non-static-positioned parents if needed
@@ -258,6 +261,9 @@ export default {
      */
     beforeEnter(el) {
       el.style.opacity = '0'
+      this.freezeScrollX = window.pageXOffset
+      this.freezeScrollY = window.pageYOffset
+      window.addEventListener('scroll', this.preventScroll);
     },
 
     enter(el, done) {
@@ -291,6 +297,7 @@ export default {
     },
 
     leave(el, done) {
+      window.removeEventListener('scroll', this.preventScroll);
       this.targetRect = this.targetElement.getBoundingClientRect()
       this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
 
@@ -330,6 +337,15 @@ export default {
         this.$emit('update:opened', false)
       }
     },
+
+    /**
+     * Prevent window scrolling when modal is opened
+     */
+    preventScroll() {
+      if (this.position === 'modal') {
+        window.scrollTo(this.freezeScrollX, this.freezeScrollY);
+      }
+    }
   },
   mounted() {
     document.addEventListener('click', this.outsideClick, true)
@@ -355,11 +371,9 @@ export default {
     left: 0;
     right: 0;
     top: 0;
-    transform: none;
     z-index: @z-index-max - 1;
     background: black;
     opacity: 0.5;
-
   }
 
   .dropdown-content {

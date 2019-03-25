@@ -61,5 +61,31 @@ export default {
       margin-top: 20px;
     }
   }
+
+  // User TODO card
+  &.user-todo {
+    display: flex;
+
+    .icon {
+      margin-right: 18px;
+    }
+    .todo-title {
+      .font-desktop-small-regular-dark();
+      padding: 2px 0;
+      flex: 1 0 auto;
+    }
+    .todo-badge {
+      box-sizing: border-box;
+      color: @color-white;
+      font-family: @font-family;
+      font-size: 13px;
+      line-height: 16px;
+      text-align: center;
+      height: 24px;
+      padding: 5px 6px 3px;
+      border-radius: 12px;
+      background-color: #4A7A91;
+    }
+  }
 }
 </style>

@@ -32,7 +32,7 @@ const ICONS_TO_GET = [
   ['delete', 'baseline'],
   ['edit', 'baseline'],
   ['email', 'baseline'],
-  ['error', 'outline'],
+  ['error_outline', 'baseline'],
   ['expand_less', 'baseline'],
   ['expand_more', 'baseline'],
   ['filter_list', 'baseline'],

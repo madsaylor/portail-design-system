@@ -24,8 +24,8 @@
       one special value - 'modal':
 
       +--- modal --------------------------------------------------------+
-      |              top-left      top-middle     top-right          | X |
-      |                +--------------------------------+            +---+
+      |              top-left      top-middle     top-right              |
+      |                +--------------------------------+                |
       |                |       |                |       |                |
       |                |       |                |       |                |
       |  left-top      |       |                |       |     right-top  |
@@ -71,11 +71,13 @@
         class="backdrop"
         @click="$emit('update:opened', false) && null"
       ></div>
+      <div class="focus-trap" tabindex="0"></div>
       <div class="dropdown-content" ref="dropdownContent" :style="{
         transition: `transform ${transitionTime}ms ease-out`,
       }">
         <slot></slot>
       </div>
+      <div class="focus-trap" tabindex="0"></div>
     </div>
   </transition>
 </template>
@@ -313,18 +315,25 @@ export default {
     },
 
     /**
+     * Check if the dropdown iteself or the target element have/are
+     * the specified element
+     */
+    hasElement(el) {
+      while (el.parentNode) {
+        if (el === this.$el || el === this.targetElement) {
+          return true
+        }
+        el = el.parentNode
+      }
+      return false
+    },
+
+    /**
      * Close dropdown on an outside click
      */
     outsideClick(event) {
-      if (!this.opened) {
+      if (!this.opened || this.hasElement(event.target)) {
         return
-      }
-      let el = event.target
-      while (el.parentNode) {
-        if (el === this.$el || el === this.targetElement) {
-          return
-        }
-        el = el.parentNode
       }
       this.$emit('update:opened', false)
     },
@@ -333,8 +342,50 @@ export default {
      * Close dropdown when the Escape key is pressed
      */
     escapePress(event) {
-      if (event.code === "Escape" && this.opened) {
+      if (this.opened && event.code === "Escape") {
         this.$emit('update:opened', false)
+      }
+    },
+
+    /**
+     * When the dropdown is opened, only focus within it through TAB
+     */
+    tabPress(event) {
+      if (!this.opened || event.code !== "Tab") {
+        return
+      }
+
+      if (
+        this.hasElement(document.activeElement) &&
+        !document.activeElement.classList.contains('focus-trap')
+      ) {
+        return
+      }
+
+      event.preventDefault()
+
+      let focusableQuery = `
+        a[href]:not([tabindex='-1']),
+        area[href]:not([tabindex='-1']),
+        input:not([disabled]):not([tabindex='-1']),
+        select:not([disabled]):not([tabindex='-1']),
+        textarea:not([disabled]):not([tabindex='-1']),
+        button:not([disabled]):not([tabindex='-1']),
+        iframe:not([tabindex='-1']),
+        [tabindex]:not([tabindex='-1']):not(.focus-trap),
+        [contentEditable=true]:not([tabindex='-1'])
+      `
+      let focusableElements = this.$el.querySelectorAll(focusableQuery)
+
+      if (!focusableElements.length) {
+        document.activeElement.blur()
+        return
+      }
+      if (event.shiftKey) {
+        focusableElements[focusableElements.length - 1].focus()
+      }
+      else {
+        focusableElements[0].focus()
       }
     },
 
@@ -343,17 +394,19 @@ export default {
      */
     preventScroll() {
       if (this.position === 'modal') {
-        window.scrollTo(this.freezeScrollX, this.freezeScrollY);
+        window.scrollTo(this.freezeScrollX, this.freezeScrollY)
       }
     }
   },
   mounted() {
     document.addEventListener('click', this.outsideClick, true)
     document.addEventListener('keydown', this.escapePress)
+    document.addEventListener('keydown', this.tabPress, true)
   },
   beforeDestroy() {
     document.removeEventListener('click', this.outsideClick, true)
     document.removeEventListener('keydown', this.escapePress)
+    document.removeEventListener('keydown', this.tabPress, true)
   },
 }
 </script>

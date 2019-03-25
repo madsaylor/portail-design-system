@@ -79,7 +79,6 @@ export default {
   ...
 }
 </style>
-
 ```
 
 2. Create a new ***MyComponent*Demo.vue** file in src/demos/components with

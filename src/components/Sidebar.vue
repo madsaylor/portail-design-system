@@ -205,7 +205,7 @@ export default {
   left: 0;
   overflow: hidden;
   position: fixed;
-  z-index: 1;
+  z-index: @z-index-sidebar;
   top: 0;
   width:  @sidebar-width;
 }

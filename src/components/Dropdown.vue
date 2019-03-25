@@ -416,7 +416,7 @@ export default {
 
 .dropdown {
   position: absolute;
-  z-index: @z-index-max - 2;
+  z-index: @z-index-dropdown;
 
   .backdrop {
     position: fixed;
@@ -424,7 +424,7 @@ export default {
     left: 0;
     right: 0;
     top: 0;
-    z-index: @z-index-max - 1;
+    z-index: @z-index-dropdown;
     background: black;
     opacity: 0.5;
   }

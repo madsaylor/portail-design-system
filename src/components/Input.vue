@@ -381,9 +381,12 @@ export default {
 
   &.text, &.date, &.select {
     .label-text {
+      .font-desktop-x-small-regular-gray();
       height: 16px;
       margin-bottom: 4px;
-      .font-desktop-x-small-regular-gray();
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     input, select {

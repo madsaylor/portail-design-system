@@ -127,25 +127,25 @@
       </select>
 
       <Icon v-if="icon_" color="gray-400" :source="icon_" />
+
+      <div class="drawer">
+        <span v-if="inputErrors.length && touched" class="error-message">
+          {{ inputErrors[0] }}
+        </span>
+
+        <span
+          v-show="help && !(inputErrors.length && touched)"
+          class="help-label"
+          ref="helpLabel"
+          @mouseover="helpVisible = true"
+        >
+          {{ helpLabel }}
+          <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible" just-fade>
+            <Tooltip v-html="help" />
+          </Dropdown>
+        </span>
+      </div>
     </label>
-
-    <div class="drawer">
-      <span v-if="inputErrors.length && touched" class="error-message">
-        {{ inputErrors[0] }}
-      </span>
-
-      <span
-        v-show="help && !(inputErrors.length && touched)"
-        class="help-label"
-        ref="helpLabel"
-        @mouseover="helpVisible = true"
-      >
-        {{ helpLabel }}
-        <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible" just-fade>
-          <Tooltip v-html="help" />
-        </Dropdown>
-      </span>
-    </div>
 
     <Dropdown
       v-if="type === 'date'"
@@ -356,6 +356,7 @@ export default {
   display: inline-block;
 
   label {
+    display: block;
     position: relative;
   }
 
@@ -467,7 +468,7 @@ export default {
     .checkbox {
       content: "";
       left: 0px;
-      top: -2px;
+      top: 7px;
       height: 20px;
       width: 20px;
       box-sizing: border-box;

@@ -110,6 +110,26 @@
           value: 'World',
         }]"
       />
+      <br />
+
+      Checkbox:<br />
+      <Input
+        type="checkbox"
+        label="Checkbox"
+        v-model="textValue"
+      />
+      <Input
+        type="checkbox"
+        label="Disabled unchecked"
+        disabled
+        :value="false"
+      />
+      <Input
+        type="checkbox"
+        label="Disabled checked"
+        disabled
+        :value="true"
+      />
     </div>
   </div>
 </template>

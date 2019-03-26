@@ -54,9 +54,8 @@ export default {
 
   .modal-header:not(:empty) {
     .font-desktop-h-3-dark-center();
-    padding-top: 16px;
+    padding: 16px;
     box-sizing: border-box;
-    height: 112px;
     background-color: @color-white;
     box-shadow: inset 0 -1px 0 0 @color-gray-300;
 

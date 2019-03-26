@@ -98,12 +98,12 @@
 -->
 
 <template>
-  <div :class="['input', {sm, md, lg, standalone: sm || md || lg}]">
+  <div :class="['input', type, {disabled, sm, md, lg, standalone: sm || md || lg}]">
     <label>
       <div class="label-text">{{ label }}</div>
 
       <input
-        v-if="type === 'text' || type === 'date'"
+        v-if="type !== 'select'"
         v-bind="inputAttrs"
         :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
         v-model="inputValue"
@@ -112,6 +112,8 @@
         @click="inputFocus"
         @blur="touched = true"
       />
+
+      <div v-if="type === 'checkbox'" class="checkbox"></div>
 
       <select
         v-if="type === 'select'"
@@ -123,9 +125,9 @@
           {{ option.title || option.value }}
         </option>
       </select>
-    </label>
 
-    <Icon v-if="icon_" color="gray-400" :source="icon_" />
+      <Icon v-if="icon_" color="gray-400" :source="icon_" />
+    </label>
 
     <div class="drawer">
       <span v-if="inputErrors.length && touched" class="error-message">
@@ -187,6 +189,9 @@ export default {
     placeholder: String,
     type: {
       type: String,
+      validator(value) {
+        return ['text', 'date', 'select', 'checkbox'].indexOf(value) !== -1
+      },
       default: 'text'
     },
     validators: Array,
@@ -348,8 +353,11 @@ export default {
 @import '../styles/vars';
 
 .input {
-  position: relative;
   display: inline-block;
+
+  label {
+    position: relative;
+  }
 
   &.standalone {
     margin-right: 32px;
@@ -370,61 +378,131 @@ export default {
     }
   }
 
-  .label-text {
-    height: 16px;
-    margin-bottom: 4px;
-    .font-desktop-x-small-regular-gray()
-  }
-
-  input, select {
-    padding: 8px 12px;
-    box-sizing: border-box;
-    border: 1px solid @color-gray-300;
-    border-radius: 2px;
-    background-color: @color-white;
-    width: 100%;
-    .font-desktop-small-regular-dark();
-
-    &.has-icon {
-      padding-right: 30px;
+  &.text, &.date, &.select {
+    .label-text {
+      height: 16px;
+      margin-bottom: 4px;
+      .font-desktop-x-small-regular-gray();
     }
 
-    &::placeholder {
-      .font-desktop-small-regular-gray();
+    input, select {
+      padding: 7px 12px;
+      box-sizing: border-box;
+      border: 1px solid @color-gray-300;
+      border-radius: 2px;
+      background-color: @color-white;
+      width: 100%;
+      .font-desktop-small-regular-dark();
+
+      &.has-icon {
+        padding-right: 30px;
+      }
+
+      &::placeholder {
+        .font-desktop-small-regular-gray();
+      }
+
+      &:focus:not(.error) {
+        border-color: @color-primary;
+      }
+      &:focus {
+        outline: none;
+      }
+
+      &.error {
+        border-color: @color-red;
+      }
+
+      &:disabled {
+        border: 1px solid #f2f4f7;
+      }
+      &:disabled, &:disabled::placeholder {
+        .font-desktop-small-regular-light-gray();
+      }
     }
 
-    &:focus:not(.error) {
-      border-color: @color-primary;
-    }
-    &:focus {
-      outline: none;
-    }
-
-    &.error {
-      border-color: @color-red;
-    }
-
-    &:disabled {
-      border: 1px solid #f2f4f7;
-    }
-    &:disabled,
-    &:disabled::placeholder {
-      .font-desktop-small-regular-light-gray();
-    }
-  }
-
-  select {
-    appearance: none;
-    &::-ms-expand {
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button,
+    input[type="date"]::-webkit-calendar-picker-indicator {
       display: none;
+      -webkit-appearance: none;
+      color: rgba(0,0,0,0);
+      opacity:0;
+    }
+
+    select {
+      appearance: none;
+      &::-ms-expand {
+        display: none;
+      }
+    }
+
+    .icon {
+      pointer-events: none;
+      position: absolute;
+      margin-left: -30px; // 24 + 6, icon size and padding
+      margin-top: 6px;    // center the 24px icon in the 36px input
     }
   }
 
-  .icon {
-    pointer-events: none;
-    position: absolute;
-    margin-left: -30px; // 24 + 6, icon size and padding
-    margin-top: 6px;    // center the 24px icon in the 36px input
+  &.checkbox {
+    padding-top: 20px;
+
+    .label-text {
+      box-sizing: border-box;
+      display: inline-block;
+      padding: 8px 0 8px 28px;
+    }
+
+    input {
+      opacity: 0;
+    }
+
+    .checkbox, .checkbox::after {
+      position: absolute;
+      display: inline-block;
+      border-radius: 2px;
+    }
+
+    .checkbox {
+      content: "";
+      left: 0px;
+      top: -2px;
+      height: 20px;
+      width: 20px;
+      box-sizing: border-box;
+      border: 1px solid @color-gray-300;
+      background-color: @color-white;
+    }
+
+    .checkbox::after {
+      left: 4px;
+      top: 4px;
+      height: 10px;
+      width: 10px;
+      background-color: @color-primary;
+    }
+    input:checked + .checkbox::after {
+      content: "";
+    }
+
+    &:not(.disabled) {
+      .label-text, .checkbox, .checkbox::after, input {
+        .font-desktop-small-regular-dark();
+        cursor: pointer;
+      }
+    }
+    &.disabled {
+      .label-text {
+        .font-desktop-small-regular-gray();
+      }
+      .checkbox {
+        border: 1px solid #f2f4f7;
+      }
+      .checkbox::after {
+        background-color: fade(@color-primary, 50);
+      }
+    }
   }
 
   .drawer {
@@ -434,7 +512,6 @@ export default {
     padding: 3px 12px;
     position: absolute;
     width: 100%;
-
   }
 
   .error-message {
@@ -455,15 +532,6 @@ export default {
     color: @color-gray-500;
     font-family: @font-family;
     text-decoration: underline dashed;
-  }
-
-  input[type="date"]::-webkit-inner-spin-button,
-  input[type="date"]::-webkit-clear-button,
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
-    color: rgba(0,0,0,0);
-    opacity:0;
   }
 }
 </style>

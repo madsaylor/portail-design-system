@@ -380,7 +380,6 @@ export default {
       }
     }
 
-    // Buttons as designed:
     .buttons {
       margin-top: 6px;
 

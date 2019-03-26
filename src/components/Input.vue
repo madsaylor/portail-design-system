@@ -441,8 +441,9 @@ export default {
     .icon {
       pointer-events: none;
       position: absolute;
-      margin-left: -30px; // 24 + 6, icon size and padding
-      margin-top: 6px;    // center the 24px icon in the 36px input
+      top: 26px;  // 20 + 6, label size and input padding
+      right: 6px;
+
     }
   }
 

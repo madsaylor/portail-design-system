@@ -109,7 +109,6 @@
         v-model="inputValue"
         ref="input"
         @focus="inputFocus"
-        @click="inputFocus"
         @blur="touched = true"
       />
 

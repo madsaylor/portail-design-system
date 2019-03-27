@@ -27,11 +27,9 @@
       display: flex;
       flex-grow: 1;
       flex-shrink: 0;
-      overflow: hidden;
       &> * {
         flex-grow: 1;
         margin: @vu @spacing / 2;
-        overflow: hidden;
       }
     }
 
@@ -39,7 +37,7 @@
 
       @width: (min(@counter, @ncol) / @ncol ) * 100;
       > .row > .col-@{counter} {
-        flex-basis: ~"@{width}%";
+        width: ~"@{width}%";
       }
       .generateCols((@counter - 1));
     }

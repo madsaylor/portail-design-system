@@ -390,13 +390,13 @@ export default {
     }
 
     input, select {
+      .font-desktop-small-regular-dark();
       padding: 7px 12px;
       box-sizing: border-box;
       border: 1px solid @color-gray-300;
       border-radius: 2px;
       background-color: @color-white;
       width: 100%;
-      .font-desktop-small-regular-dark();
 
       &.has-icon {
         padding-right: 30px;
@@ -446,7 +446,6 @@ export default {
       position: absolute;
       top: 26px;  // 20 + 6, label size and input padding
       right: 6px;
-
     }
   }
 

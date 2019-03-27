@@ -68,8 +68,8 @@
     }">
       <div
         v-if="position === 'modal'"
+        v-move-to-body
         class="backdrop"
-        @click="$emit('update:opened', false) && null"
       ></div>
       <div class="focus-trap" tabindex="0"></div>
       <div class="dropdown-content" ref="dropdownContent" :style="{
@@ -114,6 +114,18 @@ export default {
     freezeScrollX: 0,
     freezeScrollY: 0,
   }),
+  directives: {
+    moveToBody: {
+      inserted: function (el) {
+        document.body.appendChild(el)
+      },
+      unbind: function (el) {
+        if(el.parentNode) {
+          el.parentNode.removeChild(el);
+        }
+      }
+    },
+  },
   computed: {
     /**
      * Target element to "attach" the dropdown to (visually)
@@ -411,27 +423,27 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '../styles/vars';
+
+.backdrop {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: @z-index-dropdown-backdrop;
+  background: black;
+  opacity: 0.5;
+}
 
 .dropdown {
   position: absolute;
   z-index: @z-index-dropdown;
 
-  .backdrop {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: @z-index-dropdown;
-    background: black;
-    opacity: 0.5;
-  }
-
   .dropdown-content {
     position: relative;
-    z-index: @z-index-max;
+    z-index: @z-index-dropdown-content;
   }
 }
 </style>

@@ -98,7 +98,7 @@
 -->
 
 <template>
-  <div :class="['input', type, {disabled, sm, md, lg, standalone: sm || md || lg}]">
+  <div :class="['input', type, {disabled, sm, md, lg}]">
     <label>
       <div v-if="label" class="label-text">{{ label }}</div>
 
@@ -360,10 +360,6 @@ export default {
     position: relative;
   }
 
-  &.standalone {
-    margin-right: 32px;
-  }
-
   &.sm {
     width: 144px;
   }
@@ -431,7 +427,7 @@ export default {
       display: none;
       -webkit-appearance: none;
       color: rgba(0,0,0,0);
-      opacity:0;
+      opacity: 0;
     }
 
     select {
@@ -450,8 +446,6 @@ export default {
   }
 
   &.checkbox {
-    padding-top: 20px;
-
     .label-text {
       box-sizing: border-box;
       display: inline-block;

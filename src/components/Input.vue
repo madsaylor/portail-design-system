@@ -100,7 +100,7 @@
 <template>
   <div :class="['input', type, {disabled, sm, md, lg, standalone: sm || md || lg}]">
     <label>
-      <div class="label-text">{{ label }}</div>
+      <div v-if="label" class="label-text">{{ label }}</div>
 
       <input
         v-if="type !== 'select'"
@@ -444,7 +444,7 @@ export default {
     .icon {
       pointer-events: none;
       position: absolute;
-      top: 26px;  // 20 + 6, label size and input padding
+      bottom: 6px;
       right: 6px;
     }
   }

@@ -508,7 +508,7 @@ export default {
     line-height: 12px;
     padding: 3px 12px;
     position: absolute;
-    width: 100%;
+    max-width: 100%;
   }
 
   .error-message {

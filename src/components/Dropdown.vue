@@ -20,10 +20,9 @@
       dropdown should be opened (usually the element that triggers open)
 
     position - String. Where dropdown should be placed relatively to the
-      target. Formated as 'primaryAlignment-secondaryAlignment', except for
-      one special value - 'modal':
+      target. Formated as 'primaryAlignment-secondaryAlignment'
 
-      +--- modal --------------------------------------------------------+
+      +--- ----- --------------------------------------------------------+
       |              top-left      top-middle     top-right              |
       |                +--------------------------------+                |
       |                |       |                |       |                |
@@ -66,11 +65,6 @@
       ...positionStyle,
       transition: `opacity ${transitionTime}ms ease-out`,
     }">
-      <div
-        v-if="position === 'modal'"
-        v-move-to-body
-        class="backdrop"
-      ></div>
       <div class="focus-trap" tabindex="0"></div>
       <div class="dropdown-content" ref="dropdownContent" :style="{
         transition: `transform ${transitionTime}ms ease-out`,
@@ -94,7 +88,6 @@ export default {
       type: String,
       validator(value) {
         return [
-          'modal',
           'top-left',    'top-middle',    'top-right',
           'left-top',                     'right-top',
           'left-center',                  'right-center',
@@ -169,57 +162,51 @@ export default {
       let contentHeight = this.contentRect.height
       let contentWidth = this.contentRect.width
 
-      if (this.position === 'modal') {
-        left = (window.innerWidth - contentWidth) / 2 + window.pageXOffset
-        top = (window.innerHeight - contentHeight) / 2  + window.pageYOffset
+      let margin = 4
+      let [primaryAlignment, secondaryAlignment] = this.position.split('-')
+
+      switch (primaryAlignment) {
+        case 'top':
+          top -= contentHeight + margin
+          break;
+        case 'left':
+          left -= contentWidth + margin
+          break;
+        case 'right':
+          left += targetWidth + margin
+          break;
+        case 'bottom':
+          top += targetHeight + margin
       }
-      else {
-        let margin = 4
-        let [primaryAlignment, secondaryAlignment] = this.position.split('-')
 
-        switch (primaryAlignment) {
-          case 'top':
-            top -= contentHeight + margin
-            break
-          case 'left':
-            left -= contentWidth + margin
-            break
-          case 'right':
-            left += targetWidth + margin
-            break
-          case 'bottom':
-            top += targetHeight + margin
-        }
+      switch (secondaryAlignment) {
+        case 'left':
+          left -= contentWidth - targetWidth
+          break;
+        case 'middle':
+          left -= (contentWidth - targetWidth) / 2
+          break;
+        case 'right':
+          break;
+        case 'top':
+          top -= contentHeight - targetHeight
+          break;
+        case 'center':
+          top -= (contentHeight - targetHeight) / 2
+          break;
+        case 'bottom':
+      }
 
-        switch (secondaryAlignment) {
-          case 'left':
-            left -= contentWidth - targetWidth
-            break
-          case 'middle':
-            left -= (contentWidth - targetWidth) / 2
-            break
-          case 'right':
-            break
-          case 'top':
-            top -= contentHeight - targetHeight
-            break
-          case 'center':
-            top -= (contentHeight - targetHeight) / 2
-            break
-          case 'bottom':
-        }
-
-        // Check if it goes beyond the screen (horizontally)
-        // and adjust accordingly if needed
-        if ((contentWidth + margin * 2) > window.innerWidth) {
-          left = (window.innerWidth - contentWidth) / 2  // Center
-        }
-        else if (left < margin) {
-          left = margin
-        }
-        else if (left + contentWidth + margin > window.innerWidth) {
-          left = window.innerWidth - contentWidth - margin
-        }
+      // Check if it goes beyond the screen (horizontally)
+      // and adjust accordingly if needed
+      if ((contentWidth + margin * 2) > window.innerWidth) {
+        left = (window.innerWidth - contentWidth) / 2  // Center
+      }
+      else if (left < margin) {
+        left = margin
+      }
+      else if (left + contentWidth + margin > window.innerWidth) {
+        left = window.innerWidth - contentWidth - margin
       }
 
       // Offset for non-static-positioned parents if needed
@@ -400,15 +387,6 @@ export default {
         focusableElements[0].focus()
       }
     },
-
-    /**
-     * Prevent window scrolling when modal is opened
-     */
-    preventScroll() {
-      if (this.position === 'modal') {
-        window.scrollTo(this.freezeScrollX, this.freezeScrollY)
-      }
-    }
   },
   mounted() {
     document.addEventListener('click', this.outsideClick, true)
@@ -425,17 +403,6 @@ export default {
 
 <style lang="less">
 @import '../styles/vars';
-
-.backdrop {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: @z-index-dropdown-backdrop;
-  background: black;
-  opacity: 0.5;
-}
 
 .dropdown {
   position: absolute;

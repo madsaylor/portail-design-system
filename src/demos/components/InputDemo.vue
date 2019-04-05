@@ -162,6 +162,30 @@
         disabled
         :value="true"
       />
+      <br />
+
+      Radio:<br />
+      <Input
+        type="radio"
+        label="First"
+        radioVal="first"
+        v-model="radioValue"
+      />
+
+      <Input
+        type="radio"
+        label="Second"
+        radioVal="second"
+        v-model="radioValue"
+      />
+
+      <Input
+        type="radio"
+        label="Disabled"
+        radioVal="third"
+        disabled
+        v-model="radioValue"
+      />
     </div>
   </div>
 </template>
@@ -222,6 +246,29 @@ Date inputs:<br />
   :dateRange="{min: 5, max: 10}"
   v-model="dateValue3"
 />
+<Input
+  md
+  type="select"
+  placeholder="Select a value"
+  v-model="textValue"
+  :options="[{
+    title: 'Hello',
+    value: 1,
+  }, {
+    value: 'World',
+  }]"
+/>
+<Input
+  type="checkbox"
+  label="Checkbox"
+  v-model="textValue"
+/>
+<Input
+  type="radio"
+  label="First"
+  radioVal="first"
+  v-model="radioValue"
+/>
 `.slice(1)
 
 export default {
@@ -230,6 +277,7 @@ export default {
   data: () => ({
     usage,
     textValue: '',
+    radioValue: 'first',
     dateValue: new Date(),
     dateValue2: null,
     dateValue3: null,

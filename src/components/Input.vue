@@ -110,7 +110,7 @@
       <div v-if="label" class="label-text">{{ label }}</div>
 
       <input
-        v-if="type !== 'select'"
+        v-if="type !== 'select' && type !== 'radio'"
         v-bind="inputAttrs"
         :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
         v-model="inputValue"
@@ -120,7 +120,19 @@
         @blur="touched = true"
       />
 
+      <input
+        v-if="type == 'radio'"
+        v-bind="inputAttrs"
+        :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
+        :checked="inputValue === radioVal"
+        ref="input"
+        @change="changeRadio"
+        @focus="inputFocus"
+        @blur="touched = true"
+      />
+
       <div v-if="type === 'checkbox'" class="checkbox"></div>
+      <div v-if="type === 'radio'" class="radio"></div>
 
       <select
         v-if="type === 'select'"
@@ -210,12 +222,15 @@ export default {
     type: {
       type: String,
       validator(value) {
-        return ['text', 'date', 'select', 'checkbox'].indexOf(value) !== -1
+        return ['text', 'date', 'select', 'checkbox', 'radio'].indexOf(value) !== -1
       },
       default: 'text'
     },
     validators: Array,
     value: null,
+
+    // For type="radio"
+    radioVal: String,
 
     // For type="date"
     minDate: Date,
@@ -370,11 +385,13 @@ export default {
         this.datepickerVisible = true;
       }
     },
-
     validate() {
       this.touched = true;
       this.$emit('validation', this.validation)
     },
+    changeRadio() {
+      this.$emit('input', this.radioVal)
+    }
   },
   watch: {
     value() {
@@ -543,6 +560,70 @@ export default {
         background-color: fade(@color-primary, 50);
       }
     }
+  }
+
+  &.radio {
+    .label-text {
+      box-sizing: border-box;
+      display: inline-block;
+      padding: 8px 0 8px 28px;
+    }
+
+    input {
+      opacity: 0;
+    }
+
+    .radio, .radio::after {
+      position: absolute;
+      display: inline-block;
+      border-radius: 2px;
+    }
+
+    .radio {
+      content: "";
+      left: 0px;
+      top: 7px;
+      height: 20px;
+      width: 20px;
+      box-sizing: border-box;
+      border: 1px solid @color-gray-300;
+      background-color: @color-white;
+    }
+
+    .radio::after {
+      left: 4px;
+      top: 4px;
+      height: 10px;
+      width: 10px;
+      background-color: @color-primary;
+    }
+
+    input:checked + .radio::after {
+      content: "";
+    }
+
+    &:not(.disabled) {
+      .label-text, .radio, .radio::after, input {
+        .font-desktop-small-regular-dark();
+        cursor: pointer;
+        border-radius: 10px;
+      }
+    }
+    
+    &.disabled {
+      .label-text {
+        .font-desktop-small-regular-gray();
+        border-radius: 10px;
+      }
+      .radio {
+        border: 1px solid #f2f4f7;
+        border-radius: 10px;
+      }
+      .radio::after {
+        background-color: @color-gray-400;
+        border-radius: 10px;
+      }
+    }    
   }
 
   .drawer {

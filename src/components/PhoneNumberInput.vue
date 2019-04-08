@@ -5,9 +5,9 @@
       @click="toggleDropdown"
       v-click-outside="clickedOutside"
       :class="{ open: open }"
-      @keydown="keyboardNav"
+      @keydown.native="keyboardNav"
       tabindex="0"
-      @keydown.esc="reset"
+      @keydown.native.esc="reset"
     >
       <span class="selection">
         <div class="iti-flag" v-if="enabledFlags" :class="activeCountry.iso2.toLowerCase()"></div>
@@ -35,7 +35,6 @@
       type="tel"
       :placeholder="placeholder"
       :state="state"
-      :formatter="format"
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
@@ -1310,7 +1309,7 @@ const allCountries = countriesArray.map(country => ({
 
 
 export default {
-  name: 'vue-tel-input',
+  name: 'phone-numbuer-input',
   props: {
     value: {
       type: String,
@@ -1454,7 +1453,7 @@ export default {
         const formatter = new AsYouType();// eslint-disable-line
         formatter.input(this.phone);
         // Find inputted country in the countries list
-        this.activeCountry = this.findCountry(formatter.country) || this.activeCountry;
+        // this.activeCountry = this.findCountry(formatter.country) || this.activeCountry;
       } else if (this.mode === 'prefix') {
         // Remove the first '0' if this is a '0' prefix number
         // Ex: 0432421999
@@ -1514,14 +1513,6 @@ export default {
        * 2. Use the first country from preferred list (if available) or all countries list
        */
       this.activeCountry = this.findCountry(this.preferredCountries[0]) || this.filteredCountries[0];
-      /**
-       * 3. Check if fetching country based on user's IP is allowed, set it as the default country
-       */
-      if (!this.disabledFetchingCountry) {
-        getCountry().then((res) => {
-          this.activeCountry = this.findCountry(res) || this.activeCountry;
-        });
-      }
     },
     /**
      * Get the list of countries from the list of iso2 code
@@ -1625,16 +1616,7 @@ export default {
   directives: {
     // Click-outside from BosNaufal: https://github.com/BosNaufal/vue-click-outside
     'click-outside': {
-      bind: function (el, binding, vNode) {
-        // Provided expression must evaluate to a function.
-        if (typeof binding.value !== 'function') {
-          var compName = vNode.context.name;
-          var warn = '[Vue-click-outside:] provided expression ' + binding.expression + ' is not a function, but has to be';
-          if (compName) {
-            warn += 'Found in component ' + compName;
-          }
-          console.warn(warn);
-        }
+      bind: function (el, binding) {
         // Define Handler and cache it on the element
         var bubble = binding.modifiers.bubble;
         var handler = function (e) {
@@ -1646,17 +1628,17 @@ export default {
         // add Event Listeners
         document.addEventListener('click', handler)
       },
-      unbind: function (el, binding) {
+      unbind: function (el) {
         // Remove Event Listeners
         document.removeEventListener('click', el.__vueClickOutside__);
         el.__vueClickOutside__ = null
       }
     }
   },
-};
+}
 </script>
 
-<style src="./../flags/sprite.css" lang="less"></style>
+<style src="./../flags/sprite.css"></style>
 <style lang="less">
 li.last-preferred {
   border-bottom: 1px solid #cacaca;

@@ -15,6 +15,7 @@
       :sm="false"                 - Small size
       :placeholder='Placeholder'  - Text used as the placeholder
       :type='email'               - Input type
+      name='test'           - With this property current input listen event validateTest
       :validators='validators'    - Array of validators
 
       :minDate=" pastDate"        - Earliest date for the datepicker
@@ -24,6 +25,8 @@
 
       v-model='value'             - Binds value property to input
       @validation                 - Emits validation result
+      @validate                   - Run field validation.
+      @validate{name}        - Run field validation, for inputs which have current name property.
     />
 
   Properties:
@@ -92,13 +95,17 @@
       an array of the following structure:
         [['validator.name', isValid], ...]
 
+    validate - Listening event 'validate' for running validation even if this field was not touched.
+    validateTest - Listening event 'validate' for running validation for field with "name: 'test'"
+                   with even if this field was not touched.
+
   Model:
 
     Input value is updated through v-model directive
 -->
 
 <template>
-  <div :class="['input', type, {disabled, sm, md, lg}]">
+  <div :class="['input', type, {disabled, sm, md, lg, preventScroll: datepickerVisible}]">
     <label>
       <div v-if="label" class="label-text">{{ label }}</div>
 
@@ -109,6 +116,7 @@
         v-model="inputValue"
         ref="input"
         @focus="inputFocus"
+        @click="inputFocus"
         @blur="touched = true"
       />
 
@@ -147,7 +155,7 @@
     </label>
 
     <Dropdown
-      v-if="type === 'date'"
+      v-if="type === 'date' && datepickerPosition !== 'modal'"
       :target="$refs.input"
       :opened.sync="datepickerVisible"
       :position="datepickerPosition"
@@ -159,6 +167,17 @@
         v-model="datepickerValue"
       ></Datepicker>
     </Dropdown>
+
+    <Dialog
+      v-if="type === 'date' && datepickerPosition === 'modal'"
+      :opened.sync="datepickerVisible"
+    >
+      <Datepicker
+        :min="datepickerMin"
+        :max="datepickerMax"
+        v-model="datepickerValue"
+      ></Datepicker>
+    </Dialog>
   </div>
 </template>
 
@@ -166,15 +185,17 @@
 import Datepicker from './Datepicker'
 import Dropdown from './Dropdown'
 import Icon from './Icon'
+import Dialog from './Dialog'
 import Tooltip from './Tooltip'
 
 export default {
   name: "Input",
-  components: {Datepicker, Dropdown, Icon, Tooltip},
+  components: {Datepicker, Dropdown, Icon, Tooltip, Dialog},
   props: {
     // General
     disabled: Boolean,
     help: String,
+    name:  String,
     helpLabel: {
       type: String,
       default: '? explication'
@@ -210,11 +231,20 @@ export default {
     options: Array,
   },
   data: () => ({
+    validateEventName: undefined,
     helpVisible: false,
     datepickerVisible: false,
     touched: false
   }),
   mounted() {
+    if (this.name) {
+      this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
+
+      document.addEventListener(this.validateEventName, this.validate);
+    }
+
+    document.addEventListener('validate', this.validate);
+
     this.$emit('validation', this.validation)
   },
   computed: {
@@ -265,6 +295,7 @@ export default {
       }
       return data
     },
+
     inputErrors() {
       let errors = []
       for (var i = 0; i < this.validation.length; i++) {
@@ -336,15 +367,27 @@ export default {
   methods: {
     inputFocus() {
       if (this.type === 'date') {
-        this.datepickerVisible = true
+        this.datepickerVisible = true;
       }
+    },
+
+    validate() {
+      this.touched = true;
+      this.$emit('validation', this.validation)
     },
   },
   watch: {
     value() {
       this.$emit('validation', this.validation)
     }
-  }
+  },
+  beforeDestroy() {
+    if (this.name) {
+      document.removeEventListener(this.validateEventName, this.validate);
+    }
+
+    document.removeEventListener('validate', this.validate);
+  },
 }
 </script>
 

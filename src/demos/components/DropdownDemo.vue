@@ -90,7 +90,6 @@ export default {
       'left-bottom',
       'left-center',
       'left-top',
-      'modal',
       'right-bottom',
       'right-center',
       'right-top',

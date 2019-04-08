@@ -1391,10 +1391,6 @@ export default {
   },
   mounted() {
     this.initializeCountry();
-    if (this.inputOptions && this.inputOptions.showDialCode && this.activeCountry) {
-      this.phone = '+' + this.activeCountry.dialCode;
-    }
-    this.$emit('onValidate', this.response);
   },
   created() {
     if (this.value) {
@@ -1455,8 +1451,6 @@ export default {
         // Find inputted country in the countries list
         // this.activeCountry = this.findCountry(formatter.country) || this.activeCountry;
       } else if (this.mode === 'prefix') {
-        // Remove the first '0' if this is a '0' prefix number
-        // Ex: 0432421999
         phone = this.phone.slice(1);
       }
       if (this.disabledFormatting) {
@@ -1614,7 +1608,6 @@ export default {
     },
   },
   directives: {
-    // Click-outside from BosNaufal: https://github.com/BosNaufal/vue-click-outside
     'click-outside': {
       bind: function (el, binding) {
         // Define Handler and cache it on the element
@@ -1640,38 +1633,39 @@ export default {
 
 <style src="./../flags/sprite.css"></style>
 <style lang="less">
+@import '../styles/vars';
+
 li.last-preferred {
-  border-bottom: 1px solid #cacaca;
+  border-bottom: @app-last-item-border;
 }
 .iti-flag {
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-right: @app-input-margin;
+  margin-left: @app-input-margin;
 }
 .dropdown-item .iti-flag {
   display: inline-block;
-  margin-right: 5px;
+  margin-right: @app-input-margin;
 }
 .selection {
-  font-size: 0.8em;
+  font-size: @selection-font-size;
   display: flex;
   align-items: center;
 }
 .vue-tel-input {
-  border-radius: 3px;
+  border-radius: @tel-input-radius;
   display: flex;
-  border: 1px solid #bbb;
+  border: @tel-input-border;
   text-align: left;
 }
 .vue-tel-input:focus-within {
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  border-color: #66afe9;
+  border-color: @color-primary;
 }
 input {
   border: none;
-  border-radius: 0 2px 2px 0;
+  border-radius: @input-border-radius;
   width: 100%;
   outline: none;
-  padding-left: 7px;
+  padding-left: @phone-input-padding;
 }
 ul {
   z-index: 1;
@@ -1679,14 +1673,14 @@ ul {
   margin: 0;
   text-align: left;
   list-style: none;
-  max-height: 200px;
+  max-height: @drop-panel-max-height;
   overflow-y: scroll;
   position: absolute;
   top: 33px;
   left: -1px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  width: 390px;
+  background-color: @color-gray-100;
+  border: @drop-panel-border;
+  width: @drop-panel-width;
 }
 .dropdown {
   display: flex;
@@ -1694,32 +1688,32 @@ ul {
   align-content: center;
   justify-content: center;
   position: relative;
-  padding: 7px;
+  padding: @phone-input-padding;
   cursor: pointer;
 }
 .dropdown.open {
-  background-color: #f3f3f3;
+  background-color: @color-gray-200;
 }
 .dropdown:hover {
-  background-color: #f3f3f3;
+  background-color: @color-gray-200;
 }
 .country-code {
-  color: #666;
+  color: @color-gray-500;
 }
 .dropdown-arrow {
   transform: scaleY(0.5);
   display: inline-block;
-  color: #666;
+  color: @color-gray-500;
 }
 .dropdown-item {
   cursor: pointer;
-  padding: 4px 15px;
+  padding: @dropdown-item-padding;
 }
 .dropdown-item.highlighted {
-  background-color: #f3f3f3;
+  background-color: @color-gray-200;
 }
 .dropdown-menu.show {
-  max-height: 300px;
+  max-height: @drop-menu-max-height;
   overflow: scroll;
 }
 .vue-tel-input.disabled .selection,

@@ -15,6 +15,7 @@
       :sm="false"                 - Small size
       :placeholder='Placeholder'  - Text used as the placeholder
       :type='email'               - Input type
+      name='test'           - With this property current input listen event validateTest
       :validators='validators'    - Array of validators
 
       :minDate=" pastDate"        - Earliest date for the datepicker
@@ -24,6 +25,8 @@
 
       v-model='value'             - Binds value property to input
       @validation                 - Emits validation result
+      @validate                   - Run field validation.
+      @validate{name}        - Run field validation, for inputs which have current name property.
     />
 
   Properties:
@@ -91,6 +94,10 @@
     validation - Emitted when the input value changes. The event payload is
       an array of the following structure:
         [['validator.name', isValid], ...]
+
+    validate - Listening event 'validate' for running validation even if this field was not touched.
+    validateTest - Listening event 'validate' for running validation for field with "name: 'test'"
+                   with even if this field was not touched.
 
   Model:
 
@@ -188,6 +195,7 @@ export default {
     // General
     disabled: Boolean,
     help: String,
+    name:  String,
     helpLabel: {
       type: String,
       default: '? explication'
@@ -223,11 +231,20 @@ export default {
     options: Array,
   },
   data: () => ({
+    validateEventName: undefined,
     helpVisible: false,
     datepickerVisible: false,
     touched: false
   }),
   mounted() {
+    if (this.name) {
+      this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
+
+      document.addEventListener(this.validateEventName, this.validate);
+    }
+
+    document.addEventListener('validate', this.validate);
+
     this.$emit('validation', this.validation)
   },
   computed: {
@@ -278,6 +295,7 @@ export default {
       }
       return data
     },
+
     inputErrors() {
       let errors = []
       for (var i = 0; i < this.validation.length; i++) {
@@ -352,12 +370,24 @@ export default {
         this.datepickerVisible = true;
       }
     },
+
+    validate() {
+      this.touched = true;
+      this.$emit('validation', this.validation)
+    },
   },
   watch: {
     value() {
       this.$emit('validation', this.validation)
     }
-  }
+  },
+  beforeDestroy() {
+    if (this.name) {
+      document.removeEventListener(this.validateEventName, this.validate);
+    }
+
+    document.removeEventListener('validate', this.validate);
+  },
 }
 </script>
 

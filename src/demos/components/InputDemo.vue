@@ -33,6 +33,33 @@
       pre-defined by the layout and they always have 16px margin between them.
     </p>
 
+    <h4>Validation</h4>
+
+    <p>
+      When input field begin validation, it is emit event <b>@validation</b> <br>
+      <i>@return</i> Boolean, is valid field or no.
+    </p>
+
+    <p>
+      All inputs are listen <b>@validate</b> event, which will run validation inside input,
+      even if this input field was not touched.
+
+      <i>@emit</i> event @validation
+    </p>
+
+    <p>
+      If you need validate some field(s) separately, you can specify
+      validation by name property. <br>
+      Input with name property will be listen event <b>@validate{name}</b>. <br><br>
+
+      <i>Example:
+      <br>
+         name: 'test', <br>
+         listener = 'validateTest'
+      </i>
+    </p>
+    <br>
+
     <pre v-highlightjs="usage"><code class="html"></code></pre>
 
     <div class="input-component-demo">
@@ -110,6 +137,11 @@
           value: 'World',
         }]"
       />
+
+      <Button alt @click="validate()">
+        VALIDATE
+      </Button>
+
       <br />
 
       Checkbox:<br />
@@ -136,6 +168,7 @@
 
 <script>
 import Input from '../../components/Input'
+import Button from '../../components/Button'
 
 let usage = `
 Basic inputs:<br />
@@ -193,7 +226,7 @@ Date inputs:<br />
 
 export default {
   name: "InputDemo",
-  components: {Input},
+  components: {Input, Button},
   data: () => ({
     usage,
     textValue: '',
@@ -216,7 +249,13 @@ export default {
         validator: () => false
       },
     ]
-  })
+  }),
+  methods: {
+    validate() {
+      const event = new CustomEvent("validate", {});
+      document.dispatchEvent(event);
+    }
+  }
 }
 </script>
 

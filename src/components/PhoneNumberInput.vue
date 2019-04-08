@@ -1631,9 +1631,9 @@ export default {
 }
 </script>
 
-<style src="./../flags/sprite.css"></style>
 <style lang="less">
 @import '../styles/vars';
+@import '../styles/flags';
 
 li.last-preferred {
   border-bottom: @app-last-item-border;

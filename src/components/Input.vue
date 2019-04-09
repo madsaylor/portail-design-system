@@ -130,7 +130,6 @@
         v-bind="inputAttrs"
         :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
         :checked="inputValue === radioVal"
-        ref="input"
         @change="changeRadio"
         @blur="touched = true"
       />

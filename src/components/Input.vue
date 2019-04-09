@@ -89,6 +89,11 @@
       <option> element. Additionaly a .title property can be set to change
       the displayed value
 
+                           --- radio ---
+
+    radioVal - String. if the value of v-model is same as radioVal of the element,
+      the element is selected.
+
   Events:
 
     validation - Emitted when the input value changes. The event payload is
@@ -127,12 +132,10 @@
         :checked="inputValue === radioVal"
         ref="input"
         @change="changeRadio"
-        @focus="inputFocus"
         @blur="touched = true"
       />
 
-      <div v-if="type === 'checkbox'" class="checkbox"></div>
-      <div v-if="type === 'radio'" class="radio"></div>
+      <div v-if="type === 'checkbox' || type === 'radio'" :class="[type]"></div>
 
       <select
         v-if="type === 'select'"

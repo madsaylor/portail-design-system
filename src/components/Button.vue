@@ -4,12 +4,14 @@
   Usage:
 
     <Button
-      :big="true"             - Bigger button
-      :alt="boolean"          - Alternative design
-      :plain="boolean"        - Close to no styling
-      :disabled="boolean"     - Disabled
-      :icon="account_circle"  - Left or the only icon
-      :icon-right="edit    "  - Right icon
+      :big="true"                 - Bigger button
+      :alt="boolean"              - Alternative design
+      :plain="boolean"            - Close to no styling
+      :disabled="boolean"         - Disabled
+      :icon="account_circle"      - Left or the only icon
+      :icon-right="edit"          - Right icon
+      :link="https://example.com" - If link is set, component works as <a>  with button style
+      :target="_blank"            - Same as the target attribute in <a>
     >
       Button label
     </Button>

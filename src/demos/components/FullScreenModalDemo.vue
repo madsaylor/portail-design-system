@@ -6,8 +6,10 @@
     (content takes 8 columns in the middle).  The header slot also supports
     left and right corner buttons, add "left" or "right" to the button
     component class to get it attached in the respective corner
-
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="FullScreenModal"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <Button @click="show()">Show modal</Button>
 
@@ -25,6 +27,8 @@
 <script>
 import FullScreenModal from '../../components/FullScreenModal.vue'
 import Button from '../../components/Button.vue'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
 <Button @click="show()">Show modal</Button>
@@ -41,8 +45,12 @@ let usage = `
 
 export default {
   name: 'FullScreenModalDemo',
-  components: {FullScreenModal, Button},
-  data: () => ({usage, showModal: false}),
+  components: {FullScreenModal, Button, Description, Collapser},
+  data: () => ({
+    openUsage: true,
+    usage,
+    showModal: false
+  }),
   methods: {
     show() {
       this.showModal = true;

@@ -3,8 +3,10 @@
     <h3>Menu</h3>
 
     Basic styled componnet: items, click event
-
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="Menu"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <Button ref="menuDrop" @click="dropdownOpened = !dropdownOpened">Open menu</Button>
 
@@ -25,6 +27,8 @@
 import Button from '../../components/Button.vue'
 import Dropdown from '../../components/Dropdown.vue'
 import Menu from '../../components/Menu.vue'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
   <Menu
@@ -35,8 +39,9 @@ let usage = `
 
 export default {
   name: 'MenuDemo',
-  components: { Button, Dropdown, Menu },
+  components: { Button, Dropdown, Menu, Description, Collapser },
   data: () => ({
+    openUsage: true,
     usage,
     dropdownOpened: false,
     position: 'bottom-right',

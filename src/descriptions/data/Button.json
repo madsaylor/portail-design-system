@@ -1,0 +1,35 @@
+{
+  "properties": [
+    {
+      "name": "big",
+      "type": "Boolean",
+      "description": "Bigger button"
+    },
+    {
+      "name": "alt",
+      "type": "Boolean",
+      "description": "Alternative design"
+    },
+    {
+      "name": "plain",
+      "type": "Boolean",
+      "description": "Close to no styling"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "description": "Disabled"
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "description": "Left or the only icon"
+    },
+    {
+      "name": "icon-right",
+      "type": "String",
+      "description": "Right icon"
+    }
+  ],
+  "events": []
+}

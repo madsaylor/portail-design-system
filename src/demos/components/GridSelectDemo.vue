@@ -5,7 +5,10 @@
 
       Render items in a table with optional labels at the top and an ability
       to select an item. Used in the Datepicker component
-      <pre v-highlightjs="usage"><code class="html"></code></pre>
+      <Description compnent-name="GridSelect"></Description>
+      <Collapser :opened.sync="openUsage" label="Usage">
+        <pre v-highlightjs="usage"><code class="html"></code></pre>
+      </Collapser>
 
       <GridSelect
         :items="[[1, 2, 3], [4, {title: 5, disabled: true}, 6], [7, 8, 9]]"
@@ -28,6 +31,8 @@
 
 <script>
 import GridSelect from '../../components/GridSelect'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
 <GridSelect
@@ -50,11 +55,12 @@ let usage = `
 export default {
   name: "GridSelectDemo",
   data: () => ({
+    openUsage: true,
     usage,
     selected: {},
   }),
   components: {
-    GridSelect,
+    GridSelect, Description, Collapser
   },
 }
 </script>

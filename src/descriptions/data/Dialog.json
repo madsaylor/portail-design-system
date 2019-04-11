@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "opened",
+      "type": "Boolean",
+      "description": "State the dialog window"
+    },
+    {
+      "name": "backdropOpacity",
+      "type": "String",
+      "description": "Set backdrop opacity by value from 0..1 by default 0.6"
+    }
+  ],
+  "events": []
+}

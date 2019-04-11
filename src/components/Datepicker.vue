@@ -22,7 +22,6 @@
 
   Model:
 
-    Selected Date is updated through v-model directive
 -->
 
 <template>

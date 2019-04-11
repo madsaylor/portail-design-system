@@ -22,35 +22,6 @@
     position - String. Where dropdown should be placed relatively to the
       target. Formated as 'primaryAlignment-secondaryAlignment'
 
-      +--- ----- --------------------------------------------------------+
-      |              top-left      top-middle     top-right              |
-      |                +--------------------------------+                |
-      |                |       |                |       |                |
-      |                |       |                |       |                |
-      |  left-top      |       |                |       |     right-top  |
-      |   +------------------+ |                | +------------------+   |
-      |   |            |     | |                | |     |            |   |
-      |   |            |     | |                | |     |            |   |
-      |   |            |     | |                | |     |            |   |
-      |   |            +--------------------------------+            |   |
-      |   +------------------+ +----------------+ +------------------+   |
-      |   |                  | |                | |                  |   |
-      |  left-center         | |     Target     | |        right-center  |
-      |   |                  | |                | |                  |   |
-      |   +------------------+ +----------------+ +------------------+   |
-      |   |            +--------------------------------+            |   |
-      |   |            |     | |                | |     |            |   |
-      |   |            |     | |                | |     |            |   |
-      |   |            |     | |                | |     |            |   |
-      |   +------------------+ |                | +------------------+   |
-      |  left-bottom   |       |                |       |   right-bottom |
-      |                |       |                |       |                |
-      |                |       |                |       |                |
-      |                +--------------------------------+                |
-      |            bottom-left   bottom-middle   bottom-right            |
-      |                                                                  |
-      +------------------------------------------------------------------+
-
     opened - Boolean. Is dropdown shown. Supports .sync modifier that
       lets the component close itself (when user clicks outside)
 -->

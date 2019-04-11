@@ -2,7 +2,10 @@
   <div class="row-col">
     <h3>Badge</h3>
     Badge with an optional icon
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="Badge"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
     <div class="badges">
       <Badge text="Annulée" color="red"></Badge>
       <Badge text="Brouillon" color="gray"></Badge>
@@ -18,6 +21,8 @@
 
 <script>
   import Badge from '../../components/Badge.vue'
+  import Description from '../../descriptions/Description'
+  import Collapser from '../../components/Collapser.vue'
 
   let usage = `
       <Badge text="Annulée" color="red"></Badge>
@@ -32,8 +37,11 @@
 
   export default {
       name: 'BadgeDemo',
-      components: {Badge},
-      data: () => ({usage})
+      components: {Badge, Description, Collapser},
+      data: () => ({
+        openUsage: true,
+        usage
+      })
     }
 </script>
 

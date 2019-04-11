@@ -1,0 +1,43 @@
+{
+  "properties": [
+    {
+      "name": "active",
+      "type": "Number",
+      "description": "Number which describes index of chosen by default item"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "description": "Disable all tabs."
+    },
+    {
+      "name": "tabs",
+      "type": "Array",
+      "description": "is an object, which can have next props: ",
+      "subProperty": [
+        {
+          "name": "text",
+          "type": "String",
+          "description": "is string. This property is required."
+        },
+        {
+          "name": "disabled",
+          "type": "Boolean",
+          "description": "is a boolean which describes if tab disabled"
+        },
+        {
+          "name": "hidden",
+          "type": "Boolean",
+          "description": "is a boolean which describes if tab hidden"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "tab",
+      "description": "Return tab's configuration object and it's index"
+    }
+  ]
+}
+

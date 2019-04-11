@@ -1,0 +1,35 @@
+{
+  "properties": [
+    {
+      "name": "target",
+      "type": "null",
+      "description": "DOM element or CSS selector string. Element, next to which, a dropdown should be opened (usually the element that triggers open)"
+    },
+    {
+      "name": "position",
+      "type": "String",
+      "description": "String. Where dropdown should be placed relatively to the target. Formated as 'primaryAlignment-secondaryAlignment'"
+    },
+    {
+      "name": "opened",
+      "type": "Boolean",
+      "description": "Boolean. Is dropdown shown. Supports .sync modifier that lets the component close itself (when user clicks outside)"
+    },
+    {
+      "name": "just-fade-in",
+      "type": "Boolean",
+      "description": "Change the enter animation to just fade in"
+    },
+    {
+      "name": "just-fade-out",
+      "type": "Boolean",
+      "description": "Change the leave animation to just fade out"
+    },
+    {
+      "name": "just-fade",
+      "type": "Boolean",
+      "description": "Change both"
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,29 @@
+{
+  "properties": [
+    {
+      "name": "text",
+      "type": "String",
+      "description": "Badge text"
+    },
+    {
+      "name": "color",
+      "type": "String",
+      "description": "Badge background color"
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "description": "Badge optional icon"
+    },
+    {
+      "name": "iconSize",
+      "type": "String",
+      "description": "Badge icon size"
+    }
+  ],
+
+  "events": []
+}
+
+
+

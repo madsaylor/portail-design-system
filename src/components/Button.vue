@@ -16,25 +16,53 @@
 -->
 
 <template>
-  <button
-    v-on="$listeners"
-    :class="['button', {primary, big, alt, plain}]"
-    :disabled="disabled"
-  >
-    <Icon
-      v-if="icon"
-      :class="{'icon-left': hasLabel}"
-      :source="icon"
-      :size="big ? '28px' : '24px'"
-    />
-    <slot></slot>
-    <Icon
-      class="icon-right"
-      v-if="iconRight"
-      :source="iconRight"
-      :size="big ? '28px' : '24px'"
-    />
-  </button>
+  <div class="button-link-wrapper">
+    <template v-if="link">
+      <a
+        v-on="$listeners"
+        :href="link"
+        :class="['button', {primary, big, alt, plain}]"
+        :disabled="disabled"
+        :target="target"
+      >
+        <Icon
+          v-if="icon"
+          :class="{'icon-left': hasLabel}"
+          :source="icon"
+          :size="big ? '28px' : '24px'"
+        />
+        <slot></slot>
+        <Icon
+          class="icon-right"
+          v-if="iconRight"
+          :source="iconRight"
+          :size="big ? '28px' : '24px'"
+        />
+      </a>
+    </template>
+
+    <template v-else>
+      <button
+        v-on="$listeners"
+        :class="['button', {primary, big, alt, plain}]"
+        :disabled="disabled"
+      >
+        <Icon
+          v-if="icon"
+          :class="{'icon-left': hasLabel}"
+          :source="icon"
+          :size="big ? '28px' : '24px'"
+        />
+        <slot></slot>
+        <Icon
+          class="icon-right"
+          v-if="iconRight"
+          :source="iconRight"
+          :size="big ? '28px' : '24px'"
+        />
+      </button>
+    </template>
+  </div>
 </template>
 
 <script>
@@ -50,6 +78,8 @@ export default {
     disabled: Boolean,
     icon: String,
     iconRight: String,
+    link: String,
+    target: String
   },
   data: () => ({
   }),
@@ -67,6 +97,10 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
+.button-link-wrapper {
+  display: inline-block;
+}
+
 .button {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -78,8 +112,9 @@ export default {
   display: inline-block;
   margin: 0;
   transition: background .1s ease-in-out;
-
+  text-decoration: none !important;
   padding: 10px 16px;
+
   &.big {
     padding: 14px 24px;
   }

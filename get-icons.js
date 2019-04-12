@@ -54,6 +54,8 @@ const ICONS_TO_GET = [
   ['stars', 'outline'],
   ['today', 'baseline'],
   ['work_outline', 'baseline'],
+  ['exit_to_app', 'baseline'],
+  ['settings', 'baseline'],
 ]
 
 // Get svg download link

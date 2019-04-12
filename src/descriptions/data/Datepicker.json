@@ -18,7 +18,8 @@
     {
       "name": "value",
       "type": "Date",
-      "description": "Selected date"
+      "default": "new Date()",
+      "description": "Selected date."
     }
   ],
   "events": []

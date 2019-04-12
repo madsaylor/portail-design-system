@@ -8,7 +8,8 @@
     {
       "name": "position",
       "type": "String",
-      "description": "String. Where dropdown should be placed relatively to the target. Formated as 'primaryAlignment-secondaryAlignment'"
+      "default": "bottom-right",
+      "description": "String. Where dropdown should be placed relatively to the target. Formated as 'primaryAlignment-secondaryAlignment'."
     },
     {
       "name": "opened",

@@ -18,7 +18,8 @@
     {
       "name": "helpLabel",
       "type": "String",
-      "description": "Text for the tooltip label"
+      "default": "? explication",
+      "description": "Text for the tooltip label."
     },
     {
       "name": "icon",
@@ -58,7 +59,8 @@
     {
       "name": "type",
       "type": "String",
-      "description": "Passed to the input with type_ computed property. <Input type=\"date\" /> results in <input type=\"text\" />"
+      "default": "text",
+      "description": "Passed to the input with type_ computed property. <Input type=\"date\" /> results in <input type=\"text\" /.>"
     },
     {
       "name": "validators",
@@ -110,12 +112,13 @@
     {
       "name": "dateRange",
       "type": "Object",
-      "description": "Property for type Date. An alternative to minDate/maxDate: :dateRange=\"{ min: 10,  - 10 calendar days in the past from the dateRangeStart max: 20,  - 20 calendar days in the future from the dateRangeStart }\""
+      "description": "Property for type Date. An alternative to minDate/maxDate"
     },
     {
       "name": "datepickerPosition",
       "type": "String",
-      "description": "Property for type Date. Forwarded to datepicker dropdown position"
+      "default": "bottom-middle",
+      "description": "Property for type Date. Forwarded to datepicker dropdown position."
     },
     {
       "name": "options",
@@ -131,7 +134,10 @@
     {
       "name": "validate",
       "description": "Listening event 'validate' for running validation even if this field was not touched."
+    },
+    {
+      "name": "validate{name}",
+      "description": "Run field validation, for inputs which have current name property."
     }
   ]
 }
-

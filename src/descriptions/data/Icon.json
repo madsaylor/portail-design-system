@@ -8,12 +8,14 @@
     {
       "name": "size",
       "type": "String",
-      "description": "String. Must be valid css value. Size for the inner svg element"
+      "default": "24px",
+      "description": "String. Must be valid css value. Size for the inner svg element."
     },
     {
       "name": "padding",
       "type": "String",
-      "description": "String. Must be valid css value. Padding around the svg"
+      "default": "0",
+      "description": "String. Must be valid css value. Padding around the svg."
     },
     {
       "name": "color",

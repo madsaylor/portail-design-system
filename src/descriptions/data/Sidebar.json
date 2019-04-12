@@ -8,17 +8,20 @@
     {
       "name": "activeKey",
       "type": "Function",
-      "description": "Allows you to override value determining the active item. Values are compared with `===` operator. By default item's index is used"
+      "default": "(item, index) => index",
+      "description": "Allows you to override value determining the active item. Values are compared with `===` operator. By default item's index is used."
     },
     {
       "name": "active",
       "type": "Any",
-      "description": "Index (can be changed with activeKey property) for the currently active item. Supports .sync modifier"
+      "default": "0",
+      "description": "Index (can be changed with activeKey property) for the currently active item. Supports .sync modifier."
     },
     {
       "name": "activeChild",
       "type": "Any",
-      "description": "Same as active, but for child element"
+      "default": "0",
+      "description": "Same as active, but for child element."
     },
     {
       "name": "opened",

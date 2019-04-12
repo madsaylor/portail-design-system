@@ -8,7 +8,8 @@
     {
       "name": "backdropOpacity",
       "type": "String",
-      "description": "Set backdrop opacity by value from 0..1 by default 0.6"
+      "default": "0.6",
+      "description": "Set backdrop opacity by value from 0..1."
     }
   ],
   "events": []

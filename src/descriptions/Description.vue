@@ -7,6 +7,7 @@
       <ul>
         <li v-for="property in description[compnentName].properties">
           <b>{{property.name}}</b>: <i>{{property.type}}</i> - {{property.description}}
+          <span v-if="property.default"><b>By default: </b><u>{{property.default}}</u></span>
           <ul v-if="property.subProperty">
             <li v-for="subProperty in property.subProperty">
               <b>{{subProperty.name}}</b>: <i>{{subProperty.type}}</i> - {{subProperty.description}}

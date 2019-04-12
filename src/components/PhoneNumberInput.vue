@@ -1538,6 +1538,9 @@ export default {
     },
     onInput() {
       this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);
+      if (!this.phone.includes('+' + this.activeCountry.dialCode)) {
+        this.phone = '+' + this.activeCountry.dialCode;
+      }
       // Emit input event in case v-model is used in the parent
       this.$emit('input', this.response.number);
       // Emit the response, includes phone, validity and country

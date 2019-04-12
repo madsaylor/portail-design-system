@@ -40,7 +40,7 @@
       width: 100%;
       flex-direction: column;
       box-shadow: @card-shadow;
-      margin-bottom: 15px;
+      margin-bottom: @collapser-margin-bottom;
 
       .top {
         display: flex;
@@ -66,7 +66,7 @@
       }
 
       .body {
-        padding: 15px;
+        padding: @collapser-body-padding;
         background-color: white;
       }
     }

@@ -1,11 +1,6 @@
 {
   "properties": [
     {
-      "name": "text",
-      "type": "String",
-      "description": "Badge text"
-    },
-    {
       "name": "color",
       "type": "String",
       "description": "Badge background color"

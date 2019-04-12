@@ -1659,47 +1659,54 @@ li.last-preferred {
   display: flex;
   border: @tel-input-border;
   text-align: left;
+
+  &:focus-within {
+    border-color: @color-primary;
+  }
+
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    padding: @phone-input-padding;
+    cursor: pointer;
+
+    &.open{
+      background-color: @color-gray-200;
+    }
+
+    &:hover {
+      background-color: @color-gray-200;
+    }
+
+    ul {
+      z-index: 1;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      list-style: none;
+      max-height: @drop-panel-max-height;
+      overflow-y: scroll;
+      position: absolute;
+      top: 33px;
+      left: -1px;
+      background-color: @color-gray-100;
+      border: @drop-panel-border;
+      width: @drop-panel-width;
+    }
+  }
+
+  input {
+    border: none;
+    border-radius: @input-border-radius;
+    width: 100%;
+    outline: none;
+    padding-left: @phone-input-padding;
+  }
 }
-.vue-tel-input:focus-within {
-  border-color: @color-primary;
-}
-input {
-  border: none;
-  border-radius: @input-border-radius;
-  width: 100%;
-  outline: none;
-  padding-left: @phone-input-padding;
-}
-ul {
-  z-index: 1;
-  padding: 0;
-  margin: 0;
-  text-align: left;
-  list-style: none;
-  max-height: @drop-panel-max-height;
-  overflow-y: scroll;
-  position: absolute;
-  top: 33px;
-  left: -1px;
-  background-color: @color-gray-100;
-  border: @drop-panel-border;
-  width: @drop-panel-width;
-}
-.dropdown {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  position: relative;
-  padding: @phone-input-padding;
-  cursor: pointer;
-}
-.dropdown.open {
-  background-color: @color-gray-200;
-}
-.dropdown:hover {
-  background-color: @color-gray-200;
-}
+
 .country-code {
   color: @color-gray-500;
 }

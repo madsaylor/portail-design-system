@@ -18,6 +18,7 @@
       <Button icon="menu" big></Button>&nbsp;
       <Button icon="menu" plain></Button>&nbsp;
       <Button icon="menu"></Button>&nbsp;
+      <Button link="https://github.com/highqualitycode" icon="account_circle">Github</Button>&nbsp;
       <!-- OR -->
       <button class="button primary">
         Button Label

@@ -140,7 +140,7 @@ export default {
   },
   created() {
     if (this.value) {
-      this.phone = this.value
+      this.phone = this.value;
     }
   },
   data() {

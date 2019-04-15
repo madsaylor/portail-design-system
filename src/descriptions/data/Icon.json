@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "source",
+      "type": "String",
+      "description": "String, required. Icon name for icons from src/icons folder or an `<svg>...</svg>` code"
+    },
+    {
+      "name": "size",
+      "type": "String",
+      "default": "24px",
+      "description": "String. Must be valid css value. Size for the inner svg element."
+    },
+    {
+      "name": "padding",
+      "type": "String",
+      "default": "0",
+      "description": "String. Must be valid css value. Padding around the svg."
+    },
+    {
+      "name": "color",
+      "type": "String",
+      "description": "String. Color variable name or a CSS value"
+    }
+  ]
+,
+  "events": []
+}

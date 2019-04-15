@@ -4,23 +4,10 @@
 
     <h4>Usage</h4>
     <p>Tabs component can be controlled by next properties: </p>
-
-    <ul>
-      <li><b>active</b> is a number which describes index of chosen by default item</li>
-      <li><b>disabled</b> disable all tabs</li>
-      <li><b>tabs</b> is an object, which can have next props:
-        <ul>
-          <li><b>text</b> is string. This property is required. </li>
-          <li><b>disabled</b> is a boolean which describes if tab disabled</li>
-          <li><b>hidden</b> is a boolean which describes if tab hidden</li>
-        </ul>
-      </li>
-    </ul>
-
-    <p><i>Events:</i></p>
-    <p><b>@tab:click</b> - return tab's configuration object and it's index</p>
-
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="Tabs"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <Tabs :tabs="tabs" :active="active" @tab:click="onTabClick"/>
 
@@ -32,15 +19,17 @@
 
 <script>
   import Tabs from '../../components/Tabs'
+  import Description from '../../descriptions/Description'
+  import Collapser from '../../components/Collapser.vue'
 
   let usage = `<Tabs :tabs="tabs" :active="active" @tab:click="onTabClick"/>`
 
   export default {
     name: "TabsDemo",
-    components: { Tabs },
-
+    components: { Tabs, Description, Collapser},
     data() {
       return ({
+        openUsage: true,
         usage,
         active: 0,
         tabs: [

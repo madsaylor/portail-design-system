@@ -4,8 +4,11 @@
       <h3>Datepicker</h3>
 
       Datepicker with min/max selection limit.
-
-      <pre v-highlightjs="usage"><code class="html"></code></pre>
+      Selected Date is updated through v-model directive
+      <Description compnent-name="Datepicker"></Description>
+      <Collapser :opened.sync="openUsage" label="Usage">
+        <pre v-highlightjs="usage"><code class="html"></code></pre>
+      </Collapser>
 
       Localization support:
 
@@ -29,6 +32,8 @@
 
 <script>
 import Datepicker from '../../components/Datepicker'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
 <Datepicker
@@ -41,13 +46,14 @@ let usage = `
 export default {
   name: "DatepickerDemo",
   components: {
-    Datepicker
+    Datepicker, Description, Collapser
   },
   data() {
     return {
       dateSelected: new Date('2006-02-12'),
       dateSelected2: new Date(),
       usage,
+      openUsage: true,
     }
   }
 }

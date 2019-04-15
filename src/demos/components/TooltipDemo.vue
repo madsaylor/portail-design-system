@@ -3,8 +3,10 @@
     <h3>Tooltip</h3>
 
     A styled tooltip
-
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="Tooltip"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <Tooltip>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
@@ -16,6 +18,8 @@
 
 <script>
 import Tooltip from '../../components/Tooltip'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
 <Tooltip>
@@ -27,10 +31,11 @@ let usage = `
 
 export default {
   name: "TooltipDemo",
-  components: {Tooltip},
+  components: {Tooltip, Description, Collapser},
   data: () => ({
     tooltipVisibleHover: false,
     tooltipVisibleClick: false,
+    openUsage: true,
     usage
   })
 }

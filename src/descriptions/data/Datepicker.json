@@ -1,0 +1,26 @@
+{
+  "properties": [
+    {
+      "name": "lang",
+      "type": "String",
+      "description": "String. BCP 47 code. Language to be used in the datepicker for month names and weekday labels. Can be set globally with $root.locale. This property overrides global setting"
+    },
+    {
+      "name": "min",
+      "type": "Date",
+      "description": "Date. Optional earliest selectable day"
+    },
+    {
+      "name": "max",
+      "type": "Date",
+      "description": "Date. Optional latest selectable day"
+    },
+    {
+      "name": "value",
+      "type": "Date",
+      "default": "new Date()",
+      "description": "Selected date."
+    }
+  ],
+  "events": []
+}

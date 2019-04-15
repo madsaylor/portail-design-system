@@ -1,0 +1,20 @@
+{
+  "properties": [
+    {
+      "name": "items",
+      "type": "Array",
+      "description": "Array<Array<any>>, required. Items to be rendered in the grid. Where each items may have: title - String. Will be used in rendering if provided, otherwise item will be rendered as {{ item }}. Also, a scoped slot can be used for even finer control of item representation disabled - Boolean. Makes item not selectable class - String or Array<String> cutom classes to add to the element key - String or Number. Value for is selected check and :key value for v-for"
+    },
+    {
+      "name": "labelsTop",
+      "type": "Array",
+      "description": "Array<string>. Table header items"
+    },
+    {
+      "name": "value",
+      "type": "null",
+      "description": "Selected value is updated through v-model directive on mouse click, enter or space key. During rendering \"selected\" class is added to item that satisfies === comparison with the v-model. Value for the check can be overridden with selectedKey property"
+    }
+  ],
+  "events": []
+}

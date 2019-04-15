@@ -3,8 +3,10 @@
     <h3>Card</h3>
 
     Basic styled component: background, padding, shadow.
-
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="Card"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <div class="grid">
       <div class="row-col"><Card>Hello, World!</Card></div>
@@ -77,6 +79,8 @@
 <script>
 import Card from '../../components/Card.vue'
 import Icon from '../../components/Icon.vue'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
 <Card>Hello, World!</Card>
@@ -108,7 +112,10 @@ let usage = `
 
 export default {
   name: 'CardDemo',
-  components: {Card, Icon},
-  data: () => ({usage})
+  components: {Card, Icon, Description, Collapser},
+  data: () => ({
+    openUsage: true,
+    usage
+  })
 }
 </script>

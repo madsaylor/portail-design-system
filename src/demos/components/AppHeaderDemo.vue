@@ -1,8 +1,11 @@
 <template>
   <div class="row-col">
     <h3>AppHeader</h3>
+    <Description compnent-name="AppHeader"></Description>
 
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <AppHeader>
       <template #left>
@@ -19,6 +22,8 @@
 <script>
 import AppHeader from '../../components/AppHeader.vue'
 import Button from '../../components/Button.vue'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
 <AppHeader>
@@ -34,9 +39,10 @@ let usage = `
 
 export default {
   name: 'AppHeaderDemo',
-  components: {AppHeader, Button},
+  components: {AppHeader, Button, Description, Collapser},
   data: () => ({
     usage,
+    openUsage: true
   })
 }
 </script>

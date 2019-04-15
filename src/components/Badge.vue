@@ -4,7 +4,6 @@
   Usage:
 
     <Badge
-      :text="Needs Response" - Badge text
       :color="red"           - Badge background color
       :icon="error_outline"  - Badge optional icon
       :icon-size="20px">     - Badge icon size
@@ -14,7 +13,7 @@
 <template>
   <div class="badge" :class="color">
     <Icon v-if="icon" class="icon" :source="icon" color="white" :size="iconSize"/>
-    <span>{{text}}</span>
+    <slot></slot>
   </div>
 </template>
 
@@ -25,7 +24,6 @@
         name: 'Badge',
         components: {Icon},
         props: {
-          text: String,
           icon: String,
           iconSize: String,
           color: String

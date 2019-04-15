@@ -5,8 +5,10 @@
     <p>Dialog window can have any body what you want. Just put some HTML code or another component inside dialog tag.</p>
     <p>State of dialog is regulated by property <b>opened</b>.</p>
     <p>Opacity of the backdrop is regulated bu property <b>backdropOpacity</b>.</p>
-
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="Dialog"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <Button @click="opened = true">OPEN DIALOG</Button>
     <Button @click="datepickerVisible = true" alt>OPEN CALENDAR</Button>
@@ -39,6 +41,8 @@
   import Dialog from "../../components/Dialog"
   import Button from "../../components/Button"
   import Datepicker from "../../components/Datepicker"
+  import Description from '../../descriptions/Description'
+  import Collapser from '../../components/Collapser.vue'
 
 
   let usage = `
@@ -62,7 +66,7 @@
 
   export default {
     name: "DialogDemo",
-    components: {Dialog, Button, Datepicker},
+    components: {Dialog, Button, Datepicker, Description, Collapser},
     data() {
       return ({
         opened: false,
@@ -70,7 +74,8 @@
         datepickerVisible: false,
         datepickerMin: undefined,
         datepickerMax: undefined,
-        usage
+        usage,
+        openUsage: true,
       })
     }
   }

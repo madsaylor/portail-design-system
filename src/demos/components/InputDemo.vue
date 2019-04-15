@@ -58,9 +58,10 @@
          listener = 'validateTest'
       </i>
     </p>
-    <br>
-
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="Input"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <div class="input-component-demo">
       Basic inputs:<br />
@@ -193,6 +194,8 @@
 <script>
 import Input from '../../components/Input'
 import Button from '../../components/Button'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
 Basic inputs:<br />
@@ -273,8 +276,9 @@ Date inputs:<br />
 
 export default {
   name: "InputDemo",
-  components: {Input, Button},
+  components: {Input, Button, Description, Collapser},
   data: () => ({
+    openUsage: true,
     usage,
     textValue: '',
     radioValue: 'first',

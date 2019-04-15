@@ -3,8 +3,15 @@
     <h3>Dropdown</h3>
 
     Dropdown that can hold different things
+    <Description compnent-name="Dropdown"></Description>
 
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Collapser :opened.sync="visiblePosition" label="Position Scheme">
+      <pre class="scheme" v-highlightjs="scheme"><code class="html"></code></pre>
+    </Collapser>
+
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <Button ref="dropButton" @click="dropdownOpened = !dropdownOpened">
       Choose position
@@ -59,7 +66,9 @@
 
 <script>
 import Button from '../../components/Button.vue'
+import Collapser from '../../components/Collapser.vue'
 import Dropdown from '../../components/Dropdown.vue'
+import Description from '../../descriptions/Description'
 
 let usage = `
 <Button ref="dropButton" @click="dropdownOpened = !dropdownOpened">
@@ -74,11 +83,45 @@ let usage = `
 </Dropdown>
 `.slice(1)
 
+const scheme = `
++--- ----- --------------------------------------------------------+
+|              top-left      top-middle     top-right              |
+|                +--------------------------------+                |
+|                |       |                |       |                |
+|                |       |                |       |                |
+|  left-top      |       |                |       |     right-top  |
+|   +------------------+ |                | +------------------+   |
+|   |            |     | |                | |     |            |   |
+|   |            |     | |                | |     |            |   |
+|   |            |     | |                | |     |            |   |
+|   |            +--------------------------------+            |   |
+|   +------------------+ +----------------+ +------------------+   |
+|   |                  | |                | |                  |   |
+|  left-center         | |     Target     | |        right-center  |
+|   |                  | |                | |                  |   |
+|   +------------------+ +----------------+ +------------------+   |
+|   |            +--------------------------------+            |   |
+|   |            |     | |                | |     |            |   |
+|   |            |     | |                | |     |            |   |
+|   |            |     | |                | |     |            |   |
+|   +------------------+ |                | +------------------+   |
+|  left-bottom   |       |                |       |   right-bottom |
+|                |       |                |       |                |
+|                |       |                |       |                |
+|                +--------------------------------+                |
+|            bottom-left   bottom-middle   bottom-right            |
+|                                                                  |
++------------------------------------------------------------------+
+`
+
 export default {
   name: 'DropdownDemo',
-  components: {Button, Dropdown},
+  components: {Button, Dropdown, Description, Collapser},
   data: () => ({
     usage,
+    scheme,
+    openUsage: true,
+    visiblePosition: false,
     dropdownOpened: false,
     dropdown2Opened: false,
     dropdown3Opened: false,
@@ -123,6 +166,11 @@ export default {
     border-radius: 3px;
     box-sizing: border-box;
     padding: 10px;
+  }
+
+  .scheme {
+    font-size: 14px;
+    line-height: 14px;
   }
 }
 </style>

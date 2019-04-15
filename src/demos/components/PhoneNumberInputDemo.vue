@@ -1,7 +1,7 @@
 <template>
   <div class="row-col">
     <h3>Phone Number Input</h3>
-    <PhoneNumberInput @onInput="onInput" :inputOptions="{showDialCode: true}" value="+93 33 342 3443" />
+    <PhoneNumberInput @onInput="onInput" :inputOptions="{showDialCode: true}" defaultCountry="fr" value="+33 2 34 32 42 34" />
   </div>
 </template>
 

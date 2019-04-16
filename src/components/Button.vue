@@ -18,7 +18,7 @@
 -->
 
 <template>
-  <div class="button-link-wrapper">
+  <div :class="['button-link-wrapper', {mobileBottom}]">
     <template v-if="link">
       <a
         v-on="$listeners"
@@ -81,7 +81,8 @@ export default {
     icon: String,
     iconRight: String,
     link: String,
-    target: String
+    target: String,
+    mobileBottom: Boolean,
   },
   data: () => ({
   }),
@@ -101,6 +102,20 @@ export default {
 
 .button-link-wrapper {
   display: inline-block;
+
+  &.mobileBottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    line-height: normal;
+    width: 100%;
+    z-index: 2;
+    .button {
+      width: 100%;
+    }
+  }
 }
 
 .button {

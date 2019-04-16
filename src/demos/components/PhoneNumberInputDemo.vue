@@ -10,7 +10,6 @@
     <PhoneNumberInput
       @onInput="onInput"
       :inputOptions="{showDialCode: true}"
-      defaultCountry="fr"
       value="+33234324234"
     />
   </div>

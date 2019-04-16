@@ -195,7 +195,8 @@ export default {
         const formatter = new AsYouType();// eslint-disable-line
         formatter.input(this.phone);
         // Find inputted country in the countries list
-        // this.activeCountry = this.findCountry(formatter.country) || this.activeCountry;
+        const activeCountry = this.findCountry(formatter.country) || this.activeCountry;
+        this.setActiveCountry(activeCountry);
       } else if (this.mode === 'prefix') {
         phone = this.phone.slice(1);
       }
@@ -281,6 +282,9 @@ export default {
         this.phone = '+' + country.dialCode;
       }
       this.$emit('onInput', this.response);
+    },
+    setActiveCountry(country) {
+      this.activeCountry = country;
     },
     onInput() {
       this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);

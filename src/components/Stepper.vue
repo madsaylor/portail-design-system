@@ -131,11 +131,20 @@
           this.swipeStep(endX > 0 ? 1 : -1)
         }
         event.preventDefault()
+      },
+
+      onResize() {
+        this.windowWidth = window.innerWidth
       }
     },
     mounted() {
+      window.addEventListener('resize', this.onResize)
+
       this.$el.addEventListener('touchstart', this.touchStart)
       this.$el.addEventListener('touchend', this.touchEnd)
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.onResize)
     }
   }
 </script>

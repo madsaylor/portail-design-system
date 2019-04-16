@@ -2,7 +2,13 @@
   <div class="row-col">
     <h3>Stepper</h3>
     <p>Stepper component for outputting components as step</p>
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+
+    <Description compnent-name="Stepper"></Description>
+
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
+
     <Stepper v-model="steps">
       <template #header></template>
       <template #step-1>
@@ -37,10 +43,12 @@
 </template>
 
 <script>
-    import Stepper from '../../components/Stepper';
-    import Card from '../../components/Card';
-    import Icon from '../../components/Icon';
-    import Input from '../../components/Input';
+    import Stepper from '../../components/Stepper'
+    import Card from '../../components/Card'
+    import Icon from '../../components/Icon'
+    import Input from '../../components/Input'
+    import Description from '../../descriptions/Description'
+    import Collapser from '../../components/Collapser.vue'
 
 let usage = `
     <Step v-model="steps">
@@ -73,13 +81,14 @@ let usage = `
       </template>
       <template #footer></template>
     </Step>
-`.slice(1);
+`.slice(1)
 
   export default {
     name: 'StepperDemo',
-    components: {Stepper, Card, Icon, Input},
+    components: {Stepper, Card, Icon, Input, Description, Collapser},
     data: () => ({
       usage,
+      openUsage: true,
       steps: [{name: 'Card'}, {name: 'Icon'}, {name: 'Input'}]
     })
   }

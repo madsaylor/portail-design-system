@@ -80,32 +80,27 @@
         this.$emit('tab:click', tab, index)
       },
       swipeTab(regulator) {
-        let futureTab = this.active + regulator;
+        let futureTab = this.active + regulator
 
         if (futureTab < this.tabs.length && futureTab >= 0) {
-          this.onTabClick(this.tabs[futureTab], futureTab);
+          this.onTabClick(this.tabs[futureTab], futureTab)
         }
+      },
+      touchstart(event) {
+        this.startX = event.changedTouches[0].pageX
+        event.preventDefault()
+      },
+      touchend(event) {
+        let endX = event.changedTouches[0].pageX - this.startX
+        if (Math.abs(endX) > this.minDistance) {
+          this.swipeTab(endX > 0 ? 1 : -1)
+        }
+        event.preventDefault()
       }
     },
     mounted() {
-      this.$nextTick(() => {
-        this.$el.addEventListener('touchstart', (event) => {
-          this.startX = event.changedTouches[0].pageX;
-          event.preventDefault();
-        });
-
-        this.$el.addEventListener('touchmove', (event) => {
-          event.preventDefault();
-        });
-
-        this.$el.addEventListener('touchend', (event) => {
-          let endX = event.changedTouches[0].pageX - this.startX;
-          if (Math.abs(endX) > this.minDistance) {
-            this.swipeTab(endX > 0 ? 1 : -1);
-          }
-          event.preventDefault()
-        })
-      });
+      this.$el.addEventListener('touchstart', this.touchstart)
+      this.$el.addEventListener('touchend', this.touchend)
     }
   }
 </script>

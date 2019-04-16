@@ -3,8 +3,10 @@
     <h3>Button</h3>
 
     Button with an optional icon and different styles
-
-    <pre v-highlightjs="usage"><code class="html"></code></pre>
+    <Description compnent-name="Button"></Description>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
     <div style="line-height: 64px">
       <Button big>Big</Button>&nbsp;
@@ -30,6 +32,8 @@
 
 <script>
 import Button from '../../components/Button.vue'
+import Description from '../../descriptions/Description'
+import Collapser from '../../components/Collapser.vue'
 
 let usage = `
 <Button big>Big</Button>&nbsp;
@@ -51,7 +55,10 @@ let usage = `
 
 export default {
   name: 'ButtonDemo',
-  components: {Button},
-  data: () => ({usage}),
+  components: {Button, Description, Collapser},
+  data: () => ({
+    openUsage: true,
+    usage
+  }),
 }
 </script>

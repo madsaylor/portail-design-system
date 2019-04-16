@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "items",
+      "type": "Array",
+      "description": "Array<Object>, required. Items to display on the Menu."
+    }
+  ],
+  "events": []
+}

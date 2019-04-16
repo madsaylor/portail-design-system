@@ -1,0 +1,143 @@
+{
+  "properties": [
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "description": "Is input disabled. Passed directly to the input"
+    },
+    {
+      "name": "help",
+      "type": "String",
+      "description": "Text for the tooltip at the bottom of the input"
+    },
+    {
+      "name": "name",
+      "type": "String",
+      "description": "With this property current input listen event validateTest"
+    },
+    {
+      "name": "helpLabel",
+      "type": "String",
+      "default": "? explication",
+      "description": "Text for the tooltip label."
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "description": "Icon name for icons from src/icons folder or an svg code"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label at the top of the input"
+    },
+    {
+      "name": "lang",
+      "type": "String",
+      "description": "BCP 47 code. Language to be used in the datepicker for month names and weekday labels. Can be set globally with $root.locale. This property overrides global setting"
+    },
+    {
+      "name": "lg",
+      "type": "Boolean",
+      "description": "Large size - 464px"
+    },
+    {
+      "name": "md",
+      "type": "Boolean",
+      "description": "Medium size - 252px"
+    },
+    {
+      "name": "sm",
+      "type": "Boolean",
+      "description": "Small size -  144px"
+    },
+    {
+      "name": "placeholder",
+      "type": "String",
+      "description": "Passed directly to the input"
+    },
+    {
+      "name": "type",
+      "type": "String",
+      "default": "text",
+      "description": "Passed to the input with type_ computed property. <Input type=\"date\" /> results in <input type=\"text\" /.>"
+    },
+    {
+      "name": "validators",
+      "type": "Array<Object>",
+      "description": " Array of validator Objects. When multiple validators fail, only one error is displayed, determined by their order in the array. Each Object should have three fields:",
+      "subProperty": [
+        {
+          "name": "name",
+          "type": "String",
+          "description": "Validator id"
+        },
+        {
+          "name": "message",
+          "type": "String",
+          "description": "Error message that shown when validation fails"
+        },
+        {
+          "name": "validator",
+          "type": "Function",
+          "description": " Function that takes input value as an argument and returns Boolean"
+        }
+      ]
+    },
+    {
+      "name": "value",
+      "type": "null",
+      "description": "Binds value property to input"
+    },
+    {
+      "name": "radioVal",
+      "type": "String",
+      "description": "Property for type Radio. When the value of v-model is same as radioVal of the element, the element is selected."
+    },
+    {
+      "name": "minDate",
+      "type": "Date",
+      "description": "Property for type Date. Earliest selectable day for the datepicker"
+    },
+    {
+      "name": "maxDate",
+      "type": "Date",
+      "description": "Property for type Date. Latest selectable day for the datepicker"
+    },
+    {
+      "name": "dateRangeStart",
+      "type": "Date",
+      "description": "Property for type Date. Point of reference for the dateRange property"
+    },
+    {
+      "name": "dateRange",
+      "type": "Object",
+      "description": "Property for type Date. An alternative to minDate/maxDate"
+    },
+    {
+      "name": "datepickerPosition",
+      "type": "String",
+      "default": "bottom-middle",
+      "description": "Property for type Date. Forwarded to datepicker dropdown position."
+    },
+    {
+      "name": "options",
+      "type": "Array",
+      "description": "Property for type Select. Array<Object>. Options for select. Each item is bound to an <option> element. Additionaly a .title property can be set to change the displayed value"
+    }
+  ],
+  "events": [
+    {
+      "name": "validation",
+      "description": "Emitted when the input value changes."
+    },
+    {
+      "name": "validate",
+      "description": "Listening event 'validate' for running validation even if this field was not touched."
+    },
+    {
+      "name": "validate{name}",
+      "description": "Run field validation, for inputs which have current name property."
+    }
+  ]
+}

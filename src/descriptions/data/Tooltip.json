@@ -1,0 +1,11 @@
+
+{
+  "properties": [
+    {
+      "name": "visible",
+      "type": "Boolean",
+      "description": "Responsible for visibility tooltip"
+    }
+  ],
+  "events": []
+}

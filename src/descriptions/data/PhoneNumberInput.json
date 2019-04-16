@@ -1,0 +1,100 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "String",
+      "description": "Default Phone Number"
+    },
+    {
+      "name": "placeholder",
+      "type": "String",
+      "description": "Placeholder"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "description": "Enable or Disable of dropdown"
+    },
+    {
+      "name": "disabledFormatting",
+      "type": "Boolean",
+      "description": "Disable the format of phone number"
+    },
+    {
+      "name": "invalidMsg",
+      "type": "String",
+      "description": "Message that can be displayed when the phone number is invalid"
+    },
+    {
+      "name": "required",
+      "type": "Boolean",
+      "description": "required props"
+    },
+    {
+      "name": "defaultCountry",
+      "type": "String",
+      "description": "Default country"
+    },
+    {
+      "name": "enabledCountryCode",
+      "type": "Boolean",
+      "description": "Show country code next to the flag"
+    },
+    {
+      "name": "enabledFlags",
+      "type": "Boolean",
+      "description": "Show flags at the top of the dropdown"
+    },
+    {
+      "name": "preferredCountries",
+      "type": "Array",
+      "description": "Array of countries that can be at top of the list"
+    },
+    {
+      "name": "onlyCountries",
+      "type": "Array",
+      "description": "Display only the countrie in Array"
+    },
+    {
+      "name": "ignoredCountries",
+      "type": "Array",
+      "description": "Remove countries in this Array"
+    },
+    {
+      "name": "autocomplete",
+      "type": "String",
+      "description": "Complete the Phone Number automatically based on history"
+    },
+    {
+      "name": "name",
+      "type": "String",
+      "description": "Name of input field"
+    },
+    {
+      "name": "inputClasses",
+      "type": "String",
+      "description": "Classes of input field"
+    },
+    {
+      "name": "dropdownOptions",
+      "type": "Object",
+      "description": "Options which can be at the items of dropdown list"
+    },
+    {
+      "name": "inputOptions",
+      "type": "Object",
+      "description": "Options which can be inputted from Input field"
+    },
+    {
+      "name": "maxLen",
+      "type": "Number",
+      "description": "Max length of inputted numbers"
+    }
+  ],
+  "events": [
+    {
+      "name": "onInput({ number, isValid, country })",
+      "description": "Emitted when the input value changes"
+    }
+  ]
+}

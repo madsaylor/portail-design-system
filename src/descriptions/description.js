@@ -13,6 +13,7 @@ import Menu from './data/Menu';
 import Sidebar from './data/Sidebar';
 import Tabs from './data/Tabs';
 import Tooltip from './data/Tooltip';
+import PhoneNumberInput from './data/PhoneNumberInput';
 
 export default {
   AppHeader,
@@ -29,5 +30,6 @@ export default {
   Menu,
   Sidebar,
   Tabs,
-  Tooltip
+  Tooltip,
+  PhoneNumberInput
 }

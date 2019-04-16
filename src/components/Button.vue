@@ -103,17 +103,19 @@ export default {
 .button-link-wrapper {
   display: inline-block;
 
-  &.mobileBottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0;
-    line-height: normal;
-    width: 100%;
-    z-index: 2;
-    .button {
+  @media @screen-small {
+    &.mobileBottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0;
+      line-height: normal;
       width: 100%;
+      z-index: 2;
+      .button {
+        width: 100%;
+      }
     }
   }
 }

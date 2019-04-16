@@ -103,6 +103,22 @@ export default {
 .button-link-wrapper {
   display: inline-block;
 
+  @media @screen-medium {
+    &.mobileBottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0;
+      line-height: normal;
+      width: 100%;
+      z-index: 2;
+      .button {
+        width: 100%;
+      }
+    }
+  }
+
   @media @screen-small {
     &.mobileBottom {
       position: fixed;

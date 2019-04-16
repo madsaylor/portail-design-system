@@ -13,6 +13,7 @@ import Menu from './data/Menu';
 import Sidebar from './data/Sidebar';
 import Tabs from './data/Tabs';
 import Tooltip from './data/Tooltip';
+import PhoneNumberInput from './data/PhoneNumberInput';
 import Stepper from './data/Stepper';
 
 export default {
@@ -31,5 +32,6 @@ export default {
   Sidebar,
   Tabs,
   Tooltip,
+  PhoneNumberInput,
   Stepper
 }

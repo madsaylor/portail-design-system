@@ -1,47 +1,50 @@
 <template>
-  <div class="vue-tel-input" :class="{ disabled: disabled }">
-    <div
-      class="dropdown"
-      @click="toggleDropdown"
-      v-click-outside="clickedOutside"
-      :class="{ open: open }"
-      tabindex="0"
-    >
-      <span class="selection">
-        <div class="iti-flag" v-if="enabledFlags" :class="activeCountry.iso2.toLowerCase()"></div>
-        <span class="country-code" v-if="enabledCountryCode">+{{ activeCountry.dialCode }}</span>
-        <span class="dropdown-arrow">{{ open ? '▲' : '▼' }}</span>
-      </span>
-      <ul v-show="open" ref="list">
-        <li
-          class="dropdown-item"
-          v-for="(pb, index) in sortedCountries"
-          :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
-          @click="choose(pb)"
-          :class="getItemClass(index, pb.iso2)"
-          @mousemove="selectedIndex = index"
-        >
-          <div class="iti-flag" v-if="enabledFlags" :class="pb.iso2.toLowerCase()"></div>
-          <strong>{{ pb.name }}</strong>
-          <span v-if="dropdownOptions && !dropdownOptions.disabledDialCode">+{{ pb.dialCode }}</span>
-        </li>
-      </ul>
+  <div>
+    <div class="label-text">{{ label }}</div>
+    <div class="vue-tel-input" :class="{ disabled: disabled }">
+      <div
+        class="dropdown"
+        @click="toggleDropdown"
+        v-click-outside="clickedOutside"
+        :class="{ open: open }"
+        tabindex="0"
+      >
+        <span class="selection">
+          <div class="iti-flag" v-if="enabledFlags" :class="activeCountry.iso2.toLowerCase()"></div>
+          <span class="country-code" v-if="enabledCountryCode">+{{ activeCountry.dialCode }}</span>
+          <span class="dropdown-arrow">{{ open ? '▲' : '▼' }}</span>
+        </span>
+        <ul v-show="open" ref="list">
+          <li
+            class="dropdown-item"
+            v-for="(pb, index) in sortedCountries"
+            :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
+            @click="choose(pb)"
+            :class="getItemClass(index, pb.iso2)"
+            @mousemove="selectedIndex = index"
+          >
+            <div class="iti-flag" v-if="enabledFlags" :class="pb.iso2.toLowerCase()"></div>
+            <strong>{{ pb.name }}</strong>
+            <span v-if="dropdownOptions && !dropdownOptions.disabledDialCode">+{{ pb.dialCode }}</span>
+          </li>
+        </ul>
+      </div>
+      <input
+        ref="input"
+        v-model="phone"
+        type="tel"
+        :placeholder="placeholder"
+        :state="state"
+        :disabled="disabled"
+        :required="required"
+        :autocomplete="autocomplete"
+        :name="name"
+        :class="inputClasses"
+        :maxlength="maxLen"
+        @blur="onBlur"
+        @input="onInput"
+      >
     </div>
-    <input
-      ref="input"
-      v-model="phone"
-      type="tel"
-      :placeholder="placeholder"
-      :state="state"
-      :disabled="disabled"
-      :required="required"
-      :autocomplete="autocomplete"
-      :name="name"
-      :class="inputClasses"
-      :maxlength="maxLen"
-      @blur="onBlur"
-      @input="onInput"
-    >
   </div>
 </template>
 
@@ -63,6 +66,9 @@ export default {
   props: {
     value: {
       type: String,
+    },
+    label: {
+      type: String
     },
     placeholder: {
       type: String,
@@ -355,6 +361,16 @@ li.last-preferred {
   display: flex;
   align-items: center;
 }
+
+.label-text {
+  .font-desktop-x-small-regular-gray();
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: @label-height;
+  margin-bottom: @label-margin-bottom;
+}
+
 .vue-tel-input {
   border-radius: @tel-input-radius;
   display: flex;

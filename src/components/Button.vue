@@ -24,7 +24,7 @@
       <a
         v-on="$listeners"
         :href="link"
-        :class="['button', {primary, big, alt, plain}]"
+        :class="['button', {primary, big, alt, plain, 'link-ico': linkIco}]"
         :disabled="disabled"
         :target="target"
       >
@@ -78,6 +78,7 @@ export default {
     big: Boolean,
     alt: Boolean,
     plain: Boolean,
+    linkIco: Boolean,
     disabled: Boolean,
     icon: String,
     iconRight: String,
@@ -89,7 +90,7 @@ export default {
   }),
   computed: {
     primary() {
-      return !(this.alt || this.plain)
+      return !(this.alt || this.plain || this.linkIco);
     },
     hasLabel() {
       return !!this.$slots.default
@@ -188,7 +189,7 @@ export default {
     }
   }
 
-  &.alt, &.plain {
+  &.alt, &.plain, &.link-ico {
     &:hover, &:focus {
       background: darken(@color-white, 5%);
     }
@@ -214,6 +215,10 @@ export default {
     &:hover {
       background: @color-gray-300;
     }
+  }
+
+  &.link-ico {
+    .font-components-button-link-ico();
   }
 }
 </style>

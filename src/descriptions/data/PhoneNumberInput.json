@@ -6,6 +6,11 @@
       "description": "Default Phone Number"
     },
     {
+      "name": "label",
+      "type": "String",
+      "description": "Label of this Input"
+    },
+    {
       "name": "placeholder",
       "type": "String",
       "description": "Placeholder"

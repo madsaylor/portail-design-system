@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "Array",
+      "description": "Displayed step name"
+    }
+  ],
+  "events": []
+}

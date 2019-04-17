@@ -10,6 +10,7 @@
     <PhoneNumberInput
       @onInput="onInput"
       :inputOptions="{showDialCode: true}"
+      label="Phone Number"
       value="+33234324234"
     />
   </div>
@@ -25,6 +26,7 @@ let usage = `
     @onInput="onInput"
     :inputOptions="{showDialCode: true}"
     defaultCountry="fr"
+    label="Phone Number"
     value="+33 2 34 32 42 34"
   />
 `.slice(1)

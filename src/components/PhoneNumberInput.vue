@@ -68,7 +68,8 @@ export default {
       type: String,
     },
     label: {
-      type: String
+      type: String,
+      default: 'Phone Number'
     },
     placeholder: {
       type: String,

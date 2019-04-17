@@ -8,7 +8,7 @@
     {
       "name": "label",
       "type": "String",
-      "description": "Label of this Input"
+      "description": "Label of Phone Number"
     },
     {
       "name": "placeholder",

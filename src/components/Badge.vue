@@ -35,7 +35,7 @@
   @import '../styles/vars';
 
   .badge {
-    display: flex;
+    display: inline-block;
     align-items: center;
     width: auto;
     border-radius: @badge-br;

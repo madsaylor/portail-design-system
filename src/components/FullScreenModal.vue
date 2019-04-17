@@ -58,22 +58,15 @@ export default {
     box-sizing: border-box;
     background-color: @color-white;
     box-shadow: inset 0 -1px 0 0 @color-gray-300;
-
-    button.left, button.right {
-      position: fixed;
-      top: 0;
-      padding: 18px;
-    }
-    button.left {
-      left: 0;
-    }
-    button.right {
-      right: 0;
-    }
   }
+   @media @screen-medium, @screen-small {
+        .modal-header:not(:empty) {
+          padding: 12px;
+        }
+   }
 
   .modal-main {
-    padding-top: 32px;
+    height:100%;
   }
 }
 </style>

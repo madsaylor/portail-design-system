@@ -31,6 +31,16 @@
       "description": "Right icon"
     },
     {
+      "name": "link",
+      "type": "String",
+      "description": "If link is set, component works as <a>  with button style"
+    },
+    {
+      "name": "target",
+      "type": "String",
+      "description": "Same as the target attribute in <a>"
+    },
+    {
       "name": "mobile-bottom",
       "type": "Boolean",
       "description": "Show Button at the bottom with full width on mobile devices"

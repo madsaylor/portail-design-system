@@ -18,6 +18,7 @@
       <Button disabled>Disabled</Button>&nbsp;
       <Button icon="menu" big plain></Button>&nbsp;
       <Button icon="menu" big></Button>&nbsp;
+      <Button mobile-bottom>Mobile Button</Button>&nbsp;
       <Button icon="menu" plain></Button>&nbsp;
       <Button icon="menu"></Button>&nbsp;
       <Button link="https://github.com/highqualitycode" icon="account_circle">Github</Button>&nbsp;

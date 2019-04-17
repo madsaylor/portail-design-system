@@ -12,6 +12,7 @@
       :icon-right="edit"          - Right icon
       :link="https://example.com" - If link is set, component works as <a>  with button style
       :target="_blank"            - Same as the target attribute in <a>
+      :mobile-bottom              - Show Button at the bottom with full width on mobile devices
     >
       Button label
     </Button>
@@ -115,6 +116,12 @@ export default {
       z-index: 2;
       .button {
         width: 100%;
+        text-align: center;
+        padding-top: @mobile-button-padding-size;
+        padding-bottom: @mobile-button-padding-size;
+        font-size: @mobile-button-font-size;
+        line-height: @mobile-button-line-height;
+        border-radius: 0;
       }
     }
   }

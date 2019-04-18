@@ -14,6 +14,7 @@ import Sidebar from './data/Sidebar';
 import Tabs from './data/Tabs';
 import Tooltip from './data/Tooltip';
 import PhoneNumberInput from './data/PhoneNumberInput';
+import FileUpload from './data/FileUpload';
 import Stepper from './data/Stepper';
 
 export default {
@@ -33,5 +34,6 @@ export default {
   Tabs,
   Tooltip,
   PhoneNumberInput,
+  FileUpload,
   Stepper
 }

@@ -1,0 +1,42 @@
+{
+  "properties": [
+    {
+      "name": "uploadOptions",
+      "type": "Object",
+      "description": "Upload options including the url of post",
+      "subProperty": [
+        {
+          "name": "url",
+          "type": "String",
+          "description": "Url of the destination server"
+        },
+        {
+          "name": "acceptedFiles",
+          "type": "String",
+          "description": "Type of upload files, it can be separated by comman if it has multiple types"
+        },
+        {
+          "name": "addRemoveLinks",
+          "type": "Boolean",
+          "description": "Enable remove button on the thumbnail screen"
+        }
+      ]
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "description": "Show Icon on the drop panel"
+    },
+    {
+      "name": "iconSize",
+      "type": "String",
+      "description": "Size of the Icon"
+    },
+    {
+      "name": "title",
+      "type": "String",
+      "description": "Show title on the drop panel"
+    }
+  ],
+  "events": []
+}

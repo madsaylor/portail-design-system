@@ -205,7 +205,7 @@ export default {
 
   &:disabled {
     background: @color-gray-300;
-    color: @color-gray-100;
+    color: @color-gray-400;
     cursor: initial;
 
     .icon {

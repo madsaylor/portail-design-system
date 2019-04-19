@@ -41,6 +41,7 @@ export default {
 
 #file-upload {
   position: relative;
+  min-height: @file-upload-panel-height; 
   background-color: @color-gray-300;
 
   .dropzone-custom-content {
@@ -52,6 +53,10 @@ export default {
 
     .title {
       color: @color-dark;
+      font-weight: @file-upload-title-weight;
+      font-size: @file-upload-title-size;
+      line-height: @fle-upload-line-height;
+      margin-top: @file-upload-title-margin-top;
     }
   }
 }

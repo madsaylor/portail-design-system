@@ -8,10 +8,10 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <div style="line-height: 64px">
+    <div>
       <FileUpload
         icon="cloud_upload"
-        iconSize="48px"
+        iconSize="32px"
         title="Add your logo"
         :uploadOptions="uploadOptions"
       />

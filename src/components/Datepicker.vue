@@ -425,6 +425,12 @@ export default {
     height: 232px;
     width: 308px;
 
+    .labels-top {
+      th {
+        color: @color-primary;
+      }
+    }
+
     .grid-select .item-cell:not(.disabled) .item.other-month {
       color: @color-gray-400;
     }

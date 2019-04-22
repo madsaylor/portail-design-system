@@ -50,7 +50,7 @@
         :class="['item-cell', {
           disabled: item.disabled,
           selected:
-            item.key !== undefined ? item.key === value.key : item === value,
+            item.key !== undefined ? item.key === initDate : item === value,
         }]"
         :tabindex="!item.disabled && 0"
         @click="!item.disabled && select(item)"
@@ -81,6 +81,9 @@ export default {
   computed: {
     itemWidth() {
       return 100 / this.items[0].length + '%'
+    },
+    initDate() {
+      return new Date(this.value).getTime();
     }
   },
   methods: {

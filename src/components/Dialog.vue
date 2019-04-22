@@ -41,7 +41,6 @@
       moveToBody: {
         inserted: function (el) {
           document.body.appendChild(el)
-          document.body.style.overflow = 'hidden';
         },
         unbind: function (el) {
           if(el.parentNode) {
@@ -53,7 +52,6 @@
 
     methods: {
       backdropClick() {
-        document.body.style.overflow = 'auto';
         this.$emit('update:opened', false)
       },
       /**
@@ -75,9 +73,7 @@
        */
       escapePress(event) {
         if (this.opened && event.code === "Escape") {
-
           this.$emit('update:opened', false)
-          document.body.style.overflow = 'auto';
         }
       },
 
@@ -122,6 +118,11 @@
           focusableElements[0].focus()
         }
       },
+    },
+    watch: {
+      opened(value) {
+        value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto';
+      }
     },
     beforeDestroy() {
       document.removeEventListener('keydown', this.escapePress);

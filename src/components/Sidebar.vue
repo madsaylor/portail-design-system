@@ -199,15 +199,14 @@ export default {
 @import '../styles/vars';
 
 .sidebar-container {
-  bottom: 0;
   box-shadow: @sidebar-shadow;
   box-sizing: border-box;
   left: 0;
   overflow: hidden;
   position: fixed;
   z-index: @z-index-sidebar;
-  top: 0;
   width:  @sidebar-width;
+  height: @sidebar-height;
 }
 
 .sidebar {

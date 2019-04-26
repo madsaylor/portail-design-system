@@ -16,6 +16,7 @@ import Tooltip from './data/Tooltip';
 import PhoneNumberInput from './data/PhoneNumberInput';
 import FileUpload from './data/FileUpload';
 import Stepper from './data/Stepper';
+import TextArea from './data/TextArea';
 
 export default {
   AppHeader,
@@ -35,5 +36,6 @@ export default {
   Tooltip,
   PhoneNumberInput,
   FileUpload,
-  Stepper
+  Stepper,
+  TextArea
 }

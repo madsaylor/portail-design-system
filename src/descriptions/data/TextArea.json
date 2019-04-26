@@ -1,0 +1,20 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "null",
+      "description": "Binds value property to textarea"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label at the top of the textarea"
+    },
+    {
+      "name": "placeholder",
+      "type": "String",
+      "description": "Passed directly to the textarea"
+    }
+  ],
+  "events": []
+}

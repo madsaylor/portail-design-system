@@ -119,14 +119,19 @@ export default {
      * Style vars for absolute position of the component
      */
     positionStyle() {
+      let left, top;
+
       if (this.contentRect == null || this.targetRect == null) {
         return {position: 'absolute'}
       }
-      // Get a fresh targetRect in case the window got scrolled
-      // after the last update
-      let targetRect = this.targetElement.getBoundingClientRect()
-      let left = targetRect.left + window.pageXOffset
-      let top = targetRect.top + window.pageYOffset
+
+      if (this.targetElement) {
+        // Get a fresh targetRect in case the window got scrolled
+        // after the last update
+        let targetRect = this.targetElement.getBoundingClientRect()
+        left = targetRect.left + window.pageXOffset
+        top = targetRect.top + window.pageYOffset
+      }
 
       let targetHeight = this.targetRect.height
       let targetWidth = this.targetRect.width

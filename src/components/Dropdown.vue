@@ -61,7 +61,7 @@ export default {
         return [
           'top-left',    'top-middle',    'top-right',
           'left-top',                     'right-top',
-          'left-center',                  'right-center',
+          'left-center', 'default',       'right-center',
           'left-bottom',                  'right-bottom',
           'bottom-left', 'bottom-middle', 'bottom-right',
         ].indexOf(value) !== -1
@@ -134,38 +134,40 @@ export default {
       let contentWidth = this.contentRect.width
 
       let margin = 4
-      let [primaryAlignment, secondaryAlignment] = this.position.split('-')
+      if (this.position !== 'default') {
+        let [primaryAlignment, secondaryAlignment] = this.position.split('-')
 
-      switch (primaryAlignment) {
-        case 'top':
-          top -= contentHeight + margin
-          break;
-        case 'left':
-          left -= contentWidth + margin
-          break;
-        case 'right':
-          left += targetWidth + margin
-          break;
-        case 'bottom':
-          top += targetHeight + margin
-      }
+        switch (primaryAlignment) {
+          case 'top':
+            top -= contentHeight + margin
+            break;
+          case 'left':
+            left -= contentWidth + margin
+            break;
+          case 'right':
+            left += targetWidth + margin
+            break;
+          case 'bottom':
+            top += targetHeight + margin
+        }
 
-      switch (secondaryAlignment) {
-        case 'left':
-          left -= contentWidth - targetWidth
-          break;
-        case 'middle':
-          left -= (contentWidth - targetWidth) / 2
-          break;
-        case 'right':
-          break;
-        case 'top':
-          top -= contentHeight - targetHeight
-          break;
-        case 'center':
-          top -= (contentHeight - targetHeight) / 2
-          break;
-        case 'bottom':
+        switch (secondaryAlignment) {
+          case 'left':
+            left -= contentWidth - targetWidth
+            break;
+          case 'middle':
+            left -= (contentWidth - targetWidth) / 2
+            break;
+          case 'right':
+            break;
+          case 'top':
+            top -= contentHeight - targetHeight
+            break;
+          case 'center':
+            top -= (contentHeight - targetHeight) / 2
+            break;
+          case 'bottom':
+        }
       }
 
       // Check if it goes beyond the screen (horizontally)

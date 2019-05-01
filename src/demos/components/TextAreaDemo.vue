@@ -10,7 +10,7 @@
     </Collapser>
 
     <div class="textarea-wrapper">
-      <TextArea v-model="messageText" :label="labelText" :placeholder="placeholder"></TextArea>
+      <TextArea v-model="messageText" :label="labelText" :placeholder="placeholder" :rows="'5'"></TextArea>
     </div>
   </div>
 </template>
@@ -40,7 +40,6 @@ export default {
 
 <style lang="less" scoped>
   .textarea-wrapper {
-    height: 100px;
     width: 500px;
   }
 </style>

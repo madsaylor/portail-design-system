@@ -1,8 +1,13 @@
 <template>
   <div>
     <label>
-      <div v-if="label">{{label}}</div>
-      <textarea v-model="textareaValue" :placeholder="placeholder"></textarea>
+      <div class="label-text" v-if="label">{{label}}</div>
+      <textarea
+        v-model="textareaValue"
+        :placeholder="placeholder"
+        :name="name"
+        :rows="rows"
+      />
     </label>
   </div>
 </template>
@@ -13,7 +18,9 @@
     props: {
       value: null,
       label: String,
-      placeholder: String
+      placeholder: String,
+      name: String,
+      rows: Number
     },
     computed: {
       textareaValue: {
@@ -33,25 +40,40 @@
 
   div {
     label {
-      color: @color-gray-500;
-      font-size: 12px;
-      line-height: 16px;
-      font-family: Lato;
-      margin-bottom: @textarea-label-margin-bottom;
-    }
+      display: block;
+      position: relative;
 
-    textarea {
-      width: 100%;
-      height: 100%;
-      font-size: 14px;
-      line-height: 20px;
-      font-family: Lato;
-      padding: @textarea-textarea-padding;
-      border: 1px solid @color-gray-200;
-      border-radius: 2px;
-      background-color: @color-white;
-      overflow: hidden;
-      resize: none;
+      .label-text {
+        .font-desktop-x-small-regular-gray();
+        height: 16px;
+        margin-bottom: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      textarea {
+        .font-desktop-small-regular-dark();
+        padding: 7px 12px;
+        box-sizing: border-box;
+        border: 1px solid @color-gray-300;
+        border-radius: 2px;
+        background-color: @color-white;
+        width: 100%;
+        resize: none;
+        box-sizing: boder-box;
+
+        &::placeholder {
+          .font-desktop-small-regular-gray();
+        }
+
+        &:focus:not(.error) {
+          border-color: @color-primary;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
     }
   }
 

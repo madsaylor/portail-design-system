@@ -660,5 +660,11 @@ export default {
     font-family: @font-family;
     text-decoration: underline dashed;
   }
+
+  &.lg {
+    input {
+      font-size: 16px;
+    }
+  }
 }
 </style>

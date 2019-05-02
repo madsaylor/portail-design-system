@@ -382,8 +382,12 @@ export default {
     },
   },
   methods: {
-    inputFocus() {
+    inputFocus(event) {
       if (this.type === 'date') {
+        if (this.datepickerPosition === 'default' && event.type === 'focus') {
+          return;
+        }
+
         this.datepickerVisible = true;
       }
     },

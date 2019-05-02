@@ -119,19 +119,24 @@ export default {
      * Style vars for absolute position of the component
      */
     positionStyle() {
-      if (this.contentRect == null || this.targetRect == null) {
+      let left, top;
+
+      if ((this.contentRect == null || this.targetRect == null) && this.position !== 'default') {
         return {position: 'absolute'}
       }
-      // Get a fresh targetRect in case the window got scrolled
-      // after the last update
-      let targetRect = this.targetElement.getBoundingClientRect()
-      let left = targetRect.left + window.pageXOffset
-      let top = targetRect.top + window.pageYOffset
 
-      let targetHeight = this.targetRect.height
-      let targetWidth = this.targetRect.width
-      let contentHeight = this.contentRect.height
-      let contentWidth = this.contentRect.width
+      if (this.targetElement) {
+        // Get a fresh targetRect in case the window got scrolled
+        // after the last update
+        let targetRect = this.targetElement.getBoundingClientRect()
+        left = targetRect.left + window.pageXOffset
+        top = targetRect.top + window.pageYOffset
+      }
+
+      let targetHeight = this.targetRect && this.targetRect.height || 0
+      let targetWidth = this.targetRect && this.targetRect.width || 0
+      let contentHeight = this.contentRect && this.contentRect.height || 0
+      let contentWidth = this.contentRect && this.contentRect.width || 0
 
       let margin = 4
       if (this.position !== 'default') {
@@ -242,15 +247,15 @@ export default {
 
     enter(el, done) {
       this.offsetParent = el.offsetParent
-      this.targetRect = this.targetElement.getBoundingClientRect()
-      this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
+      this.targetRect = this.targetElement ? this.targetElement.getBoundingClientRect() : null
+      this.contentRect = this.$refs.dropdownContent ? this.$refs.dropdownContent.getBoundingClientRect() : null
 
       setTimeout(done, this.transitionTime)
 
       // The timeout and the second contentRect assignment below aren't
       // generally needed by fix the slightly off first-time opening animation
       setTimeout(() => {
-        this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
+        this.contentRect = this.$refs.dropdownContent ? this.$refs.dropdownContent.getBoundingClientRect() : null
         if (this.justFade || this.justFadeIn) {
           el.style.opacity = '1'
           return
@@ -272,8 +277,8 @@ export default {
 
     leave(el, done) {
       window.removeEventListener('scroll', this.preventScroll);
-      this.targetRect = this.targetElement.getBoundingClientRect()
-      this.contentRect = this.$refs.dropdownContent.getBoundingClientRect()
+      this.targetRect = this.targetElement ? this.targetElement.getBoundingClientRect() : null
+      this.contentRect = this.$refs.dropdownContent ? this.$refs.dropdownContent.getBoundingClientRect() : null
 
       setTimeout(done, this.transitionTime)
 

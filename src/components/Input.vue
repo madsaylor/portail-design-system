@@ -382,8 +382,12 @@ export default {
     },
   },
   methods: {
-    inputFocus() {
+    inputFocus(event) {
       if (this.type === 'date') {
+        if (this.datepickerPosition === 'default' && event.type === 'focus') {
+          return;
+        }
+
         this.datepickerVisible = true;
       }
     },
@@ -655,6 +659,12 @@ export default {
     color: @color-gray-500;
     font-family: @font-family;
     text-decoration: underline dashed;
+  }
+
+  &.lg {
+    input {
+      font-size: 16px;
+    }
   }
 }
 </style>

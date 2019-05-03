@@ -97,7 +97,7 @@ const scheme = `
 |   |            +--------------------------------+            |   |
 |   +------------------+ +----------------+ +------------------+   |
 |   |                  | |                | |                  |   |
-|  left-center         | |     Target     | |        right-center  |
+|  left-center         | |     default    | |        right-center  |
 |   |                  | |                | |                  |   |
 |   +------------------+ +----------------+ +------------------+   |
 |   |            +--------------------------------+            |   |
@@ -133,6 +133,7 @@ export default {
       'left-bottom',
       'left-center',
       'left-top',
+      'default',
       'right-bottom',
       'right-center',
       'right-top',

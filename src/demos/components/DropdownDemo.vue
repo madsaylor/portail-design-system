@@ -156,7 +156,7 @@ export default {
   .dropdown-content {
     display: inline-block;
     border-radius: 2px;
-    box-shadow: 0 2px 12px 1px rgba(0,0,0,0.2);
+    box-shadow: @card-shadow;
     padding: 20px;
     background: white;
   }

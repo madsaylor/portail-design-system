@@ -338,7 +338,7 @@ export default {
 .datepicker {
   background-color: @color-white;
   border-radius: 4px;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: @card-shadow;
   box-sizing: border-box;
   height: 336px;
   padding: 20px 13.5px;

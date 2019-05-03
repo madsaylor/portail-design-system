@@ -84,7 +84,7 @@ export default {
 
 .menu-wrapper {
   background-color: @color-white;
-  box-shadow: @app-menu-shadow;
+  box-shadow: @card-shadow;
 
   .item-container {
     display: block;

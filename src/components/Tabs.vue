@@ -114,7 +114,7 @@
     width: 100%;
     height: auto;
     justify-content: center;
-    box-shadow: @shadow-divider;
+    box-shadow: @card-shadow;
 
     .tabs-row {
       display: flex;
@@ -134,7 +134,7 @@
       align-items: center;
       justify-content: center;
       height: 48px;
-      box-shadow: @shadow-divider;
+      box-shadow: @card-shadow;
 
       .font-components-tab-inactive();
 

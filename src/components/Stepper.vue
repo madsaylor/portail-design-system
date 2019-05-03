@@ -157,7 +157,7 @@
     justify-content: center;
     align-items: center;
     background-color: @color-white;
-    box-shadow: @shadow-divider;
+    box-shadow: @card-shadow;
     margin-bottom: @stepper-step-margin-bottom;
   }
 

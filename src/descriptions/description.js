@@ -15,6 +15,7 @@ import Tabs from './data/Tabs';
 import Tooltip from './data/Tooltip';
 import PhoneNumberInput from './data/PhoneNumberInput';
 import FileUpload from './data/FileUpload';
+import MultiFileAttach from './data/MultiFileAttach';
 import Stepper from './data/Stepper';
 import TextArea from './data/TextArea';
 
@@ -36,6 +37,7 @@ export default {
   Tooltip,
   PhoneNumberInput,
   FileUpload,
+  MultiFileAttach,
   Stepper,
-  TextArea
+  TextArea,
 }

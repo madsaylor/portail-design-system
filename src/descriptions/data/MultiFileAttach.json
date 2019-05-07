@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label at the top of the file input"
+    },
+    {
+      "name": "files",
+      "type": "Array",
+      "description": "Array of inputted files"
+    }
+  ],
+  "events": [
+    {
+      "name": "fileInput",
+      "description": "Emitted after selecting the file using file-browser"
+    },
+    {
+      "name": "fileRemove",
+      "description": "Emitted when user removes the file"
+    }
+  ]
+}

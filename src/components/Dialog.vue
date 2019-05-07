@@ -11,9 +11,7 @@
       @click="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>
-      <div
-        class="dialog-content"
-      >
+      <div :class="['dialog-content', {'full-screen-content': fullScreen, 'full-screen-active-content': fullScreenActive}]">
         <slot></slot>
       </div>
 
@@ -21,18 +19,26 @@
 </template>
 
 <script>
+  const widthMD = 1280;
+
   export default {
     name: "Dialog",
-
     props: {
       opened: Boolean,
       backdropOpacity: {
         type: String,
         default: '0.6'
       },
+      fullScreen: {
+        type: Boolean,
+        default: false
+      }
     },
-
+    data: () => ({
+      windowWidth: window.innerWidth
+    }),
     mounted() {
+      window.addEventListener('resize', this.onResize)
       document.addEventListener('keydown', this.escapePress)
       document.addEventListener('keydown', this.tabPress, true)
     },
@@ -118,6 +124,14 @@
           focusableElements[0].focus()
         }
       },
+      onResize() {
+        this.windowWidth = window.innerWidth
+      }
+    },
+    computed: {
+      fullScreenActive() {
+        return this.fullScreen && widthMD >= this.windowWidth
+      }
     },
     watch: {
       opened(value) {
@@ -125,6 +139,7 @@
       }
     },
     beforeDestroy() {
+      window.removeEventListener('resize', this.onResize)
       document.removeEventListener('keydown', this.escapePress);
       document.removeEventListener('keydown', this.tabPress, true)
     },
@@ -162,6 +177,15 @@
       background-color: white;
     }
 
+    .full-screen-content {
+      width: 1280px;
+      height: 800px;
+    }
+
+    .full-screen-active-content {
+      width: 100% !important;
+      height: 100% !important;
+    }
   }
 
 </style>

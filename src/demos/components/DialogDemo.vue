@@ -12,6 +12,7 @@
 
     <Button @click="opened = true">OPEN DIALOG</Button>
     <Button @click="datepickerVisible = true" alt>OPEN CALENDAR</Button>
+    <Button @click="openedFullScreen = true">OPEN FULL SCREEN DIALOG</Button>
 
     <Dialog
       :opened.sync="opened"
@@ -33,6 +34,21 @@
         :max="datepickerMax"
         v-model="datepickerValue"
       ></Datepicker>
+    </Dialog>
+
+    <Dialog
+      :opened.sync="openedFullScreen"
+      :fullScreen="fullScreenActive"
+    >
+      <div class="header-dialog-body">
+        <Button plain icon-right="close" @click="closeFullScreen()"></Button>
+      </div>
+      <div class="full-screen-dialog-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </div>
     </Dialog>
   </div>
 </template>
@@ -62,6 +78,21 @@
         v-model="datepickerValue"
       ></Datepicker>
     </Dialog>
+
+    <Dialog
+      :opened.sync="openedFullScreen"
+      :fullScreen="fullScreenActive"
+    >
+      <div class="header-dialog-body">
+        <Button plain icon-right="close" @click="closeFullScreen()"></Button>
+      </div>
+      <div class="full-screen-dialog-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </div>
+    </Dialog>
   `.slice(1)
 
   export default {
@@ -70,22 +101,38 @@
     data() {
       return ({
         opened: false,
+        openedFullScreen: false,
         datepickerValue: new Date(),
         datepickerVisible: false,
         datepickerMin: undefined,
         datepickerMax: undefined,
         usage,
         openUsage: true,
+        fullScreenActive: true
       })
+    },
+    methods: {
+      closeFullScreen() {
+        this.openedFullScreen = false
+      }
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .dialog-body {
     height: auto;
     width: 600px;
     padding: 20px;
+  }
+
+  .full-screen-dialog-body {
+    padding: 20px;
+  }
+
+  .header-dialog-body {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .button {

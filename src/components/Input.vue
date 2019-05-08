@@ -416,6 +416,7 @@ export default {
 
 <style lang="less" scoped>
 @import '../styles/vars';
+@import '../styles/mixins';
 
 .input {
   display: inline-block;
@@ -663,6 +664,7 @@ export default {
 
   &.lg {
     input {
+      .placeholder-font-size(16px);
       font-size: 16px;
     }
   }

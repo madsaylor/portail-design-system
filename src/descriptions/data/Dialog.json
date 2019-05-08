@@ -10,6 +10,12 @@
       "type": "String",
       "default": "0.6",
       "description": "Set backdrop opacity by value from 0..1."
+    },
+    {
+      "name": "fullScreen",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Set up full screen option of dialog modal"
     }
   ],
   "events": []

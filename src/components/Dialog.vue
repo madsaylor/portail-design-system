@@ -11,7 +11,8 @@
       @click="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>
-      <div :class="['dialog-content', {'full-screen-content': fullScreen, 'full-screen-active-content': fullScreenActive}]">
+      <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen, 'full-screen-active-content': fullScreenActive}]"
+           :style="{borderColor}">
         <slot></slot>
       </div>
 
@@ -32,7 +33,8 @@
       fullScreen: {
         type: Boolean,
         default: false
-      }
+      },
+      borderColor: String
     },
     data: () => ({
       windowWidth: window.innerWidth
@@ -173,8 +175,13 @@
     .dialog-content {
       width: auto;
       z-index: 1000;
-      border-radius: 4px;
       background-color: white;
+      border-radius: 4px;
+    }
+
+    .border-content {
+      border-style: solid;
+      border-width: 1px;
     }
 
     .full-screen-content {

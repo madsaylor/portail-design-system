@@ -16,6 +16,7 @@
 
     <Dialog
       :opened.sync="opened"
+      :borderColor="borderColor"
     >
       <div class="dialog-body">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -62,7 +63,8 @@
 
 
   let usage = `
-    <Dialog :opened.sync="opened" >
+    <Dialog :opened.sync="opened"
+            :borderColor="borderColor">
       <div class="dialog-body">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -106,6 +108,7 @@
         datepickerVisible: false,
         datepickerMin: undefined,
         datepickerMax: undefined,
+        borderColor: '#e6e7eb',
         usage,
         openUsage: true,
         fullScreenActive: true

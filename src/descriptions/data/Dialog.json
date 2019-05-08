@@ -16,6 +16,11 @@
       "type": "Boolean",
       "default": "false",
       "description": "Set up full screen option of dialog modal"
+    },
+    {
+      "name": "borderColor",
+      "type": "String",
+      "description": "Set up border color for dialog content"
     }
   ],
   "events": []

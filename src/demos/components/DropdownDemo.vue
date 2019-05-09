@@ -78,6 +78,7 @@ let usage = `
   :target="$refs.dropButton"
   :opened.sync="dropdownOpened"
   :position="position"
+  :borderColor="borderColor"
 >
   ...
 </Dropdown>

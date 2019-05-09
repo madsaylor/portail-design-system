@@ -177,6 +177,7 @@
       z-index: 1000;
       background-color: white;
       border-radius: 4px;
+      overflow-y: auto;
     }
 
     .border-content {

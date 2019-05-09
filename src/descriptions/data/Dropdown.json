@@ -30,6 +30,11 @@
       "name": "just-fade",
       "type": "Boolean",
       "description": "Change both"
+    },
+    {
+      "name": "borderColor",
+      "type": "String",
+      "description": "Set up border color for dropdown content"
     }
   ],
   "events": []

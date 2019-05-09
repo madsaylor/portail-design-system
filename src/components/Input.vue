@@ -173,6 +173,7 @@
       :target="$refs.input"
       :opened.sync="datepickerVisible"
       :position="datepickerPosition"
+      :borderColor="datepickerBorderColor"
       just-fade
     >
       <Datepicker
@@ -185,6 +186,7 @@
     <Dialog
       v-if="type === 'date' && datepickerPosition === 'modal'"
       :opened.sync="datepickerVisible"
+      :borderColor="datepickerBorderColor"
     >
       <Datepicker
         :min="datepickerMin"
@@ -230,6 +232,7 @@ export default {
     },
     validators: Array,
     value: null,
+    datepickerBorderColor: String,
 
     // For type="radio"
     radioVal: String,

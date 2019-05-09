@@ -111,6 +111,7 @@
         sm
         type="date"
         label="N days min/max range"
+        :datepickerBorderColor="borderColor"
         placeholder="Date"
         :dateRange="{min: 5, max: 10}"
         v-model="dateValue3"
@@ -245,6 +246,7 @@ Date inputs:<br />
   sm
   type="date"
   label="N days min/max range"
+  :datepickerBorderColor="borderColor"
   placeholder="Date"
   :dateRange="{min: 5, max: 10}"
   v-model="dateValue3"
@@ -300,7 +302,8 @@ export default {
         `,
         validator: () => false
       },
-    ]
+    ],
+    borderColor: '#e6e7eb',
   }),
   methods: {
     validate() {

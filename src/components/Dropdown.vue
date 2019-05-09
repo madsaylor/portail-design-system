@@ -37,9 +37,10 @@
       transition: `opacity ${transitionTime}ms ease-out`,
     }">
       <div class="focus-trap" tabindex="0"></div>
-      <div class="dropdown-content" ref="dropdownContent" :style="{
-        transition: `transform ${transitionTime}ms ease-out`,
-      }">
+      <div class="dropdown-content"
+           ref="dropdownContent"
+           :class="[{'border-content': borderColor}]"
+           :style="{ transition: `transform ${transitionTime}ms ease-out`, borderColor}">
         <slot></slot>
       </div>
       <div class="focus-trap" tabindex="0"></div>
@@ -69,6 +70,7 @@ export default {
       default: 'bottom-right',
     },
     opened: Boolean,
+    borderColor: String
   },
   data: () => ({
     transitionTime: 100,
@@ -389,6 +391,11 @@ export default {
   .dropdown-content {
     position: relative;
     z-index: @z-index-dropdown-content;
+  }
+
+  .border-content {
+    border-style: solid;
+    border-width: 1px;
   }
 }
 </style>

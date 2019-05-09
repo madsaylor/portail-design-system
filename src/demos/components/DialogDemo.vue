@@ -10,20 +10,18 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Button @click="opened = true">OPEN DIALOG</Button>
-    <Button @click="datepickerVisible = true" alt>OPEN CALENDAR</Button>
-    <Button @click="openedFullScreen = true">OPEN FULL SCREEN DIALOG</Button>
+    <div class="button-group">
+      <Button class="button-modal" @click="opened = true">OPEN DIALOG</Button>
+      <Button class="button-modal" @click="datepickerVisible = true" alt>OPEN CALENDAR</Button>
+      <Button class="button-modal" @click="openedFullScreen = true">OPEN FULL SCREEN DIALOG SCROLL</Button>
+      <Button class="button-modal" @click="openedComplexFullScreen = true">OPEN FULL SCREEN COMPLEX DIALOG</Button>
+    </div>
 
     <Dialog
       :opened.sync="opened"
       :borderColor="borderColor"
     >
-      <div class="dialog-body">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
+      <div class="dialog-body">{{text}}</div>
     </Dialog>
 
     <Dialog
@@ -42,14 +40,37 @@
       :fullScreen="fullScreenActive"
     >
       <div class="header-dialog-body">
-        <Button plain icon-right="close" @click="closeFullScreen()"></Button>
+        <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
       </div>
       <div class="full-screen-dialog-body">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <div v-for="n in 15">
+            {{text}}
+          </div>
       </div>
+    </Dialog>
+
+    <Dialog
+      :opened.sync="openedComplexFullScreen"
+      :fullScreen="fullScreenActive"
+      :backdropOpacity="'0.3'"
+    >
+      <div class="header-dialog-body">
+        <Button class="header-button" alt @click="openedInsideComplexFullScreen = true">Open new one dialog</Button>
+        <Button class="header-button" alt @click="closeComplexFullScreen()">Close dialog</Button>
+      </div>
+      <div class="full-screen-dialog-body">
+        {{text}}
+      </div>
+
+      <Dialog :opened.sync="openedInsideComplexFullScreen"
+              :backdropOpacity="'0.3'">
+        <div class="header-dialog-body">
+          <Button alt @click="closeInsideComplexFullScreen()">Close inner dialog</Button>
+        </div>
+        <div class="dialog-body">
+          {{text}}
+        </div>
+      </Dialog>
     </Dialog>
   </div>
 </template>
@@ -61,15 +82,17 @@
   import Description from '../../descriptions/Description'
   import Collapser from '../../components/Collapser.vue'
 
+  let text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  `;
 
   let usage = `
     <Dialog :opened.sync="opened"
             :borderColor="borderColor">
       <div class="dialog-body">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      ${text}
       </div>
     </Dialog>
 
@@ -89,10 +112,9 @@
         <Button plain icon-right="close" @click="closeFullScreen()"></Button>
       </div>
       <div class="full-screen-dialog-body">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      ${text}
+      ...
+
       </div>
     </Dialog>
   `.slice(1)
@@ -104,6 +126,8 @@
       return ({
         opened: false,
         openedFullScreen: false,
+        openedComplexFullScreen: false,
+        openedInsideComplexFullScreen: false,
         datepickerValue: new Date(),
         datepickerVisible: false,
         datepickerMin: undefined,
@@ -111,12 +135,19 @@
         borderColor: '#e6e7eb',
         usage,
         openUsage: true,
-        fullScreenActive: true
+        fullScreenActive: true,
+        text
       })
     },
     methods: {
       closeFullScreen() {
         this.openedFullScreen = false
+      },
+      closeComplexFullScreen() {
+        this.openedComplexFullScreen = false
+      },
+      closeInsideComplexFullScreen() {
+        this.openedInsideComplexFullScreen = false
       }
     }
   }
@@ -136,6 +167,19 @@
   .header-dialog-body {
     display: flex;
     justify-content: flex-end;
+    padding: 10px;
+
+    .header-button {
+      &:nth-child(1) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .button-group {
+    .button-modal {
+      margin-right: 10px;
+    }
   }
 
   .button {

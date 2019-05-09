@@ -124,6 +124,11 @@
       "name": "options",
       "type": "Array",
       "description": "Property for type Select. Array<Object>. Options for select. Each item is bound to an <option> element. Additionaly a .title property can be set to change the displayed value"
+    },
+    {
+      "name": "datepickerBorderColor",
+      "type": "String",
+      "description": "Set border color for datepicker"
     }
   ],
   "events": [

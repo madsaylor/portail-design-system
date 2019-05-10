@@ -84,7 +84,7 @@
         <div class="header-dialog-body">
           <Button alt @click="closeInsideComplexFullScreen()">Close inner dialog</Button>
         </div>
-        <div class="dialog-body">
+        <div class="dialog-body-default">
           {{text}}
         </div>
       </Dialog>
@@ -205,6 +205,7 @@
   .button-group {
     .button-modal {
       margin-right: 10px;
+      margin-bottom: 10px;
     }
   }
 

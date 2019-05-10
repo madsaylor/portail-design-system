@@ -178,7 +178,6 @@
       background-color: white;
       border-radius: 4px;
       height: auto;
-      display:inline-flex;
       overflow: auto;
       max-height: calc(100% - 128px);
       max-width: 1280px;
@@ -209,6 +208,7 @@
     }
 
     .full-screen-content {
+      display: block;
       width: 1280px;
       height: 800px;
       max-height: 100%;

@@ -39,14 +39,12 @@
       :opened.sync="openedFullScreen"
       :fullScreen="fullScreenActive"
     >
-      <div class="dialog-wrapper">
-        <div class="dialog-header">
-          <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
-        </div>
-        <div class="dialog-body">
-          <div v-for="n in 25">
-            {{text}}
-          </div>
+      <div class="dialog-header">
+        <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
+      </div>
+      <div class="dialog-body">
+        <div v-for="n in 25">
+          {{text}}
         </div>
       </div>
     </Dialog>
@@ -110,14 +108,12 @@
       :opened.sync="openedFullScreen"
       :fullScreen="fullScreenActive"
     >
-      <div class="dialog-wrapper">
-        <div class="dialog-header">
-          <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
-        </div>
-        <div class="dialog-body">
-          ${text}
-          ...
-        </div>
+      <div class="dialog-header">
+        <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
+      </div>
+      <div class="dialog-body">
+        ${text}
+        ...
       </div>
     </Dialog>
   `.slice(1)

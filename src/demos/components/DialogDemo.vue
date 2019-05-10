@@ -44,7 +44,7 @@
         <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
       </div>
       <div class="full-screen-dialog-body">
-          <div v-for="n in 15">
+          <div v-for="n in 25">
             {{text}}
           </div>
       </div>
@@ -59,7 +59,7 @@
           <Button icon-right="close" alt @click="closeSecondFullScreen()">Close modal</Button>
         </div>
         <div class="dialog-body">
-          <div v-for="n in 15">
+          <div v-for="n in 25">
             {{text}}
           </div>
         </div>

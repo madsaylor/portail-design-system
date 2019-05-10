@@ -178,7 +178,6 @@
       background-color: white;
       border-radius: 4px;
       height: auto;
-      overflow: auto;
       max-height: calc(100% - 128px);
       max-width: 1280px;
 
@@ -198,6 +197,10 @@
           .dialog-header:not(:empty) {
             padding: 12px;
           }
+        }
+
+        .dialog-body {
+          overflow: auto;
         }
       }
     }

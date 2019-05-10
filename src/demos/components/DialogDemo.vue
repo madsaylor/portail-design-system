@@ -14,7 +14,6 @@
       <Button class="button-modal" @click="opened = true">OPEN DIALOG</Button>
       <Button class="button-modal" @click="datepickerVisible = true" alt>OPEN CALENDAR</Button>
       <Button class="button-modal" @click="openedFullScreen = true">OPEN FULL SCREEN DIALOG SCROLL</Button>
-      <Button class="button-modal" @click="openedSecondFullScreen = true">OPEN SECOND FULL SCREEN DIALOG SCROLL</Button>
       <Button class="button-modal" @click="openedComplexFullScreen = true">OPEN FULL SCREEN COMPLEX DIALOG</Button>
     </div>
 
@@ -40,23 +39,9 @@
       :opened.sync="openedFullScreen"
       :fullScreen="fullScreenActive"
     >
-      <div class="header-dialog-body">
-        <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
-      </div>
-      <div class="full-screen-dialog-body">
-          <div v-for="n in 25">
-            {{text}}
-          </div>
-      </div>
-    </Dialog>
-
-    <Dialog
-      :opened.sync="openedSecondFullScreen"
-      :fullScreen="secondFullScreenActive"
-    >
       <div class="dialog-wrapper">
         <div class="dialog-header">
-          <Button icon-right="close" alt @click="closeSecondFullScreen()">Close modal</Button>
+          <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
         </div>
         <div class="dialog-body">
           <div v-for="n in 25">
@@ -68,7 +53,7 @@
 
     <Dialog
       :opened.sync="openedComplexFullScreen"
-      :fullScreen="fullScreenActive"
+      :fullScreen="complexFullScreenActive"
       :backdropOpacity="'0.3'"
     >
       <div class="header-dialog-body">
@@ -125,13 +110,14 @@
       :opened.sync="openedFullScreen"
       :fullScreen="fullScreenActive"
     >
-      <div class="header-dialog-body">
-        <Button plain icon-right="close" @click="closeFullScreen()"></Button>
-      </div>
-      <div class="full-screen-dialog-body">
-      ${text}
-      ...
-
+      <div class="dialog-wrapper">
+        <div class="dialog-header">
+          <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
+        </div>
+        <div class="dialog-body">
+          ${text}
+          ...
+        </div>
       </div>
     </Dialog>
   `.slice(1)
@@ -143,7 +129,6 @@
       return ({
         opened: false,
         openedFullScreen: false,
-        openedSecondFullScreen: false,
         openedComplexFullScreen: false,
         openedInsideComplexFullScreen: false,
         datepickerValue: new Date(),
@@ -153,29 +138,28 @@
         borderColor: '#e6e7eb',
         usage,
         openUsage: true,
+        complexFullScreenActive: true,
         fullScreenActive: true,
-        secondFullScreenActive: true,
         text
       })
     },
     methods: {
-      closeFullScreen() {
-        this.openedFullScreen = false
-      },
       closeComplexFullScreen() {
         this.openedComplexFullScreen = false
       },
       closeInsideComplexFullScreen() {
         this.openedInsideComplexFullScreen = false
       },
-      closeSecondFullScreen() {
-        this.openedSecondFullScreen = false
+      closeFullScreen() {
+        this.openedFullScreen = false
       }
     }
   }
 </script>
 
 <style scoped lang="less">
+  @import "../../styles/vars";
+
   .dialog-body-default {
     height: auto;
     width: 600px;
@@ -194,6 +178,7 @@
     display: flex;
     justify-content: flex-end;
     padding: 10px;
+    border-bottom: 1px solid @color-gray-300;
 
     .header-button {
       &:nth-child(1) {

@@ -150,7 +150,7 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   @import "../styles/vars";
 
   .dialog {
@@ -180,7 +180,8 @@
       background-color: white;
       border-radius: 4px;
       height: auto;
-      max-height: calc(100% - 128px);
+      max-height: 100%;
+      overflow: auto;
       max-width: 1280px;
 
       .dialog-wrapper {
@@ -203,6 +204,7 @@
 
         .dialog-body {
           overflow: auto;
+          height:100%;
         }
       }
     }

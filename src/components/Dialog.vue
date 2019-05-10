@@ -13,7 +13,9 @@
     ></div>
       <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen, 'full-screen-active-content': fullScreenActive}]"
            :style="{borderColor}">
-        <slot></slot>
+        <div class="dialog-wrapper">
+          <slot></slot>
+        </div>
       </div>
 
   </section>

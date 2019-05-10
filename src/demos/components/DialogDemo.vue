@@ -22,7 +22,7 @@
       :opened.sync="opened"
       :borderColor="borderColor"
     >
-      <div class="dialog-body">{{text}}</div>
+      <div class="dialog-body-default">{{text}}</div>
     </Dialog>
 
     <Dialog
@@ -176,9 +176,13 @@
 </script>
 
 <style scoped lang="less">
-  .dialog-body {
+  .dialog-body-default {
     height: auto;
     width: 600px;
+    padding: 20px;
+  }
+
+  .dialog-body {
     padding: 20px;
   }
 

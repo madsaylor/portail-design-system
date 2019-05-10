@@ -177,7 +177,29 @@
       z-index: 1000;
       background-color: white;
       border-radius: 4px;
-      overflow-y: auto;
+      height: auto;
+      overflow: auto;
+      max-height: calc(100% - 128px);
+      max-width: 1280px;
+
+      .dialog-wrapper {
+        height:100%;
+        display: inline-flex;
+        flex-direction: column;
+
+        .dialog-header:not(:empty) {
+          .font-desktop-h-3-dark-center();
+          padding: 16px;
+          box-sizing: border-box;
+          background-color: @color-white;
+          box-shadow: inset 0 -1px 0 0 @color-gray-300;
+        }
+        @media @screen-medium, @screen-small {
+          .dialog-header:not(:empty) {
+            padding: 12px;
+          }
+        }
+      }
     }
 
     .border-content {
@@ -186,8 +208,15 @@
     }
 
     .full-screen-content {
+      display: block;
       width: 1280px;
       height: 800px;
+      max-height: 100%;
+      max-width:1280px;
+
+      .dialog-content {
+        flex-grow: 1;
+      }
     }
 
     .full-screen-active-content {

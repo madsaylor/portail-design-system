@@ -14,6 +14,7 @@
       <Button class="button-modal" @click="opened = true">OPEN DIALOG</Button>
       <Button class="button-modal" @click="datepickerVisible = true" alt>OPEN CALENDAR</Button>
       <Button class="button-modal" @click="openedFullScreen = true">OPEN FULL SCREEN DIALOG SCROLL</Button>
+      <Button class="button-modal" @click="openedSecondFullScreen = true">OPEN SECOND FULL SCREEN DIALOG SCROLL</Button>
       <Button class="button-modal" @click="openedComplexFullScreen = true">OPEN FULL SCREEN COMPLEX DIALOG</Button>
     </div>
 
@@ -21,7 +22,7 @@
       :opened.sync="opened"
       :borderColor="borderColor"
     >
-      <div class="dialog-body">{{text}}</div>
+      <div class="dialog-body-default">{{text}}</div>
     </Dialog>
 
     <Dialog
@@ -43,9 +44,25 @@
         <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
       </div>
       <div class="full-screen-dialog-body">
-          <div v-for="n in 15">
+          <div v-for="n in 25">
             {{text}}
           </div>
+      </div>
+    </Dialog>
+
+    <Dialog
+      :opened.sync="openedSecondFullScreen"
+      :fullScreen="secondFullScreenActive"
+    >
+      <div class="dialog-wrapper">
+        <div class="dialog-header">
+          <Button icon-right="close" alt @click="closeSecondFullScreen()">Close modal</Button>
+        </div>
+        <div class="dialog-body">
+          <div v-for="n in 25">
+            {{text}}
+          </div>
+        </div>
       </div>
     </Dialog>
 
@@ -67,7 +84,7 @@
         <div class="header-dialog-body">
           <Button alt @click="closeInsideComplexFullScreen()">Close inner dialog</Button>
         </div>
-        <div class="dialog-body">
+        <div class="dialog-body-default">
           {{text}}
         </div>
       </Dialog>
@@ -126,6 +143,7 @@
       return ({
         opened: false,
         openedFullScreen: false,
+        openedSecondFullScreen: false,
         openedComplexFullScreen: false,
         openedInsideComplexFullScreen: false,
         datepickerValue: new Date(),
@@ -136,6 +154,7 @@
         usage,
         openUsage: true,
         fullScreenActive: true,
+        secondFullScreenActive: true,
         text
       })
     },
@@ -148,15 +167,22 @@
       },
       closeInsideComplexFullScreen() {
         this.openedInsideComplexFullScreen = false
+      },
+      closeSecondFullScreen() {
+        this.openedSecondFullScreen = false
       }
     }
   }
 </script>
 
 <style scoped lang="less">
-  .dialog-body {
+  .dialog-body-default {
     height: auto;
     width: 600px;
+    padding: 20px;
+  }
+
+  .dialog-body {
     padding: 20px;
   }
 
@@ -179,6 +205,7 @@
   .button-group {
     .button-modal {
       margin-right: 10px;
+      margin-bottom: 10px;
     }
   }
 

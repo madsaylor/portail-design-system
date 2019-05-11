@@ -180,7 +180,7 @@
       background-color: white;
       border-radius: 4px;
       height: auto;
-      max-height: 100%;
+      max-height: calc(100% - 128px);
       overflow: auto;
       max-width: 1280px;
 

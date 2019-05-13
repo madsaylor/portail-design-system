@@ -138,7 +138,6 @@ export default {
   cursor: pointer;
   display: inline-block;
   margin: 0;
-  transition: background .1s ease-in-out;
   text-decoration: none !important;
   padding: 10px 16px;
 

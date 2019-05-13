@@ -41,6 +41,7 @@
       flex-direction: column;
       box-shadow: @card-shadow;
       margin-bottom: @collapser-margin-bottom;
+      cursor: pointer;
 
       .top {
         display: flex;

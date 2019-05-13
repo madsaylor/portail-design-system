@@ -319,7 +319,7 @@ export default {
   .children {
     transition: max-height .1s ease;
     max-height: 1000px;
-    overflow: hidden;
+    overflow-y: auto;
     &:not(.opened) {
       max-height: 0;
     }

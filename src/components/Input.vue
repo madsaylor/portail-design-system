@@ -493,12 +493,11 @@ export default {
       border-right: 2.5px solid #fff;
 
       &.slide-label-active {
-        transform: translateY(-20px);
+        transform: translateY(-20px) scale(0.85, 0.85);
         transition: .4s cubic-bezier(.25,.8,.25,1);
       }
 
       &.slide-label-inactive {
-        transform: translateY(0);
         transition: .4s cubic-bezier(.25,.8,.25,1);
       }
     }

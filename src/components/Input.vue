@@ -433,7 +433,7 @@ export default {
   },
   watch: {
     value(newValue) {
-      if (this.slideLabel && !newValue) {
+      if (this.slideLabel && !this.labelFocus && !newValue) {
         this.slideActive = false;
       }
 

@@ -159,6 +159,7 @@
     background-color: @color-white;
     box-shadow: @card-shadow;
     margin-bottom: @stepper-step-margin-bottom;
+    cursor: pointer;
   }
 
   .primary {

@@ -89,6 +89,7 @@
         :validators="demoValidators"
         v-model="textValue"
       />
+      <Input slideLabel md label="Slide label" v-model="slideTextValue"/>
       <br />
 
       Date inputs:<br />
@@ -283,6 +284,7 @@ export default {
     openUsage: true,
     usage,
     textValue: '',
+    slideTextValue: 'Test text',
     radioValue: 'first',
     dateValue: new Date(),
     dateValue2: null,

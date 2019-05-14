@@ -112,17 +112,17 @@
 <template>
   <div :class="['input', type, {disabled, sm, md, lg, preventScroll: datepickerVisible}]">
     <label>
-      <div v-if="label" class="label-text">{{ label }}</div>
+      <div v-if="label" :class="['label-text', {'slide-label': slideLabel}, slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">{{ label }}</div>
 
       <input
         v-if="type !== 'select' && type !== 'radio'"
         v-bind="inputAttrs"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
+        :class="{'has-icon': icon_, 'error': inputErrors.length && touched, 'slide-input': slideLabel}"
         v-model="inputValue"
         ref="input"
         @focus="inputFocus"
         @click="inputFocus"
-        @blur="touched = true"
+        @blur="inputBlur"
       />
 
       <input
@@ -233,6 +233,7 @@ export default {
     validators: Array,
     value: null,
     datepickerBorderColor: String,
+    slideLabel: Boolean,
 
     // For type="radio"
     radioVal: String,
@@ -254,7 +255,8 @@ export default {
     validateEventName: undefined,
     helpVisible: false,
     datepickerVisible: false,
-    touched: false
+    touched: false,
+    slideActive: undefined
   }),
   mounted() {
     if (this.name) {
@@ -266,6 +268,8 @@ export default {
     document.addEventListener('validate', this.validate);
 
     this.$emit('validation', this.validation)
+
+    setTimeout(() => this.slideInit(), 500)
   },
   computed: {
     inputAttrs() {
@@ -386,6 +390,10 @@ export default {
   },
   methods: {
     inputFocus(event) {
+      if (this.slideLabel) {
+        this.slideActive = true;
+      }
+
       if (this.type === 'date') {
         if (this.datepickerPosition === 'default' && event.type === 'focus') {
           return;
@@ -394,16 +402,32 @@ export default {
         this.datepickerVisible = true;
       }
     },
+    inputBlur() {
+      if (this.slideLabel && !this.value) {
+        this.slideActive = false;
+      }
+
+      this.touched = true;
+    },
     validate() {
       this.touched = true;
       this.$emit('validation', this.validation)
     },
     changeRadio() {
       this.$emit('input', this.radioVal)
+    },
+    slideInit() {
+      if (this.slideLabel && this.value) {
+        this.slideActive = true;
+      }
     }
   },
   watch: {
-    value() {
+    value(newValue) {
+      if (this.slideLabel && !newValue) {
+        this.slideActive = false;
+      }
+
       this.$emit('validation', this.validation)
     }
   },
@@ -454,6 +478,31 @@ export default {
       white-space: nowrap;
     }
 
+    .slide-label {
+      position: absolute;
+      left: 5px;
+      top: 20px;
+      z-index: 999;
+      padding: 0 11px;
+      margin-bottom: 20px;
+      max-width: 100%;
+      height: 20px;
+      font-size: 16px;
+      color: #989898;
+      background: linear-gradient(@color-white 90%, hsla(0,0%,100%,0)) !important;
+      border-right: 2.5px solid #fff;
+
+      &.slide-label-active {
+        transform: translateY(-20px);
+        transition: .4s cubic-bezier(.25,.8,.25,1);
+      }
+
+      &.slide-label-inactive {
+        transform: translateY(0);
+        transition: .4s cubic-bezier(.25,.8,.25,1);
+      }
+    }
+
     input, select {
       .font-desktop-small-regular-dark();
       padding: 7px 12px;
@@ -465,6 +514,10 @@ export default {
 
       &.has-icon {
         padding-right: 30px;
+      }
+
+      &.slide-input {
+        margin-top: 10px;
       }
 
       &::placeholder {

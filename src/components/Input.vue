@@ -112,7 +112,10 @@
 <template>
   <div :class="['input', type, {disabled, sm, md, lg, preventScroll: datepickerVisible}]">
     <label>
-      <div v-if="label" :class="['label-text', {'slide-label': slideLabel}, slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">{{ label }}</div>
+      <div v-if="label"
+           :class="['label-text', {'slide-label': slideLabel, 'label-focus': labelFocus}, slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">
+          {{ label }}
+      </div>
 
       <input
         v-if="type !== 'select' && type !== 'radio'"
@@ -256,7 +259,8 @@ export default {
     helpVisible: false,
     datepickerVisible: false,
     touched: false,
-    slideActive: undefined
+    slideActive: undefined,
+    labelFocus: undefined
   }),
   mounted() {
     if (this.name) {
@@ -391,6 +395,7 @@ export default {
   methods: {
     inputFocus(event) {
       if (this.slideLabel) {
+        this.labelFocus = true;
         this.slideActive = true;
       }
 
@@ -403,8 +408,12 @@ export default {
       }
     },
     inputBlur() {
-      if (this.slideLabel && !this.value) {
-        this.slideActive = false;
+      if (this.slideLabel) {
+        this.labelFocus = false;
+
+        if (!this.value) {
+          this.slideActive = false;
+        }
       }
 
       this.touched = true;
@@ -499,6 +508,10 @@ export default {
 
       &.slide-label-inactive {
         transition: .4s cubic-bezier(.25,.8,.25,1);
+      }
+
+      &.label-focus {
+        color: @color-dark;
       }
     }
 

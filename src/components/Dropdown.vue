@@ -263,7 +263,9 @@ export default {
           return
         }
 
-        this.$refs.dropdownContent.style.transform = this.transformationMatrix
+        if (this.$refs.dropdownContent) {
+          this.$refs.dropdownContent.style.transform = this.transformationMatrix
+        }
         el.style.display = 'none'
 
         el.offsetHeight  // Forcing layout update
@@ -272,7 +274,9 @@ export default {
 
         el.offsetHeight  // Forcing layout update
 
-        this.$refs.dropdownContent.style.transform = 'none'
+        if (this.$refs.dropdownContent) {
+          this.$refs.dropdownContent.style.transform = 'none'
+        }
         el.style.opacity = '1'
       }, 0)
     },
@@ -289,7 +293,9 @@ export default {
         return
       }
 
-      this.$refs.dropdownContent.style.transform = this.transformationMatrix
+      if (this.$refs.dropdownContent) {
+        this.$refs.dropdownContent.style.transform = this.transformationMatrix
+      }
       el.style.opacity = '0'
     },
 

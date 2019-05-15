@@ -26,7 +26,7 @@
 
 <template>
   <div class="datepicker">
-    <div class="header">
+    <div class="datepicker-header">
       <div class="labels">
         <div
           :class="{
@@ -346,7 +346,7 @@ export default {
   display: flex;
   flex-direction: column;
 
-  .header {
+  .datepicker-header {
     padding: 0 10.5px;
     height: 64px;
     display: flex;

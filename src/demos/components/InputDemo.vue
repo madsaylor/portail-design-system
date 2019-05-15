@@ -125,6 +125,15 @@
         placeholder="Date"
         v-model="dateValue"
       />
+      <Input
+        sm
+        type="date"
+        label="Changeable datepicker"
+        datepickerPosition="default modal"
+        datePositionChangeable
+        placeholder="Date"
+        v-model="dateValue"
+      />
       <br />
 
       Select:<br />

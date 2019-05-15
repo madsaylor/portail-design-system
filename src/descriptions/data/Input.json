@@ -134,6 +134,11 @@
       "name": "slideLabel",
       "type": "Boolean",
       "description": "Set up slideble input label"
+    },
+    {
+      "name": "datePositionChangeable",
+      "type": "Boolean",
+      "description": "Set up changeable position of datepicker depend on device resolution"
     }
   ],
   "events": [

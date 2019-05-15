@@ -98,7 +98,7 @@
         return `step-${this.stepIndex}`
       },
       isMobile() {
-        return this.windowWidth < DesktopWidth
+        return this.windowWidth <= DesktopWidth
       }
     },
     methods: {

@@ -420,7 +420,7 @@ export default {
       }
 
       if (this.type === 'date') {
-        if ((this.getDatepickerPosition === 'default' || this.datePositionChangeable) && event.type === 'focus') {
+        if (this.datepickerPosition && event.type === 'focus') {
           return;
         }
 

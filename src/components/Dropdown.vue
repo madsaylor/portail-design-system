@@ -65,6 +65,7 @@ export default {
           'left-center', 'default',       'right-center',
           'left-bottom',                  'right-bottom',
           'bottom-left', 'bottom-middle', 'bottom-right',
+          'modal' // not use, it option just for prevent errors with changeable positions of datepicker
         ].indexOf(value) !== -1
       },
       default: 'bottom-right',

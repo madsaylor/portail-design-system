@@ -172,10 +172,10 @@
     </label>
 
     <Dropdown
-      v-if="type === 'date' && datepickerPosition !== 'modal'"
+      v-show="type === 'date' && getDatepickerPosition !== 'modal'"
       :target="$refs.input"
       :opened.sync="datepickerVisible"
-      :position="datepickerPosition"
+      :position="getDatepickerPosition"
       :borderColor="datepickerBorderColor"
       just-fade
     >
@@ -187,7 +187,7 @@
     </Dropdown>
 
     <Dialog
-      v-if="type === 'date' && datepickerPosition === 'modal'"
+      v-show="type === 'date' && getDatepickerPosition === 'modal'"
       :opened.sync="datepickerVisible"
       :borderColor="datepickerBorderColor"
     >
@@ -206,6 +206,8 @@ import Dropdown from './Dropdown'
 import Icon from './Icon'
 import Dialog from './Dialog'
 import Tooltip from './Tooltip'
+
+const DesktopWidth = 960
 
 export default {
   name: "Input",
@@ -250,6 +252,7 @@ export default {
       type: String,
       default: 'bottom-middle',
     },
+    datePositionChangeable: Boolean,
 
     // For type="select"
     options: Array,
@@ -260,13 +263,20 @@ export default {
     datepickerVisible: false,
     touched: false,
     slideActive: undefined,
-    labelFocus: undefined
+    labelFocus: undefined,
+    windowWidth: window.innerWidth,
+    positions: Array,
   }),
   mounted() {
     if (this.name) {
       this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
 
       document.addEventListener(this.validateEventName, this.validate);
+    }
+
+    if (this.datePositionChangeable) {
+      this.positions = this.datepickerPosition.split(' ')
+      window.addEventListener('resize', this.onResize)
     }
 
     document.addEventListener('validate', this.validate);
@@ -391,6 +401,16 @@ export default {
       }
       return this.maxDate
     },
+    isMobile() {
+      return this.windowWidth <= DesktopWidth
+    },
+    getDatepickerPosition() {
+      if (this.datePositionChangeable) {
+        return this.isMobile ? this.positions[1] : this.positions[0]
+      } else {
+        return this.datepickerPosition
+      }
+    }
   },
   methods: {
     inputFocus(event) {
@@ -400,7 +420,7 @@ export default {
       }
 
       if (this.type === 'date') {
-        if (this.datepickerPosition === 'default' && event.type === 'focus') {
+        if ((this.getDatepickerPosition === 'default' || this.datePositionChangeable) && event.type === 'focus') {
           return;
         }
 
@@ -429,6 +449,9 @@ export default {
       if (this.slideLabel && this.value) {
         this.slideActive = true;
       }
+    },
+    onResize() {
+      this.windowWidth = window.innerWidth
     }
   },
   watch: {
@@ -443,6 +466,10 @@ export default {
   beforeDestroy() {
     if (this.name) {
       document.removeEventListener(this.validateEventName, this.validate);
+    }
+
+    if (this.datePositionChangeable) {
+      window.removeEventListener('resize', this.onResize)
     }
 
     document.removeEventListener('validate', this.validate);
@@ -491,7 +518,7 @@ export default {
       position: absolute;
       left: 5px;
       top: 20px;
-      z-index: 999;
+      z-index: 100;
       padding: 0 11px;
       margin-bottom: 20px;
       max-width: 100%;

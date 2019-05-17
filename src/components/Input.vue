@@ -172,7 +172,7 @@
     </label>
 
     <Dropdown
-      v-show="type === 'date' && getDatepickerPosition !== 'modal'"
+      v-if="type === 'date' && getDatepickerPosition !== 'modal'"
       :target="$refs.input"
       :opened.sync="datepickerVisible"
       :position="getDatepickerPosition"

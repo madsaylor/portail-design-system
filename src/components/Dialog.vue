@@ -161,7 +161,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    z-index: 900;
+    z-index: 1000;
     top: 0;
 
     .backdrop {
@@ -170,13 +170,13 @@
       left: 0;
       right: 0;
       top: 0;
-      z-index: 900;
+      z-index: 1000;
       background-color: #000;
     }
 
     .dialog-content {
       width: auto;
-      z-index: 1000;
+      z-index: 1001;
       background-color: white;
       border-radius: 4px;
       height: auto;

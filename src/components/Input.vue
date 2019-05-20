@@ -120,12 +120,13 @@
       <input
         v-if="type !== 'select' && type !== 'radio'"
         v-bind="inputAttrs"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched, 'slide-input': slideLabel}"
+        :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel}"
         v-model="inputValue"
         ref="input"
         @focus="inputFocus"
         @click="inputFocus"
         @blur="inputBlur"
+        @keydown="onKeyDown"
       />
 
       <input
@@ -153,7 +154,7 @@
       <Icon v-if="icon_" color="gray-400" :source="icon_" />
 
       <div class="drawer">
-        <span v-if="inputErrors.length && touched" class="error-message">
+        <span v-if="inputErrors.length && touched && showErrors" class="error-message">
           {{ inputErrors[0] }}
         </span>
 
@@ -239,6 +240,10 @@ export default {
     value: null,
     datepickerBorderColor: String,
     slideLabel: Boolean,
+    showErrors: {
+      type: Boolean,
+      default: true
+    },
 
     // For type="radio"
     radioVal: String,
@@ -266,6 +271,7 @@ export default {
     labelFocus: undefined,
     windowWidth: window.innerWidth,
     positions: Array,
+    timeoutId: undefined
   }),
   mounted() {
     if (this.name) {
@@ -452,6 +458,15 @@ export default {
     },
     onResize() {
       this.windowWidth = window.innerWidth
+    },
+    onKeyDown() {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId)
+      }
+
+      this.timeoutId = setTimeout(() => {
+        this.$emit('lastKeyDownDelay')
+      }, 300)
     }
   },
   watch: {
@@ -732,7 +747,7 @@ export default {
     box-sizing: border-box;
     font-size: 11px;
     line-height: 12px;
-    padding: 3px 12px;
+    padding: 3px 0;
     position: absolute;
     max-width: 100%;
   }
@@ -755,6 +770,8 @@ export default {
     color: @color-gray-500;
     font-family: @font-family;
     text-decoration: underline dashed;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   &.lg {

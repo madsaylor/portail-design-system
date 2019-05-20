@@ -139,6 +139,11 @@
       "name": "datePositionChangeable",
       "type": "Boolean",
       "description": "Set up changeable position of datepicker depend on device resolution"
+    },
+    {
+      "name": "showErrors",
+      "type": "Boolean",
+      "description": "Responsible for showing error message"
     }
   ],
   "events": [
@@ -153,6 +158,10 @@
     {
       "name": "validate{name}",
       "description": "Run field validation, for inputs which have current name property."
+    },
+    {
+      "name": "lastKeyDownDelay",
+      "description": "Run after keyDown event with delay 300 milliseconds."
     }
   ]
 }

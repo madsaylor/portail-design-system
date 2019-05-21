@@ -191,6 +191,8 @@
       v-show="type === 'date' && getDatepickerPosition === 'modal'"
       :opened.sync="datepickerVisible"
       :borderColor="datepickerBorderColor"
+      :backgroundColor="datepickerBackgroundColor"
+      :backdropOpacity="datepickerBackdropOpacity"
     >
       <Datepicker
         :min="datepickerMin"
@@ -239,6 +241,8 @@ export default {
     validators: Array,
     value: null,
     datepickerBorderColor: String,
+    datepickerBackgroundColor: String,
+    datepickerBackdropOpacity: String,
     slideLabel: Boolean,
     showErrors: {
       type: Boolean,

@@ -132,7 +132,8 @@
         datepickerPosition="default modal"
         :datepickerBackgroundColor="datepickerBackgroundColor"
         :datepickerBackdropOpacity="datepickerBackdropOpacity"
-        :datepickerWrapperClassObject="datepickerWrapperClassObject"
+        :datepickerWrapperStyleObject="datepickerWrapperStyleObject"
+        :datepickerFullWidth="datepickerFullWidth"
         datePositionChangeable
         placeholder="Date"
         v-model="dateValue"
@@ -320,9 +321,10 @@ export default {
     borderColor: '#e6e7eb',
     datepickerBackgroundColor: '#fff',
     datepickerBackdropOpacity: '1',
-    datepickerWrapperClassObject: {
+    datepickerWrapperStyleObject: {
       alignItems: 'flex-end'
-    }
+    },
+    datepickerFullWidth: true
   }),
   methods: {
     validate() {

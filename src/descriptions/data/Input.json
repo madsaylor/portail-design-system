@@ -144,6 +144,22 @@
       "name": "showErrors",
       "type": "Boolean",
       "description": "Responsible for showing error message"
+    },
+    {
+      "name": "datepickerWrapperStyleObject",
+      "type": "Object",
+      "description": "Styles object responsible for styles which will be applied to datepicker wrapper"
+    },
+    {
+      "name": "datepickerFullWidth",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Responsible for full width of datepicker"
+    },
+    {
+      "name": "datepickerBackgroundColor",
+      "type": "String",
+      "description": "Set background color of datepicker backdrop"
     }
   ],
   "events": [

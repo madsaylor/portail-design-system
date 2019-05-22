@@ -9,6 +9,16 @@
       "name": "files",
       "type": "Array",
       "description": "Array of inputted files"
+    },
+    {
+      "name": "maxTotalSize",
+      "type": "Number",
+      "description": "Maximum size of total files you can attach"
+    },
+    {
+      "name": "maxFileCount",
+      "type": "Number",
+      "description": "Maximum number of files you can attach"
     }
   ],
   "events": [

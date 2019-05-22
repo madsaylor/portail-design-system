@@ -3,11 +3,11 @@
     v-if="opened"
     v-move-to-body
     class="dialog"
-
+    :style="dialogClassObject"
   >
     <div
       class="backdrop"
-      :style="{opacity: backdropOpacity}"
+      :style="{opacity: backdropOpacity, 'background-color': backgroundColor}"
       @click="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>
@@ -36,7 +36,9 @@
         type: Boolean,
         default: false
       },
-      borderColor: String
+      borderColor: String,
+      backgroundColor: String,
+      dialogClassObject: Object
     },
     data: () => ({
       windowWidth: window.innerWidth

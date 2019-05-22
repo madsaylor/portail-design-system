@@ -130,6 +130,9 @@
         type="date"
         label="Changeable datepicker"
         datepickerPosition="default modal"
+        :datepickerBackgroundColor="datepickerBackgroundColor"
+        :datepickerBackdropOpacity="datepickerBackdropOpacity"
+        :datepickerWrapperClassObject="datepickerWrapperClassObject"
         datePositionChangeable
         placeholder="Date"
         v-model="dateValue"
@@ -315,6 +318,11 @@ export default {
       },
     ],
     borderColor: '#e6e7eb',
+    datepickerBackgroundColor: '#fff',
+    datepickerBackdropOpacity: '1',
+    datepickerWrapperClassObject: {
+      alignItems: 'flex-end'
+    }
   }),
   methods: {
     validate() {

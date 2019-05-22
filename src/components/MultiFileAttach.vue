@@ -28,7 +28,15 @@ export default {
   components: {Input, Icon},
   props: {
     label: String,
-    files: Array
+    files: Array,
+    maxTotalSize: {
+      type: Number,
+      default: 2
+    },
+    maxFileCount: {
+      type: Number,
+      default: 20
+    }
   },
   computed: {
     selectedFileText() {
@@ -39,10 +47,25 @@ export default {
       } else {
         return this.files.length + ' files selected'
       }
-    }
+    },
+    totalSize() {
+      let totalSize = 0;
+      this.files.forEach(file => {
+        totalSize += file.size
+      })
+      return totalSize
+    }    
   },
   methods: {
     fileInputChange(e) {
+      const currentTotal = (e.target.files[0].size + this.totalSize) / (1024 * 1000)
+      if (currentTotal > this.maxTotalSize) {
+        return
+      }
+
+      if (this.files.length >= this.maxFileCount) {
+        return
+      }
       this.$emit('fileInput', e.target.files[0])
     },
     fileInputOpen() {

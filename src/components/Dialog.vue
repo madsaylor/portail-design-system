@@ -3,7 +3,7 @@
     v-if="opened"
     v-move-to-body
     class="dialog"
-
+    :style="dialogClassObject"
   >
     <div
       class="backdrop"
@@ -37,7 +37,8 @@
         default: false
       },
       borderColor: String,
-      backgroundColor: String
+      backgroundColor: String,
+      dialogClassObject: Object
     },
     data: () => ({
       windowWidth: window.innerWidth

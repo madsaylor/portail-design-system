@@ -193,6 +193,7 @@
       :borderColor="datepickerBorderColor"
       :backgroundColor="datepickerBackgroundColor"
       :backdropOpacity="datepickerBackdropOpacity"
+      :dialogClassObject="datepickerWrapperClassObject"
     >
       <Datepicker
         :min="datepickerMin"
@@ -243,6 +244,7 @@ export default {
     datepickerBorderColor: String,
     datepickerBackgroundColor: String,
     datepickerBackdropOpacity: String,
+    datepickerWrapperClassObject: Object,
     slideLabel: Boolean,
     showErrors: {
       type: Boolean,

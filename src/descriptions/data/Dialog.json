@@ -21,6 +21,22 @@
       "name": "borderColor",
       "type": "String",
       "description": "Set up border color for dialog content"
+    },
+    {
+      "name": "backgroundColor",
+      "type": "String",
+      "description": "Set up background color of backdrop"
+    },
+    {
+      "name": "contentFullWidth",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Set up full width of content"
+    },
+    {
+      "name": "dialogStyleObject",
+      "type": "Object",
+      "description": "Styles object responsible for styles which will be applied to dialog node"
     }
   ],
   "events": []

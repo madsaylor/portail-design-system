@@ -3,7 +3,7 @@
     v-if="opened"
     v-move-to-body
     class="dialog"
-    :style="dialogClassObject"
+    :style="dialogStyleObject"
   >
     <div
       class="backdrop"
@@ -11,9 +11,10 @@
       @click="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>
-      <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen, 'full-screen-active-content': fullScreenActive}]"
+      <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen,
+                    'full-screen-active-content': fullScreenActive, 'full-width': contentFullWidth}]"
            :style="{borderColor}">
-        <div class="dialog-wrapper">
+        <div :class="['dialog-wrapper', {'full-width': contentFullWidth}]">
           <slot></slot>
         </div>
       </div>
@@ -38,7 +39,11 @@
       },
       borderColor: String,
       backgroundColor: String,
-      dialogClassObject: Object
+      dialogStyleObject: Object,
+      contentFullWidth: {
+        type: Boolean,
+        default: false
+      }
     },
     data: () => ({
       windowWidth: window.innerWidth
@@ -208,6 +213,14 @@
           overflow: auto;
           height:100%;
         }
+
+        &.full-width {
+          width: 100%;
+        }
+      }
+
+      &.full-width {
+        width: 100%;
       }
     }
 

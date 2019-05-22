@@ -193,11 +193,13 @@
       :borderColor="datepickerBorderColor"
       :backgroundColor="datepickerBackgroundColor"
       :backdropOpacity="datepickerBackdropOpacity"
-      :dialogClassObject="datepickerWrapperClassObject"
+      :dialogStyleObject="datepickerWrapperStyleObject"
+      :contentFullWidth="datepickerFullWidth"
     >
       <Datepicker
         :min="datepickerMin"
         :max="datepickerMax"
+        :fullWidth="datepickerFullWidth"
         v-model="datepickerValue"
       ></Datepicker>
     </Dialog>
@@ -244,7 +246,7 @@ export default {
     datepickerBorderColor: String,
     datepickerBackgroundColor: String,
     datepickerBackdropOpacity: String,
-    datepickerWrapperClassObject: Object,
+    datepickerWrapperStyleObject: Object,
     slideLabel: Boolean,
     showErrors: {
       type: Boolean,
@@ -264,6 +266,10 @@ export default {
       default: 'bottom-middle',
     },
     datePositionChangeable: Boolean,
+    datepickerFullWidth: {
+      type: Boolean,
+      default: false
+    },
 
     // For type="select"
     options: Array,

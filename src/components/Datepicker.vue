@@ -467,7 +467,8 @@ export default {
 
 @media @screen-medium, @screen-small {
   .datepicker {
-    height: 412px;
+    height: 428px;
+    border-radius: 0;
 
     .datepicker-header {
       padding: 0 3.5%;

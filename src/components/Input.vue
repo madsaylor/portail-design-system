@@ -196,6 +196,7 @@
       :backdropOpacity="datepickerBackdropOpacity"
       :dialogStyleObject="datepickerWrapperStyleObject"
       :contentFullWidth="datepickerFullWidth"
+      :overflowCheck="overflowCheckStatus"
     >
       <Datepicker
         :min="datepickerMin"
@@ -284,13 +285,18 @@ export default {
     labelFocus: undefined,
     windowWidth: window.innerWidth,
     positions: Array,
-    timeoutId: undefined
+    timeoutId: undefined,
+    overflowCheckStatus: undefined
   }),
   mounted() {
     if (this.name) {
       this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
 
       document.addEventListener(this.validateEventName, this.validate);
+    }
+
+    if (this.type === 'date') {
+      this.overflowCheckStatus = false;
     }
 
     if (this.datePositionChangeable) {
@@ -480,6 +486,17 @@ export default {
       this.timeoutId = setTimeout(() => {
         this.$emit('lastKeyDownDelay')
       }, 300)
+    },
+    setOverflow(value) {
+      if (this.datepickerVisible) {
+        if (value) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+      } else {
+        document.body.style.overflow = 'auto';
+      }
     }
   },
   watch: {
@@ -489,6 +506,12 @@ export default {
       }
 
       this.$emit('validation', this.validation)
+    },
+    isMobile(value) {
+      this.setOverflow(value);
+    },
+    datepickerVisible() {
+      this.setOverflow(this.isMobile);
     }
   },
   beforeDestroy() {

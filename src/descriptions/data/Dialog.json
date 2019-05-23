@@ -43,6 +43,12 @@
       "type": "Boolean",
       "default": "false",
       "description": "Set box shadow"
+    },
+    {
+      "name": "overflowCheck",
+      "type": "Boolean",
+      "default": "true",
+      "description": "Check overflow depend on it option"
     }
   ],
   "events": []

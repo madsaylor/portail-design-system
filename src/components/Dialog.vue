@@ -48,6 +48,10 @@
       datepickerBoxShadowMobile: {
         type: Boolean,
         default: false
+      },
+      overflowCheck: {
+        type: Boolean,
+        default: true
       }
     },
     data: () => ({
@@ -151,7 +155,9 @@
     },
     watch: {
       opened(value) {
-        value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto';
+        if (this.overflowCheck) {
+          value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto';
+        }
       }
     },
     beforeDestroy() {

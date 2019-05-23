@@ -12,7 +12,8 @@
       @keydown="e => escapePress(e)"
     ></div>
       <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen,
-                    'full-screen-active-content': fullScreenActive, 'full-width': contentFullWidth}]"
+                    'full-screen-active-content': fullScreenActive, 'full-width': contentFullWidth,
+                     'box-shadow': datepickerBoxShadowMobile}]"
            :style="{borderColor}">
         <div :class="['dialog-wrapper', {'full-width': contentFullWidth}]">
           <slot></slot>
@@ -37,10 +38,14 @@
         type: Boolean,
         default: false
       },
-      borderColor: String,
+      borderColor: [String, Boolean],
       backgroundColor: String,
       dialogStyleObject: Object,
       contentFullWidth: {
+        type: Boolean,
+        default: false
+      },
+      datepickerBoxShadowMobile: {
         type: Boolean,
         default: false
       }
@@ -221,6 +226,10 @@
 
       &.full-width {
         width: 100%;
+      }
+
+      &.box-shadow {
+        box-shadow: 0 -1px 1px 0 rgba(91,99,156,0.26);
       }
     }
 

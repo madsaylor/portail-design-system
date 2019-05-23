@@ -112,7 +112,7 @@
         sm
         type="date"
         label="N days min/max range"
-        :datepickerBorderColor="borderColor"
+        :datepickerBorderColorDesktop="borderColor"
         placeholder="Date"
         :dateRange="{min: 5, max: 10}"
         v-model="dateValue3"
@@ -134,6 +134,7 @@
         :datepickerBackdropOpacity="datepickerBackdropOpacity"
         :datepickerWrapperStyleObject="datepickerWrapperStyleObject"
         :datepickerFullWidth="datepickerFullWidth"
+        :datepickerBorderColorDesktop="borderColor"
         datePositionChangeable
         placeholder="Date"
         v-model="dateValue"
@@ -260,7 +261,7 @@ Date inputs:<br />
   sm
   type="date"
   label="N days min/max range"
-  :datepickerBorderColor="borderColor"
+  :datepickerBorderColorDesktop="borderColor"
   placeholder="Date"
   :dateRange="{min: 5, max: 10}"
   v-model="dateValue3"
@@ -320,7 +321,7 @@ export default {
     ],
     borderColor: '#e6e7eb',
     datepickerBackgroundColor: '#fff',
-    datepickerBackdropOpacity: '1',
+    datepickerBackdropOpacity: '0.8',
     datepickerWrapperStyleObject: {
       alignItems: 'flex-end'
     },

@@ -464,4 +464,32 @@ export default {
     width: 100%;
   }
 }
+
+@media @screen-medium, @screen-small {
+  .datepicker {
+    height: 412px;
+
+    .datepicker-header {
+      padding: 0 3.5%;
+
+      .buttons {
+        button {
+          margin-left: 36px;
+        }
+      }
+    }
+
+    .body {
+      .grid-select-row {
+
+        height: 48px;
+        .item-cell {
+          .item {
+            min-width: 59%;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

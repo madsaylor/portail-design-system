@@ -177,7 +177,7 @@
       :target="$refs.input"
       :opened.sync="datepickerVisible"
       :position="getDatepickerPosition"
-      :borderColor="datepickerBorderColor"
+      :borderColor="!isMobile && datepickerBorderColorDesktop"
       just-fade
     >
       <Datepicker
@@ -190,7 +190,8 @@
     <Dialog
       v-show="type === 'date' && getDatepickerPosition === 'modal'"
       :opened.sync="datepickerVisible"
-      :borderColor="datepickerBorderColor"
+      :borderColor="!isMobile && datepickerBorderColorDesktop"
+      :datepickerBoxShadowMobile="isMobile && type === 'date'"
       :backgroundColor="datepickerBackgroundColor"
       :backdropOpacity="datepickerBackdropOpacity"
       :dialogStyleObject="datepickerWrapperStyleObject"
@@ -243,7 +244,7 @@ export default {
     },
     validators: Array,
     value: null,
-    datepickerBorderColor: String,
+    datepickerBorderColorDesktop: String,
     datepickerBackgroundColor: String,
     datepickerBackdropOpacity: String,
     datepickerWrapperStyleObject: Object,

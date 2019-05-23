@@ -71,7 +71,7 @@ export default {
       default: 'bottom-right',
     },
     opened: Boolean,
-    borderColor: String
+    borderColor: [String, Boolean]
   },
   data: () => ({
     transitionTime: 100,

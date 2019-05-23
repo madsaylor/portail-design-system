@@ -37,6 +37,12 @@
       "name": "dialogStyleObject",
       "type": "Object",
       "description": "Styles object responsible for styles which will be applied to dialog node"
+    },
+    {
+      "name": "datepickerBoxShadowMobile",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Set box shadow"
     }
   ],
   "events": []

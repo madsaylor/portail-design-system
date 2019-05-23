@@ -39,10 +39,10 @@
       "description": "Styles object responsible for styles which will be applied to dialog node"
     },
     {
-      "name": "datepickerBoxShadowMobile",
+      "name": "datepickerContainer",
       "type": "Boolean",
       "default": "false",
-      "description": "Set box shadow"
+      "description": "Apply styles of mobile datepicker design to dialog"
     },
     {
       "name": "overflowCheck",

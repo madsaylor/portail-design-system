@@ -13,7 +13,7 @@
     ></div>
       <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen,
                     'full-screen-active-content': fullScreenActive, 'full-width': contentFullWidth,
-                     'box-shadow': datepickerBoxShadowMobile}]"
+                    'dialog-datepicker-container': datepickerContainer}]"
            :style="{borderColor}">
         <div :class="['dialog-wrapper', {'full-width': contentFullWidth}]">
           <slot></slot>
@@ -45,7 +45,7 @@
         type: Boolean,
         default: false
       },
-      datepickerBoxShadowMobile: {
+      datepickerContainer: {
         type: Boolean,
         default: false
       },
@@ -234,7 +234,8 @@
         width: 100%;
       }
 
-      &.box-shadow {
+      &.dialog-datepicker-container {
+        border-radius: 0;
         box-shadow: 0 -1px 1px 0 rgba(91,99,156,0.26);
       }
     }

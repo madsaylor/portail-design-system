@@ -191,7 +191,7 @@
       v-show="type === 'date' && getDatepickerPosition === 'modal'"
       :opened.sync="datepickerVisible"
       :borderColor="!isMobile && datepickerBorderColorDesktop"
-      :datepickerBoxShadowMobile="isMobile && type === 'date'"
+      :datepickerContainer="isMobile && type === 'date'"
       :backgroundColor="datepickerBackgroundColor"
       :backdropOpacity="datepickerBackdropOpacity"
       :dialogStyleObject="datepickerWrapperStyleObject"
@@ -295,7 +295,7 @@ export default {
       document.addEventListener(this.validateEventName, this.validate);
     }
 
-    if (this.type === 'date') {
+    if (this.type === 'date' && this.getDatepickerPosition !== 'modal') {
       this.overflowCheckStatus = false;
     }
 
@@ -487,16 +487,17 @@ export default {
         this.$emit('lastKeyDownDelay')
       }, 300)
     },
-    setOverflow(value) {
+    setOverflow(mobileMode) {
       if (this.datepickerVisible) {
-        if (value) {
-          document.body.style.overflow = 'hidden';
+        if (mobileMode && this.getDatepickerPosition === 'modal') {
+          document.body.style.overflowY = 'hidden';
         } else {
-          document.body.style.overflow = 'auto';
+          document.body.style.overflowY = 'auto';
         }
       } else {
-        document.body.style.overflow = 'auto';
+        document.body.style.overflowY = 'auto';
       }
+      document.body.style.overflowX = 'hidden';
     }
   },
   watch: {
@@ -762,7 +763,7 @@ export default {
         border-radius: 10px;
       }
     }
-    
+
     &.disabled {
       .label-text {
         .font-desktop-small-regular-gray();
@@ -776,7 +777,7 @@ export default {
         background-color: @color-gray-400;
         border-radius: 10px;
       }
-    }    
+    }
   }
 
   .drawer {

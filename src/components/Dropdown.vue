@@ -401,6 +401,7 @@ export default {
   }
 
   .border-content {
+    border-radius: 4px;
     border-style: solid;
     border-width: 1px;
   }

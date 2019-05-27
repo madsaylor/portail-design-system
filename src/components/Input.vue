@@ -511,7 +511,12 @@ export default {
     isMobile(value) {
       this.setOverflow(value);
     },
-    datepickerVisible() {
+    datepickerVisible(value) {
+      if (!value) {
+        setTimeout(() => {
+          document.body.removeAttribute('style')
+        }, 300)
+      }
       this.setOverflow(this.isMobile);
     }
   },

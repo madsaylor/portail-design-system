@@ -1,6 +1,6 @@
 <template>
   <div class="signature-wrapper">
-    <div class="signature-pad-wrapper" @mouseup="mouseup" @mouseleave="mouseleave">
+    <div class="signature-pad-wrapper" @mousedown="clearPlaceholder" @mouseup="mouseup" @mouseleave="mouseleave">
       <VueSignaturePad
         class="signature-pad"
         :width="signaturePadWidth"
@@ -34,9 +34,35 @@
       }
     },
     data: () => ({
+      showPlaceholder : true,
       signatureData: undefined
     }),
     methods: {
+      getSignaturePad() {
+        let canvas = this.$refs.signaturePad.signaturePad._canvas
+        let ctx = canvas.getContext('2d')
+
+        return {canvas, ctx}
+      },
+      initSignature() {
+        if (this.value) {
+          this.$refs.signaturePad.fromDataURL(this.value)
+        } else {
+          let {canvas, ctx} = this.getSignaturePad()
+
+          ctx.font = '500 18px Lato'
+          ctx.fillStyle = '#babcc2'
+          ctx.textAlign = 'center'
+          ctx.fillText('START DRAWING WITH YOUR MOUSE', canvas.width / 2, canvas.height / 2)
+        }
+      },
+      clearPlaceholder() {
+        if (this.showPlaceholder) {
+          let {canvas, ctx} = this.getSignaturePad()
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+          this.showPlaceholder = false
+        }
+      },
       clear() {
         this.$refs.signaturePad.clearSignature()
         this.$emit('empty', this.$refs.signaturePad.saveSignature().isEmpty)
@@ -58,11 +84,7 @@
       }
     },
     mounted() {
-      this.$nextTick(() => {
-        if (this.value) {
-          this.$refs.signaturePad.fromDataURL(this.value)
-        }
-      })
+      this.$nextTick(() => this.initSignature())
     }
   }
 </script>

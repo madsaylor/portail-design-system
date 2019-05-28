@@ -21,15 +21,15 @@
   "events": [
     {
       "name": "empty",
-      "description": "Emitted when is mouseup event trigger, mouseleave event trigger or clear button pressed, will return isEmpty status of signature pad"
+      "description": "Emitted when next events are triggering like mouseup, mouseleave or clear button pressed, will return isEmpty status of signature pad"
     },
     {
       "name": "mouseup",
-      "description": "Emitted when is mouseup event trigger on signature pad, will return signature pad data value"
+      "description": "Emitted when is mouseup event is trigger on signature pad and signature data is not empty and changed state, will return signature pad data value"
     },
     {
       "name": "mouseleave",
-      "description": "Emitted when is mouseleave event trigger on signature pad, will return signature pad data value"
+      "description": "Emitted when is mouseleave event is trigger on signature pad and signature data is not empty and changed state, will return signature pad data value"
     }
   ]
 }

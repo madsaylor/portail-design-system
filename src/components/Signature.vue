@@ -1,57 +1,68 @@
 <template>
   <div class="signature-wrapper">
-    <VueSignaturePad
-      :width="signaturePadWidth"
-      :height="signaturePadHeight"
-      :custom-style="signaturePadStyleObject"
-      ref="signaturePad"
-    />
-    <Button class="clear-signature-button"
+    <div class="signature-pad-wrapper" @mouseup="mouseup" @mouseleave="mouseleave">
+      <VueSignaturePad
+        class="signature-pad"
+        :width="signaturePadWidth"
+        :height="signaturePadHeight"
+        ref="signaturePad"
+      />
+    </div>
+    <div class="clear-signature-wrapper">
+      <span class="clear-signature"
             @click="clear">
-      Clear
-    </Button>
-    <Button v-if="showSaveButton"
-            class="save-signature-button"
-            @click="save">
-      Save
-    </Button>
+        Clear Signature
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
-  import Button from './Button'
-
   export default {
     name: 'Signature',
-    components: {Button},
     props: {
+      value: {
+        type: String
+      },
       signaturePadWidth: {
         type: String,
-        default: '570px'
+        default: '420px'
       },
       signaturePadHeight: {
         type: String,
-        default: '222px'
-      },
-      signaturePadStyleObject: {
-        type: Object
-      },
-      showSaveButton: {
-        type: Boolean,
-        default: true
+        default: '158px'
       }
     },
+    data: () => ({
+      signatureData: undefined
+    }),
     methods: {
       clear() {
         this.$refs.signaturePad.clearSignature()
         this.$emit('empty', this.$refs.signaturePad.saveSignature().isEmpty)
       },
-      save() {
+      mouseup() {
+        this.emitMouseEvent('mouseup')
+      },
+      mouseleave() {
+        this.emitMouseEvent('mouseleave')
+      },
+      emitMouseEvent(eventType) {
         const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
 
         this.$emit('empty', isEmpty)
-        this.$emit('save', data)
+        if (!isEmpty && this.signatureData !== data) {
+          this.signatureData = data
+          this.$emit(eventType, data)
+        }
       }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        if (this.value) {
+          this.$refs.signaturePad.fromDataURL(this.value)
+        }
+      })
     }
   }
 </script>
@@ -62,36 +73,28 @@
   .signature-wrapper {
     display: inline-block;
 
-    .clear-signature-button {
-      position: relative;
-      bottom: 55px;
-      left: calc(100% - 100px);
-      user-select: none;
-
-      .button {
-        background: @color-light-blue-100 !important;
-
-        &.primary, &.alt, &.plain, &.link-ico {
-          &:hover, &:focus, &:active  {
-            background: @color-light-blue-100 !important;
-          }
-        }
+    .signature-pad-wrapper {
+      .signature-pad {
+        border: 1px solid #e1e2e6;
+        border-radius: 1px;
       }
     }
 
-    .save-signature-button {
+    .clear-signature-wrapper {
       display: flex;
       justify-content: flex-end;
-      user-select: none;
 
-      .button {
-        background: @color-light-blue-200 !important;
-
-        &.primary, &.alt, &.plain, &.link-ico {
-          &:hover, &:focus, &:active {
-            background: darken(@color-light-blue-200, 10%) !important;
-          }
-        }
+      .clear-signature {
+        height: 16px;
+        width: 81px;
+        color: @color-gray-500;
+        font-family: Lato;
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 8px;
+        margin-right: 9px;
+        cursor: pointer;
+        user-select: none;
       }
     }
   }

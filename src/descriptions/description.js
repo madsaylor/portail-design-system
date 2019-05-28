@@ -18,6 +18,7 @@ import FileUpload from './data/FileUpload';
 import MultiFileAttach from './data/MultiFileAttach';
 import Stepper from './data/Stepper';
 import TextArea from './data/TextArea';
+import Signature from './data/Signature';
 
 export default {
   AppHeader,
@@ -40,4 +41,5 @@ export default {
   MultiFileAttach,
   Stepper,
   TextArea,
+  Signature,
 }

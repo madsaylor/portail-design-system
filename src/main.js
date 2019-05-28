@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueSignaturePad from 'vue-signature-pad'
 import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/monokai.css'
 
@@ -23,6 +24,7 @@ context.keys().forEach(key => {
 
 Vue.config.productionTip = false
 Vue.use(VueHighlightJS)
+Vue.use(VueSignaturePad)
 
 new Vue({
   render: h => h(App),

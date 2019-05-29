@@ -1,0 +1,37 @@
+{
+  "properties": [
+    {
+      "name": "signaturePadWidth",
+      "type": "String",
+      "default": "570px",
+      "description": "Width signature pad"
+    },
+    {
+      "name": "signaturePadHeight",
+      "type": "String",
+      "default": "222px",
+      "description": "Height signature pad"
+    },
+    {
+      "name": "signaturePadStyleObject",
+      "type": "Object",
+      "description": "Styles which is will be applying to signature pad"
+    },
+    {
+      "name": "showSaveButton",
+      "type": "Boolean",
+      "default": "true",
+      "description": "Show save button on signature pad"
+    }
+  ],
+  "events": [
+    {
+      "name": "empty",
+      "description": "Emitted when is save or clear buttons pressed, will return isEmpty status of signature pad"
+    },
+    {
+      "name": "save",
+      "description": "Emitted when is save button pressed, will return signature pad data value"
+    }
+  ]
+}

@@ -126,9 +126,9 @@
       "description": "Property for type Select. Array<Object>. Options for select. Each item is bound to an <option> element. Additionaly a .title property can be set to change the displayed value"
     },
     {
-      "name": "datepickerBorderColor",
+      "name": "datepickerBorderColorDesktop",
       "type": "String",
-      "description": "Set border color for datepicker"
+      "description": "Set border color for desktop datepicker"
     },
     {
       "name": "slideLabel",
@@ -144,6 +144,22 @@
       "name": "showErrors",
       "type": "Boolean",
       "description": "Responsible for showing error message"
+    },
+    {
+      "name": "datepickerWrapperStyleObject",
+      "type": "Object",
+      "description": "Styles object responsible for styles which will be applied to datepicker wrapper"
+    },
+    {
+      "name": "datepickerFullWidth",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Responsible for full width of datepicker"
+    },
+    {
+      "name": "datepickerBackgroundColor",
+      "type": "String",
+      "description": "Set background color of datepicker backdrop"
     }
   ],
   "events": [

@@ -25,7 +25,7 @@
 -->
 
 <template>
-  <div class="datepicker">
+  <div :class="['datepicker', {'full-width': fullWidth}]">
     <div class="datepicker-header">
       <div class="labels">
         <div
@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="body">
+    <div :class="['body', {'full-width': fullWidth}]">
       <GridSelect
         :items="{'day': days, 'month': months, 'year': years}[view]"
         :labels-top="view === 'day' ? weekLabels : null"
@@ -100,6 +100,10 @@ export default {
       type: Date,
       default: () => new Date(),
     },
+    fullWidth: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -449,6 +453,43 @@ export default {
     }
     .item-cell.selected .grid-item-big {
       color: @color-white;
+    }
+
+    &.full-width {
+      width: 100%;
+    }
+  }
+
+  &.full-width {
+    width: 100%;
+  }
+}
+
+@media @screen-medium, @screen-small {
+  .datepicker {
+    height: 428px;
+    border-radius: 0;
+
+    .datepicker-header {
+      padding: 0 3.5%;
+
+      .buttons {
+        button {
+          margin-left: 36px;
+        }
+      }
+    }
+
+    .body {
+      .grid-select-row {
+
+        height: 48px;
+        .item-cell {
+          .item {
+            min-width: 59%;
+          }
+        }
+      }
     }
   }
 }

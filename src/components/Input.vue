@@ -177,7 +177,7 @@
       :target="$refs.input"
       :opened.sync="datepickerVisible"
       :position="getDatepickerPosition"
-      :borderColor="datepickerBorderColor"
+      :borderColor="!isMobile && datepickerBorderColorDesktop"
       just-fade
     >
       <Datepicker
@@ -190,11 +190,18 @@
     <Dialog
       v-show="type === 'date' && getDatepickerPosition === 'modal'"
       :opened.sync="datepickerVisible"
-      :borderColor="datepickerBorderColor"
+      :borderColor="!isMobile && datepickerBorderColorDesktop"
+      :datepickerContainer="isMobile && type === 'date'"
+      :backgroundColor="datepickerBackgroundColor"
+      :backdropOpacity="datepickerBackdropOpacity"
+      :dialogStyleObject="datepickerWrapperStyleObject"
+      :contentFullWidth="datepickerFullWidth"
+      :overflowCheck="overflowCheckStatus"
     >
       <Datepicker
         :min="datepickerMin"
         :max="datepickerMax"
+        :fullWidth="datepickerFullWidth"
         v-model="datepickerValue"
       ></Datepicker>
     </Dialog>
@@ -238,7 +245,10 @@ export default {
     },
     validators: Array,
     value: null,
-    datepickerBorderColor: String,
+    datepickerBorderColorDesktop: String,
+    datepickerBackgroundColor: String,
+    datepickerBackdropOpacity: String,
+    datepickerWrapperStyleObject: Object,
     slideLabel: Boolean,
     showErrors: {
       type: Boolean,
@@ -258,6 +268,10 @@ export default {
       default: 'bottom-middle',
     },
     datePositionChangeable: Boolean,
+    datepickerFullWidth: {
+      type: Boolean,
+      default: false
+    },
 
     // For type="select"
     options: Array,
@@ -271,13 +285,18 @@ export default {
     labelFocus: undefined,
     windowWidth: window.innerWidth,
     positions: Array,
-    timeoutId: undefined
+    timeoutId: undefined,
+    overflowCheckStatus: undefined
   }),
   mounted() {
     if (this.name) {
       this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
 
       document.addEventListener(this.validateEventName, this.validate);
+    }
+
+    if (this.type === 'date' && this.getDatepickerPosition !== 'modal') {
+      this.overflowCheckStatus = false;
     }
 
     if (this.datePositionChangeable) {
@@ -467,6 +486,18 @@ export default {
       this.timeoutId = setTimeout(() => {
         this.$emit('lastKeyDownDelay')
       }, 300)
+    },
+    setOverflow(mobileMode) {
+      if (this.datepickerVisible) {
+        if (mobileMode && this.getDatepickerPosition === 'modal') {
+          document.body.style.overflowY = 'hidden';
+        } else {
+          document.body.style.overflowY = 'auto';
+        }
+      } else {
+        document.body.style.overflowY = 'auto';
+      }
+      document.body.style.overflowX = 'hidden';
     }
   },
   watch: {
@@ -476,6 +507,17 @@ export default {
       }
 
       this.$emit('validation', this.validation)
+    },
+    isMobile(value) {
+      this.setOverflow(value);
+    },
+    datepickerVisible(value) {
+      if (!value) {
+        setTimeout(() => {
+          document.body.removeAttribute('style')
+        }, 300)
+      }
+      this.setOverflow(this.isMobile);
     }
   },
   beforeDestroy() {
@@ -726,7 +768,7 @@ export default {
         border-radius: 10px;
       }
     }
-    
+
     &.disabled {
       .label-text {
         .font-desktop-small-regular-gray();
@@ -740,7 +782,7 @@ export default {
         background-color: @color-gray-400;
         border-radius: 10px;
       }
-    }    
+    }
   }
 
   .drawer {

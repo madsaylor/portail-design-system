@@ -1,6 +1,6 @@
 {
   "name": "@betao/ds",
-  "version": "0.3.76",
+  "version": "0.3.83",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -79,6 +79,7 @@
   ],
   "dependencies": {
     "libphonenumber-js": "^1.7.15",
+    "vue-signature-pad": "^1.1.9-beta.1",
     "vue2-dropzone": "^3.5.8"
   }
 }

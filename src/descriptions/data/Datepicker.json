@@ -20,6 +20,12 @@
       "type": "Date",
       "default": "new Date()",
       "description": "Selected date."
+    },
+    {
+      "name": "fullWidth",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Set up full width of datepicker"
     }
   ],
   "events": []

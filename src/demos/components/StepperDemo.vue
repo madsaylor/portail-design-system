@@ -48,7 +48,7 @@
     import Icon from '../../components/Icon'
     import Input from '../../components/Input'
     import Description from '../../descriptions/Description'
-    import Collapser from '../../components/Collapser.vue'
+    import Collapser from '../../components/Collapser'
 
 let usage = `
     <Step v-model="steps">

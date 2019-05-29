@@ -3,17 +3,19 @@
     v-if="opened"
     v-move-to-body
     class="dialog"
-
+    :style="dialogStyleObject"
   >
     <div
       class="backdrop"
-      :style="{opacity: backdropOpacity}"
+      :style="{opacity: backdropOpacity, 'background-color': backgroundColor}"
       @click="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>
-      <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen, 'full-screen-active-content': fullScreenActive}]"
+      <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen,
+                    'full-screen-active-content': fullScreenActive, 'full-width': contentFullWidth,
+                    'dialog-datepicker-container': datepickerContainer}]"
            :style="{borderColor}">
-        <div class="dialog-wrapper">
+        <div :class="['dialog-wrapper', {'full-width': contentFullWidth}]">
           <slot></slot>
         </div>
       </div>
@@ -36,7 +38,21 @@
         type: Boolean,
         default: false
       },
-      borderColor: String
+      borderColor: [String, Boolean],
+      backgroundColor: String,
+      dialogStyleObject: Object,
+      contentFullWidth: {
+        type: Boolean,
+        default: false
+      },
+      datepickerContainer: {
+        type: Boolean,
+        default: false
+      },
+      overflowCheck: {
+        type: Boolean,
+        default: true
+      }
     },
     data: () => ({
       windowWidth: window.innerWidth
@@ -139,7 +155,9 @@
     },
     watch: {
       opened(value) {
-        value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto';
+        if (this.overflowCheck) {
+          value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto';
+        }
       }
     },
     beforeDestroy() {
@@ -206,6 +224,19 @@
           overflow: auto;
           height:100%;
         }
+
+        &.full-width {
+          width: 100%;
+        }
+      }
+
+      &.full-width {
+        width: 100%;
+      }
+
+      &.dialog-datepicker-container {
+        border-radius: 0;
+        box-shadow: 0 -1px 1px 0 rgba(91,99,156,0.26);
       }
     }
 

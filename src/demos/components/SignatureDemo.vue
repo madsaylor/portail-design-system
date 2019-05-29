@@ -9,9 +9,7 @@
         <pre v-highlightjs="usage"><code class="html"></code></pre>
       </Collapser>
 
-      <Signature :signature-pad-style-object="signaturePadStyleObject"
-                 :show-save-button="showSaveButton">
-      </Signature>
+      <Signature v-model="data"></Signature>
     </div>
 </template>
 
@@ -21,9 +19,7 @@
   import Description from '../../descriptions/Description'
 
 let usage = `
-      <Signature :signature-pad-style-object="signaturePadStyleObject"
-                 :show-save-button="showSaveButton">
-      </Signature>
+    <Signature v-model="data"></Signature>
 `.slice(1)
 
   export default {
@@ -32,10 +28,7 @@ let usage = `
     data: () => ({
       usage,
       openUsage: true,
-      signaturePadStyleObject: {
-        border: '1px solid #1eb386'
-      },
-      showSaveButton: false
+      data: undefined
     })
   }
 </script>

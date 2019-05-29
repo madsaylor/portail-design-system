@@ -1,57 +1,106 @@
 <template>
   <div class="signature-wrapper">
-    <VueSignaturePad
-      :width="signaturePadWidth"
-      :height="signaturePadHeight"
-      :custom-style="signaturePadStyleObject"
-      ref="signaturePad"
-    />
-    <Button class="clear-signature-button"
+    <div class="signature-pad-wrapper" @mousedown="clearPlaceholder" @mouseup="mouseup" @mouseleave="mouseleave">
+      <VueSignaturePad
+        class="signature-pad"
+        :width="signaturePadWidth"
+        :height="signaturePadHeight"
+        ref="signaturePad"
+      />
+    </div>
+    <div class="clear-signature-wrapper" v-if="!lockSignaturePad">
+      <span class="clear-signature"
             @click="clear">
-      Clear
-    </Button>
-    <Button v-if="showSaveButton"
-            class="save-signature-button"
-            @click="save">
-      Save
-    </Button>
+        Clear Signature
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
-  import Button from './Button'
-
   export default {
     name: 'Signature',
-    components: {Button},
     props: {
+      value: {
+        type: String
+      },
       signaturePadWidth: {
         type: String,
-        default: '570px'
+        default: '420px'
       },
       signaturePadHeight: {
         type: String,
-        default: '222px'
+        default: '158px'
       },
-      signaturePadStyleObject: {
-        type: Object
-      },
-      showSaveButton: {
+      lockSignaturePad: {
         type: Boolean,
-        default: true
+        default: false
       }
     },
+    data: () => ({
+      showPlaceholder : true,
+      signatureData: undefined
+    }),
     methods: {
+      getSignaturePad() {
+        let canvas = this.$refs.signaturePad.signaturePad._canvas
+        let ctx = canvas.getContext('2d')
+
+        return {canvas, ctx}
+      },
+      initSignature() {
+        if (this.value) {
+          this.$refs.signaturePad.fromDataURL(this.value)
+        } else {
+          let {canvas, ctx} = this.getSignaturePad()
+
+          ctx.font = '500 18px Lato'
+          ctx.fillStyle = '#babcc2'
+          ctx.textAlign = 'center'
+          ctx.fillText('START DRAWING WITH YOUR MOUSE', canvas.width / 2, canvas.height / 2)
+        }
+        this.checkLockSignaturePad(this.lockSignaturePad)
+      },
+      clearPlaceholder() {
+        if (this.showPlaceholder && !this.value) {
+          let {canvas, ctx} = this.getSignaturePad()
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+          this.showPlaceholder = false
+        }
+      },
       clear() {
         this.$refs.signaturePad.clearSignature()
         this.$emit('empty', this.$refs.signaturePad.saveSignature().isEmpty)
       },
-      save() {
+      mouseup() {
+        this.emitMouseEvent('mouseup')
+      },
+      mouseleave() {
+        this.emitMouseEvent('mouseleave')
+      },
+      emitMouseEvent(eventType) {
         const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
 
         this.$emit('empty', isEmpty)
-        this.$emit('save', data)
+        if (!isEmpty && this.signatureData !== data) {
+          this.signatureData = data
+          this.$emit(eventType, data)
+        }
+      },
+      checkLockSignaturePad(isLock) {
+        if (isLock) {
+          this.$refs.signaturePad.lockSignaturePad()
+          this.showPlaceholder = false
+        }
       }
+    },
+    watch: {
+      lockSignaturePad(value) {
+        this.checkLockSignaturePad(value)
+      }
+    },
+    mounted() {
+      this.$nextTick(() => this.initSignature())
     }
   }
 </script>
@@ -62,36 +111,28 @@
   .signature-wrapper {
     display: inline-block;
 
-    .clear-signature-button {
-      position: relative;
-      bottom: 55px;
-      left: calc(100% - 100px);
-      user-select: none;
-
-      .button {
-        background: @color-light-blue-100 !important;
-
-        &.primary, &.alt, &.plain, &.link-ico {
-          &:hover, &:focus, &:active  {
-            background: @color-light-blue-100 !important;
-          }
-        }
+    .signature-pad-wrapper {
+      .signature-pad {
+        border: 1px solid #e1e2e6;
+        border-radius: 1px;
       }
     }
 
-    .save-signature-button {
+    .clear-signature-wrapper {
       display: flex;
       justify-content: flex-end;
-      user-select: none;
 
-      .button {
-        background: @color-light-blue-200 !important;
-
-        &.primary, &.alt, &.plain, &.link-ico {
-          &:hover, &:focus, &:active {
-            background: darken(@color-light-blue-200, 10%) !important;
-          }
-        }
+      .clear-signature {
+        height: 16px;
+        width: 81px;
+        color: @color-gray-500;
+        font-family: Lato;
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 8px;
+        margin-right: 9px;
+        cursor: pointer;
+        user-select: none;
       }
     }
   }

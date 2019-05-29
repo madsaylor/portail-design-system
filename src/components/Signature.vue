@@ -8,7 +8,7 @@
         ref="signaturePad"
       />
     </div>
-    <div class="clear-signature-wrapper">
+    <div class="clear-signature-wrapper" v-if="!lockSignaturePad">
       <span class="clear-signature"
             @click="clear">
         Clear Signature
@@ -31,6 +31,10 @@
       signaturePadHeight: {
         type: String,
         default: '158px'
+      },
+      lockSignaturePad: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({
@@ -55,9 +59,10 @@
           ctx.textAlign = 'center'
           ctx.fillText('START DRAWING WITH YOUR MOUSE', canvas.width / 2, canvas.height / 2)
         }
+        this.checkLockSignaturePad(this.lockSignaturePad)
       },
       clearPlaceholder() {
-        if (this.showPlaceholder) {
+        if (this.showPlaceholder && !this.value) {
           let {canvas, ctx} = this.getSignaturePad()
           ctx.clearRect(0, 0, canvas.width, canvas.height)
           this.showPlaceholder = false
@@ -81,6 +86,17 @@
           this.signatureData = data
           this.$emit(eventType, data)
         }
+      },
+      checkLockSignaturePad(isLock) {
+        if (isLock) {
+          this.$refs.signaturePad.lockSignaturePad()
+          this.showPlaceholder = false
+        }
+      }
+    },
+    watch: {
+      lockSignaturePad(value) {
+        this.checkLockSignaturePad(value)
       }
     },
     mounted() {

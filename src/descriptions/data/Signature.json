@@ -16,6 +16,12 @@
       "type": "String",
       "default": "158px",
       "description": "Height signature pad"
+    },
+    {
+      "name": "lockSignaturePad",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Lock signature pad"
     }
   ],
   "events": [

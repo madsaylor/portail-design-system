@@ -146,7 +146,7 @@
         v-model="inputValue"
         placeholder="placeholder"
       >
-        <option v-for="option in options" v-bind="option">
+        <option v-for="option in options" :value="option">
           {{ option.title || option.value }}
         </option>
       </select>

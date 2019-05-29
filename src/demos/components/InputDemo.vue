@@ -141,7 +141,7 @@
         md
         type="select"
         placeholder="Select a value"
-        v-model="textValue"
+        v-model="selectValue"
         :options="[{
           title: 'Hello',
           value: 1,
@@ -293,6 +293,10 @@ export default {
     openUsage: true,
     usage,
     textValue: '',
+    selectValue: {
+      value: 1,
+      title: 'Hello'
+    },
     slideTextValue: 'Test text',
     radioValue: 'first',
     dateValue: new Date(),

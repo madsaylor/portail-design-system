@@ -582,13 +582,14 @@ export default {
       height: 20px;
       font-size: 15px;
       font-family: Arial, Helvetica, sans-serif !important;
-      color: #989898;
+      color: #828282;
       background: linear-gradient(@color-white 90%, hsla(0,0%,100%,0)) !important;
       border-right: 2.5px solid #fff;
 
       &.slide-label-active {
         transform: translateY(-20px) scale(0.85, 0.85);
         transition: .4s cubic-bezier(.25,.8,.25,1);
+        color: #989898;
         font-size: 17px;
         padding: 0 10px;
         left: 0;

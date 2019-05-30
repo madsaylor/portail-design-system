@@ -621,6 +621,8 @@ export default {
         margin-top: 10px;
       }
 
+      &::-moz-placeholder
+      &:-moz-placeholder
       &::placeholder {
         .font-desktop-small-regular-gray();
       }

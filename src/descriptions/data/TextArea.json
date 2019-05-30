@@ -14,7 +14,46 @@
       "name": "placeholder",
       "type": "String",
       "description": "Passed directly to the textarea"
+    },
+    {
+      "name": "validators",
+      "type": "Array<Object>",
+      "description": " Array of validator Objects. When multiple validators fail, only one error is displayed, determined by their order in the array. Each Object should have three fields:",
+      "subProperty": [
+        {
+          "name": "name",
+          "type": "String",
+          "description": "Validator id"
+        },
+        {
+          "name": "message",
+          "type": "String",
+          "description": "Error message that shown when validation fails"
+        },
+        {
+          "name": "validator",
+          "type": "Function",
+          "description": " Function that takes input value as an argument and returns Boolean"
+        }
+      ]
+    },
+    {
+      "name": "showErrors",
+      "type": "Boolean",
+      "default": "true",
+      "description": "Responsible for showing error message"
+    },
+    {
+      "name": "initValidation",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Responsible for initial run validation"
     }
   ],
-  "events": []
+  "events": [
+    {
+      "name": "validation",
+      "description": "Emitted when the textarea value changes or in initial proccess depend on initValidation value"
+    }
+  ]
 }

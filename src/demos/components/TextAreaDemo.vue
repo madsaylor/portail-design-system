@@ -9,8 +9,22 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <div class="textarea-wrapper">
-      <TextArea v-model="messageText" :label="labelText" :placeholder="placeholder" :rows="5"></TextArea>
+    <div class="general-wrapper">
+      <div class="textarea-wrapper">
+        <TextArea v-model="messageText"
+                  :label="labelText"
+                  :placeholder="placeholder"
+                  :rows="5">
+        </TextArea>
+      </div>
+      <div class="textarea-wrapper">
+        <TextArea v-model="messageText"
+                  :label="secondlabelText"
+                  :placeholder="placeholder"
+                  :rows="5"
+                  :validators="validators">
+        </TextArea>
+      </div>
     </div>
   </div>
 </template>
@@ -21,9 +35,18 @@ import Description from '../../descriptions/Description.vue';
 import Collapser from '../../components/Collapser.vue';
 
 let usage = `
-<div class="textarea-wrapper">
-  <TextArea v-model="messageText" :label="labelText" :placeholder="placeholder"></TextArea>
-</div>`.slice(1);
+<TextArea v-model="messageText"
+          :label="labelText"
+          :placeholder="placeholder"
+          :rows="5">
+</TextArea>
+<TextArea v-model="messageText"
+          :label="secondlabelText"
+          :placeholder="placeholder"
+          :rows="5"
+          :validators="validators">
+</TextArea>
+`.slice(1);
 
 export default {
     name: "TextAreaDemo",
@@ -32,14 +55,34 @@ export default {
       openUsage: true,
       usage,
       messageText: null,
-      labelText: 'Marathon',
-      placeholder: 'Placeholder'
+      labelText: 'Textarea',
+      secondlabelText: 'Textarea with errors',
+      placeholder: 'Placeholder',
+      validators: [
+        {
+          name: 'required',
+          message: 'The textarea is required',
+          validator: value => !!value
+        },
+        {
+          name: 'min-length',
+          message: 'The textarea length is required to be equal 10 or more symbols',
+          validator: value => value && value.length >= 10
+        }
+      ]
     })
 }
 </script>
 
 <style lang="less" scoped>
-  .textarea-wrapper {
-    width: 500px;
+  .general-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .textarea-wrapper {
+      display: inline-block;
+      width: 400px;
+    }
   }
+
 </style>

@@ -219,5 +219,9 @@ export default {
   &.link-ico {
     .font-components-button-link-ico();
   }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
 }
 </style>

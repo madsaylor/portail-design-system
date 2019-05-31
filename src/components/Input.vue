@@ -575,19 +575,24 @@ export default {
       position: absolute;
       left: 5px;
       top: 20px;
-      z-index: 100;
-      padding: 0 11px;
+      z-index: 1;
+      padding: 0 0 0 6px;
       margin-bottom: 20px;
       max-width: 100%;
       height: 20px;
-      font-size: 16px;
-      color: #989898;
+      font-size: 15px;
+      font-family: Arial, Helvetica, sans-serif !important;
+      color: #828282;
       background: linear-gradient(@color-white 90%, hsla(0,0%,100%,0)) !important;
       border-right: 2.5px solid #fff;
 
       &.slide-label-active {
         transform: translateY(-20px) scale(0.85, 0.85);
         transition: .4s cubic-bezier(.25,.8,.25,1);
+        color: #989898;
+        font-size: 17px;
+        padding: 0 10px;
+        left: 0;
       }
 
       &.slide-label-inactive {
@@ -616,6 +621,8 @@ export default {
         margin-top: 10px;
       }
 
+      &::-moz-placeholder
+      &:-moz-placeholder
       &::placeholder {
         .font-desktop-small-regular-gray();
       }

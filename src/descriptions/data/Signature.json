@@ -1,37 +1,41 @@
 {
   "properties": [
     {
+      "name": "value",
+      "type": "String",
+      "description": "Set signature pad value"
+    },
+    {
       "name": "signaturePadWidth",
       "type": "String",
-      "default": "570px",
+      "default": "420px",
       "description": "Width signature pad"
     },
     {
       "name": "signaturePadHeight",
       "type": "String",
-      "default": "222px",
+      "default": "158px",
       "description": "Height signature pad"
     },
     {
-      "name": "signaturePadStyleObject",
-      "type": "Object",
-      "description": "Styles which is will be applying to signature pad"
-    },
-    {
-      "name": "showSaveButton",
+      "name": "lockSignaturePad",
       "type": "Boolean",
-      "default": "true",
-      "description": "Show save button on signature pad"
+      "default": "false",
+      "description": "Lock signature pad"
     }
   ],
   "events": [
     {
       "name": "empty",
-      "description": "Emitted when is save or clear buttons pressed, will return isEmpty status of signature pad"
+      "description": "Emitted when next events are triggering like mouseup, mouseleave or clear button pressed, will return isEmpty status of signature pad"
     },
     {
-      "name": "save",
-      "description": "Emitted when is save button pressed, will return signature pad data value"
+      "name": "mouseup",
+      "description": "Emitted when is mouseup event is trigger on signature pad and signature data is not empty and changed state, will return signature pad data value"
+    },
+    {
+      "name": "mouseleave",
+      "description": "Emitted when is mouseleave event is trigger on signature pad and signature data is not empty and changed state, will return signature pad data value"
     }
   ]
 }

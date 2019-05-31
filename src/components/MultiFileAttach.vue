@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="input-wrapper">
-      <input type="file" id="file-input" @change="fileInputChange" />
+      <input type="file" id="file-input" @change="fileInputChange" multiple />
       <Input
         type="text"
         :label="label"
@@ -48,17 +48,17 @@ export default {
         return this.files.length + ' files selected'
       }
     },
-    totalSize() {
+    currentTotalSize() {
       let totalSize = 0;
       this.files.forEach(file => {
         totalSize += file.size
       })
       return totalSize
-    }    
+    }
   },
   methods: {
     fileInputChange(e) {
-      const currentTotal = (e.target.files[0].size + this.totalSize) / (1024 * 1000)
+      const currentTotal = (this.attachedTotalSize(e.target.files) + this.currentTotalSize) / (1024 * 1000)
       if (currentTotal > this.maxTotalSize) {
         return
       }
@@ -66,13 +66,20 @@ export default {
       if (this.files.length >= this.maxFileCount) {
         return
       }
-      this.$emit('fileInput', e.target.files[0])
+      this.$emit('fileInput', e.target.files)
     },
     fileInputOpen() {
       document.getElementById('file-input').click();
     },
     removeFile(file) {
       this.$emit('fileRemove', file)
+    },
+    attachedTotalSize(files) {
+      let totalSize = 0;
+      Object.keys(files).forEach(key => {
+        totalSize += files[key].size
+      })
+      return totalSize
     }
   }
 }

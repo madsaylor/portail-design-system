@@ -45,8 +45,8 @@ export default {
     }
   },
   methods: {
-    fileInput(file) {
-      this.files = [...this.files, file]
+    fileInput(files) {
+      this.files = [...this.files, ...files]
     },
     fileRemove(file) {
       this.files = this.files.filter(f => f.name !== file.name)

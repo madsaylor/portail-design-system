@@ -6,6 +6,7 @@
         type="text"
         :label="label"
         v-model="selectedFileText"
+        disabled
       />
       <Icon attach_file class="open-icon" @click="fileInputOpen" />
     </div>
@@ -98,6 +99,14 @@ export default {
 
   .input {
     width: 100%;
+
+    label {
+      input {
+        border: 1px solid @color-gray-300 !important;
+        background-color: @color-white !important;
+        color: @color-gray-500 !important;
+      }
+    }
   }
 
   .open-icon {

@@ -240,6 +240,12 @@
       }
     }
 
+    @media only screen and (max-height: 556px) {
+      .dialog-content {
+        max-height: 100%;
+      }
+    }
+
     .border-content {
       border-style: solid;
       border-width: 1px;

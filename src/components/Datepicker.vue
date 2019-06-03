@@ -349,7 +349,6 @@ export default {
   width: 336px;
   display: flex;
   flex-direction: column;
-  z-index: 1010;
 
   .datepicker-header {
     padding: 0 10.5px;

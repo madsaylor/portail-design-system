@@ -127,6 +127,7 @@
         @click="inputFocus"
         @blur="inputBlur"
         @keydown="onKeyDown"
+        @mousedown="onMouseDown($event)"
       />
 
       <input
@@ -188,7 +189,7 @@
     </Dropdown>
 
     <Dialog
-      v-show="type === 'date' && getDatepickerPosition === 'modal'"
+      v-if="type === 'date' && getDatepickerPosition === 'modal'"
       :opened.sync="datepickerVisible"
       :borderColor="!isMobile && datepickerBorderColorDesktop"
       :datepickerContainer="isMobile && type === 'date'"
@@ -438,17 +439,18 @@ export default {
     }
   },
   methods: {
-    inputFocus(event) {
+    onMouseDown(event) {
+      if (this.type === 'date') {
+        event.preventDefault()
+      }
+    },
+    inputFocus() {
       if (this.slideLabel) {
         this.labelFocus = true;
         this.slideActive = true;
       }
 
       if (this.type === 'date') {
-        if (this.datepickerPosition && event.type === 'focus') {
-          return;
-        }
-
         this.datepickerVisible = true;
       }
     },

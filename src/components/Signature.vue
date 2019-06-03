@@ -60,6 +60,7 @@
           ctx.fillText('START DRAWING WITH YOUR MOUSE', canvas.width / 2, canvas.height / 2)
         }
         this.checkLockSignaturePad(this.lockSignaturePad)
+        this.$emit('empty', this.$refs.signaturePad.saveSignature().isEmpty)
       },
       clearPlaceholder() {
         if (this.showPlaceholder && !this.value) {

@@ -36,6 +36,10 @@
       initValidation: {
         type: Boolean,
         default: false
+      },
+      initialTouched: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({
@@ -97,6 +101,9 @@
     watch: {
       textareaValue() {
         this.$emit('validation', this.validation)
+      },
+      initialTouched(value) {
+        this.touched = value
       }
     }
   }

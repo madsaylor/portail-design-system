@@ -48,6 +48,12 @@
       "type": "Boolean",
       "default": "false",
       "description": "Responsible for initial run validation"
+    },
+    {
+      "name": "initialTouched",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Initial set of touched property"
     }
   ],
   "events": [

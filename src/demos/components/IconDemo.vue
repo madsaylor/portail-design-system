@@ -39,10 +39,7 @@ export default {
   data: () => ({
     openUsage: true,
     usage,
-    tooltip: `
-    Long error message: Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Nam mollis ullamcorper rutrum.
-    `
+    tooltip: 'This is an explanation of what the field is used for.'
   }),
 }
 </script>

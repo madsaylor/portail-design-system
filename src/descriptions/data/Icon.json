@@ -21,6 +21,11 @@
       "name": "color",
       "type": "String",
       "description": "String. Color variable name or a CSS value"
+    },
+    {
+      "name": "tooltip",
+      "type": "String",
+      "description": "Responsible for displaying tooltip on mouseover event on Icon"
     }
   ]
 ,

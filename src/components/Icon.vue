@@ -28,7 +28,26 @@
 -->
 
 <template>
-  <span
+  <span v-if="tooltip">
+      <span
+        class="icon"
+        v-html="code"
+        v-on="$listeners"
+        :style="{
+          height: size,
+          width: size,
+          padding: padding,
+          fill: COLORS[color] || color
+        }"
+        ref="tooltipIcon"
+        @mouseover="tooltipVisible = true"
+      >
+    </span>
+    <Dropdown :target="$refs.tooltipIcon" :opened.sync="tooltipVisible" just-fade>
+      <Tooltip v-html="tooltip"/>
+    </Dropdown>
+  </span>
+  <span v-else-if="!tooltip"
     class="icon"
     v-html="code"
     v-on="$listeners"
@@ -45,8 +64,12 @@
 import icons from '../icons'
 import {COLORS} from '../styles/vars'
 
+import Tooltip from './Tooltip'
+import Dropdown from './Dropdown'
+
 export default {
   name: 'Icon',
+  components: {Tooltip,Dropdown},
   props: {
     source: {
       type: String,
@@ -60,10 +83,12 @@ export default {
       default: '0'
     },
     color: String,
+    tooltip: String
   },
   data: () => ({
     icons,
     COLORS,
+    tooltipVisible: false
   }),
   computed: {
     code() {
@@ -77,7 +102,7 @@ export default {
       }
       throw 'Icon code is missing'
     }
-  },
+  }
 }
 </script>
 

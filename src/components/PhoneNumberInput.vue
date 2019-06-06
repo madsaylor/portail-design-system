@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import { formatNumber, AsYouType, isValidNumber } from 'libphonenumber-js';
 import { countriesArray } from '../common/constants';
 
@@ -225,7 +226,7 @@ export default {
       }
       // If formatting to the input is disabled, try to return the formatted value to its parent
       if (this.disabledFormatting) {
-        Object.assign(response, {
+        _.assign(response, {
           formattedNumber: formatNumber(this.phone, this.activeCountry && this.activeCountry.iso2, 'International')
         })
       }

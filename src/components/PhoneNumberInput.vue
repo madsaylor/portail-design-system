@@ -422,6 +422,7 @@ li.last-preferred {
     width: 100%;
     outline: none;
     padding-left: @phone-input-padding;
+    .font-desktop-small-regular-dark();
   }
 }
 

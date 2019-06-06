@@ -8,13 +8,27 @@
         v-model="selectedFileText"
         disabled
       />
-      <Icon attach_file class="open-icon" @click="fileInputOpen" />
+      <Icon
+        attach_file
+        class="open-icon"
+        size="20px"
+        padding="8px"
+        color="gray-500"
+        @click="fileInputOpen"
+      />
     </div>
 
     <div class="files-wrapper">
       <div v-for="file in files" :key="file.name" class="file-name">
         <span class="name">{{file.name}}</span>
-        <Icon class="close" close @click="removeFile(file)" />
+        <Icon
+          close
+          class="close"
+          size="16px"
+          padding="4px"
+          color="red"
+          @click="removeFile(file)"
+        />
       </div>
     </div>
   </div>
@@ -111,8 +125,8 @@ export default {
 
   .open-icon {
     position: absolute;
-    right: 6px;
-    bottom: 6px;
+    right: 0;
+    bottom: 0;
     cursor: pointer;
   }
 }

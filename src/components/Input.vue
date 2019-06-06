@@ -120,7 +120,7 @@
       <input
         v-if="type !== 'select' && type !== 'radio'"
         v-bind="inputAttrs"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel}"
+        :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel, 'date': type === 'date'}"
         v-model="inputValue"
         ref="input"
         @focus="inputFocus"
@@ -625,6 +625,8 @@ export default {
 
       &::-moz-placeholder
       &:-moz-placeholder
+      &:-ms-input-placeholder
+      &::-ms-input-placeholder
       &::placeholder {
         .font-desktop-small-regular-gray();
       }
@@ -791,6 +793,12 @@ export default {
         background-color: @color-gray-400;
         border-radius: 10px;
       }
+    }
+  }
+
+  &.date {
+    input {
+      cursor: default;
     }
   }
 

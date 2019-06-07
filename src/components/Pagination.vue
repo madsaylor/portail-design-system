@@ -21,8 +21,8 @@
     </div>
     <div class="pagination-count">
       <span class="count">{{this.startNumber}}-{{this.endNumber}} of {{count}}</span>
-      <Icon source="left-arrow" size="12px" padding="28px 24px 0px" @click="previous" :disabled="current === 1"/>
-      <Icon source="right-arrow" size="12px" padding="28px 0px 0px" @click="next"/>
+      <Icon source="left-arrow" size="12px" padding="8px 24px 0px" @click="previous" :disabled="current === 1"/>
+      <Icon source="right-arrow" size="12px" padding="8px 8px 0px 0px" @click="next" :disabled="current * size > count"/>
     </div>
   </div>
 </template>
@@ -84,18 +84,48 @@
     .pagination-header {
       .header-wrapper {
         display: flex;
+        height: 20px;
+        color: @color-gray-500;
+        font-family: Lato;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 0 24px 16px;
+        cursor: default;
 
         .header {
           text-transform: capitalize;
+
+          &:last-child {
+            text-align: right;
+          }
         }
       }
     }
 
     .pagination-body-wrapper {
+      color: @color-dark;
+      font-family: Lato;
+      font-size: 14px;
+      line-height: 20px;
+      cursor: default;
+
       .pagination-body {
         .client-wrapper {
           display: flex;
+          padding: 22px 24px;
           margin-bottom: 16px;
+
+          span {
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+
+        &:last-child {
+          .client-wrapper {
+            margin-bottom: 24px;
+          }
         }
       }
     }
@@ -105,15 +135,19 @@
       justify-content: flex-end;
 
       .count {
-          padding: 24px 0 0;
+        cursor: default;
+        padding: 0;
+        margin: 2px 0;
+        height: 20px;
+        color: @color-gray-500;
       }
 
       .icon {
-        &:disabled {
+        cursor: pointer;
+
+        &[disabled] {
           pointer-events: none;
-          svg {
-            fill: @color-gray-300;
-          }
+          fill: @color-gray-400;
         }
       }
     }

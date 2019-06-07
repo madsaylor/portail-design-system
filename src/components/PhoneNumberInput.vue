@@ -422,7 +422,8 @@ li.last-preferred {
     border-radius: @input-border-radius;
     width: 100%;
     outline: none;
-    padding-left: @phone-input-padding;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     .font-desktop-small-regular-dark();
   }
 }

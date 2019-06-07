@@ -15,7 +15,7 @@
     <Icon account_circle padding="24px 2px" color="blue"/>
     <Icon account_circle size="36px" padding="18px 2px" color="red" />
     <Icon account_circle size="52px" padding="10px 2px" color="gray-400" />
-    <Icon account_circle size="72px" color="#55aaff" />
+    <Icon account_circle size="72px" color="#55aaff" :tooltip="tooltip"/>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ let usage = `
 <Icon account_circle padding="24px 2px" color="blue"/>
 <Icon account_circle size="36px" padding="18px 2px" color="red" />
 <Icon account_circle size="52px" padding="10px 2px" color="gray-400" />
-<Icon account_circle size="72px" color="#55aaff" />
+<Icon account_circle size="72px" color="#55aaff" :tooltip="tooltip"/>
 `.slice(1)
 
 export default {
@@ -38,7 +38,8 @@ export default {
   components: {Icon, Description, Collapser},
   data: () => ({
     openUsage: true,
-    usage
+    usage,
+    tooltip: 'This is an explanation of what the field is used for.'
   }),
 }
 </script>

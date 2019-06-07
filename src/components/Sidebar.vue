@@ -164,10 +164,7 @@ export default {
         return
       }
       this.$emit('update:active', this.activeKey(item, index))
-      this.$emit(
-        'update:activeChild',
-        childIndex || this.activeKey(item, childIndex)
-      )
+      this.$emit('update:activeChild', this.activeKey ? this.activeKey(item, childIndex) : childIndex)
       this.$emit('item:click', item, index, childIndex, event)
     },
     outsideClick(event) {

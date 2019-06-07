@@ -129,7 +129,7 @@ export default {
       return this.displayed.getMonth()
     },
     monthName() {
-      return this.displayed.toLocaleString(this.locale, {month: 'long'})
+      return this.capitalize(this.displayed.toLocaleString(this.locale, {month: 'long'}))
     },
     /**
      * Days for the day selection grid for the displayed month
@@ -202,6 +202,7 @@ export default {
             }
           }
 
+          month.title = this.capitalize(month.title)
           quarter.push(month)
           date.setMonth(date.getMonth() + 1)
         }
@@ -327,6 +328,9 @@ export default {
       }
       this.displayed = new Date(this.displayed)
     },
+    capitalize(text) {
+      return text.charAt(0).toUpperCase() + text.slice(1)
+    }
   },
   watch: {
     value(date) {
@@ -376,7 +380,6 @@ export default {
 
       .label-main {
         .font-desktop-body-medium-dark();
-        text-transform: capitalize;
         position: absolute;
         top: 20px;
         cursor: pointer;
@@ -445,7 +448,6 @@ export default {
 
     .item-cell .grid-item-big {
       .font-desktop-body-medium-dark();
-      text-transform: capitalize;
       padding: 4px;
     }
     .item-cell.disabled .grid-item-big {

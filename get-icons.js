@@ -39,6 +39,7 @@ const ICONS_TO_GET = [
   ['group', 'outline'],
   ['help', 'baseline'],
   ['help_outline', 'baseline'],
+  ['history', 'baseline'],
   ['info', 'baseline'],
   ['insert_chart', 'baseline'],
   ['lock', 'baseline'],

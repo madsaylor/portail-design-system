@@ -32,10 +32,10 @@
     @enter="enter"
     @leave="leave"
   >
-    <div v-if="opened" class="dropdown" :style="{
-      ...positionStyle,
-      transition: `opacity ${transitionTime}ms ease-out`,
-    }">
+    <div v-if="opened"
+         class="dropdown"
+         :style="{ ...positionStyle, transition: `opacity ${transitionTime}ms ease-out`}"
+         @mouseout="onMouseout">
       <div class="focus-trap" tabindex="0"></div>
       <div class="dropdown-content"
            ref="dropdownContent"
@@ -71,7 +71,11 @@ export default {
       default: 'bottom-right',
     },
     opened: Boolean,
-    borderColor: [String, Boolean]
+    borderColor: [String, Boolean],
+    mouseoutClose: {
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     transitionTime: 100,
@@ -374,6 +378,11 @@ export default {
         focusableElements[0].focus()
       }
     },
+    onMouseout() {
+      if (this.mouseoutClose) {
+        this.$emit('update:opened', false)
+      }
+    }
   },
   mounted() {
     document.addEventListener('click', this.outsideClick, true)

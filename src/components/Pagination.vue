@@ -53,9 +53,7 @@
           return temporaryCount > this.count ? this.count : temporaryCount
         },
         headers() {
-          if (this.value.length) {
-            return Object.keys(this.value[0])
-          }
+          return Object.keys(this.value[0])
         },
         getClients() {
           return this.value.slice(this.startNumber - 1, this.endNumber)

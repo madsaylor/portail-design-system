@@ -109,7 +109,7 @@ export default {
     return {
       displayed: new Date(this.value),
       view: 'day',
-      ie: window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)
+      ie: window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv:11\./)
     }
   },
   created () {

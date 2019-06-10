@@ -14,6 +14,7 @@
                   :size="size"
                   :current="current"
                   :ratios="ratios"
+                  :identifierField="identifierField"
                   @previous="onPrevious"
                   @next="onNext">
       </Pagination>
@@ -26,7 +27,15 @@
   import Description from '../../descriptions/Description'
 
 let usage = `
-
+  <Pagination v-model="clients"
+              :count="count"
+              :size="size"
+              :current="current"
+              :ratios="ratios"
+              :identifierField="identifierField"
+              @previous="onPrevious"
+              @next="onNext">
+  </Pagination>
 `.slice(1)
 
   export default {
@@ -55,32 +64,13 @@ let usage = `
             name: 'Adam L4',
             type: 'Person',
             earned: '€ 3,123.34'
-          },
-          {
-            name: 'Adam L5',
-            type: 'Person',
-            earned: '€ 3,123.34'
-          },
-          {
-            name: 'Adam L6',
-            type: 'Person',
-            earned: '€ 3,123.34'
-          },
-          {
-            name: 'Adam L7',
-            type: 'Person',
-            earned: '€ 3,123.34'
-          },
-          {
-            name: 'Adam L7',
-            type: 'Person',
-            earned: '€ 3,123.34'
           }
       ],
-      count: 8,
+      count: 4,
       size: 3,
       current: 1,
-      ratios: ['8', '1', '1']
+      ratios: ['14', '2', '3'],
+      identifierField: 'name'
     }),
     methods: {
       onPrevious () {

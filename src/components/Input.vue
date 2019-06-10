@@ -625,8 +625,8 @@ export default {
 
       &::-moz-placeholder
       &:-moz-placeholder
-      &:-ms-input-placeholder
       &::-ms-input-placeholder
+      &:-ms-input-placeholder
       &::placeholder {
         .font-desktop-small-regular-gray();
       }

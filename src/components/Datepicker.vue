@@ -109,6 +109,7 @@ export default {
     return {
       displayed: new Date(this.value),
       view: 'day',
+      ie: window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)
     }
   },
   created () {
@@ -329,7 +330,8 @@ export default {
       this.displayed = new Date(this.displayed)
     },
     capitalize(text) {
-      return text.charAt(0).toUpperCase() + text.slice(1)
+      let index = this.ie ? 1 : 0
+      return text.charAt(index).toUpperCase() + text.slice(++index)
     }
   },
   watch: {

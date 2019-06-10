@@ -19,6 +19,7 @@ import MultiFileAttach from './data/MultiFileAttach';
 import Stepper from './data/Stepper';
 import TextArea from './data/TextArea';
 import Signature from './data/Signature';
+import Pagination from './data/Pagination';
 
 export default {
   AppHeader,
@@ -42,4 +43,5 @@ export default {
   Stepper,
   TextArea,
   Signature,
+  Pagination
 }

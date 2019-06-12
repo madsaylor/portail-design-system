@@ -452,6 +452,7 @@ export default {
 
       if (this.type === 'date') {
         this.datepickerVisible = true;
+        this.$refs.input.blur();
       }
     },
     inputBlur() {
@@ -623,10 +624,22 @@ export default {
         margin-top: 10px;
       }
 
-      &::-moz-placeholder
-      &:-moz-placeholder
-      &:-ms-input-placeholder
-      &::-ms-input-placeholder
+      &::-webkit-input-placeholder {
+        .font-desktop-small-regular-gray();
+      }
+
+      &:-moz-placeholder{
+        .font-desktop-small-regular-gray();
+      }
+
+      &::-moz-placeholder{
+        .font-desktop-small-regular-gray();
+      }
+
+      &:-ms-input-placeholder{
+        .font-desktop-small-regular-gray();
+      }
+
       &::placeholder {
         .font-desktop-small-regular-gray();
       }

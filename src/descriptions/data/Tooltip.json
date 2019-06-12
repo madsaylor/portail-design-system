@@ -4,6 +4,12 @@
       "name": "visible",
       "type": "Boolean",
       "description": "Responsible for visibility tooltip"
+    },
+    {
+      "name": "dynamicWidth",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Set up dynamic width of tooltip"
     }
   ],
   "events": []

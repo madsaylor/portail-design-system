@@ -43,8 +43,8 @@
         @mouseover="tooltipVisible = true"
       >
     </span>
-    <Dropdown :target="$refs.tooltipIcon" :opened.sync="tooltipVisible" just-fade>
-      <Tooltip v-html="tooltip"/>
+    <Dropdown :target="$refs.tooltipIcon" :opened.sync="tooltipVisible" just-fade mouseoutClose>
+      <Tooltip v-html="tooltip" dynamicWidth/>
     </Dropdown>
   </span>
   <span v-else-if="!tooltip"

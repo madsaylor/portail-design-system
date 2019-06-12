@@ -7,7 +7,7 @@
 -->
 
 <template>
-  <div class="tooltip">
+  <div :class="['tooltip', {'dynamic-width': dynamicWidth}]">
     <slot></slot>
   </div>
 </template>
@@ -16,7 +16,11 @@
 export default {
   name: "Tooltip",
   props: {
-    visible: Boolean
+    visible: Boolean,
+    dynamicWidth: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>
@@ -33,5 +37,9 @@ export default {
   line-height: 16px;
   padding: 8px;
   width: 270px;
+
+  &.dynamic-width {
+    width: auto;
+  }
 }
 </style>

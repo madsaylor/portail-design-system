@@ -35,6 +35,12 @@
       "name": "borderColor",
       "type": "String",
       "description": "Set up border color for dropdown content"
+    },
+    {
+      "name": "mouseoutClose",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Allow to close dropdown on mouseout event"
     }
   ],
   "events": []

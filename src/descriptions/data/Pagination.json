@@ -1,0 +1,49 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "Array",
+      "description": "Data for displaying list of pagination "
+    },
+    {
+      "name": "count",
+      "type": "Number",
+      "description": "Length of data array"
+    },
+    {
+      "name": "size",
+      "type": "Number",
+      "description": "Size of records which is displaying on one page"
+    },
+    {
+      "name": "current",
+      "type": "Number",
+      "description": "Current page which is displayed"
+    },
+    {
+      "name": "ratios",
+      "type": "Array",
+      "default": "[1, ..]",
+      "description": "Array for set up flex ratio between field of record"
+    },
+    {
+      "name": "identifierField",
+      "type": "String",
+      "description": "Field which is identifier for emit data from pickup event"
+    }
+  ],
+  "events": [
+    {
+      "name": "previous",
+      "description": "Emitted event for switching to previous page."
+    },
+    {
+      "name": "next",
+      "description": "Emitted event for switching to next page."
+    },
+    {
+      "name": "pickup",
+      "description": "Emitted when click on record, will emit current record data or identifier with index on current page."
+    }
+  ]
+}

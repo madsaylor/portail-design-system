@@ -223,4 +223,9 @@ html, body {
 code {
   padding: 20px !important;
 }
+
+.dropzone .dz-message {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 </style>

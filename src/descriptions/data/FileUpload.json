@@ -36,7 +36,21 @@
       "name": "title",
       "type": "String",
       "description": "Show title on the drop panel"
+    },
+    {
+      "name": "files",
+      "type": "Array",
+      "description": "Array of selected files"
     }
   ],
-  "events": []
+  "events": [
+    {
+      "name": "addfile",
+      "description": "Return the file to add"
+    },
+    {
+      "name": "removefile",
+      "description": "return the file to remove"
+    }
+  ]
 }

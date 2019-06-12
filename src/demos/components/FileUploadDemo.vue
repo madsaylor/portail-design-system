@@ -14,6 +14,9 @@
         iconSize="32px"
         title="Add your logo"
         :uploadOptions="uploadOptions"
+        :files="files"
+        @addfile="addfile"
+        @removefile="removefile"
       />
     </div>
 
@@ -41,10 +44,21 @@ export default {
     openUsage: true,
     usage,
     uploadOptions: {
-      url: 'https://httpbin.org/post',
+      url: 'https://test.org/post',
       addRemoveLinks: true,
-      acceptedFiles: "image/*"
-    }
+      acceptedFiles: "image/*",
+    },
+    files: []
   }),
+  methods: {
+    addfile(file) {
+      if (!this.files.find(f => f.name === file.name)) {
+        this.files = [...this.files, file]
+      }
+    },
+    removefile(file) {
+      this.files = this.files.filter(f => f.lastModified !== file.lastModified || f.name !== file.name)
+    }
+  }
 }
 </script>

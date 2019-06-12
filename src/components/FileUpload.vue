@@ -1,6 +1,6 @@
 <template>
-  <vue-dropzone :options="uploadOptions" id="file-upload" :useCustomSlot="true">
-    <div class="dropzone-custom-content">
+  <vue-dropzone :options="fileUploadOptions" id="file-upload" :useCustomSlot="true">
+    <div v-if="files.length === 0 " class="dropzone-custom-content">
       <div class="icon-wrapper">
         <Icon
           v-if="icon"
@@ -11,6 +11,13 @@
 
       <div class="title">
         {{title}}
+      </div>
+    </div>
+
+    <div v-else class="selected-files-wrapper">
+      <div v-for="(file, index) in files" :key="index" class="file-wrapper">
+        <img width="100" height="100" :src="file.dataURL" />
+        <Icon source="close" color="#ddd" size="24px" @click.native="removeFile(file)" />
       </div>
     </div>
   </vue-dropzone>
@@ -31,7 +38,29 @@ export default {
     uploadOptions: Object,
     icon: String,
     iconSize: String,
-    title: String
+    title: String,
+    files: Array
+  },
+  data() {
+    return {
+      mainOptions: {
+        addedfile: (file) => {
+          setTimeout(() => {
+            this.$emit('addfile', file)
+          }, 300)
+        }
+      },
+    }
+  },
+  methods: {
+    removeFile(file) {
+      this.$emit('removefile', file)
+    }
+  },
+  computed: {
+    fileUploadOptions() {
+      return { ...this.uploadOptions, ...this.mainOptions }
+    }
   }
 }
 </script>
@@ -59,5 +88,32 @@ export default {
       margin-top: @file-upload-title-margin-top;
     }
   }
+
+  .selected-files-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .file-wrapper {
+      margin-left: 10px;
+      margin-right: 10px;
+      position: relative;
+
+      img {
+        object-fit: cover;
+      }
+
+      .icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+}
+
+.dz-preview {
+  display: none !important;
 }
 </style>

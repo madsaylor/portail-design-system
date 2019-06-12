@@ -33,12 +33,7 @@
         class="icon"
         v-html="code"
         v-on="$listeners"
-        :style="{
-          height: size,
-          width: size,
-          padding: padding,
-          fill: COLORS[color] || color
-        }"
+        :style="stylesObject"
         ref="tooltipIcon"
         @mouseover="tooltipVisible = true"
       >
@@ -51,12 +46,7 @@
     class="icon"
     v-html="code"
     v-on="$listeners"
-    :style="{
-      height: size,
-      width: size,
-      padding: padding,
-      fill: COLORS[color] || color
-    }"
+    :style="stylesObject"
   ></span>
 </template>
 
@@ -83,7 +73,11 @@ export default {
       default: '0'
     },
     color: String,
-    tooltip: String
+    tooltip: String,
+    noSize: {
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     icons,
@@ -101,6 +95,19 @@ export default {
         }
       }
       throw 'Icon code is missing'
+    },
+    stylesObject() {
+      let styles = {
+        padding: this.padding,
+        fill: this.COLORS[this.color] || this.color
+      }
+
+      if (!this.noSize) {
+        styles.height = this.size
+        styles.width = this.size
+      }
+
+      return styles
     }
   }
 }
@@ -114,8 +121,8 @@ export default {
   vertical-align: bottom;
 
   svg {
-    height: inherit;
-    width: inherit;
+    height: 100%;
+    width: 100%;
     vertical-align: top;
     user-drag: none;
     user-select: none;

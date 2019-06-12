@@ -20,6 +20,7 @@ import Stepper from './data/Stepper';
 import TextArea from './data/TextArea';
 import Signature from './data/Signature';
 import Pagination from './data/Pagination';
+import EmptyState from './data/EmptyState';
 
 export default {
   AppHeader,
@@ -43,5 +44,6 @@ export default {
   Stepper,
   TextArea,
   Signature,
-  Pagination
+  Pagination,
+  EmptyState
 }

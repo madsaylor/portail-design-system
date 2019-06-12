@@ -26,6 +26,12 @@
       "name": "tooltip",
       "type": "String",
       "description": "Responsible for displaying tooltip on mouseover event on Icon"
+    },
+    {
+      "name": "noSize",
+      "type": "Boolean",
+      "default": "false",
+      "description": "When props is equal true Icon component doesn't setup width and height by default"
     }
   ]
 ,

@@ -1,0 +1,98 @@
+<template>
+  <div class="empty-page-container">
+      <div class="empty-state-wrapper">
+          <div class="row img-row">
+            <Icon v-bind:[value.imgName]="value.imgName" noSize class="empty-img"></Icon>
+          </div>
+          <div class="row title-row">
+              <span class="empty-state-title">{{ value.title }}</span>
+          </div>
+          <div class="row more-info-row">
+              <span class="empty-state-content">{{ value.moreInfo }}</span>
+          </div>
+          <div class="row btn-row">
+              <Button @click="onCreate">{{ value.btnLabel }}</Button>
+          </div>
+      </div>
+  </div>
+</template>
+
+<script>
+  import Button from './Button'
+  import Icon from './Icon'
+
+  export default {
+    name: 'EmptyState',
+    components: {Button, Icon},
+    props: {
+      value: Object
+    },
+    methods: {
+      onCreate() {
+        this.$emit('create')
+      }
+    }
+  }
+</script>
+
+<style lang="less" scoped>
+@import '../styles/vars';
+
+@max-width-empty-state: 570px;
+
+.empty-page-container {
+    text-align: center;
+    display: block;
+    margin:0 auto;
+    font-family: @font-family;
+    word-wrap: break-word;
+    max-width: @max-width-empty-state;
+
+    div {
+        padding: 8px 0;
+    }
+
+    .img-row {
+        margin-bottom: 10px;
+    }
+
+    .empty-img {
+        max-height: 152px;
+        max-width: 365px;
+
+        @media @screen-small {
+            height: auto;
+            width: 80%;
+        }
+    }
+
+    .empty-state-title {
+        color: @font-desktop-h-2-dark-color;
+        font-size: @font-desktop-h-2-dark-font-size;
+        line-height: @font-desktop-h-2-dark-line-height;
+        font-weight: @font-desktop-h-2-dark-font-weight;
+
+        @media @screen-small {
+            font-size: 20px;
+        }
+    }
+
+    .empty-state-content {
+        color: @font-desktop-body-regular-dark-color;
+        font-size: @font-desktop-body-regular-dark-font-size;
+        line-height: @font-desktop-body-regular-dark-line-height;
+
+        @media @screen-small {
+            font-size: 14px;
+        }
+    }
+
+    .btn-row {
+        margin: 20px;
+
+        @media @screen-small {
+            margin: 12px 0;
+        }
+    }
+}
+</style>

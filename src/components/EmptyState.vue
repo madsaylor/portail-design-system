@@ -2,7 +2,7 @@
   <div class="empty-page-container">
       <div class="empty-state-wrapper">
           <div class="row img-row">
-            <Icon v-bind:[value.imgName]="value.imgName" noSize class="empty-img"></Icon>
+            <Icon :[imageName]="imageName" noSize class="empty-img"></Icon>
           </div>
           <div class="row title-row">
               <span class="empty-state-title">{{ value.title }}</span>
@@ -30,6 +30,11 @@
     methods: {
       onCreate() {
         this.$emit('create')
+      }
+    },
+    computed: {
+      imageName() {
+        return this.value.imgName
       }
     }
   }

@@ -1,0 +1,35 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "Object",
+      "description": "Details object data",
+      "subProperty": [
+        {
+          "name": "title",
+          "type": "String",
+          "description": "Title of empty component"
+        },
+        {
+          "name": "moreInfo",
+          "type": "String",
+          "description": "Additional text data of empty component"
+        },
+        {
+          "name": "btnLabel",
+          "type": "String",
+          "description": "Title of button component"
+        },
+        {
+          "name": "imgName",
+          "type": "String",
+          "description": "Image name of empty component"
+        }
+      ]
+    }
+  ],
+  "events": [{
+    "name": "create",
+    "description": "Emitted when button is clicked"
+  }]
+}

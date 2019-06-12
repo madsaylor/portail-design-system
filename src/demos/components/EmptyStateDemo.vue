@@ -19,7 +19,7 @@
   import Description from '../../descriptions/Description'
 
 let usage = `
-  <EmptyState v-model="details" @create="onCreate()"></EmptyState>
+  <EmptyState v-model="details"></EmptyState>
 `.slice(1)
 
   export default {

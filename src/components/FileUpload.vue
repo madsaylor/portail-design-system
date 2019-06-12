@@ -45,6 +45,16 @@ export default {
     return {
       mainOptions: {
         addedfile: (file) => {
+          if (this.files.find(f => f.name === file.name) > 0) {
+            this.$emit('invalidfile', 'This file is already selected')
+            return
+          }
+
+          if (!this.fileTypeCheck(file)) {
+            this.$emit('invalidfile', 'Invalid file type')
+            return
+          }
+
           setTimeout(() => {
             this.$emit('addfile', file)
           }, 300)
@@ -55,6 +65,24 @@ export default {
   methods: {
     removeFile(file) {
       this.$emit('removefile', file)
+    },
+    fileTypeCheck(file) {
+      if (file.type === this.uploadOptions.acceptedFiles) {
+        return true
+      }
+
+      if (this.uploadOptions.acceptedFiles === "*") {
+        return true
+      }
+
+      if (this.uploadOptions.acceptedFiles.includes("/*")) {
+        const type = this.uploadOptions.acceptedFiles.replace("/*", '')
+        if (file.type.includes(type)) {
+          return true
+        }
+      }
+
+      return false
     }
   },
   computed: {

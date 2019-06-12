@@ -17,6 +17,7 @@
         :files="files"
         @addfile="addfile"
         @removefile="removefile"
+        @invalidfile="invalidFile"
       />
     </div>
 
@@ -48,16 +49,18 @@ export default {
       addRemoveLinks: true,
       acceptedFiles: "image/*",
     },
-    files: []
+    files: [],
+    invalidMessage: ''
   }),
   methods: {
     addfile(file) {
-      if (!this.files.find(f => f.name === file.name)) {
-        this.files = [...this.files, file]
-      }
+      this.files = [...this.files, file]
     },
     removefile(file) {
       this.files = this.files.filter(f => f.lastModified !== file.lastModified || f.name !== file.name)
+    },
+    invalidFile(message) {
+      this.invalidMessage = message
     }
   }
 }

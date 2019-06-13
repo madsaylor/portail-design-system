@@ -77,6 +77,14 @@
         v-model="textValue"
       />
       <Input
+        md
+        help="This is an explanation of what the field is used for."
+        iconRight="search"
+        label="Icon, placeholder and help text"
+        placeholder="Search"
+        v-model="textValue"
+      />
+      <Input
         sm
         disabled
         label="Disabled input"

@@ -27,6 +27,11 @@
       "description": "Icon name for icons from src/icons folder or an svg code"
     },
     {
+      "name": "iconRight",
+      "type": "String",
+      "description": "Same with Icon property, but display icons at the left side"
+    },
+    {
       "name": "label",
       "type": "String",
       "description": "Label at the top of the input"

@@ -117,10 +117,12 @@
           {{ label }}
       </div>
 
+      <Icon v-if="iconRight" color="gray-400" :source="iconRight" class="icon-right" />
+
       <input
         v-if="type !== 'select' && type !== 'radio'"
         v-bind="inputAttrs"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel, 'date': type === 'date'}"
+        :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel, 'date': type === 'date', 'has-right-icon': iconRight}"
         v-model="inputValue"
         ref="input"
         @focus="inputFocus"
@@ -133,7 +135,7 @@
       <input
         v-if="type == 'radio'"
         v-bind="inputAttrs"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
+        :class="{'has-icon': icon_, 'error': inputErrors.length && touched, 'has-right-icon': iconRight}"
         :checked="inputValue === radioVal"
         @change="changeRadio"
         @blur="touched = true"
@@ -143,7 +145,7 @@
 
       <select
         v-if="type === 'select'"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched}"
+        :class="{'has-icon': icon_, 'error': inputErrors.length && touched, 'has-right-icon': iconRight}"
         v-model="inputValue"
         placeholder="placeholder"
       >
@@ -231,6 +233,7 @@ export default {
       default: '? explication'
     },
     icon: String,
+    iconRight: String,
     label: String,
     lang: String,
     lg: Boolean,
@@ -620,6 +623,10 @@ export default {
         padding-right: 30px;
       }
 
+      &.has-right-icon {
+        padding-left: 30px;
+      }
+
       &.slide-input {
         margin-top: 10px;
       }
@@ -684,6 +691,13 @@ export default {
       position: absolute;
       bottom: 6px;
       right: 6px;
+    }
+
+    .icon-right {
+      pointer-events: none;
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
     }
   }
 

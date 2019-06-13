@@ -1,0 +1,25 @@
+{
+  "properties": [    {
+    "name": "value",
+    "type": "Array<Object>",
+    "description": "Accordions array which is consist of objects with properties for creating children of accordion component",
+    "subProperty": [
+      {
+        "name": "label",
+        "type": "String",
+        "description": "The title name child of accordion component"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "Responsible for the slot name for inserting right template"
+      },
+      {
+        "name": "open",
+        "type": "Boolean",
+        "description": "Responsible for open status child of accordion"
+      }
+    ]
+  }],
+  "events": []
+}

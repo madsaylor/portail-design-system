@@ -21,6 +21,7 @@ import TextArea from './data/TextArea';
 import Signature from './data/Signature';
 import Pagination from './data/Pagination';
 import EmptyState from './data/EmptyState';
+import Accordion from './data/Accordion';
 
 export default {
   AppHeader,
@@ -45,5 +46,6 @@ export default {
   TextArea,
   Signature,
   Pagination,
-  EmptyState
+  EmptyState,
+  Accordion
 }

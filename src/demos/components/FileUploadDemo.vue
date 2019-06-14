@@ -15,6 +15,7 @@
         title="Add your logo"
         :uploadOptions="uploadOptions"
         :files="files"
+        :preview="false"
         @addfile="addfile"
         @removefile="removefile"
         @invalidfile="invalidFile"

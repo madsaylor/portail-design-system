@@ -1,6 +1,6 @@
 <template>
   <vue-dropzone :options="fileUploadOptions" id="file-upload" :useCustomSlot="true">
-    <div v-if="files.length === 0 " class="dropzone-custom-content">
+    <div v-if="files.length === 0 || !preview " class="dropzone-custom-content">
       <div class="icon-wrapper">
         <Icon
           v-if="icon"
@@ -39,7 +39,11 @@ export default {
     icon: String,
     iconSize: String,
     title: String,
-    files: Array
+    files: Array,
+    preview: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {

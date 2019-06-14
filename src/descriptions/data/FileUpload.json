@@ -41,6 +41,11 @@
       "name": "files",
       "type": "Array",
       "description": "Array of selected files"
+    },
+    {
+      "name": "preview",
+      "type": "Boolean",
+      "description": "If this property is true, Show preview images, default value is true"
     }
   ],
   "events": [

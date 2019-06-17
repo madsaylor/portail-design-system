@@ -19,6 +19,11 @@
       "name": "maxFileCount",
       "type": "Number",
       "description": "Maximum number of files you can attach"
+    },
+    {
+      "name": "validators",
+      "type": "Array",
+      "description": "You can add error message, and validation function in this array"
     }
   ],
   "events": [

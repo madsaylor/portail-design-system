@@ -1,9 +1,10 @@
 <template>
   <div class="">
     <div class="input-wrapper">
-      <input type="file" id="file-input" @change="fileInputChange" multiple />
+      <input type="file" id="file-input" ref="file" @change="fileInputChange" multiple />
       <Input
         type="text"
+        :class="{'error': inputErrors.length && touched}"
         :label="label"
         v-model="selectedFileText"
         disabled
@@ -18,7 +19,11 @@
       />
     </div>
 
-    <div class="files-wrapper">
+    <div class="errors" v-if="inputErrors.length && touched && showErrors">
+      {{ inputErrors[0] }}
+    </div>
+
+    <div class="files-wrapper" v-if="files.length > 0">
       <div v-for="file in files" :key="file.name" class="file-name">
         <span class="name">{{file.name}}</span>
         <Icon
@@ -44,6 +49,11 @@ export default {
   props: {
     label: String,
     files: Array,
+    validators: Array,
+    showErrors: {
+      type: Boolean,
+      default: true
+    },
     maxTotalSize: {
       type: Number,
       default: 2
@@ -51,6 +61,11 @@ export default {
     maxFileCount: {
       type: Number,
       default: 20
+    }
+  },
+  data() {
+    return {
+      touched: false
     }
   },
   computed: {
@@ -69,21 +84,48 @@ export default {
         totalSize += file.size
       })
       return totalSize
-    }
-  },
-  methods: {
-    fileInputChange(e) {
-      const currentTotal = (this.attachedTotalSize(e.target.files) + this.currentTotalSize) / (1024 * 1000)
-      if (currentTotal > this.maxTotalSize) {
-        return
+    },
+    validation() {
+      if (!this.validators || !this.validators.length) {
+        return []
+      }
+
+      let data = []
+      for (var i = 0; i < this.validators.length; i++) {
+        data.push([
+          this.validators[i].name,
+          this.validators[i].validator(this.files),
+        ])
+      }
+      return data
+    },
+    inputErrors() {
+      let errors = []
+      if (this.currentTotalSize / (1024 * 1000) > this.maxTotalSize) {
+        errors.push(`Total size should be under ${this.maxTotalSize}MB`)
       }
 
       if (this.files.length >= this.maxFileCount) {
-        return
+        errors.push(`Total file count should be less than ${this.maxFileCount}`)
       }
+
+      for (var i = 0; i < this.validation.length; i++) {
+        if (!this.validation[i][1]) {
+          errors.push(this.validators[i].message)
+        }
+      }
+
+      return errors
+    },
+  },
+  methods: {
+    fileInputChange(e) {
       this.$emit('fileInput', e.target.files)
+      this.$refs.file.type = 'text'
+      this.$refs.file.type = 'file'
     },
     fileInputOpen() {
+      this.touched = true
       document.getElementById('file-input').click();
     },
     removeFile(file) {
@@ -105,7 +147,14 @@ export default {
 
 .input-wrapper {
   position: relative;
-  margin-bottom: 24px;
+
+  &.error {
+    .input {
+      input {
+        border-color: @color-red;
+      }
+    }
+  }
 
   #file-input {
     display: none;
@@ -136,6 +185,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 24px;
 
   .file-name {
     height: 24px;
@@ -158,6 +208,16 @@ export default {
       cursor: pointer;
     }
   }
+}
+
+.errors {
+  color: @color-red;
+  font-family: @font-family;
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  max-width: 100%;
 }
 
 </style>

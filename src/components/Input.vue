@@ -866,5 +866,12 @@ export default {
       font-size: 16px;
     }
   }
+
+  &.error {
+    input {
+      color: @color-red !important;
+      border-color: @color-red !important;
+    }
+  }
 }
 </style>

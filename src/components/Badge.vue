@@ -41,7 +41,7 @@
     border-radius: @badge-br;
     color: @color-white;
     padding: @badge-padding;
-    cursor: pointer;
+    cursor: default;
 
     .icon {
       margin-right: @badge-icon-margin;

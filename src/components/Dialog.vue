@@ -193,7 +193,7 @@
     }
 
     .dialog-content {
-      position: fixed;
+      position: relative;
       width: auto;
       z-index: 1001;
       background-color: white;

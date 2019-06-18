@@ -8,7 +8,7 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Tooltip>
+    <Tooltip :dynamicWidth="true" :triangleDistance="10">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
       scelerisque sit amet velit vitae tristique. Nullam congue in lorem in
       aliquam. Sed euismod nisl a ex commodo, non aliquet lacus mattis.
@@ -22,7 +22,7 @@ import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
 
 let usage = `
-<Tooltip>
+<Tooltip :triangleDistance="10">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
   scelerisque sit amet velit vitae tristique. Nullam congue in lorem in
   aliquam. Sed euismod nisl a ex commodo, non aliquet lacus mattis.

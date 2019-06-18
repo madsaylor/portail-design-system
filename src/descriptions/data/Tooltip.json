@@ -6,6 +6,16 @@
       "description": "Responsible for visibility tooltip"
     },
     {
+      "name": "triangleDistance",
+      "type": "Number",
+      "description": "Distance betweeen the top of the component and triangle"
+    },
+    {
+      "name": "triangleDirection",
+      "type": "String",
+      "description": "This field will be added in the future. Please don't use this field right now"
+    },
+    {
       "name": "dynamicWidth",
       "type": "Boolean",
       "default": "false",

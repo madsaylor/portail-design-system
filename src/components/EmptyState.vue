@@ -1,3 +1,18 @@
+<!--
+  Empty state component for empty pages
+
+  Usage:
+
+  <EmptyState v-model="value"  - Data object data which consist next field:
+                                      title    - Title of empty component
+                                      moreInfo - Additional text data of empty component
+                                      btnLabel - Title of button component
+                                      imgName  - Image name of empty component
+
+              @create >        - Emitted when button is clicked
+  </EmptyState>
+-->
+
 <template>
   <div class="empty-page-container">
       <div class="empty-state-wrapper">

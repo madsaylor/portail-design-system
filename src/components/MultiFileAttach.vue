@@ -1,3 +1,19 @@
+<!--
+  MultiFileAttach - Customized multi-file-attach component with label.
+
+  Usage:
+
+  <MultiFileAttach
+    :label="label"                - Label at the top of the file input
+    :files="files"                - Array of inputted files
+    :maxTotalSize="maxTotalSize"  - Maximum size of total files you can attach
+    :maxFileCount="maxFileCount"  - Maximum number of files you can attach
+    :validators="validators"      - You can add error message, and validation function in this array
+    @fileInput="fileInput"        - Emitted after selecting the file using file-browser
+    @fileRemove="fileRemove"      - Emitted when user removes the file
+  />
+-->
+
 <template>
   <div class="">
     <div class="input-wrapper">

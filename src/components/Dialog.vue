@@ -1,3 +1,23 @@
+<!--
+  Dialog component for displaying different content inside itself
+
+  Usage:
+
+  <Dialog
+    :opened.sync="opened"                      - State the dialog window
+    :backdropOpacity="backdropOpacity"         - Set backdrop opacity by value from 0..1.
+    :fullScreen="fullScreen"                   - Set up full screen option of dialog modal
+    :borderColor="borderColor"                 - Set up border color for dialog content
+    :backgroundColor="backgroundColor"         - Set up background color of backdrop
+    :dialogStyleObject="dialogStyleObject"     - Styles object responsible for styles which will be applied to dialog node
+    :contentFullWidth="contentFullWidth"       - Set up full width of content
+    :datepickerContainer="datepickerContainer" - Apply styles of mobile datepicker design to dialog
+    :overflowCheck="overflowCheck"             - Check overflow depend on it option
+  >
+    Dialog content...
+  </Dialog
+-->
+
 <template>
   <section
     v-if="opened"

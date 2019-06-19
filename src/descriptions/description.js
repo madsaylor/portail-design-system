@@ -23,6 +23,7 @@ import Pagination from './data/Pagination';
 import EmptyState from './data/EmptyState';
 import Accordion from './data/Accordion';
 import Table from './data/Table';
+import Collapser from './data/Collapser';
 
 export default {
   AppHeader,
@@ -49,5 +50,6 @@ export default {
   Pagination,
   EmptyState,
   Accordion,
-  Table
+  Table,
+  Collapser
 }

@@ -1,0 +1,20 @@
+{
+  "properties": [
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label of collapser component"
+    },
+    {
+      "name": "opened",
+      "type": "Boolean",
+      "description": "Responsible on open status of Collapser component"
+    }
+  ],
+  "events": [
+    {
+      "name": "update:opened",
+      "description": "Event emitted on click on collapser component, with changed value to opposite"
+    }
+  ]
+}

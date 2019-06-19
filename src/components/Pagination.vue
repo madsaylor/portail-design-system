@@ -1,3 +1,16 @@
+<!--
+  Pagination component for display data like table with pagination
+
+  Usage:
+
+  <Pagination :count="count"        - Length of data array
+              :size="size"          - Size of records which is displaying on one page
+              :current="current"    - Current page which is displayed
+              @getCurrent>          - Emitted event on local change of current page value in pagination component and take back local current page value
+      Pagination content...
+  </Pagination>
+-->
+
 <template>
   <div class="pagination-wrapper">
     <slot :range="range"></slot>

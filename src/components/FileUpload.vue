@@ -1,3 +1,25 @@
+<!--
+  FileUplaod with showing an icon and title
+
+  Usage:
+
+  <FileUpload
+    :icon="icon"                      - Show Icon on the drop panel
+    :iconSize="iconSize"              - Size of the Icon
+    :title="title"                    - Show title on the drop panel
+    :uploadOptions="uploadOptions"    - Upload options including the url of post, object consist from next fields:
+                                          url             - Url of the destination server
+                                          acceptedFiles   - Type of upload files, it can be separated by comman if it has multiple types
+                                          addRemoveLinks  - Enable remove button on the thumbnail screen
+
+    :files="files"                    - Array of selected files
+    :preview="preview"                - If this property is true, Show preview images, default value is true
+    @addfile                          - Return the file to add
+    @removefile                       - Return the file to remove
+    @invalidfile                      - Triggered when file is invalid
+  />
+-->
+
 <template>
   <vue-dropzone :options="fileUploadOptions" id="file-upload" :useCustomSlot="true">
     <div v-if="files.length === 0 || !preview " class="dropzone-custom-content">

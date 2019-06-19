@@ -1,3 +1,18 @@
+<!--
+  Table component for displaying list of data
+
+  Usage:
+
+  <Table v-model="value"                    - Data for displaying table
+         :range="range"                     - Object is provide start and end data range points for displaying on
+                                              current page
+         :ratios="ratios"                   - Array for set up flex ratio between field of record
+         :identifierField="identifierField" - Field which is identifier for emit data from pickup event
+         @pickup>                           - Emitted when click on record, will emit current record data or identifier
+                                              data with index on current page.
+  </Table>
+-->
+
 <template>
   <div class="table-wrapper" v-if="getRange">
     <div class="table-header">

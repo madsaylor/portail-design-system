@@ -1,3 +1,27 @@
+<!--
+  TextArea - custom textarea component
+
+  Usage:
+
+  <TextArea v-model="value"                   - Binds value property to textarea
+            :label="secondlabelText"          - Label at the top of the textarea
+            :placeholder="placeholder"        - Placeholder directly to the textarea
+            :rows="rows"                      - Sets the height as strings
+            :validators="validators"          - Array of validator Objects. When multiple validators fail,
+                                                only one error is displayed, determined by their order in the array.
+                                                Each Object should have three fields:
+                name    - Validator id
+                message - Error message that shown when validation fails
+                validator - Function that takes input value as an argument and returns Boolean
+
+            :showErrors="showErrors"          - Responsible for showing error message
+            :initValidation="initValidation"  - Responsible for initial run validation
+            :initialTouched="initialTouched"  - Initial set of touched property
+            @validation>                      - Emitted when the textarea value changes or in initial proccess depend
+                                                on initValidation value
+  </TextArea>
+-->
+
 <template>
   <div>
     <label>

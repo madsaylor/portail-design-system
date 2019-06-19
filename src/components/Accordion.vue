@@ -1,3 +1,18 @@
+<!--
+  Accordion component are useful when you want to toggle between hiding and showing large amount of content
+
+  Usage:
+
+  <Accordion
+    v-model="value"> - Accordions array which is consist of objects with properties for creating children of accordion component which consist next field:
+                        label - The title name child of accordion component
+                        name  - Responsible for the slot name for inserting right template
+                        open  - Responsible for open status child of accordion
+
+    Accordion content...
+  </Accordion>
+-->
+
 <template>
   <div class="accordion-wrapper">
     <Collapser :opened.sync="accordion.open"

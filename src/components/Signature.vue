@@ -1,3 +1,25 @@
+<!--
+  Signature component for make signatures
+
+  Usage:
+
+  <Signature v-model="value"                            - Set signature pad value
+             :signaturePadWidth="signaturePadWidth"     - Width signature pad
+             :signaturePadHeight="signaturePadHeight"   - Height signature pad
+             :lockSignaturePad="lockSignaturePad"       - Lock signature pad
+             @empty                                     - Emitted when next events are triggering like mouseup,
+                                                          mouseleave or clear button pressed, will return isEmpty status
+                                                          of signature pad
+             @mouseup                                   - Emitted when is mouseup event is trigger on signature pad and
+                                                          signature data is not empty and changed state,
+                                                          will return signature pad data value
+             @mouseleave                                - Emitted when is mouseleave event is trigger on signature pad
+                                                          and signature data is not empty and changed state,
+                                                          will return signature pad data value
+  >
+  </Signature>
+-->
+
 <template>
   <div class="signature-wrapper">
     <div class="signature-pad-wrapper" @mousedown="clearPlaceholder" @mouseup="mouseup" @mouseleave="mouseleave">

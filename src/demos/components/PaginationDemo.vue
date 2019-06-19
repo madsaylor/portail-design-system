@@ -9,38 +9,43 @@
         <pre v-highlightjs="usage"><code class="html"></code></pre>
       </Collapser>
 
-      <Pagination v-model="clients"
-                  :count="count"
+      <Pagination :count="count"
                   :size="size"
-                  :current="current"
-                  :ratios="ratios"
-                  :identifierField="identifierField"
-                  @previous="onPrevious"
-                  @next="onNext">
+                  :current="current">
+          <template v-slot="slotProps">
+            <Table v-model="clients"
+                   :range="slotProps.range"
+                   :ratios="ratios"
+                   :identifierField="identifierField">
+            </Table>
+          </template>
       </Pagination>
     </div>
 </template>
 
 <script>
   import Pagination from '../../components/Pagination'
+  import Table from '../../components/Table'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
 
 let usage = `
-  <Pagination v-model="clients"
-              :count="count"
+  <Pagination :count="count"
               :size="size"
-              :current="current"
-              :ratios="ratios"
-              :identifierField="identifierField"
-              @previous="onPrevious"
-              @next="onNext">
+              :current="current">
+      <template v-slot="slotProps">
+        <Table v-model="clients"
+               :range="slotProps.range"
+               :ratios="ratios"
+               :identifierField="identifierField">
+        </Table>
+      </template>
   </Pagination>
 `.slice(1)
 
   export default {
     name: 'PaginationDemo',
-    components: {Pagination, Collapser, Description},
+    components: {Pagination, Table, Collapser, Description},
     data: () => ({
       usage,
       openUsage: true,
@@ -71,15 +76,7 @@ let usage = `
       current: 1,
       ratios: ['14', '2', '3'],
       identifierField: 'name'
-    }),
-    methods: {
-      onPrevious () {
-        this.current--
-      },
-      onNext () {
-        this.current++
-      }
-    }
+    })
   }
 </script>
 

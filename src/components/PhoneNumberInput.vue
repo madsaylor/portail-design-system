@@ -1,3 +1,32 @@
+<!--
+  Phone Number Input
+
+  Usage:
+
+  <PhoneNumberInput
+    :inputOptions="inputOptions"                - Options which can be inputted from Input field
+    :label="label"                              - Label of Phone Number
+    :value="value"                              - Default Phone Number
+    :placeholder="placeholder"                  - Placeholder
+    :disabled="disabled"                        - Enable or Disable of dropdown
+    :disabledFormatting="disabledFormatting"    - Disable the format of phone number
+    :invalidMsg="invalidMsg"                    - Message that can be displayed when the phone number is invalid
+    :required="required"                        - required props
+    :defaultCountry="defaultCountry"            - Default country
+    :enabledCountryCode="enabledCountryCode"    - Show country code next to the flag
+    :enabledFlags="enabledFlags"                - Show flags at the top of the dropdown
+    :preferredCountries="preferredCountries"    - Array of countries that can be at top of the list
+    :onlyCountries="onlyCountries"              - Display only the countrie in Array
+    :ignoredCountries="ignoredCountries"        - Remove countries in this Array
+    :autocomplete="autocomplete"                - Complete the Phone Number automatically based on history
+    :name="name"                                - Name of input field
+    :inputClasses="inputClasses"                - Classes of input field
+    :dropdownOptions="dropdownOptions"          - Options which can be at the items of dropdown list
+    :maxLen="maxLen"                            - Max length of inputted numbers
+    @onInput="onInput"                          - Emitted when the input value changes
+  />
+-->
+
 <template>
   <div>
     <div class="label-text">{{ label }}</div>

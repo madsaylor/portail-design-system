@@ -55,7 +55,11 @@
     },
     {
       "name": "removefile",
-      "description": "return the file to remove"
+      "description": "Return the file to remove"
+    },
+    {
+      "name": "invalidfile",
+      "description": "Triggered when file is invalid"
     }
   ]
 }

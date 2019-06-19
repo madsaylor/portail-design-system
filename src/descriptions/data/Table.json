@@ -1,0 +1,31 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "Array",
+      "description": "Data for displaying table"
+    },
+    {
+      "name": "ratios",
+      "type": "Array",
+      "default": "[1, ..]",
+      "description": "Array for set up flex ratio between field of record"
+    },
+    {
+      "name": "identifierField",
+      "type": "String",
+      "description": "Field which is identifier for emit data from pickup event"
+    },
+    {
+      "name": "range",
+      "type": "Object",
+      "description": "Object is provide start and end data range points for displaying on current page"
+    }
+  ],
+  "events": [
+    {
+      "name": "pickup",
+      "description": "Emitted when click on record, will emit current record data or identifier data with index on current page."
+    }
+  ]
+}

@@ -13,12 +13,12 @@
     {
       "name": "placeholder",
       "type": "String",
-      "description": "Passed directly to the textarea"
+      "description": "Placeholder directly to the textarea"
     },
     {
       "name": "validators",
       "type": "Array<Object>",
-      "description": " Array of validator Objects. When multiple validators fail, only one error is displayed, determined by their order in the array. Each Object should have three fields:",
+      "description": "Array of validator Objects. When multiple validators fail, only one error is displayed, determined by their order in the array. Each Object should have three fields:",
       "subProperty": [
         {
           "name": "name",
@@ -33,7 +33,7 @@
         {
           "name": "validator",
           "type": "Function",
-          "description": " Function that takes input value as an argument and returns Boolean"
+          "description": "Function that takes input value as an argument and returns Boolean"
         }
       ]
     },
@@ -54,6 +54,11 @@
       "type": "Boolean",
       "default": "false",
       "description": "Initial set of touched property"
+    },
+    {
+      "name": "rows",
+      "type": "Number",
+      "description": "Sets the height as strings"
     }
   ],
   "events": [

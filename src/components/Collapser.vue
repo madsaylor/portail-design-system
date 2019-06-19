@@ -1,3 +1,15 @@
+<!--
+  Collapser component for displaying collapsible content
+
+  Usage:
+
+  <Collapser :opened.sync="openUsage"  -  Responsible on open status of Collapser component
+             :label="label">           -  Label of collapser component
+
+    Collapser content...
+  </Collapser>
+-->
+
 <template>
     <div class="collapser">
       <div
@@ -19,7 +31,7 @@
 
     export default {
       components: { Icon },
-      name: "Collapser",
+      name: 'Collapser',
       props: {
           label: String,
           opened: Boolean

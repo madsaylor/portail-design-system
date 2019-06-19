@@ -22,6 +22,7 @@ import Signature from './data/Signature';
 import Pagination from './data/Pagination';
 import EmptyState from './data/EmptyState';
 import Accordion from './data/Accordion';
+import Table from './data/Table';
 
 export default {
   AppHeader,
@@ -47,5 +48,6 @@ export default {
   Signature,
   Pagination,
   EmptyState,
-  Accordion
+  Accordion,
+  Table
 }

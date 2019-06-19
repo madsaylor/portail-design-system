@@ -11,7 +11,7 @@
 
     <div class="collapser-demo-wrapper">
       <Collapser :opened.sync="openCollapser" :label="label">
-        <h3>We are the stewards of the hierarchy</h3>
+        <p>We are the stewards of the hierarchy</p>
       </Collapser>
     </div>
   </div>

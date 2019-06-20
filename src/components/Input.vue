@@ -512,6 +512,7 @@ export default {
         this.slideActive = false;
       }
 
+      this.slideInit()
       this.$emit('validation', this.validation)
     },
     isMobile(value) {

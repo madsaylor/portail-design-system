@@ -1,25 +1,19 @@
 {
   "properties": [
     {
-      "name": "visible",
-      "type": "Boolean",
-      "description": "Responsible for visibility tooltip"
-    },
-    {
-      "name": "triangleDistance",
-      "type": "Number",
-      "description": "Distance betweeen the top of the component and triangle"
-    },
-    {
-      "name": "triangleDirection",
+      "name": "placement",
       "type": "String",
-      "description": "This field will be added in the future. Please don't use this field right now"
+      "description": "alignment of the tooltip from referenced component"
     },
     {
-      "name": "dynamicWidth",
-      "type": "Boolean",
-      "default": "false",
-      "description": "Set up dynamic width of tooltip"
+      "name": "popoverWidth",
+      "type": "String",
+      "description": "Width of the tooltip content"
+    },
+    {
+      "name": "offset",
+      "type": "Object",
+      "description": "We can handle the position of tooltip with this property"
     }
   ],
   "events": []

@@ -8,30 +8,58 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Tooltip :dynamicWidth="true" :triangleDistance="10">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-      scelerisque sit amet velit vitae tristique. Nullam congue in lorem in
-      aliquam. Sed euismod nisl a ex commodo, non aliquet lacus mattis.
+    <Tooltip popoverWidth="200px" placement="top">
+      <div slot="popover">This is a tooltip content</div>
+      <div slot="reference">
+        <Button>Top</Button>
+      </div>
+    </Tooltip>
+
+    <Tooltip popoverWidth="200px" placement="bottom">
+      <div slot="popover">This is a tooltip content</div>
+      <div slot="reference">
+        <Button>Bottom</Button>
+      </div>
+    </Tooltip>
+
+    <Tooltip popoverWidth="200px" placement="left">
+      <div slot="popover">This is a tooltip content</div>
+      <div slot="reference">
+        <Button>Left</Button>
+      </div>
+    </Tooltip>
+
+    <Tooltip popoverWidth="200px" placement="right">
+      <div slot="popover">
+        This is a tooltip content
+      </div>
+      <div slot="reference">
+        <Button>Right</Button>
+      </div>
     </Tooltip>
   </div>
 </template>
 
 <script>
 import Tooltip from '../../components/Tooltip'
+import Button from '../../components/Button.vue'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
 
 let usage = `
-<Tooltip :triangleDistance="10">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-  scelerisque sit amet velit vitae tristique. Nullam congue in lorem in
-  aliquam. Sed euismod nisl a ex commodo, non aliquet lacus mattis.
+<Tooltip popoverWidth="500px">
+  <div slot="popover">
+    This is a tooltip content
+  </div>
+  <div slot="reference">
+    <Button></Button>
+  </div>
 </Tooltip>
 `.slice(1)
 
 export default {
   name: "TooltipDemo",
-  components: {Tooltip, Description, Collapser},
+  components: {Tooltip, Description, Collapser, Button},
   data: () => ({
     tooltipVisibleHover: false,
     tooltipVisibleClick: false,

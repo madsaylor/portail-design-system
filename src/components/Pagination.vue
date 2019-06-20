@@ -94,8 +94,6 @@
   @import '../styles/vars';
 
   .pagination-wrapper {
-    width: 960px;
-
     .pagination-count {
       display: flex;
       justify-content: flex-end;

@@ -56,7 +56,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '../styles/vars';
 
 .reference {
@@ -75,5 +75,58 @@ export default {
   width: 270px;
   position: relative;
   text-align: left;
+  box-shadow: none;
 }
+
+/* styles.css */
+
+[x-arrow] {
+  position: absolute;
+}
+
+.popper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  &[x-placement="bottom"] {
+    [x-arrow] {
+      top: -10px;
+      border-bottom: 10px solid white;
+      border-right: 10px solid transparent;
+      border-left: 10px solid transparent;
+      filter: drop-shadow(0px -1px 0px green);
+    }
+  }
+
+  &[x-placement="top"] {
+    [x-arrow] {
+      bottom: -10px;
+      border-top: 10px solid white;
+      border-right: 10px solid transparent;
+      border-left: 10px solid transparent;
+      filter: drop-shadow(0px 1px 0px green);
+    }
+  }
+
+  &[x-placement="left"] {
+    [x-arrow] {
+      right: -10px;
+      border-left: 10px solid white;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      filter: drop-shadow(1px 0px 0px green);
+    }
+  }
+
+  &[x-placement="right"] {
+    [x-arrow] {
+      left: -10px;
+      border-right: 10px solid white;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      filter: drop-shadow(-1px 0px 0px green);
+    }
+  }
+}
+
 </style>

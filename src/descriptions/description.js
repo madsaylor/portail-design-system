@@ -24,6 +24,7 @@ import EmptyState from './data/EmptyState';
 import Accordion from './data/Accordion';
 import Table from './data/Table';
 import Collapser from './data/Collapser';
+import Loader from './data/Loader';
 
 export default {
   AppHeader,
@@ -51,5 +52,6 @@ export default {
   EmptyState,
   Accordion,
   Table,
-  Collapser
+  Collapser,
+  Loader
 }

@@ -6,11 +6,6 @@
       "description": "alignment of the tooltip from referenced component"
     },
     {
-      "name": "popoverWidth",
-      "type": "String",
-      "description": "Width of the tooltip content"
-    },
-    {
       "name": "offset",
       "type": "Object",
       "description": "We can handle the position of tooltip with this property"

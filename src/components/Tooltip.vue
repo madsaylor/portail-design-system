@@ -3,15 +3,12 @@
 
   Usage:
 
-  <Tooltip :dynamicWidth="dynamicWidth"           - Set up dynamic width of tooltip
-           :triangleDistance="triangleDistance"   - Distance betweeen the top of the component and triangle
-           :triangleDirection="triangleDirection" - This field will be added in the future. Please don't use
-                                                    this field right now
-           :visible="visible">                    - Responsible for visibility tooltip
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-    scelerisque sit amet velit vitae tristique. Nullam congue in lorem in
-    aliquam. Sed euismod nisl a ex commodo, non aliquet lacus mattis.
+  <Tooltip
+    :placement="left"           - Position of tooltip
+    :offset="offset"            - Position of Arrow, and distnace from reference componnet. (Type is Object)
+  >
+    <div slot="popover">This is Popover content</div>
+    <div slot="reference">Reference</div>
   </Tooltip>
 -->
 

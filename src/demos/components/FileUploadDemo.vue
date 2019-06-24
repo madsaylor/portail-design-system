@@ -13,12 +13,11 @@
         icon="cloud_upload"
         iconSize="32px"
         title="Add your logo"
-        :uploadOptions="uploadOptions"
         :files="files"
-        :preview="false"
+        :preview="true"
+        :validators="validators"
         @addfile="addfile"
         @removefile="removefile"
-        @invalidfile="invalidFile"
       />
     </div>
 
@@ -33,9 +32,13 @@ import Collapser from '../../components/Collapser.vue'
 let usage = `
   <FileUpload
     icon="cloud_upload"
-    iconSize="48px"
+    iconSize="32px"
     title="Add your logo"
-    :uploadOptions="uploadOptions"
+    :files="files"
+    :preview="true"
+    :validators="validators"
+    @addfile="addfile"
+    @removefile="removefile"
   />
 `.slice(1)
 
@@ -45,13 +48,15 @@ export default {
   data: () => ({
     openUsage: true,
     usage,
-    uploadOptions: {
-      url: 'https://test.org/post',
-      addRemoveLinks: true,
-      acceptedFiles: "image/*",
-    },
     files: [],
-    invalidMessage: ''
+    invalidMessage: '',
+    validators: [
+      {
+        name: 'required',
+        message: 'File is required',
+        validator: files => files.length > 0
+      }
+    ]
   }),
   methods: {
     addfile(file) {
@@ -59,9 +64,6 @@ export default {
     },
     removefile(file) {
       this.files = this.files.filter(f => f.lastModified !== file.lastModified || f.name !== file.name)
-    },
-    invalidFile(message) {
-      this.invalidMessage = message
     }
   }
 }

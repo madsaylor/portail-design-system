@@ -46,6 +46,16 @@
       "name": "preview",
       "type": "Boolean",
       "description": "If this property is true, Show preview images, default value is true"
+    },
+    {
+      "name": "showErrors",
+      "type": "Boolean",
+      "description": "If this property is true, show errors under the image, else hide erros"
+    },
+    {
+      "name": "validators",
+      "type": "Array",
+      "description": "Included validation function, validation message"
     }
   ],
   "events": [
@@ -56,10 +66,6 @@
     {
       "name": "removefile",
       "description": "Return the file to remove"
-    },
-    {
-      "name": "invalidfile",
-      "description": "Triggered when file is invalid"
     }
   ]
 }

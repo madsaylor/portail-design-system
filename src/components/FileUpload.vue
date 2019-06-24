@@ -110,16 +110,16 @@ export default {
       this.$emit('removefile', file)
     },
     fileTypeCheck(file) {
-      if (file.type === this.uploadOptions.acceptedFiles) {
+      if (file.type === this.mainOptions.acceptedFiles) {
         return true
       }
 
-      if (this.uploadOptions.acceptedFiles === "*") {
+      if (this.mainOptions.acceptedFiles === "*") {
         return true
       }
 
-      if (this.uploadOptions.acceptedFiles.includes("/*")) {
-        const type = this.uploadOptions.acceptedFiles.replace("/*", '')
+      if (this.mainOptions.acceptedFiles.includes("/*")) {
+        const type = this.mainOptions.acceptedFiles.replace("/*", '')
         if (file.type.includes(type)) {
           return true
         }

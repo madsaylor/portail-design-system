@@ -14,6 +14,7 @@
         <TextArea v-model="messageText"
                   :label="labelText"
                   :placeholder="placeholder"
+                  :maxCharactors="20"
                   :rows="5">
         </TextArea>
       </div>

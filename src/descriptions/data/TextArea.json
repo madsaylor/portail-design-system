@@ -59,6 +59,11 @@
       "name": "rows",
       "type": "Number",
       "description": "Sets the height as strings"
+    },
+    {
+      "name": "maxCharactors",
+      "type": "Number",
+      "description": "Maximum number of charactors you can input without errors"
     }
   ],
   "events": [

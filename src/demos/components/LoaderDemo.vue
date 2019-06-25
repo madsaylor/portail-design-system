@@ -13,14 +13,14 @@
         <Button @click="temporaryFullScreenLoader">Open full screen loader on 5 sec</Button>
         <Loader v-model="loadingFullScreen" :fullScreen="fullScreen"></Loader>
       </div>
-      <div class="signature-loader">
+      <div class="demo-loader-wrapper">
         <Button class="base-btn-loader" @click="temporaryLoader">Open dialog with loader on 5 sec</Button>
         <Loader v-model="loading" :target="$refs.dialog"></Loader>
         <Dialog :opened.sync="dialogOpened" ref="dialog">
           <div class="dialog-body-default">{{text}}</div>
         </Dialog>
       </div>
-      <div class="signature-loader">
+      <div class="demo-loader-wrapper">
         <Button class="base-btn-loader base-btn-loader-bottom" @click="temporarySignatureLoader">Apply loader on signature component on 5 sec</Button>
         <Loader v-model="loadingSignature" :target="$refs.signature"></Loader>
         <Signature v-model="signatureData" ref="signature"></Signature>
@@ -90,7 +90,7 @@ let usage = `
 </script>
 
 <style lang="less" scoped>
-  .signature-loader {
+  .demo-loader-wrapper {
     .base-btn-loader {
       margin-top: 10px;
       width: 100%;

@@ -13,6 +13,7 @@
     :validators:="validators"         - Input file validation
     @addfile                          - Return the file to add
     @removefile                       - Return the file to remove
+    @validation                       - Return validation status
   />
 -->
 
@@ -160,6 +161,11 @@ export default {
       }
 
       return errors
+    }
+  },
+  watch: {
+    files() {
+      this.$emit('validation', this.validation)
     }
   }
 }

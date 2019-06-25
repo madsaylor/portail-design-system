@@ -67,6 +67,7 @@
       }
     },
     data: () => ({
+      validateEventName: undefined,
       touched: false
     }),
     methods: {
@@ -121,6 +122,20 @@
           this.initValidate()
         }
       })
+
+      if (this.name) {
+        this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
+        document.addEventListener(this.validateEventName, this.initValidate);
+      }
+
+      document.addEventListener('validate', this.initValidate);
+      this.$emit('validation', this.validation)
+    },
+    beforeDestroy() {
+      if (this.name) {
+        document.removeEventListener(this.validateEventName, this.initValidate)
+      }
+      document.removeEventListener('validate', this.initValidate)
     },
     watch: {
       textareaValue() {

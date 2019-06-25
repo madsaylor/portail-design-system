@@ -34,6 +34,10 @@
     {
       "name": "fileRemove",
       "description": "Emitted when user removes the file"
+    },
+    {
+      "name": "validation",
+      "description": "Emitted when input value changed with it's status"
     }
   ]
 }

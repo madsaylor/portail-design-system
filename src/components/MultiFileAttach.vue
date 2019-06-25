@@ -11,6 +11,7 @@
     :validators="validators"      - You can add error message, and validation function in this array
     @fileInput="fileInput"        - Emitted after selecting the file using file-browser
     @fileRemove="fileRemove"      - Emitted when user removes the file
+    @validation="validation"      - Emitted when user select the file
   />
 -->
 
@@ -119,10 +120,12 @@ export default {
       let errors = []
       if (this.currentTotalSize / (1024 * 1000) > this.maxTotalSize) {
         errors.push(`Total size should be under ${this.maxTotalSize}MB`)
+        this.$emit('validation', [['max-totla-size', false]])
       }
 
       if (this.files.length >= this.maxFileCount) {
         errors.push(`Total file count should be less than ${this.maxFileCount}`)
+        this.$emit('validation', [['max-file-count', false]])
       }
 
       for (var i = 0; i < this.validation.length; i++) {
@@ -153,6 +156,11 @@ export default {
         totalSize += files[key].size
       })
       return totalSize
+    }
+  },
+  watch: {
+    files() {
+      this.$emit('validation', this.validation)
     }
   }
 }

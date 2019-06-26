@@ -1,7 +1,7 @@
 <template>
     <div v-if="value"
         :class="['loader-wrapper', {'full-screen': fullScreen}]"
-        :style="{...backgroundStyles, opacity: `0.${opacity}`}">
+        :style="{...backgroundStyles, backgroundColor: `rgba(255, 255, 255, 0.${opacity})`}">
       <div :class="['loader', fullScreen ? 'base-loader' : 'small-loader']"
            :style="{...targetStyles}"></div>
     </div>
@@ -123,7 +123,6 @@
   @import '../styles/vars';
 
   .loader-wrapper {
-    background-color: @color-white;
     z-index: 5000;
     position: fixed;
     top: 0;

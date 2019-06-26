@@ -1,8 +1,9 @@
 <template>
     <div v-if="value"
         :class="['loader-wrapper', {'full-screen': fullScreen}]"
-        :style="{...positionStyle, opacity: `0.${opacity}`}">
-      <div :class="['loader', fullScreen ? 'base-loader' : 'small-loader']"></div>
+        :style="{...backgroundStyles, opacity: `0.${opacity}`}">
+      <div :class="['loader', fullScreen ? 'base-loader' : 'small-loader']"
+           :style="{...targetStyles}"></div>
     </div>
 </template>
 
@@ -23,10 +24,9 @@
     },
     data: () => ({
       availableTarget: undefined,
+      targetBoundingRect: undefined,
       targetWidth: undefined,
-      targetHeight: undefined,
-      targetX: undefined,
-      targetY: undefined
+      targetHeight: undefined
     }),
     methods: {
       getLoaderRect() {
@@ -40,12 +40,9 @@
       },
       calculateTargetSize() {
         if (this.value && this.targetElement) {
-          let target = this.targetElement.getBoundingClientRect()
-
-          this.targetWidth = target.width
-          this.targetHeight = target.height
-          this.targetX = target.x
-          this.targetY = target.y
+          this.targetWidth = this.targetElement.clientWidth + 2
+          this.targetHeight = this.targetElement.clientHeight + 2
+          this.targetBoundingRect = this.targetElement.getBoundingClientRect()
         }
       }
     },
@@ -71,18 +68,32 @@
 
         return element
       },
-      positionStyle() {
-        let positionStyle = {}
+      targetStyles() {
+        let styles = {}
 
-        if (!this.fullScreen && this.targetWidth && this.targetHeight) {
+        if (!this.fullScreen && this.targetBoundingRect) {
           let loader = this.getLoaderRect()
-          positionStyle = {
-            left: `${(this.targetWidth / 2 - loader.width / 2) + this.targetX}px`,
-            top: `${(this.targetHeight / 2 - loader.height / 2) + this.targetY}px`
+          styles = {
+            left: `${(this.targetBoundingRect.width / 2 - loader.width / 2) + this.targetBoundingRect.x}px`,
+            top: `${(this.targetBoundingRect.height / 2 - loader.height / 2) + this.targetBoundingRect.y}px`
           }
         }
 
-        return positionStyle
+        return styles
+      },
+      backgroundStyles() {
+        let styles = {}
+
+        if (!this.fullScreen && this.targetBoundingRect) {
+          styles = {
+            top: `${this.targetBoundingRect.top}px`,
+            left: `${this.targetBoundingRect.left}px`,
+            width: `${this.targetWidth}px`,
+            height: `${this.targetHeight}px`
+          }
+        }
+
+        return styles
       }
     },
     watch: {
@@ -121,7 +132,6 @@
     .loader {
       z-index: 5001;
       position: fixed;
-
     }
 
     .base-loader {

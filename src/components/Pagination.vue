@@ -27,7 +27,7 @@
             size="12px"
             padding="8px 8px 0px 0px"
             @click="next"
-            :disabled="currentPage * size > count"/>
+            :disabled="currentPage * size >= count"/>
     </div>
   </div>
 </template>

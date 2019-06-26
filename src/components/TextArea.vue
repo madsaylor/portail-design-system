@@ -52,7 +52,7 @@
       placeholder: String,
       name: String,
       rows: Number,
-      maxCharactors: Number,
+      maxCharacters: Number,
       validators: Array,
       showErrors: {
         type: Boolean,
@@ -108,8 +108,8 @@
       textareaErrors() {
         let errors = []
 
-        if (this.textareaValue && this.textareaValue.length > this.maxCharactors) {
-          errors.push(`You can input less than ${this.maxCharactors} charactors`)
+        if (this.textareaValue && this.textareaValue.length > this.maxCharacters) {
+          errors.push(`You can input less than ${this.maxCharacters} charactors`)
           this.$emit('validation', [['max-charactor', false]])
         }
 

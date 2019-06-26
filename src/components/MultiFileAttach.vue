@@ -120,7 +120,7 @@ export default {
       let errors = []
       if (this.currentTotalSize / (1024 * 1000) > this.maxTotalSize) {
         errors.push(`Total size should be under ${this.maxTotalSize}MB`)
-        this.$emit('validation', [['max-totla-size', false]])
+        this.$emit('validation', [['max-total-size', false]])
       }
 
       if (this.files.length >= this.maxFileCount) {

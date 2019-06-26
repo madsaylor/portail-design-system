@@ -61,7 +61,7 @@
       "description": "Sets the height as strings"
     },
     {
-      "name": "maxCharactors",
+      "name": "maxCharacters",
       "type": "Number",
       "description": "Maximum number of charactors you can input without errors"
     }

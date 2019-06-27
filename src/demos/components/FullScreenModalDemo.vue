@@ -29,26 +29,14 @@ import FullScreenModal from '../../components/FullScreenModal.vue'
 import Button from '../../components/Button.vue'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
-
-let usage = `
-<Button @click="show()">Show modal</Button>
-
-<FullScreenModal v-if="showModal">
-  <template #header>
-    <Button class="left" plain icon="arrow_back"></Button>
-    Hello, World!
-    <Button class="right" plain icon="close" @click="hide()"></Button>
-  </template>
-  Lorem ipsum dolor sit amet...
-</FullScreenModal>
-`.slice(1)
+import {FullScreenModalData} from '../../static/index'
 
 export default {
   name: 'FullScreenModalDemo',
   components: {FullScreenModal, Button, Description, Collapser},
   data: () => ({
     openUsage: true,
-    usage,
+    usage: FullScreenModalData.usage,
     showModal: false
   }),
   methods: {

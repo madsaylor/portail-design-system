@@ -2,7 +2,7 @@
   <div class="grid">
     <div class="row-col">
       <h2>Colors</h2>
-      <pre v-highlightjs="usageLess"><code class="less"></code></pre>
+      <pre v-highlightjs="usage"><code class="less"></code></pre>
     </div>
     <div class="row-col" v-for="(group, groupName) in colors">
       <h3 class="group-name">{{ groupName }}</h3>
@@ -15,37 +15,13 @@
 </template>
 
 <script>
-let usageLess = `
-@import '~@betao/ds/vars';
-
-.some-class {
-  color: @color-gray-100;
-}
-`.slice(1)
+import {ColorsData} from '../static/index'
 
 export default {
   name: 'ColorsDemo',
   data: () => ({
-    usageLess,
-    colors: {
-      grays: [
-        'color-gray-100',
-        'color-gray-200',
-        'color-gray-300',
-        'color-gray-400',
-        'color-gray-500',
-      ],
-      primary: [
-        'color-dark',
-        'color-primary',
-        'color-white',
-      ],
-      system: [
-        'color-blue',
-        'color-red',
-        'color-yellow',
-      ],
-    }
+    usage: ColorsData.usage,
+    colors: ColorsData.colors
   })
 }
 </script>

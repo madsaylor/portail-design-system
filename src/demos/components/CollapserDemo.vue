@@ -20,18 +20,13 @@
 <script>
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
-
-let usage = `
-  <Collapser :opened.sync="openCollapser" :label="label">
-    <h3>We are the stewards of the hierarchy</h3>
-  </Collapser>
-`.slice(1)
+  import {CollapserData} from '../../static/index'
 
   export default {
     name: 'CollapserDemo',
     components: {Collapser, Description},
     data: () => ({
-      usage,
+      usage: CollapserData.usage,
       openUsage: true,
       data: undefined,
       label: 'Collapser',

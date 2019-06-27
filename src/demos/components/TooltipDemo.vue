@@ -45,26 +45,16 @@ import Tooltip from '../../components/Tooltip'
 import Button from '../../components/Button.vue'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
-
-let usage = `
-<Tooltip popoverWidth="500px">
-  <div slot="popover">
-    This is a tooltip content
-  </div>
-  <div slot="reference">
-    <Button></Button>
-  </div>
-</Tooltip>
-`.slice(1)
+import {TooltipData} from '../../static/index'
 
 export default {
-  name: "TooltipDemo",
+  name: 'TooltipDemo',
   components: {Tooltip, Description, Collapser, Button},
   data: () => ({
     tooltipVisibleHover: false,
     tooltipVisibleClick: false,
     openUsage: true,
-    usage
+    usage: TooltipData.usage
   })
 }
 </script>

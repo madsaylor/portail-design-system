@@ -28,49 +28,15 @@
   import Table from '../../components/Table'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
-
-let usage = `
-  <Pagination :count="count"
-              :size="size"
-              :current="current">
-      <template v-slot="slotProps">
-        <Table v-model="clients"
-               :range="slotProps.range"
-               :ratios="ratios"
-               :identifierField="identifierField">
-        </Table>
-      </template>
-  </Pagination>
-`.slice(1)
+  import {PaginationData, GeneralData} from '../../static/index'
 
   export default {
     name: 'PaginationDemo',
     components: {Pagination, Table, Collapser, Description},
     data: () => ({
-      usage,
+      usage: PaginationData.usage,
       openUsage: true,
-      clients: [
-          {
-            name: 'Adam L1',
-            type: 'Person',
-            earned: '€ 3,123.34'
-          },
-          {
-            name: 'Adam L2',
-            type: 'Person',
-            earned: '€ 3,123.34'
-          },
-          {
-            name: 'Adam L3',
-            type: 'Person',
-            earned: '€ 3,123.34'
-          },
-          {
-            name: 'Adam L4',
-            type: 'Person',
-            earned: '€ 3,123.34'
-          }
-      ],
+      clients: GeneralData.clients,
       count: 4,
       size: 3,
       current: 1,

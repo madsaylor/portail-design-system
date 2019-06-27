@@ -21,43 +21,15 @@
   import Table from '../../components/Table'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
-
-let usage = `
-  <Table v-model="clients"
-         :range="range"
-         :ratios="ratios"
-         :identifierField="identifierField">
-  </Table>
-`.slice(1)
+  import {TableData, GeneralData} from '../../static/index'
 
   export default {
     name: 'TableDemo',
     components: {Table, Collapser, Description},
     data: () => ({
-      usage,
+      usage: TableData.usage,
       openUsage: true,
-      clients: [
-        {
-          name: 'Adam L1',
-          type: 'Person',
-          earned: '€ 3,123.34'
-        },
-        {
-          name: 'Adam L2',
-          type: 'Person',
-          earned: '€ 3,123.34'
-        },
-        {
-          name: 'Adam L3',
-          type: 'Person',
-          earned: '€ 3,123.34'
-        },
-        {
-          name: 'Adam L4',
-          type: 'Person',
-          earned: '€ 3,123.34'
-        }
-      ],
+      clients: GeneralData.clients,
       ratios: ['14', '2', '3'],
       identifierField: 'name',
       range: undefined

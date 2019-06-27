@@ -29,20 +29,14 @@ import Dropdown from '../../components/Dropdown.vue'
 import Menu from '../../components/Menu.vue'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
-
-let usage = `
-  <Menu
-    :items="items"
-    @item:click="menuClick"
-  />
-`.slice(1)
+import {MenuData} from '../../static/index'
 
 export default {
   name: 'MenuDemo',
   components: { Button, Dropdown, Menu, Description, Collapser },
   data: () => ({
     openUsage: true,
-    usage,
+    usage: MenuData.usage,
     dropdownOpened: false,
     position: 'bottom-right',
     items: [

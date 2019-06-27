@@ -35,31 +35,14 @@
   import Button from '../../components/Button'
   import Dialog from '../../components/Dialog'
   import Signature from '../../components/Signature'
-
-let text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-`
-
-let usage = `
-  <Loader v-model="loadingFullScreen" :fullScreen="fullScreen"></Loader>
-
-  <Loader v-model="loading" :target="$refs.dialog"></Loader>
-  <Dialog :opened.sync="dialogOpened" ref="dialog">
-    <div class="dialog-body-default">Lorem ipsum ...</div>
-  </Dialog>
-
-  <Loader v-model="loadingSignature" :target="$refs.signature"></Loader>
-  <Signature v-model="signatureData" ref="signature"></Signature>
-`.slice(1)
+  import {LoaderData, GeneralData} from '../../static/index'
 
   export default {
     name: 'LoaderDemo',
     components: {Loader, Collapser, Description, Button, Dialog, Signature},
     data: () => ({
-      text,
-      usage,
+      text: GeneralData.text,
+      usage: LoaderData.usage,
       openUsage: true,
       loadingFullScreen: false,
       loading: false,

@@ -23,18 +23,7 @@
 import MultiFileAttach from '../../components/MultiFileAttach.vue'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
-
-let usage = `
-  <MultiFileAttach
-    label="Multi File Attach Example"
-    :files="files"
-    :maxTotalSize="2"
-    :maxFileCount="20"
-    :validators="validators"
-    @fileInput="fileInput"
-    @fileRemove="fileRemove"
-  />
-`.slice(1)
+import {MultiFileAttachData} from '../../static/index'
 
 export default {
   name: 'MultiFileAttachDemo',
@@ -42,7 +31,7 @@ export default {
   data() {
     return {
       openUsage: true,
-      usage,
+      usage: MultiFileAttachData.usage,
       files: [],
       demoValidators: [
         {

@@ -34,14 +34,7 @@
 import Datepicker from '../../components/Datepicker'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
-
-let usage = `
-<Datepicker
-  :min="new Date('2002-02-10')"
-  :max="new Date('2018-12-21')"
-  v-model="dateSelected"
-></Datepicker>
-`.slice(1)
+import {DatepickerData} from '../../static/index'
 
 export default {
   name: "DatepickerDemo",
@@ -52,7 +45,7 @@ export default {
     return {
       dateSelected: new Date('2006-02-12'),
       dateSelected2: new Date(),
-      usage,
+      usage: DatepickerData.usage,
       openUsage: true,
     }
   }
@@ -60,4 +53,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 </style>

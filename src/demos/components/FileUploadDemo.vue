@@ -28,26 +28,14 @@
 import FileUpload from '../../components/FileUpload.vue'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
-
-let usage = `
-  <FileUpload
-    icon="cloud_upload"
-    iconSize="32px"
-    title="Add your logo"
-    :files="files"
-    :preview="true"
-    :validators="validators"
-    @addfile="addfile"
-    @removefile="removefile"
-  />
-`.slice(1)
+import {FileUploadData} from '../../static/index'
 
 export default {
   name: 'FileUploadDemo',
   components: {FileUpload, Description, Collapser},
   data: () => ({
     openUsage: true,
-    usage,
+    usage: FileUploadData.usage,
     files: [],
     invalidMessage: '',
     validators: [

@@ -81,42 +81,7 @@
   import Datepicker from "../../components/Datepicker"
   import Description from '../../descriptions/Description'
   import Collapser from '../../components/Collapser.vue'
-
-  let text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  `;
-
-  let usage = `
-    <Dialog :opened.sync="opened"
-            :borderColor="borderColor">
-      <div class="dialog-body">
-      ${text}
-      </div>
-    </Dialog>
-
-    <Dialog :opened.sync="datepickerVisible" :backdropOpacity="'0.3'">
-      <Datepicker
-        :min="datepickerMin"
-        :max="datepickerMax"
-        v-model="datepickerValue"
-      ></Datepicker>
-    </Dialog>
-
-    <Dialog
-      :opened.sync="openedFullScreen"
-      :fullScreen="fullScreenActive"
-    >
-      <div class="dialog-header">
-        <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
-      </div>
-      <div class="dialog-body">
-        ${text}
-        ...
-      </div>
-    </Dialog>
-  `.slice(1)
+  import {DialogData, GeneralData} from '../../static/index'
 
   export default {
     name: "DialogDemo",
@@ -132,11 +97,11 @@
         datepickerMin: undefined,
         datepickerMax: undefined,
         borderColor: '#e6e7eb',
-        usage,
+        usage: DialogData.usage,
         openUsage: true,
         complexFullScreenActive: true,
         fullScreenActive: true,
-        text
+        text: GeneralData.text
       })
     },
     methods: {

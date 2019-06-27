@@ -1,4 +1,4 @@
-export const countriesArray = [
+export default [
   [
     'Afghanistan (‫افغانستان‬‎)',
     'af',

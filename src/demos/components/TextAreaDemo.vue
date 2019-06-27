@@ -34,27 +34,14 @@
 import TextArea from '../../components/TextArea.vue';
 import Description from '../../descriptions/Description.vue';
 import Collapser from '../../components/Collapser.vue';
-
-let usage = `
-<TextArea v-model="messageText"
-          :label="labelText"
-          :placeholder="placeholder"
-          :rows="5">
-</TextArea>
-<TextArea v-model="messageText"
-          :label="secondlabelText"
-          :placeholder="placeholder"
-          :rows="5"
-          :validators="validators">
-</TextArea>
-`.slice(1);
+import {TextAreaData} from '../../static/index'
 
 export default {
-    name: "TextAreaDemo",
+    name: 'TextAreaDemo',
     components: {TextArea, Description, Collapser},
     data: () => ({
       openUsage: true,
-      usage,
+      usage: TextAreaData.usage,
       messageText: null,
       labelText: 'Textarea',
       secondlabelText: 'Textarea with errors',

@@ -5,7 +5,7 @@
 
       See also: <a href="#Components - Icon">Icon component</a>
 
-      <pre v-highlightjs="usageJs"><code class="js"></code></pre>
+      <pre v-highlightjs="usage"><code class="js"></code></pre>
 
     </div>
     <div class="row">
@@ -23,11 +23,7 @@
 </template>
 
 <script>
-let usageJs = `
-import icons from '@betao/ds/icons'
-
-icons['arrow_right'] // => '<svg>...</svg>' code
-`.slice(1)
+import {IconsData} from '../static/index'
 
 let context = require.context('@/icons', true, /\.svg$/)
 let icons = context.keys()
@@ -35,7 +31,7 @@ let icons = context.keys()
 export default {
   name: 'IconsDemo',
   data: () => ({
-    usageJs,
+    usage: IconsData.usage,
     icons,
     context,
   })

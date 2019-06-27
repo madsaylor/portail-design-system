@@ -21,28 +21,17 @@
   import Tabs from '../../components/Tabs'
   import Description from '../../descriptions/Description'
   import Collapser from '../../components/Collapser.vue'
-
-  let usage = `<Tabs :tabs="tabs" :active="active" @tab:click="onTabClick"/>`
+  import {TabsData} from '../../static/index'
 
   export default {
-    name: "TabsDemo",
+    name: 'TabsDemo',
     components: { Tabs, Description, Collapser},
     data() {
       return ({
         openUsage: true,
-        usage,
+        usage: TabsData.usage,
         active: 0,
-        tabs: [
-          {
-            text: 'MES FACTURES'
-          },
-          {
-            text: 'MES DEVIS'
-          },
-          {
-            text: 'MES AVOIRS'
-          }
-        ]
+        tabs: TabsData.tabs
       })
     },
     methods: {

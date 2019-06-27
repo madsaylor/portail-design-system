@@ -17,23 +17,15 @@
   import EmptyState from '../../components/EmptyState'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
-
-let usage = `
-  <EmptyState v-model="details"></EmptyState>
-`.slice(1)
+  import {EmptyStateData} from '../../static/index'
 
   export default {
     name: 'EmptyStateDemo',
     components: {EmptyState, Collapser, Description},
     data: () => ({
-      usage,
+      usage: EmptyStateData.usage,
       openUsage: true,
-      details: {
-        title: `Vous n'avez pas encore créé de factures...`,
-        moreInfo: `En tant qu'auto-entrepreneur vous avez l'obligation légale de facturer vos clients`,
-        btnLabel: 'Create invoice',
-        imgName: 'invoice-empty'
-      }
+      details: EmptyStateData.details
     })
   }
 </script>

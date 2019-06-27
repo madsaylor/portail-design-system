@@ -69,79 +69,21 @@ import Button from '../../components/Button.vue'
 import Collapser from '../../components/Collapser.vue'
 import Dropdown from '../../components/Dropdown.vue'
 import Description from '../../descriptions/Description'
-
-let usage = `
-<Button ref="dropButton" @click="dropdownOpened = !dropdownOpened">
-  Position
-</Button>
-<Dropdown
-  :target="$refs.dropButton"
-  :opened.sync="dropdownOpened"
-  :position="position"
-  :borderColor="borderColor"
->
-  ...
-</Dropdown>
-`.slice(1)
-
-const scheme = `
-+--- ----- --------------------------------------------------------+
-|              top-left      top-middle     top-right              |
-|                +--------------------------------+                |
-|                |       |                |       |                |
-|                |       |                |       |                |
-|  left-top      |       |                |       |     right-top  |
-|   +------------------+ |                | +------------------+   |
-|   |            |     | |                | |     |            |   |
-|   |            |     | |                | |     |            |   |
-|   |            |     | |                | |     |            |   |
-|   |            +--------------------------------+            |   |
-|   +------------------+ +----------------+ +------------------+   |
-|   |                  | |                | |                  |   |
-|  left-center         | |     default    | |        right-center  |
-|   |                  | |                | |                  |   |
-|   +------------------+ +----------------+ +------------------+   |
-|   |            +--------------------------------+            |   |
-|   |            |     | |                | |     |            |   |
-|   |            |     | |                | |     |            |   |
-|   |            |     | |                | |     |            |   |
-|   +------------------+ |                | +------------------+   |
-|  left-bottom   |       |                |       |   right-bottom |
-|                |       |                |       |                |
-|                |       |                |       |                |
-|                +--------------------------------+                |
-|            bottom-left   bottom-middle   bottom-right            |
-|                                                                  |
-+------------------------------------------------------------------+
-`
+import {DropdownData} from '../../static/index'
 
 export default {
   name: 'DropdownDemo',
   components: {Button, Dropdown, Description, Collapser},
   data: () => ({
-    usage,
-    scheme,
+    usage: DropdownData.usage,
+    scheme: DropdownData.scheme,
     openUsage: true,
     visiblePosition: false,
     dropdownOpened: false,
     dropdown2Opened: false,
     dropdown3Opened: false,
     position: 'bottom-right',
-    positions: [
-      'bottom-left',
-      'bottom-middle',
-      'bottom-right',
-      'left-bottom',
-      'left-center',
-      'left-top',
-      'default',
-      'right-bottom',
-      'right-center',
-      'right-top',
-      'top-left',
-      'top-middle',
-      'top-right',
-    ]
+    positions: DropdownData.positions
   }),
 }
 </script>

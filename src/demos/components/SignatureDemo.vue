@@ -17,16 +17,13 @@
   import Signature from '../../components/Signature'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
-
-let usage = `
-    <Signature v-model="data"></Signature>
-`.slice(1)
+  import {SignatureData} from '../../static/index'
 
   export default {
     name: 'SignatureDemo',
     components: {Signature, Collapser, Description},
     data: () => ({
-      usage,
+      usage: SignatureData.usage,
       openUsage: true,
       data: undefined
     })

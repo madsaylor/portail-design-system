@@ -20,24 +20,15 @@
 import PhoneNumberInput from '../../components/PhoneNumberInput.vue'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
-
-let usage = `
-  <PhoneNumberInput
-    @onInput="onInput"
-    :inputOptions="{showDialCode: true}"
-    defaultCountry="fr"
-    label="Phone Number"
-    value="+33 2 34 32 42 34"
-  />
-`.slice(1)
+import {PhoneNumberInputData} from '../../static/index'
 
 export default {
-  name: "PhoneNumberInputDemo",
+  name: 'PhoneNumberInputDemo',
   components: { PhoneNumberInput, Description, Collapser },
   data: () => {
     return {
       openUsage: true,
-      usage,
+      usage: PhoneNumberInputData.usage,
       phone: {
         number: '',
         isValid: false,

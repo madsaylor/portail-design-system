@@ -80,9 +80,9 @@
 <script>
 import _ from 'lodash';
 import { formatNumber, AsYouType, isValidNumber } from 'libphonenumber-js';
-import { countriesArray } from '../common/constants';
+import {CountriesArray} from '../static/index';
 
-const allCountries = countriesArray.map(country => ({
+const allCountries = CountriesArray.map(country => ({
   name: country[0],
   iso2: country[1].toUpperCase(),
   dialCode: country[2],

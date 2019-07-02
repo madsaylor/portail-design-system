@@ -28,7 +28,7 @@
     <div
       class="backdrop"
       :style="{opacity: backdropOpacity, 'background-color': backgroundColor}"
-      @click="backdropClick()"
+      @click.stop="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>
       <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen,

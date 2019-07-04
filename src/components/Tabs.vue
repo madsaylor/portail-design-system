@@ -35,20 +35,25 @@
 -->
 <template>
   <div class="tabs-container">
-    <div class="tabs-row">
-      <template v-for="(tab, index) in tabs">
-        <div
-          v-if="!tab.hidden"
-          :class="['tab', {
-            active: active === index,
+    <div class="tabs-header">
+      <div class="tabs-row">
+        <template v-for="(tab, index) in tabs">
+          <div
+            v-if="!tab.hidden"
+            :class="['tab', {
+            active: activeTab(index),
             disabled: disabled || tab.disabled,
           }]"
 
-          @click="onTabClick(tab, index)"
-        >
-          {{tab.text}}
-        </div>
-      </template>
+            @click="onTabClick(tab, index)"
+          >
+            {{tab.text}}
+          </div>
+        </template>
+      </div>
+    </div>
+    <div class="tabs-body">
+      <slot :name="activeTabBody"></slot>
     </div>
   </div>
 </template>
@@ -73,11 +78,18 @@
       startX: undefined,
       minDistance: 100
     }),
+    computed: {
+      activeTabBody() {
+        return `tabs-${this.active}`
+      }
+    },
     methods: {
+      activeTab(index) {
+        return this.active - 1 === index
+      },
       onTabClick(tab, index) {
         if (this.disabled || tab.disabled) return;
-
-        this.$emit('tab:click', tab, index)
+        this.$emit('tab:click', tab, ++index)
       },
       swipeTab(regulator) {
         let futureTab = this.active + regulator
@@ -109,19 +121,21 @@
   @import '../styles/vars';
 
   .tabs-container {
-    display: flex;
-    background-color: @color-white;
-    width: 100%;
-    height: auto;
-    justify-content: center;
-
-    .tabs-row {
+    .tabs-header {
       display: flex;
-      width: 50%;
+      background-color: @color-white;
+      width: 100%;
+      height: auto;
+      justify-content: center;
 
-      @media @screen-small {
-        & {
-          width: 100%;
+      .tabs-row {
+        display: flex;
+        width: 50%;
+
+        @media @screen-small {
+          & {
+            width: 100%;
+          }
         }
       }
     }

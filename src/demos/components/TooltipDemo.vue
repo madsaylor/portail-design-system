@@ -29,7 +29,7 @@
       </div>
     </Tooltip>
 
-    <Tooltip popoverWidth="200px" placement="right">
+    <Tooltip popoverWidth="200px" placement="right" :offset="tooltipOffset">
       <div slot="popover">
         This is a tooltip content
       </div>
@@ -53,6 +53,7 @@ export default {
   data: () => ({
     tooltipVisibleHover: false,
     tooltipVisibleClick: false,
+    tooltipOffset: {offset: '0px 50px'},
     openUsage: true,
     usage: TooltipData.usage
   })

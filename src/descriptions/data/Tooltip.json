@@ -8,7 +8,7 @@
     {
       "name": "offset",
       "type": "Object",
-      "description": "We can handle the position of tooltip with this property"
+      "description": "We can handle the position of tooltip with this property from the reference element"
     }
   ],
   "events": []

@@ -34,6 +34,7 @@
         :class="{'error': textareaErrors.length && touched && showErrors}"
         @blur="onBlur"
       />
+      <div class="notification">{{ notificationStr }}</div>
     </label>
     <div class="textarea-errors-wraper">
         <span v-if="textareaErrors.length && touched && showErrors" class="error-message">
@@ -52,7 +53,10 @@
       placeholder: String,
       name: String,
       rows: Number,
-      maxCharacters: Number,
+      maxCharacters: {
+        type: Number,
+        default: 200
+      },
       validators: Array,
       showErrors: {
         type: Boolean,
@@ -69,7 +73,8 @@
     },
     data: () => ({
       validateEventName: undefined,
-      touched: false
+      touched: false,
+      notificationStr: ''
     }),
     methods: {
       onBlur() {
@@ -123,6 +128,8 @@
       }
     },
     mounted() {
+      this.notificationStr = `You can input less than ${this.maxCharacters} charactors`
+
       this.$nextTick(() => {
         if (this.initValidation) {
           this.initValidate()
@@ -149,6 +156,9 @@
       },
       initialTouched(value) {
         this.touched = value
+      },
+      value(val) {
+        this.notificationStr = `${this.maxCharacters - val.length} characters are left`
       }
     }
   }
@@ -173,7 +183,7 @@
 
       textarea {
         .font-desktop-small-regular-dark();
-        padding: 7px 12px;
+        padding: 7px 12px 20px 12px;
         box-sizing: border-box;
         border: 1px solid @color-gray-300;
         border-radius: 2px;
@@ -196,6 +206,13 @@
         &.error {
           border-color: @color-red;
         }
+      }
+
+      .notification {
+        .font-desktop-x-small-regular-gray();
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
       }
     }
 

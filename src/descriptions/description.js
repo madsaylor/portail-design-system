@@ -25,6 +25,7 @@ import Accordion from './data/Accordion';
 import Table from './data/Table';
 import Collapser from './data/Collapser';
 import Loader from './data/Loader';
+import DragAndDrop from './data/DragAndDrop';
 
 export default {
   AppHeader,
@@ -53,5 +54,6 @@ export default {
   Accordion,
   Table,
   Collapser,
-  Loader
+  Loader,
+  DragAndDrop
 }

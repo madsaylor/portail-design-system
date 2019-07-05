@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "list",
+      "type": "Array",
+      "description": "draggable items"
+    }
+  ],
+  "events": [
+    {
+      "name": "update:list",
+      "description": "Event is emitted when you move the items into another position"
+    }
+  ]
+}

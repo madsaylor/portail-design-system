@@ -33,6 +33,7 @@ import ComponentsData from './data/demo/ComponentsData'
 import GridData from './data/demo/GridData'
 import IconsData from './data/demo/IconsData'
 import TextData from './data/demo/TextData'
+import DragAndDropData from './data/demo/DragAndDropData'
 
 export {
   CountriesArray,
@@ -69,5 +70,6 @@ export {
   ComponentsData,
   GridData,
   IconsData,
-  TextData
+  TextData,
+  DragAndDropData
 }

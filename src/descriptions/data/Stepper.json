@@ -6,5 +6,10 @@
       "description": "Displayed step name"
     }
   ],
-  "events": []
+  "events": [
+    {
+      "name": "previous:step",
+      "description": "Event is emitted before changing the step with current step index"
+    }
+  ]
 }

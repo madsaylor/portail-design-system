@@ -50,7 +50,7 @@
     <div v-if="value.length">
       <div class="step" :style="{height: `${isMobile ? 40 : 56}px`}">
         <div v-for="(step, index) in value"
-             @click="stepIndex = index + 1">
+             @click="nextStep(index + 1)">
           <Icon :source="isMobile ? 'round' : 'check_circle'"
                 :color="getIconColor(index)"
                 size="18px"
@@ -112,6 +112,12 @@
             return 'gray-400'
         }
       },
+
+      nextStep(index) {
+        this.$emit('previous:step', this.stepIndex)
+        this.stepIndex = index;
+      },
+
       swipeStep(regulator) {
         let futureStep = this.stepIndex + regulator
 

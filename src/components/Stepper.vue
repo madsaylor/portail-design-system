@@ -114,8 +114,8 @@
       },
 
       nextStep(index) {
-        this.$emit('previous:step', this.stepIndex)
         this.stepIndex = index;
+        this.$emit('current:step', this.stepIndex)
       },
 
       swipeStep(regulator) {

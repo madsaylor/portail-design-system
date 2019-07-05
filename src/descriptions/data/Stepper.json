@@ -8,8 +8,8 @@
   ],
   "events": [
     {
-      "name": "previous:step",
-      "description": "Event is emitted before changing the step with current step index"
+      "name": "current:step",
+      "description": "Event is emitted after changing the step with current step index"
     }
   ]
 }

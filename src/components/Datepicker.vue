@@ -148,20 +148,18 @@ export default {
           day.title = day.getDate()
           day.key = day.getTime()
 
-          if (day.getMonth() !== this.month) {
-            day.class = 'other-month'
-          }
-
           if (this.min != null) {
             day.setHours(23, 59, 59, 999)
             if (day.getTime() < this.min.getTime()) {
               day.disabled = true
+              day.class = 'disabled'
             }
           }
           if (this.max != null) {
             day.setHours(0, 0, 0, 0)
             if (day.getTime() > this.max.getTime()) {
               day.disabled = true
+              day.class = 'disabled'
             }
           }
 
@@ -440,12 +438,8 @@ export default {
       }
     }
 
-    .grid-select .item-cell:not(.disabled) .item.other-month {
+    .grid-select .item-cell .disabled {
       color: @color-gray-400;
-    }
-    .grid-select .item-cell.selected .item.other-month {
-      color: @color-white;
-      background-color: fade(@color-primary, 50%);
     }
 
     .item-cell .grid-item-big {

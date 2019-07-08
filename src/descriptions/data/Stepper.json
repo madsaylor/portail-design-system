@@ -4,6 +4,11 @@
       "name": "value",
       "type": "Array",
       "description": "Displayed step name"
+    },
+    {
+      "name": "selectedStep",
+      "type": "Number",
+      "description": "Enable to select the step by it's index"
     }
   ],
   "events": [

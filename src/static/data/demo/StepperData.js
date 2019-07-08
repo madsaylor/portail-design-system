@@ -1,5 +1,5 @@
 let usage = `
-<Step v-model="steps">
+<Step v-model="steps" @current:step="setCurrentStep" :selectedStep="stepNumber">
   <template #header></template>
   <template #step-1>
     <Card class="dashboard-report">

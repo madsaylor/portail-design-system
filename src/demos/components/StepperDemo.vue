@@ -9,7 +9,7 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Stepper v-model="steps">
+    <Stepper v-model="steps" @current:step="setCurrentStep" :selectedStep="stepNumber">
       <template #header></template>
       <template #step-1>
         <Card class="dashboard-report">
@@ -39,6 +39,11 @@
       </template>
       <template #footer></template>
     </Stepper>
+
+    <div class="control-buttons">
+      <Button @click="prevStep">Preview</Button>
+      <Button @click="nextStep">Next</Button>
+    </div>
   </div>
 </template>
 
@@ -47,21 +52,42 @@
   import Card from '../../components/Card'
   import Icon from '../../components/Icon'
   import Input from '../../components/Input'
+  import Button from '../../components/Button'
   import Description from '../../descriptions/Description'
   import Collapser from '../../components/Collapser'
   import {StepperData} from '../../static/index'
 
   export default {
     name: 'StepperDemo',
-    components: {Stepper, Card, Icon, Input, Description, Collapser},
+    components: {Stepper, Card, Icon, Input, Button, Description, Collapser},
     data: () => ({
       usage: StepperData.usage,
       openUsage: true,
-      steps: [{name: 'Card'}, {name: 'Icon'}, {name: 'Input'}]
-    })
+      steps: [{name: 'Card'}, {name: 'Icon'}, {name: 'Input'}],
+      stepNumber: 1,
+    }),
+    methods: {
+      setCurrentStep(index) {
+        this.stepNumber = index
+      },
+      nextStep() {
+        this.stepNumber = this.stepNumber + 1
+      },
+      prevStep() {
+        this.stepNumber = this.stepNumber -1
+      }
+    }
   }
 </script>
 
 <style lang="less" scoped>
+  .control-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    > div {
+      margin:20px;
+    }
+  }
 </style>

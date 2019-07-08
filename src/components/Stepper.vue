@@ -85,6 +85,10 @@
     props: {
       value: {
         type: Array
+      },
+      selectedStep: {
+        default: 1,
+        type: Number
       }
     },
     data: () => ({
@@ -141,6 +145,19 @@
 
       onResize() {
         this.windowWidth = window.innerWidth
+      }
+    },
+    watch: {
+      selectedStep(val) {
+        if (this.value.length < val) {
+          this.stepIndex = 1
+          this.$emit('current:step', this.stepIndex)
+        } else if (val < 1) {
+          this.stepIndex = this.value.length
+          this.$emit('current:step', this.stepIndex)
+        } else {
+          this.stepIndex = val
+        }
       }
     },
     mounted() {

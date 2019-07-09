@@ -9,7 +9,13 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Stepper v-model="steps" @current:step="setCurrentStep" :selectedStep="stepNumber">
+    <Stepper
+      v-model="steps"
+      @current:step="setCurrentStep"
+      :selectedStep="stepNumber"
+      :linearMode="true"
+      :optionalSteps="[3]"
+    >
       <template #header></template>
       <template #step-1>
         <Card class="dashboard-report">

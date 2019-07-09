@@ -13,7 +13,12 @@
     {
       "name": "linearMode",
       "type": "Boolean",
-      "description": "If this property is false, we can move next steps by clicking header. Default value is true"
+      "description": "If this property is true, we can move next steps one by one. Default value is false"
+    },
+    {
+      "name": "optionalSteps",
+      "type": "Array",
+      "description": "In linear mode, we can move to optional steps, even it is not increased by linear"
     }
   ],
   "events": [

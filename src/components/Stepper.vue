@@ -50,7 +50,7 @@
     <div v-if="value.length">
       <div
         class="step"
-        :class="{'invalid-step': !validStep}"
+        :class="{'invalid-step': !valid}"
         :style="{height:
         `${isMobile ? 40 : 56}px`}"
       >
@@ -115,6 +115,14 @@
       },
       linearMode: {
         type: Boolean,
+        default: false
+      },
+      optionalSteps: {
+        type: Array,
+        default: () => []
+      },
+      valid: {
+        type: Boolean,
         default: true
       }
     },
@@ -130,13 +138,6 @@
       },
       isMobile() {
         return this.windowWidth <= DesktopWidth
-      },
-      validStep() {
-        if (this.stepIndex > 0 && this.stepIndex <= this.value.length) {
-          return true
-        } else {
-          return false
-        }
       }
     },
     methods: {
@@ -153,6 +154,15 @@
 
       nextStep(index) {
         if (this.linearMode) {
+          if (!this.valid) {
+            return
+          }
+
+          if (this.optionalSteps.includes(index) || Math.abs(this.stepIndex - index) == 1) {
+            this.stepIndex = index;
+            this.$emit('current:step', this.stepIndex);
+          }
+        } else {
           this.stepIndex = index;
           this.$emit('current:step', this.stepIndex)
         }
@@ -185,8 +195,21 @@
     },
     watch: {
       selectedStep(val) {
-        if (this.validStep) {
-          this.stepIndex = val
+        if (this.linearMode) {
+          if (!this.valid) {
+            this.$emit('current:step', this.stepIndex)
+            return
+          }
+
+          if ((this.optionalSteps.includes(val) || Math.abs(this.stepIndex - val) == 1) && val > 0 && val <= this.value.length) {
+            this.stepIndex = val;
+          }
+          this.$emit('current:step', this.stepIndex)
+          
+        } else {
+          if (val < 1) { this.stepIndex = this.value.length }
+          else if (val < this.value.length) { this.stepIndex = 1 }
+          else { this.stepIndex = val }
           this.$emit('current:step', this.stepIndex)
         }
       }

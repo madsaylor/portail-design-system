@@ -48,22 +48,45 @@
   <div class="stepper">
     <slot name="header"></slot>
     <div v-if="value.length">
-      <div class="step" :style="{height: `${isMobile ? 40 : 56}px`}">
-        <div v-for="(step, index) in value"
-             @click="nextStep(index + 1)">
-          <Icon :source="isMobile ? 'round' : 'check_circle'"
-                :color="getIconColor(index)"
-                size="18px"
-                padding="3px">
+      <div
+        class="step"
+        :class="{'invalid-step': !validStep}"
+        :style="{height:
+        `${isMobile ? 40 : 56}px`}"
+      >
+        <div class="alert">
+          <Icon
+            info  
+            color="red"
+            size="32px"
+            padding="12px"
+          />
+        </div>
+
+        <div
+          v-for="(step, index) in value"
+          @click="nextStep(index + 1)"
+          :key="index"
+        >
+          <Icon
+            :source="isMobile ? 'round' : 'check_circle'"
+            :color="getIconColor(index)"
+            size="18px"
+            padding="3px"
+          >
           </Icon>
+
           <span v-if="!isMobile" :class="getIconColor(index)">
             {{step.name}}
           </span>
-          <Icon source="arrow_right"
-                :color="getIconColor(index)"
-                size="18px"
-                padding="3px"
-                v-if="!isMobile && index + 1 !== value.length">
+
+          <Icon
+            source="arrow_right"
+            :color="getIconColor(index)"
+            size="18px"
+            padding="3px"
+            v-if="!isMobile && index + 1 !== value.length"
+          >
           </Icon>
         </div>
       </div>
@@ -89,6 +112,10 @@
       selectedStep: {
         default: 1,
         type: Number
+      },
+      linearMode: {
+        type: Boolean,
+        default: true
       }
     },
     data: () => ({
@@ -103,6 +130,13 @@
       },
       isMobile() {
         return this.windowWidth <= DesktopWidth
+      },
+      validStep() {
+        if (this.stepIndex > 0 && this.stepIndex <= this.value.length) {
+          return true
+        } else {
+          return false
+        }
       }
     },
     methods: {
@@ -118,8 +152,10 @@
       },
 
       nextStep(index) {
-        this.stepIndex = index;
-        this.$emit('current:step', this.stepIndex)
+        if (this.linearMode) {
+          this.stepIndex = index;
+          this.$emit('current:step', this.stepIndex)
+        }
       },
 
       swipeStep(regulator) {
@@ -149,14 +185,9 @@
     },
     watch: {
       selectedStep(val) {
-        if (this.value.length < val) {
-          this.stepIndex = 1
-          this.$emit('current:step', this.stepIndex)
-        } else if (val < 1) {
-          this.stepIndex = this.value.length
-          this.$emit('current:step', this.stepIndex)
-        } else {
+        if (this.validStep) {
           this.stepIndex = val
+          this.$emit('current:step', this.stepIndex)
         }
       }
     },
@@ -183,6 +214,22 @@
     box-shadow: @card-shadow;
     margin-bottom: @stepper-step-margin-bottom;
     cursor: pointer;
+
+    .alert {
+      display: none;
+    }
+
+    &.invalid-step {
+      border: solid 1px red;
+      position: relative;
+
+      .alert {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
   }
 
   .primary {

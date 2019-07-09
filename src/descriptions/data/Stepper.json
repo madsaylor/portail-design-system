@@ -9,6 +9,11 @@
       "name": "selectedStep",
       "type": "Number",
       "description": "Enable to select the step by it's index"
+    },
+    {
+      "name": "linearMode",
+      "type": "Boolean",
+      "description": "If this property is false, we can move next steps by clicking header. Default value is true"
     }
   ],
   "events": [

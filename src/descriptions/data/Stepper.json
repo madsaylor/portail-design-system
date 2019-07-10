@@ -19,6 +19,11 @@
       "name": "optionalSteps",
       "type": "Array",
       "description": "In linear mode, we can move to optional steps, even it is not increased by linear"
+    },
+    {
+      "name": "maxHeight",
+      "type": "String",
+      "description": "Maximum height of the stepper body, if the height of the body is bigger than this property, slider will be appeared"
     }
   ],
   "events": [

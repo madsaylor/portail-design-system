@@ -91,7 +91,9 @@
         </div>
       </div>
 
-      <slot :name="activeStepName"></slot>
+      <div class="slot-container" :style="{maxHeight: maxHeight}">
+        <slot :name="activeStepName"></slot>
+      </div>
     </div>
     <slot name="footer"></slot>
   </div>
@@ -124,6 +126,10 @@
       valid: {
         type: Boolean,
         default: true
+      },
+      maxHeight: {
+        type: String,
+        default: '400px'
       }
     },
     data: () => ({
@@ -253,6 +259,12 @@
         left: 0;
       }
     }
+  }
+
+  .slot-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; 
   }
 
   .primary {

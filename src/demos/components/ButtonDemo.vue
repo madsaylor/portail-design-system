@@ -18,11 +18,12 @@
       <Button disabled>Disabled</Button>&nbsp;
       <Button icon="menu" big plain></Button>&nbsp;
       <Button icon="menu" big></Button>&nbsp;
+      <Button icon="menu" small plain>Small Button</Button>&nbsp;
       <Button mobile-bottom>Mobile Button</Button>&nbsp;
       <Button icon="menu" plain></Button>&nbsp;
       <Button icon="menu"></Button>&nbsp;
       <Button link="https://github.com/highqualitycode" icon="account_circle">Github</Button>&nbsp;
-      <Button link="https://github.com/highqualitycode" icon="insert_chart" link-ico>Full Report</Button>&nbsp;
+      <Button link="https://github.com/highqualitycode" icon="insert_chart" small link-ico>Full Report</Button>&nbsp;
       <!-- OR -->
       <button class="button primary">
         Button Label

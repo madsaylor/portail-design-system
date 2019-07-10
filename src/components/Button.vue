@@ -24,7 +24,7 @@
       <a
         v-on="$listeners"
         :href="link"
-        :class="['button', {primary, big, alt, plain, 'link-ico': linkIco}]"
+        :class="['button', {primary, big, small, alt, plain, 'link-ico': linkIco}]"
         :disabled="disabled"
         :target="target"
       >
@@ -32,14 +32,14 @@
           v-if="icon"
           :class="{'icon-left': hasLabel}"
           :source="icon"
-          :size="big ? '28px' : '24px'"
+          :size="computedIconSize"
         />
         <slot></slot>
         <Icon
           class="icon-right"
           v-if="iconRight"
           :source="iconRight"
-          :size="big ? '28px' : '24px'"
+          :size="computedIconSize"
         />
       </a>
     </template>
@@ -47,21 +47,21 @@
     <template v-else>
       <button
         v-on="$listeners"
-        :class="['button', {primary, big, alt, plain}]"
+        :class="['button', {primary, big, small, alt, plain}]"
         :disabled="disabled"
       >
         <Icon
           v-if="icon"
           :class="{'icon-left': hasLabel}"
           :source="icon"
-          :size="big ? '28px' : '24px'"
+          :size="computedIconSize"
         />
         <slot></slot>
         <Icon
           class="icon-right"
           v-if="iconRight"
           :source="iconRight"
-          :size="big ? '28px' : '24px'"
+          :size="computedIconSize"
         />
       </button>
     </template>
@@ -76,6 +76,7 @@ export default {
   components: {Icon},
   props: {
     big: Boolean,
+    small: Boolean,
     alt: Boolean,
     plain: Boolean,
     linkIco: Boolean,
@@ -95,6 +96,11 @@ export default {
     hasLabel() {
       return !!this.$slots.default
     },
+    computedIconSize() {
+      if (this.big) return '28px'
+      else if (this.small) return '16px'
+      return '24px'
+    }
   },
 }
 </script>
@@ -143,6 +149,16 @@ export default {
 
   &.big {
     padding: 14px 24px;
+  }
+
+  &.small {
+    padding: 6px 8px;
+    .font-components-button-small();
+
+    .icon {
+      margin: 0;
+      margin-right: 4px;
+    }
   }
 
   .icon {

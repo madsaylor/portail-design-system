@@ -14,6 +14,7 @@
 
 <template>
   <Popper
+    class="ds-tooltip-wrapper"
     trigger="click"
     :options="{
       placement: placement,
@@ -56,135 +57,137 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.reference {
-  display: inline-block;
-}
-
-.popper {
-  background-color: @color-white;
-  border-radius: 2px;
-  color: @color-dark;
-  border: solid 1px @color-primary;
-  font-family: @font-family;
-  font-size: 14px;
-  line-height: 18px;
-  padding: 8px;
-  width: 270px;
-  position: relative;
-  text-align: left;
-  box-shadow: none;
-}
-
-/* styles.css */
-
-[x-arrow] {
-  position: absolute;
-}
-
-.popper {
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  &[x-placement="bottom"] {
-    [x-arrow] {
-      &:before {
-        content: '';
-        position: absolute;
-        left: -10px;
-        top: -10px;
-        border-bottom: 15px solid @color-primary;
-        border-right: 10px solid transparent;
-        border-left: 10px solid transparent;
-        z-index: 1;
-      }
-
-      &:after {
-        content: '';
-        position: absolute;
-        left: -10px;
-        top: -8px;
-        border-bottom: 15px solid @color-white;
-        border-right: 10px solid transparent;
-        border-left: 10px solid transparent;
-        z-index: 2;
-      }
-    }
+.ds-tooltip-wrapper {
+  .reference {
+    display: inline-block;
   }
 
-  &[x-placement="top"] {
-    [x-arrow] {
-       &:before {
-        content: '';
-        position: absolute;
-        left: -10px;
-        bottom: -10px;
-        border-top: 15px solid @color-primary;
-        border-right: 10px solid transparent;
-        border-left: 10px solid transparent;
-        z-index: 1;
-      }
-
-      &:after {
-        content: '';
-        position: absolute;
-        left: -10px;
-        bottom: -8px;
-        border-top: 15px solid @color-white;
-        border-right: 10px solid transparent;
-        border-left: 10px solid transparent;
-        z-index: 2;
-      }
-    }
+  .popper {
+    background-color: @color-white;
+    border-radius: 2px;
+    color: @color-dark;
+    border: solid 1px @color-primary;
+    font-family: @font-family;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 8px;
+    width: 270px;
+    position: relative;
+    text-align: left;
+    box-shadow: none;
   }
 
-  &[x-placement="left"] {
-    [x-arrow] {
-      &:before {
-        content: '';
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        border-left: 15px solid @color-primary;
-        border-top: 10px solid transparent;
-        border-bottom: 10px solid transparent;
-        z-index: 1;
-      }
+  /* styles.css */
 
-      &:after {
-        content: '';
-        position: absolute;
-        top: -10px;
-        right: -8px;
-        border-left: 15px solid @color-white;
-        border-top: 10px solid transparent;
-        border-bottom: 10px solid transparent;
-        z-index: 2;
-      }
-    }
+  [x-arrow] {
+    position: absolute;
   }
 
-  &[x-placement="right"] {
-    [x-arrow] {
-      &:before {
-        content: '';
-        position: absolute;
-        top: -10px;
-        left: -10px;
-        border-right: 15px solid @color-primary;
-        border-top: 10px solid transparent;
-        border-bottom: 10px solid transparent;
-        z-index: 1;
-      }
+  .popper {
+    margin-top: 10px;
+    margin-bottom: 10px;
 
-      &:after {
-        content: '';
-        position: absolute;
-        top: -10px;
-        left: -8px;
-        border-right: 15px solid @color-white;
-        border-top: 10px solid transparent;
-        border-bottom: 10px solid transparent;
-        z-index: 2;
+    &[x-placement="bottom"] {
+      [x-arrow] {
+        &:before {
+          content: '';
+          position: absolute;
+          left: -10px;
+          top: -10px;
+          border-bottom: 15px solid @color-primary;
+          border-right: 10px solid transparent;
+          border-left: 10px solid transparent;
+          z-index: 1;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          left: -10px;
+          top: -8px;
+          border-bottom: 15px solid @color-white;
+          border-right: 10px solid transparent;
+          border-left: 10px solid transparent;
+          z-index: 2;
+        }
+      }
+    }
+
+    &[x-placement="top"] {
+      [x-arrow] {
+        &:before {
+          content: '';
+          position: absolute;
+          left: -10px;
+          bottom: -10px;
+          border-top: 15px solid @color-primary;
+          border-right: 10px solid transparent;
+          border-left: 10px solid transparent;
+          z-index: 1;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          left: -10px;
+          bottom: -8px;
+          border-top: 15px solid @color-white;
+          border-right: 10px solid transparent;
+          border-left: 10px solid transparent;
+          z-index: 2;
+        }
+      }
+    }
+
+    &[x-placement="left"] {
+      [x-arrow] {
+        &:before {
+          content: '';
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          border-left: 15px solid @color-primary;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          z-index: 1;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: -10px;
+          right: -8px;
+          border-left: 15px solid @color-white;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          z-index: 2;
+        }
+      }
+    }
+
+    &[x-placement="right"] {
+      [x-arrow] {
+        &:before {
+          content: '';
+          position: absolute;
+          top: -10px;
+          left: -10px;
+          border-right: 15px solid @color-primary;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          z-index: 1;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: -10px;
+          left: -8px;
+          border-right: 15px solid @color-white;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          z-index: 2;
+        }
       }
     }
   }

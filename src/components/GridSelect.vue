@@ -37,7 +37,7 @@
 -->
 
 <template>
-  <table class="grid-select">
+  <table class="ds-grid-select">
     <tr v-if="labelsTop" class="labels-top">
       <th v-for="label in labelsTop">
         {{ label }}
@@ -97,7 +97,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.grid-select {
+.ds-grid-select {
   width: 100%;
   height: 100%;
   border-collapse: collapse;

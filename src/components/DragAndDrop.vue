@@ -1,6 +1,6 @@
 <template>
   <draggable v-model="draggableList" :group="group" @start="drag=true" @end="drag=false">
-    <div class="draggable-item" v-for="(element, index) in list" :key="index">
+    <div class="ds-draggable-item" v-for="(element, index) in list" :key="index">
       <Icon menu />
       <span class="title">{{ element.name }}</span>
       <span>{{ element.quantity || '' }}</span>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.draggable-item {
+.ds-draggable-item {
   display: flex;
   justify-content: space-between;
   align-items: center;

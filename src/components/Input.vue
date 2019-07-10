@@ -110,7 +110,7 @@
 -->
 
 <template>
-  <div :class="['input', type, {disabled, sm, md, lg, preventScroll: datepickerVisible}]">
+  <div :class="['ds-input', type, {disabled, sm, md, lg, preventScroll: datepickerVisible}]">
     <label>
       <div v-if="label"
            :class="['label-text', {'slide-label': slideLabel, 'label-focus': labelFocus}, slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">
@@ -545,7 +545,7 @@ export default {
 @import '../styles/vars';
 @import '../styles/mixins';
 
-.input {
+.ds-input {
   display: inline-block;
 
   label {
@@ -687,7 +687,7 @@ export default {
       }
     }
 
-    .icon {
+    .ds-icon {
       pointer-events: none;
       position: absolute;
       bottom: 6px;

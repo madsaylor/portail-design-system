@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style scoped>
-.grid-select {
+.ds-grid-select {
   display: inline-table;
   margin: 10px;
   width: 300px;

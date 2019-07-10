@@ -21,7 +21,7 @@
 -->
 
 <template>
-  <div class="signature-wrapper">
+  <div class="ds-signature-wrapper">
     <div class="signature-pad-wrapper" @mousedown="clearPlaceholder" @mouseup="mouseup" @mouseleave="mouseleave">
       <VueSignaturePad
         class="signature-pad"
@@ -131,7 +131,7 @@
 <style lang="less">
   @import '../styles/vars';
 
-  .signature-wrapper {
+  .ds-signature-wrapper {
     display: inline-block;
 
     .signature-pad-wrapper {

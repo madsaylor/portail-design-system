@@ -34,7 +34,7 @@
     @tab:click - Return tab object
 -->
 <template>
-  <div class="tabs-container">
+  <div class="ds-tabs-container">
     <div class="tabs-header">
       <div class="tabs-row">
         <template v-for="(tab, index) in tabs">
@@ -120,7 +120,7 @@
 <style scoped lang="less">
   @import '../styles/vars';
 
-  .tabs-container {
+  .ds-tabs-container {
     .tabs-header {
       display: flex;
       background-color: @color-white;

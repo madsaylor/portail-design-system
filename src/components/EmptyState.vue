@@ -14,7 +14,7 @@
 -->
 
 <template>
-  <div class="empty-page-container">
+  <div class="ds-empty-page-container">
       <div class="empty-state-wrapper">
           <div class="row img-row">
             <Icon :[imageName]="imageName" noSize class="empty-img"></Icon>
@@ -60,7 +60,7 @@
 
 @max-width-empty-state: 570px;
 
-.empty-page-container {
+.ds-empty-page-container {
     text-align: center;
     display: block;
     margin:0 auto;

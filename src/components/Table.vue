@@ -14,7 +14,7 @@
 -->
 
 <template>
-  <div class="table-wrapper" v-if="getRange">
+  <div class="ds-table-wrapper" v-if="getRange">
     <div class="table-header">
       <Card class="header-wrapper">
         <div class="header"
@@ -108,7 +108,7 @@
 <style lang="less" scoped>
   @import '../styles/vars';
 
-  .table-wrapper {
+  .ds-table-wrapper {
     .table-header {
       .header-wrapper {
         display: flex;

@@ -12,7 +12,7 @@
 -->
 
 <template>
-  <div class="pagination-wrapper">
+  <div class="ds-pagination-wrapper">
     <slot :range="range"></slot>
     <div class="pagination-count">
       <span class="count">
@@ -93,7 +93,7 @@
 <style lang="less" scoped>
   @import '../styles/vars';
 
-  .pagination-wrapper {
+  .ds-pagination-wrapper {
     .pagination-count {
       display: flex;
       justify-content: flex-end;
@@ -106,7 +106,7 @@
         color: @color-gray-500;
       }
 
-      .icon {
+      .ds-icon {
         cursor: pointer;
 
         &[disabled] {

@@ -45,7 +45,7 @@
 -->
 
 <template>
-  <div class="stepper">
+  <div class="ds-stepper">
     <slot name="header"></slot>
     <div v-if="value.length">
       <div
@@ -235,45 +235,47 @@
 <style lang="less" scoped>
   @import '../styles/vars';
 
-  .step {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: @color-white;
-    box-shadow: @card-shadow;
-    margin-bottom: @stepper-step-margin-bottom;
-    cursor: pointer;
-
-    .alert {
-      display: none;
-    }
-
-    &.invalid-step {
-      border: solid 1px red;
-      position: relative;
+  .ds-stepper {
+    .step {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: @color-white;
+      box-shadow: @card-shadow;
+      margin-bottom: @stepper-step-margin-bottom;
+      cursor: pointer;
 
       .alert {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
+        display: none;
+      }
+
+      &.invalid-step {
+        border: solid 1px red;
+        position: relative;
+
+        .alert {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
       }
     }
-  }
 
-  .slot-container {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto; 
-  }
+    .slot-container {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+    }
 
-  .primary {
-    color: @color-primary;
-  }
-  .gray-400 {
-    color: @color-gray-400;
-  }
-  .dark {
-    color: @color-dark;
+    .primary {
+      color: @color-primary;
+    }
+    .gray-400 {
+      color: @color-gray-400;
+    }
+    .dark {
+      color: @color-dark;
+    }
   }
 </style>

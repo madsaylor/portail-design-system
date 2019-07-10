@@ -30,7 +30,7 @@
 <template>
   <span v-if="tooltip">
       <span
-        class="icon"
+        class="ds-icon"
         v-html="code"
         v-on="$listeners"
         :style="stylesObject"
@@ -43,7 +43,7 @@
     </Dropdown>
   </span>
   <span v-else-if="!tooltip"
-    class="icon"
+    class="ds-icon"
     v-html="code"
     v-on="$listeners"
     :style="stylesObject"
@@ -116,7 +116,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.icon {
+.ds-icon {
   display: inline-block;
   vertical-align: bottom;
 

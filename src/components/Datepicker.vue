@@ -25,7 +25,7 @@
 -->
 
 <template>
-  <div :class="['datepicker', {'full-width': fullWidth}]">
+  <div :class="['ds-datepicker', {'full-width': fullWidth}]">
     <div class="datepicker-header">
       <div class="labels">
         <div
@@ -343,7 +343,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.datepicker {
+.ds-datepicker {
   background-color: @color-white;
   border-radius: 4px;
   box-shadow: @card-shadow;
@@ -464,7 +464,7 @@ export default {
 }
 
 @media @screen-medium, @screen-small {
-  .datepicker {
+  .ds-datepicker {
     height: 428px;
     border-radius: 0;
 

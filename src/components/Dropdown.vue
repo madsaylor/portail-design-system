@@ -33,7 +33,7 @@
     @leave="leave"
   >
     <div v-if="opened"
-         class="dropdown"
+         class="ds-dropdown"
          :style="{ ...positionStyle, transition: `opacity ${transitionTime}ms ease-out`}"
          @mouseout="onMouseout">
       <div class="focus-trap" tabindex="0"></div>
@@ -400,7 +400,7 @@ export default {
 <style lang="less" scoped>
 @import '../styles/vars';
 
-.dropdown {
+.ds-dropdown {
   position: absolute;
   z-index: @z-index-dropdown;
 

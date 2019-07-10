@@ -11,7 +11,7 @@
 -->
 
 <template>
-    <div class="collapser">
+    <div class="ds-collapser">
       <div
         class="top"
         @click="onCollapserClick">
@@ -47,7 +47,7 @@
 <style lang="less">
   @import "../styles/vars";
 
-    .collapser {
+    .ds-collapser {
       display: flex;
       width: 100%;
       flex-direction: column;

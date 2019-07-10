@@ -11,7 +11,7 @@
 -->
 
 <template>
-  <div class="app-header">
+  <div class="ds-app-header">
     <slot name="left"></slot>
     <div class="title">
       <slot></slot>
@@ -29,7 +29,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.app-header {
+.ds-app-header {
   background-color: @color-white;
   height: @app-header-height;
   box-shadow: inset 0 -1px 0 0 @color-gray-200;

@@ -14,7 +14,7 @@
 -->
 
 <template>
-  <div class="accordion-wrapper">
+  <div class="ds-accordion-wrapper">
     <Collapser :opened.sync="accordion.open"
                :label="getLabel(accordion.label, index)"
                v-for="(accordion, index) in value"
@@ -44,10 +44,10 @@
 <style lang="less">
   @import '../styles/vars';
 
-  .accordion-wrapper {
+  .ds-accordion-wrapper {
     width: 100%;
 
-    .collapser {
+    .ds-collapser {
       margin-bottom: unset;
       padding-bottom: 1px;
       box-shadow: inset 0 -1px 0 0 @color-gray-300;

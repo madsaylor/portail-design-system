@@ -30,7 +30,7 @@
 -->
 
 <template>
-  <div class="menu-wrapper">
+  <div class="ds-menu-wrapper">
     <template v-for="(item, index) in items">
       <a
         :class="['item-container', {
@@ -82,7 +82,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.menu-wrapper {
+.ds-menu-wrapper {
   background-color: @color-white;
   box-shadow: @card-shadow;
 

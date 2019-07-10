@@ -17,7 +17,7 @@
 
 <template>
   <div class="">
-    <div class="input-wrapper">
+    <div class="ds-input-wrapper">
       <input type="file" id="file-input" ref="file" @change="fileInputChange" multiple />
       <Input
         type="text"
@@ -169,11 +169,11 @@ export default {
 <style lang="less">
 @import '~@/styles/vars';
 
-.input-wrapper {
+.ds-input-wrapper {
   position: relative;
 
   &.error {
-    .input {
+    .ds-input {
       input {
         border-color: @color-red;
       }
@@ -184,7 +184,7 @@ export default {
     display: none;
   }
 
-  .input {
+  .ds-input {
     width: 100%;
 
     label {

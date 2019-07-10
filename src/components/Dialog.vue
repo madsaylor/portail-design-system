@@ -22,7 +22,7 @@
   <section
     v-if="opened"
     v-move-to-body
-    class="dialog"
+    class="ds-dialog"
     :style="dialogStyleObject"
   >
     <div
@@ -191,7 +191,7 @@
 <style lang="less">
   @import "../styles/vars";
 
-  .dialog {
+  .ds-dialog {
     position: fixed;
     display: flex;
     -ms-flex: 1 0 auto;

@@ -12,7 +12,7 @@
     </FullScreenModal>
 -->
 <template>
-  <div class="full-screen-modal">
+  <div class="ds-full-screen-modal">
     <div class="modal-header">
       <slot name="header"></slot>
     </div>
@@ -42,7 +42,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.full-screen-modal {
+.ds-full-screen-modal {
   box-sizing: border-box;
   height: 100vh;
   width: 100vw;

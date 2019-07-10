@@ -28,7 +28,7 @@
 -->
 
 <template>
-  <div>
+  <div class="ds-phone-numbuer-input">
     <div class="label-text">{{ label }}</div>
     <div class="vue-tel-input" :class="{ disabled: disabled }">
       <div
@@ -376,109 +376,111 @@ export default {
 @import '../styles/vars';
 @import '../styles/flags';
 
-li.last-preferred {
-  border-bottom: @app-last-item-border;
-}
-.iti-flag {
-  margin-right: @app-input-margin;
-  margin-left: @app-input-margin;
-}
-.dropdown-item .iti-flag {
-  display: inline-block;
-  margin-right: @app-input-margin;
-}
-.selection {
-  font-size: @selection-font-size;
-  display: flex;
-  align-items: center;
-}
-
-.label-text {
-  .font-desktop-x-small-regular-gray();
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  height: @label-height;
-  margin-bottom: @label-margin-bottom;
-}
-
-.vue-tel-input {
-  border-radius: @tel-input-radius;
-  display: flex;
-  border: @tel-input-border;
-  text-align: left;
-
-  &:focus-within {
-    border-color: @color-primary;
+.ds-phone-numbuer-input {
+  li.last-preferred {
+    border-bottom: @app-last-item-border;
   }
-
-  .dropdown {
+  .iti-flag {
+    margin-right: @app-input-margin;
+    margin-left: @app-input-margin;
+  }
+  .dropdown-item .iti-flag {
+    display: inline-block;
+    margin-right: @app-input-margin;
+  }
+  .selection {
+    font-size: @selection-font-size;
     display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    position: relative;
-    padding: @phone-input-padding;
+    align-items: center;
+  }
+
+  .label-text {
+    .font-desktop-x-small-regular-gray();
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: @label-height;
+    margin-bottom: @label-margin-bottom;
+  }
+
+  .vue-tel-input {
+    border-radius: @tel-input-radius;
+    display: flex;
+    border: @tel-input-border;
+    text-align: left;
+
+    &:focus-within {
+      border-color: @color-primary;
+    }
+
+    .dropdown {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: center;
+      position: relative;
+      padding: @phone-input-padding;
+      cursor: pointer;
+
+      &.open{
+        background-color: @color-gray-200;
+      }
+
+      &:hover {
+        background-color: @color-gray-200;
+      }
+
+      ul {
+        z-index: 1;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        list-style: none;
+        max-height: @drop-panel-max-height;
+        overflow-y: scroll;
+        position: absolute;
+        top: 33px;
+        left: -1px;
+        background-color: @color-gray-100;
+        border: @drop-panel-border;
+        width: @drop-panel-width;
+      }
+    }
+
+    input {
+      border: none;
+      border-radius: @input-border-radius;
+      width: 100%;
+      outline: none;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      .font-desktop-small-regular-dark();
+    }
+  }
+
+  .country-code {
+    color: @color-gray-500;
+  }
+  .dropdown-arrow {
+    transform: scaleY(0.5);
+    display: inline-block;
+    color: @color-gray-500;
+  }
+  .dropdown-item {
     cursor: pointer;
-
-    &.open{
-      background-color: @color-gray-200;
-    }
-
-    &:hover {
-      background-color: @color-gray-200;
-    }
-
-    ul {
-      z-index: 1;
-      padding: 0;
-      margin: 0;
-      text-align: left;
-      list-style: none;
-      max-height: @drop-panel-max-height;
-      overflow-y: scroll;
-      position: absolute;
-      top: 33px;
-      left: -1px;
-      background-color: @color-gray-100;
-      border: @drop-panel-border;
-      width: @drop-panel-width;
-    }
+    padding: @dropdown-item-padding;
   }
-
-  input {
-    border: none;
-    border-radius: @input-border-radius;
-    width: 100%;
-    outline: none;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    .font-desktop-small-regular-dark();
+  .dropdown-item.highlighted {
+    background-color: @color-gray-200;
   }
-}
-
-.country-code {
-  color: @color-gray-500;
-}
-.dropdown-arrow {
-  transform: scaleY(0.5);
-  display: inline-block;
-  color: @color-gray-500;
-}
-.dropdown-item {
-  cursor: pointer;
-  padding: @dropdown-item-padding;
-}
-.dropdown-item.highlighted {
-  background-color: @color-gray-200;
-}
-.dropdown-menu.show {
-  max-height: @drop-menu-max-height;
-  overflow: scroll;
-}
-.vue-tel-input.disabled .selection,
-.vue-tel-input.disabled .dropdown,
-.vue-tel-input.disabled input {
-  cursor: no-drop;
+  .dropdown-menu.show {
+    max-height: @drop-menu-max-height;
+    overflow: scroll;
+  }
+  .vue-tel-input.disabled .selection,
+  .vue-tel-input.disabled .dropdown,
+  .vue-tel-input.disabled input {
+    cursor: no-drop;
+  }
 }
 </style>

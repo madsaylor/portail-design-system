@@ -18,7 +18,7 @@
 -->
 
 <template>
-  <div class="upload-wrapper">
+  <div class="ds-upload-wrapper">
     <vue-dropzone :options="fileUploadOptions" id="file-upload" :useCustomSlot="true">
       <div v-if="files.length === 0 || !preview " class="dropzone-custom-content">
         <div class="icon-wrapper">
@@ -174,7 +174,7 @@ export default {
 <style lang="less" scoped>
 @import '../styles/vars';
 
-.upload-wrapper {
+.ds-upload-wrapper {
   width: 100%;
 
   #file-upload {

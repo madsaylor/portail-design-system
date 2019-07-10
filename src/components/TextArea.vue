@@ -23,7 +23,7 @@
 -->
 
 <template>
-  <div>
+  <div class="ds-text-area">
     <label>
       <div class="label-text" v-if="label">{{label}}</div>
       <textarea
@@ -167,7 +167,7 @@
 <style lang="less" scoped>
   @import '../styles/vars';
 
-  div {
+  .ds-text-area {
     label {
       display: block;
       position: relative;

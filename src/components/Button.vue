@@ -19,7 +19,7 @@
 -->
 
 <template>
-  <div :class="['button-link-wrapper', {mobileBottom}]">
+  <div :class="['ds-button-link-wrapper', {mobileBottom}]">
     <template v-if="link">
       <a
         v-on="$listeners"
@@ -108,7 +108,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.button-link-wrapper {
+.ds-button-link-wrapper {
   display: inline-block;
 
   @media @screen-medium, @screen-small {
@@ -155,13 +155,13 @@ export default {
     padding: 6px 8px;
     .font-components-button-small();
 
-    .icon {
+    .ds-icon {
       margin: 0;
       margin-right: 4px;
     }
   }
 
-  .icon {
+  .ds-icon {
     fill: @color-dark;
     margin: -4px;
   }
@@ -190,7 +190,7 @@ export default {
       background: darken(@color-primary, 10%);
     }
 
-    .icon {
+    .ds-icon {
       fill: @color-white;
     }
   }
@@ -199,7 +199,7 @@ export default {
     .font-components-button-normal-alt();
     background: @color-white;
     border: 1px solid @color-primary;
-    .icon {
+    .ds-icon {
       fill: @color-primary;
     }
   }
@@ -223,7 +223,7 @@ export default {
     color: @color-gray-400;
     cursor: initial;
 
-    .icon {
+    .ds-icon {
       fill: @color-gray-100;
     }
 

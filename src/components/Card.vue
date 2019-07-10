@@ -8,7 +8,7 @@
     <Card>Hello, World!</Card>
 -->
 <template>
-  <div class="card"><slot></slot></div>
+  <div class="ds-card"><slot></slot></div>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
 <style lang="less" scoped>
 @import '~@/styles/vars';
 
-.card {
+.ds-card {
   border-radius: @card-br;
   background-color: @color-white;
   box-shadow: @card-shadow;
@@ -66,7 +66,7 @@ export default {
   &.user-todo {
     display: flex;
 
-    .icon {
+    .ds-icon {
       margin-right: 18px;
     }
     .todo-title {

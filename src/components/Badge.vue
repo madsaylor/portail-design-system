@@ -11,7 +11,7 @@
 -->
 
 <template>
-  <div class="badge" :class="color">
+  <div class="ds-badge" :class="color">
     <Icon v-if="icon" class="icon" :source="icon" color="white" :size="iconSize"/>
     <slot></slot>
   </div>
@@ -34,7 +34,7 @@
 <style lang="less" scoped>
   @import '../styles/vars';
 
-  .badge {
+  .ds-badge {
     display: inline-flex;
     align-items: center;
     width: auto;

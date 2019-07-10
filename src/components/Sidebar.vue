@@ -55,7 +55,7 @@
 -->
 
 <template>
-  <div :class="['sidebar-container', {opened, disabled}]">
+  <div :class="['ds-sidebar-container', {opened, disabled}]">
     <div class="sidebar">
       <div class="header">
         <slot name="header">Sidebar header</slot>
@@ -195,7 +195,7 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.sidebar-container {
+.ds-sidebar-container {
   box-shadow: @sidebar-shadow;
   box-sizing: border-box;
   left: 0;
@@ -331,7 +331,7 @@ export default {
 }
 
 @media @hide-sidebar {
-  .sidebar-container {
+  .ds-sidebar-container {
     transition: left .1s ease;
     &:not(.opened) {
       left: -@sidebar-width;

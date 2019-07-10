@@ -454,7 +454,7 @@ export default {
       }
 
       if (this.type === 'date') {
-        this.datepickerVisible = true;
+        this.datepickerVisible = !this.datepickerVisible;
         this.$refs.input.blur();
       }
     },

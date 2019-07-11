@@ -41,6 +41,11 @@
       "type": "Boolean",
       "default": "false",
       "description": "Allow to close dropdown on mouseout event"
+    },
+    {
+      "name": "labelId",
+      "type": "String",
+      "description": "Label identification of input component with dropdown component"
     }
   ],
   "events": []

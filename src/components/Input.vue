@@ -125,8 +125,8 @@
         :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel, 'date': type === 'date', 'has-right-icon': iconRight}"
         v-model="inputValue"
         ref="input"
-        @focus="inputFocus"
-        @click="inputFocus"
+        @focus="inputFocus($event)"
+        @click="inputFocus($event)"
         @blur="inputBlur"
         @keydown="onKeyDown"
         @mousedown="onMouseDown($event)"
@@ -447,13 +447,17 @@ export default {
         event.preventDefault()
       }
     },
-    inputFocus() {
+    inputFocus(event) {
       if (this.slideLabel) {
         this.labelFocus = true;
         this.slideActive = true;
       }
 
       if (this.type === 'date') {
+        if (!event.toElement) {
+          event.preventDefault()
+          return
+        }
         this.datepickerVisible = !this.datepickerVisible;
         this.$refs.input.blur();
       }

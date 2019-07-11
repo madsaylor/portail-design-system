@@ -113,6 +113,7 @@
   <div :class="['ds-input', type, {disabled, sm, md, lg, preventScroll: datepickerVisible}]">
     <label>
       <div v-if="label"
+           :id="id"
            :class="['label-text', {'slide-label': slideLabel, 'label-focus': labelFocus}, slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">
           {{ label }}
       </div>
@@ -181,6 +182,7 @@
       :opened.sync="datepickerVisible"
       :position="getDatepickerPosition"
       :borderColor="!isMobile && datepickerBorderColorDesktop"
+      :labelId="id"
       just-fade
     >
       <Datepicker
@@ -290,7 +292,8 @@ export default {
     windowWidth: window.innerWidth,
     positions: Array,
     timeoutId: undefined,
-    overflowCheckStatus: undefined
+    overflowCheckStatus: undefined,
+    id: Math.random().toString(36).substring(7)
   }),
   mounted() {
     if (this.name) {
@@ -456,10 +459,10 @@ export default {
       if (this.type === 'date') {
         if (!event.toElement) {
           event.preventDefault()
-          return
+        } else {
+          this.datepickerVisible = !this.datepickerVisible;
+          this.$refs.input.blur();
         }
-        this.datepickerVisible = !this.datepickerVisible;
-        this.$refs.input.blur();
       }
     },
     inputBlur() {

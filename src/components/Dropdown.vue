@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   name: 'Dropdown',
   props: {
@@ -75,6 +77,9 @@ export default {
     mouseoutClose: {
       type: Boolean,
       default: false
+    },
+    labelId: {
+      type: String
     }
   },
   data: () => ({
@@ -325,6 +330,11 @@ export default {
       if (!this.opened || this.hasElement(event.target)) {
         return
       }
+
+      if(_.get(event, 'srcElement.id') === this.labelId) {
+        return
+      }
+
       this.$emit('update:opened', false)
     },
 

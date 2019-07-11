@@ -11,16 +11,18 @@
 -->
 
 <template>
-    <div class="ds-collapser">
+    <div class="ds-collapser" :style="{backgroundColor: bgColor}">
       <div
         class="top"
-        @click="onCollapserClick">
-        <div class="title">{{label}}</div>
+        :style="{backgroundColor: bgColor}"
+        @click="onCollapserClick"
+      >
+        <div class="title" :style="{textAlign: titleAlignment}">{{label}}</div>
         <div class="icon-wrapper">
           <Icon color="#3F4352" :source="opened ? 'expand_less' : 'expand_more'"></Icon>
         </div>
       </div>
-      <div class="body" v-show="opened">
+      <div class="body" :style="{backgroundColor: bgColor}" v-show="opened">
         <slot></slot>
       </div>
     </div>
@@ -34,7 +36,15 @@
       name: 'Collapser',
       props: {
           label: String,
-          opened: Boolean
+          opened: Boolean,
+          titleAlignment: {
+            type: String,
+            default: 'center'
+          },
+          bgColor: {
+            type: String,
+            default: '#ffffff'
+          }
       },
       methods: {
         onCollapserClick() {
@@ -71,6 +81,9 @@
 
         .title {
           flex: 1;
+          padding-left: 15px;
+          padding-right: 15px;
+          display: block;
         }
 
         .icon-wrapper {

@@ -9,6 +9,16 @@
       "name": "opened",
       "type": "Boolean",
       "description": "Responsible on open status of Collapser component"
+    },
+    {
+      "name": "titleAlignment",
+      "type": "String",
+      "description": "Alignment of the title"
+    },
+    {
+      "name": "bgColor",
+      "type": "String",
+      "description": "Background color of the Stepper"
     }
   ],
   "events": [

@@ -10,7 +10,7 @@
     </Collapser>
 
     <div class="collapser-demo-wrapper">
-      <Collapser :opened.sync="openCollapser" :label="label">
+      <Collapser :opened.sync="openCollapser" :label="label" titleAlignment="left" bgColor="#EEEEEE" >
         <p>We are the stewards of the hierarchy</p>
       </Collapser>
     </div>

@@ -75,12 +75,14 @@
       }
     },
     data: () => ({
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      $_defaultStyles: {}
     }),
     mounted() {
       window.addEventListener('resize', this.onResize)
       document.addEventListener('keydown', this.escapePress)
       document.addEventListener('keydown', this.tabPress, true)
+      document.addEventListener('touchmove', this.touchMove, { passive: false })
     },
 
     directives: {
@@ -166,6 +168,11 @@
       },
       onResize() {
         this.windowWidth = window.innerWidth
+      },
+      touchMove(event) {
+        if (this.opened) {
+          event.preventDefault()
+        }
       }
     },
     computed: {
@@ -176,7 +183,35 @@
     watch: {
       opened(value) {
         if (this.overflowCheck) {
-          value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto';
+          let htmlStyle = document.getElementsByTagName('html')[0].style
+          let bodyStyle = document.getElementsByTagName('body')[0].style
+
+          if (value) {
+            this.$_defaultStyles = {
+              body: {},
+              html: {}
+            }
+
+            this.$_defaultStyles.body = {
+              position: bodyStyle.position || 'static',
+              overflow: 'auto'
+            }
+
+            bodyStyle.overflow = 'hidden'
+            bodyStyle.position = 'relative'
+
+            this.$_defaultStyles.html = {
+              position: htmlStyle.position,
+              overflow: htmlStyle.overflow,
+              height: htmlStyle.height
+            }
+
+            htmlStyle.overflow = 'hidden'
+            htmlStyle.position = 'relative'
+          } else {
+            Object.assign(htmlStyle, this.$_defaultStyles.html)
+            Object.assign(bodyStyle, this.$_defaultStyles.body)
+          }
         }
       }
     },
@@ -184,6 +219,7 @@
       window.removeEventListener('resize', this.onResize)
       document.removeEventListener('keydown', this.escapePress);
       document.removeEventListener('keydown', this.tabPress, true)
+      document.removeEventListener('touchmove', this.touchMove, { passive: false })
     },
   }
 </script>

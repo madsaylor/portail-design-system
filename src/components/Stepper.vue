@@ -164,7 +164,7 @@
             return
           }
 
-          if (this.optionalSteps.includes(index) || Math.abs(this.stepIndex - index) == 1) {
+          if (this.optionalSteps.includes(index) || index - this.stepIndex <= 1) {
             this.stepIndex = index;
             this.$emit('current:step', this.stepIndex);
           }
@@ -207,7 +207,7 @@
             return
           }
 
-          if ((this.optionalSteps.includes(val) || Math.abs(this.stepIndex - val) == 1) && val > 0 && val <= this.value.length) {
+          if ((this.optionalSteps.includes(val) || val - this.stepIndex <= 1) && val > 0 && val <= this.value.length) {
             this.stepIndex = val;
           }
           this.$emit('current:step', this.stepIndex)

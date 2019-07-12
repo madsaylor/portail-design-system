@@ -114,7 +114,8 @@
     <label>
       <div v-if="label"
            :id="id"
-           :class="['label-text', {'slide-label': slideLabel, 'label-focus': labelFocus}, slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">
+           :class="['label-text', {'slide-label': slideLabel, 'label-focus': labelFocus, 'slide-label-date': type === 'date'},
+                    slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">
           {{ label }}
       </div>
 
@@ -618,6 +619,10 @@ export default {
       &.label-focus {
         color: @color-dark;
       }
+
+      &.slide-label-date {
+        cursor: pointer;
+      }
     }
 
     input, select {
@@ -842,7 +847,7 @@ export default {
 
   &.date {
     input {
-      cursor: default;
+      cursor: pointer;
     }
   }
 

@@ -155,6 +155,8 @@
         </option>
       </select>
 
+      <div v-if="type === 'select' && !inputValue" class="select-placeholder">{{ placeholder }}</div>
+
       <Icon v-if="icon_" color="gray-400" :source="icon_" />
 
       <div class="drawer">
@@ -692,6 +694,13 @@ export default {
       &::-ms-expand {
         display: none;
       }
+    }
+
+    .select-placeholder {
+      position: absolute;
+      bottom: 6px;
+      left: 14px;
+      color: #838795;
     }
 
     .ds-icon {

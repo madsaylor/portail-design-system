@@ -128,8 +128,8 @@
         :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel, 'date': type === 'date', 'has-right-icon': iconRight}"
         v-model="inputValue"
         ref="input"
-        @focus="inputFocus"
-        @click="inputFocus"
+        @focus.prevent="inputFocus"
+        @click.prevent="inputFocus"
         @blur="inputBlur"
         @keydown="onKeyDown"
         @mousedown="onInputPrevent($event)"
@@ -693,7 +693,7 @@ export default {
     .ds-icon {
       pointer-events: none;
       position: absolute;
-      bottom: 6px;
+      bottom: 8%;
       right: 6px;
       height: 50% !important;
     }

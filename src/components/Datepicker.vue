@@ -86,6 +86,8 @@
 import GridSelect from './GridSelect'
 import Icon from './Icon'
 
+import moment from 'moment'
+
 export default {
   name: 'Datepicker',
   components: {
@@ -257,7 +259,7 @@ export default {
       let date = new Date()
       date.setDate(date.getDate() - date.getDay() + 1)  // set date to Monday
       for (let i = 1; i < 8; i++) {
-        labels.push(date.toLocaleString(this.locale, {weekday: 'long'})[0])
+        labels.push(moment(date).locale(this.locale).format('dddd')[0])
         date.setDate(date.getDate() + 1)
       }
       return labels

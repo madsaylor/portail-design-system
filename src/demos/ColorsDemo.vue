@@ -8,7 +8,7 @@
       <h3 class="group-name">{{ groupName }}</h3>
       <div
         v-for="colorName in group"
-        :class="['card', 'color-demo', colorName]"
+        :class="['ds-card', 'color-demo', colorName]"
       >@{{ colorName }}</div>
     </div>
   </div>

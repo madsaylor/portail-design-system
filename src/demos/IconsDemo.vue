@@ -12,7 +12,7 @@
       <div class="col-12">
       </div>
       <div class="col-6" v-for="icon in icons">
-        <div class="card icon-demo" >
+        <div class="ds-card icon-demo" >
           <div class="icon" v-html="context(icon)"></div>
           {{ icon.slice(2, -4) }}
           <br>

@@ -33,7 +33,7 @@
       <h3>Demo</h3>
     </div>
     <div class="row-col row-col-demo">
-      <div class="card">
+      <div class="ds-card">
         row-col Lorem ipsum dolor sit amet
       </div>
     </div>
@@ -42,7 +42,7 @@
         :class="'col-' + size"
         v-for="n in 12/size"
       >
-        <div class="card">
+        <div class="ds-card">
           col-{{size}} Lorem ipsum dolor sit amet
         </div>
       </div>
@@ -73,7 +73,7 @@ export default {
     }
   }
 
-  .card {
+  .ds-card {
     padding: 0;
   }
 }

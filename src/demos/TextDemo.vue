@@ -20,7 +20,7 @@
     </div>
     <div class="row">
       <div class="col-6" v-for="fontStyle in fontStyles">
-        <div :class="['card', 'font-style-demo', fontStyle]">
+        <div :class="['ds-card', 'font-style-demo', fontStyle]">
           .{{ fontStyle }}();
         </div>
       </div>

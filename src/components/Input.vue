@@ -551,7 +551,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import '../styles/vars';
 @import '../styles/mixins';
 
@@ -663,7 +663,7 @@ export default {
         border: 1px solid #f2f4f7;
       }
       &:disabled, &:disabled::placeholder {
-        .font-desktop-small-regular-light-gray();
+        .font-desktop-small-regular-light-gray-base();
       }
     }
 
@@ -695,6 +695,7 @@ export default {
       position: absolute;
       bottom: 6px;
       right: 6px;
+      height: 50% !important;
     }
 
     .icon-right {
@@ -702,6 +703,12 @@ export default {
       position: absolute;
       bottom: 6px;
       left: 6px;
+    }
+  }
+
+  &.select {
+    .ds-icon {
+      height: 70% !important;
     }
   }
 
@@ -752,7 +759,7 @@ export default {
     }
     &.disabled {
       .label-text {
-        .font-desktop-small-regular-gray();
+        .font-desktop-input-small-regular-gray-base();
       }
       .checkbox {
         border: 1px solid #f2f4f7;

@@ -72,9 +72,8 @@
 @font-desktop-small-regular-gray-font-weight: 400;
 @font-desktop-small-regular-gray-font-family: Lato, Arial, Helvetica, Sans-Serif;
 
-.font-desktop-small-regular-gray() {
+.font-desktop-input-small-regular-gray-base() {
   font-size: @font-desktop-small-regular-gray-font-size;
-  line-height: @font-desktop-small-regular-gray-line-height;
   text-align: @font-desktop-small-regular-gray-text-align;
   color: @font-desktop-small-regular-gray-color;
   font-style: @font-desktop-small-regular-gray-font-style;
@@ -82,25 +81,30 @@
   font-family: @font-desktop-small-regular-gray-font-family;
 }
 
+.font-desktop-small-regular-gray() {
+  .font-desktop-input-small-regular-gray-base();
+  line-height: @font-desktop-small-regular-gray-line-height;
+}
+
 .input-placeholder() {
   &::-webkit-input-placeholder {
-    .font-desktop-small-regular-gray();
+    .font-desktop-input-small-regular-gray-base();
   }
 
   &:-moz-placeholder{
-    .font-desktop-small-regular-gray();
+    .font-desktop-input-small-regular-gray-base();
   }
 
   &::-moz-placeholder{
-    .font-desktop-small-regular-gray();
+    .font-desktop-input-small-regular-gray-base();
   }
 
   &:-ms-input-placeholder{
-    .font-desktop-small-regular-gray();
+    .font-desktop-input-small-regular-gray-base();
   }
 
   &::placeholder {
-    .font-desktop-small-regular-gray();
+    .font-desktop-input-small-regular-gray-base();
   }
 }
 
@@ -189,14 +193,18 @@
 @font-desktop-small-regular-light-gray-font-weight: 400;
 @font-desktop-small-regular-light-gray-font-family: Lato, Arial, Helvetica, Sans-Serif;
 
-.font-desktop-small-regular-light-gray() {
+.font-desktop-small-regular-light-gray-base() {
   font-size: @font-desktop-small-regular-light-gray-font-size;
-  line-height: @font-desktop-small-regular-light-gray-line-height;
   text-align: @font-desktop-small-regular-light-gray-text-align;
   color: @font-desktop-small-regular-light-gray-color;
   font-style: @font-desktop-small-regular-light-gray-font-style;
   font-weight: @font-desktop-small-regular-light-gray-font-weight;
   font-family: @font-desktop-small-regular-light-gray-font-family;
+}
+
+.font-desktop-small-regular-light-gray() {
+  .font-desktop-small-regular-light-gray-base();
+  line-height: @font-desktop-small-regular-light-gray-line-height;
 }
 
 /* desktop/body/regular/gray font style */

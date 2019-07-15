@@ -64,13 +64,13 @@
 }
 
 /* desktop/small/regular/gray font style */
-@font-desktop-small-regular-gray-font-size: 14px !important;
-@font-desktop-small-regular-gray-line-height: 20px !important;
-@font-desktop-small-regular-gray-text-align: left !important;
-@font-desktop-small-regular-gray-color: #838795 !important;
-@font-desktop-small-regular-gray-font-style: normal !important;
-@font-desktop-small-regular-gray-font-weight: 400 !important;
-@font-desktop-small-regular-gray-font-family: Lato, Arial, Helvetica, Sans-Serif !important;
+@font-desktop-small-regular-gray-font-size: 14px;
+@font-desktop-small-regular-gray-line-height: 20px;
+@font-desktop-small-regular-gray-text-align: left;
+@font-desktop-small-regular-gray-color: #838795;
+@font-desktop-small-regular-gray-font-style: normal;
+@font-desktop-small-regular-gray-font-weight: 400;
+@font-desktop-small-regular-gray-font-family: Lato, Arial, Helvetica, Sans-Serif;
 
 .font-desktop-small-regular-gray() {
   font-size: @font-desktop-small-regular-gray-font-size;
@@ -80,6 +80,28 @@
   font-style: @font-desktop-small-regular-gray-font-style;
   font-weight: @font-desktop-small-regular-gray-font-weight;
   font-family: @font-desktop-small-regular-gray-font-family;
+}
+
+.input-placeholder() {
+  &::-webkit-input-placeholder {
+    .font-desktop-small-regular-gray();
+  }
+
+  &:-moz-placeholder{
+    .font-desktop-small-regular-gray();
+  }
+
+  &::-moz-placeholder{
+    .font-desktop-small-regular-gray();
+  }
+
+  &:-ms-input-placeholder{
+    .font-desktop-small-regular-gray();
+  }
+
+  &::placeholder {
+    .font-desktop-small-regular-gray();
+  }
 }
 
 /* desktop/small/italic/gray font style */

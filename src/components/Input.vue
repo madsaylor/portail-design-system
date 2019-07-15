@@ -114,6 +114,7 @@
     <label>
       <div v-if="label"
            :id="id"
+           @click="onInputPrevent($event, true)"
            :class="['label-text', {'slide-label': slideLabel, 'label-focus': labelFocus, 'slide-label-date': type === 'date'},
                     slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">
           {{ label }}
@@ -127,11 +128,11 @@
         :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel, 'date': type === 'date', 'has-right-icon': iconRight}"
         v-model="inputValue"
         ref="input"
-        @focus="inputFocus($event)"
-        @click="inputFocus($event)"
+        @focus="inputFocus"
+        @click="inputFocus"
         @blur="inputBlur"
         @keydown="onKeyDown"
-        @mousedown="onMouseDown($event)"
+        @mousedown="onInputPrevent($event)"
       />
 
       <input
@@ -448,24 +449,23 @@ export default {
     }
   },
   methods: {
-    onMouseDown(event) {
+    onInputPrevent(event, callInputFocus) {
       if (this.type === 'date') {
         event.preventDefault()
+        if (callInputFocus) {
+          this.inputFocus()
+        }
       }
     },
-    inputFocus(event) {
+    inputFocus() {
       if (this.slideLabel) {
         this.labelFocus = true;
         this.slideActive = true;
       }
 
       if (this.type === 'date') {
-        if (!event.toElement) {
-          event.preventDefault()
-        } else {
-          this.datepickerVisible = !this.datepickerVisible;
-          this.$refs.input.blur();
-        }
+        this.datepickerVisible = !this.datepickerVisible;
+        this.$refs.input.blur();
       }
     },
     inputBlur() {
@@ -551,7 +551,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '../styles/vars';
 @import '../styles/mixins';
 
@@ -646,25 +646,7 @@ export default {
         margin-top: 10px;
       }
 
-      &::-webkit-input-placeholder {
-        .font-desktop-small-regular-gray();
-      }
-
-      &:-moz-placeholder{
-        .font-desktop-small-regular-gray();
-      }
-
-      &::-moz-placeholder{
-        .font-desktop-small-regular-gray();
-      }
-
-      &:-ms-input-placeholder{
-        .font-desktop-small-regular-gray();
-      }
-
-      &::placeholder {
-        .font-desktop-small-regular-gray();
-      }
+      .input-placeholder();
 
       &:focus:not(.error) {
         border-color: @color-primary;

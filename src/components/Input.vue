@@ -187,6 +187,7 @@
       :position="getDatepickerPosition"
       :borderColor="!isMobile && datepickerBorderColorDesktop"
       :labelId="id"
+      :activeDatepickerComponent="activeDatepickerComponent"
       just-fade
     >
       <Datepicker
@@ -206,6 +207,7 @@
       :dialogStyleObject="datepickerWrapperStyleObject"
       :contentFullWidth="datepickerFullWidth"
       :overflowCheck="overflowCheckStatus"
+      :activeDatepickerComponent="activeDatepickerComponent"
     >
       <Datepicker
         :min="datepickerMin"
@@ -445,6 +447,13 @@ export default {
         return this.isMobile ? this.positions[1] : this.positions[0]
       } else {
         return this.datepickerPosition
+      }
+    },
+    activeDatepickerComponent() {
+      if (this.getDatepickerPosition === 'modal') {
+        return 'Dialog'
+      } else if (this.getDatepickerPosition !== 'modal') {
+        return 'Dropdown'
       }
     }
   },

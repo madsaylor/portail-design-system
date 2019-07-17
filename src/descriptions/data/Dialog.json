@@ -49,6 +49,11 @@
       "type": "Boolean",
       "default": "true",
       "description": "Check overflow depend on it option"
+    },
+    {
+      "name": "activeDatepickerComponent",
+      "type": "String",
+      "description": "Provide active datepicker component, if dialog component is part of it ecosystem"
     }
   ],
   "events": []

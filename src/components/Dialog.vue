@@ -44,10 +44,12 @@
 </template>
 
 <script>
+  import _ from 'lodash'
+
   const widthMD = 1280;
 
   export default {
-    name: "Dialog",
+    name: 'Dialog',
     props: {
       opened: Boolean,
       backdropOpacity: {
@@ -72,6 +74,9 @@
       overflowCheck: {
         type: Boolean,
         default: true
+      },
+      activeDatepickerComponent: {
+        type: String
       }
     },
     data: () => ({
@@ -100,7 +105,7 @@
 
     methods: {
       backdropClick() {
-        this.$emit('update:opened', false)
+        this.openedDispatchWrapper()
       },
       /**
        * Check if the dropdown iteself or the target element have/are
@@ -121,7 +126,7 @@
        */
       escapePress(event) {
         if (this.opened && event.code === "Escape") {
-          this.$emit('update:opened', false)
+          this.openedDispatchWrapper()
         }
       },
 
@@ -172,6 +177,11 @@
       touchMove(event) {
         if (this.opened) {
           event.preventDefault()
+        }
+      },
+      openedDispatchWrapper() {
+        if (_.isUndefined(this.activeDatepickerComponent) || this.activeDatepickerComponent === 'Dialog') {
+          this.$emit('update:opened', false)
         }
       }
     },

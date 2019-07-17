@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import _ from 'lodash';
+import _ from 'lodash'
 
 export default {
   name: 'Dropdown',
@@ -79,6 +79,9 @@ export default {
       default: false
     },
     labelId: {
+      type: String
+    },
+    activeDatepickerComponent: {
       type: String
     }
   },
@@ -335,7 +338,7 @@ export default {
         return
       }
 
-      this.$emit('update:opened', false)
+      this.openedDispatchWrapper()
     },
 
     /**
@@ -343,7 +346,7 @@ export default {
      */
     escapePress(event) {
       if (this.opened && event.code === "Escape") {
-        this.$emit('update:opened', false)
+        this.openedDispatchWrapper()
       }
     },
 
@@ -390,6 +393,11 @@ export default {
     },
     onMouseout() {
       if (this.mouseoutClose) {
+        this.openedDispatchWrapper()
+      }
+    },
+    openedDispatchWrapper() {
+      if (_.isUndefined(this.activeDatepickerComponent) || this.activeDatepickerComponent === 'Dropdown') {
         this.$emit('update:opened', false)
       }
     }

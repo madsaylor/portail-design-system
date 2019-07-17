@@ -62,8 +62,68 @@ export default {
     }
   }
 
+  >.dashboard-report {
+    .report-title {
+      .font-desktop-body-regular-dark();
+    }
+    .report-amount {
+      margin-top: 12px;
+      font-family: @font-family;
+      font-size: 24px;
+      line-height: 24px;
+
+      &.green {
+        color: @color-primary;
+        svg {
+          fill: @color-primary;
+        }
+      }
+      &.yellow {
+        color: @color-yellow;
+        svg {
+          fill: @color-yellow;
+        }
+      }
+      &.red {
+        color: @color-red;
+        svg {
+          fill: @color-red;
+        }
+      }
+    }
+    .report-subtitle {
+      .font-desktop-small-regular-gray();
+      margin-top: 20px;
+    }
+  }
+
   // User TODO card
   &.user-todo {
+    display: flex;
+
+    .ds-icon {
+      margin-right: 18px;
+    }
+    .todo-title {
+      .font-desktop-small-regular-dark();
+      padding: 2px 0;
+      flex: 1 0 auto;
+    }
+    .todo-badge {
+      box-sizing: border-box;
+      color: @color-white;
+      font-family: @font-family;
+      font-size: 13px;
+      line-height: 16px;
+      text-align: center;
+      height: 24px;
+      padding: 5px 6px 3px;
+      border-radius: 12px;
+      background-color: #4A7A91;
+    }
+  }
+
+  > .user-todo {
     display: flex;
 
     .ds-icon {

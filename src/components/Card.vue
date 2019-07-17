@@ -62,7 +62,7 @@ export default {
     }
   }
 
-  >.dashboard-report {
+  .dashboard-report {
     .report-title {
       .font-desktop-body-regular-dark();
     }
@@ -123,7 +123,7 @@ export default {
     }
   }
 
-  > .user-todo {
+  .user-todo {
     display: flex;
 
     .ds-icon {

@@ -454,6 +454,8 @@ export default {
         return 'Dialog'
       } else if (this.getDatepickerPosition !== 'modal') {
         return 'Dropdown'
+      } else {
+        return void 0
       }
     }
   },

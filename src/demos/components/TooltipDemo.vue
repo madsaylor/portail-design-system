@@ -8,35 +8,49 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Tooltip popoverWidth="200px" placement="top">
-      <div slot="popover">This is a tooltip content</div>
-      <div slot="reference">
-        <Button>Top</Button>
-      </div>
-    </Tooltip>
+    <div class="row-col tooltip-buttons">
+      <Tooltip popoverWidth="200px" placement="top" class="default-tooltip">
+        <div slot="popover">This is a tooltip content</div>
+        <div slot="reference">
+          <Button>Top</Button>
+        </div>
+      </Tooltip>
 
-    <Tooltip popoverWidth="200px" placement="bottom">
-      <div slot="popover">This is a tooltip content</div>
-      <div slot="reference">
-        <Button>Bottom</Button>
-      </div>
-    </Tooltip>
+      <Tooltip popoverWidth="200px" placement="bottom" class="default-tooltip">
+        <div slot="popover">This is a tooltip content</div>
+        <div slot="reference">
+          <Button>Bottom</Button>
+        </div>
+      </Tooltip>
 
-    <Tooltip popoverWidth="200px" placement="left">
-      <div slot="popover">This is a tooltip content</div>
-      <div slot="reference">
-        <Button>Left</Button>
-      </div>
-    </Tooltip>
+      <Tooltip popoverWidth="200px" placement="left" class="default-tooltip">
+        <div slot="popover">This is a tooltip content</div>
+        <div slot="reference">
+          <Button>Left</Button>
+        </div>
+      </Tooltip>
 
-    <Tooltip popoverWidth="200px" placement="right" :offset="tooltipOffset">
-      <div slot="popover">
-        This is a tooltip content
-      </div>
-      <div slot="reference">
-        <Button>Right</Button>
-      </div>
-    </Tooltip>
+      <Tooltip
+        popoverWidth="200px"
+        placement="right"
+        class="default-tooltip"
+        :offset="tooltipOffset"
+      >
+        <div slot="popover">
+          This is a tooltip content
+        </div>
+        <div slot="reference">
+          <Button>Right</Button>
+        </div>
+      </Tooltip>
+    </div>
+
+    <div class="row-col">
+      <Tooltip type="mini">
+        <div>This is the mini Tooltip content</div>
+        <div>Second line of mini tooltip</div>
+      </Tooltip>
+    </div>
   </div>
 </template>
 
@@ -49,7 +63,7 @@ import {TooltipData} from '../../static/index'
 
 export default {
   name: 'TooltipDemo',
-  components: {Tooltip, Description, Collapser, Button},
+  components: {Tooltip, Description, Collapser, Button },
   data: () => ({
     tooltipVisibleHover: false,
     tooltipVisibleClick: false,
@@ -82,6 +96,14 @@ export default {
   .white-text {
     color: @color-white;
     margin: 0;
+  }
+}
+
+.tooltip-buttons {
+  margin-bottom: 20px;
+
+  .default-tooltip {
+    margin-right: 10px;
   }
 }
 </style>

@@ -1,6 +1,11 @@
 {
   "properties": [
     {
+      "name": "type",
+      "type": "String",
+      "description": "If type is mini, this will only show the tooltop contents, if not, this will work with popper"
+    },
+    {
       "name": "placement",
       "type": "String",
       "description": "alignment of the tooltip from referenced component"

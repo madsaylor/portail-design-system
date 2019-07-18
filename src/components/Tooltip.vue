@@ -13,21 +13,31 @@
 -->
 
 <template>
-  <Popper
-    class="ds-tooltip-wrapper"
-    trigger="click"
-    :options="{
-      placement: placement,
-      modifiers: { offset: offset }
-    }">
-    <div class="popper" :style="{width: popoverWidth}">
-      <slot name="popover"></slot>
-    </div>
- 
-    <div class="reference" slot="reference">
-      <slot name="reference"></slot>
-    </div>
-  </Popper>
+  <div class="ds-tooltip-wrapper">
+    <template v-if="type === 'mini'">
+      <div class="mini">
+        <slot></slot>
+      </div>
+    </template>
+
+    <template v-else>
+      <Popper
+        trigger="click"
+        :options="{
+          placement: placement,
+          modifiers: { offset: offset }
+        }"
+      >
+        <div class="popper" :style="{width: popoverWidth}">
+          <slot name="popover"></slot>
+        </div>
+    
+        <div class="reference" slot="reference">
+          <slot name="reference"></slot>
+        </div>
+      </Popper>
+    </template>
+  </div>
 </template>
 
 <script>
@@ -38,6 +48,10 @@ import 'vue-popperjs/dist/vue-popper.css';
 export default {
   name: "Tooltip",
   props: {
+    type: {
+      type: String,
+      default: ''
+    },
     placement: {
       type: String,
       default: 'top'
@@ -58,6 +72,8 @@ export default {
 @import '../styles/vars';
 
 .ds-tooltip-wrapper {
+  display: inline-block;
+
   .reference {
     display: inline-block;
   }
@@ -75,15 +91,6 @@ export default {
     position: relative;
     text-align: left;
     box-shadow: none;
-  }
-
-  /* styles.css */
-
-  [x-arrow] {
-    position: absolute;
-  }
-
-  .popper {
     margin-top: 10px;
     margin-bottom: 10px;
 
@@ -190,6 +197,21 @@ export default {
         }
       }
     }
+  }
+
+  .mini {
+    padding: 8px;
+    background-color: #3F4352;
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 16px;
+    color: white;
+  }
+
+  /* styles.css */
+
+  [x-arrow] {
+    position: absolute;
   }
 }
 

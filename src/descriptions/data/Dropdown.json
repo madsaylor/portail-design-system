@@ -46,6 +46,11 @@
       "name": "labelId",
       "type": "String",
       "description": "Label identification of input component with dropdown component"
+    },
+    {
+      "name": "activeDatepickerComponent",
+      "type": "String",
+      "description": "Provide active datepicker component, if dropdown component is part of it ecosystem"
     }
   ],
   "events": []

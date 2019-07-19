@@ -27,12 +27,13 @@
           placement: placement,
           modifiers: { offset: offset }
         }"
+        :forceShow="forceShow"
       >
         <div class="popper" :style="{width: popoverWidth}">
           <slot name="popover"></slot>
         </div>
     
-        <div class="reference" ref="reference" slot="reference">
+        <div class="reference" ref="reference" slot="reference" @click="updateForceShow">
           <slot name="reference"></slot>
         </div>
       </Popper>
@@ -64,6 +65,10 @@ export default {
       type: Boolean,
       default: false
     },
+    forceShow: {
+      type: Boolean,
+      default: false,
+    },
     popoverWidth: String
   },
   mounted() {
@@ -73,6 +78,13 @@ export default {
   },
   components: {
     Popper
+  },
+  methods: {
+    updateForceShow() {
+      setTimeout(() => {
+        this.$emit('update:forceShow', !this.forceShow)
+      }, 10)
+    }
   }
 }
 </script>

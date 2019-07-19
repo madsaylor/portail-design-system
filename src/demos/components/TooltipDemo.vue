@@ -23,7 +23,13 @@
         </div>
       </Tooltip>
 
-      <Tooltip popoverWidth="200px" placement="left" class="default-tooltip">
+      <Tooltip
+        popoverWidth="200px"
+        placement="left"
+        class="default-tooltip"
+        :forceShow="forceShow"
+        @update:forceShow="forceShowUpdate"
+      >
         <div slot="popover">This is a tooltip content</div>
         <div slot="reference">
           <Button>Left</Button>
@@ -69,9 +75,15 @@ export default {
     tooltipVisibleHover: false,
     tooltipVisibleClick: false,
     tooltipOffset: {offset: '0px 50px'},
+    forceShow: false,
     openUsage: true,
     usage: TooltipData.usage
-  })
+  }),
+  methods: {
+    forceShowUpdate(value) {
+      this.forceShow = value
+    }
+  }
 }
 </script>
 

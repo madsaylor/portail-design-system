@@ -13,7 +13,8 @@
 -->
 
 <template>
-  <div :class="['ds-tooltip-wrapper', {'ds-tooltip-wrapper-mini': type === 'mini'}]">
+  <div :class="['ds-tooltip-wrapper', {'ds-tooltip-wrapper-mini': type === 'mini'}]"
+       :style="stylesObject">
     <template v-if="type === 'mini'">
       <div class="mini">
         <slot></slot>
@@ -69,7 +70,10 @@ export default {
       type: Boolean,
       default: false,
     },
-    popoverWidth: String
+    popoverWidth: String,
+    margin: {
+      type: String
+    }
   },
   mounted() {
     if (this.initialShowTooltip) {
@@ -84,6 +88,15 @@ export default {
       setTimeout(() => {
         this.$emit('update:forceShow', !this.forceShow)
       }, 10)
+    }
+  },
+  computed: {
+    stylesObject() {
+      let styles = {
+        margin: this.margin
+      }
+
+      return styles
     }
   }
 }

@@ -11,6 +11,11 @@
       "description": "alignment of the tooltip from referenced component"
     },
     {
+      "name": "initialShowTooltip",
+      "type": "Boolean",
+      "description": "When we are using default tooltip, if this value is true, it will show the tooltip on first load"
+    },
+    {
       "name": "offset",
       "type": "Object",
       "description": "We can handle the position of tooltip with this property from the reference element"

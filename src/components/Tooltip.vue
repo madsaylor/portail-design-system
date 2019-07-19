@@ -32,7 +32,7 @@
           <slot name="popover"></slot>
         </div>
     
-        <div class="reference" slot="reference">
+        <div class="reference" ref="reference" slot="reference">
           <slot name="reference"></slot>
         </div>
       </Popper>
@@ -60,7 +60,16 @@ export default {
       type: Object,
       default: () => {return {offset: '0, 10px'}}
     },
+    initialShowTooltip: {
+      type: Boolean,
+      default: false
+    },
     popoverWidth: String
+  },
+  mounted() {
+    if (this.initialShowTooltip) {
+      this.$refs.reference.click();
+    }
   },
   components: {
     Popper

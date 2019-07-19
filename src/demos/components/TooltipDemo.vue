@@ -34,6 +34,7 @@
         popoverWidth="200px"
         placement="right"
         class="default-tooltip"
+        :initialShowTooltip="true"
         :offset="tooltipOffset"
       >
         <div slot="popover">

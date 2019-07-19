@@ -13,7 +13,7 @@
 -->
 
 <template>
-  <div class="ds-tooltip-wrapper">
+  <div :class="['ds-tooltip-wrapper', {'ds-tooltip-wrapper-mini': type === 'mini'}]">
     <template v-if="type === 'mini'">
       <div class="mini">
         <slot></slot>
@@ -94,6 +94,10 @@ export default {
 
 .ds-tooltip-wrapper {
   display: inline-block;
+
+  &.ds-tooltip-wrapper-mini {
+    position: absolute;
+  }
 
   .reference {
     display: inline-block;
@@ -227,7 +231,6 @@ export default {
     font-size: 12px;
     line-height: 16px;
     color: white;
-    position: absolute;
   }
 
   /* styles.css */

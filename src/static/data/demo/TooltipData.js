@@ -7,6 +7,11 @@ let usage = `
     <Button></Button>
   </div>
 </Tooltip>
+
+<Tooltip type="mini">
+  <div>This is the mini Tooltip content</div>
+  <div>Second line of mini tooltip</div>
+</Tooltip>
 `.slice(1)
 
 export default {

@@ -227,6 +227,7 @@ export default {
     font-size: 12px;
     line-height: 16px;
     color: white;
+    position: absolute;
   }
 
   /* styles.css */

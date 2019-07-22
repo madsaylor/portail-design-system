@@ -36,6 +36,7 @@
         Clear Signature
       </span>
     </div>
+    <slot name="loader"></slot>
   </div>
 </template>
 
@@ -133,6 +134,7 @@
 
   .ds-signature-wrapper {
     display: inline-block;
+    position: relative;
 
     .signature-pad-wrapper {
       .signature-pad {

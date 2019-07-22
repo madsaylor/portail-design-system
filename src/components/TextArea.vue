@@ -88,7 +88,15 @@
     computed: {
       textareaValue: {
         get() {
-          return this.value
+          if (!this.value) {
+            return ''
+          }
+
+          if (this.value.length < this.maxCharacters) {
+            return this.value
+          } else {
+            return this.value.substring(0, this.maxCharacters - 1)
+          }
         },
         set(value) {
           this.$emit('input', value)
@@ -151,14 +159,12 @@
       document.removeEventListener('validate', this.initValidate)
     },
     watch: {
-      textareaValue() {
+      textareaValue(val) {
         this.$emit('validation', this.validation)
+        this.notificationStr = `${this.maxCharacters - val.length} characters are left`
       },
       initialTouched(value) {
         this.touched = value
-      },
-      value(val) {
-        this.notificationStr = `${this.maxCharacters - val.length} characters are left`
       }
     }
   }
@@ -211,8 +217,13 @@
       .notification {
         .font-desktop-x-small-regular-gray();
         position: absolute;
-        bottom: 10px;
-        right: 10px;
+        bottom: 8px;
+        right: 20px;
+        left: 13px;
+        text-align: right;
+        padding: 2px 0;
+        z-index: 2;
+        background-color: white;
       }
     }
 

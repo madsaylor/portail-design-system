@@ -38,8 +38,9 @@
         <div :class="['dialog-wrapper', {'full-width': contentFullWidth}]">
           <slot></slot>
         </div>
+        <slot name="loader"></slot>
       </div>
-
+    <slot name="loaderWrapper"></slot>
   </section>
 </template>
 

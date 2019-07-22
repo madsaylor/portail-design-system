@@ -1,13 +1,25 @@
 let usage = `
 <Loader v-model="loadingFullScreen" :fullScreen="fullScreen"></Loader>
 
-<Loader v-model="loading" :target="$refs.dialog"></Loader>
-<Dialog :opened.sync="dialogOpened" ref="dialog">
-  <div class="dialog-body-default">Lorem ipsum ...</div>
+<Dialog :opened.sync="dialogWrapperOpened">
+  <div class="dialog-body-default">{{text}}</div>
+  <template #loaderWrapper>
+    <Loader v-model="loadingWrapper"></Loader>
+  </template>
+</Dialog>
+        
+<Dialog :opened.sync="dialogOpened">
+  <div class="dialog-body-default">{{text}}</div>
+  <template #loader>
+    <Loader v-model="loading"></Loader>
+  </template>
 </Dialog>
 
-<Loader v-model="loadingSignature" :target="$refs.signature"></Loader>
-<Signature v-model="signatureData" ref="signature"></Signature>
+<Signature v-model="signatureData">
+  <template #loader>
+    <Loader v-model="loadingSignature"></Loader>
+  </template>
+</Signature>
 `.slice(1)
 
 export default {

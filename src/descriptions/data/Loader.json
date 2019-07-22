@@ -16,11 +16,6 @@
       "type": "Number",
       "default": "80",
       "description": "Responsible for loader opacity"
-    },
-    {
-      "name": "target",
-      "type": "null",
-      "description": "Provides element on which will be applied loader, not applied in case full screen mode"
     }
   ],
   "events": []

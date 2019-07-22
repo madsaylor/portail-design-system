@@ -11,19 +11,39 @@
 
       <div>
         <Button @click="temporaryFullScreenLoader">Open full screen loader on 5 sec</Button>
+
         <Loader v-model="loadingFullScreen" :fullScreen="fullScreen"></Loader>
       </div>
       <div class="demo-loader-wrapper">
-        <Button class="base-btn-loader" @click="temporaryLoader">Open dialog with loader on 5 sec</Button>
-        <Loader v-model="loading" :target="$refs.dialog"></Loader>
-        <Dialog :opened.sync="dialogOpened" ref="dialog">
+        <Button class="base-btn-loader" @click="temporaryLoaderWrapper">Open dialog with loader wrapper on 5 sec</Button>
+
+        <Dialog :opened.sync="dialogWrapperOpened">
           <div class="dialog-body-default">{{text}}</div>
+          <template #loaderWrapper>
+            <Loader v-model="loadingWrapper"></Loader>
+          </template>
         </Dialog>
       </div>
       <div class="demo-loader-wrapper">
-        <Button class="base-btn-loader base-btn-loader-bottom" @click="temporarySignatureLoader">Apply loader on signature component on 5 sec</Button>
-        <Loader v-model="loadingSignature" :target="$refs.signature"></Loader>
-        <Signature v-model="signatureData" ref="signature"></Signature>
+        <Button class="base-btn-loader" @click="temporaryLoader">Open dialog with loader on 5 sec</Button>
+
+        <Dialog :opened.sync="dialogOpened">
+          <div class="dialog-body-default">{{text}}</div>
+          <template #loader>
+            <Loader v-model="loading"></Loader>
+          </template>
+        </Dialog>
+      </div>
+      <div class="demo-loader-wrapper">
+        <Button class="base-btn-loader base-btn-loader-bottom" @click="temporarySignatureLoader">
+          Apply loader on signature component on 5 sec
+        </Button>
+
+        <Signature v-model="signatureData">
+          <template #loader>
+            <Loader v-model="loadingSignature"></Loader>
+          </template>
+        </Signature>
       </div>
     </div>
 </template>
@@ -46,14 +66,20 @@
       openUsage: true,
       loadingFullScreen: false,
       loading: false,
+      loadingWrapper: false,
       loadingSignature: false,
       fullScreen: true,
       dialogOpened: false,
+      dialogWrapperOpened: false,
       signatureData: undefined
     }),
     methods: {
       temporaryFullScreenLoader() {
         this.loadingShow('loadingFullScreen', 5)
+      },
+      temporaryLoaderWrapper() {
+        this.dialogWrapperOpened = true
+        this.loadingShow('loadingWrapper', 5)
       },
       temporaryLoader() {
         this.dialogOpened = true

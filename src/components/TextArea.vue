@@ -95,7 +95,7 @@
           if (this.value.length < this.maxCharacters) {
             return this.value
           } else {
-            return this.value.substring(0, this.maxCharacters - 1)
+            return this.value.substring(0, this.maxCharacters)
           }
         },
         set(value) {

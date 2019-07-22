@@ -34,12 +34,13 @@
         :class="{'error': textareaErrors.length && touched && showErrors}"
         @blur="onBlur"
       />
-      <div class="notification">{{ notificationStr }}</div>
     </label>
     <div class="textarea-errors-wraper">
-        <span v-if="textareaErrors.length && touched && showErrors" class="error-message">
-          {{ textareaErrors[0] }}
-        </span>
+      <span v-if="textareaErrors.length && touched && showErrors" class="error-message">
+        {{ textareaErrors[0] }}
+      </span>
+      
+      <div class="notification">{{ notificationStr }}</div>
     </div>
   </div>
 </template>
@@ -136,7 +137,7 @@
       }
     },
     mounted() {
-      this.notificationStr = `You can input less than ${this.maxCharacters} charactors`
+      this.notificationStr = `${this.value ? this.value.length : 0}/${this.maxCharacters}`
 
       this.$nextTick(() => {
         if (this.initValidation) {
@@ -161,7 +162,7 @@
     watch: {
       textareaValue(val) {
         this.$emit('validation', this.validation)
-        this.notificationStr = `${this.maxCharacters - val.length} characters are left`
+        this.notificationStr = `${val.length}/${this.maxCharacters}`
       },
       initialTouched(value) {
         this.touched = value
@@ -176,7 +177,6 @@
   .ds-text-area {
     label {
       display: block;
-      position: relative;
 
       .label-text {
         .font-desktop-x-small-regular-gray();
@@ -189,7 +189,7 @@
 
       textarea {
         .font-desktop-small-regular-dark();
-        padding: 7px 12px 20px 12px;
+        padding: 7px 12px;
         box-sizing: border-box;
         border: 1px solid @color-gray-300;
         border-radius: 2px;
@@ -213,27 +213,16 @@
           border-color: @color-red;
         }
       }
-
-      .notification {
-        .font-desktop-x-small-regular-gray();
-        position: absolute;
-        bottom: 8px;
-        right: 20px;
-        left: 13px;
-        text-align: right;
-        padding: 2px 0;
-        z-index: 2;
-        background-color: white;
-      }
     }
 
     .textarea-errors-wraper {
       box-sizing: border-box;
       font-size: 11px;
       line-height: 12px;
-      padding: 3px 0;
-      position: absolute;
       max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
       .error-message {
         color: @color-red;
@@ -246,6 +235,14 @@
         text-overflow: ellipsis;
         display: inline-block;
         max-width: 100%;
+      }
+
+      .notification {
+        .font-desktop-x-small-regular-gray();
+        text-align: right;
+        padding: 2px 0;
+        flex-grow: 1;
+        white-space: nowrap;
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-select-demo">
+  <div class="ds-grid grid-select-demo">
     <div class="row-col">
       <h3>GridSelect</h3>
 

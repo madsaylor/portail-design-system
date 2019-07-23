@@ -13,16 +13,16 @@
 <template>
     <div class="ds-collapser" :style="{backgroundColor: bgColor}">
       <div
-        class="top"
+        class="ds-collapser-header"
         :style="{backgroundColor: bgColor}"
         @click="onCollapserClick"
       >
-        <div class="title" :style="{textAlign: titleAlignment}">{{label}}</div>
-        <div class="icon-wrapper">
+        <div class="ds-title" :style="{textAlign: titleAlignment}">{{label}}</div>
+        <div class="ds-icon-wrapper">
           <Icon color="#3F4352" :source="opened ? 'expand_less' : 'expand_more'"></Icon>
         </div>
       </div>
-      <div class="body" :style="{backgroundColor: bgColor}" v-show="opened">
+      <div class="ds-collapser-body" :style="{backgroundColor: bgColor}" v-show="opened">
         <slot></slot>
       </div>
     </div>
@@ -65,7 +65,7 @@
       margin-bottom: @collapser-margin-bottom;
       cursor: pointer;
 
-      .top {
+      .ds-collapser-header {
         display: flex;
         width: 100%;
         height: 40px;
@@ -79,19 +79,19 @@
           justify-content: center;
         }
 
-        .title {
+        .ds-title {
           flex: 1;
           padding-left: 15px;
           padding-right: 15px;
           display: block;
         }
 
-        .icon-wrapper {
+        .ds-icon-wrapper {
           width: 50px;
         }
       }
 
-      .body {
+      .ds-collapser-body {
         padding: @collapser-body-padding;
         background-color: white;
       }

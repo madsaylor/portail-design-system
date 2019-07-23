@@ -33,23 +33,23 @@
   <div class="ds-menu-wrapper">
     <template v-for="(item, index) in items">
       <a
-        :class="['item-container', {
-          disabled: item.disabled
+        :class="['ds-item-container', {
+          'ds-disabled': item.disabled
         }]"
         :key="index"
         :href="item.href"
         @click="itemClick(item, index)"
       >
-        <div v-if="index !== 0" class="divider" />
+        <div v-if="index !== 0" class="ds-divider" />
 
-        <div class="item">
+        <div class="ds-item">
           <Icon
             v-if="item.icon"
             :source="item.icon"
             size="24px"
             color="gray-400"
           />
-          <span class="title">{{ item.title }}</span>
+          <span class="ds-title">{{ item.title }}</span>
         </div>
       </a>
     </template>
@@ -86,7 +86,7 @@ export default {
   background-color: @color-white;
   box-shadow: @card-shadow;
 
-  .item-container {
+  .ds-item-container {
     display: block;
     text-decoration: none;
     color: @color-dark;
@@ -96,17 +96,17 @@ export default {
       text-decoration: none;
     }
 
-    &.disabled {
+    &.ds-disabled {
       color: @color-gray-400;
     }
 
-    .divider {
+    .ds-divider {
       height: @app-menu-divider-height;
       width: 100%;
       background: @color-gray-300;
     }
 
-    .item {
+    .ds-item {
       display: flex;
       align-items: center;
       padding: @app-menu-padding;
@@ -116,7 +116,7 @@ export default {
         background-color: @color-gray-200;
       }
 
-      .title {
+      .ds-title {
         margin-left: @app-menu-spacing;
       }
     }

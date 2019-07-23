@@ -35,14 +35,14 @@
 -->
 <template>
   <div class="ds-tabs-container">
-    <div class="tabs-header">
-      <div class="tabs-row">
+    <div class="ds-tabs-header">
+      <div class="ds-tabs-row">
         <template v-for="(tab, index) in tabs">
           <div
             v-if="!tab.hidden"
-            :class="['tab', {
-            active: activeTab(index),
-            disabled: disabled || tab.disabled,
+            :class="['ds-tab', {
+            'ds-active': activeTab(index),
+            'ds-disabled': disabled || tab.disabled,
           }]"
 
             @click="onTabClick(tab, index)"
@@ -52,7 +52,7 @@
         </template>
       </div>
     </div>
-    <div class="tabs-body">
+    <div class="ds-tabs-body">
       <slot :name="activeTabBody"></slot>
     </div>
   </div>
@@ -121,14 +121,14 @@
   @import '../styles/vars';
 
   .ds-tabs-container {
-    .tabs-header {
+    .ds-tabs-header {
       display: flex;
       background-color: @color-white;
       width: 100%;
       height: auto;
       justify-content: center;
 
-      .tabs-row {
+      .ds-tabs-row {
         display: flex;
         width: 50%;
 
@@ -140,7 +140,7 @@
       }
     }
 
-    .tab {
+    .ds-tab {
       display: flex;
       cursor: pointer;
       flex: 1 1 auto;
@@ -155,12 +155,12 @@
 
       .font-components-tab-inactive();
 
-      &:not(.disabled) {
-        &:hover, &:focus, &.active {
+      &:not(.ds-disabled) {
+        &:hover, &:focus, &.ds-active {
           .font-components-tab-active();
         }
 
-        &.active {
+        &.ds-active {
           box-shadow: inset 0 -3px 0 -1px @color-primary;
         }
       }

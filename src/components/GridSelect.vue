@@ -31,25 +31,25 @@
   Model:
 
     Selected value is updated through v-model directive on mouse click, enter
-    or space key. During rendering "selected" class is added to item that
+    or space key. During rendering "ds-selected" class is added to item that
     satisfies === comparison with the v-model. Value for the check can be
     overridden with selectedKey property
 -->
 
 <template>
   <table class="ds-grid-select">
-    <tr v-if="labelsTop" class="labels-top">
+    <tr v-if="labelsTop" class="ds-labels-top">
       <th v-for="label in labelsTop">
         {{ label }}
       </th>
     </tr>
 
-    <tr v-for="row in items" class="grid-select-row">
+    <tr v-for="row in items" class="ds-grid-select-row">
       <td
         v-for="item in row"
-        :class="['item-cell', {
-          disabled: item.disabled,
-          selected:
+        :class="['ds-item-cell', {
+          'ds-disabled': item.disabled,
+          'ds-selected':
             item.key !== undefined ? item.key === initDate : item === value,
         }]"
         :tabindex="!item.disabled && 0"
@@ -57,7 +57,7 @@
         @keydown.enter.space.prevent="select(item)"
         :style="{width: itemWidth}"
       >
-        <span :class="['item', ...item.class]">
+        <span :class="['ds-item', ...item.class]">
           <slot v-bind="{item}">
             {{ item.title || item }}
           </slot>
@@ -102,7 +102,7 @@ export default {
   height: 100%;
   border-collapse: collapse;
 
-  .labels-top th {
+  .ds-labels-top th {
     color: @color-gray-500;
     font-family: @font-family;
     font-size: 16px;
@@ -115,10 +115,10 @@ export default {
     user-select: none;
   }
 
-  .grid-select-row {
-    .item-cell {
+  .ds-grid-select-row {
+    .ds-item-cell {
       text-align: center;
-      > .item {
+      > .ds-item {
         border-radius: 2px;
         box-sizing: border-box;
         color: @color-dark;
@@ -133,25 +133,25 @@ export default {
         user-select: none;
       }
 
-      &:not(.disabled) {
+      &:not(.ds-disabled) {
         cursor: pointer;
 
-        &:hover > .item,
-        &:focus > .item {
+        &:hover > .ds-item,
+        &:focus > .ds-item {
           background: darken(@color-white, 5%);
         }
 
-        &:active > .item {
+        &:active > .ds-item {
           background: darken(@color-white, 10%);
         }
 
-        &.selected > .item {
+        &.ds-selected > .ds-item {
           color: @color-white;
           background-color: @color-primary;
         }
       }
 
-      &.disabled > .item {
+      &.ds-disabled > .ds-item {
         color: @color-gray-300;
       }
 

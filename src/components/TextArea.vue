@@ -25,22 +25,22 @@
 <template>
   <div class="ds-text-area">
     <label>
-      <div class="label-text" v-if="label">{{label}}</div>
+      <div class="ds-label-text" v-if="label">{{label}}</div>
       <textarea
         v-model="textareaValue"
         :placeholder="placeholder"
         :name="name"
         :rows="rows"
-        :class="{'error': textareaErrors.length && touched && showErrors}"
+        :class="{'ds-error': textareaErrors.length && touched && showErrors}"
         @blur="onBlur"
       />
     </label>
-    <div class="textarea-errors-wraper">
-      <span v-if="textareaErrors.length && touched && showErrors" class="error-message">
+    <div class="ds-textarea-errors-wraper">
+      <span v-if="textareaErrors.length && touched && showErrors" class="ds-error-message">
         {{ textareaErrors[0] }}
       </span>
       
-      <div class="notification">{{ notificationStr }}</div>
+      <div class="ds-notification">{{ notificationStr }}</div>
     </div>
   </div>
 </template>
@@ -178,7 +178,7 @@
     label {
       display: block;
 
-      .label-text {
+      .ds-label-text {
         .font-desktop-x-small-regular-gray();
         height: 16px;
         margin-bottom: 4px;
@@ -202,20 +202,20 @@
           .font-desktop-small-regular-gray();
         }
 
-        &:focus:not(.error) {
+        &:focus:not(.ds-error) {
           border-color: @color-primary;
         }
         &:focus {
           outline: none;
         }
 
-        &.error {
+        &.ds-error {
           border-color: @color-red;
         }
       }
     }
 
-    .textarea-errors-wraper {
+    .ds-textarea-errors-wraper {
       box-sizing: border-box;
       font-size: 11px;
       line-height: 12px;
@@ -224,7 +224,7 @@
       justify-content: space-between;
       align-items: center;
 
-      .error-message {
+      .ds-error-message {
         color: @color-red;
         font-family: @font-family;
         list-style: none;
@@ -237,7 +237,7 @@
         max-width: 100%;
       }
 
-      .notification {
+      .ds-notification {
         .font-desktop-x-small-regular-gray();
         text-align: right;
         padding: 2px 0;

@@ -19,9 +19,9 @@
 
 <template>
   <div class="ds-upload-wrapper">
-    <vue-dropzone :options="fileUploadOptions" id="file-upload" :useCustomSlot="true">
-      <div v-if="files.length === 0 || !preview " class="dropzone-custom-content">
-        <div class="icon-wrapper">
+    <vue-dropzone :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
+      <div v-if="files.length === 0 || !preview " class="ds-dropzone-custom-content">
+        <div class="ds-icon-wrapper">
           <Icon
             v-if="icon"
             :source="icon"
@@ -29,20 +29,20 @@
           />
         </div>
 
-        <div class="title">
+        <div class="ds-title">
           {{title}}
         </div>
       </div>
 
-      <div v-else class="selected-files-wrapper">
-        <div v-for="(file, index) in files" :key="index" class="file-wrapper">
+      <div v-else class="ds-selected-files-wrapper">
+        <div v-for="(file, index) in files" :key="index" class="ds-file-wrapper">
           <img width="100" height="100" :src="file.dataURL" />
           <Icon source="close" color="#ddd" size="24px" @click.native="removeFile(file)" />
         </div>
       </div>
     </vue-dropzone>
 
-    <div class="errors" v-if="inputErrors.length && touched">
+    <div class="ds-errors" v-if="inputErrors.length && touched">
       {{ inputErrors[0] }}
     </div>
   </div>
@@ -177,20 +177,20 @@ export default {
 .ds-upload-wrapper {
   width: 100%;
 
-  #file-upload {
+  #ds-file-upload {
     width: 100%;
     position: relative;
     min-height: @file-upload-panel-height; 
     background-color: @color-gray-300;
 
-    .dropzone-custom-content {
+    .ds-dropzone-custom-content {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
 
-      .title {
+      .ds-title {
         color: @color-dark;
         font-weight: @file-upload-title-weight;
         font-size: @file-upload-title-size;
@@ -199,13 +199,13 @@ export default {
       }
     }
 
-    .selected-files-wrapper {
+    .ds-selected-files-wrapper {
       display: flex;
       justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
 
-      .file-wrapper {
+      .ds-file-wrapper {
         margin-left: 10px;
         margin-right: 10px;
         position: relative;
@@ -214,7 +214,7 @@ export default {
           object-fit: cover;
         }
 
-        .icon {
+        .ds-icon {
           position: absolute;
           top: 0;
           right: 0;
@@ -223,7 +223,7 @@ export default {
     }
   }
 
-  .errors {
+  .ds-errors {
     color: @color-red;
     font-family: @font-family;
     font-size: 12px;

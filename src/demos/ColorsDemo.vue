@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div class="ds-grid">
     <div class="row-col">
       <h2>Colors</h2>
       <pre v-highlightjs="usage"><code class="less"></code></pre>

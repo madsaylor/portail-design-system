@@ -16,19 +16,19 @@
 -->
 
 <template>
-  <div class="">
+  <div>
     <div class="ds-input-wrapper">
-      <input type="file" id="file-input" ref="file" @change="fileInputChange" multiple />
+      <input type="file" id="ds-file-input" ref="file" @change="fileInputChange" multiple />
       <Input
         type="text"
-        :class="{'error': inputErrors.length && touched}"
+        :class="{'ds-error': inputErrors.length && touched}"
         :label="label"
         v-model="selectedFileText"
         disabled
       />
       <Icon
         attach_file
-        class="open-icon"
+        class="ds-open-icon"
         size="20px"
         padding="8px"
         color="gray-500"
@@ -36,16 +36,16 @@
       />
     </div>
 
-    <div class="errors" v-if="inputErrors.length && touched && showErrors">
+    <div class="ds-errors" v-if="inputErrors.length && touched && showErrors">
       {{ inputErrors[0] }}
     </div>
 
-    <div class="files-wrapper" v-if="files.length > 0">
-      <div v-for="file in files" :key="file.name" class="file-name">
-        <span class="name">{{file.name}}</span>
+    <div class="ds-files-wrapper" v-if="files.length > 0">
+      <div v-for="file in files" :key="file.name" class="ds-file-name">
+        <span class="ds-name">{{file.name}}</span>
         <Icon
           close
-          class="close"
+          class="ds-close"
           size="16px"
           padding="4px"
           color="red"
@@ -145,7 +145,7 @@ export default {
     },
     fileInputOpen() {
       this.touched = true
-      document.getElementById('file-input').click();
+      document.getElementById('ds-file-input').click();
     },
     removeFile(file) {
       this.$emit('fileRemove', file)
@@ -172,7 +172,7 @@ export default {
 .ds-input-wrapper {
   position: relative;
 
-  &.error {
+  &.ds-error {
     .ds-input {
       input {
         border-color: @color-red;
@@ -180,7 +180,7 @@ export default {
     }
   }
 
-  #file-input {
+  #ds-file-input {
     display: none;
   }
 
@@ -196,7 +196,7 @@ export default {
     }
   }
 
-  .open-icon {
+  .ds-open-icon {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -204,14 +204,14 @@ export default {
   }
 }
 
-.files-wrapper {
+.ds-files-wrapper {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 24px;
 
-  .file-name {
+  .ds-file-name {
     height: 24px;
     background-color: #F4F6FB;
     border: 1px solid #E6E7EB;
@@ -221,20 +221,20 @@ export default {
     margin-right: 12px;
     margin-bottom: 8px;
 
-    .name {
+    .ds-name {
       font-size: 12px;
       line-height: 16px;
       color: #838795;
       padding: 4px;
     }
 
-    .close {
+    .ds-close {
       cursor: pointer;
     }
   }
 }
 
-.errors {
+.ds-errors {
   color: @color-red;
   font-family: @font-family;
   font-size: 12px;

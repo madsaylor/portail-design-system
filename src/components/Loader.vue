@@ -1,5 +1,5 @@
 <template>
-  <div :class="['loader', ...loaderWrapperClasses]" :style="{...backgroundColor}">
+  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{...backgroundColor}">
     <div :class="[...loaderClasses]"></div>
   </div>
 </template>
@@ -26,7 +26,7 @@
       },
       loaderClasses() {
         if (this.value) {
-          return this.fullScreen ? 'base-loader' : 'mini-loader'
+          return this.fullScreen ? 'ds-base-loader' : 'ds-mini-loader'
         } else {
           return ''
         }
@@ -36,7 +36,7 @@
 
         if (this.value) {
           if (this.fullScreen) {
-            loaderWrapperClasses.push('full-screen')
+            loaderWrapperClasses.push('ds-full-screen')
             loaderWrapperClasses.push('ds-loader-wrapper')
           } else {
             loaderWrapperClasses.push('ds-loader-wrapper-mini')
@@ -61,7 +61,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    .loader {
+    .ds-loader {
       z-index: 5001;
     }
   }
@@ -69,7 +69,7 @@
   .ds-loader-wrapper {
     position: fixed;
 
-    .loader {
+    .ds-loader {
       position: fixed;
       margin: auto;
       left: 0;
@@ -85,19 +85,19 @@
     height: 100%;
   }
 
-  .base-loader {
+  .ds-base-loader {
     width: 64px;
     height: 64px;
     background-image: url('../icons/portail-loader.gif');
   }
 
-  .mini-loader {
+  .ds-mini-loader {
     width: 32px;
     height: 32px;
     background-image: url('../icons/portail-loader-small.gif');
   }
 
-  .full-screen {
+  .ds-full-screen {
     height: 100%;
     width: 100%;
   }

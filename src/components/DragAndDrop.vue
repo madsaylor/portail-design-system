@@ -2,7 +2,7 @@
   <draggable v-model="draggableList" :group="group" @start="drag=true" @end="drag=false">
     <div class="ds-draggable-item" v-for="(element, index) in list" :key="index">
       <Icon menu />
-      <span class="title">{{ element.name }}</span>
+      <span class="ds-title">{{ element.name }}</span>
       <span>{{ element.quantity || '' }}</span>
       <span>{{ element.price || '' }}</span>
       <span>{{ element.percentage || '' }}</span>
@@ -53,7 +53,7 @@ export default {
   border-radius: 2px;
   margin-bottom: 12px;
 
-  .title {
+  .ds-title {
     flex-basis: 40%;
   }
 }

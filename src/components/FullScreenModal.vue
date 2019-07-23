@@ -13,11 +13,11 @@
 -->
 <template>
   <div class="ds-full-screen-modal">
-    <div class="modal-header">
+    <div class="ds-modal-header">
       <slot name="header"></slot>
     </div>
 
-    <div class="modal-main grid">
+    <div class="ds-modal-main ds-grid">
       <div class="row">
         <div class="col-2"></div>
         <div class="col-8"><slot></slot></div>
@@ -52,7 +52,7 @@ export default {
   top: 0;
   left: 0;
 
-  .modal-header:not(:empty) {
+  .ds-modal-header:not(:empty) {
     .font-desktop-h-3-dark-center();
     padding: 16px;
     box-sizing: border-box;
@@ -60,12 +60,12 @@ export default {
     box-shadow: inset 0 -1px 0 0 @color-gray-300;
   }
    @media @screen-medium, @screen-small {
-        .modal-header:not(:empty) {
+        .ds-modal-header:not(:empty) {
           padding: 12px;
         }
    }
 
-  .modal-main {
+  .ds-modal-main {
     height:100%;
   }
 }

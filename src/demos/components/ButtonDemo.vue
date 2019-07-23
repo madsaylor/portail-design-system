@@ -25,7 +25,7 @@
       <Button link="https://github.com/highqualitycode" icon="account_circle">Github</Button>&nbsp;
       <Button link="https://github.com/highqualitycode" icon="insert_chart" small link-ico>Full Report</Button>&nbsp;
       <!-- OR -->
-      <button class="button primary">
+      <button class="ds-button ds-button-primary">
         Button Label
       </button>
     </div>

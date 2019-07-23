@@ -52,14 +52,14 @@
       padding-bottom: 1px;
       box-shadow: inset 0 -1px 0 0 @color-gray-300;
 
-      .top {
+      .ds-collapser-header {
         height: 56px;
 
         & > div {
           justify-content: left;
         }
 
-        .title {
+        .ds-title {
           height: 24px;
           font-family: Lato;
           font-size: 18px;
@@ -71,7 +71,7 @@
           margin-left: 12px;
         }
 
-        .icon-wrapper {
+        .ds-icon-wrapper {
           margin-left: 10px;
         }
       }

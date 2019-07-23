@@ -16,7 +16,7 @@
   <div :class="['ds-tooltip-wrapper', {'ds-tooltip-wrapper-mini': type === 'mini'}]"
        :style="stylesObject">
     <template v-if="type === 'mini'">
-      <div class="mini">
+      <div class="ds-mini">
         <slot></slot>
       </div>
     </template>
@@ -237,7 +237,7 @@ export default {
     }
   }
 
-  .mini {
+  .ds-mini {
     padding: 8px;
     background-color: #3F4352;
     border-radius: 2px;

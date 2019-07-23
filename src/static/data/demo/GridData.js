@@ -1,6 +1,6 @@
 let usage = `
 <!-- Grid container -->
-<div class="grid">
+<div class="ds-grid">
   <!-- Single row element can have multiple rows of cells if they warp -->
   <div class="row">
     <!-- Element with col-x class taking x columns -->

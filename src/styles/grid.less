@@ -1,13 +1,13 @@
 @import "./vars.less";
 
 /**
- * generates .grid .row and .col-* classes
+ * generates .ds-grid .row and .col-* classes
  * @spacing  Margins on the sides and between columns
  * @ncol     Number of columns in a layout
  * @ncol-max Maximum number for .col-[n] classes to generate.
  */
 .generateGrid(@spacing, @ncol, @ncol-max) {
-  .grid {
+  .ds-grid {
     > .row {
       display: flex;
       align-items: stretch;

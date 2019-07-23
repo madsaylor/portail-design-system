@@ -12,7 +12,7 @@
 
 <template>
   <div class="ds-badge" :class="color">
-    <Icon v-if="icon" class="icon" :source="icon" color="white" :size="iconSize"/>
+    <Icon v-if="icon" class="ds-icon" :source="icon" color="white" :size="iconSize"/>
     <slot></slot>
   </div>
 </template>
@@ -43,7 +43,7 @@
     padding: @badge-padding;
     cursor: default;
 
-    .icon {
+    .ds-icon {
       margin-right: @badge-icon-margin;
     }
   }

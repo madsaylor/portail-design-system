@@ -22,16 +22,16 @@
 
 <template>
   <div class="ds-signature-wrapper">
-    <div class="signature-pad-wrapper" @mousedown="clearPlaceholder" @mouseup="mouseup" @mouseleave="mouseleave">
+    <div class="ds-signature-pad-wrapper" @mousedown="clearPlaceholder" @mouseup="mouseup" @mouseleave="mouseleave">
       <VueSignaturePad
-        class="signature-pad"
+        class="ds-signature-pad"
         :width="signaturePadWidth"
         :height="signaturePadHeight"
         ref="signaturePad"
       />
     </div>
-    <div class="clear-signature-wrapper" v-if="!lockSignaturePad">
-      <span class="clear-signature"
+    <div class="ds-clear-signature-wrapper" v-if="!lockSignaturePad">
+      <span class="ds-clear-signature"
             @click="clear">
         Clear Signature
       </span>
@@ -136,18 +136,18 @@
     display: inline-block;
     position: relative;
 
-    .signature-pad-wrapper {
-      .signature-pad {
+    .ds-signature-pad-wrapper {
+      .ds-signature-pad {
         border: 1px solid #e1e2e6;
         border-radius: 1px;
       }
     }
 
-    .clear-signature-wrapper {
+    .ds-clear-signature-wrapper {
       display: flex;
       justify-content: flex-end;
 
-      .clear-signature {
+      .ds-clear-signature {
         height: 16px;
         width: 81px;
         color: @color-gray-500;

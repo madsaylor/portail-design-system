@@ -2,8 +2,8 @@ let usage = `
 <Tabs :tabs="tabs" :active="active" @tab:click="onTabClick">
   <template #tabs-1>
     <h4 class="body-title">MES FACTURES</h4>
-    <Card class="dashboard-report">
-      <div class="report-title">
+    <Card class="ds-dashboard-report">
+      <div class="ds-report-title">
         Chiffre d'affaires réalisé en 2018
       </div>
       ...

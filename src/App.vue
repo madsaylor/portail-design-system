@@ -11,13 +11,13 @@
     <AppHeader>
       <template #left>
         <Button
-          id="open-sidebar-button" icon="menu" plain
+          id="ds-open-sidebar-button" icon="menu" plain
           @click="sidebarOpened = !sidebarOpened"
         />
       </template>
       Portail v3 Design System
     </AppHeader>
-    <div class="main-content grid">
+    <div class="main-content ds-grid">
 
       <div class="row-col">
         Links:

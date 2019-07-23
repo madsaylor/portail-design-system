@@ -3,7 +3,7 @@ import GeneralData from '../GeneralData'
 let usage = `
 <Dialog :opened.sync="opened"
         :borderColor="borderColor">
-  <div class="dialog-body">
+  <div class="ds-dialog-body">
   ${GeneralData.text}
   </div>
 </Dialog>
@@ -20,10 +20,10 @@ let usage = `
   :opened.sync="openedFullScreen"
   :fullScreen="fullScreenActive"
 >
-  <div class="dialog-header">
+  <div class="ds-dialog-header">
     <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
   </div>
-  <div class="dialog-body">
+  <div class="ds-dialog-body">
     ${GeneralData.text}
     ...
   </div>

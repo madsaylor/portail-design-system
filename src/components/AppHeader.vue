@@ -13,7 +13,7 @@
 <template>
   <div class="ds-app-header">
     <slot name="left"></slot>
-    <div class="title">
+    <div class="ds-title">
       <slot></slot>
     </div>
     <slot name="right"></slot>
@@ -36,7 +36,7 @@ export default {
   display: flex;
   align-items: stretch;
 
-  .title {
+  .ds-title {
     flex: 1 0 auto;
     .font-desktop-h-3-dark();
     padding: @app-header-title-padding;
@@ -45,7 +45,7 @@ export default {
   @media @screen-small {
     height: @app-header-height-small;
 
-    .title {
+    .ds-title {
       .font-desktop-body-medium-dark();
       padding: @app-header-title-padding-small;
     }

@@ -55,18 +55,18 @@
 -->
 
 <template>
-  <div :class="['ds-sidebar-container', {opened, disabled}]">
-    <div class="sidebar">
-      <div class="header">
+  <div :class="['ds-sidebar-container', {'ds-opened': opened, 'ds-disabled': disabled}]">
+    <div class="ds-sidebar">
+      <div class="ds-header">
         <slot name="header">Sidebar header</slot>
       </div>
 
-      <div class="items">
+      <div class="ds-items">
         <template v-for="(item, index) in items">
           <a
-            :class="['item', {
-              active: activeKey(item, index) === active,
-              disabled: disabled || item.disabled
+            :class="['ds-item', {
+              'ds-active': activeKey(item, index) === active,
+              'ds-disabled': disabled || item.disabled
             }]"
             :href="item.href"
             :key="activeKey(item, index)"
@@ -82,9 +82,9 @@
               color="gray-400"
             />
 
-            <div class="title">{{ item.title }}</div>
+            <div class="ds-title">{{ item.title }}</div>
 
-            <div v-if="item.badge" class="badge" :style="{
+            <div v-if="item.badge" class="ds-badge" :style="{
               'background-color':
                 disabled || item.disabled ?
                   COLORS['gray-300'] :
@@ -99,15 +99,15 @@
             />
           </a>
           <section :class="[
-            'children',
-            {opened: activeKey(item, index) === active},
+            'ds-children',
+            {'ds-opened': activeKey(item, index) === active},
           ]">
             <a
               v-for="(child, childIndex) in item.children"
               :key="activeKey(child, childIndex)"
-              :class="['item', 'child-item', {
-                active: activeKey(child, childIndex) === activeChild,
-                disabled: disabled || child.disabled
+              :class="['ds-item', 'ds-child-item', {
+                'ds-active': activeKey(child, childIndex) === activeChild,
+                'ds-disabled': disabled || child.disabled
               }]"
               :href="item.href"
               :tabindex="
@@ -125,7 +125,7 @@
         </template>
       </div>
 
-      <div class="footer"><slot name="footer"></slot></div>
+      <div class="ds-footer"><slot name="footer"></slot></div>
     </div>
   </div>
 </template>
@@ -184,7 +184,7 @@ export default {
   },
   mounted() {
     document.addEventListener('click', this.outsideClick, true)
-    this.$el.parentNode.classList.add('sidebar-padding')
+    this.$el.parentNode.classList.add('ds-sidebar-padding')
   },
   beforeDestroy() {
     document.removeEventListener('click', this.outsideClick, true)
@@ -206,7 +206,7 @@ export default {
   height: @sidebar-height;
 }
 
-.sidebar {
+.ds-sidebar {
   background-color: @color-white;
   height: 100%;
   display: flex;
@@ -218,11 +218,11 @@ export default {
   }                               //
 
 
-  &.disabled {
+  &.ds-disabled {
     background: @color-gray-100;
   }
 
-  .header, .item {
+  .ds-header, .ds-item {
     box-shadow: @sidebar-item-shadow;
     box-sizing: border-box;
     height: @sidebar-item-height;
@@ -230,7 +230,7 @@ export default {
     flex: 0 0 auto;
   }
 
-  .header, .items {
+  .ds-header, .ds-items {
     margin-bottom: 16px;
   }
 
@@ -241,37 +241,37 @@ export default {
     list-style-type: 0;
   }
 
-  .item {
+  .ds-item {
     .font-desktop-body-regular-dark();
     align-items: center;
     cursor: pointer;
     display: flex;
     transition: all .1s ease-in-out;
 
-    &.child-item {
+    &.ds-child-item {
       .font-desktop-body-regular-gray();
       padding-left: 50px;
     }
 
-    .icon[expand_more] {
+    .ds-icon[expand_more] {
       transition: transform .1s ease;
     }
 
-    &.active {
+    &.ds-active {
       .font-desktop-body-regular-accent();
-      .icon svg {
+      .ds-icon svg {
         fill: @color-primary;
       }
-      .icon[expand_more] {
+      .ds-icon[expand_more] {
         transform: rotate(180deg);
       }
     }
 
-    &.disabled {
+    &.ds-disabled {
       background: @color-gray-100;
       color: @color-gray-400;
       cursor: initial;
-      .icon svg {
+      .ds-icon svg {
         fill: @color-gray-400;
       }
       &:hover {
@@ -289,12 +289,12 @@ export default {
       background: darken(@color-white, 10%);
     }
 
-    .title {
+    .ds-title {
       padding-left: 12px;
       flex: 1 0 auto;
     }
 
-    .badge {
+    .ds-badge {
       height: 20px;
       min-width: 20px;
       margin: 2px;
@@ -313,16 +313,16 @@ export default {
     }
   }
 
-  .children {
+  .ds-children {
     transition: max-height .1s ease;
     max-height: 1000px;
     overflow-y: auto;
-    &:not(.opened) {
+    &:not(.ds-opened) {
       max-height: 0;
     }
   }
 
-  .footer:not(:empty) {
+  .ds-footer:not(:empty) {
     box-sizing: border-box;
     margin-top: auto;
     padding: @sidebar-item-padding;
@@ -333,17 +333,17 @@ export default {
 @media @hide-sidebar {
   .ds-sidebar-container {
     transition: left .1s ease;
-    &:not(.opened) {
+    &:not(.ds-opened) {
       left: -@sidebar-width;
     }
   }
 }
 
 @media @show-sidebar {
-  .sidebar-padding {
+  .ds-sidebar-padding {
     padding-left: @sidebar-width;
   }
-  #open-sidebar-button {
+  #ds-open-sidebar-button {
     display: none;
   }
 }

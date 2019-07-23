@@ -26,16 +26,16 @@
     :style="dialogStyleObject"
   >
     <div
-      class="backdrop"
+      class="ds-dialog-backdrop"
       :style="{opacity: backdropOpacity, 'background-color': backgroundColor}"
       @click.stop="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>
-      <div :class="['dialog-content', {'border-content': borderColor, 'full-screen-content': fullScreen,
-                    'full-screen-active-content': fullScreenActive, 'full-width': contentFullWidth,
-                    'dialog-datepicker-container': datepickerContainer}]"
+      <div :class="['ds-dialog-content', {'ds-border-content': borderColor, 'ds-full-screen-content': fullScreen,
+                    'ds-full-screen-active-content': fullScreenActive, 'ds-full-width': contentFullWidth,
+                    'ds-dialog-datepicker-container': datepickerContainer}]"
            :style="{borderColor}">
-        <div :class="['dialog-wrapper', {'full-width': contentFullWidth}]">
+        <div :class="['ds-dialog-wrapper', {'ds-full-width': contentFullWidth}]">
           <slot></slot>
         </div>
         <slot name="loader"></slot>
@@ -249,7 +249,7 @@
     z-index: 1000;
     top: 0;
 
-    .backdrop {
+    .ds-dialog-backdrop {
       position: fixed;
       bottom: 0;
       left: 0;
@@ -259,7 +259,7 @@
       background-color: #000;
     }
 
-    .dialog-content {
+    .ds-dialog-content {
       position: relative;
       width: auto;
       z-index: 1001;
@@ -270,12 +270,12 @@
       overflow: auto;
       max-width: 1280px;
 
-      .dialog-wrapper {
+      .ds-dialog-wrapper {
         height:100%;
         display: inline-flex;
         flex-direction: column;
 
-        .dialog-header:not(:empty) {
+        .ds-dialog-header:not(:empty) {
           .font-desktop-h-3-dark-center();
           padding: 16px;
           box-sizing: border-box;
@@ -283,55 +283,55 @@
           box-shadow: inset 0 -1px 0 0 @color-gray-300;
         }
         @media @screen-medium, @screen-small {
-          .dialog-header:not(:empty) {
+          .ds-dialog-header:not(:empty) {
             padding: 12px;
           }
         }
 
-        .dialog-body {
+        .ds-dialog-body {
           overflow: auto;
           height:100%;
         }
 
-        &.full-width {
+        &.ds-full-width {
           width: 100%;
         }
       }
 
-      &.full-width {
+      &.ds-full-width {
         width: 100%;
       }
 
-      &.dialog-datepicker-container {
+      &.ds-dialog-datepicker-container {
         border-radius: 0;
         box-shadow: 0 -1px 1px 0 rgba(91,99,156,0.26);
       }
     }
 
     @media only screen and (max-height: 556px) {
-      .dialog-content {
+      .ds-dialog-content {
         max-height: 100%;
       }
     }
 
-    .border-content {
+    .ds-border-content {
       border-style: solid;
       border-width: 1px;
     }
 
-    .full-screen-content {
+    .ds-full-screen-content {
       display: block;
       width: 1280px;
       height: 800px;
       max-height: 100%;
       max-width:1280px;
 
-      .dialog-content {
+      .ds-dialog-content {
         flex-grow: 1;
       }
     }
 
-    .full-screen-active-content {
+    .ds-full-screen-active-content {
       width: 100% !important;
       height: 100% !important;
     }

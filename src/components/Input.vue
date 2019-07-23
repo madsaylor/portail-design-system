@@ -110,22 +110,23 @@
 -->
 
 <template>
-  <div :class="['ds-input', type, {disabled, sm, md, lg, preventScroll: datepickerVisible}]">
+  <div :class="['ds-input', getType, {'ds-disabled': disabled, 'ds-sm': sm, 'ds-md': md, 'ds-lg': lg,
+                preventScroll: datepickerVisible}]">
     <label>
       <div v-if="label"
            :id="id"
            @click="onInputPrevent($event, true)"
-           :class="['label-text', {'slide-label': slideLabel, 'label-focus': labelFocus, 'slide-label-date': type === 'date'},
-                    slideActive ? 'slide-label-active' : slideLabel ? 'slide-label-inactive' : '']">
+           :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus, 'ds-slide-label-date': getType === 'ds-date'},
+                    slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']">
           {{ label }}
       </div>
 
-      <Icon v-if="iconRight" color="gray-400" :source="iconRight" class="icon-right" />
+      <Icon v-if="iconRight" color="gray-400" :source="iconRight" class="ds-icon-right"/>
 
       <input
-        v-if="type !== 'select' && type !== 'radio'"
+        v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
         v-bind="inputAttrs"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched && showErrors, 'slide-input': slideLabel, 'date': type === 'date', 'has-right-icon': iconRight}"
+        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched && showErrors, 'ds-slide-input': slideLabel, 'date': getType === 'ds-date', 'ds-has-right-icon': iconRight}"
         v-model="inputValue"
         ref="input"
         @focus.prevent="inputFocus"
@@ -136,19 +137,19 @@
       />
 
       <input
-        v-if="type == 'radio'"
+        v-if="getType == 'ds-radio'"
         v-bind="inputAttrs"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched, 'has-right-icon': iconRight}"
+        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-right-icon': iconRight}"
         :checked="inputValue === radioVal"
         @change="changeRadio"
         @blur="touched = true"
       />
 
-      <div v-if="type === 'checkbox' || type === 'radio'" :class="[type]"></div>
+      <div v-if="getType === 'ds-checkbox' || getType === 'ds-radio'" :class="[getType]"></div>
 
       <select
-        v-if="type === 'select'"
-        :class="{'has-icon': icon_, 'error': inputErrors.length && touched, 'has-right-icon': iconRight}"
+        v-if="getType === 'ds-select'"
+        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-right-icon': iconRight}"
         v-model="inputValue"
         placeholder="placeholder"
       >
@@ -157,18 +158,18 @@
         </option>
       </select>
 
-      <div v-if="type === 'select' && !inputValue" class="select-placeholder">{{ placeholder }}</div>
+      <div v-if="getType === 'ds-select' && !inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
 
       <Icon v-if="icon_" color="gray-400" :source="icon_" />
 
-      <div class="drawer">
-        <span v-if="inputErrors.length && touched && showErrors" class="error-message">
+      <div class="ds-drawer">
+        <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
           {{ inputErrors[0] }}
         </span>
 
         <span
           v-show="help && !(inputErrors.length && touched)"
-          class="help-label"
+          class="ds-help-label"
           ref="helpLabel"
           @mouseover="helpVisible = true"
         >
@@ -181,7 +182,7 @@
     </label>
 
     <Dropdown
-      v-show="type === 'date' && getDatepickerPosition !== 'modal'"
+      v-show="getType === 'ds-date' && getDatepickerPosition !== 'modal'"
       :target="$refs.input"
       :opened.sync="datepickerVisible"
       :position="getDatepickerPosition"
@@ -198,10 +199,10 @@
     </Dropdown>
 
     <Dialog
-      v-show="type === 'date' && getDatepickerPosition === 'modal'"
+      v-show="getType === 'ds-date' && getDatepickerPosition === 'modal'"
       :opened.sync="datepickerVisible"
       :borderColor="!isMobile && datepickerBorderColorDesktop"
-      :datepickerContainer="isMobile && type === 'date'"
+      :datepickerContainer="isMobile && getType === 'ds-date'"
       :backgroundColor="datepickerBackgroundColor"
       :backdropOpacity="datepickerBackdropOpacity"
       :dialogStyleObject="datepickerWrapperStyleObject"
@@ -308,7 +309,7 @@ export default {
       document.addEventListener(this.validateEventName, this.validate);
     }
 
-    if (this.type === 'date' && this.getDatepickerPosition !== 'modal') {
+    if (this.getType === 'ds-date' && this.getDatepickerPosition !== 'modal') {
       this.overflowCheckStatus = false;
     }
 
@@ -329,14 +330,14 @@ export default {
         type: this.type === 'date' ? 'text' : this.type,
         placeholder: this.placeholder,
         disabled: this.disabled,
-        readonly: this.type === 'date',
+        readonly: this.getType === 'ds-date',
       }
     },
     icon_() {
-      if (this.type === 'date') {
+      if (this.getType === 'ds-date') {
         return 'today'
       }
-      if (this.type === 'select') {
+      if (this.getType === 'ds-select') {
         return 'expand_more'
       }
       return this.icon
@@ -383,7 +384,7 @@ export default {
     },
     inputValue: {
       get() {
-        if (this.type === 'date') {
+        if (this.getType === 'ds-date') {
           if (!this.value || isNaN(this.value)) {
             return ''
           }
@@ -394,7 +395,7 @@ export default {
         return this.value
       },
       set(value) {
-        if (this.type === 'date') {
+        if (this.getType === 'ds-date') {
           return
         }
 
@@ -457,11 +458,14 @@ export default {
       } else {
         return void 0
       }
+    },
+    getType() {
+      return `ds-${this.type}`
     }
   },
   methods: {
     onInputPrevent(event, callInputFocus) {
-      if (this.type === 'date') {
+      if (this.getType === 'ds-date') {
         event.preventDefault()
         if (callInputFocus) {
           this.inputFocus()
@@ -474,7 +478,7 @@ export default {
         this.slideActive = true;
       }
 
-      if (this.type === 'date') {
+      if (this.getType === 'ds-date') {
         this.datepickerVisible = !this.datepickerVisible;
         this.$refs.input.blur();
       }
@@ -574,23 +578,23 @@ export default {
     position: relative;
   }
 
-  &.sm {
+  &.ds-sm {
     width: 144px;
   }
-  &.md {
+  &.ds-md {
     width: 252px;
   }
-  &.lg {
+  &.ds-lg {
     width: 464px;
   }
   @media @screen-small {
-    &.lg {
+    &.ds-lg {
       width: 296px;
     }
   }
 
-  &.text, &.date, &.select {
-    .label-text {
+  &.ds-text, &.ds-date, &.ds-select {
+    .ds-label-text {
       .font-desktop-x-small-regular-gray();
       height: 16px;
       margin-bottom: 4px;
@@ -599,7 +603,7 @@ export default {
       white-space: nowrap;
     }
 
-    .slide-label {
+    .ds-slide-label {
       position: absolute;
       left: 5px;
       top: 20px;
@@ -614,7 +618,7 @@ export default {
       background: linear-gradient(@color-white 90%, hsla(0,0%,100%,0)) !important;
       border-right: 2.5px solid #fff;
 
-      &.slide-label-active {
+      &.ds-slide-label-active {
         transform: translateY(-20px) scale(0.85, 0.85);
         transition: .4s cubic-bezier(.25,.8,.25,1);
         color: #989898;
@@ -623,15 +627,15 @@ export default {
         left: 0;
       }
 
-      &.slide-label-inactive {
+      &.ds-slide-label-inactive {
         transition: .4s cubic-bezier(.25,.8,.25,1);
       }
 
-      &.label-focus {
+      &.ds-label-focus {
         color: @color-dark;
       }
 
-      &.slide-label-date {
+      &.ds-slide-label-date {
         cursor: pointer;
       }
     }
@@ -645,28 +649,28 @@ export default {
       background-color: @color-white;
       width: 100%;
 
-      &.has-icon {
+      &.ds-has-icon {
         padding-right: 30px;
       }
 
-      &.has-right-icon {
+      &.ds-has-right-icon {
         padding-left: 30px;
       }
 
-      &.slide-input {
+      &.ds-slide-input {
         margin-top: 10px;
       }
 
       .input-placeholder();
 
-      &:focus:not(.error) {
+      &:focus:not(.ds-error) {
         border-color: @color-primary;
       }
       &:focus {
         outline: none;
       }
 
-      &.error {
+      &.ds-error {
         border-color: @color-red;
       }
 
@@ -694,7 +698,7 @@ export default {
       }
     }
 
-    .select-placeholder {
+    .ds-select-placeholder {
       position: absolute;
       bottom: 6px;
       left: 14px;
@@ -709,7 +713,7 @@ export default {
       height: 50% !important;
     }
 
-    .icon-right {
+    .ds-icon-right {
       pointer-events: none;
       position: absolute;
       bottom: 6px;
@@ -717,14 +721,14 @@ export default {
     }
   }
 
-  &.select {
+  &.ds-select {
     .ds-icon {
       height: 70% !important;
     }
   }
 
-  &.checkbox {
-    .label-text {
+  &.ds-checkbox {
+    .ds-label-text {
       box-sizing: border-box;
       display: inline-block;
       padding: 8px 0 8px 28px;
@@ -734,13 +738,13 @@ export default {
       opacity: 0;
     }
 
-    .checkbox, .checkbox::after {
+    .ds-checkbox, .ds-checkbox::after {
       position: absolute;
       display: inline-block;
       border-radius: 2px;
     }
 
-    .checkbox {
+    .ds-checkbox {
       content: "";
       left: 0px;
       top: 7px;
@@ -751,38 +755,38 @@ export default {
       background-color: @color-white;
     }
 
-    .checkbox::after {
+    .ds-checkbox::after {
       left: 4px;
       top: 4px;
       height: 10px;
       width: 10px;
       background-color: @color-primary;
     }
-    input:checked + .checkbox::after {
+    input:checked + .ds-checkbox::after {
       content: "";
     }
 
-    &:not(.disabled) {
-      .label-text, .checkbox, .checkbox::after, input {
+    &:not(.ds-disabled) {
+      .ds-label-text, .ds-checkbox, .ds-checkbox::after, input {
         .font-desktop-small-regular-dark();
         cursor: pointer;
       }
     }
-    &.disabled {
-      .label-text {
+    &.ds-disabled {
+      .ds-label-text {
         .font-desktop-input-small-regular-gray-base();
       }
-      .checkbox {
+      .ds-checkbox {
         border: 1px solid #f2f4f7;
       }
-      .checkbox::after {
+      .ds-checkbox::after {
         background-color: fade(@color-primary, 50);
       }
     }
   }
 
-  &.radio {
-    .label-text {
+  &.ds-radio {
+    .ds-label-text {
       box-sizing: border-box;
       display: inline-block;
       padding: 8px 0 8px 28px;
@@ -792,13 +796,13 @@ export default {
       opacity: 0;
     }
 
-    .radio, .radio::after {
+    .ds-radio, .ds-radio::after {
       position: absolute;
       display: inline-block;
       border-radius: 2px;
     }
 
-    .radio {
+    .ds-radio {
       content: "";
       left: 0px;
       top: 7px;
@@ -809,7 +813,7 @@ export default {
       background-color: @color-white;
     }
 
-    .radio::after {
+    .ds-radio::after {
       left: 4px;
       top: 4px;
       height: 10px;
@@ -817,41 +821,41 @@ export default {
       background-color: @color-primary;
     }
 
-    input:checked + .radio::after {
+    input:checked + .ds-radio::after {
       content: "";
     }
 
-    &:not(.disabled) {
-      .label-text, .radio, .radio::after, input {
+    &:not(.ds-disabled) {
+      .ds-label-text, .ds-radio, .ds-radio::after, input {
         .font-desktop-small-regular-dark();
         cursor: pointer;
         border-radius: 10px;
       }
     }
 
-    &.disabled {
-      .label-text {
+    &.ds-disabled {
+      .ds-label-text {
         .font-desktop-small-regular-gray();
         border-radius: 10px;
       }
-      .radio {
+      .ds-radio {
         border: 1px solid #f2f4f7;
         border-radius: 10px;
       }
-      .radio::after {
+      .ds-radio::after {
         background-color: @color-gray-400;
         border-radius: 10px;
       }
     }
   }
 
-  &.date {
+  &.ds-date {
     input {
       cursor: pointer;
     }
   }
 
-  .drawer {
+  .ds-drawer {
     box-sizing: border-box;
     font-size: 11px;
     line-height: 12px;
@@ -860,7 +864,7 @@ export default {
     max-width: 100%;
   }
 
-  .error-message {
+  .ds-error-message {
     color: @color-red;
     font-family: @font-family;
     list-style: none;
@@ -873,7 +877,7 @@ export default {
     max-width: 100%;
   }
 
-  .help-label {
+  .ds-help-label {
     cursor: pointer;
     color: @color-gray-500;
     font-family: @font-family;
@@ -882,14 +886,14 @@ export default {
     padding-right: 12px;
   }
 
-  &.lg {
+  &.ds-lg {
     input {
       .placeholder-font-size(16px);
       font-size: 16px;
     }
   }
 
-  &.error {
+  &.ds-error {
     input {
       color: @color-red !important;
       border-color: @color-red !important;

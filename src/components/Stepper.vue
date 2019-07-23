@@ -48,13 +48,9 @@
   <div class="ds-stepper">
     <slot name="header"></slot>
     <div v-if="value.length">
-      <div
-        class="step"
-        :class="{'invalid-step': !valid}"
-        :style="{height:
-        `${isMobile ? 40 : 56}px`}"
-      >
-        <div class="alert">
+      <div :class="['ds-step', {'ds-invalid-step': !valid}]"
+           :style="{height: `${isMobile ? 40 : 56}px`}">
+        <div class="ds-alert">
           <Icon
             info  
             color="red"
@@ -91,7 +87,7 @@
         </div>
       </div>
 
-      <div class="slot-container" :style="{maxHeight: maxHeight}">
+      <div class="ds-slot-container" :style="{maxHeight: maxHeight}">
         <slot :name="activeStepName"></slot>
       </div>
     </div>
@@ -236,7 +232,7 @@
   @import '../styles/vars';
 
   .ds-stepper {
-    .step {
+    .ds-step {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -245,15 +241,15 @@
       margin-bottom: @stepper-step-margin-bottom;
       cursor: pointer;
 
-      .alert {
+      .ds-alert {
         display: none;
       }
 
-      &.invalid-step {
+      &.ds-invalid-step {
         border: solid 1px red;
         position: relative;
 
-        .alert {
+        .ds-alert {
           display: block;
           position: absolute;
           top: 0;
@@ -262,7 +258,7 @@
       }
     }
 
-    .slot-container {
+    .ds-slot-container {
       width: 100%;
       height: 100%;
       overflow-y: auto;

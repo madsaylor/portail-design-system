@@ -25,13 +25,13 @@
 -->
 
 <template>
-  <div :class="['ds-datepicker', {'full-width': fullWidth}]">
-    <div class="datepicker-header">
-      <div class="labels">
+  <div :class="['ds-datepicker', {'ds-full-width': fullWidth}]">
+    <div class="ds-datepicker-header">
+      <div class="ds-datepicker-labels">
         <div
           :class="{
-            'hidden': view === 'day' || view === 'month',
-            'label-main': view === 'year',
+            'ds-hidden': view === 'day' || view === 'month',
+            'ds-label-main': view === 'year',
           }"
           @click="view = 'month'"
         >
@@ -39,9 +39,9 @@
         </div>
         <div
           :class="{
-            'hidden': view === 'year',
-            'label-sup': view === 'day',
-            'label-main': view === 'month',
+            'ds-hidden': view === 'year',
+            'ds-label-sup': view === 'day',
+            'ds-label-main': view === 'month',
           }"
           @click="view = 'year'"
         >
@@ -50,15 +50,15 @@
 
         <div
           :class="{
-            'hidden': view === 'month' || view === 'year',
-            'label-main': view === 'day',
+            'ds-hidden': view === 'month' || view === 'year',
+            'ds-label-main': view === 'day',
           }"
           @click="view = 'month'"
         >
           {{ monthName }}
         </div>
       </div>
-      <div class="buttons">
+      <div class="ds-buttons">
         <button @click="shift(-1)" :disabled="!canShiftBack">
           <Icon arrow_left color="dark" size="32px"></Icon>
         </button>
@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div :class="['body', {'full-width': fullWidth}]">
+    <div :class="['ds-datepicker-body', {'ds-full-width': fullWidth}]">
       <GridSelect
         :items="{'day': days, 'month': months, 'year': years}[view]"
         :labels-top="view === 'day' ? weekLabels : null"
@@ -76,7 +76,7 @@
         @input="select"
         #default="{item}"
       >
-        <span :class="{'grid-item-big': view !== 'day'}">{{item.title}}</span>
+        <span :class="{'ds-grid-item-big': view !== 'day'}">{{item.title}}</span>
       </GridSelect>
     </div>
   </div>
@@ -154,14 +154,14 @@ export default {
             day.setHours(23, 59, 59, 999)
             if (day.getTime() < this.min.getTime()) {
               day.disabled = true
-              day.class = 'disabled'
+              day.class = 'ds-disabled'
             }
           }
           if (this.max != null) {
             day.setHours(0, 0, 0, 0)
             if (day.getTime() > this.max.getTime()) {
               day.disabled = true
-              day.class = 'disabled'
+              day.class = 'ds-disabled'
             }
           }
 
@@ -356,12 +356,12 @@ export default {
   display: flex;
   flex-direction: column;
 
-  .datepicker-header {
+  .ds-datepicker-header {
     padding: 0 10.5px;
     height: 64px;
     display: flex;
 
-    .labels {
+    .ds-datepicker-labels {
       flex: 1 0 auto;
       position: relative;
 
@@ -369,18 +369,18 @@ export default {
         transition: all .1s ease;
       }
 
-      .hidden {
+      .ds-hidden {
         display: none;
       }
 
-      .label-sup {
+      .ds-label-sup {
         .font-desktop-small-regular-gray();
         position: absolute;
         top: 0px;
         cursor: pointer;
       }
 
-      .label-main {
+      .ds-label-main {
         .font-desktop-body-medium-dark();
         position: absolute;
         top: 20px;
@@ -388,7 +388,7 @@ export default {
       }
     }
 
-    .buttons {
+    .ds-buttons {
       margin-top: 6px;
 
       button {
@@ -401,7 +401,7 @@ export default {
         background-color: @color-gray-200;
         border-radius: 0;
 
-        .icon {
+        .ds-icon {
           margin: -1px;
         }
 
@@ -422,7 +422,7 @@ export default {
 
         &:disabled {
           opacity: 0.5;
-          .icon {
+          .ds-icon {
             fill: @color-dark;
           }
         }
@@ -430,37 +430,37 @@ export default {
     }
   }
 
-  .body {
+  .ds-datepicker-body {
     height: 232px;
     width: 308px;
 
-    .labels-top {
+    .ds-labels-top {
       th {
         color: @color-primary;
       }
     }
 
-    .grid-select .item-cell .disabled {
+    .grid-select .ds-item-cell .ds-disabled {
       color: @color-gray-400;
     }
 
-    .item-cell .grid-item-big {
+    .ds-item-cell .ds-grid-item-big {
       .font-desktop-body-medium-dark();
       padding: 4px;
     }
-    .item-cell.disabled .grid-item-big {
+    .ds-item-cell.ds-disabled .ds-grid-item-big {
       color: @color-gray-400;
     }
-    .item-cell.selected .grid-item-big {
+    .ds-item-cell.selected .ds-grid-item-big {
       color: @color-white;
     }
 
-    &.full-width {
+    &.ds-full-width {
       width: 100%;
     }
   }
 
-  &.full-width {
+  &.ds-full-width {
     width: 100%;
   }
 }
@@ -470,22 +470,22 @@ export default {
     height: 428px;
     border-radius: 0;
 
-    .datepicker-header {
+    .ds-datepicker-header {
       padding: 0 3.5%;
 
-      .buttons {
+      .ds-buttons {
         button {
           margin-left: 36px;
         }
       }
     }
 
-    .body {
-      .grid-select-row {
+    .ds-datepicker-body {
+      .ds-grid-select-row {
 
         height: 48px;
-        .item-cell {
-          .item {
+        .ds-item-cell {
+          .ds-item {
             min-width: 59%;
           }
         }

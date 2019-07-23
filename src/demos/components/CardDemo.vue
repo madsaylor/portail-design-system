@@ -8,45 +8,45 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <div class="grid">
+    <div class="ds-grid">
       <div class="row-col"><Card>Hello, World!</Card></div>
 
       <div class="row">
         <div class="col-4">
-          <Card class="dashboard-report">
-            <div class="report-title">
+          <Card class="ds-dashboard-report">
+            <div class="ds-report-title">
               Chiffre d'affaires réalisé en 2018
             </div>
-            <div class="report-amount green">
+            <div class="ds-report-amount green">
               <Icon arrow_upward></Icon>95,00 €
             </div>
-            <div class="report-subtitle">
+            <div class="ds-report-subtitle">
               dont 0,00 € ce mois-ci
             </div>
           </Card>
         </div>
         <div class="col-4">
-          <Card class="dashboard-report">
-            <div class="report-title">
+          <Card class="ds-dashboard-report">
+            <div class="ds-report-title">
               Factures en attente
             </div>
-            <div class="report-amount yellow">
+            <div class="ds-report-amount yellow">
               <Icon arrow_upward></Icon>43,00 €
             </div>
-            <div class="report-subtitle">
+            <div class="ds-report-subtitle">
               0 facture(s) en attente
             </div>
           </Card>
         </div>
         <div class="col-4">
-          <Card class="dashboard-report">
-            <div class="report-title">
+          <Card class="ds-dashboard-report">
+            <div class="ds-report-title">
               Factures impayées
             </div>
-            <div class="report-amount red">
+            <div class="ds-report-amount red">
               <Icon arrow_upward></Icon>95,00 €
             </div>
-            <div class="report-subtitle">
+            <div class="ds-report-subtitle">
               0 facture(s) impayée(s)
             </div>
           </Card></div>
@@ -54,21 +54,21 @@
 
       <div class="row">
         <div class="col-6">
-          <Card class="user-todo">
+          <Card class="ds-user-todo">
             <Icon error_outline color="red"></Icon>
-            <div class="todo-title">
+            <div class="ds-todo-title">
               Ajout des documents nécessaires
             </div>
-            <div class="todo-badge">Needs Response</div>
+            <div class="ds-todo-badge">Needs Response</div>
           </Card>
         </div>
         <div class="col-6">
-          <Card class="user-todo">
+          <Card class="ds-user-todo">
             <Icon query_builder color="yellow"></Icon>
-            <div class="todo-title">
+            <div class="ds-todo-title">
               Ajout des documents nécessaires
             </div>
-            <div class="todo-badge">Processing</div>
+            <div class="ds-todo-badge">Processing</div>
           </Card>
         </div>
       </div>

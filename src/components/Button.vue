@@ -19,24 +19,25 @@
 -->
 
 <template>
-  <div :class="['ds-button-link-wrapper', {mobileBottom}]">
+  <div :class="['ds-button-link-wrapper', {'ds-mobile-bottom': mobileBottom}]">
     <template v-if="link">
       <a
         v-on="$listeners"
         :href="link"
-        :class="['button', {primary, big, small, alt, plain, 'link-ico': linkIco}]"
+        :class="['ds-button', {'ds-button-primary': primary, 'ds-button-big': big, 'ds-button-small': small,
+                               'ds-button-alt': alt, 'ds-button-plain': plain, 'ds-button-link-ico': linkIco}]"
         :disabled="disabled"
         :target="target"
       >
         <Icon
           v-if="icon"
-          :class="{'icon-left': hasLabel}"
+          :class="{'ds-icon-left': hasLabel}"
           :source="icon"
           :size="computedIconSize"
         />
         <slot></slot>
         <Icon
-          class="icon-right"
+          class="ds-icon-right"
           v-if="iconRight"
           :source="iconRight"
           :size="computedIconSize"
@@ -47,18 +48,19 @@
     <template v-else>
       <button
         v-on="$listeners"
-        :class="['button', {primary, big, small, alt, plain}]"
+        :class="['ds-button', {'ds-button-primary': primary, 'ds-button-big': big, 'ds-button-small': small,
+                               'ds-button-alt': alt, 'ds-button-plain': plain}]"
         :disabled="disabled"
       >
         <Icon
           v-if="icon"
-          :class="{'icon-left': hasLabel}"
+          :class="{'ds-icon-left': hasLabel}"
           :source="icon"
           :size="computedIconSize"
         />
         <slot></slot>
         <Icon
-          class="icon-right"
+          class="ds-icon-right"
           v-if="iconRight"
           :source="iconRight"
           :size="computedIconSize"
@@ -112,7 +114,7 @@ export default {
   display: inline-block;
 
   @media @screen-medium, @screen-small {
-    &.mobileBottom {
+    &.ds-mobile-bottom {
       position: fixed;
       bottom: 0;
       left: 0;
@@ -121,7 +123,7 @@ export default {
       line-height: normal;
       width: 100%;
       z-index: 2;
-      .button {
+      .ds-button {
         width: 100%;
         text-align: center;
         padding-top: @mobile-button-padding-size;
@@ -134,7 +136,7 @@ export default {
   }
 }
 
-.button {
+.ds-button {
   -moz-appearance: none;
   -webkit-appearance: none;
   background: none;
@@ -147,11 +149,11 @@ export default {
   text-decoration: none !important;
   padding: 10px 16px;
 
-  &.big {
+  &.ds-button-big {
     padding: 14px 24px;
   }
 
-  &.small {
+  &.ds-button-small {
     padding: 6px 8px;
     .font-components-button-small();
 
@@ -165,20 +167,20 @@ export default {
     fill: @color-dark;
     margin: -4px;
   }
-  .icon-left {
+  .ds-icon-left {
     margin-left: -10px;
     margin-right: 5px;
   }
-  .icon-right {
+  .ds-icon-right {
     margin-right: -10px;
     margin-left: 5px;
   }
 
-  &.primary {
+  &.ds-button-primary {
     .font-components-button-normal();
     background: @color-primary;
 
-    &.big {
+    &.ds-button-big {
       .font-components-button-big();
     }
 
@@ -195,7 +197,7 @@ export default {
     }
   }
 
-  &.alt {
+  &.ds-button-alt {
     .font-components-button-normal-alt();
     background: @color-white;
     border: 1px solid @color-primary;
@@ -204,7 +206,7 @@ export default {
     }
   }
 
-  &.alt, &.plain, &.link-ico {
+  &.ds-button-alt, &.ds-button-plain, &.ds-button-link-ico {
     &:hover, &:focus {
       background: darken(@color-white, 5%);
     }
@@ -232,7 +234,7 @@ export default {
     }
   }
 
-  &.link-ico {
+  &.ds-button-link-ico {
     .font-components-button-link-ico();
   }
 

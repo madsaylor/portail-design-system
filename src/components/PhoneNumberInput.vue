@@ -29,23 +29,22 @@
 
 <template>
   <div class="ds-phone-numbuer-input">
-    <div class="label-text">{{ label }}</div>
-    <div class="vue-tel-input" :class="{ disabled: disabled }">
+    <div class="ds-label-text">{{ label }}</div>
+    <div :class="['ds-vue-tel-input', { 'ds-disabled': disabled }]">
       <div
-        class="dropdown"
         @click="toggleDropdown"
         v-click-outside="clickedOutside"
-        :class="{ open: open }"
+        :class="['ds-dropdown', { 'ds-open': open }]"
         tabindex="0"
       >
-        <span class="selection">
+        <span class="ds-selection">
           <div class="iti-flag" v-if="enabledFlags" :class="activeCountry.iso2.toLowerCase()"></div>
-          <span class="country-code" v-if="enabledCountryCode">+{{ activeCountry.dialCode }}</span>
-          <span class="dropdown-arrow">{{ open ? '▲' : '▼' }}</span>
+          <span class="ds-country-code" v-if="enabledCountryCode">+{{ activeCountry.dialCode }}</span>
+          <span class="ds-dropdown-arrow">{{ open ? '▲' : '▼' }}</span>
         </span>
         <ul v-show="open" ref="list">
           <li
-            class="dropdown-item"
+            class="ds-dropdown-item"
             v-for="(pb, index) in sortedCountries"
             :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
             @click="choose(pb)"
@@ -308,9 +307,9 @@ export default {
       const lastPreferred = index === this.preferredCountries.length - 1;
       const preferred = !!~this.preferredCountries.map(c => c.toUpperCase()).indexOf(iso2);
       return {
-        highlighted,
-        'last-preferred': lastPreferred,
-        preferred,
+        'ds-highlighted': highlighted,
+        'ds-last-preferred': lastPreferred,
+        'ds-preferred': preferred,
       };
     },
     choose(country) {
@@ -377,24 +376,24 @@ export default {
 @import '../styles/flags';
 
 .ds-phone-numbuer-input {
-  li.last-preferred {
+  li.ds-last-preferred {
     border-bottom: @app-last-item-border;
   }
   .iti-flag {
     margin-right: @app-input-margin;
     margin-left: @app-input-margin;
   }
-  .dropdown-item .iti-flag {
+  .ds-dropdown-item .iti-flag {
     display: inline-block;
     margin-right: @app-input-margin;
   }
-  .selection {
+  .ds-selection {
     font-size: @selection-font-size;
     display: flex;
     align-items: center;
   }
 
-  .label-text {
+  .ds-label-text {
     .font-desktop-x-small-regular-gray();
     overflow: hidden;
     text-overflow: ellipsis;
@@ -403,7 +402,7 @@ export default {
     margin-bottom: @label-margin-bottom;
   }
 
-  .vue-tel-input {
+  .ds-vue-tel-input {
     border-radius: @tel-input-radius;
     display: flex;
     border: @tel-input-border;
@@ -413,7 +412,7 @@ export default {
       border-color: @color-primary;
     }
 
-    .dropdown {
+    .ds-dropdown {
       display: flex;
       flex-direction: column;
       align-content: center;
@@ -422,7 +421,7 @@ export default {
       padding: @phone-input-padding;
       cursor: pointer;
 
-      &.open{
+      &.ds-open{
         background-color: @color-gray-200;
       }
 
@@ -458,28 +457,28 @@ export default {
     }
   }
 
-  .country-code {
+  .ds-country-code {
     color: @color-gray-500;
   }
-  .dropdown-arrow {
+  .ds-dropdown-arrow {
     transform: scaleY(0.5);
     display: inline-block;
     color: @color-gray-500;
   }
-  .dropdown-item {
+  .ds-dropdown-item {
     cursor: pointer;
     padding: @dropdown-item-padding;
   }
-  .dropdown-item.highlighted {
+  .ds-dropdown-item.ds-highlighted {
     background-color: @color-gray-200;
   }
   .dropdown-menu.show {
     max-height: @drop-menu-max-height;
     overflow: scroll;
   }
-  .vue-tel-input.disabled .selection,
-  .vue-tel-input.disabled .dropdown,
-  .vue-tel-input.disabled input {
+  .ds-vue-tel-input.ds-disabled .ds-selection,
+  .ds-vue-tel-input.ds-disabled .ds-dropdown,
+  .ds-vue-tel-input.ds-disabled input {
     cursor: no-drop;
   }
 }

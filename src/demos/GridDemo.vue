@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-demo">
+  <div class="ds-grid grid-demo">
     <div class="row-col">
       <h2>Grid</h2>
         <p>

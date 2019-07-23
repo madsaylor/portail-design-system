@@ -15,17 +15,17 @@
 
 <template>
   <div class="ds-empty-page-container">
-      <div class="empty-state-wrapper">
-          <div class="row img-row">
-            <Icon :[imageName]="imageName" noSize class="empty-img"></Icon>
+      <div class="ds-empty-state-wrapper">
+          <div class="row ds-img-row">
+            <Icon :[imageName]="imageName" noSize class="ds-empty-img"></Icon>
           </div>
-          <div class="row title-row">
-              <span class="empty-state-title">{{ value.title }}</span>
+          <div class="row ds-title-row">
+              <span class="ds-empty-state-title">{{ value.title }}</span>
           </div>
-          <div class="row more-info-row">
-              <span class="empty-state-content">{{ value.moreInfo }}</span>
+          <div class="row ds-more-info-row">
+              <span class="ds-empty-state-content">{{ value.moreInfo }}</span>
           </div>
-          <div class="row btn-row">
+          <div class="row ds-btn-row">
               <Button @click="onCreate">{{ value.btnLabel }}</Button>
           </div>
       </div>
@@ -72,11 +72,11 @@
         padding: 8px 0;
     }
 
-    .img-row {
+    .ds-img-row {
         margin-bottom: 10px;
     }
 
-    .empty-img {
+    .ds-empty-img {
         max-height: 152px;
         max-width: 365px;
 
@@ -86,7 +86,7 @@
         }
     }
 
-    .empty-state-title {
+    .ds-empty-state-title {
         color: @font-desktop-h-2-dark-color;
         font-size: @font-desktop-h-2-dark-font-size;
         line-height: @font-desktop-h-2-dark-line-height;
@@ -97,7 +97,7 @@
         }
     }
 
-    .empty-state-content {
+    .ds-empty-state-content {
         color: @font-desktop-body-regular-dark-color;
         font-size: @font-desktop-body-regular-dark-font-size;
         line-height: @font-desktop-body-regular-dark-line-height;
@@ -107,7 +107,7 @@
         }
     }
 
-    .btn-row {
+    .ds-btn-row {
         margin: 20px;
 
         @media @screen-small {

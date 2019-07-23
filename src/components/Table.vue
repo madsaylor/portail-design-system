@@ -15,18 +15,18 @@
 
 <template>
   <div class="ds-table-wrapper" v-if="getRange">
-    <div class="table-header">
-      <Card class="header-wrapper">
-        <div class="header"
+    <div class="ds-table-header">
+      <Card class="ds-header-wrapper">
+        <div class="ds-header"
              v-for="(header, index) in headers"
              :style="getFlex(index)">
           {{header}}
         </div>
       </Card>
     </div>
-    <div class="table-body-wrapper">
-      <div class="table-body" v-for="(data, dataIndex) in getData" @click="onClick(data, dataIndex)">
-        <Card class="data-wrapper">
+    <div class="ds-table-body-wrapper">
+      <div class="ds-table-body" v-for="(data, dataIndex) in getData" @click="onClick(data, dataIndex)">
+        <Card class="ds-data-wrapper">
       <span v-for="(value, key, index) in data"
             :style="getFlex(index)">
         {{value}}
@@ -109,8 +109,8 @@
   @import '../styles/vars';
 
   .ds-table-wrapper {
-    .table-header {
-      .header-wrapper {
+    .ds-table-header {
+      .ds-header-wrapper {
         display: flex;
         height: 20px;
         color: @color-gray-500;
@@ -120,7 +120,7 @@
         padding: 0 24px 16px;
         cursor: default;
 
-        .header {
+        .ds-header {
           text-transform: capitalize;
           text-align: right;
 
@@ -131,15 +131,15 @@
       }
     }
 
-    .table-body-wrapper {
+    .ds-table-body-wrapper {
       color: @color-dark;
       font-family: Lato;
       font-size: 14px;
       line-height: 20px;
       cursor: pointer;
 
-      .table-body {
-        .data-wrapper {
+      .ds-table-body {
+        .ds-data-wrapper {
           display: flex;
           padding: 22px 24px;
           margin-bottom: 16px;
@@ -153,7 +153,7 @@
         }
 
         &:last-child {
-          .data-wrapper {
+          .ds-data-wrapper {
             margin-bottom: 24px;
           }
         }

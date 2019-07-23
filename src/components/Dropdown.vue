@@ -36,14 +36,14 @@
          class="ds-dropdown"
          :style="{ ...positionStyle, transition: `opacity ${transitionTime}ms ease-out`}"
          @mouseout="onMouseout">
-      <div class="focus-trap" tabindex="0"></div>
-      <div class="dropdown-content"
+      <div class="ds-focus-trap" tabindex="0"></div>
+      <div class="ds-dropdown-content"
            ref="dropdownContent"
-           :class="[{'border-content': borderColor}]"
+           :class="[{'ds-border-content': borderColor}]"
            :style="{ transition: `transform ${transitionTime}ms ease-out`, borderColor}">
         <slot></slot>
       </div>
-      <div class="focus-trap" tabindex="0"></div>
+      <div class="ds-focus-trap" tabindex="0"></div>
     </div>
   </transition>
 </template>
@@ -360,7 +360,7 @@ export default {
 
       if (
         this.hasElement(document.activeElement) &&
-        !document.activeElement.classList.contains('focus-trap')
+        !document.activeElement.classList.contains('ds-focus-trap')
       ) {
         return
       }
@@ -375,7 +375,7 @@ export default {
         textarea:not([disabled]):not([tabindex='-1']),
         button:not([disabled]):not([tabindex='-1']),
         iframe:not([tabindex='-1']),
-        [tabindex]:not([tabindex='-1']):not(.focus-trap),
+        [tabindex]:not([tabindex='-1']):not(.ds-focus-trap),
         [contentEditable=true]:not([tabindex='-1'])
       `
       let focusableElements = this.$el.querySelectorAll(focusableQuery)
@@ -422,12 +422,12 @@ export default {
   position: absolute;
   z-index: @z-index-dropdown;
 
-  .dropdown-content {
+  .ds-dropdown-content {
     position: relative;
     z-index: @z-index-dropdown-content;
   }
 
-  .border-content {
+  .ds-border-content {
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;

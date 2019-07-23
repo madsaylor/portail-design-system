@@ -14,8 +14,8 @@
 <template>
   <div class="ds-pagination-wrapper">
     <slot :range="range"></slot>
-    <div class="pagination-count">
-      <span class="count">
+    <div class="ds-pagination-count">
+      <span class="ds-count">
         {{this.startNumber}}-{{this.endNumber}} of {{count}}
       </span>
       <Icon source="left-arrow"
@@ -94,11 +94,11 @@
   @import '../styles/vars';
 
   .ds-pagination-wrapper {
-    .pagination-count {
+    .ds-pagination-count {
       display: flex;
       justify-content: flex-end;
 
-      .count {
+      .ds-count {
         cursor: default;
         padding: 0;
         margin: 2px 0;

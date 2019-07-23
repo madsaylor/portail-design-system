@@ -39,10 +39,10 @@
       :opened.sync="openedFullScreen"
       :fullScreen="fullScreenActive"
     >
-      <div class="dialog-header">
+      <div class="ds-dialog-header">
         <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
       </div>
-      <div class="dialog-body">
+      <div class="ds-dialog-body">
         <div v-for="n in 25">
           {{text}}
         </div>
@@ -127,7 +127,7 @@
     padding: 20px;
   }
 
-  .dialog-body {
+  .ds-dialog-body {
     padding: 20px;
   }
 

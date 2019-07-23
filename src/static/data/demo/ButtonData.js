@@ -11,7 +11,7 @@ let usage = `
 <Button icon="menu" plain></Button>&nbsp;
 <Button icon="menu"></Button>&nbsp;
 <!-- OR -->
-<button class="button primary">
+<button class="ds-button ds-button-primary">
   Button Label
 </button>
 `.slice(1)

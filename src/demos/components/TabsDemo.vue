@@ -12,14 +12,14 @@
     <Tabs :tabs="tabs" :active="active" @tab:click="onTabClick">
       <template #tabs-1>
         <h4 class="body-title">MES FACTURES</h4>
-        <Card class="dashboard-report">
+        <Card class="ds-dashboard-report">
           <div class="report-title">
             Chiffre d'affaires réalisé en 2018
           </div>
-          <div class="report-amount green">
+          <div class="ds-report-amount green">
             <Icon arrow_upward></Icon>95,00 €
           </div>
-          <div class="report-subtitle">
+          <div class="ds-report-subtitle">
             dont 0,00 € ce mois-ci
           </div>
         </Card>

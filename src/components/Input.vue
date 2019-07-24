@@ -720,13 +720,7 @@ export default {
       left: 6px;
     }
   }
-
-  &.ds-select {
-    .ds-icon {
-      height: 70% !important;
-    }
-  }
-
+  
   &.ds-checkbox {
     .ds-label-text {
       box-sizing: border-box;

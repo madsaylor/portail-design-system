@@ -267,12 +267,14 @@
       border-radius: 4px;
       height: auto;
       max-height: calc(100% - 128px);
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
       max-width: 1280px;
 
       .ds-dialog-wrapper {
         height:100%;
-        display: inline-flex;
+        max-width: 100%;
+        display: flex;
         flex-direction: column;
 
         .ds-dialog-header:not(:empty) {

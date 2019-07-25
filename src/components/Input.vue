@@ -708,9 +708,8 @@ export default {
     .ds-icon {
       pointer-events: none;
       position: absolute;
-      bottom: 8%;
+      bottom: 10%;
       right: 6px;
-      height: 50% !important;
     }
 
     .ds-icon-right {

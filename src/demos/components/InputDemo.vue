@@ -149,11 +149,11 @@
       />
       <br />
 
-      Select:<br />
       <Input
         md
         type="select"
         placeholder="Select a value"
+        label="Select"
         v-model="selectValue"
         :options="[{
           title: 'Hello',

@@ -54,6 +54,11 @@
       "name": "activeDatepickerComponent",
       "type": "String",
       "description": "Provide active datepicker component, if dialog component is part of it ecosystem"
+    },
+    {
+      "name": "backdropId",
+      "type": "String",
+      "description": "Id of backdrop"
     }
   ],
   "events": []

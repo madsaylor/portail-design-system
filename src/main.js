@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueSignaturePad from 'vue-signature-pad'
 import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/monokai.css'
+import Internationalization from './plugins/Internationalization'
 
 import './utils/patch-ios-safari-click'
 
@@ -25,6 +26,7 @@ context.keys().forEach(key => {
 Vue.config.productionTip = false
 Vue.use(VueHighlightJS)
 Vue.use(VueSignaturePad)
+Vue.use(Internationalization)
 
 new Vue({
   render: h => h(App),

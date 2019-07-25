@@ -87,12 +87,14 @@ export default {
   },
   computed: {
     selectedFileText() {
-      if (this.files.length === 0) {
+      let filesCount = this.files.length
+
+      if (filesCount === 0) {
         return ''
-      } else if (this.files.length === 1) {
-        return '1 file selected'
+      } else if (filesCount === 1) {
+        return filesCount + ' file selected'
       } else {
-        return this.files.length + ' files selected'
+        return filesCount + ' files selected'
       }
     },
     currentTotalSize() {
@@ -119,12 +121,12 @@ export default {
     inputErrors() {
       let errors = []
       if (this.currentTotalSize / (1024 * 1000) > this.maxTotalSize) {
-        errors.push(`Total size should be under ${this.maxTotalSize}MB`)
+        errors.push(this.dsTranslateComplex(['Total size less', 'MB'], [`${this.maxTotalSize}`]))
         this.$emit('validation', [['max-total-size', false]])
       }
 
       if (this.files.length >= this.maxFileCount) {
-        errors.push(`Total file count should be less than ${this.maxFileCount}`)
+        errors.push(this.dsTranslateComplex(['Total file count less'], [`${this.maxFileCount}`]))
         this.$emit('validation', [['max-file-count', false]])
       }
 

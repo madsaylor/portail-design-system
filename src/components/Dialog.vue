@@ -28,6 +28,7 @@
     <div
       class="ds-dialog-backdrop"
       :style="{opacity: backdropOpacity, 'background-color': backgroundColor}"
+      :id="backdropId"
       @click.stop="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>
@@ -53,6 +54,10 @@
     name: 'Dialog',
     props: {
       opened: Boolean,
+      backdropId: {
+        type: String,
+        default: ''
+      },
       backdropOpacity: {
         type: String,
         default: '0.6'

@@ -83,14 +83,18 @@ export default {
           this.errors = []
 
           if (this.files.find(f => f.name === file.name)) {
-            this.$emit('invalidfile', 'This file is already selected')
-            this.errors.push('This file is already selected')
+            let message = this.dsTranslate('File selected')
+
+            this.$emit('invalidfile', message)
+            this.errors.push(message)
             return
           }
 
           if (!this.fileTypeCheck(file)) {
-            this.$emit('invalidfile', 'Invalid file type')
-            this.errors.push('Invalid file type')
+            let message = this.dsTranslate('File invalid')
+
+            this.$emit('invalidfile', message)
+            this.errors.push(message)
             return
           }
 

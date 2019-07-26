@@ -123,7 +123,8 @@
         let errors = []
 
         if (this.textareaValue && this.textareaValue.length > this.maxCharacters) {
-          errors.push(`You can input less than ${this.maxCharacters} charactors`)
+          errors.push(this.dsTranslateComplex(['Can input less characters (1/2)', 'Can input less characters (2/2)'],
+                                              [`${this.maxCharacters}`]))
           this.$emit('validation', [['max-charactor', false]])
         }
 

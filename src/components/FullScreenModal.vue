@@ -29,13 +29,7 @@
 
 <script>
 export default {
-  name: 'FullScreenModal',
-  props: {
-
-  },
-  data: () => ({
-
-  }),
+  name: 'FullScreenModal'
 }
 </script>
 

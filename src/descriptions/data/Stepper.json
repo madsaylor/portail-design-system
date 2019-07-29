@@ -24,6 +24,12 @@
       "name": "maxHeight",
       "type": "String",
       "description": "Maximum height of the stepper body, if the height of the body is bigger than this property, slider will be appeared"
+    },
+    {
+      "name": "invalidStep",
+      "type": "Number",
+      "default": "-1",
+      "description": "Set invalid step, which is disable forward navigation on next steps after invalid step"
     }
   ],
   "events": [

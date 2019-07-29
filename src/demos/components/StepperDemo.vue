@@ -80,7 +80,7 @@
         this.stepNumber = this.stepNumber + 1
       },
       prevStep() {
-        this.stepNumber = this.stepNumber -1
+        this.stepNumber = this.stepNumber - 1
       }
     }
   }

@@ -48,24 +48,15 @@
   <div class="ds-stepper">
     <slot name="header"></slot>
     <div v-if="value.length">
-      <div :class="['ds-step', {'ds-invalid-step': !valid}]"
+      <div :class="['ds-step']"
            :style="{height: `${isMobile ? 40 : 56}px`}">
-        <div class="ds-alert">
-          <Icon
-            info  
-            color="red"
-            size="32px"
-            padding="12px"
-          />
-        </div>
-
         <div
           v-for="(step, index) in value"
           @click="nextStep(index + 1)"
           :key="index"
         >
           <Icon
-            :source="isMobile ? 'round' : 'check_circle'"
+            :source="index + 1 === invalidStep ? 'info' : isMobile ? 'round' : 'check_circle'"
             :color="getIconColor(index)"
             size="18px"
             padding="3px"
@@ -119,9 +110,9 @@
         type: Array,
         default: () => []
       },
-      valid: {
-        type: Boolean,
-        default: true
+      invalidStep: {
+        type: Number,
+        default: -1
       },
       maxHeight: {
         type: String,
@@ -145,6 +136,8 @@
     methods: {
       getIconColor(index) {
         switch (true) {
+          case(this.invalidStep === index + 1):
+            return 'red'
           case(this.stepIndex > index + 1):
             return 'primary'
           case(this.stepIndex === index + 1):
@@ -156,7 +149,7 @@
 
       nextStep(index) {
         if (this.linearMode) {
-          if (!this.valid) {
+          if (~this.invalidStep && this.invalidStep < index) {
             return
           }
 
@@ -198,7 +191,7 @@
     watch: {
       selectedStep(val) {
         if (this.linearMode) {
-          if (!this.valid) {
+          if (~this.invalidStep && this.invalidStep < val) {
             this.$emit('current:step', this.stepIndex)
             return
           }
@@ -240,22 +233,6 @@
       box-shadow: @card-shadow;
       margin-bottom: @stepper-step-margin-bottom;
       cursor: pointer;
-
-      .ds-alert {
-        display: none;
-      }
-
-      &.ds-invalid-step {
-        border: solid 1px red;
-        position: relative;
-
-        .ds-alert {
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-      }
     }
 
     .ds-slot-container {
@@ -272,6 +249,9 @@
     }
     .dark {
       color: @color-dark;
+    }
+    .red {
+      color: @color-red;
     }
   }
 </style>

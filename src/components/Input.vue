@@ -705,11 +705,19 @@ export default {
       color: #838795;
     }
 
-    .ds-icon {
+    select + .ds-icon {
       pointer-events: none;
       position: absolute;
       bottom: 10%;
       right: 6px;
+    }
+
+    input + .ds-icon {
+      pointer-events: none;
+      position: absolute;
+      bottom: 8%;
+      right: 6px;
+      height: 50% !important;
     }
 
     .ds-icon-right {

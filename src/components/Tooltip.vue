@@ -62,10 +62,6 @@ export default {
       type: Object,
       default: () => {return {offset: '0, 10px'}}
     },
-    initialShowTooltip: {
-      type: Boolean,
-      default: false
-    },
     forceShow: {
       type: Boolean,
       default: false,
@@ -73,11 +69,6 @@ export default {
     popoverWidth: String,
     margin: {
       type: String
-    }
-  },
-  mounted() {
-    if (this.initialShowTooltip) {
-      this.$refs.reference.click();
     }
   },
   components: {

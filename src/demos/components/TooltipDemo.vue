@@ -40,7 +40,6 @@
         popoverWidth="200px"
         placement="right"
         class="default-tooltip"
-        :initialShowTooltip="true"
         :offset="tooltipOffset"
       >
         <div slot="popover">
@@ -75,7 +74,7 @@ export default {
     tooltipVisibleHover: false,
     tooltipVisibleClick: false,
     tooltipOffset: {offset: '0px 50px'},
-    forceShow: false,
+    forceShow: true,
     openUsage: true,
     usage: TooltipData.usage
   }),

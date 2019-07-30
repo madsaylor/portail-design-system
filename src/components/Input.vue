@@ -406,7 +406,7 @@ export default {
       },
       set(value) {
         if (this.valueModeSelect && this.getType === 'ds-select') {
-          this.$emit('input', value.value)
+          this.$emit('input', value && value.value)
           return
         }
 

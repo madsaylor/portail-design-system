@@ -110,9 +110,13 @@
         type: Array,
         default: () => []
       },
-      invalidStep: {
-        type: Number,
-        default: -1
+      valid: {
+        type: Boolean,
+        default: true
+      },
+      diableForwardHeaderNavigation: {
+        type: Boolean,
+        default: false
       },
       maxHeight: {
         type: String,
@@ -123,7 +127,9 @@
       windowWidth: window.innerWidth,
       stepIndex: 1,
       startX: undefined,
-      minDistance: 100
+      minDistance: 100,
+      invalidStep: -1,
+      disabledStep: -1
     }),
     computed: {
       activeStepName() {
@@ -149,7 +155,7 @@
 
       nextStep(index) {
         if (this.linearMode) {
-          if (~this.invalidStep && this.invalidStep < index) {
+          if(!this.valid || this.diableForwardHeaderNavigation && this.disabledStep < index) {
             return
           }
 
@@ -186,12 +192,16 @@
 
       onResize() {
         this.windowWidth = window.innerWidth
+      },
+
+      checkInvalidStep(valid) {
+        this.invalidStep = !valid ? this.selectedStep : -1
       }
     },
     watch: {
       selectedStep(val) {
         if (this.linearMode) {
-          if (~this.invalidStep && this.invalidStep < val) {
+          if (!this.valid) {
             this.$emit('current:step', this.stepIndex)
             return
           }
@@ -207,9 +217,16 @@
           else { this.stepIndex = val }
           this.$emit('current:step', this.stepIndex)
         }
+      },
+      valid(val) {
+        this.checkInvalidStep(val)
+      },
+      diableForwardHeaderNavigation(val) {
+        this.disabledStep = val ? this.selectedStep : -1
       }
     },
     mounted() {
+      this.checkInvalidStep(this.valid)
       window.addEventListener('resize', this.onResize)
 
       this.$el.addEventListener('touchstart', this.touchStart)

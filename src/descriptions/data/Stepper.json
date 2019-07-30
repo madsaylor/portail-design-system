@@ -26,10 +26,16 @@
       "description": "Maximum height of the stepper body, if the height of the body is bigger than this property, slider will be appeared"
     },
     {
-      "name": "invalidStep",
-      "type": "Number",
-      "default": "-1",
-      "description": "Set invalid step, which is disable forward navigation on next steps after invalid step"
+      "name": "valid",
+      "type": "Boolean",
+      "default": "true",
+      "description": "When property setup as false, on current step will apply styles for invalid step and will restrict move on to any other step"
+    },
+    {
+      "name": "diableForwardHeaderNavigation",
+      "type": "Boolean",
+      "default": "false",
+      "description": "When property setup as true, forward navigation by click on headers will be disabled from current step"
     }
   ],
   "events": [

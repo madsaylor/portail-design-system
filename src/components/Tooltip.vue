@@ -29,6 +29,8 @@
       <Popper
         v-else
         trigger="click"
+        :delay-on-mouse-over="0"
+        :delay-on-mouse-out="0"
         :options="{
           placement: placement,
           modifiers: { offset: offset }

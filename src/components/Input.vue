@@ -227,6 +227,8 @@ import Icon from './Icon'
 import Dialog from './Dialog'
 import Tooltip from './Tooltip'
 
+import _ from 'lodash'
+
 const DesktopWidth = 960
 
 export default {
@@ -288,6 +290,10 @@ export default {
 
     // For type="select"
     options: Array,
+    valueModeSelect: {
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     validateEventName: undefined,
@@ -392,9 +398,18 @@ export default {
           return this.value.toLocaleDateString(this.locale)
         }
 
+        if (!_.isObject(this.value) && this.valueModeSelect && this.getType === 'ds-select') {
+          return this.options && this.options.find((option) => option.value === this.value) || {}
+        }
+
         return this.value
       },
       set(value) {
+        if (this.valueModeSelect && this.getType === 'ds-select') {
+          this.$emit('input', value.value)
+          return
+        }
+
         if (this.getType === 'ds-date') {
           return
         }

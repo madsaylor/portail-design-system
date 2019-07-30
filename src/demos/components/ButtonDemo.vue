@@ -28,6 +28,8 @@
       <button class="ds-button ds-button-primary">
         Button Label
       </button>
+
+      <Button icon="add_circle" plain-two>Add New Item</Button>
     </div>
 
   </div>
@@ -48,3 +50,7 @@ export default {
   }),
 }
 </script>
+
+<style lang="less">
+
+</style>

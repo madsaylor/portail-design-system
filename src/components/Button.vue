@@ -25,7 +25,8 @@
         v-on="$listeners"
         :href="link"
         :class="['ds-button', {'ds-button-primary': primary, 'ds-button-big': big, 'ds-button-small': small,
-                               'ds-button-alt': alt, 'ds-button-plain': plain, 'ds-button-link-ico': linkIco}]"
+                               'ds-button-alt': alt, 'ds-button-plain': plain, 'ds-button-plain-two': plainTwo,
+                               'ds-button-link-ico': linkIco}]"
         :disabled="disabled"
         :target="target"
       >
@@ -49,7 +50,7 @@
       <button
         v-on="$listeners"
         :class="['ds-button', {'ds-button-primary': primary, 'ds-button-big': big, 'ds-button-small': small,
-                               'ds-button-alt': alt, 'ds-button-plain': plain}]"
+                               'ds-button-alt': alt, 'ds-button-plain': plain, 'ds-button-plain-two': plainTwo}]"
         :disabled="disabled"
       >
         <Icon
@@ -81,6 +82,7 @@ export default {
     small: Boolean,
     alt: Boolean,
     plain: Boolean,
+    plainTwo: Boolean,
     linkIco: Boolean,
     disabled: Boolean,
     icon: String,
@@ -93,14 +95,14 @@ export default {
   }),
   computed: {
     primary() {
-      return !(this.alt || this.plain || this.linkIco);
+      return !(this.alt || this.plain || this.plainTwo || this.linkIco)
     },
     hasLabel() {
       return !!this.$slots.default
     },
     computedIconSize() {
       if (this.big) return '28px'
-      else if (this.small) return '16px'
+      else if (this.small || this.plainTwo) return '16px'
       return '24px'
     }
   },
@@ -213,6 +215,18 @@ export default {
 
     &:active {
       background: darken(@color-white, 10%);
+    }
+  }
+
+  &.ds-button-plain-two {
+    .font-components-button-plain-two();
+
+    .ds-icon-left, .ds-icon-right {
+      margin-bottom: 3px;
+    }
+
+    &:hover, &:focus, &:active {
+      background-color: rgba(0, 0, 0, 0);
     }
   }
 

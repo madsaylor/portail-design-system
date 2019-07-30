@@ -81,9 +81,7 @@ export default {
   },
   methods: {
     updateForceShow() {
-      setTimeout(() => {
-        this.$emit('update:forceShow', !this.forceShow)
-      }, 10)
+      this.$emit('update:forceShow', !this.forceShow)
     }
   },
   computed: {

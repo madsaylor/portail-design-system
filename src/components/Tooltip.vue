@@ -22,7 +22,12 @@
     </template>
 
     <template v-else>
+      <div v-if="!forceShow" @click="updateForceShow">
+        <slot name="reference"></slot>
+      </div>
+
       <Popper
+        v-else
         trigger="click"
         :options="{
           placement: placement,

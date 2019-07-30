@@ -264,8 +264,8 @@ export default {
   }),
   methods: {
     validate() {
-      const event = new CustomEvent("validate", {});
-      document.dispatchEvent(event);
+      const event = new CustomEvent("validate", {})
+      document.dispatchEvent(event)
     }
   }
 }

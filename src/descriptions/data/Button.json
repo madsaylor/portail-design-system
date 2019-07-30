@@ -16,6 +16,11 @@
       "description": "Close to no styling"
     },
     {
+      "name": "plain-two",
+      "type": "Boolean",
+      "description": "Close to no styling, some styles are different from plain type also have a small icon"
+    },
+    {
       "name": "disabled",
       "type": "Boolean",
       "description": "Disabled"

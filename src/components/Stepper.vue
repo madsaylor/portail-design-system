@@ -114,7 +114,7 @@
         type: Boolean,
         default: true
       },
-      diableForwardHeaderNavigation: {
+      disableForwardHeaderNavigation: {
         type: Boolean,
         default: false
       },
@@ -129,7 +129,8 @@
       startX: undefined,
       minDistance: 100,
       invalidStep: -1,
-      disabledStep: -1
+      disabledStep: -1,
+      previousDisabledState: undefined
     }),
     computed: {
       activeStepName() {
@@ -155,7 +156,7 @@
 
       nextStep(index) {
         if (this.linearMode) {
-          if(!this.valid || this.diableForwardHeaderNavigation && this.disabledStep < index) {
+          if(!this.valid || this.disableForwardHeaderNavigation && this.disabledStep < index) {
             return
           }
 
@@ -196,6 +197,16 @@
 
       checkInvalidStep(valid) {
         this.invalidStep = !valid ? this.selectedStep : -1
+      },
+
+      checkDisableStep(disable) {
+        if (this.previousDisabledState !== this.disableForwardHeaderNavigation) {
+          this.disabledStep = disable ? this.selectedStep : -1
+        } else if (this.disableForwardHeaderNavigation) {
+          this.disabledStep = this.selectedStep > this.disabledStep ? this.selectedStep : this.disabledStep
+        }
+
+        this.previousDisabledState = this.disableForwardHeaderNavigation
       }
     },
     watch: {
@@ -210,23 +221,26 @@
             this.stepIndex = val;
           }
           this.$emit('current:step', this.stepIndex)
-          
         } else {
           if (val < 1) { this.stepIndex = this.value.length }
           else if (val < this.value.length) { this.stepIndex = 1 }
           else { this.stepIndex = val }
           this.$emit('current:step', this.stepIndex)
         }
+
+        this.checkDisableStep(this.disableForwardHeaderNavigation)
       },
       valid(val) {
         this.checkInvalidStep(val)
       },
-      diableForwardHeaderNavigation(val) {
-        this.disabledStep = val ? this.selectedStep : -1
+      disableForwardHeaderNavigation(val) {
+        this.checkDisableStep(val)
       }
     },
     mounted() {
       this.checkInvalidStep(this.valid)
+      this.checkDisableStep(this.disableForwardHeaderNavigation)
+
       window.addEventListener('resize', this.onResize)
 
       this.$el.addEventListener('touchstart', this.touchStart)

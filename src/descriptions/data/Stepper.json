@@ -32,7 +32,7 @@
       "description": "When property setup as false, on current step will apply styles for invalid step and will restrict move on to any other step"
     },
     {
-      "name": "diableForwardHeaderNavigation",
+      "name": "disableForwardHeaderNavigation",
       "type": "Boolean",
       "default": "false",
       "description": "When property setup as true, forward navigation by click on headers will be disabled from current step"

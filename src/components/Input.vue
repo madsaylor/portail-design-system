@@ -42,6 +42,8 @@
 
     label - String. Label at the top of the input
 
+    initialTouched - Initial set of touched property
+
     lang - String. BCP 47 code. Language to be used in the datepicker
       for month names and weekday labels. Can be set globally with
       $root.locale. This property overrides global setting
@@ -293,6 +295,10 @@ export default {
     valueModeSelect: {
       type: Boolean,
       default: false
+    },
+    initialTouched: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -323,6 +329,8 @@ export default {
       this.positions = this.datepickerPosition.split(' ')
       window.addEventListener('resize', this.onResize)
     }
+
+    this.touched = this.initialTouched
 
     document.addEventListener('validate', this.validate);
 
@@ -565,6 +573,9 @@ export default {
         }, 300)
       }
       this.setOverflow(this.isMobile);
+    },
+    initialTouched(value) {
+      this.touched = value
     }
   },
   beforeDestroy() {

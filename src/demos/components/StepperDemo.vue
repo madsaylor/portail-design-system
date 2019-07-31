@@ -15,6 +15,7 @@
       :selectedStep="stepNumber"
       :linearMode="true"
       :optionalSteps="[3]"
+      :disableForwardHeaderNavigation="disableForwardHeaderNavigation"
     >
       <template #header></template>
       <template #step-1>
@@ -49,6 +50,10 @@
     <div class="control-buttons">
       <Button @click="prevStep">Preview</Button>
       <Button @click="nextStep">Next</Button>
+      <Button @click="onDisableSwitcher">Disable mode switcher</Button>
+    </div>
+    <div>
+      <span><b>Disable mode:</b> {{disableForwardHeaderNavigation}}</span>
     </div>
   </div>
 </template>
@@ -71,6 +76,7 @@
       openUsage: true,
       steps: [{name: 'Card'}, {name: 'Icon'}, {name: 'Input'}],
       stepNumber: 1,
+      disableForwardHeaderNavigation: true
     }),
     methods: {
       setCurrentStep(index) {
@@ -81,6 +87,9 @@
       },
       prevStep() {
         this.stepNumber = this.stepNumber - 1
+      },
+      onDisableSwitcher() {
+        this.disableForwardHeaderNavigation = !this.disableForwardHeaderNavigation
       }
     }
   }

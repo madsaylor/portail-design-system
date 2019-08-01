@@ -130,7 +130,6 @@
         v-model="inputValue"
         ref="input"
         @focus.prevent="inputFocus"
-        @click.prevent="inputFocus"
         @blur="inputBlur"
         @keydown="onKeyDown"
         @mousedown="onInputPrevent($event)"

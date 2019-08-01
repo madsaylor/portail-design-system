@@ -215,7 +215,8 @@
 
       <Input
         md
-        iconRight="euro_symbol"
+        icon="euro_symbol"
+        iconSize="16px"
         textAlign="right"
         label="Euro Input"
         placeholder="Input Currency"

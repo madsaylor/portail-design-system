@@ -121,7 +121,7 @@
           {{ label }}
       </div>
 
-      <Icon v-if="iconRight" color="gray-400" :source="iconRight" class="ds-icon-right"/>
+      <Icon :size="iconSize" v-if="iconLeft" color="gray-400" :source="iconLeft" class="ds-icon-left"/>
 
       <input
         v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
@@ -131,7 +131,7 @@
           'ds-error': inputErrors.length && touched && showErrors,
           'ds-slide-input': slideLabel,
           'date': getType === 'ds-date',
-          'ds-has-right-icon': iconRight,
+          'ds-has-left-icon': iconLeft,
           'ds-text-right': textAlign === 'right'
         }"
         v-model="inputValue"
@@ -145,7 +145,7 @@
       <input
         v-if="getType == 'ds-radio'"
         v-bind="inputAttrs"
-        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-right-icon': iconRight}"
+        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         :checked="inputValue === radioVal"
         @change="changeRadio"
         @blur="touched = true"
@@ -155,14 +155,14 @@
 
       <select
         v-if="getType === 'ds-select'"
-        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-right-icon': iconRight}"
+        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         v-model="inputValue"
         placeholder="placeholder"
       >
         <option
           v-for="(option, index) in options"
           :key="index"
-          :value="selectOptionFormat === 2 ? option.Id : option"
+          :value="selectOptionFormat === 2 ? option.id : option"
         >
           {{ option.title || option.value }}
         </option>
@@ -170,7 +170,7 @@
 
       <div v-if="getType === 'ds-select' && !inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
 
-      <Icon v-if="icon_" color="gray-400" :source="icon_" />
+      <Icon :size="iconSize" v-if="icon_" color="gray-400" :source="icon_" />
 
       <div class="ds-drawer">
         <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
@@ -254,7 +254,11 @@ export default {
       default: '? explication'
     },
     icon: String,
-    iconRight: String,
+    iconLeft: String,
+    iconSize: {
+      type: String,
+      default: '24px'
+    },
     label: String,
     lang: String,
     lg: Boolean,
@@ -686,7 +690,7 @@ export default {
         padding-right: 30px;
       }
 
-      &.ds-has-right-icon {
+      &.ds-has-left-icon {
         padding-left: 30px;
       }
 
@@ -766,11 +770,12 @@ export default {
       height: 50% !important;
     }
 
-    .ds-icon-right {
+    .ds-icon-left {
       pointer-events: none;
       position: absolute;
-      bottom: 6px;
+      bottom: 5px;
       left: 6px;
+      height: 50% !important;
     }
   }
   

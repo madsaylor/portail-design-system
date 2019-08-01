@@ -80,11 +80,15 @@
     .ds-multi-select {
       height: 30px;
       width: 275px;
-      border-top: none;
-      border-left: none;
-      border-right: none;
+      border: none;
+      border-bottom: 1px solid @color-gray-300;
 
       background-color: rgba(0,0,0,0);
+
+      &:focus {
+        outline: none;
+        border-bottom: 1px solid @color-light-blue-200;
+      }
     }
 
     .ds-multi-select-dropdown-content {
@@ -162,6 +166,10 @@
               position: absolute;
               display: none;
             }
+          }
+
+          .ds-checkbox-text {
+            font-size: 16px;
           }
         }
 

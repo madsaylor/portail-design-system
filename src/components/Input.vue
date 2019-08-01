@@ -137,7 +137,7 @@
         v-model="inputValue"
         ref="input"
         @focus.prevent="inputFocus"
-        @click.prevent="inputFocus"
+        @[checkSetClickEvent].prevent="inputFocus"
         @blur="inputBlur"
         @keydown="onKeyDown"
         @mousedown="onInputPrevent($event)"
@@ -499,6 +499,9 @@ export default {
     },
     getType() {
       return `ds-${this.type}`
+    },
+    checkSetClickEvent() {
+      return this.getType === 'ds-checkbox' ? null : 'click'
     }
   },
   methods: {

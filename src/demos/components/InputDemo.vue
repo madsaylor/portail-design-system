@@ -156,8 +156,8 @@
         label="Select"
         v-model="selectValue"
         :options="[{
-          title: 'Hello',
-          value: 1,
+          value: 'Hello',
+          Id: 1,
         }, {
           value: 'World',
         }]"
@@ -211,6 +211,16 @@
         disabled
         v-model="radioValue"
       />
+      <br />
+
+      <Input
+        md
+        iconRight="euro_symbol"
+        textAlign="right"
+        label="Euro Input"
+        placeholder="Input Currency"
+        v-model="currencyValue"
+      />
     </div>
   </div>
 </template>
@@ -229,6 +239,7 @@ export default {
     openUsage: true,
     usage: InputData.usage,
     textValue: '',
+    currencyValue: 20,
     selectValue: null,
     slideTextValue: 'Test text',
     radioValue: 'first',

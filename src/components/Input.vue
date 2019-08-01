@@ -126,7 +126,14 @@
       <input
         v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
         v-bind="inputAttrs"
-        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched && showErrors, 'ds-slide-input': slideLabel, 'date': getType === 'ds-date', 'ds-has-right-icon': iconRight}"
+        :class="{
+          'ds-has-icon': icon_,
+          'ds-error': inputErrors.length && touched && showErrors,
+          'ds-slide-input': slideLabel,
+          'date': getType === 'ds-date',
+          'ds-has-right-icon': iconRight,
+          'ds-text-right': textAlign === 'right'
+        }"
         v-model="inputValue"
         ref="input"
         @focus.prevent="inputFocus"
@@ -152,7 +159,11 @@
         v-model="inputValue"
         placeholder="placeholder"
       >
-        <option v-for="option in options" :value="option">
+        <option
+          v-for="(option, index) in options"
+          :key="index"
+          :value="selectOptionFormat === 2 ? option.Id : option"
+        >
           {{ option.title || option.value }}
         </option>
       </select>
@@ -292,6 +303,14 @@ export default {
     valueModeSelect: {
       type: Boolean,
       default: false
+    },
+    textAlign: {
+      type: String,
+      default: 'left'
+    },
+    selectOptionFormat: {
+      type: Number,
+      default: 1
     }
   },
   data: () => ({
@@ -673,6 +692,10 @@ export default {
 
       &.ds-slide-input {
         margin-top: 10px;
+      }
+
+      &.ds-text-right {
+        text-align: right;
       }
 
       .input-placeholder();

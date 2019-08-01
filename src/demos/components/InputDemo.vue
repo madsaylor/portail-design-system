@@ -229,10 +229,7 @@ export default {
     openUsage: true,
     usage: InputData.usage,
     textValue: '',
-    selectValue: {
-      value: 1,
-      title: 'Hello'
-    },
+    selectValue: null,
     slideTextValue: 'Test text',
     radioValue: 'first',
     dateValue: new Date(),

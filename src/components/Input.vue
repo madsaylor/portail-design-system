@@ -719,6 +719,13 @@ export default {
       color: #838795;
     }
 
+    .ds-select-placeholder + .ds-icon {
+      pointer-events: none;
+      position: absolute;
+      bottom: 10%;
+      right: 6px;
+    }
+
     select + .ds-icon {
       pointer-events: none;
       position: absolute;

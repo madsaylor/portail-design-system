@@ -34,6 +34,7 @@ import GridData from './data/demo/GridData'
 import IconsData from './data/demo/IconsData'
 import TextData from './data/demo/TextData'
 import DragAndDropData from './data/demo/DragAndDropData'
+import MultiSelectDropdownData from './data/demo/MultiSelectDropdownData'
 
 export {
   CountriesArray,
@@ -71,5 +72,6 @@ export {
   GridData,
   IconsData,
   TextData,
-  DragAndDropData
+  DragAndDropData,
+  MultiSelectDropdownData
 }

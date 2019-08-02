@@ -22,7 +22,7 @@
     </template>
 
     <template v-else>
-      <div v-if="!forceShow" @click="updateForceShow">
+      <div class="reference" v-if="!forceShow" @click="updateForceShow">
         <slot name="reference"></slot>
       </div>
 
@@ -110,6 +110,7 @@ export default {
 
   .reference {
     display: inline-block;
+    cursor: pointer;
   }
 
   .popper {

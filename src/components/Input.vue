@@ -121,16 +121,24 @@
           {{ label }}
       </div>
 
-      <Icon v-if="iconRight" color="gray-400" :source="iconRight" class="ds-icon-right"/>
+      <Icon :size="iconSize" v-if="iconLeft" :color="iconColor" :source="iconLeft" class="ds-icon-left"/>
 
       <input
         v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
         v-bind="inputAttrs"
-        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched && showErrors, 'ds-slide-input': slideLabel, 'date': getType === 'ds-date', 'ds-has-right-icon': iconRight}"
+        :class="{
+          'ds-has-icon': icon_,
+          'ds-error': inputErrors.length && touched && showErrors,
+          'ds-slide-input': slideLabel,
+          'date': getType === 'ds-date',
+          'ds-has-left-icon': iconLeft,
+          'ds-text-right': textAlign === 'right'
+        }"
         v-model="inputValue"
         ref="input"
+        :style="getStyle"
         @focus.prevent="inputFocus"
-        @click.prevent="inputFocus"
+        @[checkSetClickEvent].prevent="inputFocus"
         @blur="inputBlur"
         @keydown="onKeyDown"
         @mousedown="onInputPrevent($event)"
@@ -139,7 +147,7 @@
       <input
         v-if="getType == 'ds-radio'"
         v-bind="inputAttrs"
-        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-right-icon': iconRight}"
+        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         :checked="inputValue === radioVal"
         @change="changeRadio"
         @blur="touched = true"
@@ -149,18 +157,24 @@
 
       <select
         v-if="getType === 'ds-select'"
-        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-right-icon': iconRight}"
+        v-bind="inputAttrs"
+        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         v-model="inputValue"
         placeholder="placeholder"
+        @blur="touched = true"
       >
-        <option v-for="option in options" :value="option">
+        <option
+          v-for="(option, index) in options"
+          :key="index"
+          :value="getOptionValue(option)"
+        >
           {{ option.title || option.value }}
         </option>
       </select>
 
       <div v-if="getType === 'ds-select' && !inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
 
-      <Icon v-if="icon_" color="gray-400" :source="icon_" />
+      <Icon :size="iconSize" v-if="icon_" :color="iconColor" :source="icon_" />
 
       <div class="ds-drawer">
         <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
@@ -244,7 +258,15 @@ export default {
       default: '? explication'
     },
     icon: String,
-    iconRight: String,
+    iconLeft: String,
+    iconSize: {
+      type: String,
+      default: '24px'
+    },
+    iconColor: {
+      type: String,
+      default: 'gray-400'
+    },
     label: String,
     lang: String,
     lg: Boolean,
@@ -293,6 +315,14 @@ export default {
     valueModeSelect: {
       type: Boolean,
       default: false
+    },
+    textAlign: {
+      type: String,
+      default: 'left'
+    },
+    selectOptionFormat: {
+      type: Number,
+      default: 1
     }
   },
   data: () => ({
@@ -398,18 +428,19 @@ export default {
           return this.value.toLocaleDateString(this.locale)
         }
 
-        if (!_.isObject(this.value) && this.valueModeSelect && this.getType === 'ds-select') {
-          return this.options && this.options.find((option) => option.value === this.value) || {}
+        if (this.getType === 'ds-select') {
+          if (_.isObject(this.value) && this.valueModeSelect) {
+            if (this.selectOptionFormat === 1) {
+              return this.value.value
+            } else if (this.selectOptionFormat === 2) {
+              return this.value.id
+            }
+          }
         }
 
         return this.value
       },
       set(value) {
-        if (this.valueModeSelect && this.getType === 'ds-select') {
-          this.$emit('input', value && value.value)
-          return
-        }
-
         if (this.getType === 'ds-date') {
           return
         }
@@ -476,6 +507,19 @@ export default {
     },
     getType() {
       return `ds-${this.type}`
+    },
+    checkSetClickEvent() {
+      return this.getType === 'ds-checkbox' ? null : 'click'
+    },
+    getStyle() {
+      const style = {}
+      const padding = parseInt(this.iconSize) + 6
+      if (this.icon) {
+        style.paddingRight = padding + 'px'
+      } else if (this.iconLeft) {
+        style.paddingLeft = padding + 'px'
+      }
+      return style
     }
   },
   methods: {
@@ -544,6 +588,16 @@ export default {
         document.body.style.overflowY = 'auto';
       }
       document.body.style.overflowX = 'hidden';
+    },
+    getOptionValue(option) {
+      if (this.valueModeSelect) {
+        if (this.selectOptionFormat === 1) {
+          return option.value
+        } else {
+          return option.id
+        }
+      }
+      return option
     }
   },
   watch: {
@@ -668,12 +722,16 @@ export default {
         padding-right: 30px;
       }
 
-      &.ds-has-right-icon {
+      &.ds-has-left-icon {
         padding-left: 30px;
       }
 
       &.ds-slide-input {
         margin-top: 10px;
+      }
+
+      &.ds-text-right {
+        text-align: right;
       }
 
       .input-placeholder();
@@ -718,6 +776,15 @@ export default {
       bottom: 6px;
       left: 14px;
       color: #838795;
+      line-height: 24px;
+      font-size: 16px;
+    }
+
+    .ds-select-placeholder + .ds-icon {
+      pointer-events: none;
+      position: absolute;
+      bottom: 10%;
+      right: 6px;
     }
 
     select + .ds-icon {
@@ -735,11 +802,12 @@ export default {
       height: 50% !important;
     }
 
-    .ds-icon-right {
+    .ds-icon-left {
       pointer-events: none;
       position: absolute;
-      bottom: 6px;
+      bottom: 5px;
       left: 6px;
+      height: 50% !important;
     }
   }
   

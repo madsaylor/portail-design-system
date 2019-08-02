@@ -57,6 +57,8 @@ const ICONS_TO_GET = [
   ['work_outline', 'baseline'],
   ['exit_to_app', 'baseline'],
   ['settings', 'baseline'],
+  ['euro_symbol', 'baseline'],
+  ['euro_symbol', 'outline']
 ]
 
 // Get svg download link

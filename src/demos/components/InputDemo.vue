@@ -155,11 +155,16 @@
         placeholder="Select a value"
         label="Select"
         v-model="selectValue"
+        :disabled="false"
+        :validators="demoValidatorForSelect"
+        :valueModeSelect="true"
+        :selectOptionFormat="2"
         :options="[{
-          title: 'Hello',
-          value: 1,
+          value: 'Hello',
+          id: 1,
         }, {
           value: 'World',
+          id: 2
         }]"
       />
 
@@ -211,6 +216,18 @@
         disabled
         v-model="radioValue"
       />
+      <br />
+
+      <Input
+        md
+        icon="euro_symbol"
+        iconSize="16px"
+        iconColor="#3f4352"
+        textAlign="right"
+        label="Euro Input"
+        placeholder="Input Currency"
+        v-model="currencyValue"
+      />
     </div>
   </div>
 </template>
@@ -229,15 +246,20 @@ export default {
     openUsage: true,
     usage: InputData.usage,
     textValue: '',
-    selectValue: {
-      value: 1,
-      title: 'Hello'
-    },
+    currencyValue: 20,
+    selectValue: null,
     slideTextValue: 'Test text',
     radioValue: 'first',
     dateValue: new Date(),
     dateValue2: null,
     dateValue3: null,
+    demoValidatorForSelect: [
+      {
+        name: 'required',
+        message: 'The field is required',
+        validator: value => !!value
+      }
+    ],
     demoValidators: [
       {
         name: 'required',

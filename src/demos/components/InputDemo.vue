@@ -155,7 +155,9 @@
         placeholder="Select a value"
         label="Select"
         v-model="selectValue"
+        :disabled="false"
         :validators="demoValidatorForSelect"
+        :valueModeSelect="true"
         :selectOptionFormat="2"
         :options="[{
           value: 'Hello',
@@ -245,7 +247,7 @@ export default {
     usage: InputData.usage,
     textValue: '',
     currencyValue: 20,
-    selectValue: [],
+    selectValue: null,
     slideTextValue: 'Test text',
     radioValue: 'first',
     dateValue: new Date(),

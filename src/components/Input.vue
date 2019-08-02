@@ -157,6 +157,7 @@
 
       <select
         v-if="getType === 'ds-select'"
+        v-bind="inputAttrs"
         :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         v-model="inputValue"
         placeholder="placeholder"
@@ -165,7 +166,7 @@
         <option
           v-for="(option, index) in options"
           :key="index"
-          :value="selectOptionFormat === 2 ? option.id : option"
+          :value="getOptionValue(option)"
         >
           {{ option.title || option.value }}
         </option>
@@ -428,11 +429,7 @@ export default {
         }
 
         if (this.getType === 'ds-select') {
-          if (!_.isObject(this.value) && this.valueModeSelect) {
-            return this.options && this.options.find((option) => option.value === this.value) || {}  
-          }
-
-          if (_.isObject(this.value)) {
+          if (_.isObject(this.value) && this.valueModeSelect) {
             if (this.selectOptionFormat === 1) {
               return this.value.value
             } else if (this.selectOptionFormat === 2) {
@@ -444,11 +441,6 @@ export default {
         return this.value
       },
       set(value) {
-        if (this.valueModeSelect && this.getType === 'ds-select') {
-          this.$emit('input', value && value.value)
-          return
-        }
-
         if (this.getType === 'ds-date') {
           return
         }
@@ -596,6 +588,16 @@ export default {
         document.body.style.overflowY = 'auto';
       }
       document.body.style.overflowX = 'hidden';
+    },
+    getOptionValue(option) {
+      if (this.valueModeSelect) {
+        if (this.selectOptionFormat === 1) {
+          return option.value
+        } else {
+          return option.id
+        }
+      }
+      return option
     }
   },
   watch: {

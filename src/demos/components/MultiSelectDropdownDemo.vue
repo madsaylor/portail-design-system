@@ -2,7 +2,7 @@
   <div class="row-col">
     <h3>MultiSelectDropdown</h3>
 
-    Custom select with support multiple choices
+    Custom multi select dropdown
     <Description compnent-name="MultiSelectDropdown"></Description>
     <Collapser :opened.sync="openUsage" label="Usage">
       <pre v-highlightjs="usage"><code class="html"></code></pre>
@@ -11,7 +11,8 @@
     <div class="row-col">
       <MultiSelectDropdown v-model="multiSelectValue"
                            :options="options"
-                           :open-drop-down-list.sync="openDropDownList">
+                           :open-drop-down-list.sync="openDropDownList"
+                           :validators="multiSelectValidators">
       </MultiSelectDropdown>
     </div>
   </div>
@@ -29,19 +30,32 @@
     data: () => ({
       openUsage: true,
       usage: MultiSelectDropdownData.usage,
-      multiSelectValue: ['Espèces', 'Virement'],
+      multiSelectValue: [],
       options: [{
+        id: 1,
         value: 'Espèces'
       }, {
+        id: 2,
         value: 'Chèque'
       }, {
+        id: 3,
         value: 'Virement'
       }, {
+        id: 4,
         value: 'Carte bancaire'
       }, {
-        value: 'Tout moyen de paiement'
+        id: 5,
+        value: 'Tout moyen de paiement',
+        deselectAll: true
       }],
-      openDropDownList: false
+      openDropDownList: false,
+      multiSelectValidators: [
+        {
+          name: 'required',
+          message: 'The field is required',
+          validator: value => value && !!value.length
+        }
+      ]
     })
   }
 </script>

@@ -17,7 +17,7 @@
     "postbuild": "npm run build-icons",
     "prerelease": "npm run build",
     "release": "release-it",
-    "serve": "vue-cli-service serve"
+    "serve": "vue-cli-service serve --port 8081"
   },
   "main": "./dist/ds.common.js",
   "browser": {

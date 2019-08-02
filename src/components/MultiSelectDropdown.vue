@@ -1,11 +1,15 @@
 <template>
   <div class="ds-multi-select-dropdown-wrapper">
-    <input class="ds-multi-select"
+    <input :class="['ds-multi-select', {'ds-multi-select-error': checkError}]"
            type="text"
            ref="multiSelect"
-           v-model="multiSelectValue"
-           @click="changeListState"/>
-
+           v-model="inputSelectValue"
+           @click="changeListState"
+           readonly="readonly"/>
+    <Icon expand_more color="dark" class="ds-multi-select-icon"/>
+    <div class="ds-multi-select-error-message-wrapper" v-if="checkError">
+      {{multiSelectErrors[0]}}
+    </div>
     <Dropdown :target="$refs.multiSelect"
               :opened.sync="dropDownListState"
               :position="dropDownPosition">
@@ -17,7 +21,7 @@
             <label class="ds-checkbox-container">
               <input class="ds-checkbox-input"
                      type="checkbox"
-                     :value="option.value"
+                     :value="idMode ? option.id : option.value"
                      v-model="multiSelectValue"/>
               <span class="ds-checkbox-text">{{ option.title }} {{ option.value }}</span>
               <span class="ds-checkbox-checkmark"></span>
@@ -30,12 +34,13 @@
 
 <script>
   import Dropdown from './Dropdown'
+  import Icon from './Icon'
 
   export default {
     name: 'MultiSelectDropdown',
-    components: {Dropdown},
+    components: {Dropdown, Icon},
     props: {
-      value: Array,
+      value: null,
       options: Array,
       openDropDownList: {
         type: Boolean,
@@ -44,14 +49,46 @@
       dropDownPosition: {
         type: String,
         default: "default"
+      },
+      idMode: {
+        type: Boolean,
+        default: false
+      },
+      validators: Array,
+      initValidation: {
+        type: Boolean,
+        default: false
       }
     },
+    data: () => ({
+      inputSelectValue: undefined,
+      touched: false
+    }),
     computed: {
       multiSelectValue: {
         get() {
-          return this.value
+          this.validate()
+          return this.value || []
         },
         set(value) {
+          let deselectIndex = -1
+
+          this.options.forEach((option) => {
+            if (option.deselectAll) {
+              deselectIndex = value.findIndex((val) => val === (this.idMode ? option.id : option.value))
+            }
+          })
+
+          if (~deselectIndex) {
+            if (deselectIndex === value.length - 1) {
+              value = [value[deselectIndex]]
+            } else {
+              value.splice(deselectIndex, 1)
+            }
+          }
+
+          this.touched = true
+          this.inputSelectValue = this.calcInputSelectValue(value)
           this.$emit('input', value)
         }
       },
@@ -62,12 +99,62 @@
         set(value) {
           this.$emit('update:open-drop-down-list', value)
         }
+      },
+      idValue() {
+        if (this.idMode) {
+          let idValueObj = {}
+          this.options.forEach((option) => idValueObj[option.id] = option.value)
+          return idValueObj
+        } else {
+          return null
+        }
+      },
+      validation() {
+        if (!this.validators || !this.validators.length) {
+          return []
+        }
+
+        let data = []
+        for (let i = 0; i < this.validators.length; i++) {
+          data.push([
+            this.validators[i].name,
+            this.validators[i].validator(this.inputSelectValue),
+          ])
+        }
+
+        return data
+      },
+      multiSelectErrors() {
+        let errors = []
+
+        for (let i = 0; i < this.validation.length; i++) {
+          if (!this.validation[i][1]) {
+            errors.push(this.validators[i].message)
+          }
+        }
+
+        return errors
+      },
+      checkError() {
+        return this.multiSelectErrors.length && this.touched
       }
     },
     methods: {
       changeListState() {
         this.dropDownListState = !this.dropDownListState
-      }
+      },
+      calcInputSelectValue(multiSelectValue) {
+        return this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map((value) => this.idValue[value]) :
+                             multiSelectValue
+      },
+      validate() {
+        if (this.initValidation || this.touched) {
+          this.$emit('validation', this.validation)
+        }
+      },
+    },
+    mounted() {
+      this.inputSelectValue = this.calcInputSelectValue(this.multiSelectValue)
     }
   }
 </script>
@@ -79,7 +166,8 @@
 
     .ds-multi-select {
       height: 30px;
-      width: 275px;
+      width: 250px;
+      padding-right: 25px;
       border: none;
       border-bottom: 1px solid @color-gray-300;
 
@@ -89,6 +177,22 @@
         outline: none;
         border-bottom: 1px solid @color-light-blue-200;
       }
+
+      &.ds-multi-select-error {
+        border-bottom: 1px solid @color-red;
+      }
+    }
+
+    .ds-multi-select-icon {
+      position: relative;
+      top: -3px;
+      left: -25px;
+    }
+
+    .ds-multi-select-error-message-wrapper {
+      width: 275px;
+      font-size: 12px;
+      color: @color-red;
     }
 
     .ds-multi-select-dropdown-content {

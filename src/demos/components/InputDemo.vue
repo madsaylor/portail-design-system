@@ -155,11 +155,14 @@
         placeholder="Select a value"
         label="Select"
         v-model="selectValue"
+        :validators="demoValidatorForSelect"
+        :selectOptionFormat="2"
         :options="[{
           value: 'Hello',
-          Id: 1,
+          id: 1,
         }, {
           value: 'World',
+          id: 2
         }]"
       />
 
@@ -217,6 +220,7 @@
         md
         icon="euro_symbol"
         iconSize="16px"
+        iconColor="#3f4352"
         textAlign="right"
         label="Euro Input"
         placeholder="Input Currency"
@@ -241,12 +245,19 @@ export default {
     usage: InputData.usage,
     textValue: '',
     currencyValue: 20,
-    selectValue: null,
+    selectValue: [],
     slideTextValue: 'Test text',
     radioValue: 'first',
     dateValue: new Date(),
     dateValue2: null,
     dateValue3: null,
+    demoValidatorForSelect: [
+      {
+        name: 'required',
+        message: 'The field is required',
+        validator: value => !!value
+      }
+    ],
     demoValidators: [
       {
         name: 'required',

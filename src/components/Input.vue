@@ -121,7 +121,7 @@
           {{ label }}
       </div>
 
-      <Icon :size="iconSize" v-if="iconLeft" color="gray-400" :source="iconLeft" class="ds-icon-left"/>
+      <Icon :size="iconSize" v-if="iconLeft" :color="iconColor" :source="iconLeft" class="ds-icon-left"/>
 
       <input
         v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
@@ -136,6 +136,7 @@
         }"
         v-model="inputValue"
         ref="input"
+        :style="getStyle"
         @focus.prevent="inputFocus"
         @[checkSetClickEvent].prevent="inputFocus"
         @blur="inputBlur"
@@ -159,6 +160,7 @@
         :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         v-model="inputValue"
         placeholder="placeholder"
+        @blur="touched = true"
       >
         <option
           v-for="(option, index) in options"
@@ -171,7 +173,7 @@
 
       <div v-if="getType === 'ds-select' && !inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
 
-      <Icon :size="iconSize" v-if="icon_" color="gray-400" :source="icon_" />
+      <Icon :size="iconSize" v-if="icon_" :color="iconColor" :source="icon_" />
 
       <div class="ds-drawer">
         <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
@@ -259,6 +261,10 @@ export default {
     iconSize: {
       type: String,
       default: '24px'
+    },
+    iconColor: {
+      type: String,
+      default: 'gray-400'
     },
     label: String,
     lang: String,
@@ -421,8 +427,18 @@ export default {
           return this.value.toLocaleDateString(this.locale)
         }
 
-        if (!_.isObject(this.value) && this.valueModeSelect && this.getType === 'ds-select') {
-          return this.options && this.options.find((option) => option.value === this.value) || {}
+        if (this.getType === 'ds-select') {
+          if (!_.isObject(this.value) && this.valueModeSelect) {
+            return this.options && this.options.find((option) => option.value === this.value) || {}  
+          }
+
+          if (_.isObject(this.value)) {
+            if (this.selectOptionFormat === 1) {
+              return this.value.value
+            } else if (this.selectOptionFormat === 2) {
+              return this.value.id
+            }
+          }
         }
 
         return this.value
@@ -502,6 +518,16 @@ export default {
     },
     checkSetClickEvent() {
       return this.getType === 'ds-checkbox' ? null : 'click'
+    },
+    getStyle() {
+      const style = {}
+      const padding = parseInt(this.iconSize) + 6
+      if (this.icon) {
+        style.paddingRight = padding + 'px'
+      } else if (this.iconLeft) {
+        style.paddingLeft = padding + 'px'
+      }
+      return style
     }
   },
   methods: {

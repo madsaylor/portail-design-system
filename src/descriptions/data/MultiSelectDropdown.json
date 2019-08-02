@@ -1,0 +1,49 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "null",
+      "description": "Binds to input and reflect current data. Could be initialize like null or undefined, but when value will contain data, the data type will be Array"
+    },
+    {
+      "name": "options",
+      "type": "Array<Object>",
+      "description": "Data for selecting. When checked option with `deselectAll=true` property, other options will be deselected. If after previous action select usual option, option with `deselectAll=true` will be discarded"
+    },
+    {
+      "name": "openDropDownList",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Set state of dropdown list"
+    },
+    {
+      "name": "dropDownPosition",
+      "type": "String",
+      "default": "default",
+      "description": "Set position of dropdown list"
+    },
+    {
+      "name": "idMode",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Setup mode in which value of props will be equals the id from objects' options"
+    },
+    {
+      "name": "validators",
+      "type": "Array<Object>",
+      "description": "Array of validators"
+    },
+    {
+      "name": "initValidation",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Check validation on initialize component"
+    }
+  ],
+  "events": [
+    {
+      "name": "validation",
+      "description": "Emitted when the multi select value changes and after component initialize"
+    }
+  ]
+}

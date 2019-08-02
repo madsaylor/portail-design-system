@@ -1,6 +1,6 @@
 {
   "name": "@betao/ds",
-  "version": "0.3.215",
+  "version": "0.3.216",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -17,7 +17,7 @@
     "postbuild": "npm run build-icons",
     "prerelease": "npm run build",
     "release": "release-it",
-    "serve": "vue-cli-service serve"
+    "serve": "vue-cli-service serve --port 8081"
   },
   "main": "./dist/ds.common.js",
   "browser": {

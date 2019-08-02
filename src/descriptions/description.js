@@ -26,6 +26,7 @@ import Table from './data/Table';
 import Collapser from './data/Collapser';
 import Loader from './data/Loader';
 import DragAndDrop from './data/DragAndDrop';
+import MultiSelectDropdown from './data/MultiSelectDropdown';
 
 export default {
   AppHeader,
@@ -55,5 +56,6 @@ export default {
   Table,
   Collapser,
   Loader,
-  DragAndDrop
+  DragAndDrop,
+  MultiSelectDropdown
 }

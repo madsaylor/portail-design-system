@@ -1,7 +1,8 @@
 <template>
   <Dialog
-    :opened.sync="opened"
+    :opened="opened"
     :borderColor="borderColor"
+    @update:opened="updateOpenStatus"
   >
     <div
       class="ds-confirm-wrapper"
@@ -16,8 +17,8 @@
       </div>
 
       <div class="ds-confirm-footer">
-        <Button>Cancel</Button>
-        <Button>Accept</Button>
+        <Button @click="updateOpenStatus(false)" alt>Cancel</Button>
+        <Button @click="acceptStatus">Accept</Button>
       </div>
     </div>
   </Dialog>
@@ -37,7 +38,7 @@ export default {
     },
     borderColor: {
       type: String,
-      default: '#eeeeee'
+      default: '#e6e7eb'
     },
     width: {
       type: String,
@@ -51,12 +52,49 @@ export default {
       style.width = this.width
       return style
     }
+  },
+  methods: {
+    updateOpenStatus(status) {
+      this.$emit('update:opened', status)
+      this.$emit('accept', false)
+    },
+    acceptStatus() {
+      this.$emit('update:opened', false)
+      this.$emit('accept', true)
+    }
   }
 }
 </script>
 
 <style lang="less">
 .ds-confirm-wrapper {
-  padding: 32px 40px;
+  padding: 40px 40px 32px 40px;
+  box-sizing: border-box;
+  font-family: Lato;
+
+  .ds-confirm-header {
+    font-size: 24px;
+    line-height: 28px;
+    color: #3F4352;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .ds-confirm-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .ds-button-link-wrapper {
+      margin-left: 16px;
+    }
+  }
+
+  .ds-confirm-body {
+    margin-bottom: 32px;
+    color: #3F4352;
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 </style>

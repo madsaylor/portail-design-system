@@ -1,7 +1,7 @@
 <template>
   <div class="row-col">
     <h3>Confirm Dialog</h3>
-    <Description component-name="ConfirmDialog"></Description>
+    <Description compnent-name="ConfirmDialog"></Description>
     <Collapser :opened.sync="openUsage" label="Usage">
       <pre v-highlightjs="usage">
         <code class="html"></code>
@@ -16,9 +16,10 @@
       :opened.sync="opened"
       :borderColor="borderColor"
       title="Dialog box title"
+      @accept="accept"
     >
       <div slot="ds-confirm-content">
-        Donec facilisis tortor ut augue lacinia, at viverra est semper. Sed sapien metus, scelerisque nec pharetra id, tempor a tortor. Pellentesque non dignissim neque. 
+        {{ text }}
       </div>
     </ConfirmDialog>
   </div>
@@ -29,6 +30,7 @@ import ConfirmDialog from '../../components/ConfirmDialog'
 import Button from '../../components/Button'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser'
+import { ConfirmDialogData, GeneralData } from '../../static/index'
 
 export default {
   name: 'ConfirmDialogDemo',
@@ -36,9 +38,17 @@ export default {
   data() {
     return ({
       opened: false,
+      openUsage: true,
       borderColor: '#e6e7eb',
-      usage: 'test'
+      usage: ConfirmDialogData.usage,
+      text: GeneralData.text,
+      accepted: false
     })
+  },
+  methods: {
+    accept(status) {
+      this.accepted = status
+    }
   }
 }
 </script>

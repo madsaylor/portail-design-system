@@ -1,0 +1,25 @@
+{
+  "properties": [
+    {
+      "name": "opened",
+      "type": "Boolean",
+      "description": "If this property is true, dialog will be opened"
+    },
+    {
+      "name": "borderColor",
+      "type": "String",
+      "description": "border color of the Confirm Dialog"
+    },
+    {
+      "name": "width",
+      "type": "String",
+      "description": "Width of the Confirm Dialog"
+    },
+    {
+      "name": "title",
+      "type": "String",
+      "description": "Title of the Confirm Dialog"
+    }
+  ],
+  "events": []
+}

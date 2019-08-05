@@ -11,6 +11,7 @@ import CollapserData from './data/demo/CollapserData'
 import DatepickerData from './data/demo/DatepickerData'
 import DialogData from './data/demo/DialogData'
 import ConfirmDialogData from './data/demo/ConfirmDialogData'
+import AlertDialogData from './data/demo/AlertDialogData'
 import DropdownData from './data/demo/DropdownData'
 import EmptyStateData from './data/demo/EmptyStateData'
 import FileUploadData from './data/demo/FileUploadData'
@@ -51,6 +52,7 @@ export {
   DatepickerData,
   DialogData,
   ConfirmDialogData,
+  AlertDialogData,
   DropdownData,
   EmptyStateData,
   FileUploadData,

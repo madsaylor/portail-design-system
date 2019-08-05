@@ -5,7 +5,8 @@ import Card from './data/Card';
 import Datepicker from './data/Datepicker';
 import Dropdown from './data/Dropdown';
 import Dialog from './data/Dialog';
-import ConfirmDialog from './data/ConfirmDialog'
+import ConfirmDialog from './data/ConfirmDialog';
+import AlertDialog from './data/AlertDialog';
 import FullScreenModal from './data/FullScreenModal';
 import GridSelect from './data/GridSelect';
 import Icon from './data/Icon';
@@ -38,6 +39,7 @@ export default {
   Dropdown,
   Dialog,
   ConfirmDialog,
+  AlertDialog,
   FullScreenModal,
   GridSelect,
   Icon,

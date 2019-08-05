@@ -43,7 +43,7 @@
         <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>
       </div>
       <div class="ds-dialog-body">
-        <div v-for="n in 25">
+        <div v-for="n in 25" :key="n">
           {{text}}
         </div>
       </div>

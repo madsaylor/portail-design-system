@@ -9,11 +9,13 @@
     </Collapser>
 
     <div class="row-col">
-      <MultiSelectDropdown v-model="multiSelectValue"
-                           :options="options"
-                           :open-drop-down-list.sync="openDropDownList"
-                           :validators="multiSelectValidators">
-      </MultiSelectDropdown>
+      <MultiSelectDropdown
+        label="Multi select"
+        v-model="multiSelectValue"
+        :options="options"
+        :validators="multiSelectValidators"
+        :placeholder="'Input Value'"
+      />
     </div>
   </div>
 </template>
@@ -48,7 +50,6 @@
         value: 'Tout moyen de paiement',
         deselectAll: true
       }],
-      openDropDownList: false,
       multiSelectValidators: [
         {
           name: 'required',

@@ -11,12 +11,6 @@
       "description": "Data for selecting. When checked option with `deselectAll=true` property, other options will be deselected. If after previous action select usual option, option with `deselectAll=true` will be discarded"
     },
     {
-      "name": "openDropDownList",
-      "type": "Boolean",
-      "default": "false",
-      "description": "Set state of dropdown list"
-    },
-    {
       "name": "dropDownPosition",
       "type": "String",
       "default": "default",
@@ -38,6 +32,16 @@
       "type": "Boolean",
       "default": "false",
       "description": "Check validation on initialize component"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label of component"
+    },
+    {
+      "name": "placeholder",
+      "type": "String",
+      "description": "Show placeholder when value is empty"
     }
   ],
   "events": [

@@ -1,31 +1,44 @@
 <template>
   <div class="ds-multi-select-dropdown-wrapper">
-    <input :class="['ds-multi-select', {'ds-multi-select-error': checkError}]"
-           type="text"
-           ref="multiSelect"
-           v-model="inputSelectValue"
-           @click="changeListState"
-           readonly="readonly"/>
-    <Icon expand_more color="dark" class="ds-multi-select-icon"/>
+    <div v-if="label"
+      class="ds-label-text"
+    >
+      {{ label }}
+    </div>
+    <input
+      :class="['ds-multi-select', {'ds-multi-select-error': checkError}]"
+      type="text"
+      ref="multiSelect"
+      v-model="inputSelectValue"
+      :placeholder="placeholder"
+      @click="updateOpenState"
+      readonly="readonly"
+    />
+    <Icon expand_more color="gray-400" class="ds-multi-select-icon"/>
     <div class="ds-multi-select-error-message-wrapper" v-if="checkError">
       {{multiSelectErrors[0]}}
     </div>
-    <Dropdown :target="$refs.multiSelect"
-              :opened.sync="dropDownListState"
-              :position="dropDownPosition">
-
+    <Dropdown
+      :target="$refs.multiSelect"
+      :opened.sync="openDropDownList"
+      :position="dropDownPosition"
+    >
       <div class="ds-multi-select-dropdown-content">
-        <div class="ds-checkbox-container-wrapper"
-             v-for="(option, index) in options">
-
-            <label class="ds-checkbox-container">
-              <input class="ds-checkbox-input"
-                     type="checkbox"
-                     :value="idMode ? option.id : option.value"
-                     v-model="multiSelectValue"/>
-              <span class="ds-checkbox-text">{{ option.title }} {{ option.value }}</span>
-              <span class="ds-checkbox-checkmark"></span>
-            </label>
+        <div
+          class="ds-checkbox-container-wrapper"
+          v-for="(option, index) in options"
+          :key="index"
+        >
+          <label class="ds-checkbox-container">
+            <input
+              class="ds-checkbox-input"
+              type="checkbox"
+              :value="idMode ? option.id : option.value"
+              v-model="multiSelectValue"
+            />
+            <span class="ds-checkbox-text">{{ option.title }} {{ option.value }}</span>
+            <span class="ds-checkbox-checkmark"></span>
+          </label>
         </div>
       </div>
     </Dropdown>
@@ -42,10 +55,7 @@
     props: {
       value: null,
       options: Array,
-      openDropDownList: {
-        type: Boolean,
-        default: false
-      },
+      label: String,
       dropDownPosition: {
         type: String,
         default: "default"
@@ -58,11 +68,16 @@
       initValidation: {
         type: Boolean,
         default: false
+      },
+      placeholder: {
+        type: String,
+        default: ''
       }
     },
     data: () => ({
       inputSelectValue: undefined,
-      touched: false
+      touched: false,
+      openDropDownList: false
     }),
     computed: {
       multiSelectValue: {
@@ -90,14 +105,6 @@
           this.touched = true
           this.inputSelectValue = this.calcInputSelectValue(value)
           this.$emit('input', value)
-        }
-      },
-      dropDownListState: {
-        get() {
-          return this.openDropDownList
-        },
-        set(value) {
-          this.$emit('update:open-drop-down-list', value)
         }
       },
       idValue() {
@@ -140,8 +147,8 @@
       }
     },
     methods: {
-      changeListState() {
-        this.dropDownListState = !this.dropDownListState
+      updateOpenState() {
+        this.openDropDownList = !this.openDropDownList
       },
       calcInputSelectValue(multiSelectValue) {
         return this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map((value) => this.idValue[value]) :
@@ -163,19 +170,33 @@
   @import '../styles/vars';
 
   .ds-multi-select-dropdown-wrapper {
+    position: relative;
+    width: 252px;
+
+    .ds-label-text {
+      .font-desktop-x-small-regular-gray();
+      height: 16px;
+      margin-bottom: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
     .ds-multi-select {
-      height: 30px;
-      width: 250px;
-      padding-right: 25px;
-      border: none;
-      border-bottom: 1px solid @color-gray-300;
+      .font-desktop-small-regular-dark();
+      padding: 7px 25px 7px 12px;
+      box-sizing: border-box;
+      border: 1px solid @color-gray-300;
+      border-radius: 2px;
+      background-color: @color-white;
+      cursor: pointer;
+      width: 100%;
 
-      background-color: rgba(0,0,0,0);
-
+      &:focus:not(.ds-error) {
+        border-color: @color-primary;
+      }
       &:focus {
         outline: none;
-        border-bottom: 1px solid @color-light-blue-200;
       }
 
       &.ds-multi-select-error {
@@ -184,9 +205,9 @@
     }
 
     .ds-multi-select-icon {
-      position: relative;
-      top: -3px;
-      left: -25px;
+      position: absolute;
+      bottom: 10%;
+      right: 5px;
     }
 
     .ds-multi-select-error-message-wrapper {

@@ -22,6 +22,7 @@
       :target="$refs.multiSelect"
       :opened.sync="openDropDownList"
       :position="dropDownPosition"
+      class="ds-multi-select-container"
     >
       <div class="ds-multi-select-dropdown-content">
         <div
@@ -200,24 +201,30 @@
       }
 
       &.ds-multi-select-error {
-        border-bottom: 1px solid @color-red;
+        border: 1px solid @color-red;
       }
+
     }
 
     .ds-multi-select-icon {
       position: absolute;
-      bottom: 10%;
+      top: 27px;
       right: 5px;
     }
 
     .ds-multi-select-error-message-wrapper {
-      width: 275px;
+      width: 100%;
       font-size: 12px;
       color: @color-red;
     }
 
+    .ds-multi-select-container {
+      left: 0;
+      right: 0;
+    }
+
     .ds-multi-select-dropdown-content {
-      display: inline-block;
+      display: block;
       border-radius: 2px;
       box-shadow: @card-shadow;
       padding: 15px;

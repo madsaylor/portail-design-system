@@ -15,6 +15,7 @@
         :options="options"
         :validators="multiSelectValidators"
         :placeholder="'Input Value'"
+        :idMode="true"
       />
     </div>
   </div>
@@ -32,7 +33,15 @@
     data: () => ({
       openUsage: true,
       usage: MultiSelectDropdownData.usage,
-      multiSelectValue: [],
+      multiSelectValue: [
+        {
+          id: 1,
+          value: 'Espèces'
+        }, {
+          id: 2,
+          value: 'Chèque'
+        }
+      ],
       options: [{
         id: 1,
         value: 'Espèces'

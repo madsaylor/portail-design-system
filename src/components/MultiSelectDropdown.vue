@@ -34,7 +34,7 @@
             <input
               class="ds-checkbox-input"
               type="checkbox"
-              :value="idMode ? option.id : option.value"
+              :value="idMode ? option : option.value"
               v-model="multiSelectValue"
             />
             <span class="ds-checkbox-text">{{ option.title }} {{ option.value }}</span>
@@ -152,7 +152,7 @@
         this.openDropDownList = !this.openDropDownList
       },
       calcInputSelectValue(multiSelectValue) {
-        return this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map((value) => this.idValue[value]) :
+        return this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map(value => value.value) :
                              multiSelectValue
       },
       validate() {

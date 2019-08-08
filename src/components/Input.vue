@@ -955,8 +955,6 @@ export default {
     padding: 0;
     margin: 0;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     display: inline-block;
     max-width: 100%;
   }

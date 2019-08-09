@@ -83,6 +83,10 @@
       },
       activeDatepickerComponent: {
         type: String
+      },
+      clickOutsideToClose: {
+        type: Boolean,
+        default: true
       }
     },
     data: () => ({
@@ -111,7 +115,9 @@
 
     methods: {
       backdropClick() {
-        this.openedDispatchWrapper()
+        if (this.clickOutsideToClose) {
+          this.openedDispatchWrapper()
+        }
       },
       /**
        * Check if the dropdown iteself or the target element have/are

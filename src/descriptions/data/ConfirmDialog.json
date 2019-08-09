@@ -19,6 +19,11 @@
       "name": "title",
       "type": "String",
       "description": "Title of the Confirm Dialog"
+    },
+    {
+      "name": "clickOutsideToCloase",
+      "type": "Boolean",
+      "description": "If this property is false, it is impossible to close the modal by clicking outside, default is true"
     }
   ],
   "events": []

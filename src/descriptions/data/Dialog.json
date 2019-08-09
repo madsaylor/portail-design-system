@@ -59,6 +59,11 @@
       "name": "backdropId",
       "type": "String",
       "description": "Id of backdrop"
+    },
+    {
+      "name": "clickOutsideToCloase",
+      "type": "Boolean",
+      "description": "If this property is false, it is impossible to close the modal by clicking outside, default is true"
     }
   ],
   "events": []

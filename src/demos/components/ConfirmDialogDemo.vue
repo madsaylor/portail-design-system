@@ -15,6 +15,7 @@
     <ConfirmDialog
       :opened.sync="opened"
       :borderColor="borderColor"
+      :clickOutsideToClose="false"
       title="Dialog box title"
       @accept="accept"
     >

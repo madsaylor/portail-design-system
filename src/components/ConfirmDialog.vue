@@ -2,6 +2,7 @@
   <Dialog
     :opened="opened"
     :borderColor="borderColor"
+    :clickOutsideToClose="clickOutsideToClose"
     @update:opened="updateOpenStatus"
   >
     <div
@@ -44,7 +45,11 @@ export default {
       type: String,
       default: '544px'
     },
-    title: String
+    title: String,
+    clickOutsideToClose: {
+      type: Boolean,
+      default: true
+    }
   },
   computed: {
     getStyle() {

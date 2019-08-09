@@ -15,6 +15,7 @@
     <AlertDialog
       :opened.sync="opened"
       :borderColor="borderColor"
+      :clickOutsideToClose="false"
       title="Alert Dialog Title"
     >
       <div slot="ds-alert-content">

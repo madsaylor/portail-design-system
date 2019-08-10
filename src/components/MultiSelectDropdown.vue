@@ -163,6 +163,11 @@
     },
     mounted() {
       this.inputSelectValue = this.calcInputSelectValue(this.multiSelectValue)
+    },
+    watch: {
+      value() {
+        this.$emit('validation', this.validation)
+      }
     }
   }
 </script>

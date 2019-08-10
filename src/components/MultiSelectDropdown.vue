@@ -160,6 +160,15 @@
           this.$emit('validation', this.validation)
         }
       },
+      setValidity(field, value) {
+        this.validators = this.validators.map(validator => {
+          if (validator.name === field) {
+            validator.validator = () => value
+          }
+          return validator
+        })
+        this.$emit('validation', this.validation)
+      }
     },
     mounted() {
       this.inputSelectValue = this.calcInputSelectValue(this.multiSelectValue)

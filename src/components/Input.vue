@@ -598,6 +598,15 @@ export default {
         }
       }
       return option
+    },
+    setValidity(field, value) {
+      this.validators = this.validators.map(validator => {
+        if (validator.name === field) {
+          validator.validator = () => value
+        }
+        return validator
+      })
+      this.$emit('validation', this.validation)
     }
   },
   watch: {

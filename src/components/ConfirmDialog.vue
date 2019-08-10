@@ -18,8 +18,8 @@
       </div>
 
       <div class="ds-confirm-footer">
-        <Button @click="updateOpenStatus(false)" alt>Cancel</Button>
-        <Button @click="acceptStatus">Accept</Button>
+        <Button @click="updateOpenStatus(false)" alt>{{ rejectLabel }}</Button>
+        <Button @click="acceptStatus">{{ acceptLabel }}</Button>
       </div>
     </div>
   </Dialog>
@@ -49,6 +49,14 @@ export default {
     clickOutsideToClose: {
       type: Boolean,
       default: true
+    },
+    acceptLabel: {
+      type: String,
+      default: 'Accept'
+    },
+    rejectLabel: {
+      type: String,
+      default: 'Cancel'
     }
   },
   computed: {

@@ -21,6 +21,16 @@
       "description": "Title of the Confirm Dialog"
     },
     {
+      "name": "acceptLabel",
+      "type": "String",
+      "description": "Label for Accept Button"
+    },
+    {
+      "name": "rejectLabel",
+      "type": "String",
+      "description": "Label for Reject Button"
+    },
+    {
       "name": "clickOutsideToCloase",
       "type": "Boolean",
       "description": "If this property is false, it is impossible to close the modal by clicking outside, default is true"

@@ -19,6 +19,11 @@
       "name": "bgColor",
       "type": "String",
       "description": "Background color of the Stepper"
+    },
+    {
+      "name": "iconColor",
+      "type": "String",
+      "description": "Set icon color of Collapser component on header"
     }
   ],
   "events": [

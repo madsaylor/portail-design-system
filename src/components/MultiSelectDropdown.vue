@@ -177,8 +177,9 @@
       this.inputSelectValue = this.calcInputSelectValue(this.multiSelectValue)
     },
     watch: {
-      value() {
+      value(val) {
         this.$emit('validation', this.validation)
+        this.inputSelectValue = this.calcInputSelectValue(val)
       }
     }
   }

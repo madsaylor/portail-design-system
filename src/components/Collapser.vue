@@ -19,7 +19,7 @@
       >
         <div class="ds-title" :style="{textAlign: titleAlignment}">{{label}}</div>
         <div class="ds-icon-wrapper">
-          <Icon color="#3F4352" :source="opened ? 'expand_less' : 'expand_more'"></Icon>
+          <Icon :color="iconColor" :source="opened ? 'expand_less' : 'expand_more'"></Icon>
         </div>
       </div>
       <div class="ds-collapser-body" :style="{backgroundColor: bgColor}" v-show="opened">
@@ -44,6 +44,10 @@
           bgColor: {
             type: String,
             default: '#ffffff'
+          },
+          iconColor: {
+            type: String,
+            default: '#3F4352'
           }
       },
       methods: {

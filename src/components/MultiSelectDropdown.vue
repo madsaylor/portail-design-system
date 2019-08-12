@@ -47,6 +47,7 @@
 </template>
 
 <script>
+  import { isEqual } from 'lodash'
   import Dropdown from './Dropdown'
   import Icon from './Icon'
 
@@ -91,7 +92,7 @@
 
           this.options.forEach((option) => {
             if (option.deselectAll) {
-              deselectIndex = value.findIndex((val) => val === (this.idMode ? option.id : option.value))
+              deselectIndex = value.findIndex((val) => isEqual(val, option))
             }
           })
 

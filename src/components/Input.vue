@@ -235,6 +235,7 @@
 </template>
 
 <script>
+import { cloneDeep } from 'lodash'
 import Datepicker from './Datepicker'
 import Dropdown from './Dropdown'
 import Icon from './Icon'
@@ -600,6 +601,7 @@ export default {
       return option
     },
     setValidity(field, value) {
+      const orgValidators = cloneDeep(this.validators)
       this.validators = this.validators.map(validator => {
         if (validator.name === field) {
           validator.validator = () => value
@@ -607,6 +609,7 @@ export default {
         return validator
       })
       this.$emit('validation', this.validation)
+      this.validators = cloneDeep(orgValidators)
     }
   },
   watch: {

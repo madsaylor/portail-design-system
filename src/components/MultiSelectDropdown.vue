@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import { isEqual } from 'lodash'
+  import { isEqual, cloneDeep } from 'lodash'
   import Dropdown from './Dropdown'
   import Icon from './Icon'
 
@@ -162,6 +162,7 @@
         }
       },
       setValidity(field, value) {
+        const orgValidators = cloneDeep(this.validators)
         this.validators = this.validators.map(validator => {
           if (validator.name === field) {
             validator.validator = () => value
@@ -169,6 +170,7 @@
           return validator
         })
         this.$emit('validation', this.validation)
+        this.validators = cloneDeep(orgValidators)
       }
     },
     mounted() {

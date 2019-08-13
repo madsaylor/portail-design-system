@@ -68,11 +68,12 @@
       box-shadow: @card-shadow;
       margin-bottom: @collapser-margin-bottom;
       cursor: pointer;
+      box-shadow: 0 1px 1px 0 rgba(91,99,156,0.26);
 
       .ds-collapser-header {
         display: flex;
         width: 100%;
-        height: 40px;
+        height: 56px;
         align-items: center;
 
         background-color: white;
@@ -88,6 +89,11 @@
           padding-left: 15px;
           padding-right: 15px;
           display: block;
+          height: 24px;
+          line-height: 24px;
+          font-size: 16px;
+          font-family: Lato;
+          font-weight: 500;
         }
 
         .ds-icon-wrapper {

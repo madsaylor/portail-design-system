@@ -53,21 +53,16 @@
       box-shadow: inset 0 -1px 0 0 @color-gray-300;
 
       .ds-collapser-header {
-        height: 56px;
-
         & > div {
           justify-content: left;
         }
 
         .ds-title {
-          height: 24px;
-          font-family: Lato;
-          font-size: 18px;
-          line-height: 24px;
           flex: none;
           text-transform: none;
           letter-spacing: normal;
           font-weight: normal;
+          font-size: 18px;
           margin-left: 12px;
         }
 

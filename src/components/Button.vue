@@ -35,6 +35,7 @@
           :class="{'ds-icon-left': hasLabel}"
           :source="icon"
           :size="computedIconSize"
+          :color="iconColor"
         />
         <slot></slot>
         <Icon
@@ -42,6 +43,7 @@
           v-if="iconRight"
           :source="iconRight"
           :size="computedIconSize"
+          :color="iconColor"
         />
       </a>
     </template>
@@ -58,6 +60,7 @@
           :class="{'ds-icon-left': hasLabel}"
           :source="icon"
           :size="computedIconSize"
+          :color="iconColor"
         />
         <slot></slot>
         <Icon
@@ -65,6 +68,7 @@
           v-if="iconRight"
           :source="iconRight"
           :size="computedIconSize"
+          :color="iconColor"
         />
       </button>
     </template>
@@ -87,6 +91,7 @@ export default {
     disabled: Boolean,
     icon: String,
     iconRight: String,
+    iconColor: String,
     link: String,
     target: String,
     mobileBottom: Boolean,

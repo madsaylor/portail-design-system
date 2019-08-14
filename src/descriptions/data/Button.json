@@ -49,6 +49,11 @@
       "name": "mobile-bottom",
       "type": "Boolean",
       "description": "Show Button at the bottom with full width on mobile devices"
+    },
+    {
+      "name": "iconColor",
+      "type": "String",
+      "description": "Set icon color"
     }
   ],
   "events": []

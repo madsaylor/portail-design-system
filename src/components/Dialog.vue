@@ -97,7 +97,7 @@
       window.addEventListener('resize', this.onResize)
       document.addEventListener('keydown', this.escapePress)
       document.addEventListener('keydown', this.tabPress, true)
-      document.addEventListener('touchmove', this.touchMove, { passive: false })
+      // document.addEventListener('touchmove', this.touchMove, { passive: false })
     },
 
     directives: {

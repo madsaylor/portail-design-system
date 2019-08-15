@@ -126,6 +126,8 @@
       <input
         v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
         v-bind="inputAttrs"
+        :[checkMaxLength]="maxlength"
+        :[checkPasswordType]="type"
         :class="{
           'ds-has-icon': icon_,
           'ds-error': inputErrors.length && touched && showErrors,
@@ -277,7 +279,7 @@ export default {
     type: {
       type: String,
       validator(value) {
-        return ['text', 'date', 'select', 'checkbox', 'radio'].indexOf(value) !== -1
+        return ['text', 'date', 'select', 'checkbox', 'radio', 'password'].indexOf(value) !== -1
       },
       default: 'text'
     },
@@ -292,6 +294,9 @@ export default {
       type: Boolean,
       default: true
     },
+    maxlength: Number,
+    pattern: RegExp,
+    confirmModel: null,
 
     // For type="radio"
     radioVal: String,
@@ -404,7 +409,7 @@ export default {
       for (var i = 0; i < this.validators.length; i++) {
         data.push([
           this.validators[i].name,
-          this.validators[i].validator(this.inputValue),
+          this.validators[i].validator(this.inputValue, this.confirmModel),
         ])
       }
       return data
@@ -512,6 +517,12 @@ export default {
     checkSetClickEvent() {
       return this.getType === 'ds-checkbox' ? null : 'click'
     },
+    checkMaxLength() {
+      return (this.getType === 'ds-text' || this.getType === 'ds-password') && this.maxlength ? 'maxlength' : null
+    },
+    checkPasswordType() {
+      return this.getType === 'ds-password' ? this.type : null
+    },
     getStyle() {
       const style = {}
       const padding = parseInt(this.iconSize) + 6
@@ -577,6 +588,13 @@ export default {
       this.timeoutId = setTimeout(() => {
         this.$emit('lastKeyDownDelay')
       }, 300)
+    },
+    checkPattern() {
+      setTimeout(() => {
+        if (this.pattern && this.inputValue) {
+          this.inputValue = this.inputValue.replace(this.pattern, '')
+        }
+      }, 100)
     },
     setOverflow(mobileMode) {
       if (this.datepickerVisible) {
@@ -674,7 +692,7 @@ export default {
     }
   }
 
-  &.ds-text, &.ds-date, &.ds-select {
+  &.ds-text, &.ds-date, &.ds-select, &.ds-password {
     .ds-label-text {
       .font-desktop-x-small-regular-gray();
       height: 16px;

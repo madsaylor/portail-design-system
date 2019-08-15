@@ -11,7 +11,7 @@ export default {
       return (locales[_.get(window, `dsLang`, 'fr')] || locales['fr'])[value]
     }
 
-    Vue.filter('dsTranslate', (value) => Vue.$_dsLocale(value))
+    Vue.filter('dsTranslate', (value) => Vue.$_dsLocale(value) || value)
 
     Vue.mixin({
       methods: {

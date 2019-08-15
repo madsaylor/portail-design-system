@@ -18,8 +18,8 @@
       </div>
 
       <div class="ds-confirm-footer">
-        <Button @click="updateOpenStatus(false)" alt>{{ rejectLabel }}</Button>
-        <Button @click="acceptStatus">{{ acceptLabel }}</Button>
+        <Button @click="updateOpenStatus(false)" alt>{{ rejectLabel | dsTranslate }}</Button>
+        <Button @click="acceptStatus">{{ acceptLabel | dsTranslate }}</Button>
       </div>
     </div>
   </Dialog>

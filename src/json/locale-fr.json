@@ -5,5 +5,7 @@
   "Can input less characters (2/2)": " caractères",
   "Total size less": "La taille totale doit être inférieure à ",
   "MB": "MB",
-  "Total file count less": "Le nombre total de fichiers doit être inférieur à "
+  "Total file count less": "Le nombre total de fichiers doit être inférieur à ",
+  "Accept": "accepté",
+  "Cancel": "annuler"
 }

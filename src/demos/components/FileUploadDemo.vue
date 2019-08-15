@@ -18,6 +18,7 @@
         :validators="validators"
         @addfile="addfile"
         @removefile="removefile"
+        :multiple="false"
       />
     </div>
 

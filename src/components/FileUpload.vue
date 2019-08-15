@@ -73,6 +73,10 @@ export default {
     showErrors: {
       type: Boolean,
       default: true
+    },
+    multiple: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -168,7 +172,12 @@ export default {
     }
   },
   watch: {
-    files() {
+    files(value) {
+      if (!this.multiple && value.length > 0) {
+        document.getElementsByClassName('dz-hidden-input')[0].setAttribute('disabled', '')
+      } else {
+        document.getElementsByClassName('dz-hidden-input')[0].removeAttribute('disabled')
+      }
       this.$emit('validation', this.validation)
     }
   }

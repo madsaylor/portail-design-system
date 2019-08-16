@@ -30,7 +30,8 @@
 -->
 
 <template>
-  <div class="ds-menu-wrapper">
+  <div class="ds-menu-wrapper" :style="stylesWrapper">
+    <slot name="header"></slot>
     <template v-for="(item, index) in items">
       <a
         :class="['ds-item-container', {
@@ -53,6 +54,9 @@
         </div>
       </a>
     </template>
+    <div class="ds-menu-footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -68,12 +72,22 @@ export default {
     items: {
       type: Array,
       required: true
-    }
+    },
+    width: String,
+    height: String
   },
   methods: {
     itemClick(item, index) {
       if (item.disabled) return
       this.$emit('item:click', item, index)
+    }
+  },
+  computed: {
+    stylesWrapper() {
+      return {
+        width: this.width,
+        height: this.height
+      }
     }
   }
 }
@@ -119,6 +133,13 @@ export default {
       .ds-title {
         margin-left: @app-menu-spacing;
       }
+    }
+  }
+
+  .ds-menu-footer {
+    > * {
+      position: absolute;
+      bottom: 0;
     }
   }
 }

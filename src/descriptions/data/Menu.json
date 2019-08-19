@@ -4,6 +4,36 @@
       "name": "items",
       "type": "Array",
       "description": "Array<Object>, required. Items to display on the Menu."
+    },
+    {
+      "name": "width",
+      "type": "String",
+      "description": "Set width of menu component"
+    },
+    {
+      "name": "height",
+      "type": "String",
+      "description": "Set height of menu component"
+    },
+    {
+      "name": "title",
+      "type": "String",
+      "description": "Set title of menu component"
+    },
+    {
+      "name": "opened",
+      "type": "Boolean",
+      "description": "Set variable for close menu on icon close"
+    },
+    {
+      "name": "menuSelectMode",
+      "type": "Boolean",
+      "description": "Set mode in that items will be scrollable"
+    },
+    {
+      "name": "searchMode",
+      "type": "Boolean",
+      "description": "Set search mode in that items won't be scrollable, will displaying only 4 items and available search by items title field"
     }
   ],
   "events": []

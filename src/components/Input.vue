@@ -121,7 +121,7 @@
           {{ label }}
       </div>
 
-      <Icon :size="iconSize" v-if="iconLeft" :color="iconColor" :source="iconLeft" class="ds-icon-left"/>
+      <Icon :size="iconSize" v-if="iconLeft" :color="iconColor" :source="iconLeft" class="ds-icon-left" :padding="iconPadding"/>
 
       <input
         v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
@@ -174,7 +174,7 @@
 
       <div v-if="getType === 'ds-select' && !inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
 
-      <Icon :size="iconSize" v-if="icon_" :color="iconColor" :source="icon_" />
+      <Icon :size="iconSize" v-if="icon_" :color="iconColor" :source="icon_" :padding="iconPadding"/>
 
       <div class="ds-drawer">
         <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
@@ -268,6 +268,7 @@ export default {
       type: String,
       default: 'gray-400'
     },
+    iconPadding: String,
     label: String,
     lang: String,
     lg: Boolean,

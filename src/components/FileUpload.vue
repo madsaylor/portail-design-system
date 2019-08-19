@@ -19,7 +19,7 @@
 
 <template>
   <div class="ds-upload-wrapper">
-    <vue-dropzone :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
+    <vue-dropzone v-if="multiple" :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
       <div v-if="files.length === 0 || !preview " class="ds-dropzone-custom-content">
         <div class="ds-icon-wrapper">
           <Icon
@@ -35,7 +35,30 @@
       </div>
 
       <div v-else class="ds-selected-files-wrapper">
-        <div v-for="(file, index) in files" :key="index" class="ds-file-wrapper">
+        <div v-for="(f, index) in files" :key="index" class="ds-file-wrapper">
+          <img width="100" height="100" :src="f.dataURL" />
+          <Icon source="close" color="#ddd" size="24px" @click.native="removeFile(f)" />
+        </div>
+      </div>
+    </vue-dropzone>
+
+    <vue-dropzone v-else :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
+      <div v-if="!file || !preview " class="ds-dropzone-custom-content">
+        <div class="ds-icon-wrapper">
+          <Icon
+            v-if="icon"
+            :source="icon"
+            :size="iconSize"
+          />
+        </div>
+
+        <div class="ds-title">
+          {{title}}
+        </div>
+      </div>
+
+      <div v-else class="ds-selected-files-wrapper">
+        <div class="ds-file-wrapper">
           <img width="100" height="100" :src="file.dataURL" />
           <Icon source="close" color="#ddd" size="24px" @click.native="removeFile(file)" />
         </div>
@@ -64,7 +87,10 @@ export default {
     icon: String,
     iconSize: String,
     title: String,
-    files: Array,
+    files: {
+      type: Array,
+      default: () => []
+    },
     validators: Array,
     preview: {
       type: Boolean,
@@ -103,6 +129,9 @@ export default {
           }
 
           setTimeout(() => {
+            if (!this.multiple) {
+              this.file = file
+            }
             this.$emit('addfile', file)
           }, 300)
         },
@@ -111,11 +140,15 @@ export default {
         acceptedFiles: "image/*"
       },
       touched: false,
-      errors: []
+      errors: [],
+      file: null
     }
   },
   methods: {
     removeFile(file) {
+      if (!this.multiple) {
+        this.file = null
+      }
       this.$emit('removefile', file)
     },
     fileTypeCheck(file) {
@@ -148,10 +181,18 @@ export default {
 
       let data = []
       for (var i = 0; i < this.validators.length; i++) {
-        data.push([
-          this.validators[i].name,
-          this.validators[i].validator(this.files)
-        ])
+        if (!this.multiple) {
+          data.push([
+            this.validators[i].name,
+            this.validators[i].validator(this.file)
+          ])
+        } else {
+          data.push([
+            this.validators[i].name,
+            this.validators[i].validator(this.files)
+          ])
+        }
+        
       }
       return data
     },
@@ -172,12 +213,7 @@ export default {
     }
   },
   watch: {
-    files(value) {
-      if (!this.multiple && value.length > 0) {
-        document.getElementsByClassName('dz-hidden-input')[0].setAttribute('disabled', '')
-      } else {
-        document.getElementsByClassName('dz-hidden-input')[0].removeAttribute('disabled')
-      }
+    files() {
       this.$emit('validation', this.validation)
     }
   }

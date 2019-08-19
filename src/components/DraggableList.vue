@@ -2,11 +2,7 @@
   <draggable v-model="draggableList" :group="group" @start="drag=true" @end="drag=false">
     <div class="ds-draggable-item" v-for="(element, index) in list" :key="index">
       <Icon menu />
-      <span class="ds-title">{{ element.name }}</span>
-      <span>{{ element.quantity || '' }}</span>
-      <span>{{ element.price || '' }}</span>
-      <span>{{ element.percentage || '' }}</span>
-      <span>{{ element.total || '' }}</span>
+      <span v-for="(key, index) in Object.keys(element)" :key="index">{{ element[key] || ''}}</span>
     </div>
   </draggable>
 </template>

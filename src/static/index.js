@@ -35,7 +35,7 @@ import ComponentsData from './data/demo/ComponentsData'
 import GridData from './data/demo/GridData'
 import IconsData from './data/demo/IconsData'
 import TextData from './data/demo/TextData'
-import DragAndDropData from './data/demo/DragAndDropData'
+import DraggableListData from './data/demo/DraggableListData'
 import MultiSelectDropdownData from './data/demo/MultiSelectDropdownData'
 
 export {
@@ -76,6 +76,6 @@ export {
   GridData,
   IconsData,
   TextData,
-  DragAndDropData,
+  DraggableListData,
   MultiSelectDropdownData
 }

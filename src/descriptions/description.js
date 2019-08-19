@@ -27,7 +27,7 @@ import Accordion from './data/Accordion';
 import Table from './data/Table';
 import Collapser from './data/Collapser';
 import Loader from './data/Loader';
-import DragAndDrop from './data/DragAndDrop';
+import DraggableList from './data/DraggableList';
 import MultiSelectDropdown from './data/MultiSelectDropdown';
 
 export default {
@@ -60,6 +60,6 @@ export default {
   Table,
   Collapser,
   Loader,
-  DragAndDrop,
+  DraggableList,
   MultiSelectDropdown
 }

@@ -54,6 +54,11 @@
       "name": "iconColor",
       "type": "String",
       "description": "Set icon color"
+    },
+    {
+      "name": "iconSize",
+      "type": "String",
+      "description": "Set icon size"
     }
   ],
   "events": []

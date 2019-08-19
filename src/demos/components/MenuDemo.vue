@@ -22,46 +22,47 @@
       />
     </Dropdown>
 
-    <Dropdown
-      :target="$refs.menuSelect"
-      :opened.sync="dropdownOpenedMenuSelect"
-      :position="positionMenuSelect"
-    >
+    <Dialog :opened.sync="dropdownOpenedMenuSelect">
       <Menu
-        :items="items"
+        searchMode
+        menuSelectMode
+        :title="title"
+        :items="menuSelectItems"
         @item:click="menuClick"
+        :opened.sync="dropdownOpenedMenuSelect"
         width="320px"
-        height="380px"
+        height="360px"
       >
-        <template #header>
-          <div class="ds-header-content">
-            <span class="ds-header-title">Select your item</span>
-            <Icon class="ds-header-icon" close color="gray-400"></Icon>
-          </div>
-        </template>
         <template #footer>
-          <div class="ds-footer-content">
-            <Icon class="ds-footer-icon" add color="primary"></Icon>
-            <span class="ds-footer-text">Add new product / service</span>
+          <div class="ds-footer-content-menu">
+            <Button icon="add"
+                    class="ds-footer-button-menu"
+                    plain-two
+                    icon-color="primary"
+                    icon-size="24px"
+                    @click="addNewItem">
+
+              ADD NEW PRODUCT / SERVICE
+            </Button>
           </div>
         </template>
       </Menu>
-    </Dropdown>
+    </Dialog>
   </div>
 </template>
 
 <script>
 import Button from '../../components/Button.vue'
 import Dropdown from '../../components/Dropdown.vue'
+import Dialog from '../../components/Dialog.vue'
 import Menu from '../../components/Menu.vue'
-import Icon from '../../components/Icon.vue'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
 import {MenuData} from '../../static/index'
 
 export default {
   name: 'MenuDemo',
-  components: { Button, Dropdown, Menu, Description, Collapser, Icon},
+  components: { Button, Dropdown, Menu, Description, Collapser, Dialog},
   data: () => ({
     openUsage: true,
     usage: MenuData.usage,
@@ -73,61 +74,28 @@ export default {
       { title: 'Parameters du compte', icon: 'send', disabled: true },
       { title: 'Se deconnecter', icon: 'search' }
     ],
+    title: 'Select your item',
     menuSelectItems: [
-
+      { title: 'Item name 1 abcd', disabled: true },
+      { title: 'Item name 2 abb'},
+      { title: 'Item name 3 aaa'},
+      { title: 'Item name 4 ccd'},
+      { title: 'Item name 5 ddd'},
+      { title: 'Item name 6 ggg'}
     ]
   }),
   methods: {
     menuClick() {
       this.dropdownOpenedMenu = false
+    },
+    addNewItem() {
+      this.$emit('addNewItem');
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-  @import '../../styles/vars';
-
-  .ds-header-content {
-    display: flex;
-    justify-content: space-between;
-    height: 56px;
-    background-color: #f2f4f7;
-    box-shadow: inset 0 -1px 0 0 @color-gray-300;
-
-    .ds-header-title {
-      height: 24px;
-      color: @color-dark;
-      font-family: Asap;
-      font-size: 18px;
-      line-height: 24px;
-      margin: 16px 0 16px 16px;
-    }
-
-    .ds-header-icon {
-      margin: 16px 16px 16px 0;
-    }
-  }
-
-  .ds-footer-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 48px;
-    width: 100%;
-    background-color: #f2f4f7;
-    box-shadow: inset 0 1px 0 0 @color-gray-300;
-
-    .ds-footer-icon {
-      margin-right: 5px;
-    }
-
-    .ds-footer-text {
-      font-size: 18px;
-      color: @color-primary;
-    }
-  }
-
   .ds-demo-menu-btn {
     margin-right: 15px;
   }

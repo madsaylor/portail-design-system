@@ -92,6 +92,7 @@ export default {
     icon: String,
     iconRight: String,
     iconColor: String,
+    iconSize: String,
     link: String,
     target: String,
     mobileBottom: Boolean,
@@ -106,7 +107,8 @@ export default {
       return !!this.$slots.default
     },
     computedIconSize() {
-      if (this.big) return '28px'
+      if (this.iconSize) return this.iconSize
+      else if (this.big) return '28px'
       else if (this.small || this.plainTwo) return '16px'
       return '24px'
     }
@@ -174,13 +176,10 @@ export default {
     fill: @color-dark;
     margin: -4px;
   }
-  .ds-icon-left {
+  .ds-icon-left, .ds-icon-right {
     margin-left: -10px;
     margin-right: 5px;
-  }
-  .ds-icon-right {
-    margin-right: -10px;
-    margin-left: 5px;
+    vertical-align: middle;
   }
 
   &.ds-button-primary {
@@ -261,4 +260,12 @@ export default {
     border: 0;
   }
 }
+
+.ds-footer-button-menu {
+  .ds-button {
+    color: @color-primary;
+    padding: 0;
+  }
+}
+
 </style>

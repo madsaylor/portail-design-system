@@ -76,12 +76,12 @@ export default {
     ],
     title: 'Select your item',
     menuSelectItems: [
-      { title: 'Item name 1 abcd', disabled: true },
-      { title: 'Item name 2 abb'},
-      { title: 'Item name 3 aaa'},
-      { title: 'Item name 4 ccd'},
-      { title: 'Item name 5 ddd'},
-      { title: 'Item name 6 ggg'}
+      { title: 'Item name 1 apple', disabled: true },
+      { title: 'Item name 2 banana'},
+      { title: 'Item name 3 coco'},
+      { title: 'Item name 4 pineapple'},
+      { title: 'Item name 5 mango'},
+      { title: 'Item name 6 grapefruit'}
     ]
   }),
   methods: {

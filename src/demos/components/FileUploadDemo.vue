@@ -13,7 +13,6 @@
         icon="cloud_upload"
         iconSize="32px"
         title="Add your logo"
-        :files="files"
         :preview="true"
         :validators="validators"
         @addfile="addfile"
@@ -43,7 +42,7 @@ export default {
       {
         name: 'required',
         message: 'File is required',
-        validator: files => files.length > 0
+        validator: value => Array.isArray(value) ? value.length > 0 : value
       }
     ]
   }),

@@ -229,12 +229,20 @@
         v-model="currencyValue"
       />
 
-      <Input v-model="cvvValue"
+      <Input sm
+             v-model="cvvValue"
+             type="number"
              :maxlength="3"
              placeholder="xxx"
-             :pattern="cvvPattern"
              label="CVV"
              help="This is an explanation of what the field is used for."/>
+
+
+      <Input v-model="cardNumber"
+             type="payment-card"
+             :maxlength="19"
+             label="Card number"/>
+
       <br/>
 
       <Input v-model="password"
@@ -326,8 +334,7 @@ export default {
     },
     datepickerFullWidth: true,
     cvvValue: null,
-    cvvPattern: /[^0-9]+/g,
-
+    cardNumber: null,
     password: undefined,
     confirmPassword: undefined,
     passwordShowErrors: {

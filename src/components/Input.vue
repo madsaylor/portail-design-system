@@ -142,6 +142,7 @@
         @focus.prevent="inputFocus"
         @[checkSetClickEvent].prevent="inputFocus"
         @blur="inputBlur"
+        @keypress="onKeyPress"
         @keydown="onKeyDown"
         @mousedown="onInputPrevent($event)"
       />
@@ -280,7 +281,7 @@ export default {
     type: {
       type: String,
       validator(value) {
-        return ['text', 'date', 'select', 'checkbox', 'radio', 'password'].indexOf(value) !== -1
+        return ['text', 'date', 'select', 'checkbox', 'radio', 'password', 'number', 'payment-card'].indexOf(value) !== -1
       },
       default: 'text'
     },
@@ -356,6 +357,14 @@ export default {
       this.overflowCheckStatus = false;
     }
 
+    if (this.value) {
+      if (this.type === 'number') {
+        this.setValueNumber()
+      } else if (this.type === 'payment-card') {
+        this.setValueNumberWhitespace()
+      }
+    }
+
     if (this.datePositionChangeable) {
       this.positions = this.datepickerPosition.split(' ')
       window.addEventListener('resize', this.onResize)
@@ -370,7 +379,7 @@ export default {
   computed: {
     inputAttrs() {
       return {
-        type: this.type === 'date' ? 'text' : this.type,
+        type: this.type === 'date' || this.type === 'number' ? 'text' : this.type,
         placeholder: this.placeholder,
         disabled: this.disabled,
         readonly: this.getType === 'ds-date',
@@ -519,7 +528,7 @@ export default {
       return this.getType === 'ds-checkbox' ? null : 'click'
     },
     checkMaxLength() {
-      return (this.getType === 'ds-text' || this.getType === 'ds-password') && this.maxlength ? 'maxlength' : null
+      return (this.type === 'text' || this.type === 'password' || this.type === 'number' || this.type === 'payment-card') && this.maxlength ? 'maxlength' : null
     },
     checkPasswordType() {
       return this.getType === 'ds-password' ? this.type : null
@@ -581,6 +590,17 @@ export default {
     onResize() {
       this.windowWidth = window.innerWidth
     },
+    onKeyPress(event) {
+      event = event ? event : window.event
+      let charCode = event.which ? event.which : event.keyCode
+
+      if ((this.type === 'payment-card' && charCode > 32 || this.type === 'number' && charCode > 31) &&
+          (charCode < 48 || charCode > 57)) {
+        event.preventDefault()
+      } else {
+        return true
+      }
+    },
     onKeyDown() {
       if (this.timeoutId) {
         clearTimeout(this.timeoutId)
@@ -589,13 +609,6 @@ export default {
       this.timeoutId = setTimeout(() => {
         this.$emit('lastKeyDownDelay')
       }, 300)
-    },
-    checkPattern() {
-      setTimeout(() => {
-        if (this.pattern && this.inputValue) {
-          this.inputValue = this.inputValue.replace(this.pattern, '')
-        }
-      }, 100)
     },
     setOverflow(mobileMode) {
       if (this.datepickerVisible) {
@@ -629,6 +642,12 @@ export default {
       })
       this.$emit('validation', this.validation)
       this.validators = cloneDeep(orgValidators)
+    },
+    setValueNumber() {
+      this.inputValue = this.inputValue.replace(/[^0-9]+/g, '').slice(0, this.maxlength)
+    },
+    setValueNumberWhitespace() {
+      this.inputValue = this.inputValue.replace(/[^0-9 ]+/g, '').slice(0, this.maxlength)
     }
   },
   watch: {
@@ -693,7 +712,7 @@ export default {
     }
   }
 
-  &.ds-text, &.ds-date, &.ds-select, &.ds-password {
+  &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-payment-card {
     .ds-label-text {
       .font-desktop-x-small-regular-gray();
       height: 16px;

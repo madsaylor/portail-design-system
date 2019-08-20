@@ -23,6 +23,11 @@
       ]
     },
     {
+      "name": "value",
+      "type": "null",
+      "description": "Binds File value property to input (2 way binding)"
+    },
+    {
       "name": "icon",
       "type": "String",
       "description": "Show Icon on the drop panel"
@@ -59,14 +64,6 @@
     }
   ],
   "events": [
-    {
-      "name": "addfile",
-      "description": "Return the file to add"
-    },
-    {
-      "name": "removefile",
-      "description": "Return the file to remove"
-    },
     {
       "name": "validation",
       "description": "Emitted when input value changed with it's status"

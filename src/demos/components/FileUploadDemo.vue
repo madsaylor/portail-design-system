@@ -8,15 +8,29 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
+    <div>Multi File Upload</div>
     <div>
       <FileUpload
+        v-model="file"
         icon="cloud_upload"
         iconSize="32px"
         title="Add your logo"
         :preview="true"
         :validators="validators"
-        @addfile="addfile"
-        @removefile="removefile"
+        :multiple="true"
+      />
+    </div>
+    <br />
+
+    <div>Single File Upload</div>
+    <div>
+      <FileUpload
+        v-model="singleFile"
+        icon="cloud_upload"
+        iconSize="32px"
+        title="Add your logo"
+        :preview="true"
+        :validators="validators"
         :multiple="false"
       />
     </div>
@@ -36,7 +50,8 @@ export default {
   data: () => ({
     openUsage: true,
     usage: FileUploadData.usage,
-    files: [],
+    file: [],
+    singleFile: null,
     invalidMessage: '',
     validators: [
       {
@@ -45,14 +60,6 @@ export default {
         validator: value => Array.isArray(value) ? value.length > 0 : value
       }
     ]
-  }),
-  methods: {
-    addfile(file) {
-      this.files = [...this.files, file]
-    },
-    removefile(file) {
-      this.files = this.files.filter(f => f.lastModified !== file.lastModified || f.name !== file.name)
-    }
-  }
+  })
 }
 </script>

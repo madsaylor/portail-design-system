@@ -228,6 +228,40 @@
         placeholder="Input Currency"
         v-model="currencyValue"
       />
+
+      <Input sm
+             v-model="cvvValue"
+             type="number"
+             :maxlength="3"
+             placeholder="xxx"
+             label="CVV"
+             help="This is an explanation of what the field is used for."/>
+
+
+      <Input v-model="cardNumber"
+             type="payment-card"
+             :maxlength="19"
+             label="Card number"/>
+
+      <br/>
+
+      <Input v-model="password"
+             type="password"
+             :confirmModel="confirmPassword"
+             placeholder="Placeholder"
+             label="New Password"
+             :validators="passwordValidators"
+             :show-errors="passwordShowErrors.firstField"
+             @lastKeyDownDelay="onlastKeyDownDelay('firstField')"/>
+
+      <Input v-model="confirmPassword"
+             type="password"
+             :confirmModel="password"
+             placeholder="Placeholder"
+             label="Confirm the new password"
+             :validators="confirmPasswordValidators"
+             :show-errors="passwordShowErrors.secondField"
+             @lastKeyDownDelay="onlastKeyDownDelay('secondField')"/>
     </div>
   </div>
 </template>
@@ -238,6 +272,8 @@ import Button from '../../components/Button'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
 import {InputData} from '../../static/index'
+
+import _ from 'lodash'
 
 export default {
   name: "InputDemo",
@@ -276,18 +312,56 @@ export default {
         validator: () => false
       },
     ],
+    passwordValidators: [
+      {
+        name: 'match-fields-values',
+        message: `The value of field doesn't match to values related fields`,
+        validator: (value, confirmPassword) => !_.isUndefined(value) && !_.isUndefined(confirmPassword) && (value == confirmPassword)
+      }
+    ],
+    confirmPasswordValidators: [
+      {
+        name: 'match-fields-values',
+        message: `The value of field doesn't match to values related fields`,
+        validator: (value, confirmPassword) => !_.isUndefined(value) && !_.isUndefined(confirmPassword) && (value == confirmPassword)
+      }
+    ],
     borderColor: '#e6e7eb',
     datepickerBackgroundColor: '#fff',
     datepickerBackdropOpacity: '0.8',
     datepickerWrapperStyleObject: {
       alignItems: 'flex-end'
     },
-    datepickerFullWidth: true
+    datepickerFullWidth: true,
+    cvvValue: null,
+    cardNumber: null,
+    password: undefined,
+    confirmPassword: undefined,
+    passwordShowErrors: {
+      firstField: false,
+      secondField: false
+    },
+    showErrorSupport: {
+      firstField: false,
+      secondField: false
+    }
   }),
   methods: {
     validate() {
       const event = new CustomEvent("validate", {})
       document.dispatchEvent(event)
+    },
+    onlastKeyDownDelay(field) {
+      this.showErrorSupport[field] = true
+      this.checkShowErrors()
+    },
+    checkShowErrors() {
+      let {firstField, secondField} = this.showErrorSupport
+      let err = this.passwordShowErrors
+
+      if (firstField === true && secondField === true) {
+        err.firstField = err.secondField = true
+      }
     }
   }
 }

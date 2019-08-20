@@ -176,6 +176,21 @@
       "name": "iconPadding",
       "type": "String",
       "description": "Set icon padding"
+    },
+    {
+      "name": "maxlength",
+      "type": "Number",
+      "description": "Setup max count characters for Input component with type text"
+    },
+    {
+      "name": "pattern",
+      "type": "RegExp",
+      "description": "Setup regexp object with allowed characters of field"
+    },
+    {
+      "name": "confirmModel",
+      "type": "null",
+      "description": "Provided value for validation purpose like equality models of Input component and any other model"
     }
   ],
   "events": [

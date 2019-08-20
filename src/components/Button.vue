@@ -176,9 +176,16 @@ export default {
     fill: @color-dark;
     margin: -4px;
   }
-  .ds-icon-left, .ds-icon-right {
+
+  .ds-icon-left {
     margin-left: -10px;
     margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  .ds-icon-right {
+    margin-right: -10px;
+    margin-left: 5px;
     vertical-align: middle;
   }
 

@@ -1,10 +1,29 @@
 <template>
-  <draggable v-model="draggableList" :group="group" @start="drag=true" @end="drag=false">
-    <div class="ds-draggable-item" v-for="(element, index) in list" :key="index">
-      <Icon menu />
-      <span v-for="(key, index) in Object.keys(element)" :key="index">{{ element[key] || ''}}</span>
+  <div>
+    <div class="ds-draggable-header">
+      <div :style="{width: '36px'}"></div>
+      <div
+        v-for="(header, index) in headers"
+        :style="{width: header.width, textAlign: header.textDirection}"
+        :key="index"
+        :class="{'flex-grow': header.flexGrow}"
+      >{{ header.title }}</div>
     </div>
-  </draggable>
+
+    <draggable v-model="draggableList" :group="group" @start="drag=true" @end="drag=false">
+      <div class="ds-draggable-item" v-for="(element, index) in list" :key="index">
+        <Icon menu color="#BABCC2" />
+        <span
+          v-for="(header, index) in headers"
+          :key="index"
+          :style="{width: header.width, textAlign: header.textDirection}"
+          :class="{'flex-grow': header.flexGrow}"
+        >
+          {{ element[header.key] || ''}}
+        </span>
+      </div>
+    </draggable>
+  </div>
 </template>
 
 <script>
@@ -17,7 +36,8 @@ export default {
     draggable, Icon
   },
   props: {
-    list: Array
+    list: Array,
+    headers: Array
   },
   data() {
     return {
@@ -38,6 +58,20 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.ds-draggable-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  text-align: right;
+  font-size: 12px;
+  line-height: 12px;
+  color: #838795;
+
+  .flex-grow {
+    flex-grow: 1;
+  }
+}
+
 .ds-draggable-item {
   display: flex;
   justify-content: space-between;
@@ -48,9 +82,21 @@ export default {
   border: 1px solid #E6E7EB;
   border-radius: 2px;
   margin-bottom: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: right;
+  color: #3F4352;
+
+  >.ds-icon {
+    margin-right: 12px;
+  }
 
   .ds-title {
     flex-basis: 40%;
+  }
+
+  .flex-grow {
+    flex-grow: 1;
   }
 }
 </style>

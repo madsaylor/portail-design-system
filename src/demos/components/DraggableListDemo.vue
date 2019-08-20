@@ -7,7 +7,7 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <DraggableList :list="dragList" @update:list="updateDraggableLists" />
+    <DraggableList :list="dragList" :headers="headers" @update:list="updateDraggableLists" />
   </div>
 </template>
 
@@ -31,6 +31,39 @@ export default {
         { name: 'item 4', quantity: '8', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
         { name: 'item 5', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
         { name: 'item 6', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43' }
+      ],
+      headers: [
+        {
+          key: 'name',
+          title: 'Name',
+          width: '40%',
+          textDirection: 'left',
+          flexGrow: true
+        },
+        {
+          key: 'quantity',
+          title: 'Quantity',
+          width: '10%',
+          textDirection: 'right'
+        },
+        {
+          key: 'price',
+          title: 'Price',
+          width: '10%',
+          textDirection: 'right'
+        },
+        {
+          key: 'percentage',
+          title: 'Percentage',
+          width: '10%',
+          textDirection: 'right'
+        },
+        {
+          key: 'total',
+          title: 'Total',
+          width: '10%',
+          textDirection: 'right'
+        }
       ]
     })
   },

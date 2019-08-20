@@ -4,6 +4,11 @@
       "name": "list",
       "type": "Array",
       "description": "draggable items"
+    },
+    {
+      "name": "headers",
+      "type": "Array",
+      "description": "Show the columns which has the same name with the list as key value. This includes title of each columns in the list, and includes width and textDirection"
     }
   ],
   "events": [

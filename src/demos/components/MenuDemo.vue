@@ -42,7 +42,7 @@
                     icon-size="24px"
                     @click="addNewItem">
 
-              ADD NEW PRODUCT / SERVICE
+              Add new product / service
             </Button>
           </div>
         </template>

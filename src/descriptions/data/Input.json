@@ -173,6 +173,11 @@
       "description": "Setup value by true, it'll provide next functionality for select component like make a possible to get only value at model from option object, and will allow setting option object by default only by value of it's option that came from model. Checking is value by type in process of finding option object"
     },
     {
+      "name": "iconPadding",
+      "type": "String",
+      "description": "Set icon padding"
+    },
+    {
       "name": "maxlength",
       "type": "Number",
       "description": "Setup max count characters for Input component with type text"

@@ -7,20 +7,17 @@
     :icon="icon"                      - Show Icon on the drop panel
     :iconSize="iconSize"              - Size of the Icon
     :title="title"                    - Show title on the drop panel
-    :files="files"                    - Array of selected files
     :preview="preview"                - If this property is true, Show preview images, default value is true
     :showErrors="true"                - If this property is true, Show errors under the Image, default value is true
     :validators:="validators"         - Input file validation
-    @addfile                          - Return the file to add
-    @removefile                       - Return the file to remove
     @validation                       - Return validation status
   />
 -->
 
 <template>
   <div class="ds-upload-wrapper">
-    <vue-dropzone :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
-      <div v-if="files.length === 0 || !preview " class="ds-dropzone-custom-content">
+    <vue-dropzone v-if="multiple" :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
+      <div v-if="inputValue.length === 0 || !preview " class="ds-dropzone-custom-content">
         <div class="ds-icon-wrapper">
           <Icon
             v-if="icon"
@@ -35,9 +32,32 @@
       </div>
 
       <div v-else class="ds-selected-files-wrapper">
-        <div v-for="(file, index) in files" :key="index" class="ds-file-wrapper">
-          <img width="100" height="100" :src="file.dataURL" />
-          <Icon source="close" color="#ddd" size="24px" @click.native="removeFile(file)" />
+        <div v-for="(f, index) in inputValue" :key="index" class="ds-file-wrapper">
+          <img width="100" height="100" :src="f.dataURL" />
+          <Icon source="close" color="#ddd" size="24px" @click.native="removeFile(f)" />
+        </div>
+      </div>
+    </vue-dropzone>
+
+    <vue-dropzone v-else :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
+      <div v-if="!inputValue || !preview " class="ds-dropzone-custom-content">
+        <div class="ds-icon-wrapper">
+          <Icon
+            v-if="icon"
+            :source="icon"
+            :size="iconSize"
+          />
+        </div>
+
+        <div class="ds-title">
+          {{title}}
+        </div>
+      </div>
+
+      <div v-else class="ds-selected-files-wrapper">
+        <div class="ds-file-wrapper">
+          <img width="100" height="100" :src="inputValue.dataURL" />
+          <Icon source="close" color="#ddd" size="24px" @click.prevent="removeFile(inputValue)" />
         </div>
       </div>
     </vue-dropzone>
@@ -53,6 +73,7 @@
 import Icon from './Icon.vue'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import { isEqual } from 'lodash'
 
 export default {
   name: "FileUpload",
@@ -64,7 +85,7 @@ export default {
     icon: String,
     iconSize: String,
     title: String,
-    files: Array,
+    value: [Array, File],
     validators: Array,
     preview: {
       type: Boolean,
@@ -86,7 +107,7 @@ export default {
           this.touched = true
           this.errors = []
 
-          if (this.files.find(f => f.name === file.name)) {
+          if (this.multiple && this.inputValue.find(f => f.name === file.name)) {
             let message = this.dsTranslate('File selected')
 
             this.$emit('invalidfile', message)
@@ -103,7 +124,13 @@ export default {
           }
 
           setTimeout(() => {
-            this.$emit('addfile', file)
+            if (!this.multiple) {
+              this.inputValue = file
+            } else {
+              this.inputValue.push(file)
+            }
+            this.$emit('input', this.inputValue)
+            this.$emit('validation', this.validation)
           }, 300)
         },
         url: 'https://*',
@@ -111,12 +138,19 @@ export default {
         acceptedFiles: "image/*"
       },
       touched: false,
-      errors: []
+      errors: [],
+      inputValue: []
     }
   },
   methods: {
     removeFile(file) {
-      this.$emit('removefile', file)
+      if (!this.multiple) {
+        this.inputValue = null
+      } else {
+        this.inputValue = this.inputValue.filter(f => !isEqual(f, file))
+      }
+      this.$emit('input', this.inputValue)
+      this.$emit('validation', this.validation)
     },
     fileTypeCheck(file) {
       if (file.type === this.mainOptions.acceptedFiles) {
@@ -150,7 +184,7 @@ export default {
       for (var i = 0; i < this.validators.length; i++) {
         data.push([
           this.validators[i].name,
-          this.validators[i].validator(this.files)
+          this.validators[i].validator(this.inputValue)
         ])
       }
       return data
@@ -172,14 +206,13 @@ export default {
     }
   },
   watch: {
-    files(value) {
-      if (!this.multiple && value.length > 0) {
-        document.getElementsByClassName('dz-hidden-input')[0].setAttribute('disabled', '')
-      } else {
-        document.getElementsByClassName('dz-hidden-input')[0].removeAttribute('disabled')
-      }
+    value(val) {
+      this.inputValue = val
       this.$emit('validation', this.validation)
     }
+  },
+  mounted() {
+    this.inputValue = this.value
   }
 }
 </script>

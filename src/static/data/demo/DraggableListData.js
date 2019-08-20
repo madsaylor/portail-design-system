@@ -1,6 +1,7 @@
 let usage = `
-  <DragAndDrop
+  <DraggableList
     :list="dragList"
+    :headers="headers"
     @update:list="updateDraggableLists"
   />
 `

@@ -1,29 +1,29 @@
 <template>
   <div class="row-col">
-    <h3>Drag And Drop</h3>
+    <h3>DraggableList</h3>
 
-    <Description compnent-name="DragAndDrop"></Description>
+    <Description compnent-name="DraggableList"></Description>
     <Collapser :opened.sync="openUsage" label="Usage">
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <DragAndDrop :list="dragList" @update:list="updateDraggableLists" />
+    <DraggableList :list="dragList" :headers="headers" @update:list="updateDraggableLists" />
   </div>
 </template>
 
 <script>
-import DragAndDrop from '../../components/DragAndDrop'
+import DraggableList from '../../components/DraggableList'
 import Description from '../../descriptions/Description'
 import Collapser from '../../components/Collapser.vue'
-import { DragAndDropData } from '../../static/index'
+import { DraggableListData } from '../../static/index'
 
 export default {
-  name: "DragAndDropDemo",
-  components: { DragAndDrop, Description, Collapser },
+  name: "DraggableListDemo",
+  components: { DraggableList, Description, Collapser },
   data() {
     return ({
       openUsage: true,
-      usage: DragAndDropData.usage,
+      usage: DraggableListData.usage,
       dragList: [
         { name: 'item 1', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
         { name: 'item 2', quantity: '2', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
@@ -31,6 +31,39 @@ export default {
         { name: 'item 4', quantity: '8', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
         { name: 'item 5', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
         { name: 'item 6', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43' }
+      ],
+      headers: [
+        {
+          key: 'name',
+          title: 'Name',
+          width: '40%',
+          textDirection: 'left',
+          flexGrow: true
+        },
+        {
+          key: 'quantity',
+          title: 'Quantity',
+          width: '10%',
+          textDirection: 'right'
+        },
+        {
+          key: 'price',
+          title: 'Price',
+          width: '10%',
+          textDirection: 'right'
+        },
+        {
+          key: 'percentage',
+          title: 'Percentage',
+          width: '10%',
+          textDirection: 'right'
+        },
+        {
+          key: 'total',
+          title: 'Total',
+          width: '10%',
+          textDirection: 'right'
+        }
       ]
     })
   },

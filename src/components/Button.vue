@@ -272,6 +272,7 @@ export default {
   .ds-button {
     color: @color-primary;
     padding: 0;
+    text-transform: uppercase;
   }
 }
 

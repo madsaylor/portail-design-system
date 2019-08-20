@@ -24,9 +24,8 @@ Basic inputs:<br />
   :validators="demoValidators"
   v-model="textValue"
 />
-<br />
 
-Date inputs:<br />
+Date inputs:
 <Input
   sm
   type="date"
@@ -74,6 +73,37 @@ Date inputs:<br />
   radioVal="first"
   v-model="radioValue"
 />
+
+<Input sm
+       v-model="cvvValue"
+       type="number"
+       :maxlength="3"
+       placeholder="xxx"
+       label="CVV"
+       help="This is an explanation of what the field is used for."/>
+       
+<Input v-model="cardNumber"
+       type="payment-card"
+       :maxlength="19"
+       label="Card number"/>
+
+<Input v-model="password"
+       type="password"
+       :confirmModel="confirmPassword"
+       placeholder="Placeholder"
+       label="New Password"
+       :validators="passwordValidators"
+       :show-errors="passwordShowErrors.firstField"
+       @lastKeyDownDelay="onlastKeyDownDelay('firstField')"/>
+
+<Input v-model="confirmPassword"
+       type="password"
+       :confirmModel="password"
+       placeholder="Placeholder"
+       label="Confirm the new password"
+       :validators="confirmPasswordValidators"
+       :show-errors="passwordShowErrors.secondField"
+       @lastKeyDownDelay="onlastKeyDownDelay('secondField')"/>
 `.slice(1)
 
 export default {

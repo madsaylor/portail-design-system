@@ -996,6 +996,7 @@ export default {
     padding: 3px 0;
     position: absolute;
     max-width: 100%;
+    width: 100%;
   }
 
   .ds-error-message {

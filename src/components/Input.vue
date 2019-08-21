@@ -563,6 +563,7 @@ export default {
         this.datepickerVisible = !this.datepickerVisible;
         this.$refs.input.blur();
       }
+      this.$emit('inputFocus')
     },
     inputBlur() {
       if (this.slideLabel) {
@@ -574,6 +575,7 @@ export default {
       }
 
       this.touched = true;
+      this.$emit('inputBlur')
     },
     validate() {
       this.touched = true;
@@ -597,8 +599,6 @@ export default {
       if ((this.type === 'payment-card' && charCode > 32 || this.type === 'number' && charCode > 31) &&
           (charCode < 48 || charCode > 57)) {
         event.preventDefault()
-      } else {
-        return true
       }
     },
     onKeyDown() {

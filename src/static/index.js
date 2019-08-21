@@ -37,6 +37,7 @@ import IconsData from './data/demo/IconsData'
 import TextData from './data/demo/TextData'
 import DraggableListData from './data/demo/DraggableListData'
 import MultiSelectDropdownData from './data/demo/MultiSelectDropdownData'
+import AutocompleteData from './data/demo/AutocompleteData'
 
 export {
   CountriesArray,
@@ -77,5 +78,6 @@ export {
   IconsData,
   TextData,
   DraggableListData,
-  MultiSelectDropdownData
+  MultiSelectDropdownData,
+  AutocompleteData
 }

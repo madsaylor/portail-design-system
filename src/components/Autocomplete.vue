@@ -4,12 +4,13 @@
     <Input class="ds-autocomplete-input"
            slideLabel
            md
-           label="Slide label"
+           :label="label"
            v-model="inputValue"
            ref="autocomplete"
            @inputFocus="autocompleteOpened = true"
            @inputBlur="autocompleteOpened = false"
     />
+    <Icon class="ds-autocomplete-icon" close color="gray-400" @click="clear()"></Icon>
 
     <Dropdown
       :target="$refs.autocomplete"
@@ -17,7 +18,7 @@
       :position="position">
 
       <div class="ds-dropdown-content" v-if="showList">
-        <div class="ds-content" v-for="item in dataSearchListWrapper">
+        <div class="ds-content" v-for="item in dataSearchListWrapper" @click="select(item)">
           <span v-if="item.number">{{item.number}} - </span> {{item.title}}
         </div>
       </div>
@@ -29,12 +30,14 @@
 <script>
   import Input from './Input'
   import Dropdown from './Dropdown'
+  import Icon from './Icon'
 
   import _ from 'lodash'
 
   export default {
     name: 'Autocomplete',
-    comments: {Input, Dropdown},
+    components: {Icon},
+    comments: {Input, Dropdown, Icon},
     props: {
       value: String,
       type: {
@@ -46,7 +49,8 @@
       },
       dataList: {
         type: Array
-      }
+      },
+      label: String
     },
     data: () => ({
       autocompleteOpened: false,
@@ -132,21 +136,32 @@
           this.bday = this.getYears()
         }
       },
+      getDataString(value) {
+        let dataStr = ''
+
+        if (value.number) {
+          dataStr = `${value.number} - `
+        }
+
+        dataStr = dataStr + value.title
+
+        return dataStr
+      },
       searchData() {
         let searchString = this.inputValue
         searchString = searchString.toLowerCase()
 
         this.searchResults = this.dataListWrapper.filter((data) => {
-          let dataStr = ''
-
-          if (data.number) {
-            dataStr = `${data.number} - `
-          }
-
-          dataStr = dataStr + data.title
-          return ~dataStr.toString().toLowerCase().indexOf(searchString)
+          return ~this.getDataString(data).toString().toLowerCase().indexOf(searchString)
         })
+
         this.searchId = undefined
+      },
+      select(value) {
+        this.inputValue = this.getDataString(value)
+      },
+      clear() {
+        this.inputValue = ''
       }
     },
     watch: {
@@ -173,6 +188,12 @@
       /*height: 50px;*/
       /*padding-left: 20px;*/
       /*padding-right: 30px;*/
+    }
+
+    .ds-autocomplete-icon {
+      position: relative;
+      right: 30px;
+      bottom: 5px;
     }
 
     .ds-dropdown-content {

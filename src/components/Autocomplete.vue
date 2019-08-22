@@ -1,28 +1,37 @@
 <template>
   <div class="ds-autocomplete-wrapper">
-
     <Input class="ds-autocomplete-input"
            slideLabel
-           md
+           :sm="sm"
+           :md="md"
+           :lg="lg"
            :label="label"
+           :validators="validators"
            v-model="inputValue"
            ref="autocomplete"
            @inputFocus="autocompleteOpened = true"
-           @inputBlur="autocompleteOpened = false"
+           @inputBlur="onInputBlur"
+           :confirmModel="dataListWrapper"
     />
-    <Icon class="ds-autocomplete-icon" close color="gray-400" @click="clear()"></Icon>
+
+    <Icon v-if="inputValue"
+          class="ds-autocomplete-icon"
+          close
+          :color="iconColor"
+          @click="clear()">
+    </Icon>
 
     <Dropdown
       :target="$refs.autocomplete"
       :opened.sync="autocompleteOpened"
-      :position="position">
+      :position="position"
+      :transitionTime="0">
 
-      <div class="ds-dropdown-content" v-if="showList">
+      <div class="ds-dropdown-content ds-autocomplete-dropdown-content" v-if="showList">
         <div class="ds-content" v-for="item in dataSearchListWrapper" @click="select(item)">
           <span v-if="item.number">{{item.number}} - </span> {{item.title}}
         </div>
       </div>
-
     </Dropdown>
   </div>
 </template>
@@ -40,6 +49,12 @@
     comments: {Input, Dropdown, Icon},
     props: {
       value: String,
+      label: String,
+      lg: Boolean,
+      md: Boolean,
+      sm: Boolean,
+      dataList: Array,
+      validators: Array,
       type: {
         type: String,
         validator(value) {
@@ -47,10 +62,10 @@
         },
         default: 'custom'
       },
-      dataList: {
-        type: Array
-      },
-      label: String
+      iconColor: {
+        type: String,
+        default: 'gray-500'
+      }
     },
     data: () => ({
       autocompleteOpened: false,
@@ -162,6 +177,11 @@
       },
       clear() {
         this.inputValue = ''
+      },
+      onInputBlur() {
+        setTimeout(() => {
+          this.autocompleteOpened = false
+        }, 100)
       }
     },
     watch: {
@@ -177,26 +197,64 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   @import '../styles/vars';
 
   .ds-autocomplete-wrapper {
+    margin-bottom: 15px;
 
     .ds-autocomplete-input {
-      /*border: 2px solid #e2e2e2;*/
-      /*border-radius: 5px;*/
-      /*height: 50px;*/
-      /*padding-left: 20px;*/
-      /*padding-right: 30px;*/
+      .ds-slide-label {
+        top: 26px !important;
+        margin-left: 7px;
+
+        &.ds-slide-label-active {
+          top: 22px !important;
+
+          &.ds-label-error {
+            color: @color-red;
+          }
+        }
+
+        &.ds-label-error {
+          color: @color-red;
+        }
+      }
+
+      input {
+        height: 50px !important;
+        border: 2px solid #e2e2e2 !important;
+        border-radius: 5px !important;
+        padding-bottom: 2px !important;
+
+        font-size: 16px !important;
+        padding-left: 20px !important;
+        font-weight: 400 !important;
+        font-family: Roboto, sans-serif !important;
+        color: #989898 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+
+        &.ds-error {
+          color: @color-red !important;
+          border-color: @color-red !important;
+        }
+
+        &:focus {
+          color: rgba(0,0,0,0.87) !important;
+        }
+      }
     }
 
     .ds-autocomplete-icon {
       position: relative;
       right: 30px;
-      bottom: 5px;
+      bottom: 12px;
+      cursor: pointer;
     }
 
-    .ds-dropdown-content {
+    .ds-autocomplete-dropdown-content {
       display: inline-block;
       border-radius: 2px;
       box-shadow: @card-shadow;
@@ -216,6 +274,16 @@
         &:hover {
           background-color: @color-gray-200;
         }
+      }
+    }
+
+    .ds-drawer {
+      margin-top: 3px;
+    }
+
+    @media (max-width: 991px) {
+      .ds-autocomplete-input {
+        width: 100% !important;
       }
     }
   }

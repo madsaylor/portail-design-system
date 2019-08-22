@@ -116,7 +116,8 @@
       <div v-if="label"
            :id="id"
            @click="onInputPrevent($event, true)"
-           :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus, 'ds-slide-label-date': getType === 'ds-date'},
+           :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus, 'ds-slide-label-date': getType === 'ds-date',
+                    'ds-label-error': inputErrors.length && touched && showErrors},
                     slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']">
           {{ label }}
       </div>

@@ -83,10 +83,13 @@ export default {
     },
     activeDatepickerComponent: {
       type: String
+    },
+    transitionTime: {
+      type: Number,
+      default: 100
     }
   },
   data: () => ({
-    transitionTime: 100,
     contentRect: null,
     targetRect: null,
     offsetParent: null,

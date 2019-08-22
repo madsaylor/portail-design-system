@@ -7,10 +7,10 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Autocomplete type="day" v-model="chosenDay" label="Day"></Autocomplete>
-    <Autocomplete type="month" v-model="chosenMonth" label="Month"></Autocomplete>
-    <Autocomplete type="year" v-model="chosenYear" label="Year"></Autocomplete>
-    <Autocomplete v-model="chosenCustom" :data-list="dataList" label="Custom"></Autocomplete>
+    <Autocomplete type="day" v-model="chosenDay" label="Day﹡" :validators="validators"></Autocomplete>
+    <Autocomplete type="month" v-model="chosenMonth" label="Month﹡" :validators="validators"></Autocomplete>
+    <Autocomplete type="year" v-model="chosenYear" label="Year﹡" :validators="validators"></Autocomplete>
+    <Autocomplete v-model="chosenCustom" :data-list="dataList" label="Custom﹡" :validators="validators"></Autocomplete>
   </div>
 </template>
 
@@ -37,11 +37,33 @@
         {title: 'pineapple'},
         {title: 'mango'},
         {title: 'grapefruit'},
+      ],
+      validators: [
+        {
+          name: 'required',
+          message: 'The field is required',
+          validator: value => !!value
+        },
+        {
+          name: 'valid-date',
+          message: 'Please choose a valid date',
+          validator: (value, dataListWrapper) => dataListWrapper && !!dataListWrapper.find((item) => {
+            let dataStr = ''
+
+            if (item.number) {
+              dataStr = `${item.number} - `
+            }
+
+            dataStr = dataStr + item.title
+
+            return dataStr === value
+          })
+        }
       ]
     })
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 
 </style>

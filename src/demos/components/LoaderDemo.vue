@@ -15,23 +15,10 @@
         <Loader v-model="loadingFullScreen" :fullScreen="fullScreen"></Loader>
       </div>
       <div class="demo-loader-wrapper">
-        <Button class="base-btn-loader" @click="temporaryLoaderWrapper">Open dialog with loader wrapper on 5 sec</Button>
-
-        <Dialog :opened.sync="dialogWrapperOpened">
-          <div class="dialog-body-default">{{text}}</div>
-          <template #loaderWrapper>
-            <Loader v-model="loadingWrapper"></Loader>
-          </template>
-        </Dialog>
-      </div>
-      <div class="demo-loader-wrapper">
         <Button class="base-btn-loader" @click="temporaryLoader">Open dialog with loader on 5 sec</Button>
 
-        <Dialog :opened.sync="dialogOpened">
+        <Dialog :opened.sync="dialogOpened" :enableLoader="loading">
           <div class="dialog-body-default">{{text}}</div>
-          <template #loader>
-            <Loader v-model="loading"></Loader>
-          </template>
         </Dialog>
       </div>
       <div class="demo-loader-wrapper">
@@ -66,20 +53,14 @@
       openUsage: true,
       loadingFullScreen: false,
       loading: false,
-      loadingWrapper: false,
       loadingSignature: false,
       fullScreen: true,
       dialogOpened: false,
-      dialogWrapperOpened: false,
       signatureData: undefined
     }),
     methods: {
       temporaryFullScreenLoader() {
         this.loadingShow('loadingFullScreen', 5)
-      },
-      temporaryLoaderWrapper() {
-        this.dialogWrapperOpened = true
-        this.loadingShow('loadingWrapper', 5)
       },
       temporaryLoader() {
         this.dialogOpened = true

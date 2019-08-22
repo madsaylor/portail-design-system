@@ -64,6 +64,12 @@
       "name": "clickOutsideToCloase",
       "type": "Boolean",
       "description": "If this property is false, it is impossible to close the modal by clicking outside, default is true"
+    },
+    {
+      "name": "enableLoader",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Control displaying of loader component above the content of dialog component"
     }
   ],
   "events": []

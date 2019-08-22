@@ -60,11 +60,6 @@ export default {
   methods: {
     updateOpenStatus(status) {
       this.$emit('update:opened', status)
-      this.$emit('accept', false)
-    },
-    acceptStatus() {
-      this.$emit('update:opened', false)
-      this.$emit('accept', true)
     }
   }
 }

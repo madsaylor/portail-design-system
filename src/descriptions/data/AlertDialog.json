@@ -26,5 +26,10 @@
       "description": "If this property is false, it is impossible to close the modal by clicking outside, default is true"
     }
   ],
-  "events": []
+  "events": [
+    {
+      "name": "update:opened",
+      "description": "Emitted when the dialog is opened and closed with opened status"
+    }
+  ]
 }

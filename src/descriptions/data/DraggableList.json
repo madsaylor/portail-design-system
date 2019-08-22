@@ -3,12 +3,39 @@
     {
       "name": "list",
       "type": "Array",
-      "description": "draggable items"
+      "description": "Array of draggable items. Items should be an object and each items should be the same type"
     },
     {
       "name": "headers",
       "type": "Array",
-      "description": "Show the columns which has the same name with the list as key value. This includes title of each columns in the list, and includes width and textDirection"
+      "description": "Show the columns which has the same name with the list as key value. This includes title of each columns in the list, and includes width and textDirection",
+      "subProperty": [
+        {
+          "name": "key",
+          "type": "String",
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "title of the column which is shown at the top of the draggable list"
+        },
+        {
+          "name": "width",
+          "type": "String",
+          "description": "Width of the column in the list"
+        },
+        {
+          "name": "textDirection",
+          "type": "String",
+          "description": "text alignment of the column"
+        },
+        {
+          "name": "flexGrow",
+          "type": "Boolean",
+          "description": "If this value is true, row will be expanded to the remaining spaces"
+        }
+      ]
     }
   ],
   "events": [

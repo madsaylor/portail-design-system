@@ -39,19 +39,20 @@
         <div :class="['ds-dialog-wrapper', {'ds-full-width': contentFullWidth}]">
           <slot></slot>
         </div>
-        <slot name="loader"></slot>
+        <Loader v-model="enableLoader"></Loader>
       </div>
-    <slot name="loaderWrapper"></slot>
   </section>
 </template>
 
 <script>
+  import Loader from './Loader'
   import _ from 'lodash'
 
   const widthMD = 1280;
 
   export default {
     name: 'Dialog',
+    comments: {Loader},
     props: {
       opened: Boolean,
       backdropId: {
@@ -87,6 +88,10 @@
       clickOutsideToClose: {
         type: Boolean,
         default: true
+      },
+      enableLoader: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({

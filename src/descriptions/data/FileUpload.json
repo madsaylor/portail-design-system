@@ -6,11 +6,6 @@
       "description": "Upload options including the url of post",
       "subProperty": [
         {
-          "name": "url",
-          "type": "String",
-          "description": "Url of the destination server"
-        },
-        {
           "name": "acceptedFiles",
           "type": "String",
           "description": "Type of upload files, it can be separated by comman if it has multiple types"
@@ -18,14 +13,14 @@
         {
           "name": "addRemoveLinks",
           "type": "Boolean",
-          "description": "Enable remove button on the thumbnail screen"
+          "description": "Enable remove button on the thumbnail screen. Default value is true"
         }
       ]
     },
     {
       "name": "value",
-      "type": "null",
-      "description": "Binds File value property to input (2 way binding)"
+      "type": "File | File[]",
+      "description": "If multiple property is true, it will bind Array of File, and if multiple property is false, it will bind File (2 way binding)"
     },
     {
       "name": "icon",
@@ -43,11 +38,6 @@
       "description": "Show title on the drop panel"
     },
     {
-      "name": "files",
-      "type": "Array",
-      "description": "Array of selected files"
-    },
-    {
       "name": "preview",
       "type": "Boolean",
       "description": "If this property is true, Show preview images, default value is true"
@@ -55,7 +45,7 @@
     {
       "name": "showErrors",
       "type": "Boolean",
-      "description": "If this property is true, show errors under the image, else hide erros"
+      "description": "If this property is true, show errors under the image, else hide errors. Default is true"
     },
     {
       "name": "validators",

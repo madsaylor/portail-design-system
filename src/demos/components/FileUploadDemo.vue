@@ -7,32 +7,39 @@
     <Collapser :opened.sync="openUsage" label="Usage">
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
+    
+    <div class="ds-grid">
+      <div class="row">
+        <div class="col-6">
+          <div>
+            <div>Multi File Upload</div>
+            <FileUpload
+              v-model="file"
+              icon="cloud_upload"
+              iconSize="32px"
+              title="Add your logo"
+              :preview="true"
+              :validators="validators"
+              :multiple="true"
+            />
+          </div>
+        </div>
 
-    <div>Multi File Upload</div>
-    <div>
-      <FileUpload
-        v-model="file"
-        icon="cloud_upload"
-        iconSize="32px"
-        title="Add your logo"
-        :preview="true"
-        :validators="validators"
-        :multiple="true"
-      />
-    </div>
-    <br />
-
-    <div>Single File Upload</div>
-    <div>
-      <FileUpload
-        v-model="singleFile"
-        icon="cloud_upload"
-        iconSize="32px"
-        title="Add your logo"
-        :preview="true"
-        :validators="validators"
-        :multiple="false"
-      />
+        <div class="col-6">
+          <div>
+            <div>Single File Upload</div>
+            <FileUpload
+              v-model="singleFile"
+              icon="cloud_upload"
+              iconSize="32px"
+              title="Add your logo"
+              :preview="true"
+              :validators="validators"
+              :multiple="false"
+            />
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>

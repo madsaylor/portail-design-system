@@ -4,7 +4,8 @@ let usage = `
 <AlertDialog
   :opened.sync="opened"
   :borderColor="borderColor"
-  title="Dialog box title"
+  :clickOutsideToClose="false"
+  title="Alert Dialog Title"
 >
   <div slot="ds-alert-content">
     ${GeneralData.text}

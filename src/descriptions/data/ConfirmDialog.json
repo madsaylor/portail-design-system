@@ -36,5 +36,14 @@
       "description": "If this property is false, it is impossible to close the modal by clicking outside, default is true"
     }
   ],
-  "events": []
+  "events": [
+    {
+      "name": "update:opened",
+      "description": "Emitted when the dialog is opened and closed with opened status"
+    },
+    {
+      "name": "accept",
+      "description": "Emitted when user click the accept or close button with accepted status, If user click accpet, event is emitted with 'true' status. If user click the cancel button, event is emitted with 'false' status"
+    }
+  ]
 }

@@ -7,10 +7,32 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Autocomplete type="day" v-model="chosenDay" label="Day﹡" :validators="validators"></Autocomplete>
-    <Autocomplete type="month" v-model="chosenMonth" label="Month﹡" :validators="validators"></Autocomplete>
-    <Autocomplete type="year" v-model="chosenYear" label="Year﹡" :validators="validators"></Autocomplete>
-    <Autocomplete v-model="chosenCustom" :data-list="dataList" label="Custom﹡" :validators="validators"></Autocomplete>
+    <Autocomplete v-model="chosenDay"
+                  type="day"
+                  label="Day"
+                  :validators="validators"
+                  required>
+    </Autocomplete>
+
+    <Autocomplete v-model="chosenMonth"
+                  type="month"
+                  label="Month"
+                  :validators="validators"
+                  required>
+    </Autocomplete>
+
+    <Autocomplete v-model="chosenYear"
+                  type="year"
+                  label="Year"
+                  :validators="validators"
+                  required>
+    </Autocomplete>
+
+    <Autocomplete v-model="chosenCustom"
+                  :data-list="dataList"
+                  label="Custom"
+                  :validators="validators">
+    </Autocomplete>
   </div>
 </template>
 

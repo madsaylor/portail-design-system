@@ -5,13 +5,13 @@
            :sm="sm"
            :md="md"
            :lg="lg"
-           :label="label"
+           :label="getInputLabel"
            :validators="validators"
+           :confirmModel="dataListWrapper"
            v-model="inputValue"
            ref="autocomplete"
            @inputFocus="autocompleteOpened = true"
            @inputBlur="onInputBlur"
-           :confirmModel="dataListWrapper"
     />
 
     <Icon v-if="inputValue"
@@ -53,6 +53,7 @@
       lg: Boolean,
       md: Boolean,
       sm: Boolean,
+      required: Boolean,
       dataList: Array,
       validators: Array,
       type: {
@@ -75,6 +76,9 @@
       searchResults: undefined
     }),
     computed: {
+      getInputLabel() {
+        return this.required ? this.label + `*` : this.label
+      },
       dataSearchListWrapper() {
         return this.searchResults || this.dataListWrapper
       },
@@ -243,6 +247,7 @@
 
         &:focus {
           color: rgba(0,0,0,0.87) !important;
+          border: 1px solid rgba(0,0,0,0.87) !important;
         }
       }
     }

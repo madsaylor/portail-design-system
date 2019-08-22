@@ -29,6 +29,7 @@ import Collapser from './data/Collapser';
 import Loader from './data/Loader';
 import DraggableList from './data/DraggableList';
 import MultiSelectDropdown from './data/MultiSelectDropdown';
+import Autocomplete from './data/Autocomplete';
 
 export default {
   AppHeader,
@@ -61,5 +62,6 @@ export default {
   Collapser,
   Loader,
   DraggableList,
-  MultiSelectDropdown
+  MultiSelectDropdown,
+  Autocomplete
 }

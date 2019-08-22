@@ -51,6 +51,12 @@
       "name": "activeDatepickerComponent",
       "type": "String",
       "description": "Provide active datepicker component, if dropdown component is part of it ecosystem"
+    },
+    {
+      "name": "transitionTime",
+      "type": "Number",
+      "default": "100",
+      "description": "Setup transition time"
     }
   ],
   "events": []

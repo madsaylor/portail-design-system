@@ -1,0 +1,74 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "String",
+      "description": "Binds value property to input"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Set label for the input field"
+    },
+    {
+      "name": "lg",
+      "type": "Boolean",
+      "description": "Set input width large size"
+    },
+    {
+      "name": "md",
+      "type": "Boolean",
+      "description": "Set input width medium size"
+    },
+    {
+      "name": "sm",
+      "type": "Boolean",
+      "description": "Set input width small size"
+    },
+    {
+      "name": "required",
+      "type": "Boolean",
+      "description": "Added the small asterisk to the label in case if props set as true, that's mean that field is required to be fulfilled"
+    },
+    {
+      "name": "dataList",
+      "type": "Array",
+      "description": "Required for displaying data list for custom autocomplete component instance"
+    },
+    {
+      "name": "validators",
+      "type": "Array<Object>",
+      "description": "Array of validator Objects. When multiple validators fail, only one error is displayed, determined by their order in the array. Each Object should have three fields:",
+      "subProperty": [
+        {
+          "name": "name",
+          "type": "String",
+          "description": "Validator id"
+        },
+        {
+          "name": "message",
+          "type": "String",
+          "description": "Error message that shown when validation fails"
+        },
+        {
+          "name": "validator",
+          "type": "Function",
+          "description": "Function that takes input value and confirmModel as arguments and returns Boolean"
+        }
+      ]
+    },
+    {
+      "name": "type",
+      "type": "String",
+      "default": "custom",
+      "description": "Supported 4 base type like: day, month, year and custom. For day, month, year shouldn't be passed dataList because dataList is generated inside the Autocomplete component. For custom type dataList should be provided"
+    },
+    {
+      "name": "iconColor",
+      "type": "String",
+      "default": "gray-500",
+      "description": "Set the icon color"
+    }
+  ],
+  "events": []
+}

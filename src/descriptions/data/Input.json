@@ -209,6 +209,14 @@
     {
       "name": "lastKeyDownDelay",
       "description": "Run after keyDown event with delay 300 milliseconds."
+    },
+    {
+      "name": "inputFocus",
+      "description": "Triggered when the input field of Input Component will dispatch focus event"
+    },
+    {
+      "name": "inputBlur",
+      "description": "Triggered when the input field of Input Component will dispatch blur event"
     }
   ]
 }

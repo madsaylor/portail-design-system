@@ -52,7 +52,7 @@
 
   export default {
     name: 'Dialog',
-    comments: {Loader},
+    components: {Loader},
     props: {
       opened: Boolean,
       backdropId: {

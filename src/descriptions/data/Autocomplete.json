@@ -68,7 +68,22 @@
       "type": "String",
       "default": "gray-500",
       "description": "Set the icon color"
+    },
+    {
+      "name": "daysMounth",
+      "type": "Number",
+      "default": "31",
+      "description": "Set up days count. For autocomplete component with type day"
     }
   ],
-  "events": []
+  "events": [
+    {
+      "name": "validation",
+      "description": "Emitted when the input value changes and on mounted hook"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the input value changes."
+    }
+  ]
 }

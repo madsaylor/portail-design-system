@@ -11,6 +11,7 @@
                   type="day"
                   label="Day"
                   :validators="validators"
+                  :daysMounth="28"
                   required>
     </Autocomplete>
 
@@ -69,7 +70,7 @@
         {
           name: 'valid-date',
           message: 'Please choose a valid date',
-          validator: (value, dataListWrapper) => dataListWrapper && !!dataListWrapper.find((item) => {
+          validator: (value, dataListWrapper) => !!dataListWrapper && !!dataListWrapper.find((item) => {
             let dataStr = ''
 
             if (item.number) {

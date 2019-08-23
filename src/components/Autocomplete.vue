@@ -65,6 +65,10 @@
       iconColor: {
         type: String,
         default: 'gray-500'
+      },
+      daysMounth: {
+        type: Number,
+        default: 31
       }
     },
     data: () => ({
@@ -98,11 +102,26 @@
       },
       showList() {
         return this.dataListWrapper && this.dataListWrapper.length || this.dataSearchListWrapper && this.dataSearchListWrapper.length
+      },
+      validation() {
+        if (!this.validators || !this.validators.length) {
+          return []
+        }
+
+        let data = []
+        for (let i = 0; i < this.validators.length; i++) {
+          data.push([
+            this.validators[i].name,
+            this.validators[i].validator(this.inputValue, this.confirmModel),
+          ])
+        }
+        return data
       }
     },
     methods: {
-      getDaysRange(N) {
-        let days = Array.from({length: N}, (v, k) => k++)
+      getDaysRange(borderDayNumber) {
+        borderDayNumber++
+        let days = Array.from({length: borderDayNumber}, (v, k) => k++)
         days.splice(0, 1)
 
         return days.map((dayNumber) => {
@@ -147,7 +166,7 @@
       },
       checkAutocompleteData() {
         if (this.type === 'day') {
-          this.bday = this.getDaysRange(32)
+          this.bday = this.getDaysRange(this.daysMounth)
         } else if (this.type === 'month') {
           this.bday = this.getMonths()
         } else if (this.type === 'year') {
@@ -169,7 +188,7 @@
         let searchString = this.inputValue
         searchString = searchString.toLowerCase()
 
-        this.searchResults = this.dataListWrapper.filter((data) => {
+        this.searchResults = this.dataListWrapper && this.dataListWrapper.filter((data) => {
           return ~this.getDataString(data).toString().toLowerCase().indexOf(searchString)
         })
 
@@ -192,9 +211,12 @@
         if (!this.searchId) {
           this.searchId = setTimeout(() => this.searchData(), 300)
         }
+
+        this.$emit('validation', this.validation)
       }
     },
     mounted() {
+      this.$emit('validation', this.validation)
       this.checkAutocompleteData()
     }
   }
@@ -240,7 +262,7 @@
         text-overflow: ellipsis !important;
 
         &.ds-error {
-          color: @color-red !important;
+          color: rgba(0,0,0,0.87) !important;
           border-color: @color-red !important;
         }
 

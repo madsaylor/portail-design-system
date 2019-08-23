@@ -2,7 +2,7 @@
   "properties": [
     {
       "name": "value",
-      "type": "String",
+      "type": "null",
       "description": "Binds value property to input"
     },
     {

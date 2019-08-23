@@ -47,7 +47,7 @@
     name: 'Autocomplete',
     components: {Input, Dropdown, Icon},
     props: {
-      value: String,
+      value: null,
       label: String,
       lg: Boolean,
       md: Boolean,

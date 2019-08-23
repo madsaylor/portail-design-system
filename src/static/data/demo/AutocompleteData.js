@@ -3,6 +3,7 @@ let usage = `
               type="day"
               label="Day"
               :validators="validators"
+              :daysMounth="28"
               required>
 </Autocomplete>
 

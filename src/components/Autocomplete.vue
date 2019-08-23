@@ -45,8 +45,7 @@
 
   export default {
     name: 'Autocomplete',
-    components: {Icon},
-    comments: {Input, Dropdown, Icon},
+    components: {Input, Dropdown, Icon},
     props: {
       value: String,
       label: String,

@@ -22,7 +22,12 @@
     </template>
 
     <template v-else>
-      <div class="reference" v-if="!forceShow" @click="updateForceShow">
+      <div class="reference"
+        v-if="!forceShow"
+        @mouseover="mouseOver"
+        @mouseout="mouseOut"
+        @click="updateForceShow"
+      >
         <slot name="reference"></slot>
       </div>
 
@@ -41,7 +46,14 @@
           <slot name="popover"></slot>
         </div>
     
-        <div class="reference" ref="reference" slot="reference" @click="updateForceShow">
+        <div
+          class="reference"
+          ref="reference"
+          slot="reference"
+          @click="updateForceShow"
+          @mouseover="mouseOver"
+          @mouseout="mouseOut"
+        >
           <slot name="reference"></slot>
         </div>
       </Popper>
@@ -84,6 +96,12 @@ export default {
   methods: {
     updateForceShow() {
       this.$emit('update:forceShow', !this.forceShow)
+    },
+    mouseOver() {
+      this.$emit('onMouseOver')
+    },
+    mouseOut() {
+      this.$emit('onMouseOut')
     }
   },
   computed: {

@@ -22,7 +22,12 @@
     </template>
 
     <template v-else>
-      <div class="reference" v-if="!forceShow" @click="updateForceShow">
+      <div class="reference"
+        v-if="!forceShow"
+        @mouseover="mouseOver"
+        @mouseout="mouseOut"
+        @click="updateForceShow"
+      >
         <slot name="reference"></slot>
       </div>
 

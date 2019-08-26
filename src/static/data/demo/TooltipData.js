@@ -1,10 +1,16 @@
 let usage = `
-<Tooltip popoverWidth="500px">
-  <div slot="popover">
-    This is a tooltip content
-  </div>
+<Tooltip
+  popoverWidth="200px"
+  placement="left"
+  class="default-tooltip"
+  :forceShow="forceShow"
+  @update:forceShow="forceShowUpdate"
+  @onMouseOver="onMouseOver"
+  @onMouseOut="onMouseOut"
+>
+  <div slot="popover">This is a tooltip content</div>
   <div slot="reference">
-    <Button></Button>
+    <Button>Left</Button>
   </div>
 </Tooltip>
 

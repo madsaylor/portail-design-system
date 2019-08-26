@@ -30,6 +30,14 @@
     {
       "name": "update:forceshow",
       "description": "Emit event to show or hide tooltip"
+    },
+    {
+      "name": "onMouseOver",
+      "description": "Event Emitted when users move their mouses over the reference"
+    },
+    {
+      "name": "onMouseOut",
+      "description": "Event Emitted when users move their mouses out of the reference"
     }
   ]
 }

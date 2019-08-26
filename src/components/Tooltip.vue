@@ -41,7 +41,14 @@
           <slot name="popover"></slot>
         </div>
     
-        <div class="reference" ref="reference" slot="reference" @click="updateForceShow">
+        <div
+          class="reference"
+          ref="reference"
+          slot="reference"
+          @click="updateForceShow"
+          @mouseover="mouseOver"
+          @mouseout="mouseOut"
+        >
           <slot name="reference"></slot>
         </div>
       </Popper>
@@ -84,6 +91,12 @@ export default {
   methods: {
     updateForceShow() {
       this.$emit('update:forceShow', !this.forceShow)
+    },
+    mouseOver() {
+      this.$emit('onMouseOver')
+    },
+    mouseOut() {
+      this.$emit('onMouseOut')
     }
   },
   computed: {

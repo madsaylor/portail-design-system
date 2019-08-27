@@ -191,6 +191,18 @@
       "name": "confirmModel",
       "type": "null",
       "description": "Provided value for validation purpose like equality models of Input component and any other model"
+    },
+    {
+      "name": "activeIcon",
+      "type": "Boolean",
+      "default": "false",
+      "description": "When setup as true allow dispatch 'icon-click' event when click on Icon"
+    },
+    {
+      "name": "showIcon",
+      "type": "Boolean",
+      "default": "true",
+      "description": "Responsible for showing Icon"
     }
   ],
   "events": [
@@ -217,6 +229,10 @@
     {
       "name": "inputBlur",
       "description": "Triggered when the input field of Input Component will dispatch blur event"
+    },
+    {
+      "name": "icon-click",
+      "description": "Dispatch when Icon get click and activeIcon prop is true"
     }
   ]
 }

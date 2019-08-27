@@ -187,11 +187,10 @@
       },
       clear() {
         this.inputValue = ''
+        setTimeout(() => this.autocompleteOpened = true, 100)
       },
       onInputBlur() {
-        setTimeout(() => {
-          this.autocompleteOpened = false
-        }, 100)
+        setTimeout(() => this.autocompleteOpened = false, 100)
       },
       onValidate(value) {
         this.$emit('validation', value)

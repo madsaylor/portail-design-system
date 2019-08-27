@@ -173,7 +173,7 @@
         return dataStr
       },
       searchData() {
-        let searchString = this.inputValue
+        let searchString = this.inputValue || ''
         searchString = searchString.toLowerCase()
 
         this.searchResults = this.dataListWrapper && this.dataListWrapper.filter((data) => {

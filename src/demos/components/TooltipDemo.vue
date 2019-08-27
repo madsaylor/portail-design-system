@@ -9,20 +9,6 @@
     </Collapser>
 
     <div class="row-col tooltip-buttons">
-      <Tooltip popoverWidth="200px" placement="top" class="default-tooltip">
-        <div slot="popover">This is a tooltip content</div>
-        <div slot="reference">
-          <Button>Top</Button>
-        </div>
-      </Tooltip>
-
-      <Tooltip popoverWidth="200px" placement="bottom" class="default-tooltip">
-        <div slot="popover">This is a tooltip content</div>
-        <div slot="reference">
-          <Button>Bottom</Button>
-        </div>
-      </Tooltip>
-
       <Tooltip
         popoverWidth="200px"
         placement="left"
@@ -32,21 +18,7 @@
       >
         <div slot="popover">This is a tooltip content</div>
         <div slot="reference">
-          <Button>Left</Button>
-        </div>
-      </Tooltip>
-
-      <Tooltip
-        popoverWidth="200px"
-        placement="right"
-        class="default-tooltip"
-        :offset="tooltipOffset"
-      >
-        <div slot="popover">
-          This is a tooltip content
-        </div>
-        <div slot="reference">
-          <Button>Right</Button>
+          <Button>Tooltip</Button>
         </div>
       </Tooltip>
     </div>

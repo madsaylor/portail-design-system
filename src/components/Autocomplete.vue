@@ -14,6 +14,7 @@
            :showIcon="showIcon"
            v-model="inputValue"
            ref="autocomplete"
+           @validation="onValidate"
            @inputFocus="autocompleteOpened = true"
            @inputBlur="onInputBlur"
            @icon-click="clear"
@@ -102,20 +103,6 @@
       },
       showList() {
         return this.dataListWrapper && this.dataListWrapper.length || this.dataSearchListWrapper && this.dataSearchListWrapper.length
-      },
-      validation() {
-        if (!this.validators || !this.validators.length) {
-          return []
-        }
-
-        let data = []
-        for (let i = 0; i < this.validators.length; i++) {
-          data.push([
-            this.validators[i].name,
-            this.validators[i].validator(this.inputValue, this.confirmModel),
-          ])
-        }
-        return data
       }
     },
     methods: {
@@ -205,6 +192,9 @@
         setTimeout(() => {
           this.autocompleteOpened = false
         }, 100)
+      },
+      onValidate(value) {
+        this.$emit('validation', value)
       }
     },
     watch: {
@@ -212,12 +202,9 @@
         if (!this.searchId) {
           this.searchId = setTimeout(() => this.searchData(), 300)
         }
-
-        this.$emit('validation', this.validation)
       }
     },
     mounted() {
-      this.$emit('validation', this.validation)
       this.checkAutocompleteData()
     }
   }

@@ -6,6 +6,7 @@
            :sm="sm"
            :md="md"
            :lg="lg"
+           :id="id"
            :label="getInputLabel"
            :validators="validators"
            :confirmModel="dataListWrapper"
@@ -52,7 +53,6 @@
       lg: Boolean,
       md: Boolean,
       sm: Boolean,
-      minWidth: String,
       required: Boolean,
       dataList: Array,
       validators: Array,
@@ -77,7 +77,10 @@
       position: 'bottom-right',
       bday: undefined,
       searchId: undefined,
-      searchResults: undefined
+      searchResults: undefined,
+      id: undefined,
+      timeoutId: undefined,
+      minWidth: undefined
     }),
     computed: {
       getInputLabel() {
@@ -197,6 +200,19 @@
       },
       onValidate(value) {
         this.$emit('validation', value)
+      },
+      onResize() {
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId);
+        }
+
+        this.timeoutId = setTimeout(() => {
+          this.minWidth = `${document.getElementById(this.id).clientWidth}px`
+        }, 1000)
+      },
+      setIdCalcDataListWidth() {
+        this.id = `ds-autocomplete-${Math.random().toString(15).substring(5)}`
+        this.onResize()
       }
     },
     watch: {
@@ -213,6 +229,11 @@
     },
     mounted() {
       this.checkAutocompleteData()
+      this.setIdCalcDataListWidth()
+      window.addEventListener('resize', this.onResize)
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.onResize)
     }
   }
 </script>

@@ -74,6 +74,11 @@
       "type": "Number",
       "default": "31",
       "description": "Set up days count. For autocomplete component with type day"
+    },
+    {
+      "name": "minWidth",
+      "type": "String",
+      "description": "Set min-width for data list"
     }
   ],
   "events": [

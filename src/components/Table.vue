@@ -6,6 +6,7 @@
   <Table v-model="value"                    - Data for displaying table
          :range="range"                     - Object is provide start and end data range points for displaying on
                                               current page
+         :headers="headers"                 - Array of object which contains key value of data, and title of the columns
          :ratios="ratios"                   - Array for set up flex ratio between field of record
          :identifierField="identifierField" - Field which is identifier for emit data from pickup event
          @pickup>                           - Emitted when click on record, will emit current record data or identifier
@@ -18,19 +19,30 @@
     <div class="ds-table-header">
       <Card class="ds-header-wrapper">
         <div class="ds-header"
-             v-for="(header, index) in headers"
-             :style="getFlex(index)">
-          {{header}}
+          v-for="(header, index) in headers"
+          :style="getFlex(index)"
+          :key="index"
+        >
+          {{header.title}}
         </div>
       </Card>
     </div>
+
     <div class="ds-table-body-wrapper">
-      <div class="ds-table-body" v-for="(data, dataIndex) in getData" @click="onClick(data, dataIndex)">
+      <div
+        class="ds-table-body"
+        v-for="(data, dataIndex) in getData"
+        :key="dataIndex"
+        @click="onClick(data, dataIndex)"
+      >
         <Card class="ds-data-wrapper">
-      <span v-for="(value, key, index) in data"
-            :style="getFlex(index)">
-        {{value}}
-      </span>
+          <span
+            v-for="(value, index) in headers"
+            :style="getFlex(index)"
+            :key="index"
+          >
+            {{data[value.key]}}
+          </span>
         </Card>
       </div>
     </div>
@@ -50,15 +62,16 @@
         type: Array,
         default: () => new Array(100).fill('1'),
       },
+      headers: {
+        type: Array,
+        default: () => []
+      },
       identifierField: String,
     },
     data: () => ({
       internalRange: undefined
     }),
     computed: {
-      headers() {
-        return Object.keys(this.value[0])
-      },
       getData() {
         return this.value.slice(this.getRange.start - 1, this.getRange.end)
       },

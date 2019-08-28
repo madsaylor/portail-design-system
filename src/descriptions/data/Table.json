@@ -12,6 +12,12 @@
       "description": "Array for set up flex ratio between field of record"
     },
     {
+      "name": "headers",
+      "type": "Array",
+      "default": [],
+      "description": "Array for indicating the key of columns, and title of columns"
+    },
+    {
       "name": "identifierField",
       "type": "String",
       "description": "Field which is identifier for emit data from pickup event"

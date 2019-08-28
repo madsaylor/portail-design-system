@@ -9,10 +9,13 @@
         <pre v-highlightjs="usage"><code class="html"></code></pre>
       </Collapser>
 
-      <Table v-model="clients"
-             :range="range"
-             :ratios="ratios"
-             :identifierField="identifierField">
+      <Table
+        v-model="clients"
+        :range="range"
+        :ratios="ratios"
+        :identifierField="identifierField"
+        :headers="headers"
+      >
       </Table>
     </div>
 </template>
@@ -32,7 +35,12 @@
       clients: GeneralData.clients,
       ratios: ['14', '2', '3'],
       identifierField: 'name',
-      range: undefined
+      range: undefined,
+      headers: [
+        { key: 'name', title: 'Name' },
+        { key: 'type', title: 'Type' },
+        { key: 'earned', title: 'Earned' }
+      ]
     })
   }
 </script>

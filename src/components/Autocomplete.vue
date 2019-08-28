@@ -204,6 +204,11 @@
         if (!this.searchId) {
           this.searchId = setTimeout(() => this.searchData(), 300)
         }
+      },
+      daysMounth(value) {
+        if (this.type === 'day') {
+          this.bday = this.getDaysRange(value)
+        }
       }
     },
     mounted() {

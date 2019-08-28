@@ -7,27 +7,33 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Autocomplete v-model="chosenDay"
-                  type="day"
-                  label="Day"
-                  :validators="validators"
-                  :daysMounth="28"
-                  required>
-    </Autocomplete>
-
-    <Autocomplete v-model="chosenMonth"
-                  type="month"
-                  label="Month"
-                  :validators="validators"
-                  required>
-    </Autocomplete>
-
-    <Autocomplete v-model="chosenYear"
-                  type="year"
-                  label="Year"
-                  :validators="validators"
-                  required>
-    </Autocomplete>
+    <div class="ds-row">
+      <div class="ds-column">
+        <Autocomplete v-model="chosenDay"
+                      type="day"
+                      label="Day"
+                      :validators="validators"
+                      :daysMounth="28"
+                      required>
+        </Autocomplete>
+      </div>
+      <div class="ds-column">
+        <Autocomplete v-model="chosenMonth"
+                      type="month"
+                      label="Month"
+                      :validators="validators"
+                      required>
+        </Autocomplete>
+      </div>
+      <div class="ds-column">
+        <Autocomplete v-model="chosenYear"
+                      type="year"
+                      label="Year"
+                      :validators="validators"
+                      required>
+        </Autocomplete>
+      </div>
+    </div>
 
     <Autocomplete v-model="chosenCustom"
                   :data-list="dataList"
@@ -88,5 +94,16 @@
 </script>
 
 <style lang="less">
+  .ds-row {
+    display:  flex;
 
+    .ds-column {
+      flex: 1;
+      padding-right: 15px;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
 </style>

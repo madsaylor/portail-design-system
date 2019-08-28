@@ -122,7 +122,14 @@
           {{ label }}
       </div>
 
-      <Icon :size="iconSize" v-if="iconLeft" :color="iconColor" :source="iconLeft" class="ds-icon-left" :padding="iconPadding"/>
+      <Icon :size="iconSize"
+            v-if="iconLeft && showIcon"
+            :color="iconColor"
+            :source="iconLeft"
+            :class="['ds-icon-left', {'active-icon': activeIcon}]"
+            :padding="iconPadding"
+            @click="onIconClick"
+      />
 
       <input
         v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
@@ -178,7 +185,14 @@
 
       <div v-if="getType === 'ds-select' && !inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
 
-      <Icon :size="iconSize" v-if="icon_" :color="iconColor" :source="icon_" :padding="iconPadding"/>
+      <Icon :size="iconSize"
+            v-if="icon_ && showIcon"
+            :color="iconColor"
+            :class="{'active-icon': activeIcon}"
+            :source="icon_"
+            :padding="iconPadding"
+            @click="onIconClick"
+      />
 
       <div class="ds-drawer">
         <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
@@ -300,6 +314,14 @@ export default {
     maxlength: Number,
     pattern: RegExp,
     confirmModel: null,
+    activeIcon: {
+      type: Boolean,
+      default: false
+    },
+    showIcon: {
+      type: Boolean,
+      default: true
+    },
 
     // For type="radio"
     radioVal: String,
@@ -649,6 +671,9 @@ export default {
     },
     setValueNumberWhitespace() {
       this.inputValue = this.inputValue.replace(/[^0-9 ]+/g, '').slice(0, this.maxlength)
+    },
+    onIconClick() {
+      this.$emit('icon-click')
     }
   },
   watch: {
@@ -859,6 +884,11 @@ export default {
       bottom: 5px;
       left: 6px;
       height: 50% !important;
+    }
+
+    input + .active-icon {
+      cursor: pointer;
+      pointer-events: auto;
     }
   }
   

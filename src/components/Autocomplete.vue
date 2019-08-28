@@ -2,24 +2,23 @@
   <div class="ds-autocomplete-wrapper">
     <Input class="ds-autocomplete-input"
            slideLabel
+           activeIcon
            :sm="sm"
            :md="md"
            :lg="lg"
            :label="getInputLabel"
            :validators="validators"
            :confirmModel="dataListWrapper"
+           icon="close"
+           :iconColor="iconColor"
+           :showIcon="showIcon"
            v-model="inputValue"
            ref="autocomplete"
+           @validation="onValidate"
            @inputFocus="autocompleteOpened = true"
            @inputBlur="onInputBlur"
+           @icon-click="clear"
     />
-
-    <Icon v-if="inputValue"
-          class="ds-autocomplete-icon"
-          close
-          :color="iconColor"
-          @click="clear()">
-    </Icon>
 
     <Dropdown
       :target="$refs.autocomplete"
@@ -39,13 +38,12 @@
 <script>
   import Input from './Input'
   import Dropdown from './Dropdown'
-  import Icon from './Icon'
 
   import _ from 'lodash'
 
   export default {
     name: 'Autocomplete',
-    components: {Input, Dropdown, Icon},
+    components: {Input, Dropdown},
     props: {
       value: null,
       label: String,
@@ -100,31 +98,24 @@
           this.$emit('input', value)
         }
       },
+      showIcon() {
+        return !!this.inputValue
+      },
       showList() {
         return this.dataListWrapper && this.dataListWrapper.length || this.dataSearchListWrapper && this.dataSearchListWrapper.length
-      },
-      validation() {
-        if (!this.validators || !this.validators.length) {
-          return []
-        }
-
-        let data = []
-        for (let i = 0; i < this.validators.length; i++) {
-          data.push([
-            this.validators[i].name,
-            this.validators[i].validator(this.inputValue, this.confirmModel),
-          ])
-        }
-        return data
       }
     },
     methods: {
+      checkUnshiftZero(value) {
+        return value < 10 ? '0' + value : value
+      },
       getDaysRange(borderDayNumber) {
         borderDayNumber++
         let days = Array.from({length: borderDayNumber}, (v, k) => k++)
         days.splice(0, 1)
 
         return days.map((dayNumber) => {
+          dayNumber = this.checkUnshiftZero(dayNumber)
           return {
             title: dayNumber
           }
@@ -137,10 +128,7 @@
 
         for (let i = 0; i < 12; i++) {
           monthNumber = month.getMonth() + 1
-
-          if (monthNumber < 10) {
-            monthNumber = '0' + monthNumber.toString()
-          }
+          monthNumber = this.checkUnshiftZero(monthNumber)
 
           months.push({
             number: monthNumber,
@@ -185,7 +173,7 @@
         return dataStr
       },
       searchData() {
-        let searchString = this.inputValue
+        let searchString = this.inputValue || ''
         searchString = searchString.toLowerCase()
 
         this.searchResults = this.dataListWrapper && this.dataListWrapper.filter((data) => {
@@ -199,11 +187,13 @@
       },
       clear() {
         this.inputValue = ''
+        setTimeout(() => this.autocompleteOpened = true, 100)
       },
       onInputBlur() {
-        setTimeout(() => {
-          this.autocompleteOpened = false
-        }, 100)
+        setTimeout(() => this.autocompleteOpened = false, 100)
+      },
+      onValidate(value) {
+        this.$emit('validation', value)
       }
     },
     watch: {
@@ -211,12 +201,9 @@
         if (!this.searchId) {
           this.searchId = setTimeout(() => this.searchData(), 300)
         }
-
-        this.$emit('validation', this.validation)
       }
     },
     mounted() {
-      this.$emit('validation', this.validation)
       this.checkAutocompleteData()
     }
   }
@@ -229,6 +216,7 @@
     margin-bottom: 15px;
 
     .ds-autocomplete-input {
+      width: 100%;
       .ds-slide-label {
         top: 26px !important;
         margin-left: 7px;
@@ -261,23 +249,22 @@
         overflow: hidden !important;
         text-overflow: ellipsis !important;
 
+        &:not(.ds-error) {
+          &:focus {
+            color: rgba(0, 0, 0, 0.87) !important;
+            border: 1px solid rgba(0, 0, 0, 0.87) !important;
+          }
+        }
+
         &.ds-error {
           color: rgba(0,0,0,0.87) !important;
           border-color: @color-red !important;
         }
-
-        &:focus {
-          color: rgba(0,0,0,0.87) !important;
-          border: 1px solid rgba(0,0,0,0.87) !important;
-        }
       }
-    }
 
-    .ds-autocomplete-icon {
-      position: relative;
-      right: 30px;
-      bottom: 12px;
-      cursor: pointer;
+      .active-icon {
+        bottom: 15% !important;
+      }
     }
 
     .ds-autocomplete-dropdown-content {
@@ -304,13 +291,10 @@
     }
 
     .ds-drawer {
-      margin-top: 3px;
-    }
-
-    @media (max-width: 991px) {
-      .ds-autocomplete-input {
-        width: 100% !important;
-      }
+      font-size: 12px !important;
+      line-height: 14px !important;
+      padding-top: 5px !important;
+      padding-right: 5px !important;
     }
   }
 </style>

@@ -20,8 +20,9 @@
     <Dialog
       :opened.sync="opened"
       :borderColor="borderColor"
+      :enableLoader="enableLoader"
     >
-      <div class="dialog-body-default">{{text}}</div>
+      <div class="dialog-body-default" v-for="n in count">{{text}}</div>
     </Dialog>
 
     <Dialog
@@ -101,7 +102,9 @@
         openUsage: true,
         complexFullScreenActive: true,
         fullScreenActive: true,
-        text: GeneralData.text
+        text: GeneralData.text,
+        count: 1,
+        enableLoader: false
       })
     },
     methods: {
@@ -114,6 +117,12 @@
       closeFullScreen() {
         this.openedFullScreen = false
       }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.count = 12
+        this.enableLoader = true
+      }, 5000)
     }
   }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{...backgroundColor}">
+  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{...backgroundColor, height}">
     <div :class="[...loaderClasses]"></div>
   </div>
 </template>
@@ -9,6 +9,7 @@
     name: 'Loader',
     props: {
       value: Boolean,
+      target: null,
       fullScreen: {
         type: Boolean,
         default: false
@@ -23,6 +24,38 @@
         return {
           backgroundColor: this.value ? `rgba(255, 255, 255, 0.${this.opacity})`: ''
         }
+      },
+      targetElement() {
+        let element = this.target
+
+        if (element == null) {
+          return
+        }
+
+        if (element.length) {
+          element = element[0]
+          console.log('element ', element)
+        }
+
+        if (element.$el) {
+          element = element.$el
+          console.log('element ', element)
+        }
+
+        if (typeof element === 'string') {
+          element = document.querySelector(element)
+        }
+
+        return element
+      },
+      height() {
+        if (this.targetElement) {
+          debugger
+        }
+        let height = this.targetElement && this.targetElement.scrollHeight
+        console.log(this.targetElement)
+        console.log('height ', height)
+        return height ? `${height}px` : '100%'
       },
       loaderClasses() {
         if (this.value) {

@@ -36,10 +36,10 @@
                     'ds-full-screen-active-content': fullScreenActive, 'ds-full-width': contentFullWidth,
                     'ds-dialog-datepicker-container': datepickerContainer}]"
            :style="{borderColor}">
-        <div :class="['ds-dialog-wrapper', {'ds-full-width': contentFullWidth}]">
+        <div :class="['ds-dialog-wrapper', {'ds-full-width': contentFullWidth}]" ref="content">
           <slot></slot>
         </div>
-        <Loader v-model="enableLoader"></Loader>
+        <Loader v-model="enableLoader" :target="$refs.content"></Loader>
       </div>
   </section>
 </template>

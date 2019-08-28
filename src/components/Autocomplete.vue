@@ -26,7 +26,9 @@
       :position="position"
       :transitionTime="0">
 
-      <div class="ds-dropdown-content ds-autocomplete-dropdown-content" v-if="showList">
+      <div v-if="showList"
+           class="ds-dropdown-content ds-autocomplete-dropdown-content"
+           :style="{minWidth}">
         <div class="ds-content" v-for="item in dataSearchListWrapper" @click="select(item)">
           <span v-if="item.number">{{item.number}} - </span> {{item.title}}
         </div>
@@ -50,6 +52,7 @@
       lg: Boolean,
       md: Boolean,
       sm: Boolean,
+      minWidth: String,
       required: Boolean,
       dataList: Array,
       validators: Array,

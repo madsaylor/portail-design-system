@@ -14,6 +14,7 @@
                       label="Day"
                       :validators="validators"
                       :daysMounth="28"
+                      minWidth="100px"
                       required>
         </Autocomplete>
       </div>
@@ -22,6 +23,7 @@
                       type="month"
                       label="Month"
                       :validators="validators"
+                      minWidth="150px"
                       required>
         </Autocomplete>
       </div>
@@ -30,6 +32,7 @@
                       type="year"
                       label="Year"
                       :validators="validators"
+                      minWidth="100px"
                       required>
         </Autocomplete>
       </div>

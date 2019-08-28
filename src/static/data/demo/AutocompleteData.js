@@ -4,6 +4,7 @@ let usage = `
               label="Day"
               :validators="validators"
               :daysMounth="28"
+              minWidth="100px"
               required>
 </Autocomplete>
 
@@ -11,6 +12,7 @@ let usage = `
               type="month"
               label="Month"
               :validators="validators"
+              minWidth="150px"
               required>
 </Autocomplete>
 
@@ -18,6 +20,7 @@ let usage = `
               type="year"
               label="Year"
               :validators="validators"
+              minWidth="100px"
               required>
 </Autocomplete>
 

@@ -24,11 +24,11 @@
     v-move-to-body
     class="ds-dialog"
     :style="dialogStyleObject"
+    :id="backdropId"
   >
     <div
       class="ds-dialog-backdrop"
       :style="{opacity: backdropOpacity, 'background-color': backgroundColor}"
-      :id="backdropId"
       @click.stop="backdropClick()"
       @keydown="e => escapePress(e)"
     ></div>

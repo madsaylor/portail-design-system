@@ -6,22 +6,22 @@ let text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
 let clients = [
   {
     name: 'Adam L1',
-    type: 'Person',
+    type: { name: 'Person' },
     earned: '€ 3,123.34'
   },
   {
     name: 'Adam L2',
-    type: 'Person',
+    type: { name: 'Person' },
     earned: '€ 3,123.34'
   },
   {
     name: 'Adam L3',
-    type: 'Person',
+    type: { name: 'Person' },
     earned: '€ 3,123.34'
   },
   {
     name: 'Adam L4',
-    type: 'Person',
+    type: { name: 'Person' },
     earned: '€ 3,123.34'
   }
 ]

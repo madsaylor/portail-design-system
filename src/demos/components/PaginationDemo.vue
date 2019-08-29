@@ -12,10 +12,10 @@
       <Pagination :count="count"
                   :size="size"
                   :current="current">
-          <template v-slot="slotProps">
+          <template>
             <Table v-model="clients"
-                   :range="slotProps.range"
                    :ratios="ratios"
+                   :headers="headers"
                    :identifierField="identifierField">
             </Table>
           </template>
@@ -41,7 +41,12 @@
       size: 3,
       current: 1,
       ratios: ['14', '2', '3'],
-      identifierField: 'name'
+      identifierField: 'name',
+      headers: [
+        { key: 'name', title: 'Name' },
+        { key: 'type', title: 'Type' },
+        { key: 'earned', title: 'Earned' }
+      ]
     })
   }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{...backgroundColor}">
+  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{backgroundColor, height, transform}">
     <div :class="[...loaderClasses]"></div>
   </div>
 </template>
@@ -9,6 +9,7 @@
     name: 'Loader',
     props: {
       value: Boolean,
+      target: null,
       fullScreen: {
         type: Boolean,
         default: false
@@ -18,11 +19,17 @@
         default: 80
       }
     },
+    data: () => ({
+      height: undefined,
+      transform: undefined
+    }),
     computed: {
       backgroundColor() {
-        return {
-          backgroundColor: this.value ? `rgba(255, 255, 255, 0.${this.opacity})`: ''
-        }
+        return this.value ? `rgba(255, 255, 255, 0.${this.opacity})` : ''
+      },
+      targetElement() {
+        let element = document.querySelector(`#${this.target}`)
+        return element ? element : null
       },
       loaderClasses() {
         if (this.value) {
@@ -45,6 +52,22 @@
 
         return loaderWrapperClasses
       }
+    },
+    methods: {
+      setHeightTransform() {
+        if (this.targetElement && this.value) {
+          this.height = `${this.targetElement.scrollHeight}px`
+          this.transform = `translate(${-this.targetElement.clientWidth / 2}px, ${-this.targetElement.clientHeight / 2}px)`
+        }
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.setHeightTransform()
+      })
+    },
+    updated() {
+      this.setHeightTransform()
     }
   }
 </script>

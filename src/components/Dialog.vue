@@ -35,11 +35,12 @@
       <div :class="['ds-dialog-content', {'ds-border-content': borderColor, 'ds-full-screen-content': fullScreen,
                     'ds-full-screen-active-content': fullScreenActive, 'ds-full-width': contentFullWidth,
                     'ds-dialog-datepicker-container': datepickerContainer}]"
-           :style="{borderColor}">
-        <div :class="['ds-dialog-wrapper', {'ds-full-width': contentFullWidth}]" ref="content">
+           :style="{borderColor}"
+           :id="idContent">
+        <div :class="['ds-dialog-wrapper', {'ds-full-width': contentFullWidth}]">
           <slot></slot>
         </div>
-        <Loader v-model="enableLoader" :target="$refs.content"></Loader>
+        <Loader v-model="enableLoader" :target="idContent"></Loader>
       </div>
   </section>
 </template>
@@ -96,7 +97,8 @@
     },
     data: () => ({
       windowWidth: window.innerWidth,
-      $_defaultStyles: {}
+      $_defaultStyles: {},
+      idContent: 'ds-dialog-content-'.concat(Math.random().toString(15).substring(5))
     }),
     mounted() {
       window.addEventListener('resize', this.onResize)

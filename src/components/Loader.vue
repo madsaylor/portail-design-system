@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{...backgroundColor, height}">
+  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{backgroundColor, height, transform}">
     <div :class="[...loaderClasses]"></div>
   </div>
 </template>
@@ -19,43 +19,17 @@
         default: 80
       }
     },
+    data: () => ({
+      height: undefined,
+      transform: undefined
+    }),
     computed: {
       backgroundColor() {
-        return {
-          backgroundColor: this.value ? `rgba(255, 255, 255, 0.${this.opacity})`: ''
-        }
+        return this.value ? `rgba(255, 255, 255, 0.${this.opacity})` : ''
       },
       targetElement() {
-        let element = this.target
-
-        if (element == null) {
-          return
-        }
-
-        if (element.length) {
-          element = element[0]
-          console.log('element ', element)
-        }
-
-        if (element.$el) {
-          element = element.$el
-          console.log('element ', element)
-        }
-
-        if (typeof element === 'string') {
-          element = document.querySelector(element)
-        }
-
-        return element
-      },
-      height() {
-        if (this.targetElement) {
-          debugger
-        }
-        let height = this.targetElement && this.targetElement.scrollHeight
-        console.log(this.targetElement)
-        console.log('height ', height)
-        return height ? `${height}px` : '100%'
+        let element = document.querySelector(`#${this.target}`)
+        return element ? element : null
       },
       loaderClasses() {
         if (this.value) {
@@ -78,6 +52,22 @@
 
         return loaderWrapperClasses
       }
+    },
+    methods: {
+      setHeightTransform() {
+        if (this.targetElement && this.value) {
+          this.height = `${this.targetElement.scrollHeight}px`
+          this.transform = `translate(${-this.targetElement.clientWidth / 2}px, ${-this.targetElement.clientHeight / 2}px)`
+        }
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.setHeightTransform()
+      })
+    },
+    updated() {
+      this.setHeightTransform()
     }
   }
 </script>

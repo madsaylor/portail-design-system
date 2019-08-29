@@ -6,6 +6,7 @@
            :sm="sm"
            :md="md"
            :lg="lg"
+           :id="id"
            :label="getInputLabel"
            :validators="validators"
            :confirmModel="dataListWrapper"
@@ -26,7 +27,9 @@
       :position="position"
       :transitionTime="0">
 
-      <div class="ds-dropdown-content ds-autocomplete-dropdown-content" v-if="showList">
+      <div v-if="showList"
+           class="ds-dropdown-content ds-autocomplete-dropdown-content"
+           :style="{minWidth}">
         <div class="ds-content" v-for="item in dataSearchListWrapper" @click="select(item)">
           <span v-if="item.number">{{item.number}} - </span> {{item.title}}
         </div>
@@ -74,7 +77,10 @@
       position: 'bottom-right',
       bday: undefined,
       searchId: undefined,
-      searchResults: undefined
+      searchResults: undefined,
+      id: undefined,
+      timeoutId: undefined,
+      minWidth: undefined
     }),
     computed: {
       getInputLabel() {
@@ -194,6 +200,19 @@
       },
       onValidate(value) {
         this.$emit('validation', value)
+      },
+      onResize() {
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId);
+        }
+
+        this.timeoutId = setTimeout(() => {
+          this.minWidth = `${document.getElementById(this.id).clientWidth}px`
+        }, 1000)
+      },
+      setIdCalcDataListWidth() {
+        this.id = `ds-autocomplete-${Math.random().toString(15).substring(5)}`
+        this.onResize()
       }
     },
     watch: {
@@ -201,10 +220,20 @@
         if (!this.searchId) {
           this.searchId = setTimeout(() => this.searchData(), 300)
         }
+      },
+      daysMounth(value) {
+        if (this.type === 'day') {
+          this.bday = this.getDaysRange(value)
+        }
       }
     },
     mounted() {
       this.checkAutocompleteData()
+      this.setIdCalcDataListWidth()
+      window.addEventListener('resize', this.onResize)
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.onResize)
     }
   }
 </script>

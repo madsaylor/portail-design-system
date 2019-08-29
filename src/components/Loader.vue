@@ -61,6 +61,13 @@
         }
       }
     },
+    watch: {
+      value(value) {
+        if (!value) {
+          this.height = `100%`
+        }
+      }
+    },
     mounted() {
       this.$nextTick(() => {
         this.setHeightTransform()

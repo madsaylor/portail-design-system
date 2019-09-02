@@ -40,7 +40,7 @@
         <div :class="['ds-dialog-wrapper', {'ds-full-width': contentFullWidth}]">
           <slot></slot>
         </div>
-        <Loader v-model="enableLoader" :target="idContent"></Loader>
+        <Loader v-if="enableLoader" v-model="enableLoader" :target="idContent"></Loader>
       </div>
   </section>
 </template>

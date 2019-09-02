@@ -41,7 +41,7 @@
             :style="getFlex(index)"
             :key="index"
           >
-            {{data[value.key]}}
+            {{ getCellValue(data, value.key) }}
           </span>
         </Card>
       </div>
@@ -51,6 +51,7 @@
 
 <script>
   import Card from './Card'
+  import { get } from 'lodash'
 
   export default {
     name: 'Table',
@@ -104,6 +105,9 @@
             end: this.value.length
           }
         }
+      },
+      getCellValue(value, deepParam) {
+        return get(value, deepParam)
       }
     },
     watch: {
@@ -132,6 +136,8 @@
         line-height: 20px;
         padding: 0 24px 16px;
         cursor: default;
+        background-color: transparent;
+        box-shadow: none;
 
         .ds-header {
           text-transform: capitalize;

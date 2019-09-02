@@ -38,7 +38,7 @@
       range: undefined,
       headers: [
         { key: 'name', title: 'Name' },
-        { key: 'type', title: 'Type' },
+        { key: 'type.name', title: 'Type' },
         { key: 'earned', title: 'Earned' }
       ]
     })

@@ -41,7 +41,7 @@
       "name": "tabsAlign",
       "type": "String",
       "default": "center",
-      "description": "Allow justify tabs by next values: 'center', 'flex-start', 'flex-end', 'space-between'"
+      "description": "Allow justify tabs by next values: center, flex-start, flex-end, space-between"
     }
   ],
   "events": [

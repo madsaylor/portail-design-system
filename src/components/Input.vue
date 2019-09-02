@@ -111,7 +111,8 @@
 
 <template>
   <div :class="['ds-input', getType, {'ds-disabled': disabled, 'ds-sm': sm, 'ds-md': md, 'ds-lg': lg,
-                preventScroll: datepickerVisible}]">
+                preventScroll: datepickerVisible}]"
+        :style="{width}">
     <label>
       <div v-if="label"
            :id="id"
@@ -322,6 +323,7 @@ export default {
       type: Boolean,
       default: true
     },
+    width: String,
 
     // For type="radio"
     radioVal: String,
@@ -564,6 +566,11 @@ export default {
       } else if (this.iconLeft) {
         style.paddingLeft = padding + 'px'
       }
+
+      if (this.width) {
+        style.width = this.width
+      }
+
       return style
     }
   },

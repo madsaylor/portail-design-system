@@ -203,6 +203,11 @@
       "type": "Boolean",
       "default": "true",
       "description": "Responsible for showing Icon"
+    },
+    {
+      "name": "width",
+      "type": "String",
+      "description": "Setup the width"
     }
   ],
   "events": [

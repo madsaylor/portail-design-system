@@ -31,6 +31,17 @@
           "description": "is a boolean which describes if tab hidden"
         }
       ]
+    },
+    {
+      "name": "simpleTabs",
+      "type": "Boolean",
+      "description": "When setup as true, turning on styles mode for tabs different from the default styles"
+    },
+    {
+      "name": "tabsAlign",
+      "type": "String",
+      "default": "center",
+      "description": "Allow justify tabs by next values: center, flex-start, flex-end, space-between"
     }
   ],
   "events": [

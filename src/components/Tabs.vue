@@ -35,19 +35,16 @@
 -->
 <template>
   <div class="ds-tabs-container">
-    <div class="ds-tabs-header">
+    <div :class="[simpleTabs ? 'ds-simple-tabs-header' : 'ds-tabs-header']" :style="{'justify-content': tabsAlign}">
       <div class="ds-tabs-row">
         <template v-for="(tab, index) in tabs">
           <div
             v-if="!tab.hidden"
-            :class="['ds-tab', {
-            'ds-active': activeTab(index),
-            'ds-disabled': disabled || tab.disabled,
-          }]"
+            :class="[simpleTabs ? 'ds-simple-tab' : 'ds-tab', activeTabClass(index),
+                    {'ds-disabled': disabled || tab.disabled}]"
+            @click="onTabClick(tab, index)">
 
-            @click="onTabClick(tab, index)"
-          >
-            {{tab.text}}
+              {{tab.text}}
           </div>
         </template>
       </div>
@@ -60,8 +57,16 @@
 
 <script>
   export default {
-    name: "Tabs",
+    name: 'Tabs',
     props: {
+      tabsAlign: {
+        type: String,
+        default: 'center',
+        validator(value) {
+          return ['center', 'flex-start', 'flex-end', 'space-between'].indexOf(value) !== -1
+        }
+      },
+      simpleTabs: Boolean,
       active: {
         required: true,
         type: Number
@@ -108,6 +113,11 @@
           this.swipeTab(endX > 0 ? 1 : -1)
         }
         event.preventDefault()
+      },
+      activeTabClass(index) {
+        if (this.activeTab(index)) {
+          return this.simpleTabs ? 'ds-simple-active' : 'ds-active'
+        }
       }
     },
     mounted() {
@@ -121,12 +131,10 @@
   @import '../styles/vars';
 
   .ds-tabs-container {
-    .ds-tabs-header {
+    .ds-tabs-header, .ds-simple-tabs-header {
       display: flex;
-      background-color: @color-white;
       width: 100%;
       height: auto;
-      justify-content: center;
 
       .ds-tabs-row {
         display: flex;
@@ -140,20 +148,26 @@
       }
     }
 
-    .ds-tab {
+    .ds-tabs-header {
+      background-color: @color-white;
+    }
+
+    .ds-tab, .ds-simple-tab {
       display: flex;
       cursor: pointer;
       flex: 1 1 auto;
       align-items: center;
       justify-content: center;
       height: 48px;
+    }
+
+    .ds-tab {
+      .font-components-tab-inactive();
       border-right: 1px solid @color-gray-300;
 
       &:first-child {
         border-left: 1px solid @color-gray-300;
       }
-
-      .font-components-tab-inactive();
 
       &:not(.ds-disabled) {
         &:hover, &:focus, &.ds-active {
@@ -162,6 +176,23 @@
 
         &.ds-active {
           box-shadow: inset 0 -3px 0 -1px @color-primary;
+        }
+      }
+    }
+
+    .ds-simple-tab {
+      height: 38px;
+      border-radius: 2px 2px 0 0;
+      color: @color-gray-500;
+      font-family: Lato;
+      font-size: 14px;
+      line-height: 20px;
+
+
+      &:not(.ds-disabled) {
+        &.ds-simple-active {
+          color: @color-primary;
+          background-color: @color-white;
         }
       }
     }

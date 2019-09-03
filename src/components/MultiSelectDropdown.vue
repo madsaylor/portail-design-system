@@ -226,7 +226,7 @@
 
     .ds-multi-select-icon {
       position: absolute;
-      top: 27px;
+      bottom: 6px;
       right: 5px;
     }
 

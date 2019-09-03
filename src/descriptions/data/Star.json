@@ -1,4 +1,15 @@
 {
-  "properties": [],
+  "properties": [
+    {
+      "name": "value",
+      "type": "null",
+      "description": "Regarding provided value will be filled out the number of selected stars"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "description": "Disable the changes of Star component value "
+    }
+  ],
   "events": []
 }

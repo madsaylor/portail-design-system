@@ -8,7 +8,8 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Star></Star>
+    <Star v-model="starValue"></Star> <br/>
+    <Star v-model="disabledStarValue" disabled></Star>
   </div>
 </template>
 
@@ -23,11 +24,13 @@
     components: {Star, Description, Collapser},
     data: () => ({
       openUsage: true,
-      usage: StarData.usage
+      usage: StarData.usage,
+      starValue: 2,
+      disabledStarValue: 1
     })
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 
 </style>

@@ -30,6 +30,7 @@ import Loader from './data/Loader';
 import DraggableList from './data/DraggableList';
 import MultiSelectDropdown from './data/MultiSelectDropdown';
 import Autocomplete from './data/Autocomplete';
+import Star from './data/Star';
 
 export default {
   AppHeader,
@@ -63,5 +64,6 @@ export default {
   Loader,
   DraggableList,
   MultiSelectDropdown,
-  Autocomplete
+  Autocomplete,
+  Star
 }

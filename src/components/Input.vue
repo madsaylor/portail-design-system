@@ -199,7 +199,9 @@
         <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
           {{ inputErrors[0] }}
         </span>
-
+        <span v-if="subLabel" class="ds-sub-label">
+          {{subLabel}}
+        </span>
         <span
           v-show="help && !(inputErrors.length && touched)"
           class="ds-help-label"
@@ -289,6 +291,7 @@ export default {
     },
     iconPadding: String,
     label: String,
+    subLabel: String,
     lang: String,
     lg: Boolean,
     md: Boolean,
@@ -1048,13 +1051,16 @@ export default {
     max-width: 100%;
   }
 
-  .ds-help-label {
+  .ds-help-label, .ds-sub-label {
     cursor: pointer;
     color: @color-gray-500;
     font-family: @font-family;
-    text-decoration: underline dashed;
     padding-left: 12px;
     padding-right: 12px;
+  }
+
+  .ds-help-label {
+    text-decoration: underline dashed;
   }
 
   &.ds-lg {

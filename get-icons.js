@@ -58,7 +58,11 @@ const ICONS_TO_GET = [
   ['exit_to_app', 'baseline'],
   ['settings', 'baseline'],
   ['euro_symbol', 'baseline'],
-  ['euro_symbol', 'outline']
+  ['euro_symbol', 'outline'],
+  ['drafts', 'baseline'],
+  ['drafts', 'outline']
+  ['save', 'baseline'],
+  ['save', 'outline']
 ]
 
 // Get svg download link

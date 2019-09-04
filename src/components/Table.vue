@@ -159,6 +159,7 @@
           .icons-wrapper {
             line-height: 10px;
             margin-left: 10px;
+            font-size: 8px;
           }
 
           &:first-child {

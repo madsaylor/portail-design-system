@@ -15,14 +15,20 @@
 </template>
 
 <script>
+  import _ from 'lodash'
+
   export default {
     name: 'Star',
     props: {
       value: Number,
-      disabled: Boolean
+      disabled: Boolean,
+      starsCount: {
+        type: Number,
+        default: 5
+      }
     },
     data: () => ({
-      stars: [1, 2, 3, 4, 5],
+      stars: undefined,
       hoverToFill: 0
     }),
     methods: {
@@ -35,6 +41,10 @@
       starLeave() {
         this.hoverToFill = 0
       }
+    },
+    mounted() {
+      let end = this.starsCount
+      this.stars = _.range(1, ++end)
     }
   }
 </script>

@@ -2,13 +2,19 @@
   "properties": [
     {
       "name": "value",
-      "type": "null",
+      "type": "Number",
       "description": "Regarding provided value will be filled out the number of selected stars"
     },
     {
       "name": "disabled",
       "type": "Boolean",
-      "description": "Disable the changes of Star component value "
+      "description": "Disable the changes of Star component value"
+    },
+    {
+      "name": "starsCount",
+      "type": "Number",
+      "default": "5",
+      "description": "Set stars count"
     }
   ],
   "events": []

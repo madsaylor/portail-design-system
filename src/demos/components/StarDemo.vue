@@ -1,7 +1,7 @@
 <template>
   <div class="row-col">
     <h3>Star</h3>
-    Stars list for rate
+    <p>Stars list for rate</p>
 
     <Description compnent-name="Star"></Description>
     <Collapser :opened.sync="openUsage" label="Usage">
@@ -9,7 +9,8 @@
     </Collapser>
 
     <Star v-model="starValue"></Star> <br/>
-    <Star v-model="disabledStarValue" disabled></Star>
+    <Star v-model="disabledStarValue" disabled></Star> <br/>
+    <Star v-model="customStarValue" :starsCount="starsCount"></Star>
   </div>
 </template>
 
@@ -25,8 +26,10 @@
     data: () => ({
       openUsage: true,
       usage: StarData.usage,
-      starValue: 2,
-      disabledStarValue: 1
+      starValue: 1,
+      disabledStarValue: 3,
+      customStarValue: 5,
+      starsCount: 20
     })
   }
 </script>

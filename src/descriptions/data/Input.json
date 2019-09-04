@@ -37,6 +37,11 @@
       "description": "Label at the top of the input"
     },
     {
+      "name": "subLabel",
+      "type": "String",
+      "description": "Label at the bottom of the input"
+    },
+    {
       "name": "lang",
       "type": "String",
       "description": "BCP 47 code. Language to be used in the datepicker for month names and weekday labels. Can be set globally with $root.locale. This property overrides global setting"

@@ -59,6 +59,11 @@
       "name": "iconSize",
       "type": "String",
       "description": "Set icon size"
+    },
+    {
+      "name": "padding",
+      "type": "String",
+      "description": "Set button padding"
     }
   ],
   "events": []

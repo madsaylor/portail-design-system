@@ -11,17 +11,17 @@ let clients = [
   },
   {
     name: 'Adam L2',
-    type: { name: 'Person' },
+    type: { name: 'ABC' },
     earned: '€ 3,123.34'
   },
   {
     name: 'Adam L3',
-    type: { name: 'Person' },
+    type: { name: 'BCA' },
     earned: '€ 3,123.34'
   },
   {
     name: 'Adam L4',
-    type: { name: 'Person' },
+    type: { name: 'CDE' },
     earned: '€ 3,123.34'
   }
 ]

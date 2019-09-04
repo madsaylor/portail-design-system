@@ -23,7 +23,11 @@
           :style="getFlex(index)"
           :key="index"
         >
-          {{header.title}}
+          <span>{{header.title}}</span>
+          <span class="icons-wrapper">
+            <div @click="sortAsc(header)">▲</div>
+            <div @click="sortDsc(header)">▼</div>
+          </span>
         </div>
       </Card>
     </div>
@@ -108,6 +112,12 @@
       },
       getCellValue(value, deepParam) {
         return get(value, deepParam)
+      },
+      sortAsc(header) {
+        this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)
+      },
+      sortDsc(header) {
+        this.value.sort((a, b) => get(a, header.key) <= get(b, header.key) ? 1 : -1)
       }
     },
     watch: {
@@ -142,9 +152,18 @@
         .ds-header {
           text-transform: capitalize;
           text-align: right;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+
+          .icons-wrapper {
+            line-height: 10px;
+            margin-left: 10px;
+          }
 
           &:first-child {
             text-align: left;
+            justify-content: flex-start;
           }
         }
       }

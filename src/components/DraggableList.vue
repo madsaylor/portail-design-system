@@ -37,7 +37,14 @@ export default {
   },
   props: {
     list: Array,
-    headers: Array
+    headers: Array,
+    orderby: String
+  },
+  mounted() {
+    if (this.orderby) {
+      this.list.sort((a, b) => a[this.orderby] > b[this.orderby] ? 1 : -1).map((item, index) => ({...item, position: index}))
+      this.$emit('update:list', this.list)
+    }
   },
   data() {
     return {
@@ -50,7 +57,18 @@ export default {
         return this.list
       },
       set(value) {
+        if (this.orderby) {
+          value = value.map((item, index) => ({...item, position: index}))
+        }
         this.$emit('update:list', value)
+      }
+    }
+  },
+  watch: {
+    value(newval, oldval) {
+      if (!oldval && newval && this.orderby) {
+        newval.sort((a, b) => a[this.orderby] > b[this.orderby] ? 1 : -1).map((item, index) => ({...item, position: index}))
+        this.$emit('update:list', newval)
       }
     }
   }

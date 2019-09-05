@@ -7,7 +7,7 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <DraggableList :list="dragList" :headers="headers" @update:list="updateDraggableLists" />
+    <DraggableList :list="dragList" :headers="headers" @update:list="updateDraggableLists" orderby="position" />
   </div>
 </template>
 
@@ -25,12 +25,12 @@ export default {
       openUsage: true,
       usage: DraggableListData.usage,
       dragList: [
-        { name: 'item 1', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
-        { name: 'item 2', quantity: '2', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
-        { name: 'item 3', quantity: '6', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
-        { name: 'item 4', quantity: '8', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
-        { name: 'item 5', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43' },
-        { name: 'item 6', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43' }
+        { name: 'item 1', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43', position: 0 },
+        { name: 'item 2', quantity: '2', price: '$42 303,43', percentage: '44%', total: '$42 303,43', position: 1 },
+        { name: 'item 3', quantity: '6', price: '$42 303,43', percentage: '44%', total: '$42 303,43', position: 2 },
+        { name: 'item 4', quantity: '8', price: '$42 303,43', percentage: '44%', total: '$42 303,43', position: 3 },
+        { name: 'item 5', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43', position: 4 },
+        { name: 'item 6', quantity: '1', price: '$42 303,43', percentage: '44%', total: '$42 303,43', position: 5 }
       ],
       headers: [
         {

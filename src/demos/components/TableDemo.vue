@@ -39,7 +39,7 @@
       headers: [
         { key: 'name', title: 'Name' },
         { key: 'type.name', title: 'Type' },
-        { key: 'earned', title: 'Earned' }
+        { key: 'earned', title: 'Earned', prefix: '€' }
       ]
     })
   }

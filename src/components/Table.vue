@@ -45,7 +45,7 @@
             :style="getFlex(index)"
             :key="index"
           >
-            {{ getCellValue(data, value.key) }}
+            {{ getCellValue(data, value) }}
           </span>
         </Card>
       </div>
@@ -110,8 +110,8 @@
           }
         }
       },
-      getCellValue(value, deepParam) {
-        return get(value, deepParam)
+      getCellValue(value, header) {
+        return `${header.prefix || ''} ${get(value, header.key)} ${header.suffix || ''}`
       },
       sortAsc(header) {
         this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)

@@ -150,7 +150,6 @@
         box-shadow: none;
 
         .ds-header {
-          text-transform: capitalize;
           text-align: right;
           display: flex;
           justify-content: flex-end;

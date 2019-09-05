@@ -63,8 +63,10 @@
     },
     watch: {
       value(value) {
-        if (!value) {
+        if (value) {
           this.height = `100%`
+        } else {
+          this.height = '0'
         }
       }
     },

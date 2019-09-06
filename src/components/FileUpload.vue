@@ -56,7 +56,7 @@
 
       <div v-else class="ds-selected-files-wrapper">
         <div class="ds-file-wrapper">
-          <img width="100" height="100" :src="inputValue.dataURL" />
+          <img width="100" height="100" :src="typeof inputValue === 'object' ? inputValue.dataURL : inputValue" />
           <Icon source="close" color="#ddd" size="24px" @click.prevent="removeFile(inputValue)" />
         </div>
       </div>
@@ -85,7 +85,7 @@ export default {
     icon: String,
     iconSize: String,
     title: String,
-    value: [Array, File],
+    value: [Array, File, String],
     validators: Array,
     preview: {
       type: Boolean,

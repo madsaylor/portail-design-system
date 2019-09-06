@@ -18,7 +18,7 @@
       </div>
 
       <div class="ds-alert-footer">
-        <Button @click="updateOpenStatus(false)" alt>Got it</Button>
+        <Button @click="updateOpenStatus(false)" alt>OK</Button>
       </div>
     </div>
   </Dialog>

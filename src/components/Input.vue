@@ -199,11 +199,11 @@
         <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
           {{ inputErrors[0] }}
         </span>
-        <span v-if="subLabel" class="ds-sub-label">
+        <span v-if="subLabel && !(inputErrors.length && touched)" class="ds-sub-label">
           {{subLabel}}
         </span>
         <span
-          v-show="help && !(inputErrors.length && touched)"
+          v-show="help && !(inputErrors.length && touched) && !subLabel"
           class="ds-help-label"
           ref="helpLabel"
           @mouseover="helpVisible = true"

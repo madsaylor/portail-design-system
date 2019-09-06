@@ -67,7 +67,7 @@
         type: String,
         default: 'gray-500'
       },
-      daysMounth: {
+      daysMonth: {
         type: Number,
         default: 31
       }
@@ -160,7 +160,7 @@
       },
       checkAutocompleteData() {
         if (this.type === 'day') {
-          this.bday = this.getDaysRange(this.daysMounth)
+          this.bday = this.getDaysRange(this.daysMonth)
         } else if (this.type === 'month') {
           this.bday = this.getMonths()
         } else if (this.type === 'year') {
@@ -221,7 +221,7 @@
           this.searchId = setTimeout(() => this.searchData(), 300)
         }
       },
-      daysMounth(value) {
+      daysMonth(value) {
         if (this.type === 'day') {
           this.bday = this.getDaysRange(value)
         }

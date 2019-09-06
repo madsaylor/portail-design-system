@@ -13,7 +13,7 @@
                       type="day"
                       label="Day"
                       :validators="validators"
-                      :daysMounth="28"
+                      :daysMonth="28"
                       required>
         </Autocomplete>
       </div>

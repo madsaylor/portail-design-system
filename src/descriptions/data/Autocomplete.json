@@ -70,7 +70,7 @@
       "description": "Set the icon color"
     },
     {
-      "name": "daysMounth",
+      "name": "daysMonth",
       "type": "Number",
       "default": "31",
       "description": "Set up days count. For autocomplete component with type day"

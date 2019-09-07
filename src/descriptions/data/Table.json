@@ -15,7 +15,14 @@
       "name": "headers",
       "type": "Array",
       "default": [],
-      "description": "Array for indicating the key of columns, and title of columns"
+      "description": "Array for indicating the key of columns, and title of columns",
+      "subProperty": [
+        {
+          "name": "key",
+          "type": "String",
+          "description": "This indicates what values should be shown from the Object array in the column"
+        }
+      ]
     },
     {
       "name": "identifierField",

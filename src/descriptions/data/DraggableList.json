@@ -3,7 +3,14 @@
     {
       "name": "list",
       "type": "Array",
-      "description": "Array of draggable items. Items should be an object and each items should be the same type"
+      "description": "Array of draggable items. Items should be an object and each items should be the same type",
+      "subProperty": [
+        {
+          "name": "position",
+          "type": "Number",
+          "description": "Position of the item from the list"
+        }
+      ]
     },
     {
       "name": "headers",
@@ -13,7 +20,7 @@
         {
           "name": "key",
           "type": "String",
-          "description": ""
+          "description": "This is indicating what should be shown in the column"
         },
         {
           "name": "title",

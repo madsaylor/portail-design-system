@@ -70,6 +70,16 @@
       "type": "Boolean",
       "default": "false",
       "description": "Control displaying of loader component above the content of dialog component"
+    },
+    {
+      "name": "minHeight",
+      "type": "String",
+      "description": "Set min-height of dialog component"
+    },
+    {
+      "name": "minWidth",
+      "type": "String",
+      "description": "Set min-width of dialog component"
     }
   ],
   "events": []

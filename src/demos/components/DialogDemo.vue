@@ -53,6 +53,8 @@
       :opened.sync="openedComplexFullScreen"
       :fullScreen="complexFullScreenActive"
       :backdropOpacity="'0.3'"
+      :min-height="minHeight"
+      :min-width="minWidth"
     >
       <div class="header-dialog-body">
         <Button class="header-button" alt @click="openedInsideComplexFullScreen = true">Open new one dialog</Button>
@@ -101,7 +103,9 @@
         openUsage: true,
         complexFullScreenActive: true,
         fullScreenActive: true,
-        text: GeneralData.text
+        text: GeneralData.text,
+        minWidth: '100%',
+        minHeight: '100%'
       })
     },
     methods: {

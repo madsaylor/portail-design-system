@@ -154,6 +154,7 @@
         @keypress="onKeyPress"
         @keydown="onKeyDown"
         @mousedown="onInputPrevent($event)"
+        @paste.prevent="onPaste($event)"
       />
 
       <input
@@ -385,13 +386,7 @@ export default {
       this.overflowCheckStatus = false;
     }
 
-    if (this.value) {
-      if (this.type === 'number') {
-        this.setValueNumber()
-      } else if (this.type === 'payment-card') {
-        this.setValueNumberWhitespace()
-      }
-    }
+    this.checkValuePattern()
 
     if (this.datePositionChangeable) {
       this.positions = this.datepickerPosition.split(' ')
@@ -676,11 +671,24 @@ export default {
       this.$emit('validation', this.validation)
       this.validators = cloneDeep(orgValidators)
     },
-    setValueNumber() {
-      this.inputValue = this.inputValue.replace(/[^0-9]+/g, '').slice(0, this.maxlength)
+    checkValuePattern(paste, value) {
+      if (this.value || paste) {
+        if (this.type === 'number') {
+          this.setValueNumber(value || this.inputValue)
+        } else if (this.type === 'payment-card') {
+          this.setValueNumberWhitespace(value || this.inputValue)
+        }
+      }
     },
-    setValueNumberWhitespace() {
-      this.inputValue = this.inputValue.replace(/[^0-9 ]+/g, '').slice(0, this.maxlength)
+    onPaste(event) {
+      let text = event.clipboardData.getData('Text')
+      this.checkValuePattern(true, this.inputValue + text)
+    },
+    setValueNumber(value) {
+      this.inputValue = value.replace(/[^0-9]+/g, '').slice(0, this.maxlength)
+    },
+    setValueNumberWhitespace(value) {
+      this.inputValue = value.replace(/[^0-9 ]+/g, '').slice(0, this.maxlength)
     },
     onIconClick() {
       this.$emit('icon-click')

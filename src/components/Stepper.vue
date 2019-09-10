@@ -156,7 +156,7 @@
 
       nextStep(index) {
         if (this.linearMode) {
-          if(!this.valid || this.disableForwardHeaderNavigation && this.disabledStep < index) {
+          if(!this.valid && (index > this.invalidStep) || this.disableForwardHeaderNavigation) {
             return
           }
 
@@ -212,7 +212,7 @@
     watch: {
       selectedStep(val) {
         if (this.linearMode) {
-          if (!this.valid) {
+          if (!this.valid && val > this.invalidStep) {
             this.$emit('current:step', this.stepIndex)
             return
           }

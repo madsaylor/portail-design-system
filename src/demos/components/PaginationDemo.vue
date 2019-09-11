@@ -9,16 +9,19 @@
         <pre v-highlightjs="usage"><code class="html"></code></pre>
       </Collapser>
 
-      <Pagination :count="count"
-                  :size="size"
-                  :current="current">
-          <template>
-            <Table v-model="clients"
-                   :ratios="ratios"
-                   :headers="headers"
-                   :identifierField="identifierField">
-            </Table>
-          </template>
+      <Pagination
+        :count="count"
+        :size="size"
+        :current="current"
+        @getCurrent="updatePage"
+      >
+        <Table
+          v-model="clients"
+          :ratios="ratios"
+          :headers="headers"
+          :identifierField="identifierField"
+          :range="range"
+        />
       </Pagination>
     </div>
 </template>
@@ -37,17 +40,32 @@
       usage: PaginationData.usage,
       openUsage: true,
       clients: GeneralData.clients,
-      count: 4,
       size: 3,
       current: 1,
       ratios: ['14', '2', '3'],
       identifierField: 'name',
       headers: [
         { key: 'name', title: 'Name' },
-        { key: 'type', title: 'Type' },
+        { key: 'type.name', title: 'Type' },
         { key: 'earned', title: 'Earned' }
-      ]
-    })
+      ],
+      range: {
+        start: 1,
+        end: 3
+      }
+    }),
+    methods: {
+      updatePage(page) {
+        this.current = page
+        this.range.start = this.size * (this.current - 1) + 1
+        this.range.end = this.size * this.current
+      }
+    },
+    computed: {
+      count() {
+        return this.clients.length
+      }
+    }
   }
 </script>
 

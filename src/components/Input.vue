@@ -677,12 +677,14 @@ export default {
           this.setValueNumber(value || this.inputValue)
         } else if (this.type === 'payment-card') {
           this.setValueNumberWhitespace(value || this.inputValue)
+        } else {
+          this.inputValue = value
         }
       }
     },
     onPaste(event) {
-      let text = event.clipboardData.getData('Text')
-      this.checkValuePattern(true, this.inputValue + text)
+      let value = (this.inputValue || '') + event.clipboardData.getData('Text')
+      this.checkValuePattern(true, value)
     },
     setValueNumber(value) {
       this.inputValue = value.replace(/[^0-9]+/g, '').slice(0, this.maxlength)

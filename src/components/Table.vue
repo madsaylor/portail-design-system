@@ -137,6 +137,10 @@
 
   .ds-table-wrapper {
     .ds-table-header {
+      @media screen and (max-width: 551px) {
+        display: none;
+      }
+
       .ds-header-wrapper {
         display: flex;
         height: 20px;
@@ -183,9 +187,30 @@
           margin-bottom: 16px;
           text-align: right;
 
+          @media screen and (max-width: 551px) {
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 16px 16px 12px 16px;
+          }
+
           span {
             &:first-child {
               text-align: left;
+            }
+
+            @media screen and (max-width: 551px) {
+              font-size: 14px;
+
+              &:first-child {
+                flex-basis: 100% !important;
+                font-size: 16px;
+                line-height: 24px;
+                margin-bottom: 16px;
+              }
+
+              &:nth-child(2) {
+                text-align: left;
+              }
             }
           }
         }

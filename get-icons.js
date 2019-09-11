@@ -62,7 +62,11 @@ const ICONS_TO_GET = [
   ['drafts', 'baseline'],
   ['drafts', 'outline']
   ['save', 'baseline'],
-  ['save', 'outline']
+  ['save', 'outline'],
+  ['more_horiz', 'baseline'],
+  ['more_horiz', 'outline'],
+  ['more_vert', 'baseline'],
+  ['more_vert', 'outline']
 ]
 
 // Get svg download link

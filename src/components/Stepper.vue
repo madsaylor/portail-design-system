@@ -156,7 +156,7 @@
 
       nextStep(index) {
         if (this.linearMode) {
-          if(!this.valid && (index > this.invalidStep) || this.disableForwardHeaderNavigation) {
+          if(!this.valid && (index > this.invalidStep) || this.disableForwardHeaderNavigation && this.valid) {
             return
           }
 

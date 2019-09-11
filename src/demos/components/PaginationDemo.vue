@@ -40,7 +40,6 @@
       usage: PaginationData.usage,
       openUsage: true,
       clients: GeneralData.clients,
-      count: 4,
       size: 3,
       current: 1,
       ratios: ['14', '2', '3'],
@@ -60,6 +59,11 @@
         this.current = page
         this.range.start = this.size * (this.current - 1) + 1
         this.range.end = this.size * this.current
+      }
+    },
+    computed: {
+      count() {
+        return this.clients.length
       }
     }
   }

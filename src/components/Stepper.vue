@@ -130,7 +130,9 @@
       minDistance: 100,
       invalidStep: -1,
       disabledStep: -1,
-      previousDisabledState: undefined
+      previousDisabledState: undefined,
+      lastAvailableHeaderStep: 1,
+      forbidUpdateLastStep: false
     }),
     computed: {
       activeStepName() {
@@ -156,17 +158,16 @@
 
       nextStep(index) {
         if (this.linearMode) {
-          if(!this.valid && (index > this.invalidStep) || this.disableForwardHeaderNavigation && this.valid) {
+          if (!this.valid && (index > this.invalidStep) ||
+              this.disableForwardHeaderNavigation && (index > this.lastAvailableHeaderStep)) {
             return
           }
 
           if (this.optionalSteps.includes(index) || index - this.stepIndex <= 1) {
-            this.stepIndex = index;
-            this.$emit('current:step', this.stepIndex);
+            this.updateStepHelper(index)
           }
         } else {
-          this.stepIndex = index;
-          this.$emit('current:step', this.stepIndex)
+          this.updateStepHelper(index)
         }
       },
 
@@ -207,6 +208,14 @@
         }
 
         this.previousDisabledState = this.disableForwardHeaderNavigation
+      },
+      updateStepHelper(index) {
+        if (this.stepIndex !== index) {
+          this.forbidUpdateLastStep = this.disableForwardHeaderNavigation
+        }
+
+        this.stepIndex = index;
+        this.$emit('current:step', this.stepIndex)
       }
     },
     watch: {
@@ -228,6 +237,11 @@
           this.$emit('current:step', this.stepIndex)
         }
 
+        if (!this.forbidUpdateLastStep) {
+          this.lastAvailableHeaderStep = this.stepIndex
+        }
+        this.forbidUpdateLastStep = false
+
         this.checkDisableStep(this.disableForwardHeaderNavigation)
       },
       valid(val) {
@@ -245,6 +259,7 @@
 
       this.$el.addEventListener('touchstart', this.touchStart)
       this.$el.addEventListener('touchend', this.touchEnd)
+      this.lastAvailableHeaderStep = this.stepIndex
     },
     beforeDestroy() {
       window.removeEventListener('resize', this.onResize)

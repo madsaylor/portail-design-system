@@ -140,7 +140,7 @@
         display: flex;
         width: 50%;
 
-        @media @screen-small {
+        @media @screen-mobile-all {
           & {
             width: 100%;
           }
@@ -193,6 +193,25 @@
         &.ds-simple-active {
           color: @color-primary;
           background-color: @color-white;
+        }
+      }
+    }
+
+    @media @screen-mobile-all {
+      .ds-simple-tabs-header {
+        border: 1px solid @color-gray-300;
+        .ds-tabs-row {
+          .ds-simple-tab {
+            border-right: 1px solid @color-gray-300;
+
+            &:last-child {
+              border-right: none;
+            }
+          }
+
+          .ds-simple-active {
+            color: @color-dark;
+          }
         }
       }
     }

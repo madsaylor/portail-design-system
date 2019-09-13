@@ -202,6 +202,7 @@
         border: 1px solid @color-gray-300;
         .ds-tabs-row {
           .ds-simple-tab {
+            height: 36px;
             border-right: 1px solid @color-gray-300;
             background-color: @color-gray-100;
 

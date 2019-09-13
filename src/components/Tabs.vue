@@ -203,6 +203,7 @@
         .ds-tabs-row {
           .ds-simple-tab {
             border-right: 1px solid @color-gray-300;
+            background-color: @color-gray-100;
 
             &:last-child {
               border-right: none;
@@ -210,6 +211,7 @@
           }
 
           .ds-simple-active {
+            background-color: @color-white;
             color: @color-dark;
           }
         }

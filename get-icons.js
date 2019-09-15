@@ -66,7 +66,19 @@ const ICONS_TO_GET = [
   ['more_horiz', 'baseline'],
   ['more_horiz', 'outline'],
   ['more_vert', 'baseline'],
-  ['more_vert', 'outline']
+  ['more_vert', 'outline'],
+  ['content_copy', 'baseline'],
+  ['content_copy', 'outline'],
+  ['file_download', 'baseline'],
+  ['file_download', 'outline'],
+  ['file_upload', 'baseline'],
+  ['file_upload', 'outline'],
+  ['file_in_page', 'baseline'],
+  ['file_in_page', 'outline'],
+  ['print', 'baseline'],
+  ['print', 'outline'],
+  ['restore_page', 'baseline'],
+  ['restore_page', 'outline']
 ]
 
 // Get svg download link

@@ -1,23 +1,23 @@
 <template>
-    <div class="row-col">
-      <h3>Table</h3>
-      <p>Table component for displaying list of data</p>
+  <div class="row-col">
+    <h3>Table</h3>
+    <p>Table component for displaying list of data</p>
 
-      <Description compnent-name="Table"></Description>
+    <Description compnent-name="Table"></Description>
 
-      <Collapser :opened.sync="openUsage" label="Usage">
-        <pre v-highlightjs="usage"><code class="html"></code></pre>
-      </Collapser>
+    <Collapser :opened.sync="openUsage" label="Usage">
+      <pre v-highlightjs="usage"><code class="html"></code></pre>
+    </Collapser>
 
-      <Table
-        v-model="clients"
-        :range="range"
-        :ratios="ratios"
-        :identifierField="identifierField"
-        :headers="headers"
-      >
-      </Table>
-    </div>
+    <Table
+      v-model="clients"
+      :range="range"
+      :ratios="ratios"
+      :identifierField="identifierField"
+      :headers="headers"
+    >
+    </Table>
+  </div>
 </template>
 
 <script>

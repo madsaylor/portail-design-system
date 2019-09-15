@@ -31,6 +31,7 @@ import DraggableList from './data/DraggableList';
 import MultiSelectDropdown from './data/MultiSelectDropdown';
 import Autocomplete from './data/Autocomplete';
 import Star from './data/Star';
+import ExpandableTable from './data/ExpandableTable'
 
 export default {
   AppHeader,
@@ -65,5 +66,6 @@ export default {
   DraggableList,
   MultiSelectDropdown,
   Autocomplete,
-  Star
+  Star,
+  ExpandableTable
 }

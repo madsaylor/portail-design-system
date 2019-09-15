@@ -8,12 +8,17 @@
     <Card>Hello, World!</Card>
 -->
 <template>
-  <div class="ds-card"><slot></slot></div>
+  <div @click="onClick" class="ds-card"><slot></slot></div>
 </template>
 
 <script>
 export default {
   name: 'Card',
+  methods: {
+    onClick() {
+      this.$emit('click')
+    }
+  }
 }
 </script>
 

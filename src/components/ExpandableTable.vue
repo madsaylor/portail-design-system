@@ -92,12 +92,12 @@
               <div class="expanded-cell">
                 <span v-if="data.has_tva && data.totalTTC">
                   <strong>{{ "Total TTC: " }}</strong>
-                  <span> {{ data.totalTTC }}</span>
+                  <span> {{ data.totalTTC() }}</span>
                 </span>
 
                 <span v-if="!data.has_tva && data.totalTTC">
                   <strong>{{ "Total: " }}</strong>
-                  <span>{{ data.totalTTC }}</span>
+                  <span>{{ data.totalTTC() }}</span>
                   <span>{{' '}}</span>
                 </span>
 

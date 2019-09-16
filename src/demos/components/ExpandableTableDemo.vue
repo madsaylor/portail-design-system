@@ -25,6 +25,7 @@
 </template>
 
 <script>
+  import moment from 'moment'
   import ExpandableTable from '../../components/ExpandableTable'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
@@ -40,6 +41,7 @@
       columns: [
         { key: 'name', title: 'Name', width: '300px', sortable: true },
         { key: 'type.name', title: 'Type', width: '10%' },
+        { key: 'invoice_date', title: 'Date', filter: (value) => moment(value).format('DD-MM-YYYY') },
         { key: 'earned', title: 'Earned', prefix: '$'}
       ]
     }),

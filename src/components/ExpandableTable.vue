@@ -192,7 +192,12 @@
         return 'primary'
       },
       getCellValue(value, column) {
-        return `${column.prefix || ''} ${get(value, column.key)} ${column.suffix || ''}` || ''
+        let extractVal = `${column.prefix || ''} ${get(value, column.key) || ''} ${column.suffix || ''}`
+        if (column.filter) {
+          extractVal = column.filter(extractVal)
+        }
+
+        return extractVal
       },
       sortAsc(column) {
         this.dataSource.sort((a, b) => get(a, column.key) >= get(b, column.key) ? 1 : -1)

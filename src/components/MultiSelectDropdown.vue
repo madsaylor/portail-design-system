@@ -226,8 +226,15 @@
 
     .ds-multi-select-icon {
       position: absolute;
-      bottom: 6px;
       right: 5px;
+    }
+
+    .ds-label-text ~ .ds-multi-select-icon {
+      top: 26px;
+    }
+
+    .ds-multi-select-icon {
+      top: 6px;
     }
 
     .ds-multi-select-error-message-wrapper {

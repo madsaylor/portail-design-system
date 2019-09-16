@@ -1046,6 +1046,7 @@ export default {
     line-height: 12px;
     padding: 3px 0;
     position: absolute;
+    text-align: left;
     max-width: 100%;
     width: 100%;
   }

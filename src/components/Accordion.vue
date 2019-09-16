@@ -64,6 +64,7 @@
           font-weight: normal;
           font-size: 18px;
           margin-left: 12px;
+          overflow: hidden;
         }
 
         .ds-icon-wrapper {

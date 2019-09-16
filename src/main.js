@@ -3,12 +3,12 @@ import VueSignaturePad from 'vue-signature-pad'
 import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/monokai.css'
 import Internationalization from './plugins/Internationalization'
+import GlobalFilters from './plugins/GlobalFilters'
 
 import './utils/patch-ios-safari-click'
 
 import './fonts/lato.css'
 import App from './App.vue'
-import moment from 'moment'
 
 
 // import and globally register every component form /components
@@ -28,17 +28,7 @@ Vue.config.productionTip = false
 Vue.use(VueHighlightJS)
 Vue.use(VueSignaturePad)
 Vue.use(Internationalization)
-
-Vue.filter('capitalize', function (value) {
-  if (!value) return ''
-  value = value.toString()
-  return value.charAt(0).toUpperCase() + value.slice(1)
-})
-
-Vue.filter('shortDate', function (value) {
-  if (!value) return ''
-  return moment(value).format('DD/MM/YYYY');
-})
+Vue.use(GlobalFilters)
 
 new Vue({
   render: h => h(App),

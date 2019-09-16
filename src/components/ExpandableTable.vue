@@ -92,12 +92,12 @@
               <div class="expanded-cell">
                 <span v-if="data.has_tva && data.totalTTC">
                   <strong>{{ "Total TTC: " }}</strong>
-                  <span> {{ data.totalTTC() }}</span>
+                  <span> {{ data.totalTTC }}</span>
                 </span>
 
                 <span v-if="!data.has_tva && data.totalTTC">
                   <strong>{{ "Total: " }}</strong>
-                  <span>{{ data.totalTTC() }}</span>
+                  <span>{{ data.totalTTC }}</span>
                   <span>{{' '}}</span>
                 </span>
 
@@ -144,11 +144,12 @@
 <script>
   import Card from './Card'
   import Button from './Button'
+  import Badge from './Badge'
   import { get, isEqual } from 'lodash'
 
   export default {
     name: 'ExpandableTable',
-    components: {Card, Button},
+    components: {Card, Button, Badge},
     props: {
       dataSource: Array,
       columns: {

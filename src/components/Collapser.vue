@@ -94,6 +94,7 @@
           font-size: 16px;
           font-family: Lato;
           font-weight: 500;
+          overflow: hidden;
         }
 
         .ds-icon-wrapper {

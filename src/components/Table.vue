@@ -44,7 +44,12 @@
             :style="getFlex(value)"
             :key="index"
           >
-            {{ getCellValue(data, value) }}
+            <template v-if="value.badge">
+              <Badge :color="getBadgeColor(data, value)" >{{ getCellValue(data, value) }}</Badge>
+            </template>
+            <template v-else>
+              {{ getCellValue(data, value) }}
+            </template>
           </span>
         </Card>
       </div>
@@ -53,12 +58,30 @@
 </template>
 
 <script>
+
+  const COLORS_BY_STATUS = {
+    cancelled: '#30302d',
+    refunded: '#3B9AE3',
+    partial_refunded: '#52a0d8',
+    draft: '#9e9e9e',
+    paid_with_deposit: '#66bb6a',
+    paid: '#66bb6a',
+    converted: '#66bb6a',
+    expired: '#ef5350',
+    pending_with_paid_deposit: '#68b7a3',
+    pending_with_deposit_pending: '#ffa726',
+    waiting: '#ffa726',
+    sent: '#1E88E5',
+    default: '#9e9e9e'
+  };
+
   import Card from './Card'
+  import Badge from './Badge'
   import { get } from 'lodash'
 
   export default {
     name: 'Table',
-    components: {Card},
+    components: {Card, Badge},
     props: {
       value: Array,
       range: Object,
@@ -112,11 +135,15 @@
         }
       },
       getCellValue(value, header) {
-        let cellValue = `${header.prefix || ''} ${get(value, header.key)} ${header.suffix || ''}`
+        let cellValue = `${header.prefix || ''} ${get(value, header.key) || ''} ${header.suffix || ''}`
         if (header.filter) {
           cellValue = header.filter(cellValue)
         }
         return cellValue
+      },
+      getBadgeColor(value, header) {
+        const cellValue = get(value, header.key)
+        return COLORS_BY_STATUS[cellValue] || 'primary'
       },
       sortAsc(header) {
         this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)

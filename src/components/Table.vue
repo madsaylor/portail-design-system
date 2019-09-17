@@ -7,7 +7,6 @@
          :range="range"                     - Object is provide start and end data range points for displaying on
                                               current page
          :headers="headers"                 - Array of object which contains key value of data, and title of the columns
-         :ratios="ratios"                   - Array for set up flex ratio between field of record
          :identifierField="identifierField" - Field which is identifier for emit data from pickup event
          @pickup>                           - Emitted when click on record, will emit current record data or identifier
                                               data with index on current page.
@@ -20,11 +19,11 @@
       <Card class="ds-header-wrapper">
         <div class="ds-header"
           v-for="(header, index) in headers"
-          :style="getFlex(index)"
+          :style="getFlex(header)"
           :key="index"
         >
           <span>{{header.title}}</span>
-          <span class="icons-wrapper">
+          <span v-if="header.sortable" class="icons-wrapper">
             <div @click="sortAsc(header)">▲</div>
             <div @click="sortDsc(header)">▼</div>
           </span>
@@ -42,7 +41,7 @@
         <Card class="ds-data-wrapper">
           <span
             v-for="(value, index) in headers"
-            :style="getFlex(index)"
+            :style="getFlex(value)"
             :key="index"
           >
             {{ getCellValue(data, value) }}
@@ -63,10 +62,6 @@
     props: {
       value: Array,
       range: Object,
-      ratios: {
-        type: Array,
-        default: () => new Array(100).fill('1'),
-      },
       headers: {
         type: Array,
         default: () => []
@@ -90,9 +85,15 @@
       }
     },
     methods: {
-      getFlex(index) {
-        return {
-          flex: this.ratios[index]
+      getFlex(header) {
+        if (header.width) {
+          return {
+            flexBasis: header.width
+          }
+        } else {
+          return {
+            flex: 1
+          }
         }
       },
       onClick(data, dataIndex) {
@@ -111,7 +112,11 @@
         }
       },
       getCellValue(value, header) {
-        return `${header.prefix || ''} ${get(value, header.key)} ${header.suffix || ''}`
+        let cellValue = `${header.prefix || ''} ${get(value, header.key)} ${header.suffix || ''}`
+        if (header.filter) {
+          cellValue = header.filter(cellValue)
+        }
+        return cellValue
       },
       sortAsc(header) {
         this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)

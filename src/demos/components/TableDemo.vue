@@ -12,7 +12,6 @@
     <Table
       v-model="clients"
       :range="range"
-      :ratios="ratios"
       :identifierField="identifierField"
       :headers="headers"
     >
@@ -21,6 +20,7 @@
 </template>
 
 <script>
+  import moment from 'moment'
   import Table from '../../components/Table'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
@@ -33,13 +33,13 @@
       usage: TableData.usage,
       openUsage: true,
       clients: GeneralData.clients,
-      ratios: ['14', '2', '3'],
       identifierField: 'name',
       range: undefined,
       headers: [
-        { key: 'name', title: 'Name' },
-        { key: 'type.name', title: 'Type' },
-        { key: 'earned', title: 'Earned', prefix: '€' }
+        { key: 'name', title: 'Name', width: '30%' },
+        { key: 'type.name', title: 'Type', width: '25%' },
+        { key: 'earned', title: 'Earned', prefix: '€', sortable: true },
+        { key: 'invoice_date', title: 'Date', sortable: true, filter: (value) => moment(value).format('DD-MM-YYYY') }
       ]
     })
   }

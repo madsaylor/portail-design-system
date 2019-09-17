@@ -16,8 +16,10 @@
       :opened.sync="opened"
       :borderColor="borderColor"
       :clickOutsideToClose="false"
+      :extraButton="true"
       acceptLabel="Accept"
       rejectLabel="Reject"
+      extraButtonLabel="New Action"
       title="Dialog box title"
       @accept="accept"
     >

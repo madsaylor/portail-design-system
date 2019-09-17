@@ -67,10 +67,10 @@
       flex-direction: column;
       box-shadow: @card-shadow;
       margin-bottom: @collapser-margin-bottom;
-      cursor: pointer;
       box-shadow: 0 1px 1px 0 rgba(91,99,156,0.26);
 
       .ds-collapser-header {
+        cursor: pointer;
         display: flex;
         width: 100%;
         height: 56px;

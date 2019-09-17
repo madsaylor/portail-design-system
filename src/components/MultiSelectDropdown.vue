@@ -14,7 +14,10 @@
       @click="updateOpenState"
       readonly="readonly"
     />
-    <Icon expand_more color="gray-400" class="ds-multi-select-icon"/>
+    <Icon expand_more
+          color="gray-400"
+          class="ds-multi-select-icon"
+          @click="updateOpenState"/>
     <div class="ds-multi-select-error-message-wrapper" v-if="checkError">
       {{multiSelectErrors[0]}}
     </div>
@@ -225,6 +228,7 @@
     }
 
     .ds-multi-select-icon {
+      cursor: pointer;
       position: absolute;
       right: 5px;
     }

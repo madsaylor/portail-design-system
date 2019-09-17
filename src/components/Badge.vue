@@ -11,24 +11,33 @@
 -->
 
 <template>
-  <div class="ds-badge" :class="color">
+  <div class="ds-badge" :style="{backgroundColor}">
     <Icon v-if="icon" class="ds-icon" :source="icon" color="white" :size="iconSize"/>
     <slot></slot>
   </div>
 </template>
 
 <script>
-    import Icon from './Icon.vue'
+  import Icon from './Icon.vue'
+  import {COLORS} from '../styles/vars'
 
-    export default {
-        name: 'Badge',
-        components: {Icon},
-        props: {
-          icon: String,
-          iconSize: String,
-          color: String
-        }
+  export default {
+    name: 'Badge',
+    components: {Icon},
+    props: {
+      icon: String,
+      iconSize: String,
+      color: String
+    },
+    data: () => ({
+      COLORS
+    }),
+    computed: {
+      backgroundColor() {
+        return this.COLORS[this.color] || this.color
+      }
     }
+  }
 </script>
 
 <style lang="less" scoped>
@@ -46,21 +55,5 @@
     .ds-icon {
       margin-right: @badge-icon-margin;
     }
-  }
-
-  .red {
-    background-color: @color-red;
-  }
-  .gray {
-    background-color: @color-gray-400;
-  }
-  .dark {
-    background-color: @color-dark;
-  }
-  .primary {
-    background-color: @color-primary;
-  }
-  .yellow {
-    background-color: @color-yellow;
   }
 </style>

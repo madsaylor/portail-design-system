@@ -17,7 +17,6 @@
            ref="autocomplete"
            @validation="onValidate"
            @inputFocus="autocompleteOpened = true"
-           @inputBlur="onInputBlur"
            @icon-click="clear"
     />
 
@@ -190,13 +189,11 @@
       },
       select(value) {
         this.inputValue = this.getDataString(value)
+        this.autocompleteOpened = false
       },
       clear() {
         this.inputValue = ''
         setTimeout(() => this.autocompleteOpened = true, 100)
-      },
-      onInputBlur() {
-        setTimeout(() => this.autocompleteOpened = false, 100)
       },
       onValidate(value) {
         this.$emit('validation', value)

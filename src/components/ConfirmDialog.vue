@@ -19,6 +19,9 @@
 
       <div class="ds-confirm-footer">
         <Button @click="updateOpenStatus(false)" alt>{{ rejectLabel | dsTranslate }}</Button>
+        <template v-if="extraButton">
+          <Button @click="extraButtonClick">{{ extraButtonLabel }}</Button>
+        </template>
         <Button @click="acceptStatus">{{ acceptLabel | dsTranslate }}</Button>
       </div>
     </div>
@@ -57,6 +60,13 @@ export default {
     rejectLabel: {
       type: String,
       default: 'Cancel'
+    },
+    extraButton: {
+      type: Boolean,
+      default: false
+    },
+    extraButtonLabel: {
+      type: String
     }
   },
   computed: {
@@ -74,6 +84,10 @@ export default {
     acceptStatus() {
       this.$emit('update:opened', false)
       this.$emit('accept', true)
+    },
+    extraButtonClick() {
+      this.$emit('update:opened', false),
+      this.$emit('extraAction')
     }
   }
 }

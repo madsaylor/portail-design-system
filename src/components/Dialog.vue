@@ -125,7 +125,7 @@
     methods: {
       backdropClick() {
         if (this.clickOutsideToClose) {
-          this.openedDispatchWrapper()
+          this.openedDispatchWrapper(true)
         }
       },
       /**
@@ -200,7 +200,10 @@
           event.preventDefault()
         }
       },
-      openedDispatchWrapper() {
+      openedDispatchWrapper(backdropClick) {
+        if (backdropClick && !this.clickOutsideToClose) {
+          return
+        }
         if (_.isUndefined(this.activeDatepickerComponent) || this.activeDatepickerComponent === 'Dialog') {
           this.$emit('update:opened', false)
         }

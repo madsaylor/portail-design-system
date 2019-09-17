@@ -11,8 +11,6 @@
 
     <Table
       v-model="clients"
-      :range="range"
-      :identifierField="identifierField"
       :headers="headers"
     >
     </Table>
@@ -33,13 +31,12 @@
       usage: TableData.usage,
       openUsage: true,
       clients: GeneralData.clients,
-      identifierField: 'name',
-      range: undefined,
       headers: [
         { key: 'name', title: 'Name', width: '30%' },
-        { key: 'type.name', title: 'Type', width: '25%' },
+        { key: 'type.name', title: 'Type', width: '20%' },
         { key: 'earned', title: 'Earned', prefix: '€', sortable: true },
-        { key: 'invoice_date', title: 'Date', sortable: true, filter: (value) => moment(value).format('DD-MM-YYYY') }
+        { key: 'invoice_date', title: 'Date', sortable: true, filter: (value) => moment(value).format('DD-MM-YYYY') },
+        { key: 'status', title: 'Status', badge: true }
       ]
     })
   }

@@ -78,7 +78,9 @@ const ICONS_TO_GET = [
   ['print', 'baseline'],
   ['print', 'outline'],
   ['restore_page', 'baseline'],
-  ['restore_page', 'outline']
+  ['restore_page', 'outline'],
+  ['refund', 'baseline'],
+  ['refund', 'outline']
 ]
 
 // Get svg download link

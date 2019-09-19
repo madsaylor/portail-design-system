@@ -156,8 +156,8 @@
         this.openDropDownList = !this.openDropDownList
       },
       calcInputSelectValue(multiSelectValue) {
-        return this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map(value => value.value) :
-                             multiSelectValue
+        return this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map(value => value.value) || '' :
+                             multiSelectValue || ''
       },
       validate() {
         if (this.initValidation || this.touched) {
@@ -245,6 +245,7 @@
       width: 100%;
       font-size: 12px;
       color: @color-red;
+      position: absolute;
     }
 
     .ds-multi-select-container {

@@ -185,7 +185,7 @@
         </option>
       </select>
 
-      <div v-if="getType === 'ds-select' && !inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
+      <div v-if="getType === 'ds-select' && inputValue !== 0 &&!inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
 
       <Icon :size="iconSize"
             v-if="icon_ && showIcon"

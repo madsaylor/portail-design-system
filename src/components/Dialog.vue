@@ -294,6 +294,12 @@
       overflow-x: hidden;
       max-width: 1280px;
 
+      @media @screen-small {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+      }
+
       .ds-dialog-wrapper {
         height:100%;
         max-width: 100%;

@@ -94,10 +94,17 @@ export default {
 </script>
 
 <style lang="less">
+@import "../styles/vars";
+
 .ds-confirm-wrapper {
   padding: 40px 40px 32px 40px;
   box-sizing: border-box;
   font-family: Lato;
+
+  @media @screen-small {
+    width: 100% !important;
+    max-width: 100%;
+  }
 
   .ds-confirm-header {
     font-size: 24px;

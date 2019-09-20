@@ -32,6 +32,7 @@ import MultiSelectDropdown from './data/MultiSelectDropdown';
 import Autocomplete from './data/Autocomplete';
 import Star from './data/Star';
 import ExpandableTable from './data/ExpandableTable'
+import FilterSelect from './data/FilterSelect'
 
 export default {
   AppHeader,
@@ -67,5 +68,6 @@ export default {
   MultiSelectDropdown,
   Autocomplete,
   Star,
-  ExpandableTable
+  ExpandableTable,
+  FilterSelect
 }

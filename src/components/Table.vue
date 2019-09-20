@@ -135,7 +135,7 @@
         }
       },
       getCellValue(value, header) {
-        let cellValue = `${header.prefix || ''} ${get(value, header.key) || ''} ${header.suffix || ''}`
+        let cellValue = `${header.prefix || ''} ${get(value, header.key) || '0'} ${header.suffix || ''}`
         if (header.filter) {
           cellValue = header.filter(cellValue)
         }

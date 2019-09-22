@@ -6,7 +6,7 @@ let locales = {
 }
 
 export default {
-  install(Vue) {
+  install: (Vue) => {
     Vue.$_dsLocale = (value) => {
       return (locales[_.get(window, `dsLang`, 'fr')] || locales['fr'])[value]
     }

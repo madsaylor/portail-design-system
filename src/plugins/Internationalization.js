@@ -6,17 +6,19 @@ let locales = {
 }
 
 export default {
-  install: (Vue) => {
-    Vue.$_dsLocale = (value) => {
+  install: function(Vue) {
+    Vue.$_dsLocale = function(value) {
       return (locales[_.get(window, `dsLang`, 'fr')] || locales['fr'])[value]
     }
 
-    Vue.filter('dsTranslate', (value) => Vue.$_dsLocale(value) || value)
+    Vue.filter('dsTranslate', function(value) {
+      return Vue.$_dsLocale(value) || value
+    })
 
     Vue.mixin({
       methods: {
         dsTranslate: Vue.$_dsLocale,
-        dsTranslateComplex: (strings, args, startArgs) => {
+        dsTranslateComplex: function (strings, args, startArgs) {
           let result = ''
           let argsIndex = 0
 

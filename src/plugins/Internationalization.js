@@ -8,7 +8,7 @@ let locales = {
 export default {
   install: function(Vue) {
     Vue.$_dsLocale = function(value) {
-      return (locales[_.get(window, `dsLang`, 'fr')] || locales['fr'])[value]
+      return (locales[_.get(window, 'dsLang', 'fr')] || locales['fr'])[value]
     }
 
     Vue.filter('dsTranslate', function(value) {

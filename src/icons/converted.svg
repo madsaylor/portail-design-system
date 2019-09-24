@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="270px" height="152px" viewBox="0 0 270 152" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>converted</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="converted" transform="translate(0.000000, 1.000000)">
+            <g id="Group" transform="translate(134.950798, 75.140367) rotate(-20.000000) translate(-134.950798, -75.140367) translate(3.450798, 43.140367)">
+                <g id="border-[11-19]" stroke="#FFBD06">
+                    <rect id="outer" stroke-width="3" x="0.5" y="0.5" width="262" height="63" rx="2"></rect>
+                    <rect id="inner" x="4.5" y="4.5" width="254" height="55" rx="2"></rect>
+                </g>
+                <g id="DEVIS-CONVERTI" transform="translate(21.939693, 13.342020)" fill="#FFBD06" font-family="RobotoCondensed-Bold, Roboto Condensed" font-size="32" font-style="condensed" font-weight="bold">
+                    <text>
+                        <tspan x="0" y="30">DEVIS CONVERTI</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

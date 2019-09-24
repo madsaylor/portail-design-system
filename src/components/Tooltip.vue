@@ -13,8 +13,10 @@
 -->
 
 <template>
-  <div :class="['ds-tooltip-wrapper', {'ds-tooltip-wrapper-mini': type === 'mini'}]"
-       :style="stylesObject">
+  <div
+    :class="['ds-tooltip-wrapper', {'ds-tooltip-wrapper-mini': type === 'mini'}]"
+    :style="stylesObject"
+  >
     <template v-if="type === 'mini'">
       <div class="ds-mini">
         <slot></slot>
@@ -23,40 +25,68 @@
 
     <template v-else>
       <div class="reference"
-        v-if="!forceShow"
+        v-if="!forceShow && !forceHide"
+        @click="updateForceShow"
         @mouseover="mouseOver"
         @mouseout="mouseOut"
-        @click="updateForceShow"
       >
         <slot name="reference"></slot>
       </div>
 
-      <Popper
-        v-else
-        trigger="click"
-        :delay-on-mouse-over="0"
-        :delay-on-mouse-out="0"
-        :options="{
-          placement: placement,
-          modifiers: { offset: offset }
-        }"
-        :forceShow="forceShow"
-      >
-        <div class="popper" :style="{width: popoverWidth}">
-          <slot name="popover"></slot>
+      <template v-else>
+        <div>
+          <Popper
+            v-if="forceShow"
+            trigger="click"
+            :delay-on-mouse-over="0"
+            :delay-on-mouse-out="0"
+            :options="{
+              placement: placement,
+              modifiers: { offset: offset }
+            }"
+            :force-show="true"
+          >
+            <div class="popper" :style="{width: popoverWidth}">
+              <slot name="popover"></slot>
+            </div>
+        
+            <div
+              class="reference"
+              ref="reference"
+              slot="reference"
+              @click="updateForceShow"
+            >
+              <slot name="reference"></slot>
+            </div>
+          </Popper>
         </div>
-    
-        <div
-          class="reference"
-          ref="reference"
-          slot="reference"
-          @click="updateForceShow"
-          @mouseover="mouseOver"
-          @mouseout="mouseOut"
-        >
-          <slot name="reference"></slot>
+
+        <div>
+          <Popper
+            v-if="!forceShow"
+            trigger="hover"
+            :delay-on-mouse-over="0"
+            :delay-on-mouse-out="0"
+            :options="{
+              placement: placement,
+              modifiers: { offset: offset }
+            }"
+          >
+            <div class="popper" :style="{width: popoverWidth}">
+              <slot name="popover"></slot>
+            </div>
+        
+            <div
+              class="reference"
+              ref="reference"
+              slot="reference"
+              @click="updateForceShow"
+            >
+              <slot name="reference"></slot>
+            </div>
+          </Popper> 
         </div>
-      </Popper>
+      </template>
     </template>
   </div>
 </template>
@@ -84,6 +114,10 @@ export default {
     forceShow: {
       type: Boolean,
       default: false,
+    },
+    forceHide: {
+      type: Boolean,
+      default: false
     },
     popoverWidth: String,
     margin: {

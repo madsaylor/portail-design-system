@@ -14,6 +14,7 @@
         placement="left"
         class="default-tooltip"
         :forceShow="forceShow"
+        :forceHide="true"
         @update:forceShow="forceShowUpdate"
       >
         <div slot="popover">This is a tooltip content</div>

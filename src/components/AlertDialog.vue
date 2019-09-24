@@ -18,7 +18,7 @@
       </div>
 
       <div class="ds-alert-footer">
-        <Button @click="updateOpenStatus(false)" alt>OK</Button>
+        <Button @click="updateOpenStatus(false)" alt> {{getOkTitle}} </Button>
       </div>
     </div>
   </Dialog>
@@ -45,6 +45,7 @@ export default {
       default: '544px'
     },
     title: String,
+    okTitle: String,
     clickOutsideToClose: {
       type: Boolean,
       default: true
@@ -55,6 +56,9 @@ export default {
       const style = {}
       style.width = this.width
       return style
+    },
+    getOkTitle() {
+      return this.okTitle ? this.okTitle : this.dsTranslate('OK')
     }
   },
   methods: {

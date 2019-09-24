@@ -21,6 +21,12 @@
       "description": "Title of the Confirm Dialog"
     },
     {
+      "name": "okTitle",
+      "type": "String",
+      "default": "OK",
+      "description": "Button title of the Confirm Dialog button"
+    },
+    {
       "name": "clickOutsideToCloase",
       "type": "Boolean",
       "description": "If this property is false, it is impossible to close the modal by clicking outside, default is true"

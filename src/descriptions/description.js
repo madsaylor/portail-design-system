@@ -33,6 +33,7 @@ import Autocomplete from './data/Autocomplete';
 import Star from './data/Star';
 import ExpandableTable from './data/ExpandableTable'
 import FilterSelect from './data/FilterSelect'
+import Chips from './data/Chips'
 
 export default {
   AppHeader,
@@ -69,5 +70,6 @@ export default {
   Autocomplete,
   Star,
   ExpandableTable,
-  FilterSelect
+  FilterSelect,
+  Chips
 }

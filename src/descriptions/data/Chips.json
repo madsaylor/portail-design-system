@@ -1,0 +1,62 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "Array",
+      "description": "Reflect value of Chips component"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label at the top of the Chips component"
+    },
+    {
+      "name": "placeholder",
+      "type": "String",
+      "description": "Setup placeholder inside area related to new chip"
+    },
+    {
+      "name": "removable",
+      "type": "Boolean",
+      "description": "Allow remove chips items when setup as true"
+    },
+    {
+      "name": "validators",
+      "type": "Array<Object>",
+      "description": " Array of validator Objects. When multiple validators fail, only one error is displayed, determined by their order in the array. Each Object should have three fields:",
+      "subProperty": [
+        {
+          "name": "name",
+          "type": "String",
+          "description": "Validator id"
+        },
+        {
+          "name": "message",
+          "type": "String",
+          "description": "Error message that shown when validation fails"
+        },
+        {
+          "name": "validator",
+          "type": "Function",
+          "description": " Function that takes input value as an argument and returns Boolean"
+        }
+      ]
+    },
+    {
+      "name": "showErrors",
+      "type": "Boolean",
+      "default": "true",
+      "description": "Responsible for showing error message"
+    }
+  ],
+  "events": [
+    {
+      "name": "validation",
+      "description": "Emitted when the chips items will be changed"
+    },
+    {
+      "name": "validate",
+      "description": "Listening event 'validate' for running validation even if chips items wasn't touched"
+    }
+  ]
+}

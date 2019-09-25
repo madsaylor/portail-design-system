@@ -99,6 +99,7 @@
         if (this.newChip) {
           this.valueWrapper = this.valueWrapper.concat(this.newChip)
           this.newChip = ''
+          this.setTouchEmitValidation()
         }
       },
       validate() {
@@ -193,7 +194,6 @@
       cursor: text;
       padding-bottom: 5px;
       box-shadow: 0 1px @color-gray-500;
-      line-height: 2;
 
       .ds-chips-label {
         color: @color-gray-500;
@@ -215,10 +215,11 @@
       }
 
       .ds-chips {
+        display: inline-block;
         cursor: default;
-        padding: 7px 8px 7px 10px;
-        margin-right: 10px;
-        border-radius: 15px;
+        padding: 4px 8px 4px 10px;
+        margin: 5px 10px 5px 0;
+        border-radius: 20px;
         background-color: @color-gray-300;
 
         .ds-chip-title {

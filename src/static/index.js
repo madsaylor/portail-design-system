@@ -39,6 +39,7 @@ import DraggableListData from './data/demo/DraggableListData'
 import MultiSelectDropdownData from './data/demo/MultiSelectDropdownData'
 import AutocompleteData from './data/demo/AutocompleteData'
 import StarData from './data/demo/StarData'
+import ChipsData from './data/demo/ChipsData'
 
 export {
   CountriesArray,
@@ -81,5 +82,6 @@ export {
   DraggableListData,
   MultiSelectDropdownData,
   AutocompleteData,
-  StarData
+  StarData,
+  ChipsData
 }

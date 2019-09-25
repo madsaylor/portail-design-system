@@ -21,12 +21,10 @@
           v-for="(header, index) in headers"
           :style="getFlex(header)"
           :key="index"
+          @click="sorting(header)"
         >
-          <span>{{header.title}}</span>
-          <span v-if="header.sortable" class="icons-wrapper">
-            <div @click="sortAsc(header)">▲</div>
-            <div @click="sortDsc(header)">▼</div>
-          </span>
+          <span class="ds-header-title">{{header.title}}</span>
+          <Icon v-if="sortKey === header.key" :source="sortType === 'Increase' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
         </div>
       </Card>
     </div>
@@ -75,13 +73,19 @@
     default: '#9e9e9e'
   };
 
+  const SORT_TYPES = {
+    ASC: 'Increase',
+    DSC: 'Descrease'
+  }
+
   import Card from './Card'
   import Badge from './Badge'
+  import Icon from './Icon'
   import { get } from 'lodash'
 
   export default {
     name: 'Table',
-    components: {Card, Badge},
+    components: {Card, Badge, Icon},
     props: {
       value: Array,
       range: Object,
@@ -92,7 +96,9 @@
       identifierField: String,
     },
     data: () => ({
-      internalRange: undefined
+      internalRange: undefined,
+      sortType: null,
+      sortKey: null
     }),
     computed: {
       getData() {
@@ -145,11 +151,24 @@
         const cellValue = get(value, header.key)
         return COLORS_BY_STATUS[cellValue] || 'primary'
       },
-      sortAsc(header) {
-        this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)
-      },
-      sortDsc(header) {
-        this.value.sort((a, b) => get(a, header.key) <= get(b, header.key) ? 1 : -1)
+      sorting(header) {
+        const { ascSorting, dscSorting } = header
+        if (this.sortKey === header.key && this.sortType === SORT_TYPES.ASC) {
+          this.sortType = SORT_TYPES.DSC
+          if (ascSorting) {
+            this.value.sort((a, b) => ascSorting(get(a, header.key), get(b, header.key)))
+          } else {
+            this.value.sort((a, b) => get(a, header.key) <= get(b, header.key) ? 1 : -1)
+          }
+        } else {
+          this.sortType = SORT_TYPES.ASC
+          if (dscSorting) {
+            this.value.sort((a, b) => dscSorting(get(a, header.key), get(b, header.key)))
+          } else {
+            this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)
+          }
+        }
+        this.sortKey = header.key
       }
     },
     watch: {
@@ -190,11 +209,10 @@
           display: flex;
           justify-content: flex-end;
           align-items: center;
+          cursor: pointer;
 
-          .icons-wrapper {
-            line-height: 10px;
-            margin-left: 10px;
-            font-size: 8px;
+          .ds-header-title {
+            margin-right: 4px;
           }
 
           &:first-child {

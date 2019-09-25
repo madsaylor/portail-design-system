@@ -28,8 +28,8 @@
              v-bind="inputAttrs"
              type="text"
              v-model="newChip"
-             @focus="onFocus"
-             @blur="onBlur"
+             @focus="onFocusInput"
+             @blur="onBlurInput"
              @keypress="onKeyPress"/>
     </div>
     <div v-if="error" class="ds-chips-errors">
@@ -70,10 +70,10 @@
       onBlurChips() {
         this.selectedChips = -1
       },
-      onFocus() {
+      onFocusInput() {
         this.active = true
       },
-      onBlur() {
+      onBlurInput() {
         this.touched = true
         this.active = false
         this.addNewChip()

@@ -2,7 +2,7 @@
   "properties": [
     {
       "name": "value",
-      "type": "Array",
+      "type": "null",
       "description": "Reflect value of Chips component"
     },
     {

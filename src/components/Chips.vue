@@ -47,7 +47,7 @@
     name: 'Chips',
     components: {Icon},
     props: {
-      value: Array,
+      value: null,
       label: String,
       placeholder: String,
       removable: Boolean,

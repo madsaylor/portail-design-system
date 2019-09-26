@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="140px" height="200px" viewBox="0 0 140 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+  <title>Group</title>
+  <desc>Created with Sketch.</desc>
+  <defs></defs>
+  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Group" transform="translate(-50.000000, -20.000000)">
+      <path d="M120,20 C81.4,20 50,51.4 50,90 C50,142.5 120,220 120,220 C120,220 190,142.5 190,90 C190,51.4 158.6,20 120,20 Z" id="Shape" fill="#757575"></path>
+      <polygon id="Shape" points="0 0 240 0 240 240 0 240"></polygon>
+      <path d="M127,125.75 C115.705,125.75 105.94,119.36 101.08,110 L127,110 L127,101 L98.11,101 C97.885,99.515 97.75,98.03 97.75,96.5 C97.75,94.97 97.885,93.485 98.11,92 L127,92 L127,83 L101.08,83 C105.94,73.64 115.75,67.25 127,67.25 C134.245,67.25 140.905,69.905 146.035,74.315 L154,66.35 C146.845,59.915 137.35,56 127,56 C109.36,56 94.42,67.295 88.84,83 L73,83 L73,92 L86.77,92 C86.59,93.485 86.5,94.97 86.5,96.5 C86.5,98.03 86.59,99.515 86.77,101 L73,101 L73,110 L88.84,110 C94.42,125.705 109.36,137 127,137 C137.395,137 146.845,133.085 154,126.65 L145.99,118.685 C140.905,123.095 134.29,125.75 127,125.75 Z" id="Shape" fill="#FFFFFF"></path>
+    </g>
+  </g>
+</svg>

@@ -244,6 +244,7 @@
       }
 
       .ds-chips-input {
+        padding: 10px 0 10px;
         font-size: 16px;
         font-family: Roboto, "Helvetica Neue", sans-serif;
         border: none;

@@ -14,6 +14,7 @@
                       label="Day"
                       :validators="validators"
                       :daysMonth="28"
+                      keyboard="digital"
                       required>
         </Autocomplete>
       </div>
@@ -38,7 +39,8 @@
     <Autocomplete v-model="chosenCustom"
                   :data-list="dataList"
                   label="Custom"
-                  :validators="validators">
+                  :validators="validators"
+                  keyboard="alphabet">
     </Autocomplete>
   </div>
 </template>

@@ -74,6 +74,12 @@
       "type": "Number",
       "default": "31",
       "description": "Set up days count. For autocomplete component with type day"
+    },
+    {
+      "name": "keyboard",
+      "type": "String",
+      "default": "digital",
+      "description": "Set the keyboard type which will be open on mobile devices could be set the next keyboards like: digital and alphabet"
     }
   ],
   "events": [

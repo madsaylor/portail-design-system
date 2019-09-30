@@ -301,7 +301,7 @@ export default {
     type: {
       type: String,
       validator(value) {
-        return ['text', 'date', 'select', 'checkbox', 'radio', 'password', 'number', 'payment-card'].indexOf(value) !== -1
+        return ['text', 'date', 'select', 'checkbox', 'radio', 'password', 'number', 'payment-card', 'tel'].indexOf(value) !== -1
       },
       default: 'text'
     },
@@ -758,7 +758,7 @@ export default {
     }
   }
 
-  &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-payment-card {
+  &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-payment-card, &.ds-tel {
     .ds-label-text {
       .font-desktop-x-small-regular-gray();
       height: 16px;

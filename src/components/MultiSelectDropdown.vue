@@ -1,10 +1,6 @@
 <template>
   <div class="ds-multi-select-dropdown-wrapper">
-    <div v-if="label"
-      class="ds-label-text"
-    >
-      {{ label }}
-    </div>
+    <div v-if="label" class="ds-label-text">{{ label }}</div>
     <input
       :class="['ds-multi-select', {'ds-multi-select-error': checkError}]"
       type="text"

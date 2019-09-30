@@ -34,6 +34,7 @@ import Star from './data/Star';
 import ExpandableTable from './data/ExpandableTable'
 import FilterSelect from './data/FilterSelect'
 import Chips from './data/Chips'
+import Select from './data/Select'
 
 export default {
   AppHeader,
@@ -71,5 +72,6 @@ export default {
   Star,
   ExpandableTable,
   FilterSelect,
-  Chips
+  Chips,
+  Select
 }

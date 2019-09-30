@@ -132,7 +132,7 @@
         for (let i = 0; i < this.validators.length; i++) {
           data.push([
             this.validators[i].name,
-            this.validators[i].validator(this.inputSelectValue)
+            this.validators[i].validator(this.value)
           ])
         }
 

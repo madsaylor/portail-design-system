@@ -7,10 +7,10 @@
       ref="dsSelect"
       v-model="inputSelectValue"
       :placeholder="placeholder"
-      @click="openDropList"
+      @click="toggleDropList"
       readonly="readonly"
     />
-    <Icon expand_more color="gray-400" class="ds-drop-icon" @click="toggleDropList" />
+    <Icon expand_more color="gray-400" class="ds-drop-icon" />
     <div class="ds-select-error-message-wrapper" v-if="checkError">
       {{selectErrors[0]}}
     </div>
@@ -71,9 +71,12 @@
       openDropList() {
         this.touched = true
         this.openDropDownList = true
+        this.$emit('validation', this.validation)
       },
       toggleDropList() {
+        this.touched = true
         this.openDropDownList = !this.openDropDownList
+        this.$emit('validation', this.validation)
       },
       selectValue(option) {
         this.setInputSelectValue(option)
@@ -166,6 +169,7 @@
   .ds-select-wrapper {
     position: relative;
     width: 252px;
+    text-align: left;
 
     .ds-label {
       .font-desktop-x-small-regular-gray();
@@ -223,6 +227,7 @@
       .ds-option-wrapper {
         padding: 5px 10px;
         cursor: pointer;
+        text-align: left;
       }
     }
   }

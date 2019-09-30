@@ -116,7 +116,7 @@
     <label>
       <div v-if="label"
            :id="id"
-           @click="onInputPrevent($event, true)"
+           @click="onInputPrevent($event, true); onCheckboxRadioClick();"
            :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus, 'ds-slide-label-date': getType === 'ds-date',
                     'ds-label-error': inputErrors.length && touched && showErrors},
                     slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']">
@@ -166,7 +166,10 @@
         @blur="touched = true"
       />
 
-      <div v-if="getType === 'ds-checkbox' || getType === 'ds-radio'" :class="[getType]"></div>
+      <div v-if="getType === 'ds-checkbox' || getType === 'ds-radio'"
+           :class="[getType]"
+           @click="onCheckboxRadioClick">
+      </div>
 
       <select
         v-if="getType === 'ds-select'"
@@ -573,6 +576,11 @@ export default {
     }
   },
   methods: {
+    onCheckboxRadioClick() {
+      if (this.getType === 'ds-checkbox' || this.getType === 'ds-radio') {
+        this.inputFocus();
+      }
+    },
     onInputPrevent(event, callInputFocus) {
       if (this.getType === 'ds-date') {
         event.preventDefault()

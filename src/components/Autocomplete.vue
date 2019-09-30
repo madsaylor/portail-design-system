@@ -13,6 +13,7 @@
            icon="close"
            :iconColor="iconColor"
            :showIcon="showIcon"
+           :type="getInputType"
            v-model="inputValue"
            ref="autocomplete"
            @validation="onValidate"
@@ -69,6 +70,13 @@
       daysMonth: {
         type: Number,
         default: 31
+      },
+      keyboard: {
+        type: String,
+        validator(value) {
+          return ['alphabet', 'digital'].indexOf(value) !== -1
+        },
+        default: 'digital'
       }
     },
     data: () => ({
@@ -108,6 +116,9 @@
       },
       showList() {
         return this.dataListWrapper && this.dataListWrapper.length || this.dataSearchListWrapper && this.dataSearchListWrapper.length
+      },
+      getInputType() {
+        return this.keyboard === 'digital' ? 'tel' : 'text'
       }
     },
     methods: {

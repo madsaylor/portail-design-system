@@ -223,6 +223,8 @@
       border: solid 1px #eee;
       background-color: white;
       z-index: 999;
+      max-height: 150px;
+      overflow-y: auto;
 
       .ds-option-wrapper {
         padding: 5px 10px;

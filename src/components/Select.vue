@@ -97,14 +97,14 @@
       setInputSelectValue(value) {
         if (typeof value === 'object' && value) {
           const selectedOption = this.options.find(option => isEqual(option, value))
-          this.inputSelectValue = selectedOption.title || selectedOption.value
+          this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
         } else {
           if (this.idMode) {
             const selectedOption = this.options.find(option => option.id === value)
-            this.inputSelectValue = selectedOption.title || selectedOption.value
+            this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
           } else if (this.valueMode) {
             const selectedOption = this.options.find(option => option.value === value)
-            this.inputSelectValue = selectedOption.title || selectedOption.value
+            this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
           } else {
             this.inputSelectValue = value
           }

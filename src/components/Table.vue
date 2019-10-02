@@ -141,10 +141,11 @@
         }
       },
       getCellValue(value, header) {
-        let cellValue = `${header.prefix || ''} ${get(value, header.key) || '0'} ${header.suffix || ''}`
+        let cellValue = value
         if (header.filter) {
           cellValue = header.filter(cellValue)
         }
+        cellValue = `${header.prefix || ''} ${get(cellValue, header.key) || '0'} ${header.suffix || ''}`
         return cellValue
       },
       getBadgeColor(value, header) {

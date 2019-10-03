@@ -141,7 +141,7 @@
         }
       },
       getCellValue(value, header) {
-        let cellValue = get(value, header.key, '')
+        let cellValue = get(value, header.key, '') || ''
         if (header.filter) {
           cellValue = header.filter(cellValue)
         }

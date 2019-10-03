@@ -20,12 +20,12 @@
       </span>
       <Icon source="left-arrow"
             size="12px"
-            padding="8px 24px 0px"
+            padding="8px 12px"
             @click="previous"
             :disabled="currentPage === 1"/>
       <Icon source="right-arrow"
             size="12px"
-            padding="8px 8px 0px 0px"
+            padding="8px 12px"
             @click="next"
             :disabled="currentPage * size >= count"/>
     </div>

@@ -879,6 +879,7 @@ export default {
       position: absolute;
       bottom: 6px;
       left: 14px;
+      pointer-events: none;
       color: #838795;
       line-height: 24px;
       font-size: 16px;

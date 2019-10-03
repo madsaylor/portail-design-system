@@ -152,8 +152,7 @@
         this.openDropDownList = !this.openDropDownList
       },
       calcInputSelectValue(multiSelectValue) {
-        return this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map(value => value.value) :
-                             multiSelectValue
+        return (this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map(value => value.value) : multiSelectValue) || ''
       },
       validate() {
         if (this.initValidation || this.touched) {

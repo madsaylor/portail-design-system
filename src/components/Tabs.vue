@@ -40,11 +40,15 @@
         <template v-for="(tab, index) in tabs">
           <div
             v-if="!tab.hidden"
-            :class="[simpleTabs ? 'ds-simple-tab' : 'ds-tab', activeTabClass(index),
-                    {'ds-disabled': disabled || tab.disabled}]"
-            @click="onTabClick(tab, index)">
-
-              {{tab.text}}
+            :key="index"
+            :class="[
+              simpleTabs ? 'ds-simple-tab' : 'ds-tab',
+              activeTabClass(index),
+              {'ds-disabled': disabled || tab.disabled}
+            ]"
+            @click="onTabClick(tab, index)"
+          >
+            {{tab.text}}
           </div>
         </template>
       </div>
@@ -121,8 +125,10 @@
       }
     },
     mounted() {
-      this.$el.addEventListener('touchstart', this.touchstart)
-      this.$el.addEventListener('touchend', this.touchend)
+      if (!this.simpleTabs) {
+        this.$el.addEventListener('touchstart', this.touchstart)
+        this.$el.addEventListener('touchend', this.touchend)
+      }
     }
   }
 </script>

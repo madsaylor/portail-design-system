@@ -97,6 +97,7 @@
     .ds-pagination-count {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
 
       .ds-count {
         cursor: default;

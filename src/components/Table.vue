@@ -24,7 +24,7 @@
           @click="sorting(header)"
         >
           <span class="ds-header-title">{{header.title}}</span>
-          <Icon v-if="sortKey === header.key" :source="sortType === 'Increase' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
+          <Icon v-if="sortKey === header.key" :source="sortType === '+' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
         </div>
       </Card>
     </div>

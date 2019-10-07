@@ -10,7 +10,7 @@
       @click="toggleDropList"
       readonly="readonly"
     />
-    <Icon expand_more color="gray-400" class="ds-drop-icon" />
+    <Icon expand_more color="gray-400" class="ds-drop-icon"/>
     <div class="ds-select-error-message-wrapper" v-if="checkError">
       {{selectErrors[0]}}
     </div>
@@ -205,6 +205,7 @@
     .ds-drop-icon {
       cursor: pointer;
       position: absolute;
+      pointer-events: none;
       right: 5px;
       bottom: 10%;
     }

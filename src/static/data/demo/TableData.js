@@ -1,10 +1,7 @@
 let usage = `
 <Table
-  v-model="clients"
-  :range="range"
-  :ratios="ratios"
+  v-model="value"
   :headers="headers"
-  :identifierField="identifierField"
 />
 `.slice(1)
 

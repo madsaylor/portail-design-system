@@ -130,18 +130,8 @@
       sorting(header) {
         if (this.sortKey === header.key && this.sortType === SORT_TYPES.ASC) {
           this.sortType = SORT_TYPES.DSC
-          // if (ascSorting) {
-          //   this.value.sort((a, b) => ascSorting(get(a, header.key), get(b, header.key)))
-          // } else {
-          //   this.value.sort((a, b) => get(a, header.key) <= get(b, header.key) ? 1 : -1)
-          // }
         } else {
           this.sortType = SORT_TYPES.ASC
-          // if (dscSorting) {
-          //   this.value.sort((a, b) => dscSorting(get(a, header.key), get(b, header.key)))
-          // } else {
-          //   this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)
-          // }
         }
         this.sortKey = header.key
 

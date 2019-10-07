@@ -6,21 +6,45 @@
       "description": "Data for displaying table"
     },
     {
-      "name": "ratios",
-      "type": "Array",
-      "default": "[1, ..]",
-      "description": "Array for set up flex ratio between field of record"
-    },
-    {
       "name": "headers",
       "type": "Array",
       "default": [],
-      "description": "Array for indicating the key of columns, and title of columns",
+      "description": "Configuration of each row",
       "subProperty": [
         {
           "name": "key",
           "type": "String",
           "description": "This indicates what values should be shown from the Object array in the column"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "Title of the column"
+        },
+        {
+          "name": "width",
+          "type": "String",
+          "description": "Width of the column"
+        },
+        {
+          "name": "prefix",
+          "type": "String",
+          "description": "Prefix of the cell in the current column"
+        },
+        {
+          "name": "suffix",
+          "type": "String",
+          "description": "Suffix of the cell in the current column"
+        },
+        {
+          "name": "filter",
+          "type": "String",
+          "description": "Filter function of the cell in the current column"
+        },
+        {
+          "name": "badge",
+          "type": "Boolean",
+          "description": "If this value is true, value of the cell will be put in Badge component. Defult is False"
         }
       ]
     },
@@ -28,11 +52,6 @@
       "name": "identifierField",
       "type": "String",
       "description": "Field which is identifier for emit data from pickup event"
-    },
-    {
-      "name": "range",
-      "type": "Object",
-      "description": "Object is provide start and end data range points for displaying on current page"
     }
   ],
   "events": [

@@ -3,17 +3,16 @@
 
   Usage:
 
-  <Pagination :count="count"        - Length of data array
-              :size="size"          - Size of records which is displaying on one page
-              :current="current"    - Current page which is displayed
-              @getCurrent>          - Emitted event on local change of current page value in pagination component and take back local current page value
-      Pagination content...
-  </Pagination>
+  <Pagination
+    :count="count"        - Length of data array
+    :size="size"          - Size of records which is displaying on one page
+    :current="current"    - Current page which is displayed
+    @getCurrent           - Emitted event on local change of current page value in pagination component and take back local current page value
+  />
 -->
 
 <template>
   <div class="ds-pagination-wrapper">
-    <slot :range="range"></slot>
     <div class="ds-pagination-count">
       <span class="ds-count">
         {{this.startNumber}}-{{this.endNumber}} of {{count}}
@@ -54,12 +53,6 @@
           let temporaryCount = this.currentPage * this.size
           return temporaryCount > this.count ? this.count : temporaryCount
         },
-        range() {
-          return {
-            start: this.startNumber,
-            end: this.endNumber
-          }
-        },
         currentPage: {
           get() {
             return this.paginationCurrent
@@ -97,6 +90,7 @@
     .ds-pagination-count {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
 
       .ds-count {
         cursor: default;

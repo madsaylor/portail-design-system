@@ -4,9 +4,7 @@
   Usage:
 
   <Table v-model="value"                    - Data for displaying table
-         :range="range"                     - Object is provide start and end data range points for displaying on
-                                              current page
-         :headers="headers"                 - Array of object which contains key value of data, and title of the columns
+         :headers="headers"                 - Array of object which contains configuration of the each rows
          :identifierField="identifierField" - Field which is identifier for emit data from pickup event
          @pickup>                           - Emitted when click on record, will emit current record data or identifier
                                               data with index on current page.
@@ -14,7 +12,7 @@
 -->
 
 <template>
-  <div class="ds-table-wrapper" v-if="getRange">
+  <div class="ds-table-wrapper">
     <div class="ds-table-header">
       <Card class="ds-header-wrapper">
         <div class="ds-header"
@@ -24,7 +22,7 @@
           @click="sorting(header)"
         >
           <span class="ds-header-title">{{header.title}}</span>
-          <Icon v-if="sortKey === header.key" :source="sortType === 'Increase' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
+          <Icon v-if="sortKey === header.key" :source="sortType === '+' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
         </div>
       </Card>
     </div>
@@ -32,7 +30,7 @@
     <div class="ds-table-body-wrapper">
       <div
         class="ds-table-body"
-        v-for="(data, dataIndex) in getData"
+        v-for="(data, dataIndex) in value"
         :key="dataIndex"
         @click="onClick(data, dataIndex)"
       >
@@ -74,8 +72,8 @@
   };
 
   const SORT_TYPES = {
-    ASC: 'Increase',
-    DSC: 'Descrease'
+    ASC: '+',
+    DSC: '-'
   }
 
   import Card from './Card'
@@ -88,7 +86,6 @@
     components: {Card, Badge, Icon},
     props: {
       value: Array,
-      range: Object,
       headers: {
         type: Array,
         default: () => []
@@ -96,23 +93,9 @@
       identifierField: String,
     },
     data: () => ({
-      internalRange: undefined,
       sortType: null,
       sortKey: null
     }),
-    computed: {
-      getData() {
-        return this.value.slice(this.getRange.start - 1, this.getRange.end)
-      },
-      getRange: {
-        get() {
-          return this.internalRange
-        },
-        set(value) {
-          this.internalRange = value
-        }
-      }
-    },
     methods: {
       getFlex(header) {
         if (header.width) {
@@ -132,14 +115,6 @@
           this.$emit('pickup', data, dataIndex)
         }
       },
-      checkRange() {
-        if (!this.getRange) {
-          this.getRange = {
-            start: 1,
-            end: this.value.length
-          }
-        }
-      },
       getCellValue(value, header) {
         let cellValue = get(value, header.key, '') || ''
         if (header.filter) {
@@ -153,33 +128,26 @@
         return COLORS_BY_STATUS[cellValue] || 'primary'
       },
       sorting(header) {
-        const { ascSorting, dscSorting } = header
         if (this.sortKey === header.key && this.sortType === SORT_TYPES.ASC) {
           this.sortType = SORT_TYPES.DSC
-          if (ascSorting) {
-            this.value.sort((a, b) => ascSorting(get(a, header.key), get(b, header.key)))
-          } else {
-            this.value.sort((a, b) => get(a, header.key) <= get(b, header.key) ? 1 : -1)
-          }
+          // if (ascSorting) {
+          //   this.value.sort((a, b) => ascSorting(get(a, header.key), get(b, header.key)))
+          // } else {
+          //   this.value.sort((a, b) => get(a, header.key) <= get(b, header.key) ? 1 : -1)
+          // }
         } else {
           this.sortType = SORT_TYPES.ASC
-          if (dscSorting) {
-            this.value.sort((a, b) => dscSorting(get(a, header.key), get(b, header.key)))
-          } else {
-            this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)
-          }
+          // if (dscSorting) {
+          //   this.value.sort((a, b) => dscSorting(get(a, header.key), get(b, header.key)))
+          // } else {
+          //   this.value.sort((a, b) => get(a, header.key) >= get(b, header.key) ? 1 : -1)
+          // }
         }
         this.sortKey = header.key
+
+        const sortCombinationKey = (this.sortType + this.sortKey).replace('+', '')
+        this.$emit('sort', sortCombinationKey)
       }
-    },
-    watch: {
-      range(newValue) {
-        this.getRange = newValue
-      }
-    },
-    mounted() {
-      this.getRange = this.range
-      this.checkRange()
     }
   }
 </script>

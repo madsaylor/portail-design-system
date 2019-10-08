@@ -723,6 +723,7 @@ export default {
         }, 300)
       }
       this.setOverflow(this.isMobile);
+      this.$emit('datepickerVisible', value);
     }
   },
   beforeDestroy() {

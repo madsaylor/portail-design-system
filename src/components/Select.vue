@@ -104,7 +104,7 @@
           selectedOption = this.options.find(option => isEqual(option, value))
         }
         
-        this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : value.title || value.value || ''
+        this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : value && (value.title || value.value || '')
       },
       setValidity(field, value) {
         const orgValidators = cloneDeep(this.validators)

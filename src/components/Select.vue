@@ -156,6 +156,10 @@
       value(val) {
         this.$emit('validation', this.validation)
         this.setInputSelectValue(val)
+      },
+      options() {
+        this.$emit('validation', this.validation)
+        this.setInputSelectValue(this.value)
       }
     }
   }

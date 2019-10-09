@@ -89,24 +89,22 @@
         }
       },
       setInputSelectValue(value) {
+        let selectedOption = null
         if (this.idMode) {
-          let selectedOption = this.options.find(option => option.id === value.id)
+          selectedOption = this.options.find(option => option.id === value.id)
           if (!selectedOption) {
             selectedOption = this.options.find(option => option.id === value)
           }
-          this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
         } else if (this.valueMode) {
-          let selectedOption = this.options.find(option => option.value === value.value)
+          selectedOption = this.options.find(option => option.value === value.value)
           if (!selectedOption) {
             selectedOption = this.options.find(option => option.value === value)
           }
-          this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
         } else if (typeof value === 'object' && value) {
-          const selectedOption = this.options.find(option => isEqual(option, value))
-          this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
-        } else {
-          this.inputSelectValue = value
+          selectedOption = this.options.find(option => isEqual(option, value))
         }
+        
+        this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : value.title || value.value || ''
       },
       setValidity(field, value) {
         const orgValidators = cloneDeep(this.validators)

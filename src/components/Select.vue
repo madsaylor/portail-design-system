@@ -158,8 +158,10 @@
         this.setInputSelectValue(val)
       },
       options() {
-        this.$emit('validation', this.validation)
-        this.setInputSelectValue(this.value)
+        if (this.value) {
+          this.$emit('validation', this.validation)
+          this.setInputSelectValue(this.value)
+        }
       }
     }
   }

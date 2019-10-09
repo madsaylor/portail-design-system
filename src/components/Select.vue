@@ -80,13 +80,7 @@
       },
       selectValue(option) {
         this.setInputSelectValue(option)
-        if (this.idMode) {
-          this.$emit('input', option.id)
-        } else if (this.valueMode) {
-          this.$emit('input', option.value)
-        } else {
-          this.$emit('input', option)
-        }
+        this.$emit('input', option)
         this.openDropDownList = false
       },
       validate() {
@@ -95,19 +89,23 @@
         }
       },
       setInputSelectValue(value) {
-        if (typeof value === 'object' && value) {
+        if (this.idMode) {
+          let selectedOption = this.options.find(option => option.id === value.id)
+          if (!selectedOption) {
+            selectedOption = this.options.find(option => option.id === value)
+          }
+          this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
+        } else if (this.valueMode) {
+          let selectedOption = this.options.find(option => option.value === value.value)
+          if (!selectedOption) {
+            selectedOption = this.options.find(option => option.value === value)
+          }
+          this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
+        } else if (typeof value === 'object' && value) {
           const selectedOption = this.options.find(option => isEqual(option, value))
           this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
         } else {
-          if (this.idMode) {
-            const selectedOption = this.options.find(option => option.id === value)
-            this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
-          } else if (this.valueMode) {
-            const selectedOption = this.options.find(option => option.value === value)
-            this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
-          } else {
-            this.inputSelectValue = value
-          }
+          this.inputSelectValue = value
         }
       },
       setValidity(field, value) {

@@ -33,7 +33,7 @@
     data: () => ({
       openUsage: true,
       usage: SelectData.usage,
-      selectValue: 1,
+      selectValue: { id: 2 },
       options: [
         { id: 1, value: 'Espèces' },
         { id: 2, value: 'Chèque' },
@@ -44,7 +44,7 @@
         {
           name: 'required',
           message: 'The field is required',
-          validator: value => value && !!value.length
+          validator: value => value && !!value
         }
       ]
     })

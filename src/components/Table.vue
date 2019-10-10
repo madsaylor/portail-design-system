@@ -170,10 +170,6 @@
           align-items: center;
           cursor: pointer;
 
-          .ds-header-title {
-            margin-right: 4px;
-          }
-
           &:first-child {
             text-align: left;
             justify-content: flex-start;

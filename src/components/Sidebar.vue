@@ -179,8 +179,6 @@ export default {
         }
         el = el.parentNode
       }
-      event.preventDefault();
-      event.stopPropagation();
       this.$emit('update:opened', false)
     },
   },

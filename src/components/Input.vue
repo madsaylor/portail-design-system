@@ -880,10 +880,12 @@ export default {
       position: absolute;
       bottom: 6px;
       left: 14px;
+      right: 32px;
       pointer-events: none;
       color: #838795;
       line-height: 24px;
       font-size: 16px;
+      background-color: white;
     }
 
     .ds-select-placeholder + .ds-icon {

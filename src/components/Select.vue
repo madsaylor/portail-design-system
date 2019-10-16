@@ -36,6 +36,8 @@
 </template>
 
 <script>
+  import _ from 'lodash';
+
   import { cloneDeep, isEqual } from 'lodash'
   import Dropdown from './Dropdown'
   import Icon from './Icon'
@@ -97,7 +99,7 @@
       setInputSelectValue(value) {
         let selectedOption = null
         if (this.idMode) {
-          selectedOption = this.options.find(option => option.id ===  value && value.id)
+          selectedOption = this.options.find(option => option.id ===  _.get(value, 'id'))
           if (!selectedOption) {
             selectedOption = this.options.find(option => option.id === value)
           }

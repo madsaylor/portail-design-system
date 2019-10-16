@@ -10,7 +10,9 @@
       @click="toggleDropList"
       readonly="readonly"
     />
-    <Icon expand_more color="gray-400" class="ds-drop-icon"/>
+    <Icon :source="openDropDownList && reversibleIcon ? 'expand_less' : 'expand_more'"
+          color="gray-400"
+          class="ds-drop-icon"/>
     <div class="ds-select-error-message-wrapper" v-if="checkError">
       {{selectErrors[0]}}
     </div>
@@ -56,6 +58,10 @@
         default: false
       },
       valueMode: {
+        type: Boolean,
+        default: false
+      },
+      reversibleIcon: {
         type: Boolean,
         default: false
       }

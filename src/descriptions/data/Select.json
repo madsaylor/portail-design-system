@@ -36,6 +36,12 @@
       "name": "placeholder",
       "type": "String",
       "description": "Show placeholder when value is empty"
+    },
+    {
+      "name": "reversibleIcon",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Reversible icon on select component"
     }
   ],
   "events": [

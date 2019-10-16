@@ -97,7 +97,7 @@
       setInputSelectValue(value) {
         let selectedOption = null
         if (this.idMode) {
-          selectedOption = this.options.find(option => option.id === value.id)
+          selectedOption = this.options.find(option => option.id ===  value && value.id)
           if (!selectedOption) {
             selectedOption = this.options.find(option => option.id === value)
           }

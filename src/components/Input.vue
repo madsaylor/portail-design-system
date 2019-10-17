@@ -133,7 +133,7 @@
       />
 
       <input
-        v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
+        v-if="getType !== 'ds-select' && getType !== 'ds-radio' && !mask"
         v-bind="inputAttrs"
         :[checkMaxLength]="maxlength"
         :[checkPasswordType]="type"
@@ -148,6 +148,32 @@
         v-model="inputValue"
         ref="input"
         :style="getStyle"
+        @focus.prevent="inputFocus"
+        @[checkSetClickEvent].prevent="inputFocus"
+        @blur="inputBlur"
+        @keypress="onKeyPress"
+        @keydown="onKeyDown"
+        @mousedown="onInputPrevent($event)"
+        @paste.prevent="onPaste($event)"
+      />
+
+      <input
+        v-if="getType !== 'ds-select' && getType !== 'ds-radio' && mask"
+        v-bind="inputAttrs"
+        :[checkMaxLength]="maxlength"
+        :[checkPasswordType]="type"
+        :class="{
+          'ds-has-icon': icon_,
+          'ds-error': inputErrors.length && touched && showErrors,
+          'ds-slide-input': slideLabel,
+          'date': getType === 'ds-date',
+          'ds-has-left-icon': iconLeft,
+          'ds-text-right': textAlign === 'right'
+        }"
+        v-model="inputValue"
+        ref="input"
+        :style="getStyle"
+        v-mask="mask"
         @focus.prevent="inputFocus"
         @[checkSetClickEvent].prevent="inputFocus"
         @blur="inputBlur"
@@ -363,7 +389,8 @@ export default {
     selectOptionFormat: {
       type: Number,
       default: 1
-    }
+    },
+    mask: String
   },
   data: () => ({
     validateEventName: undefined,

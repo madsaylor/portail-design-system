@@ -82,6 +82,7 @@
     "libphonenumber-js": "^1.7.15",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "v-mask": "^2.0.2",
     "vue-popperjs": "^2.0.4",
     "vue-signature-pad": "^1.1.9-beta.1",
     "vue2-dropzone": "3.5.2",

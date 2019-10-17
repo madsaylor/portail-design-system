@@ -29,7 +29,7 @@
         :key="index"
         @click="selectValue(option)"
       >
-        {{option.title}} {{option.value}}
+        {{option.title}} <span v-if="!displayTitle">{{option.value}}</span>
       </div>
     </Dropdown>
   </div>
@@ -64,6 +64,10 @@
         default: false
       },
       reversibleIcon: {
+        type: Boolean,
+        default: false
+      },
+      displayTitle: {
         type: Boolean,
         default: false
       }

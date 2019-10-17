@@ -68,6 +68,7 @@
       <Input sm label="Small" v-model="textValue"/>
       <Input md label="Medium" v-model="textValue"/>
       <Input lg label="Large" v-model="textValue"/>
+      <Input label="Mask: 12/20" v-mask="'##/##'" v-model="maskValue"/>
       <Input
         md
         help="This is an explanation of what the field is used for."
@@ -282,6 +283,7 @@ export default {
     openUsage: true,
     usage: InputData.usage,
     textValue: '',
+    maskValue: '',
     currencyValue: 20,
     selectValue: null,
     slideTextValue: 'Test text',

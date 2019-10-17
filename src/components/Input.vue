@@ -330,7 +330,8 @@ export default {
     type: {
       type: String,
       validator(value) {
-        return ['text', 'date', 'select', 'checkbox', 'radio', 'password', 'number', 'payment-card', 'tel'].indexOf(value) !== -1
+        return ['text', 'date', 'select', 'checkbox', 'radio', 'password', 'number',
+                'number-dot', 'payment-card', 'tel'].indexOf(value) !== -1
       },
       default: 'text'
     },
@@ -581,7 +582,8 @@ export default {
       return this.getType === 'ds-checkbox' ? null : 'click'
     },
     checkMaxLength() {
-      return (this.type === 'text' || this.type === 'password' || this.type === 'number' || this.type === 'payment-card') && this.maxlength ? 'maxlength' : null
+      return (this.type === 'text' || this.type === 'password' || this.type === 'number' || this.type === 'number-dot' ||
+              this.type === 'payment-card') && this.maxlength ? 'maxlength' : null
     },
     checkPasswordType() {
       return this.getType === 'ds-password' ? this.type : null
@@ -659,8 +661,12 @@ export default {
       event = event ? event : window.event
       let charCode = event.which ? event.which : event.keyCode
 
-      if ((this.type === 'payment-card' && charCode > 32 || this.type === 'number' && charCode > 31) &&
-          (charCode < 48 || charCode > 57)) {
+      console.log('charCode ', charCode);
+      if ((this.type === 'payment-card' && charCode > 32 || this.type === 'number' && charCode > 31 ||
+          (this.type === 'number-dot' && (charCode > 31 && charCode !== 46)) &&
+          (charCode < 48 || charCode > 57))) {
+
+        console.log('here');
         event.preventDefault()
       }
     },
@@ -710,6 +716,8 @@ export default {
       if (this.value || paste) {
         if (this.type === 'number') {
           this.setValueNumber(value || this.inputValue)
+        } else if (this.type === 'number-dot') {
+          this.setValueNumberDot(value || this.inputValue)
         } else if (this.type === 'payment-card') {
           this.setValueNumberWhitespace(value || this.inputValue)
         } else {
@@ -723,6 +731,9 @@ export default {
     },
     setValueNumber(value) {
       this.inputValue = value.replace(/[^0-9]+/g, '').slice(0, this.maxlength)
+    },
+    setValueNumberDot(value) {
+      this.inputValue = value.replace(/[^0-9.]+/g, '').slice(0, this.maxlength)
     },
     setValueNumberWhitespace(value) {
       this.inputValue = value.replace(/[^0-9 ]+/g, '').slice(0, this.maxlength)
@@ -794,7 +805,7 @@ export default {
     }
   }
 
-  &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-payment-card, &.ds-tel {
+  &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-number-dot, &.ds-payment-card, &.ds-tel {
     .ds-label-text {
       .font-desktop-x-small-regular-gray();
       height: 16px;

@@ -738,6 +738,9 @@ export default {
     },
     onIconClick() {
       this.$emit('icon-click')
+    },
+    setTouched(touched) {
+      this.touched = touched
     }
   },
   watch: {

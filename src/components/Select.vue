@@ -92,7 +92,13 @@
       },
       selectValue(option) {
         this.setInputSelectValue(option)
-        this.$emit('input', option)
+        if (this.idMode && option.id) {
+          this.$emit('input', option.id)
+        } else if (this.valueMode && option.value) {
+          this.$emit('input', option.value)
+        } else  {
+          this.$emit('input', option)
+        }
         this.openDropDownList = false
       },
       validate() {
@@ -128,6 +134,9 @@
         })
         this.$emit('validation', this.validation)
         this.validators = cloneDeep(orgValidators)
+      },
+      setTouched(touched) {
+        this.touched = touched
       }
     },
     computed: {

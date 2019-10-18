@@ -48,6 +48,12 @@
       "type": "Boolean",
       "default": "false",
       "description": "When props set up as true display only title in options"
+    },
+    {
+      "name": "emitFullOption",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Emit full option object when set up as true"
     }
   ],
   "events": [

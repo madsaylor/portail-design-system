@@ -70,6 +70,10 @@
       displayTitle: {
         type: Boolean,
         default: false
+      },
+      emitFullOption: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -92,9 +96,9 @@
       },
       selectValue(option) {
         this.setInputSelectValue(option)
-        if (this.idMode && option.id) {
+        if (this.idMode && option.id && !this.emitFullOption) {
           this.$emit('input', option.id)
-        } else if (this.valueMode && option.value) {
+        } else if (this.valueMode && option.value && !this.emitFullOption) {
           this.$emit('input', option.value)
         } else  {
           this.$emit('input', option)

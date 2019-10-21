@@ -133,7 +133,7 @@
       />
 
       <input
-        v-if="getType !== 'ds-select' && getType !== 'ds-radio'"
+        v-if="getType !== 'ds-select' && getType !== 'ds-radio' && !mask"
         v-bind="inputAttrs"
         :[checkMaxLength]="maxlength"
         :[checkPasswordType]="type"
@@ -148,6 +148,32 @@
         v-model="inputValue"
         ref="input"
         :style="getStyle"
+        @focus.prevent="inputFocus"
+        @[checkSetClickEvent].prevent="inputFocus"
+        @blur="inputBlur"
+        @keypress="onKeyPress"
+        @keydown="onKeyDown"
+        @mousedown="onInputPrevent($event)"
+        @paste.prevent="onPaste($event)"
+      />
+
+      <input
+        v-if="getType !== 'ds-select' && getType !== 'ds-radio' && mask"
+        v-bind="inputAttrs"
+        :[checkMaxLength]="maxlength"
+        :[checkPasswordType]="type"
+        :class="{
+          'ds-has-icon': icon_,
+          'ds-error': inputErrors.length && touched && showErrors,
+          'ds-slide-input': slideLabel,
+          'date': getType === 'ds-date',
+          'ds-has-left-icon': iconLeft,
+          'ds-text-right': textAlign === 'right'
+        }"
+        v-model="inputValue"
+        ref="input"
+        :style="getStyle"
+        v-mask="mask"
         @focus.prevent="inputFocus"
         @[checkSetClickEvent].prevent="inputFocus"
         @blur="inputBlur"
@@ -304,7 +330,8 @@ export default {
     type: {
       type: String,
       validator(value) {
-        return ['text', 'date', 'select', 'checkbox', 'radio', 'password', 'number', 'payment-card', 'tel'].indexOf(value) !== -1
+        return ['text', 'date', 'select', 'checkbox', 'radio', 'password', 'number',
+                'number-dot', 'payment-card', 'tel'].indexOf(value) !== -1
       },
       default: 'text'
     },
@@ -363,7 +390,8 @@ export default {
     selectOptionFormat: {
       type: Number,
       default: 1
-    }
+    },
+    mask: String
   },
   data: () => ({
     validateEventName: undefined,
@@ -554,7 +582,8 @@ export default {
       return this.getType === 'ds-checkbox' ? null : 'click'
     },
     checkMaxLength() {
-      return (this.type === 'text' || this.type === 'password' || this.type === 'number' || this.type === 'payment-card') && this.maxlength ? 'maxlength' : null
+      return (this.type === 'text' || this.type === 'password' || this.type === 'number' || this.type === 'number-dot' ||
+              this.type === 'payment-card') && this.maxlength ? 'maxlength' : null
     },
     checkPasswordType() {
       return this.getType === 'ds-password' ? this.type : null
@@ -632,8 +661,10 @@ export default {
       event = event ? event : window.event
       let charCode = event.which ? event.which : event.keyCode
 
-      if ((this.type === 'payment-card' && charCode > 32 || this.type === 'number' && charCode > 31) &&
-          (charCode < 48 || charCode > 57)) {
+      if ((this.type === 'payment-card' && charCode > 32 || this.type === 'number' && charCode > 31 ||
+          (this.type === 'number-dot' && (charCode > 31 && charCode !== 46)) &&
+          (charCode < 48 || charCode > 57))) {
+
         event.preventDefault()
       }
     },
@@ -683,6 +714,8 @@ export default {
       if (this.value || paste) {
         if (this.type === 'number') {
           this.setValueNumber(value || this.inputValue)
+        } else if (this.type === 'number-dot') {
+          this.setValueNumberDot(value || this.inputValue)
         } else if (this.type === 'payment-card') {
           this.setValueNumberWhitespace(value || this.inputValue)
         } else {
@@ -697,11 +730,17 @@ export default {
     setValueNumber(value) {
       this.inputValue = value.replace(/[^0-9]+/g, '').slice(0, this.maxlength)
     },
+    setValueNumberDot(value) {
+      this.inputValue = value.replace(/[^0-9.]+/g, '').slice(0, this.maxlength)
+    },
     setValueNumberWhitespace(value) {
       this.inputValue = value.replace(/[^0-9 ]+/g, '').slice(0, this.maxlength)
     },
     onIconClick() {
       this.$emit('icon-click')
+    },
+    setTouched(touched) {
+      this.touched = touched
     }
   },
   watch: {
@@ -723,6 +762,7 @@ export default {
         }, 300)
       }
       this.setOverflow(this.isMobile);
+      this.$emit('datepickerVisible', value);
     }
   },
   beforeDestroy() {
@@ -766,7 +806,7 @@ export default {
     }
   }
 
-  &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-payment-card, &.ds-tel {
+  &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-number-dot, &.ds-payment-card, &.ds-tel {
     .ds-label-text {
       .font-desktop-x-small-regular-gray();
       height: 16px;
@@ -879,10 +919,12 @@ export default {
       position: absolute;
       bottom: 6px;
       left: 14px;
+      right: 32px;
       pointer-events: none;
       color: #838795;
       line-height: 24px;
       font-size: 16px;
+      background-color: white;
     }
 
     .ds-select-placeholder + .ds-icon {

@@ -10,7 +10,9 @@
       @click="toggleDropList"
       readonly="readonly"
     />
-    <Icon expand_more color="gray-400" class="ds-drop-icon"/>
+    <Icon :source="openDropDownList && reversibleIcon ? 'expand_less' : 'expand_more'"
+          color="gray-400"
+          class="ds-drop-icon"/>
     <div class="ds-select-error-message-wrapper" v-if="checkError">
       {{selectErrors[0]}}
     </div>
@@ -27,13 +29,15 @@
         :key="index"
         @click="selectValue(option)"
       >
-        {{option.title}} {{option.value}}
+        {{option.title}} <span v-if="!displayTitle">{{option.value}}</span>
       </div>
     </Dropdown>
   </div>
 </template>
 
 <script>
+  import _ from 'lodash';
+
   import { cloneDeep, isEqual } from 'lodash'
   import Dropdown from './Dropdown'
   import Icon from './Icon'
@@ -58,6 +62,18 @@
       valueMode: {
         type: Boolean,
         default: false
+      },
+      reversibleIcon: {
+        type: Boolean,
+        default: false
+      },
+      displayTitle: {
+        type: Boolean,
+        default: false
+      },
+      emitFullOption: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -80,11 +96,11 @@
       },
       selectValue(option) {
         this.setInputSelectValue(option)
-        if (this.idMode) {
+        if (this.idMode && option.id && !this.emitFullOption) {
           this.$emit('input', option.id)
-        } else if (this.valueMode) {
+        } else if (this.valueMode && option.value && !this.emitFullOption) {
           this.$emit('input', option.value)
-        } else {
+        } else  {
           this.$emit('input', option)
         }
         this.openDropDownList = false
@@ -95,20 +111,22 @@
         }
       },
       setInputSelectValue(value) {
-        if (typeof value === 'object' && value) {
-          const selectedOption = this.options.find(option => isEqual(option, value))
-          this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
-        } else {
-          if (this.idMode) {
-            const selectedOption = this.options.find(option => option.id === value)
-            this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
-          } else if (this.valueMode) {
-            const selectedOption = this.options.find(option => option.value === value)
-            this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : ''
-          } else {
-            this.inputSelectValue = value
+        let selectedOption = null
+        if (this.idMode) {
+          selectedOption = this.options.find(option => option.id ===  _.get(value, 'id'))
+          if (!selectedOption) {
+            selectedOption = this.options.find(option => option.id === value)
           }
+        } else if (this.valueMode) {
+          selectedOption = this.options.find(option => option.value === value.value)
+          if (!selectedOption) {
+            selectedOption = this.options.find(option => option.value === value)
+          }
+        } else if (typeof value === 'object' && value) {
+          selectedOption = this.options.find(option => isEqual(option, value))
         }
+        
+        this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : value && (value.title || value.value || '')
       },
       setValidity(field, value) {
         const orgValidators = cloneDeep(this.validators)
@@ -120,6 +138,9 @@
         })
         this.$emit('validation', this.validation)
         this.validators = cloneDeep(orgValidators)
+      },
+      setTouched(touched) {
+        this.touched = touched
       }
     },
     computed: {
@@ -158,6 +179,12 @@
       value(val) {
         this.$emit('validation', this.validation)
         this.setInputSelectValue(val)
+      },
+      options() {
+        if (this.value) {
+          this.$emit('validation', this.validation)
+          this.setInputSelectValue(this.value)
+        }
       }
     }
   }

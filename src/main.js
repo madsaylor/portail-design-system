@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { VueMaskDirective } from 'v-mask'
 import VueSignaturePad from 'vue-signature-pad'
 import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/monokai.css'
@@ -29,6 +30,7 @@ Vue.use(VueHighlightJS)
 Vue.use(VueSignaturePad)
 Vue.use(Internationalization)
 Vue.use(GlobalFilters)
+Vue.directive('mask', VueMaskDirective);
 
 new Vue({
   render: h => h(App),

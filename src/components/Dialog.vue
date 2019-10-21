@@ -27,7 +27,7 @@
     :id="backdropId"
   >
     <div
-      class="ds-dialog-backdrop"
+      :class="['ds-dialog-backdrop', {'ds-dialog-datepicker-backdrop': datepickerContainer}]"
       :style="{opacity: backdropOpacity, 'background-color': backgroundColor}"
       @click.stop="backdropClick()"
       @keydown="e => escapePress(e)"
@@ -365,6 +365,19 @@
     .ds-full-screen-active-content {
       width: 100% !important;
       height: 100% !important;
+    }
+  }
+
+  @media @screen-small {
+    .ds-dialog {
+      .ds-dialog-datepicker-container {
+        margin-bottom: auto;
+        height: 430px;
+      }
+
+      .ds-dialog-datepicker-backdrop {
+        opacity: 1 !important;
+      }
     }
   }
 

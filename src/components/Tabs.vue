@@ -53,15 +53,19 @@
         </template>
       </div>
     </div>
-    <div class="ds-tabs-body">
+    <div class="ds-tabs-body" :id="idContent">
       <slot :name="activeTabBody"></slot>
+      <Loader v-if="enableLoader" v-model="enableLoader" :target="idContent"></Loader>
     </div>
   </div>
 </template>
 
 <script>
+  import Loader from './Loader'
+
   export default {
     name: 'Tabs',
+    components: {Loader},
     props: {
       tabsAlign: {
         type: String,
@@ -81,11 +85,16 @@
       tabs: {
         required: true,
         type: Array
+      },
+      enableLoader: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({
       startX: undefined,
-      minDistance: 100
+      minDistance: 100,
+      idContent: 'ds-tabs-content-'.concat(Math.random().toString(15).substring(5))
     }),
     computed: {
       activeTabBody() {
@@ -201,6 +210,10 @@
           background-color: @color-white;
         }
       }
+    }
+
+    .ds-tabs-body {
+      position: relative;
     }
 
     @media @screen-mobile-all {

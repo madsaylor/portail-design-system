@@ -169,6 +169,9 @@
         })
         this.$emit('validation', this.validation)
         this.validators = cloneDeep(orgValidators)
+      },
+      setTouched(touched) {
+        this.touched = touched
       }
     },
     mounted() {

@@ -42,6 +42,12 @@
       "type": "String",
       "default": "center",
       "description": "Allow justify tabs by next values: center, flex-start, flex-end, space-between"
+    },
+    {
+      "name": "enableLoader",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Control displaying of Loader component above the content of Tabs component"
     }
   ],
   "events": [

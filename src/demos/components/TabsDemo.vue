@@ -9,7 +9,11 @@
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
 
-    <Tabs :tabs="tabs" :active="active" @tab:click="onTabClick">
+    <Tabs :tabs="tabs"
+          :active="active"
+          :enableLoader="enableLoader"
+          :disabled="disabled"
+          @tab:click="onTabClick">
       <template #tabs-1>
         <h4 class="body-title">MES FACTURES</h4>
         <Card class="ds-dashboard-report">
@@ -42,6 +46,8 @@
         </div>
       </template>
     </Tabs>
+    <Button class="loader-mode-button" @click="loaderMode = !loaderMode">Switch loader mode</Button>
+    <p><b>Loader mode during 3 sec:</b> {{loaderMode}}</p>
   </div>
 </template>
 
@@ -50,24 +56,38 @@
   import Card from '../../components/Card'
   import Icon from '../../components/Icon'
   import Input from '../../components/Input'
+  import Button from '../../components/Button'
   import Description from '../../descriptions/Description'
   import Collapser from '../../components/Collapser.vue'
   import {TabsData} from '../../static/index'
 
   export default {
     name: 'TabsDemo',
-    components: { Tabs, Card, Icon, Input, Description, Collapser},
+    components: { Tabs, Card, Icon, Input, Description, Collapser, Button},
     data() {
       return ({
         openUsage: true,
         usage: TabsData.usage,
         active: 1,
-        tabs: TabsData.tabs
+        tabs: TabsData.tabs,
+        enableLoader: false,
+        loaderMode: false,
+        disabled: false
       })
     },
     methods: {
       onTabClick(tab, index) {
-        this.active = index;
+        this.active = index
+
+        if (this.loaderMode) {
+          this.disabled = true
+          this.enableLoader = true
+
+          setTimeout(() => {
+            this.enableLoader = false
+            this.disabled = false
+          }, 3000)
+        }
       }
     }
   }
@@ -82,5 +102,9 @@
   .tab-inputs {
     display: flex;
     justify-content: space-between;
+  }
+
+  .loader-mode-button {
+    margin: 16px 0 0;
   }
 </style>

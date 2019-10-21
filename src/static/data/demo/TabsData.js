@@ -1,5 +1,9 @@
 let usage = `    
-<Tabs :tabs="tabs" :active="active" @tab:click="onTabClick">
+<Tabs :tabs="tabs" 
+      :active="active" 
+      :enableLoader="enableLoader" 
+      :disabled="disabled"
+      @tab:click="onTabClick">
   <template #tabs-1>
     <h4 class="body-title">MES FACTURES</h4>
     <Card class="ds-dashboard-report">

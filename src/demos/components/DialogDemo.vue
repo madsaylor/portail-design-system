@@ -38,6 +38,7 @@
     <Dialog
       :opened.sync="openedFullScreen"
       :fullScreen="fullScreenActive"
+      :enableLoader="true"
     >
       <div class="ds-dialog-header">
         <Button icon-right="close" alt @click="closeFullScreen()">Close modal</Button>

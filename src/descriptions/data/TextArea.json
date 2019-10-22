@@ -64,6 +64,11 @@
       "name": "maxCharacters",
       "type": "Number",
       "description": "Maximum number of charactors you can input without errors"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "description": "Is disable textarea when set as true"
     }
   ],
   "events": [

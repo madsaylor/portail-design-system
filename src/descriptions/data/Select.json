@@ -54,6 +54,17 @@
       "type": "Boolean",
       "default": "false",
       "description": "Emit full option object when set up as true"
+    },
+    {
+      "name": "help",
+      "type": "String",
+      "description": "Text for the tooltip at the bottom of the select"
+    },
+    {
+      "name": "helpLabel",
+      "type": "String",
+      "default": "? explication",
+      "description": "Text for the tooltip label."
     }
   ],
   "events": [

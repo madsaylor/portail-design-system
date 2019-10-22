@@ -16,6 +16,15 @@
     <div class="ds-select-error-message-wrapper" v-if="checkError">
       {{selectErrors[0]}}
     </div>
+    <div v-if="help && !checkError"
+         class="ds-select-help"
+         ref="helpLabel"
+         @mouseover="helpVisible = true">
+      {{helpLabel}}
+      <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible" just-fade>
+        <Tooltip v-html="help"/>
+      </Dropdown>
+    </div>
 
     <Dropdown
       :target="$refs.dsSelect"
@@ -51,6 +60,11 @@
       label: String,
       placeholder: String,
       validators: Array,
+      help: String,
+      helpLabel: {
+        type: String,
+        default: '? explication'
+      },
       dropdownPosition: {
         type: String,
         default: "default"
@@ -80,6 +94,7 @@
       return {
         openDropDownList: false,
         touched: false,
+        helpVisible: false,
         inputSelectValue: undefined
       }
     },
@@ -234,7 +249,7 @@
       position: absolute;
       pointer-events: none;
       right: 5px;
-      bottom: 10%;
+      top: 27px;
     }
 
     .ds-select-error-message-wrapper {
@@ -242,6 +257,18 @@
       font-size: 12px;
       color: @color-red;
       position: absolute;
+    }
+
+    .ds-select-help {
+      cursor: pointer;
+      position: absolute;
+      width: 100%;
+      color: @color-gray-500;
+      font-family: @font-family;
+      font-size: 11px;
+      line-height: 12px;
+      padding: 3px 12px;
+      text-decoration: underline dashed;
     }
 
     .ds-options {

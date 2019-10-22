@@ -10,11 +10,20 @@
 
     <div class="row-col">
       <Select
-        label="Select"
+        class="ds-select-demo"
         v-model="selectValue"
+        label="Select"
         :options="options"
         :validators="selectValidators"
         :placeholder="'Input Value'"
+        :idMode="true"/>
+
+      <Select
+        class="ds-select-demo"
+        v-model="selectValue2"
+        label="Select"
+        help="This is an explanation of what the select is used for."
+        :options="options"
         :idMode="true"
       />
     </div>
@@ -34,6 +43,7 @@
       openUsage: true,
       usage: SelectData.usage,
       selectValue: { id: 2 },
+      selectValue2: { id: 1 },
       options: [
         { id: 1, value: 'Espèces' },
         { id: 2, value: 'Chèque' },
@@ -50,3 +60,9 @@
     })
   }
 </script>
+
+<style lang="less" scoped>
+  .ds-select-demo {
+    margin-bottom: 10px;
+  }
+</style>

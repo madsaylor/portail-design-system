@@ -32,6 +32,7 @@
         :name="name"
         :rows="rows"
         :class="{'ds-error': textareaErrors.length && touched && showErrors}"
+        :disabled="disabled"
         @blur="onBlur"
       />
     </label>
@@ -54,6 +55,7 @@
       placeholder: String,
       name: String,
       rows: Number,
+      disabled: Boolean,
       maxCharacters: {
         type: Number,
         default: 200

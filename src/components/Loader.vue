@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{backgroundColor, height, transform}">
+  <div :class="['ds-loader', ...loaderWrapperClasses]" :style="{backgroundColor, height, maxHeight, transform}">
     <div :class="[...loaderClasses]"></div>
   </div>
 </template>
@@ -21,6 +21,7 @@
     },
     data: () => ({
       height: undefined,
+      maxHeight: undefined,
       transform: undefined
     }),
     computed: {
@@ -56,7 +57,8 @@
     methods: {
       setHeightTransform() {
         if (this.targetElement && this.value) {
-          this.height = `${this.targetElement.scrollHeight}px`
+          this.height = `${this.targetElement.clientHeight}px`
+          this.maxHeight = this.height
           this.transform = `translate(${-this.targetElement.clientWidth / 2}px, ${-this.targetElement.clientHeight / 2}px)`
         }
       }

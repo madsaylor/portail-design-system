@@ -1,6 +1,9 @@
 <template>
   <div class="ds-select-wrapper">
     <div v-if="label" class="ds-label">{{ label }}</div>
+    <Icon :source="openDropDownList && reversibleIcon ? 'expand_less' : 'expand_more'"
+          color="gray-400"
+          class="ds-drop-icon"/>
     <input
       :class="['ds-select', {'ds-select-error': checkError}]"
       type="text"
@@ -249,7 +252,7 @@
       position: absolute;
       pointer-events: none;
       right: 5px;
-      top: 27px;
+      bottom: 5px;
     }
 
     .ds-select-error-message-wrapper {

@@ -65,6 +65,11 @@
       "type": "String",
       "default": "? explication",
       "description": "Text for the tooltip label."
+    },
+    {
+      "name": "optionsOverflow",
+      "type": "String",
+      "description": "Set overflow for options list of the select"
     }
   ],
   "events": [

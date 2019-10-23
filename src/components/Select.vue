@@ -33,6 +33,7 @@
       :target="$refs.dsSelect"
       :opened.sync="openDropDownList"
       :position="dropdownPosition"
+      :style="{overflow: optionsOverflow}"
       class="ds-options"
     >
       <div
@@ -63,6 +64,7 @@
       label: String,
       placeholder: String,
       validators: Array,
+      optionsOverflow: String,
       help: String,
       helpLabel: {
         type: String,

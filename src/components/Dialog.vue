@@ -35,7 +35,7 @@
       <div :class="['ds-dialog-content', {'ds-border-content': borderColor, 'ds-full-screen-content': fullScreen,
                     'ds-full-screen-active-content': fullScreenActive, 'ds-full-width': contentFullWidth,
                     'ds-dialog-datepicker-container': datepickerContainer}]"
-           :style="{borderColor, minHeight, minWidth}"
+           :style="{borderColor, minHeight, minWidth, overflowY}"
            :id="idContent">
         <div :class="['ds-dialog-wrapper', {'ds-full-width': contentFullWidth}]">
           <slot></slot>
@@ -212,6 +212,9 @@
     computed: {
       fullScreenActive() {
         return this.fullScreen && widthMD >= this.windowWidth
+      },
+      overflowY() {
+        return this.enableLoader ? 'hidden' : 'auto'
       }
     },
     watch: {
@@ -290,7 +293,7 @@
       border-radius: 4px;
       height: auto;
       max-height: calc(100% - 128px);
-      overflow: hidden;
+      overflow-x: hidden;
       max-width: 1280px;
 
       @media @screen-small {

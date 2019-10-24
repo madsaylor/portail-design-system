@@ -110,7 +110,6 @@
         this.$emit('validation', this.validation)
       },
       toggleDropList() {
-        this.touched = true
         this.openDropDownList = !this.openDropDownList
         this.$emit('validation', this.validation)
       },
@@ -205,6 +204,11 @@
           this.$emit('validation', this.validation)
           this.setInputSelectValue(this.value)
         }
+      },
+      openDropDownList(newVal, oldVal) {
+        if (!newVal && oldVal) {
+          this.touched = true
+        }
       }
     }
   }
@@ -237,7 +241,7 @@
       cursor: pointer;
       width: 100%;
 
-      &:focus:not(.ds-error) {
+      &:focus:not(.ds-select-error) {
         border-color: @color-primary;
       }
       &:focus {

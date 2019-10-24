@@ -662,8 +662,8 @@ export default {
       let charCode = event.which ? event.which : event.keyCode
 
       if ((this.type === 'payment-card' && charCode > 32 || this.type === 'number' && charCode > 31 ||
-          (this.type === 'number-dot' && (charCode > 31 && charCode !== 46)) &&
-          (charCode < 48 || charCode > 57))) {
+          (this.type === 'number-dot' && (charCode > 31 && charCode !== 46))) &&
+          (charCode < 48 || charCode > 57)) {
 
         event.preventDefault()
       }

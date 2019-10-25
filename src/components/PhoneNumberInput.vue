@@ -30,7 +30,7 @@
 <template>
   <div class="ds-phone-numbuer-input">
     <div class="ds-label-text">{{ label }}</div>
-    <div :class="['ds-vue-tel-input', { 'ds-disabled': disabled }]">
+    <div :class="['ds-vue-tel-input', { 'ds-disabled': disabled }]" @keydown="keyboardNav">
       <div
         @click="toggleDropdown"
         v-click-outside="clickedOutside"
@@ -346,6 +346,65 @@ export default {
     clickedOutside() {
       this.open = false;
     },
+    keyboardNav(e) {
+      if (e.keyCode === 40) {
+        // down arrow
+        e.preventDefault();
+        this.open = true;
+        if (this.selectedIndex === null) {
+          this.selectedIndex = 0;
+        } else {
+          this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);
+        }
+        const selEle = this.$refs.list.children[this.selectedIndex];
+        if (selEle.offsetTop + selEle.clientHeight
+          > this.$refs.list.scrollTop + this.$refs.list.clientHeight) {
+          this.$refs.list.scrollTop = selEle.offsetTop
+            - this.$refs.list.clientHeight
+            + selEle.clientHeight;
+        }
+      } else if (e.keyCode === 38) {
+        // up arrow
+        e.preventDefault();
+        this.open = true;
+        if (this.selectedIndex === null) {
+          this.selectedIndex = this.sortedCountries.length - 1;
+        } else {
+          this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+        }
+        const selEle = this.$refs.list.children[this.selectedIndex];
+        if (selEle.offsetTop < this.$refs.list.scrollTop) {
+          this.$refs.list.scrollTop = selEle.offsetTop;
+        }
+      } else if (e.keyCode === 13) {
+        // enter key
+        if (this.selectedIndex !== null) {
+          this.choose(this.sortedCountries[this.selectedIndex]);
+        }
+        this.open = !this.open;
+      } else {
+        // typing a country's name
+        this.typeToFindInput += e.key;
+        clearTimeout(this.typeToFindTimer);
+        this.typeToFindTimer = setTimeout(() => {
+          this.typeToFindInput = '';
+        }, 700);
+        // don't include preferred countries so we jump to the right place in the alphabet
+        const typedCountryI = this.sortedCountries
+          .slice(this.preferredCountries.length)
+          .findIndex(c => c.name.toLowerCase().startsWith(this.typeToFindInput));
+        if (typedCountryI >= 0) {
+          this.selectedIndex = this.preferredCountries.length + typedCountryI;
+          const selEle = this.$refs.list.children[this.selectedIndex];
+          const needToScrollTop = selEle.offsetTop < this.$refs.list.scrollTop;
+          const needToScrollBottom = selEle.offsetTop + selEle.clientHeight
+            > this.$refs.list.scrollTop + this.$refs.list.clientHeight;
+          if (needToScrollTop || needToScrollBottom) {
+            this.$refs.list.scrollTop = selEle.offsetTop - this.$refs.list.clientHeight / 2;
+          }
+        }
+      }
+    }
   },
   directives: {
     'click-outside': {
@@ -470,7 +529,7 @@ export default {
     padding: @dropdown-item-padding;
   }
   .ds-dropdown-item.ds-highlighted {
-    background-color: @color-gray-200;
+    background-color: @color-gray-300;
   }
   .dropdown-menu.show {
     max-height: @drop-menu-max-height;

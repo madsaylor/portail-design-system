@@ -113,7 +113,7 @@ export default {
     },
     searchItems() {
       let res = this.items.filter((item) => ~item.title.indexOf(this.searchValue))
-      res = res.slice(0, 5)
+      // res = res.slice(0, 5)
 
       this.searchResult = res
       this.searchId = undefined
@@ -138,7 +138,8 @@ export default {
     }
   },
   mounted() {
-    this.searchResult = this.items.slice(0, 4)
+    // this.searchResult = this.items.slice(0, 4)
+    this.searchResult = this.items
   }
 }
 </script>
@@ -192,6 +193,7 @@ export default {
 
     &.ds-item-wrapper-menu-search {
       height: calc(100% - 154px);
+      overflow-y: auto;
 
       > .ds-item-container {
         &:first-child {

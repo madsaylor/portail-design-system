@@ -289,6 +289,7 @@
       z-index: 999;
       max-height: 150px;
       overflow-y: auto;
+      overflow-x: hidden;
 
       .ds-option-wrapper {
         padding: 5px 10px;

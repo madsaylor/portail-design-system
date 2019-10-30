@@ -100,7 +100,8 @@
     data: () => ({
       windowWidth: window.innerWidth,
       $_defaultStyles: {},
-      idContent: 'ds-dialog-content-'.concat(Math.random().toString(15).substring(5))
+      idContent: 'ds-dialog-content-'.concat(Math.random().toString(15).substring(5)),
+      scrollPositionY: 0
     }),
     mounted() {
       window.addEventListener('resize', this.onResize)
@@ -195,11 +196,11 @@
       onResize() {
         this.windowWidth = window.innerWidth
       },
-      touchMove(event) {
-        if (this.opened) {
-          event.preventDefault()
-        }
-      },
+      // touchMove(event) {
+      //   if (this.opened) {
+      //     event.preventDefault()
+      //   }
+      // },
       openedDispatchWrapper(backdropClick) {
         if (backdropClick && !this.clickOutsideToClose) {
           return
@@ -215,6 +216,9 @@
       },
       overflowY() {
         return this.enableLoader ? 'hidden' : 'auto'
+      },
+      isMobile() {
+        return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
       }
     },
     watch: {
@@ -222,9 +226,12 @@
         if (this.overflowCheck) {
           let htmlStyle = document.getElementsByTagName('html')[0].style
           let bodyStyle = document.getElementsByTagName('body')[0].style
-          let appStyle = document.getElementById('app').style
 
           if (value) {
+            if (this.isMobile) {
+              this.scrollPositionY = window.pageYOffset
+            }
+
             this.$_defaultStyles = {
               body: {},
               html: {}
@@ -236,22 +243,24 @@
             }
 
             bodyStyle.overflow = 'hidden'
-            bodyStyle.position = 'relative'
+            bodyStyle.position = this.isMobile ? 'fixed' : 'relative'
 
             this.$_defaultStyles.html = {
-              position: htmlStyle.position,
+              position: htmlStyle.position || 'static',
               overflow: htmlStyle.overflow,
               height: htmlStyle.height
             }
 
             htmlStyle.overflow = 'hidden'
-            htmlStyle.position = 'relative'
-
-            appStyle.display = 'none'
+            htmlStyle.position = this.isMobile ? 'fixed' : 'relative'
           } else {
             Object.assign(htmlStyle, this.$_defaultStyles.html)
             Object.assign(bodyStyle, this.$_defaultStyles.body)
-            appStyle.display = 'block'
+
+            if (this.isMobile) {
+              window.scrollTo(0, this.scrollPositionY)
+              this.scrollPositionY = 0
+            }
           }
         }
       }
@@ -260,7 +269,7 @@
       window.removeEventListener('resize', this.onResize)
       document.removeEventListener('keydown', this.escapePress);
       document.removeEventListener('keydown', this.tabPress, true)
-      document.removeEventListener('touchmove', this.touchMove, { passive: false })
+      // document.removeEventListener('touchmove', this.touchMove, { passive: false })
     },
   }
 </script>

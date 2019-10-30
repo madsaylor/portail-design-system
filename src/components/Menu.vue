@@ -112,7 +112,7 @@ export default {
       this.$emit('update:opened', false)
     },
     searchItems() {
-      let res = this.items.filter((item) => ~item.title.indexOf(this.searchValue))
+      let res = this.items.filter((item) => ~item.title.toLowerCase().indexOf(this.searchValue.toLowerCase()))
       // res = res.slice(0, 5)
 
       this.searchResult = res

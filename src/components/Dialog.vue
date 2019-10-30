@@ -242,8 +242,8 @@
               overflow: 'auto'
             }
 
-            bodyStyle.overflow = 'hidden'
-            bodyStyle.position = this.isMobile ? 'fixed' : 'relative'
+            document.body.style.overflow = 'hidden'
+            document.body.style.position = this.isMobile ? 'fixed' : 'relative'
 
             this.$_defaultStyles.html = {
               position: htmlStyle.position || 'static',
@@ -255,7 +255,8 @@
             htmlStyle.position = this.isMobile ? 'fixed' : 'relative'
           } else {
             Object.assign(htmlStyle, this.$_defaultStyles.html)
-            Object.assign(bodyStyle, this.$_defaultStyles.body)
+            document.body.style.position = this.$_defaultStyles.body.position
+            document.body.style.overflow = this.$_defaultStyles.body.overflow
 
             if (this.isMobile) {
               window.scrollTo(0, this.scrollPositionY)

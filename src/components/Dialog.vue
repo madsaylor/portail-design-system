@@ -222,6 +222,7 @@
         if (this.overflowCheck) {
           let htmlStyle = document.getElementsByTagName('html')[0].style
           let bodyStyle = document.getElementsByTagName('body')[0].style
+          let appStyle = document.getElementById('app').style
 
           if (value) {
             this.$_defaultStyles = {
@@ -245,9 +246,12 @@
 
             htmlStyle.overflow = 'hidden'
             htmlStyle.position = 'relative'
+
+            appStyle.display = 'none'
           } else {
             Object.assign(htmlStyle, this.$_defaultStyles.html)
             Object.assign(bodyStyle, this.$_defaultStyles.body)
+            appStyle.display = 'block'
           }
         }
       }

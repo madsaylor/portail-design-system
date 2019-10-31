@@ -403,7 +403,6 @@ export default {
     windowWidth: window.innerWidth,
     positions: Array,
     timeoutId: undefined,
-    overflowCheckStatus: undefined,
     id: Math.random().toString(36).substring(7)
   }),
   mounted() {
@@ -411,10 +410,6 @@ export default {
       this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
 
       document.addEventListener(this.validateEventName, this.validate);
-    }
-
-    if (this.getType === 'ds-date' && this.getDatepickerPosition !== 'modal') {
-      this.overflowCheckStatus = false;
     }
 
     this.checkValuePattern()
@@ -431,6 +426,9 @@ export default {
     setTimeout(() => this.slideInit(), 500)
   },
   computed: {
+    overflowCheckStatus() {
+      return this.getType === 'ds-date' && this.getDatepickerPosition === 'modal' && this.datePositionChangeable
+    },
     inputAttrs() {
       return {
         type: this.type === 'date' || this.type === 'number' ? 'text' : this.type,

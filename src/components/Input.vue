@@ -710,29 +710,26 @@ export default {
     },
     checkValuePattern(paste, value) {
       if (this.value || paste) {
-        if (this.type === 'number') {
-          this.setValueNumber(value || this.inputValue)
-        } else if (this.type === 'number-dot') {
-          this.setValueNumberDot(value || this.inputValue)
-        } else if (this.type === 'payment-card') {
-          this.setValueNumberWhitespace(value || this.inputValue)
-        } else {
-          this.inputValue = value
+        let patternObj = {
+          'number': /[^0-9]+/g,
+          'number-dot': /[^0-9.]+/g,
+          'payment-card': /[^0-9 ]+/g
         }
+
+        let pattern = patternObj[this.type]
+        this.setValueByPatternLength(pattern, value || this.inputValue)
       }
     },
     onPaste(event) {
       let value = (this.inputValue || '') + event.clipboardData.getData('Text')
       this.checkValuePattern(true, value)
     },
-    setValueNumber(value) {
-      this.inputValue = value.replace(/[^0-9]+/g, '').slice(0, this.maxlength)
-    },
-    setValueNumberDot(value) {
-      this.inputValue = value.replace(/[^0-9.]+/g, '').slice(0, this.maxlength)
-    },
-    setValueNumberWhitespace(value) {
-      this.inputValue = value.replace(/[^0-9 ]+/g, '').slice(0, this.maxlength)
+    setValueByPatternLength(pattern, value) {
+      if (pattern) {
+        value = value.replace(pattern, '')
+      }
+
+      this.inputValue = typeof value === 'string' ? value.slice(0, this.maxlength) : value
     },
     onIconClick() {
       this.$emit('icon-click')

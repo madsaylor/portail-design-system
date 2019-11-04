@@ -124,16 +124,15 @@
         }
       },
       setInputSelectValue(value) {
-        let selectedOption = null
         if (this.idMode) {
-          selectedOption = this.options.find(option => option.id ===  _.get(value, 'id'))
-          this.inputSelectValue = selectedOption.value
+          const selectedOption = this.options.find(option => option.id ===  _.get(value, 'id'))
+          this.inputSelectValue = selectedOption ? selectedOption.value : ''
         } else if (this.valueMode) {
-          selectedOption = this.options.find(option => option === value)
-          this.inputSelectValue = selectedOption
+          const selectedOption = this.options.find(option => option === value)
+          this.inputSelectValue = selectedOption || ''
         } else if (typeof value === 'object' && value) {
-          selectedOption = this.options.find(option => isEqual(option, value))
-          this.inputSelectValue = selectedOption.title
+          const selectedOption = this.options.find(option => isEqual(option, value))
+          this.inputSelectValue = selectedOption ? selectedOption.title : ''
         }
       },
       setValidity(field, value) {

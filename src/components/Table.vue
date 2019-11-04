@@ -68,6 +68,8 @@
     pending_with_deposit_pending: '#ffa726',
     waiting: '#ffa726',
     sent: '#1E88E5',
+    Pending: '#ffa726',
+    Proceeded: '#963CE3',
     default: '#9e9e9e'
   };
 

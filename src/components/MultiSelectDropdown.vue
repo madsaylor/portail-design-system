@@ -33,10 +33,10 @@
             <input
               class="ds-checkbox-input"
               type="checkbox"
-              :value="idMode ? option : option.value"
+              :value="option"
               v-model="multiSelectValue"
             />
-            <span class="ds-checkbox-text">{{ option.title }} {{ option.value }}</span>
+            <span class="ds-checkbox-text">{{ idMode ? option.value : valueMode ? option : option.title }}</span>
             <span class="ds-checkbox-checkmark"></span>
           </label>
         </div>
@@ -62,6 +62,10 @@
         default: "default"
       },
       idMode: {
+        type: Boolean,
+        default: false
+      },
+      valueMode: {
         type: Boolean,
         default: false
       },
@@ -108,15 +112,6 @@
           this.$emit('input', value)
         }
       },
-      idValue() {
-        if (this.idMode) {
-          let idValueObj = {}
-          this.options.forEach((option) => idValueObj[option.id] = option.value)
-          return idValueObj
-        } else {
-          return null
-        }
-      },
       validation() {
         if (!this.validators || !this.validators.length) {
           return []
@@ -152,7 +147,17 @@
         this.openDropDownList = !this.openDropDownList
       },
       calcInputSelectValue(multiSelectValue) {
-        return (this.idMode ? Array.isArray(multiSelectValue) && multiSelectValue.map(value => value.value) : multiSelectValue) || ''
+        if (Array.isArray(multiSelectValue)) {
+          if (this.idMode) {
+            return multiSelectValue.map(value => value.value)
+          } else if (this.valueMode) {
+            return multiSelectValue
+          } else {
+            return multiSelectValue.map(value => value.title)
+          }
+        } else {
+          return multiSelectValue
+        }
       },
       validate() {
         if (this.initValidation || this.touched) {

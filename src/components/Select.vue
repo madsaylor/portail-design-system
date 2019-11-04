@@ -115,13 +115,7 @@
       },
       selectValue(option) {
         this.setInputSelectValue(option)
-        if (this.idMode && option.id && !this.emitFullOption) {
-          this.$emit('input', option.id)
-        } else if (this.valueMode && option.value && !this.emitFullOption) {
-          this.$emit('input', option.value)
-        } else  {
-          this.$emit('input', option)
-        }
+        this.$emit('input', option)
         this.openDropDownList = false
       },
       validate() {
@@ -133,19 +127,14 @@
         let selectedOption = null
         if (this.idMode) {
           selectedOption = this.options.find(option => option.id ===  _.get(value, 'id'))
-          if (!selectedOption) {
-            selectedOption = this.options.find(option => option.id === value)
-          }
+          this.inputSelectValue = selectedOption.value
         } else if (this.valueMode) {
-          selectedOption = this.options.find(option => option.value === value.value)
-          if (!selectedOption) {
-            selectedOption = this.options.find(option => option.value === value)
-          }
+          selectedOption = this.options.find(option => option === value)
+          this.inputSelectValue = selectedOption
         } else if (typeof value === 'object' && value) {
           selectedOption = this.options.find(option => isEqual(option, value))
+          this.inputSelectValue = selectedOption.title
         }
-        
-        this.inputSelectValue = selectedOption ? selectedOption.title || selectedOption.value : value && (value.title || value.value || '')
       },
       setValidity(field, value) {
         const orgValidators = cloneDeep(this.validators)

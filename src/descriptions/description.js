@@ -35,6 +35,7 @@ import ExpandableTable from './data/ExpandableTable'
 import FilterSelect from './data/FilterSelect'
 import Chips from './data/Chips'
 import Select from './data/Select'
+import Calendar from './data/Calendar'
 
 export default {
   AppHeader,
@@ -73,5 +74,6 @@ export default {
   ExpandableTable,
   FilterSelect,
   Chips,
-  Select
+  Select,
+  Calendar
 }

@@ -1,4 +1,158 @@
 {
-  "properties": [],
-  "events": []
+  "properties": [
+    {
+      "name": "value",
+      "type": "null",
+      "description": "Binds value property to input"
+    },
+    {
+      "name": "lg",
+      "type": "Boolean",
+      "description": "Large size - 464px"
+    },
+    {
+      "name": "md",
+      "type": "Boolean",
+      "description": "Medium size - 252px"
+    },
+    {
+      "name": "sm",
+      "type": "Boolean",
+      "description": "Small size -  144px"
+    },
+    {
+      "name": "width",
+      "type": "String",
+      "description": "Setup the width"
+    },
+    {
+      "name": "lang",
+      "type": "String",
+      "description": "BCP 47 code. Language to be used in the calendar for month names and weekday labels. Can be set globally with $root.locale. This property overrides global setting"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label at the top of the input"
+    },
+    {
+      "name": "slideLabel",
+      "type": "Boolean",
+      "description": "Set up slideble input label"
+    },
+    {
+      "name": "placeholder",
+      "type": "String",
+      "description": "Passed directly to the input"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "description": "Disable input of calendar"
+    },
+    {
+      "name": "minDate",
+      "type": "Date",
+      "description": "Earliest selectable day for the calendar"
+    },
+    {
+      "name": "maxDate",
+      "type": "Date",
+      "description": "Latest selectable day for the calendar"
+    },
+    {
+      "name": "rangeStart",
+      "type": "Date",
+      "description": "Point of reference for the range property"
+    },
+    {
+      "name": "range",
+      "type": "Object",
+      "description": "An alternative to minDate/maxDate"
+    },
+    {
+      "name": "position",
+      "type": "String",
+      "default": "bottom-middle",
+      "description": "Forwarded to calendar dropdown position."
+    },
+    {
+      "name": "positionChangeable",
+      "type": "Boolean",
+      "description": "Set up changeable position of calendar depend on device resolution"
+    },
+    {
+      "name": "fullWidth",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Responsible for full width"
+    },
+    {
+      "name": "textAlign",
+      "type": "String",
+      "default": "left",
+      "description": "Used to specify the horizontal alignment of text"
+    },
+    {
+      "name": "iconSize",
+      "type": "String",
+      "default": "24px",
+      "description": "Size for icon"
+    },
+    {
+      "name": "iconColor",
+      "type": "String",
+      "default": "gray-400",
+      "description": "Icon color variable name or a CSS value"
+    },
+    {
+      "name": "iconPadding",
+      "type": "String",
+      "description": "Set icon padding"
+    },
+    {
+      "name": "activeIcon",
+      "type": "Boolean",
+      "default": "false",
+      "description": "When setup as true allow dispatch 'icon-click' event when click on Icon"
+    },
+    {
+      "name": "borderColorDesktop",
+      "type": "String",
+      "description": "Set border color for desktop calendar"
+    },
+    {
+      "name": "backgroundColor",
+      "type": "String",
+      "description": "Set background color of calendar backdrop"
+    },
+    {
+      "name": "backdropOpacity",
+      "type": "String",
+      "description": "Set opacity of calendar backdrop"
+    },
+    {
+      "name": "wrapperStyleObject",
+      "type": "Object",
+      "description": "Styles object responsible for styles which will be applied to calendar wrapper"
+    }
+  ],
+  "events": [
+    {
+      "name": "calendarVisible",
+      "description": "Dispatched when calendar visible state is changed"
+    },
+    {
+      "name": "inputFocus",
+      "description": "Triggered when the input field of Calendar Component will dispatch focus event"
+    },
+    {
+      "name": "inputBlur",
+      "description": "Triggered when the input field of Calendar Component will dispatch blur event"
+    },
+    {
+      "name": "icon-click",
+      "description": "Dispatched when Icon get click and activeIcon prop is true"
+    }
+  ]
 }

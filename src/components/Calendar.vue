@@ -1,98 +1,119 @@
 <template>
-  <div :class="['ds-calendar', {'ds-sm': sm, 'ds-md': md, 'ds-lg': lg, preventScroll: datepickerVisible}]" :style="{width}">
+  <div :class="['ds-calendar', {'ds-sm': sm, 'ds-md': md, 'ds-lg': lg}]" :style="{width}">
     <label>
-      <div v-if="label" :id="id"
-           @click="onInputPrevent($event, true)"
-           :class="['ds-label-text', 'ds-slide-label-date', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus},
-                    slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']">
+      <div v-if="label"
+           :id="id"
+           :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus, },
+                    slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']"
+           @click="onInputPrevent($event, true)">
+
         {{ label }}
       </div>
 
-      <Icon :size="iconSize"
-            v-if="iconLeft"
-            :color="iconColor"
-            :source="iconLeft"
-            :class="['ds-icon-left', {'active-icon': activeIcon}]"
-            :padding="iconPadding"
-            @click="onIconClick"
-      />
-
       <input
-        v-bind="inputAttrs"
-        :class="['date', 'ds-has-icon', {
+        type="text"
+        v-model="inputValue"
+        :class="['ds-has-icon', {
           'ds-slide-input': slideLabel,
-          'ds-has-left-icon': iconLeft,
           'ds-text-right': textAlign === 'right'
         }]"
-        v-model="inputValue"
         ref="input"
         :style="getStyle"
+        :placeholder="placeholder"
+        :disabled="disabled"
         @focus.prevent="inputFocus"
         @click.prevent="inputFocus"
         @blur="inputBlur"
-        @mousedown="onInputPrevent($event)"/>
+        @mousedown="onInputPrevent($event)"
+        readonly/>
 
-      <Icon :size="iconSize"
+      <CalendarIcon source="today"
+            :size="iconSize"
             :color="iconColor"
             :class="{'active-icon': activeIcon}"
-            :source="'today'"
             :padding="iconPadding"
             @click="onIconClick"
       />
     </label>
 
-    <Dropdown
-      v-show="getDatepickerPosition !== 'modal'"
+    <CalendarDropdown
+      v-show="getCalendarPosition !== 'modal'"
       :target="$refs.input"
-      :opened.sync="datepickerVisible"
-      :position="getDatepickerPosition"
-      :borderColor="!isMobile && datepickerBorderColorDesktop"
+      :opened.sync="calendarVisible"
+      :position="getCalendarPosition"
+      :borderColor="!isMobile && borderColorDesktop"
       :labelId="id"
-      :activeDatepickerComponent="activeDatepickerComponent"
+      :activeDatepickerComponent="activeCalendarComponent"
       just-fade
     >
       <Datepicker
         :min="datepickerMin"
         :max="datepickerMax"
-        v-model="datepickerValue"
+        v-model="calendarValue"
       ></Datepicker>
-    </Dropdown>
+    </CalendarDropdown>
 
-    <Dialog
-      v-show="getDatepickerPosition === 'modal'"
-      :opened.sync="datepickerVisible"
-      :borderColor="!isMobile && datepickerBorderColorDesktop"
+    <CalendarDialog
+      v-show="getCalendarPosition === 'modal'"
+      :opened.sync="calendarVisible"
+      :borderColor="!isMobile && borderColorDesktop"
       :datepickerContainer="isMobile"
-      :backgroundColor="datepickerBackgroundColor"
-      :backdropOpacity="datepickerBackdropOpacity"
-      :dialogStyleObject="datepickerWrapperStyleObject"
-      :contentFullWidth="datepickerFullWidth"
-      :overflowCheck="overflowCheckStatus"
-      :activeDatepickerComponent="activeDatepickerComponent"
+      :backgroundColor="backgroundColor"
+      :backdropOpacity="backdropOpacity"
+      :dialogStyleObject="wrapperStyleObject"
+      :contentFullWidth="fullWidth"
+      :overflowCheck="getCalendarPosition === 'modal' && positionChangeable"
+      :activeDatepickerComponent="activeCalendarComponent"
     >
       <Datepicker
         :min="datepickerMin"
         :max="datepickerMax"
-        :fullWidth="datepickerFullWidth"
-        v-model="datepickerValue"
+        :fullWidth="fullWidth"
+        v-model="calendarValue"
       ></Datepicker>
-    </Dialog>
+    </CalendarDialog>
   </div>
 </template>
 
 <script>
   import Datepicker from './Datepicker'
-  import Dropdown from './Dropdown'
-  import Icon from './Icon'
-  import Dialog from './Dialog'
+  import CalendarDropdown from './calendarComponents/CalendarDropdown'
+  import CalendarIcon from './calendarComponents/CalendarIcon'
+  import CalendarDialog from './calendarComponents/CalendarDialog'
 
   const DesktopWidth = 960
 
   export default {
     name: 'Calendar',
-    components: {Datepicker, Dropdown, Icon, Dialog},
+    components: {Datepicker, CalendarDropdown, CalendarIcon, CalendarDialog},
     props: {
-      iconLeft: String,
+      value: null,
+      lg: Boolean,
+      md: Boolean,
+      sm: Boolean,
+      width: String,
+      lang: String,
+      label: String,
+      slideLabel: Boolean,
+      placeholder: String,
+      disabled: Boolean,
+      minDate: Date,
+      maxDate: Date,
+      rangeStart: Date,
+      range: Object,     // For example {min: 30, max: 180}
+      position: {
+        type: String,
+        default: 'bottom-middle',
+      },
+      positionChangeable: Boolean,
+      fullWidth: {
+        type: Boolean,
+        default: false
+      },
+      textAlign: {
+        type: String,
+        default: 'left'
+      },
       iconSize: {
         type: String,
         default: '24px'
@@ -102,73 +123,24 @@
         default: 'gray-400'
       },
       iconPadding: String,
-      label: String,
-      lang: String,
-      lg: Boolean,
-      md: Boolean,
-      sm: Boolean,
-      placeholder: String,
-      value: null,
-      datepickerBorderColorDesktop: String,
-      datepickerBackgroundColor: String,
-      datepickerBackdropOpacity: String,
-      datepickerWrapperStyleObject: Object,
-      slideLabel: Boolean,
       activeIcon: {
         type: Boolean,
         default: false
       },
-      width: String,
-      minDate: Date,
-      maxDate: Date,
-      dateRangeStart: Date,
-      dateRange: Object,     // For example {min: 30, max: 180}
-      datepickerPosition: {
-        type: String,
-        default: 'bottom-middle',
-      },
-      datePositionChangeable: Boolean,
-      datepickerFullWidth: {
-        type: Boolean,
-        default: false
-      },
-      textAlign: {
-        type: String,
-        default: 'left'
-      }
+      borderColorDesktop: String,
+      backgroundColor: String,
+      backdropOpacity: String,
+      wrapperStyleObject: Object
     },
     data: () => ({
-      datepickerVisible: false,
+      calendarVisible: false,
       slideActive: undefined,
       labelFocus: undefined,
       windowWidth: window.innerWidth,
       positions: Array,
       id: Math.random().toString(36).substring(7)
     }),
-    mounted() {
-      if (this.datePositionChangeable) {
-        this.positions = this.datepickerPosition.split(' ')
-        window.addEventListener('resize', this.onResize)
-      }
-
-      setTimeout(() => this.slideInit(), 500)
-    },
     computed: {
-      overflowCheckStatus() {
-        return this.getDatepickerPosition === 'modal' && this.datePositionChangeable
-      },
-      inputAttrs() {
-        return {
-          type: 'text',
-          placeholder: this.placeholder
-        }
-      },
-      locale() {
-        if (this.$root === this) {
-          return this.lang || 'fr-fr'
-        }
-        return this.lang || this.$root.locale || 'fr-fr'
-      },
       inputValue: {
         get() {
           if (!this.value || isNaN(this.value)) {
@@ -178,14 +150,16 @@
           return this.value.toLocaleDateString(this.locale)
         },
         set(value) {
-          // if (this.getType === 'ds-calendar') {
-          //   return
-          // }
-
           this.$emit('input', value)
         }
       },
-      datepickerValue: {
+      locale() {
+        if (this.$root === this) {
+          return this.lang || 'fr-fr'
+        }
+        return this.lang || this.$root.locale || 'fr-fr'
+      },
+      calendarValue: {
         get() {
           if (this.value && !isNaN(this.value)) {
             return this.value
@@ -200,25 +174,25 @@
           return date
         },
         set(value) {
-          this.datepickerVisible = false
+          this.calendarVisible = false
           this.$emit('input', value)
         }
       },
       dateRangeStart_() {
-        return this.dateRangeStart || new Date()
+        return this.rangeStart || new Date()
       },
       datepickerMin() {
-        if (this.dateRange && this.dateRange.min != null) {
+        if (this.range && this.range.min != null) {
           let minDate = new Date(this.dateRangeStart_)
-          minDate.setDate(minDate.getDate() - this.dateRange.min)
+          minDate.setDate(minDate.getDate() - this.range.min)
           return minDate
         }
         return this.minDate
       },
       datepickerMax() {
-        if (this.dateRange && this.dateRange.max != null) {
+        if (this.range && this.range.max != null) {
           let maxDate = new Date(this.dateRangeStart_)
-          maxDate.setDate(maxDate.getDate() + this.dateRange.max)
+          maxDate.setDate(maxDate.getDate() + this.range.max)
           return maxDate
         }
         return this.maxDate
@@ -226,17 +200,17 @@
       isMobile() {
         return this.windowWidth <= DesktopWidth
       },
-      getDatepickerPosition() {
-        if (this.datePositionChangeable) {
+      getCalendarPosition() {
+        if (this.positionChangeable) {
           return this.isMobile ? this.positions[1] : this.positions[0]
         } else {
-          return this.datepickerPosition
+          return this.position
         }
       },
-      activeDatepickerComponent() {
-        if (this.getDatepickerPosition === 'modal') {
+      activeCalendarComponent() {
+        if (this.getCalendarPosition === 'modal') {
           return 'Dialog'
-        } else if (this.getDatepickerPosition !== 'modal') {
+        } else if (this.getCalendarPosition !== 'modal') {
           return 'Dropdown'
         } else {
           return void 0
@@ -247,8 +221,6 @@
         const padding = parseInt(this.iconSize) + 6
         if (this.icon) {
           style.paddingRight = padding + 'px'
-        } else if (this.iconLeft) {
-          style.paddingLeft = padding + 'px'
         }
 
         if (this.width) {
@@ -271,17 +243,17 @@
           this.slideActive = true
         }
 
-        this.datepickerVisible = !this.datepickerVisible
+        this.calendarVisible = !this.calendarVisible
         this.$refs.input.blur()
 
         this.$emit('inputFocus')
       },
       inputBlur() {
         if (this.slideLabel) {
-          this.labelFocus = false;
+          this.labelFocus = false
 
           if (!this.value) {
-            this.slideActive = false;
+            this.slideActive = false
           }
         }
 
@@ -289,23 +261,23 @@
       },
       slideInit() {
         if (this.slideLabel && this.value) {
-          this.slideActive = true;
+          this.slideActive = true
         }
       },
       onResize() {
         this.windowWidth = window.innerWidth
       },
       setOverflow(mobileMode) {
-        if (this.datepickerVisible) {
-          if (mobileMode && this.getDatepickerPosition === 'modal') {
-            document.body.style.overflowY = 'hidden';
+        if (this.calendarVisible) {
+          if (mobileMode && this.getCalendarPosition === 'modal') {
+            document.body.style.overflowY = 'hidden'
           } else {
-            document.body.style.overflowY = 'auto';
+            document.body.style.overflowY = 'auto'
           }
         } else {
-          document.body.style.overflowY = 'auto';
+          document.body.style.overflowY = 'auto'
         }
-        document.body.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden'
       },
       onIconClick() {
         this.$emit('icon-click')
@@ -314,27 +286,35 @@
     watch: {
       value(newValue) {
         if (this.slideLabel && !this.labelFocus && !newValue) {
-          this.slideActive = false;
+          this.slideActive = false
         }
 
         this.slideInit()
         this.$emit('validation', this.validation)
       },
       isMobile(value) {
-        this.setOverflow(value);
+        this.setOverflow(value)
       },
-      datepickerVisible(value) {
+      calendarVisible(value) {
         if (!value) {
           setTimeout(() => {
             document.body.removeAttribute('style')
           }, 300)
         }
-        this.setOverflow(this.isMobile);
-        this.$emit('datepickerVisible', value);
+        this.setOverflow(this.isMobile)
+        this.$emit('calendarVisible', value)
       }
     },
+    mounted() {
+      if (this.positionChangeable) {
+        this.positions = this.position.split(' ')
+        window.addEventListener('resize', this.onResize)
+      }
+
+      setTimeout(() => this.slideInit(), 500)
+    },
     beforeDestroy() {
-      if (this.datePositionChangeable) {
+      if (this.positionChangeable) {
         window.removeEventListener('resize', this.onResize)
       }
     }
@@ -391,6 +371,7 @@
       color: #828282;
       background: linear-gradient(@color-white 90%, hsla(0,0%,100%,0)) !important;
       border-right: 2.5px solid #fff;
+      cursor: pointer;
 
       &.ds-slide-label-active {
         transform: translateY(-20px) scale(0.85, 0.85);
@@ -408,10 +389,6 @@
       &.ds-label-focus {
         color: @color-dark;
       }
-
-      &.ds-slide-label-date {
-        cursor: pointer;
-      }
     }
 
     input {
@@ -425,10 +402,6 @@
 
       &.ds-has-icon {
         padding-right: 30px;
-      }
-
-      &.ds-has-left-icon {
-        padding-left: 30px;
       }
 
       &.ds-slide-input {
@@ -471,14 +444,6 @@
       height: 50% !important;
     }
 
-    .ds-icon-left {
-      pointer-events: none;
-      position: absolute;
-      bottom: 5px;
-      left: 6px;
-      height: 50% !important;
-    }
-
     input + .active-icon {
       cursor: pointer;
       pointer-events: auto;
@@ -496,4 +461,3 @@
     }
   }
 </style>
-

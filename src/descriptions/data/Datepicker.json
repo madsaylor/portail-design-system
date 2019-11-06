@@ -26,6 +26,11 @@
       "type": "Boolean",
       "default": "false",
       "description": "Set up full width of datepicker"
+    },
+    {
+      "name": "isMobile",
+      "type": "Boolean",
+      "description": "Responsible for displaying mobile view when set as true"
     }
   ],
   "events": []

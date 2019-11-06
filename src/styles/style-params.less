@@ -15,11 +15,13 @@
 @color-light-blue-100: #79c0f8;
 @color-light-blue-200: #2196F3;
 @color-yellow: #fcc138;
+@color-gray-600: #778ca2;
 @color-gray-500: #838795;
 @color-gray-400: #babcc2;
 @color-gray-300: #e6e7eb;
 @color-gray-200: #f4f6fb;
 @color-gray-100: #f7f8fa;
+@color-gray-050: #f8fafb;
 
 /*
     Font Styles:
@@ -998,4 +1000,21 @@
   font-size: @font-components-button-plain-two-font-size;
   font-weight: @font-components-button-plain-two-font-weight;
   line-height: @font-components-button-plain-two-line-height;
+}
+
+/* components/datepicker/header/text font style */
+@font-components-datepicker-header-text-height: 19px;
+@font-components-datepicker-header-text-color: #252631;
+@font-components-datepicker-header-text-font-family: Roboto;
+@font-components-datepicker-header-text-font-size: 16px;
+@font-components-datepicker-header-text-letter-spacing: 0.2px;
+@font-components-datepicker-header-text-line-height: 19px;
+
+.font-components-datepicker-header-text() {
+  height: @font-components-datepicker-header-text-height;
+  color: @font-components-datepicker-header-text-color;
+  font-family: @font-components-datepicker-header-text-font-family;
+  font-size: @font-components-datepicker-header-text-font-size;
+  letter-spacing: @font-components-datepicker-header-text-letter-spacing;
+  line-height: @font-components-datepicker-header-text-line-height;
 }

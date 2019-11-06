@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="17px" viewBox="0 0 10 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>arrow-left</title>
+    <desc>Created with Sketch.</desc>
+    <g id="UI-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="[UI]-Icons" transform="translate(-154.000000, -407.000000)" fill="#252631" fill-rule="nonzero">
+            <g id="arrow-left" transform="translate(154.070312, 407.671875)">
+                <polygon id="" points="7.9921875 0 9.0234375 1.03125 1.93359375 8.078125 9.0234375 15.125 7.9921875 16.15625 0.4296875 8.59375 0 8.078125 0.4296875 7.5625"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

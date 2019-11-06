@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="11px" viewBox="0 0 20 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>arrow-down</title>
+    <desc>Created with Sketch.</desc>
+    <g id="UI-Elements" stroke="none" stroke-width="1" fill="#252631" fill-rule="evenodd">
+        <g id="[UI]-Icons" transform="translate(-350.000000, -363.000000)" fill="#252631" fill-rule="nonzero">
+            <g id="arrow-down" transform="translate(350.890625, 363.140625)">
+                <polygon id="" points="1.03125 0 9.109375 8.12109375 17.1875 0 18.21875 1.03125 9.625 9.625 9.109375 10.0546875 8.59375 9.625 0 1.03125"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

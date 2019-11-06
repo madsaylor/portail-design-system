@@ -26,44 +26,35 @@
 
 <template>
   <div :class="['ds-datepicker', {'ds-full-width': fullWidth}]">
+    <div class="ds-datepicker-header-additional">
+      <span>
+        <span class="ds-additional-month">{{monthName}}</span>
+        <span class="ds-additional-day">{{getDay}}</span>
+      </span>
+      <Icon close-circle color="gray-600" size="16px"></Icon>
+    </div>
     <div class="ds-datepicker-header">
       <div class="ds-datepicker-labels">
-        <div
-          :class="{
-            'ds-hidden': view === 'day' || view === 'month',
-            'ds-label-main': view === 'year',
-          }"
-          @click="view = 'month'"
-        >
-          {{ decade }}
-        </div>
-        <div
-          :class="{
-            'ds-hidden': view === 'year',
-            'ds-label-sup': view === 'day',
-            'ds-label-main': view === 'month',
-          }"
-          @click="view = 'year'"
-        >
-          {{ year }}
-        </div>
-
-        <div
-          :class="{
-            'ds-hidden': view === 'month' || view === 'year',
-            'ds-label-main': view === 'day',
-          }"
-          @click="view = 'month'"
-        >
+        <span class="ds-month"
+              @click="onMonth()">
           {{ monthName }}
-        </div>
+        </span>
+        <span class="ds-year">
+          {{ year }}
+        </span>
+        <Icon @click="onYear()"
+              :source="view === 'year' ? 'arrow-up' : 'arrow-down'"
+              color="gray-600"
+              size="16px"
+              class="ds-year-icon">
+        </Icon>
       </div>
       <div class="ds-buttons">
         <button @click="shift(-1)" :disabled="!canShiftBack">
-          <Icon arrow_left color="dark" size="32px"></Icon>
+          <Icon arrow-left color="gray-600" size="16px"></Icon>
         </button>
         <button @click="shift(1)" :disabled="!canShiftForward">
-          <Icon arrow_right color="dark" size="32px"></Icon>
+          <Icon arrow-right color="gray-600" size="16px"></Icon>
         </button>
       </div>
     </div>
@@ -79,12 +70,22 @@
         <span :class="{'ds-grid-item-big': view !== 'day'}">{{item.title}}</span>
       </GridSelect>
     </div>
+    <div class="ds-datepicker-footer">
+      <Button @click="onSave()">
+        Save
+      </Button>
+      <Button plain-two
+              class="ds-datepicker-clear" @click="onClear()">
+        Clear
+      </Button>
+    </div>
   </div>
 </template>
 
 <script>
 import GridSelect from './GridSelect'
 import Icon from './Icon'
+import Button from './Button'
 
 import moment from 'moment'
 
@@ -93,6 +94,7 @@ export default {
   components: {
     GridSelect,
     Icon,
+    Button
   },
   props: {
     lang: String,
@@ -120,10 +122,6 @@ export default {
   computed: {
     locale() {
       return this.lang || this.$root.locale || 'fr-fr'
-    },
-    decade() {
-      let start = Math.floor(this.displayed.getFullYear() / 10) * 10
-      return `${start} — ${start + 9}`
     },
     year() {
       return this.displayed.getFullYear()
@@ -172,6 +170,9 @@ export default {
       }
       return days
     },
+    getDay() {
+      return this.value.getDate()
+    },
     /**
      * Months for the month selection grid for the displayed year
      * @return {Array<Array<Object>>} 3 by 4 nested array
@@ -217,11 +218,11 @@ export default {
      */
     years() {
       let date = new Date(this.displayed)
-      date.setFullYear(Math.floor(date.getFullYear() / 10) * 10)
+      date.setFullYear(Math.floor(date.getFullYear() / 30) * 30)
       let years = []
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 6; i++) {
         let row = []
-        for (let j = 0; j < 3; j++) {
+        for (let j = 0; j < 5; j++) {
           let year = new Date(date)
           year.key = year.title = year.getFullYear()
 
@@ -247,11 +248,7 @@ export default {
         }
         years.push(row)
       }
-      years[3] = [
-        {title: '', disabled: true, key: -Infinity},
-        years[3][0],
-        {title: '', disabled: true, key: Infinity},
-      ]
+
       return years
     },
     weekLabels() {
@@ -259,7 +256,7 @@ export default {
       let date = new Date()
       date.setDate(date.getDate() - date.getDay() + 1)  // set date to Monday
       for (let i = 1; i < 8; i++) {
-        labels.push(moment(date).locale(this.locale).format('dddd')[0])
+        labels.push(moment(date).locale(this.locale).format('ddd').slice(0, 3).toLowerCase())
         date.setDate(date.getDate() + 1)
       }
       return labels
@@ -302,7 +299,7 @@ export default {
         return true
       }
       return this.bounds.min.getTime() > this.min.getTime()
-    },
+    }
   },
   methods: {
     select(item) {
@@ -332,13 +329,25 @@ export default {
     capitalize(text) {
       let index = this.ie ? 1 : 0
       return text.charAt(index).toUpperCase() + text.slice(++index)
+    },
+    onYear() {
+      this.view = this.view === 'day' ? 'year' : 'day'
+    },
+    onMonth() {
+      this.view = this.view === 'day' ? 'month' : 'day'
+    },
+    onSave() {
+
+    },
+    onClear() {
+
     }
   },
   watch: {
     value(date) {
       date.key = date.getTime()
     }
-  },
+  }
 }
 </script>
 
@@ -348,20 +357,26 @@ export default {
 .ds-datepicker {
   background-color: @color-white;
   border-radius: 4px;
-  box-shadow: @card-shadow;
+  box-shadow: @datepicker-shadow;
   box-sizing: border-box;
-  height: 336px;
-  padding: 20px 13.5px;
-  width: 336px;
+  height: 332px;
+  width: 353px;
   display: flex;
   flex-direction: column;
 
+  .ds-datepicker-header-additional {
+    display: none;
+  }
+
   .ds-datepicker-header {
-    padding: 0 10.5px;
-    height: 64px;
+    height: 60px;
     display: flex;
+    padding: 0 20px;
+    background-color: @color-gray-050;
 
     .ds-datepicker-labels {
+      display: flex;
+      align-items: center;
       flex: 1 0 auto;
       position: relative;
 
@@ -369,74 +384,85 @@ export default {
         transition: all .1s ease;
       }
 
-      .ds-hidden {
-        display: none;
-      }
-
-      .ds-label-sup {
-        .font-desktop-small-regular-gray();
-        position: absolute;
-        top: 0px;
+      .ds-month {
+        .font-components-datepicker-header-text();
         cursor: pointer;
       }
 
-      .ds-label-main {
-        .font-desktop-body-medium-dark();
-        position: absolute;
-        top: 20px;
+      .ds-year {
+        .font-components-datepicker-header-text();
+        cursor: default;
+        margin-left: 5px;
+      }
+
+      .ds-year-icon {
         cursor: pointer;
+        margin-left: 8px;
       }
     }
 
     .ds-buttons {
-      margin-top: 6px;
+      display: flex;
+      align-items: center;
 
       button {
-        height: 32px;
-        width: 32px;
+        height: 18px;
+        width: 18px;
         box-sizing: border-box;
         padding: 0;
-        margin-left: 12px;
-        border: 1px solid @color-gray-300;
-        background-color: @color-gray-200;
+        margin-left: 14px;
+        border: none;
+        background-color: transparent;
         border-radius: 0;
-
-        .ds-icon {
-          margin: -1px;
-        }
+        cursor: pointer;
 
         &:focus {
-          background-color: darken(@color-gray-200, 2%);
           outline: none;
         }
 
-        &:not(:disabled) {
-          &:hover {
-            background-color: @color-gray-300;
-          }
-
-          &:active {
-            background-color: darken(@color-gray-300, 2%);
-          }
-        }
-
         &:disabled {
-          opacity: 0.5;
-          .ds-icon {
-            fill: @color-dark;
-          }
+          cursor: default;
+        }
+      }
+    }
+
+    &.ds-datepicker-header-mobile {
+      background-color: @color-white;
+      height: 40px;
+    }
+  }
+
+  .ds-grid-select-row {
+    .ds-item-cell {
+      > .ds-item {
+        box-sizing: content-box;
+        line-height: 30px;
+        min-width: 26px;
+
+        > span {
+          font-family: Roboto;
         }
       }
     }
   }
 
   .ds-datepicker-body {
-    height: 232px;
-    width: 308px;
+    height: 272px;
+    width: 353px;
+    padding: 21px 15px;
+    box-sizing: border-box;
 
     .ds-labels-top {
       th {
-        color: @color-primary;
+        color: @color-gray-600;
+        height: 16px;
+        width: 29px;
+        text-transform: capitalize;
+        font-family: Roboto;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+        line-height: 16px;
+        padding-bottom: 12px;
       }
     }
 
@@ -460,6 +486,10 @@ export default {
     }
   }
 
+  .ds-datepicker-footer {
+    display: none;
+  }
+
   &.ds-full-width {
     width: 100%;
   }
@@ -467,27 +497,60 @@ export default {
 
 @media @screen-medium, @screen-small {
   .ds-datepicker {
-    height: 428px;
+    height: 411px;
     border-radius: 0;
 
-    .ds-datepicker-header {
-      padding: 0 3.5%;
+    .ds-datepicker-header-additional {
+      .font-components-datepicker-header-text();
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      height: 60px;
+      box-sizing: border-box;
+      background-color: @color-gray-050;
 
-      .ds-buttons {
-        button {
-          margin-left: 36px;
-        }
+      .ds-additional-day {
+        margin-left: 5px;
+      }
+    }
+
+    .ds-datepicker-header {
+      background-color: @color-white;
+      height: 40px;
+      padding: 0 20px;
+
+      .ds-year,
+      .ds-month {
+        color: @color-gray-600 !important;
       }
     }
 
     .ds-datepicker-body {
+      height: 261px;
       .ds-grid-select-row {
 
-        height: 48px;
+        height: 32px;
         .ds-item-cell {
           .ds-item {
             min-width: 59%;
           }
+        }
+      }
+    }
+
+    .ds-datepicker-footer {
+      display: block;
+      box-sizing: border-box;
+      padding: 0 20px 14px;
+      height: 50px;
+
+      .ds-datepicker-clear {
+        margin-left: 12px;
+
+        button {
+          color: @color-gray-600;
+          font-family: "Roboto Medium";
         }
       }
     }

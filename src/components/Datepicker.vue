@@ -31,7 +31,7 @@
         <span class="ds-additional-month">{{monthName}}</span>
         <span class="ds-additional-day">{{getDay}}</span>
       </span>
-      <Icon close-circle color="gray-600" size="16px"></Icon>
+      <Icon times_circle color="gray-600" size="16px"></Icon>
     </div>
     <div class="ds-datepicker-header">
       <div class="ds-datepicker-labels">
@@ -43,7 +43,7 @@
           {{ year }}
         </span>
         <Icon @click="onYear()"
-              :source="view === 'year' ? 'arrow-up' : 'arrow-down'"
+              :source="view === 'year' ? 'angle_up_solid' : 'angle_down_solid'"
               color="gray-600"
               size="16px"
               class="ds-year-icon">
@@ -51,10 +51,10 @@
       </div>
       <div class="ds-buttons">
         <button @click="shift(-1)" :disabled="!canShiftBack">
-          <Icon arrow-left color="gray-600" size="16px"></Icon>
+          <Icon angle_left_solid color="gray-600" size="16px"></Icon>
         </button>
         <button @click="shift(1)" :disabled="!canShiftForward">
-          <Icon arrow-right color="gray-600" size="16px"></Icon>
+          <Icon angle_right_solid color="gray-600" size="16px"></Icon>
         </button>
       </div>
     </div>

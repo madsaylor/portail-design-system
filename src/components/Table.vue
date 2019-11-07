@@ -30,21 +30,21 @@
     <div class="ds-table-body-wrapper">
       <div
         class="ds-table-body"
-        v-for="(data, dataIndex) in value"
+        v-for="(row, dataIndex) in value"
         :key="dataIndex"
-        @click="onClick(data, dataIndex)"
+        @click="onClick(row, dataIndex)"
       >
         <Card class="ds-data-wrapper">
           <span
-            v-for="(value, index) in headers"
-            :style="getFlex(value)"
+            v-for="(header, index) in headers"
+            :style="getFlex(header)"
             :key="index"
           >
-            <template v-if="value.badge">
-              <Badge :color="getBadgeColor(data, value)" >{{ getCellValue(data, value) }}</Badge>
-            </template>
-            <template v-else>
-              {{ getCellValue(data, value) }}
+            <slot :name="getSlotName(header)" :value="getCellValue(row, header)" :orgValue="getOrgValue(row, header)">
+            </slot>
+
+            <template v-if="!hasSlot(header)">
+              {{ getCellValue(row, header) }}
             </template>
           </span>
         </Card>
@@ -55,37 +55,18 @@
 
 <script>
 
-  const COLORS_BY_STATUS = {
-    cancelled: '#30302d',
-    refunded: '#3B9AE3',
-    partial_refunded: '#52a0d8',
-    draft: '#9e9e9e',
-    paid_with_deposit: '#66bb6a',
-    paid: '#66bb6a',
-    converted: '#66bb6a',
-    expired: '#ef5350',
-    pending_with_paid_deposit: '#68b7a3',
-    pending_with_deposit_pending: '#ffa726',
-    waiting: '#ffa726',
-    sent: '#1E88E5',
-    Pending: '#ffa726',
-    Proceeded: '#963CE3',
-    default: '#9e9e9e'
-  };
-
   const SORT_TYPES = {
     ASC: '+',
     DSC: '-'
   }
 
   import Card from './Card'
-  import Badge from './Badge'
   import Icon from './Icon'
   import { get } from 'lodash'
 
   export default {
     name: 'Table',
-    components: {Card, Badge, Icon},
+    components: {Card, Icon},
     props: {
       value: Array,
       headers: {
@@ -99,6 +80,13 @@
       sortKey: null
     }),
     methods: {
+      getSlotName(header) {
+        return `cell-${header.key}`
+      },
+      hasSlot(header) {
+        const slotName = `cell-${header.key}`
+        return !!this.$scopedSlots[slotName]
+      },
       getFlex(header) {
         if (header.width) {
           return {
@@ -125,9 +113,8 @@
         cellValue = `${header.prefix || ''} ${cellValue} ${header.suffix || ''}`
         return cellValue
       },
-      getBadgeColor(value, header) {
-        const cellValue = get(value, header.key)
-        return COLORS_BY_STATUS[cellValue] || 'primary'
+      getOrgValue(value, header) {
+        return get(value, header.key, '')
       },
       sorting(header) {
         if (this.sortKey === header.key && this.sortType === SORT_TYPES.ASC) {
@@ -191,7 +178,7 @@
         .ds-data-wrapper {
           display: flex;
           padding: 22px 24px;
-          margin-bottom: 16px;
+          margin-bottom: 6px;
           text-align: right;
 
           @media screen and (max-width: 551px) {

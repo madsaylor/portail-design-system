@@ -66,7 +66,7 @@
     name: 'CalendarDemo',
     components: {Calendar, Description, Collapser},
     data: () => ({
-      openUsage: false, // change after finish developing Calendar component to true
+      openUsage: true,
       usage: CalendarData.usage,
       dateValue: new Date(),
       dateValue2: null,

@@ -41,6 +41,7 @@ import AutocompleteData from './data/demo/AutocompleteData'
 import StarData from './data/demo/StarData'
 import ChipsData from './data/demo/ChipsData'
 import SelectData from './data/demo/SelectData'
+import CalendarData from  './data/demo/CalendarData'
 
 export {
   CountriesArray,
@@ -85,5 +86,6 @@ export {
   AutocompleteData,
   StarData,
   ChipsData,
-  SelectData
+  SelectData,
+  CalendarData
 }

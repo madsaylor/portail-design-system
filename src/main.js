@@ -13,7 +13,7 @@ import App from './App.vue'
 
 
 // import and globally register every component form /components
-let context = require.context('./components', true, /.*\.vue$/)
+let context = require.context('./components', false, /.*\.vue$/)
 context.keys().forEach(key => {
   // Get component config
   let component = context(key)

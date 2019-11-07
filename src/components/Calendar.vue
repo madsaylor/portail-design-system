@@ -58,6 +58,8 @@
         :min="datepickerMin"
         :max="datepickerMax"
         v-model="calendarValue"
+        :secondDate.sync="calendarSecondValue"
+        :rangeAvailable="rangeAvailable"
       ></Datepicker>
     </CalendarDropdown>
 
@@ -78,6 +80,8 @@
         :max="datepickerMax"
         :fullWidth="fullWidth"
         v-model="calendarValue"
+        :secondDate.sync="calendarSecondValue"
+        :rangeAvailable="rangeAvailable"
       ></Datepicker>
     </CalendarDialog>
   </div>
@@ -144,6 +148,8 @@
         type: Boolean,
         default: true
       },
+      secondDate: null,
+      rangeAvailable: Boolean
     },
     data: () => ({
       calendarVisible: false,
@@ -190,6 +196,25 @@
         set(value) {
           this.calendarVisible = false
           this.$emit('input', value)
+        }
+      },
+      calendarSecondValue: {
+        get() {
+          if (this.secondDate && !isNaN(this.secondDate)) {
+            return this.secondDate
+          }
+          let date = new Date()
+          if (this.datepickerMax && date.getTime() > this.datepickerMax.getTime()) {
+            return this.datepickerMax
+          }
+          if (this.datepickerMin && date.getTime() < this.datepickerMin.getTime()) {
+            return this.datepickerMin
+          }
+          return date
+        },
+        set(value) {
+          this.calendarVisible = false
+          this.$emit('update:secondDate', value)
         }
       },
       dateRangeStart_() {

@@ -64,6 +64,7 @@
         :items="{'day': days, 'month': months, 'year': years}[view]"
         :labels-top="view === 'day' ? weekLabels : null"
         :value="value"
+        :secondValue="secondDate"
         @input="select"
         #default="{item}"
       >
@@ -107,7 +108,9 @@ export default {
     fullWidth: {
       type: Boolean,
       default: false
-    }
+    },
+    secondDate: null,
+    rangeAvailable: Boolean
   },
   data() {
     return {
@@ -311,7 +314,28 @@ export default {
         this.view = 'day'
       }
       else if (this.view === 'day') {
-        this.$emit('input', item)
+        if (this.value && this.secondDate) {
+          let minDate
+          let maxDate
+
+          if (0 < this.value - this.secondDate) {
+            minDate = this.value
+            maxDate = this.secondDate
+          } else {
+            minDate = this.secondDate
+            maxDate = this.value
+          }
+
+          if (0 > minDate - item) {
+            this.$emit('update:secondDate', item)
+          } else {
+            this.$emit('input', item)
+          }
+        } else if (this.value && this.rangeAvailable) {
+          this.$emit('update:secondDate', item)
+        } else {
+          this.$emit('input', item)
+        }
       }
     },
     shift(delta) {
@@ -322,7 +346,7 @@ export default {
         this.displayed.setFullYear(this.year + delta)
       }
       else if (this.view === 'year') {
-        this.displayed.setFullYear(this.year + delta * 10)
+        this.displayed.setFullYear(this.year + delta * 30)
       }
       this.displayed = new Date(this.displayed)
     },

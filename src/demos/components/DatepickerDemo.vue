@@ -26,6 +26,12 @@
         :max="new Date('2018-12-21')"
         v-model="dateSelected"
       ></Datepicker>
+
+      <Datepicker
+        v-model="dateSelected2"
+        :secondDate.sync="secondDate"
+        rangeAvailable
+      ></Datepicker>
     </div>
   </div>
 </template>
@@ -45,6 +51,7 @@ export default {
     return {
       dateSelected: new Date('2006-02-12'),
       dateSelected2: new Date(),
+      secondDate: null,
       usage: DatepickerData.usage,
       openUsage: true,
     }

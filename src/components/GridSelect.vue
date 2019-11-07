@@ -49,8 +49,7 @@
         v-for="item in row"
         :class="['ds-item-cell', {
           'ds-disabled': item.disabled,
-          'ds-selected':
-            item.key !== undefined ? item.key === initDate : item === value,
+          'ds-selected': getSelected(item)
         }]"
         :tabindex="!item.disabled && 0"
         @click="!item.disabled && select(item)"
@@ -77,6 +76,7 @@ export default {
     },
     labelsTop: Array,
     value: null,
+    secondValue: null
   },
   computed: {
     itemWidth() {
@@ -84,11 +84,21 @@ export default {
     },
     initDate() {
       return new Date(this.value).getTime();
+    },
+    secondInitDate() {
+      return new Date(this.secondValue).getTime();
     }
   },
   methods: {
     select(item) {
       this.$emit('input', item)
+    },
+    getSelected(item) {
+      if (item.key !== undefined) {
+        return item.key === this.initDate || item.key === this.secondInitDate
+      } else {
+        return item === this.value || item === this.secondValue
+      }
     }
   },
 }

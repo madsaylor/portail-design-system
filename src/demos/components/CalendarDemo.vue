@@ -53,6 +53,22 @@
       placeholder="Date"
       v-model="dateValue5"
     />
+
+    <Calendar
+      md
+      label="Changeable Range datepicker"
+      position="default modal"
+      :backgroundColor="backgroundColor"
+      :backdropOpacity="backdropOpacity"
+      :wrapperStyleObject="wrapperStyleObject"
+      :fullWidth="fullWidth"
+      :borderColorDesktop="borderColor"
+      positionChangeable
+      placeholder="Date"
+      v-model="dateValue6"
+      :secondDate.sync="dateValue7"
+      rangeAvailable
+    />
   </div>
 </template>
 
@@ -73,6 +89,8 @@
       dateValue3: null,
       dateValue4: null,
       dateValue5: null,
+      dateValue6: null,
+      dateValue7: null,
       borderColor: '#e6e7eb',
       backgroundColor: '#fff',
       backdropOpacity: '0.8',

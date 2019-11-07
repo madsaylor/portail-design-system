@@ -3,7 +3,7 @@
     <label>
       <div v-if="label"
            :id="id"
-           :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus, },
+           :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus},
                     slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']"
            @click="onInputPrevent($event, true)">
 
@@ -14,6 +14,7 @@
         type="text"
         v-model="inputValue"
         :class="['ds-has-icon', {
+          'ds-error': inputErrors.length && touched && showErrors,
           'ds-slide-input': slideLabel,
           'ds-text-right': textAlign === 'right'
         }]"
@@ -34,6 +35,13 @@
             :padding="iconPadding"
             @click="onIconClick"
       />
+
+      <div class="ds-drawer">
+        <span v-if="inputErrors.length && touched && showErrors"
+              class="ds-error-message">
+          {{ inputErrors[0] }}
+        </span>
+      </div>
     </label>
 
     <CalendarDropdown
@@ -130,12 +138,18 @@
       borderColorDesktop: String,
       backgroundColor: String,
       backdropOpacity: String,
-      wrapperStyleObject: Object
+      wrapperStyleObject: Object,
+      validators: Array,
+      showErrors: {
+        type: Boolean,
+        default: true
+      },
     },
     data: () => ({
       calendarVisible: false,
       slideActive: undefined,
       labelFocus: undefined,
+      touched: false,
       windowWidth: window.innerWidth,
       positions: Array,
       id: Math.random().toString(36).substring(7)
@@ -228,7 +242,32 @@
         }
 
         return style
-      }
+      },
+
+      validation() {
+        if (!this.validators || !this.validators.length) {
+          return []
+        }
+
+        let data = []
+        for (let i = 0; i < this.validators.length; i++) {
+          data.push([
+            this.validators[i].name,
+            this.validators[i].validator(this.inputValue, this.confirmModel),
+          ])
+        }
+        return data
+      },
+
+      inputErrors() {
+        let errors = []
+        for (let i = 0; i < this.validation.length; i++) {
+          if (!this.validation[i][1]) {
+            errors.push(this.validators[i].message)
+          }
+        }
+        return errors
+      },
     },
     methods: {
       onInputPrevent(event, callInputFocus) {
@@ -257,6 +296,7 @@
           }
         }
 
+        this.touched = true
         this.$emit('inputBlur')
       },
       slideInit() {
@@ -281,6 +321,10 @@
       },
       onIconClick() {
         this.$emit('icon-click')
+      },
+      validate() {
+        this.touched = true
+        this.$emit('validation', this.validation)
       }
     },
     watch: {
@@ -311,12 +355,17 @@
         window.addEventListener('resize', this.onResize)
       }
 
+      document.addEventListener('validate', this.validate)
+      this.$emit('validation', this.validation)
+
       setTimeout(() => this.slideInit(), 500)
     },
     beforeDestroy() {
       if (this.positionChangeable) {
         window.removeEventListener('resize', this.onResize)
       }
+
+      document.removeEventListener('validate', this.validate)
     }
   }
 </script>
@@ -418,6 +467,10 @@
         outline: none;
       }
 
+      &.ds-error {
+        border-color: @color-red;
+      }
+
       &:disabled {
         border: 1px solid #f2f4f7;
       }
@@ -451,6 +504,28 @@
 
     input {
       cursor: pointer;
+    }
+
+    .ds-drawer {
+      box-sizing: border-box;
+      font-size: 11px;
+      line-height: 12px;
+      padding: 3px 0;
+      position: absolute;
+      text-align: left;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .ds-error-message {
+      color: @color-red;
+      font-family: @font-family;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      display: inline-block;
+      max-width: 100%;
     }
 
     &.ds-lg {

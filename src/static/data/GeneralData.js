@@ -44,7 +44,7 @@ let clients = [
     invoice_date: '1999-02-20',
     invoice_duedate: '2000-10-20',
     emailed_date: '2000-11-09',
-    status: 'converted'
+    status: 'expired'
   },
   {
     name: 'Adam L4',
@@ -54,7 +54,7 @@ let clients = [
     invoice_date: '1999-02-20',
     invoice_duedate: '2000-10-20',
     emailed_date: '2000-11-09',
-    status: 'converted'
+    status: 'sent'
   }
 ]
 

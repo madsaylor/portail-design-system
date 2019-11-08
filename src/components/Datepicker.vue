@@ -28,8 +28,7 @@
   <div :class="['ds-datepicker', {'ds-full-width': fullWidth}]">
     <div class="ds-datepicker-header-additional">
       <span>
-        <span class="ds-additional-month">{{monthName}}</span>
-        <span class="ds-additional-day">{{getDay}}</span>
+        {{additionalHeaderDate}}
       </span>
       <Icon times_circle color="gray-600" size="16px"></Icon>
     </div>
@@ -123,6 +122,15 @@ export default {
     this.range && this.setRange()
   },
   computed: {
+    additionalHeaderDate() {
+      if (!this.secondDate) {
+        return `${this.getMonth} ${this.getDay}`
+      } else if (this.value < this.secondDate) {
+        return `${this.getMonth} ${this.getDay} - ${this.getSecondMonth} ${this.getSecondDay}`
+      } else {
+        return `${this.getSecondMonth} ${this.getSecondDay} - ${this.getMonth} ${this.getDay}`
+      }
+    },
     locale() {
       return this.lang || this.$root.locale || 'fr-fr'
     },
@@ -175,6 +183,15 @@ export default {
     },
     getDay() {
       return this.value.getDate()
+    },
+    getMonth() {
+      return this.capitalize(this.value.toLocaleString(this.locale, {month: 'long'}))
+    },
+    getSecondDay() {
+      return this.secondDate && this.secondDate.getDate()
+    },
+    getSecondMonth() {
+      return this.secondDate && this.capitalize(this.secondDate.toLocaleString(this.locale, {month: 'long'}))
     },
     /**
      * Months for the month selection grid for the displayed year
@@ -314,28 +331,7 @@ export default {
         this.view = 'day'
       }
       else if (this.view === 'day') {
-        if (this.value && this.secondDate) {
-          let minDate
-          let maxDate
-
-          if (0 < this.value - this.secondDate) {
-            minDate = this.value
-            maxDate = this.secondDate
-          } else {
-            minDate = this.secondDate
-            maxDate = this.value
-          }
-
-          if (0 > minDate - item) {
-            this.$emit('update:secondDate', item)
-          } else {
-            this.$emit('input', item)
-          }
-        } else if (this.value && this.rangeAvailable) {
-          this.$emit('update:secondDate', item)
-        } else {
-          this.$emit('input', item)
-        }
+        this.selectDay(item)
       }
     },
     shift(delta) {
@@ -365,10 +361,51 @@ export default {
     },
     onClear() {
 
+    },
+    _dateMinMaxInternal(id, value) {
+      return {
+        id: id,
+        value: value
+      }
+    },
+    selectDay(item) {
+      if (this.value && this.secondDate) {
+        let dateMin, dateMax
+
+        if (this.value - this.secondDate < 0) {
+          dateMin = this._dateMinMaxInternal('input', this.value)
+          dateMax = this._dateMinMaxInternal('update:secondDate', this.secondDate)
+        } else {
+          dateMin = this._dateMinMaxInternal('update:secondDate', this.secondDate)
+          dateMax = this._dateMinMaxInternal('input', this.value)
+        }
+
+        if (dateMin.value < item && item < dateMax.value) {
+          let diffValue = Math.abs(this.value - item)
+          let diffSecondValue = Math.abs(this.secondDate - item)
+
+          if (diffValue < diffSecondValue) {
+            this.$emit('input', item)
+          } else {
+            this.$emit('update:secondDate', item)
+          }
+        } else if (dateMax.value > item) {
+          this.$emit(dateMin.id, item)
+        } else {
+          this.$emit(dateMax.id, item)
+        }
+      } else if (this.value && this.rangeAvailable) {
+        this.$emit('update:secondDate', item)
+      } else {
+        this.$emit('input', item)
+      }
     }
   },
   watch: {
     value(date) {
+      date.key = date.getTime()
+    },
+    secondDate(date) {
       date.key = date.getTime()
     }
   }
@@ -533,10 +570,6 @@ export default {
       height: 60px;
       box-sizing: border-box;
       background-color: @color-gray-050;
-
-      .ds-additional-day {
-        margin-left: 5px;
-      }
     }
 
     .ds-datepicker-header {

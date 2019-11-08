@@ -83,10 +83,10 @@ export default {
       return 100 / this.items[0].length + '%'
     },
     initDate() {
-      return new Date(this.value).getTime();
+      return new Date(this.value).getTime()
     },
     secondInitDate() {
-      return new Date(this.secondValue).getTime();
+      return new Date(this.secondValue).getTime()
     }
   },
   methods: {

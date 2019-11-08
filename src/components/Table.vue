@@ -19,10 +19,13 @@
           v-for="(header, index) in headers"
           :style="getFlex(header)"
           :key="index"
-          @click="sorting(header)"
         >
-          <span class="ds-header-title">{{header.title}}</span>
-          <Icon v-if="sortKey === header.key" :source="sortType === '+' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
+          <div class="ds-title-wrapper" @click="sorting(header)">
+            <span class="ds-header-title">{{header.title}}</span>
+            <Icon v-if="sortKey === header.key" :source="sortType === '+' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
+          </div>
+
+          <slot :name="getFilterSlotName(header)"></slot>
         </div>
       </Card>
     </div>
@@ -83,6 +86,9 @@
       getSlotName(header) {
         return `cell-${header.key}`
       },
+      getFilterSlotName(header) {
+        return `filter-${header.key}`
+      },
       hasSlot(header) {
         const slotName = `cell-${header.key}`
         return !!this.$scopedSlots[slotName]
@@ -135,6 +141,8 @@
   @import '../styles/vars';
 
   .ds-table-wrapper {
+    color: @color-gray-500;
+
     .ds-table-header {
       @media screen and (max-width: 551px) {
         display: none;
@@ -142,27 +150,36 @@
 
       .ds-header-wrapper {
         display: flex;
-        height: 20px;
-        color: @color-gray-500;
         font-family: Lato;
         font-size: 14px;
         line-height: 20px;
-        padding: 0 24px 16px;
+        padding: 0 0 16px;
         cursor: default;
         background-color: transparent;
         box-shadow: none;
 
         .ds-header {
           display: flex;
-          justify-content: flex-start;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
           cursor: pointer;
+          padding-right: 16px;
+          box-sizing: border-box;
+
+          .ds-title-wrapper {
+            width: 100%;
+            margin-bottom: 8px;
+          }
+
+          .ds-filters-wrapper {
+            width: 100%;
+          }
         }
       }
     }
 
     .ds-table-body-wrapper {
-      color: @color-dark;
+      color: @color-gray-500;
       font-family: Lato;
       font-size: 14px;
       line-height: 20px;
@@ -171,7 +188,7 @@
       .ds-table-body {
         .ds-data-wrapper {
           display: flex;
-          padding: 10px 12px;
+          padding: 10px 0;
           margin-bottom: 6px;
           background-color: white;
           align-items: center;
@@ -185,6 +202,14 @@
           span {
             @media screen and (max-width: 551px) {
               font-size: 14px;
+            }
+
+            &:first-child {
+              padding-left: 12px;
+            }
+
+            &:last-child {
+              padding-right: 12px;
             }
           }
         }

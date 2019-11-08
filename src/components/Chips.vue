@@ -197,7 +197,12 @@
       border: solid 1px #E8ECEF;
       border-radius: 3px;
       padding: 0 10px;
+      background-color: white;
       box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      height: 42px;
 
       .ds-chips-label {
         color: @color-gray-500;
@@ -219,7 +224,9 @@
       }
 
       .ds-chips {
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: default;
         padding: 4px 8px 4px 10px;
         margin: 4px 10px 4px 0;
@@ -248,11 +255,14 @@
       }
 
       .ds-chips-input {
-        padding: 10px 0 10px;
-        font-size: 16px;
-        font-family: Roboto, "Helvetica Neue", sans-serif;
+        padding: 12px 0 12px;
         border: none;
         background-color: transparent;
+        flex-grow: 1;
+        flex-shrink: 0;
+        width: 30px;
+        font-size: 14px;
+        color: @color-dark;
 
         &:focus {
           outline: none;
@@ -264,7 +274,7 @@
       }
 
       &.ds-chips-container-error {
-        border: solid 1 px @color-red;
+        border: solid 1px @color-red;
       }
     }
 

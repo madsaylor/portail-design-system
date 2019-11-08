@@ -13,6 +13,26 @@
       v-model="clients"
       :headers="headers"
     >
+      <template slot="filter-name">
+        <Chips v-model="nameFilter" />
+      </template>
+
+      <template slot="filter-type.name">
+        <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
+      </template>
+
+      <template slot="filter-earned">
+        <Input v-model="financialFilter" />
+      </template>
+
+      <template slot="filter-invoice_date">
+        <Input v-model="invoiceDateFilter" />
+      </template>
+
+      <template slot="filter-status">
+        <Chips v-model="statusFilter" />
+      </template>
+
       <template v-slot:cell-name="{row, value}">
         <div class="name-wrapper">
           <Icon :source="row.type.name === 'Person' ? 'account_circle' : 'group_outline'" />
@@ -40,6 +60,9 @@
   import Table from '../../components/Table'
   import Badge from '../../components/Badge'
   import Icon from '../../components/Icon'
+  import Chips from '../../components/Chips'
+  import Input from '../../components/Input'
+  import Select from '../../components/Select'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
   import {TableData, GeneralData} from '../../static/index'
@@ -64,20 +87,29 @@
 
   export default {
     name: 'TableDemo',
-    components: {Table, Badge, Icon, Collapser, Description},
+    components: {Table, Badge, Icon, Chips, Input, Select, Collapser, Description},
     data: () => ({
       usage: TableData.usage,
       openUsage: true,
       clients: GeneralData.clients,
       headers: [
-        { key: 'name', title: 'Name', width: '30%', filters: 'chip' },
+        { key: 'name', title: 'Name', width: '30%' },
         { key: 'type.name', title: 'Type', width: '20%' },
         { key: 'earned', title: 'Earned', prefix: '€', sortable: true },
         { key: 'invoice_date', title: 'Date', sortable: true, filter: (value) => moment(value).format('DD-MM-YYYY') },
         { key: 'status', title: 'Status', badge: true },
         { key: 'actions', title: '', width: '50px'}
       ],
-      colors: COLORS_BY_STATUS
+      colors: COLORS_BY_STATUS,
+      nameFilter: [],
+      typeFilter: '',
+      typeOptions: [
+        { id: 1, value: 'Person' },
+        { id: 2, value: 'Company' }
+      ],
+      financialFilter: '',
+      invoiceDateFilter: '',
+      statusFilter: []
     })
   }
 </script>
@@ -101,5 +133,9 @@
         font-size: 14px;
       }
     }
+  }
+
+  .ds-chips-wrapper {
+    width: 100%;
   }
 </style>

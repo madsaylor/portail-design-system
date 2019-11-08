@@ -14,23 +14,33 @@
       :headers="headers"
     >
       <template slot="filter-name">
-        <Chips v-model="nameFilter" />
+        <div class="filter-wrapper">
+          <Chips v-model="nameFilter" />
+        </div>
       </template>
 
       <template slot="filter-type.name">
-        <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
+        <div class="filter-wrapper">
+          <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
+        </div>
       </template>
 
       <template slot="filter-earned">
-        <Input v-model="financialFilter" />
+        <div class="filter-wrapper">
+          <Input v-model="financialFilter" />
+        </div>
       </template>
 
       <template slot="filter-invoice_date">
-        <Input v-model="invoiceDateFilter" />
+        <div class="filter-wrapper">
+          <Input v-model="invoiceDateFilter" />
+        </div>
       </template>
 
       <template slot="filter-status">
-        <Chips v-model="statusFilter" />
+        <div class="filter-wrapper">
+          <Chips v-model="statusFilter" />
+        </div>
       </template>
 
       <template v-slot:cell-name="{row, value}">
@@ -98,7 +108,7 @@
         { key: 'earned', title: 'Earned', prefix: '€', sortable: true },
         { key: 'invoice_date', title: 'Date', sortable: true, filter: (value) => moment(value).format('DD-MM-YYYY') },
         { key: 'status', title: 'Status', badge: true },
-        { key: 'actions', title: '', width: '50px'}
+        { key: 'actions', title: '', width: '70px'}
       ],
       colors: COLORS_BY_STATUS,
       nameFilter: [],
@@ -135,7 +145,11 @@
     }
   }
 
-  .ds-chips-wrapper {
+  .filter-wrapper {
     width: 100%;
+
+    > * {
+      width: 100%;
+    }
   }
 </style>

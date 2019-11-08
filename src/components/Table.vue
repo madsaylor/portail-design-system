@@ -24,7 +24,6 @@
             <span class="ds-header-title">{{header.title}}</span>
             <Icon v-if="sortKey === header.key" :source="sortType === '+' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
           </div>
-
           <slot :name="getFilterSlotName(header)"></slot>
         </div>
       </Card>
@@ -171,8 +170,8 @@
             margin-bottom: 8px;
           }
 
-          .ds-filters-wrapper {
-            width: 100%;
+          > * {
+            width: 100% !important;
           }
         }
       }
@@ -200,6 +199,8 @@
           }
 
           span {
+            box-sizing: border-box;
+
             @media screen and (max-width: 551px) {
               font-size: 14px;
             }

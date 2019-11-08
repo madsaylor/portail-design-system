@@ -3,7 +3,7 @@
     {
       "name": "value",
       "type": "Array",
-      "description": "Data for displaying table"
+      "description": "Data for displaying table. We can add the filtering functionality by adding slots with key value. Also we can customize each cell by adding slots."
     },
     {
       "name": "headers",
@@ -58,6 +58,16 @@
     {
       "name": "pickup",
       "description": "Emitted when click on record, will emit current record data or identifier data with index on current page."
+    }
+  ],
+  "slots": [
+    {
+      "name": "cell-{key}",
+      "description": "We can customize the cell in the columns with this slot. So please use the key props in header in order to indicate which columns should be customized"
+    },
+    {
+      "name": "filter-{key}",
+      "description": "We can add the filter at the top of each row using this slot. So please use the key props i header props."
     }
   ]
 }

@@ -27,10 +27,15 @@
 <template>
   <div :class="['ds-datepicker', {'ds-full-width': fullWidth}]">
     <div class="ds-datepicker-header-additional">
-      <span>
+      <span class="ds-additional-title">
         {{additionalHeaderDate}}
       </span>
-      <Icon times_circle color="gray-600" size="16px"></Icon>
+      <Icon class="ds-close-icon"
+            times_circle
+            color="gray-600"
+            size="16px"
+            @click="onClear()">
+      </Icon>
     </div>
     <div class="ds-datepicker-header">
       <div class="ds-datepicker-labels">
@@ -182,10 +187,10 @@ export default {
       return days
     },
     getDay() {
-      return this.value.getDate()
+      return this.value && this.value.getDate()
     },
     getMonth() {
-      return this.capitalize(this.value.toLocaleString(this.locale, {month: 'long'}))
+      return this.value && this.capitalize(this.value.toLocaleString(this.locale, {month: 'long'}))
     },
     getSecondDay() {
       return this.secondDate && this.secondDate.getDate()
@@ -360,7 +365,9 @@ export default {
 
     },
     onClear() {
-
+      if (this.rangeAvailable) {
+        this.$emit('update:secondDate', undefined)
+      }
     },
     _dateMinMaxInternal(id, value) {
       return {
@@ -399,14 +406,19 @@ export default {
       } else {
         this.$emit('input', item)
       }
+    },
+    dateKey(date) {
+      if (date) {
+        date.key = date.getTime()
+      }
     }
   },
   watch: {
     value(date) {
-      date.key = date.getTime()
+      this.dateKey(date)
     },
     secondDate(date) {
-      date.key = date.getTime()
+      this.dateKey(date)
     }
   }
 }
@@ -570,6 +582,14 @@ export default {
       height: 60px;
       box-sizing: border-box;
       background-color: @color-gray-050;
+
+      .ds-additional-title {
+        cursor: default;
+      }
+
+      .ds-close-icon {
+        cursor: pointer;
+      }
     }
 
     .ds-datepicker-header {

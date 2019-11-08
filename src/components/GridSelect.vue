@@ -49,7 +49,8 @@
         v-for="item in row"
         :class="['ds-item-cell', {
           'ds-disabled': item.disabled,
-          'ds-selected': getSelected(item)
+          'ds-selected': getSelected(item),
+          'ds-range': getRange(item)
         }]"
         :tabindex="!item.disabled && 0"
         @click="!item.disabled && select(item)"
@@ -98,6 +99,15 @@ export default {
         return item.key === this.initDate || item.key === this.secondInitDate
       } else {
         return item === this.value || item === this.secondValue
+      }
+    },
+    getRange(item) {
+      if (item.key !== undefined) {
+        return this.initDate && this.secondInitDate && (this.initDate < item.key && item.key < this.secondInitDate ||
+                                                        this.secondInitDate < item.key && item.key < this.initDate)
+      } else {
+        return this.value && this.secondValue && (this.value < item && item < this.secondValue ||
+                                                  this.secondValue < item && item < this.value)
       }
     }
   },
@@ -158,6 +168,14 @@ export default {
         &.ds-selected > .ds-item {
           color: @color-white;
           background-color: @color-primary;
+        }
+
+        &.ds-range {
+          background-color: rgba(30, 179, 134, 0.1);
+
+          .ds-item {
+            color: @color-primary;
+          }
         }
       }
 

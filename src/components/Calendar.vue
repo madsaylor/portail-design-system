@@ -60,6 +60,9 @@
         v-model="calendarValue"
         :secondDate.sync="calendarSecondValue"
         :rangeAvailable="rangeAvailable"
+        :selectDayList="selectDayList"
+        :isMobile="isMobile"
+        @save="onSave"
       ></Datepicker>
     </CalendarDropdown>
 
@@ -82,6 +85,9 @@
         v-model="calendarValue"
         :secondDate.sync="calendarSecondValue"
         :rangeAvailable="rangeAvailable"
+        :selectDayList="selectDayList"
+        :isMobile="isMobile"
+        @save="onSave"
       ></Datepicker>
     </CalendarDialog>
   </div>
@@ -149,7 +155,8 @@
         default: true
       },
       secondDate: null,
-      rangeAvailable: Boolean
+      rangeAvailable: Boolean,
+      selectDayList: Boolean
     },
     data: () => ({
       calendarVisible: false,
@@ -194,7 +201,6 @@
           return date
         },
         set(value) {
-          this.calendarVisible = false
           this.$emit('input', value)
         }
       },
@@ -213,7 +219,6 @@
           return date
         },
         set(value) {
-          this.calendarVisible = false
           this.$emit('update:secondDate', value)
         }
       },
@@ -350,6 +355,9 @@
       validate() {
         this.touched = true
         this.$emit('validation', this.validation)
+      },
+      onSave() {
+        this.calendarVisible = false
       }
     },
     watch: {

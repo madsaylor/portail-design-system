@@ -25,64 +25,111 @@
 -->
 
 <template>
-  <div :class="['ds-datepicker', {'ds-full-width': fullWidth}]">
-    <div class="ds-datepicker-header-additional">
+  <div :class="['ds-datepicker', {'ds-full-width': fullWidth, 'ds-datepicker-select-day-list': selectDayList && !isMobile}]">
+    <div class="ds-datepicker-sidebar">
+
+      <div class="ds-datepicker-sidebar-header">
+          <div>
+            Pick a date
+          </div>
+          <Icon class="ds-close-icon"
+                times_circle
+                color="gray-600"
+                size="16px"
+                @click="onClear()">
+          </Icon>
+      </div>
+
+      <div class="ds-datepicker-sidebar-content">
+        {{additionalHeaderDate}}
+      </div>
+
+      <div class="ds-datepicker-sidebar-footer-wrapper">
+        <div class="ds-datepicker-sidebar-footer">
+          <Button plain-two
+                  class="ds-datepicker-sidebar-clear" @click="onClear()">
+            Clear
+          </Button>
+          <Button @click="onSave()">
+            Save
+          </Button>
+        </div>
+      </div>
+
+    </div>
+    <div class="ds-main-content">
+      <div class="ds-datepicker-header-additional">
       <span class="ds-additional-title">
         {{additionalHeaderDate}}
       </span>
-      <Icon class="ds-close-icon"
-            times_circle
-            color="gray-600"
-            size="16px"
-            @click="onClear()">
-      </Icon>
-    </div>
-    <div class="ds-datepicker-header">
-      <div class="ds-datepicker-labels">
+        <Icon class="ds-close-icon"
+              times_circle
+              color="gray-600"
+              size="16px"
+              @click="onClear()">
+        </Icon>
+      </div>
+      <div class="ds-datepicker-header">
+        <div class="ds-datepicker-labels">
         <span class="ds-month"
               @click="onMonth()">
           {{ monthName }}
         </span>
-        <span class="ds-year">
+          <span class="ds-year">
           {{ year }}
         </span>
-        <Icon @click="onYear()"
-              :source="view === 'year' ? 'angle_up_solid' : 'angle_down_solid'"
-              color="gray-600"
-              size="16px"
-              class="ds-year-icon">
-        </Icon>
+          <Icon @click="onYear()"
+                :source="view === 'year' ? 'angle_up_solid' : 'angle_down_solid'"
+                color="gray-600"
+                size="16px"
+                class="ds-year-icon">
+          </Icon>
+        </div>
+        <div class="ds-buttons">
+          <button @click="shift(-1)" :disabled="!canShiftBack">
+            <Icon angle_left_solid color="gray-600" size="16px"></Icon>
+          </button>
+          <button @click="shift(1)" :disabled="!canShiftForward">
+            <Icon angle_right_solid color="gray-600" size="16px"></Icon>
+          </button>
+        </div>
       </div>
-      <div class="ds-buttons">
-        <button @click="shift(-1)" :disabled="!canShiftBack">
-          <Icon angle_left_solid color="gray-600" size="16px"></Icon>
-        </button>
-        <button @click="shift(1)" :disabled="!canShiftForward">
-          <Icon angle_right_solid color="gray-600" size="16px"></Icon>
-        </button>
-      </div>
-    </div>
 
-    <div :class="['ds-datepicker-body', {'ds-full-width': fullWidth}]">
-      <GridSelect
-        :items="{'day': days, 'month': months, 'year': years}[view]"
-        :labels-top="view === 'day' ? weekLabels : null"
-        :value="value"
-        :secondValue="secondDate"
-        @input="select"
-        #default="{item}"
-      >
-        <span :class="{'ds-grid-item-big': view !== 'day'}">{{item.title}}</span>
-      </GridSelect>
-    </div>
-    <div class="ds-datepicker-footer">
-      <Button @click="onSave()">
-        Save
-      </Button>
-      <Button plain-two
-              class="ds-datepicker-clear" @click="onClear()">
-        Clear
-      </Button>
+      <div :class="['ds-datepicker-body', {'ds-full-width': fullWidth,
+                  'ds-datepicker-body-select-day-list': selectDayList && !isMobile}]">
+        <GridSelect
+          :items="{'day': days, 'month': months, 'year': years}[view]"
+          :labels-top="view === 'day' ? weekLabels : null"
+          :value="value"
+          :secondValue="secondDate"
+          :rangeAvailable="rangeAvailable"
+          @input="select"
+          #default="{item}"
+        >
+          <span :class="{'ds-grid-item-big': view !== 'day'}">{{item.title}}</span>
+        </GridSelect>
+
+        <div v-if="selectDayList && !isMobile"
+             class="ds-select-day-list-wrapper">
+          <div class="ds-select-day-list">
+            <div @click="setInitDay">À la réception</div>
+            <div v-for="i in 6"
+                 @click="setDayRange(i)">
+              Dans les {{ i * defaultMultiplicateur}} jours
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="ds-datepicker-footer">
+        <Button plain-two
+                class="ds-datepicker-clear" @click="onClear()">
+          Clear
+        </Button>
+        <Button @click="onSave()">
+          Save
+        </Button>
+      </div>
     </div>
   </div>
 </template>
@@ -114,13 +161,17 @@ export default {
       default: false
     },
     secondDate: null,
-    rangeAvailable: Boolean
+    rangeAvailable: Boolean,
+    selectDayList: Boolean,
+    isMobile: Boolean
   },
   data() {
     return {
       displayed: new Date(this.value),
       view: 'day',
-      ie: window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv:11\./)
+      ie: window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv:11\./),
+      dateUnset: false,
+      defaultMultiplicateur: 15
     }
   },
   created () {
@@ -128,6 +179,10 @@ export default {
   },
   computed: {
     additionalHeaderDate() {
+      // if (this.dateUnset) {
+      //   return `Pick a date`
+      // } else
+
       if (!this.secondDate) {
         return `${this.getMonth} ${this.getDay}`
       } else if (this.value < this.secondDate) {
@@ -329,6 +384,7 @@ export default {
   methods: {
     select(item) {
       this.displayed = item
+      this.dateUnset = false
       if (this.view === 'year') {
         this.view = 'month'
       }
@@ -362,9 +418,11 @@ export default {
       this.view = this.view === 'day' ? 'month' : 'day'
     },
     onSave() {
-
+      this.$emit('save')
     },
     onClear() {
+      this.dateUnset = true
+      this.$emit('input', undefined)
       if (this.rangeAvailable) {
         this.$emit('update:secondDate', undefined)
       }
@@ -376,7 +434,7 @@ export default {
       }
     },
     selectDay(item) {
-      if (this.value && this.secondDate) {
+      if (this.value && this.secondDate && this.rangeAvailable) {
         let dateMin, dateMax
 
         if (this.value - this.secondDate < 0) {
@@ -411,6 +469,14 @@ export default {
       if (date) {
         date.key = date.getTime()
       }
+    },
+    setInitDay() {
+      this.$emit('update:secondDate', undefined)
+    },
+    setDayRange(multiplicateur) {
+      let valueCopy = new Date(this.value.getTime())
+      valueCopy.setDate(valueCopy.getDate() + this.defaultMultiplicateur * multiplicateur - 1)
+      this.$emit('update:secondDate', valueCopy)
     }
   },
   watch: {
@@ -554,8 +620,35 @@ export default {
       color: @color-white;
     }
 
+    .ds-select-day-list-wrapper {
+      width: 190px;
+      display: flex;
+      justify-content: center;
+      margin-left: 25px;
+
+      .ds-select-day-list {
+        width: 110px;
+        color: @color-primary;
+        font-family: "Roboto Medium";
+        font-size: 14px;
+        line-height: 21px;
+        border-left: 1px solid #E8ECEF;
+        padding-left: 25px;
+
+        > div {
+          cursor: pointer;
+          margin-bottom: 13px;
+        }
+      }
+    }
+
     &.ds-full-width {
       width: 100%;
+    }
+
+    &.ds-datepicker-body-select-day-list {
+      display: flex;
+      width: 526px;
     }
   }
 
@@ -565,6 +658,14 @@ export default {
 
   &.ds-full-width {
     width: 100%;
+  }
+
+  &.ds-datepicker-select-day-list {
+    width: 526px;
+  }
+
+  .ds-datepicker-sidebar {
+    display: none;
   }
 }
 
@@ -585,10 +686,6 @@ export default {
 
       .ds-additional-title {
         cursor: default;
-      }
-
-      .ds-close-icon {
-        cursor: pointer;
       }
     }
 
@@ -617,18 +714,86 @@ export default {
     }
 
     .ds-datepicker-footer {
-      display: block;
+      display: flex;
+      justify-content: flex-end;
       box-sizing: border-box;
       padding: 0 20px 14px;
       height: 50px;
 
       .ds-datepicker-clear {
-        margin-left: 12px;
+        margin-right: 12px;
 
         button {
           color: @color-gray-600;
           font-family: "Roboto Medium";
+          height: 14px;
+          font-size: 12px;
+          line-height: 14px;
+          text-transform: uppercase;
         }
+      }
+    }
+
+    .ds-close-icon {
+      cursor: pointer;
+    }
+  }
+}
+
+@media @screen-medium and (orientation: landscape), @screen-small and (orientation: landscape) {
+  .ds-datepicker {
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+
+    .ds-datepicker-header-additional {
+      display: none;
+    }
+
+    .ds-datepicker-sidebar {
+      display: flex;
+      flex-direction: column;
+      min-width: 190px;
+      padding: 20px;
+      background-color: @color-gray-050;
+
+      .ds-datepicker-sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        height: 20%;
+      }
+
+      .ds-datepicker-sidebar-content {
+        display: flex;
+        align-items: center;
+        height: 60%;
+      }
+
+      .ds-datepicker-sidebar-footer-wrapper {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        height: 20%;
+
+        .ds-datepicker-sidebar-footer {
+          .ds-datepicker-sidebar-clear {
+            margin-right: 30px;
+          }
+        }
+      }
+    }
+
+    .ds-main-content {
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      .ds-datepicker-body {
+        height: 225px;
+      }
+
+      .ds-datepicker-footer {
+        display: none;
       }
     }
   }

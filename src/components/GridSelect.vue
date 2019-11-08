@@ -50,18 +50,20 @@
         :class="['ds-item-cell', {
           'ds-disabled': item.disabled,
           'ds-selected': getSelected(item),
-          'ds-range': getRange(item)
+          'ds-range': getRange(item),
+          'ds-selected-range-start': getSelectedRangeStart(item),
+          'ds-selected-range-end': getSelectedRangeEnd(item)
         }]"
         :tabindex="!item.disabled && 0"
         @click="!item.disabled && select(item)"
         @keydown.enter.space.prevent="select(item)"
         :style="{width: itemWidth}"
       >
-        <span :class="['ds-item', ...item.class]">
-          <slot v-bind="{item}">
-            {{ item.title || item }}
-          </slot>
-        </span>
+          <span :class="['ds-item', ...item.class]">
+            <slot v-bind="{item}">
+              {{ item.title || item }}
+            </slot>
+          </span>
       </td>
     </tr>
   </table>
@@ -77,7 +79,8 @@ export default {
     },
     labelsTop: Array,
     value: null,
-    secondValue: null
+    secondValue: null,
+    rangeAvailable: Boolean
   },
   computed: {
     itemWidth() {
@@ -88,6 +91,9 @@ export default {
     },
     secondInitDate() {
       return new Date(this.secondValue).getTime()
+    },
+    dateRangeExist() {
+      return this.value && this.secondValue && this.rangeAvailable
     }
   },
   methods: {
@@ -95,20 +101,50 @@ export default {
       this.$emit('input', item)
     },
     getSelected(item) {
-      if (item.key !== undefined) {
-        return item.key === this.initDate || item.key === this.secondInitDate
+      if (this.dateRangeExist) {
+        return this.getSingleSelected(item, this.value, this.initDate) ||
+               this.getSingleSelected(item, this.secondValue, this.secondInitDate)
       } else {
-        return item === this.value || item === this.secondValue
+        return this.getSingleSelected(item, this.value, this.initDate)
       }
     },
     getRange(item) {
-      if (item.key !== undefined) {
+      if (this.dateRangeExist && item.key !== undefined) {
         return this.initDate && this.secondInitDate && (this.initDate < item.key && item.key < this.secondInitDate ||
-                                                        this.secondInitDate < item.key && item.key < this.initDate)
+          this.secondInitDate < item.key && item.key < this.initDate)
+      } else if (this.dateRangeExist) {
+        return this.value < item && item < this.secondValue || this.secondValue < item && item < this.value
       } else {
-        return this.value && this.secondValue && (this.value < item && item < this.secondValue ||
-                                                  this.secondValue < item && item < this.value)
+        return false
       }
+    },
+    getSelectedRangeStart(item) {
+      if (this.dateRangeExist && this.value < this.secondValue) {
+        return this.getSingleSelected(item, this.value, this.initDate)
+      } else if (this.dateRangeExist) {
+        return this.getSingleSelected(item, this.secondValue, this.secondInitDate)
+      } else {
+        return false
+      }
+    },
+    getSelectedRangeEnd(item) {
+      if (this.dateRangeExist && this.value > this.secondValue) {
+        return this.getSingleSelected(item, this.value, this.initDate)
+      } else if (this.dateRangeExist) {
+        return this.getSingleSelected(item, this.secondValue, this.secondInitDate)
+      } else {
+        return false
+      }
+    },
+    getSingleSelected(item, date, dateMilles) {
+      if (item.key !== undefined) {
+        return item.key === dateMilles
+      } else {
+        return item === date
+      }
+    },
+    getSelectedRange(item) {
+      return this.dateRangeExist && this.getSelected(item)
     }
   },
 }
@@ -171,10 +207,38 @@ export default {
         }
 
         &.ds-range {
-          background-color: rgba(30, 179, 134, 0.1);
-
           .ds-item {
+            width: 100%;
+            padding: 1px;
+            background-color: rgba(30, 179, 134, 0.1);
             color: @color-primary;
+          }
+        }
+        &.ds-selected-range-start,
+        &.ds-selected-range-end {
+          .ds-item {
+            width: 100%;
+            padding: 1px;
+            color: @color-primary;
+
+            span {
+              display: inline-block;
+              min-width: 30px;
+              color: @color-white;
+              background-color: @color-primary;
+            }
+          }
+        }
+
+        &.ds-selected-range-start {
+          .ds-item {
+            background: linear-gradient(90deg, @color-white 50%, rgba(30, 179, 134, 0.1) 50%);
+          }
+        }
+
+        &.ds-selected-range-end {
+          .ds-item {
+            background: linear-gradient(90deg, rgba(30, 179, 134, 0.1) 50%, @color-white 50%);
           }
         }
       }

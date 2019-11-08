@@ -850,7 +850,7 @@ export default {
 
     input, select {
       .font-desktop-small-regular-dark();
-      padding: 7px 12px;
+      padding: 10px 12px;
       box-sizing: border-box;
       border: 1px solid @color-gray-300;
       border-radius: 2px;

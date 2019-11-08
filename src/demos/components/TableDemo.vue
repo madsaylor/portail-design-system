@@ -13,8 +13,53 @@
       v-model="clients"
       :headers="headers"
     >
+      <template slot="filter-name">
+        <div class="filter-wrapper">
+          <Chips v-model="nameFilter" />
+        </div>
+      </template>
+
+      <template slot="filter-type.name">
+        <div class="filter-wrapper">
+          <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
+        </div>
+      </template>
+
+      <template slot="filter-earned">
+        <div class="filter-wrapper">
+          <Input v-model="financialFilter" />
+        </div>
+      </template>
+
+      <template slot="filter-invoice_date">
+        <div class="filter-wrapper">
+          <Input v-model="invoiceDateFilter" />
+        </div>
+      </template>
+
+      <template slot="filter-status">
+        <div class="filter-wrapper">
+          <Chips v-model="statusFilter" />
+        </div>
+      </template>
+
+      <template v-slot:cell-name="{row, value}">
+        <div class="name-wrapper">
+          <Icon :source="row.type.name === 'Person' ? 'account_circle' : 'group_outline'" />
+          <div class="name-number">
+            <div class="name">{{ value }}</div>
+            <div class="number">Client ID: {{ row.number }}</div>
+          </div>
+        </div>
+      </template>
+
       <template v-slot:cell-status="{value, orgValue}">
         <Badge :color="colors[orgValue]" >{{ value }}</Badge>
+      </template>
+
+      <template v-slot:cell-actions="{ row }">
+        <Icon source="edit" color="#888" />
+        <Icon source="delete" color="#888" />
       </template>
     </Table>
   </div>
@@ -24,6 +69,10 @@
   import moment from 'moment'
   import Table from '../../components/Table'
   import Badge from '../../components/Badge'
+  import Icon from '../../components/Icon'
+  import Chips from '../../components/Chips'
+  import Input from '../../components/Input'
+  import Select from '../../components/Select'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
   import {TableData, GeneralData} from '../../static/index'
@@ -48,7 +97,7 @@
 
   export default {
     name: 'TableDemo',
-    components: {Table, Badge, Collapser, Description},
+    components: {Table, Badge, Icon, Chips, Input, Select, Collapser, Description},
     data: () => ({
       usage: TableData.usage,
       openUsage: true,
@@ -58,13 +107,49 @@
         { key: 'type.name', title: 'Type', width: '20%' },
         { key: 'earned', title: 'Earned', prefix: '€', sortable: true },
         { key: 'invoice_date', title: 'Date', sortable: true, filter: (value) => moment(value).format('DD-MM-YYYY') },
-        { key: 'status', title: 'Status', badge: true }
+        { key: 'status', title: 'Status', badge: true },
+        { key: 'actions', title: '', width: '70px'}
       ],
-      colors: COLORS_BY_STATUS
+      colors: COLORS_BY_STATUS,
+      nameFilter: [],
+      typeFilter: '',
+      typeOptions: [
+        { id: 1, value: 'Person' },
+        { id: 2, value: 'Company' }
+      ],
+      financialFilter: '',
+      invoiceDateFilter: '',
+      statusFilter: []
     })
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+  .name-wrapper {
+    display: flex;
+    align-items: center;
 
+    .name-number {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 10px;
+
+      .name {
+        font-size: 16px;
+      }
+
+      .number {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .filter-wrapper {
+    width: 100%;
+
+    > * {
+      width: 100%;
+    }
+  }
 </style>

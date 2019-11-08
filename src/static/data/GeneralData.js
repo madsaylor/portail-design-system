@@ -28,7 +28,7 @@ let clients = [
   },
   {
     name: 'Adam L2',
-    type: { name: 'ABC' },
+    type: { name: 'Company' },
     earned: '3,123.34',
     number: '293932',
     invoice_date: '1999-02-20',
@@ -38,7 +38,7 @@ let clients = [
   },
   {
     name: 'Adam L3',
-    type: { name: 'BCA' },
+    type: { name: 'Company' },
     earned: '3,123.34',
     number: '293932',
     invoice_date: '1999-02-20',
@@ -48,7 +48,7 @@ let clients = [
   },
   {
     name: 'Adam L4',
-    type: { name: 'CDE' },
+    type: { name: 'Person' },
     earned: '3,123.34',
     number: '293932',
     invoice_date: '1999-02-20',

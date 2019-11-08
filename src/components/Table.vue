@@ -34,20 +34,20 @@
         :key="dataIndex"
         @click="onClick(row, dataIndex)"
       >
-        <Card class="ds-data-wrapper">
+        <div class="ds-data-wrapper">
           <span
             v-for="(header, index) in headers"
             :style="getFlex(header)"
             :key="index"
           >
-            <slot :name="getSlotName(header)" :value="getCellValue(row, header)" :orgValue="getOrgValue(row, header)">
+            <slot :name="getSlotName(header)" :value="getCellValue(row, header)" :orgValue="getOrgValue(row, header)" :row="row">
             </slot>
 
             <template v-if="!hasSlot(header)">
               {{ getCellValue(row, header) }}
             </template>
           </span>
-        </Card>
+        </div>
       </div>
     </div>
   </div>
@@ -153,16 +153,10 @@
         box-shadow: none;
 
         .ds-header {
-          text-align: right;
           display: flex;
-          justify-content: flex-end;
+          justify-content: flex-start;
           align-items: center;
           cursor: pointer;
-
-          &:first-child {
-            text-align: left;
-            justify-content: flex-start;
-          }
         }
       }
     }
@@ -177,9 +171,10 @@
       .ds-table-body {
         .ds-data-wrapper {
           display: flex;
-          padding: 22px 24px;
+          padding: 10px 12px;
           margin-bottom: 6px;
-          text-align: right;
+          background-color: white;
+          align-items: center;
 
           @media screen and (max-width: 551px) {
             flex-wrap: wrap;
@@ -188,23 +183,8 @@
           }
 
           span {
-            &:first-child {
-              text-align: left;
-            }
-
             @media screen and (max-width: 551px) {
               font-size: 14px;
-
-              &:first-child {
-                flex-basis: 100% !important;
-                font-size: 16px;
-                line-height: 24px;
-                margin-bottom: 16px;
-              }
-
-              &:nth-child(2) {
-                text-align: left;
-              }
             }
           }
         }

@@ -13,8 +13,23 @@
       v-model="clients"
       :headers="headers"
     >
+      <template v-slot:cell-name="{row, value}">
+        <div class="name-wrapper">
+          <Icon :source="row.type.name === 'Person' ? 'account_circle' : 'group_outline'" />
+          <div class="name-number">
+            <div class="name">{{ value }}</div>
+            <div class="number">Client ID: {{ row.number }}</div>
+          </div>
+        </div>
+      </template>
+
       <template v-slot:cell-status="{value, orgValue}">
         <Badge :color="colors[orgValue]" >{{ value }}</Badge>
+      </template>
+
+      <template v-slot:cell-actions="{ row }">
+        <Icon source="edit" color="#888" />
+        <Icon source="delete" color="#888" />
       </template>
     </Table>
   </div>
@@ -24,6 +39,7 @@
   import moment from 'moment'
   import Table from '../../components/Table'
   import Badge from '../../components/Badge'
+  import Icon from '../../components/Icon'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
   import {TableData, GeneralData} from '../../static/index'
@@ -48,23 +64,42 @@
 
   export default {
     name: 'TableDemo',
-    components: {Table, Badge, Collapser, Description},
+    components: {Table, Badge, Icon, Collapser, Description},
     data: () => ({
       usage: TableData.usage,
       openUsage: true,
       clients: GeneralData.clients,
       headers: [
-        { key: 'name', title: 'Name', width: '30%' },
+        { key: 'name', title: 'Name', width: '30%', filters: 'chip' },
         { key: 'type.name', title: 'Type', width: '20%' },
         { key: 'earned', title: 'Earned', prefix: '€', sortable: true },
         { key: 'invoice_date', title: 'Date', sortable: true, filter: (value) => moment(value).format('DD-MM-YYYY') },
-        { key: 'status', title: 'Status', badge: true }
+        { key: 'status', title: 'Status', badge: true },
+        { key: 'actions', title: '', width: '50px'}
       ],
       colors: COLORS_BY_STATUS
     })
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+  .name-wrapper {
+    display: flex;
+    align-items: center;
 
+    .name-number {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 10px;
+
+      .name {
+        font-size: 16px;
+      }
+
+      .number {
+        font-size: 14px;
+      }
+    }
+  }
 </style>

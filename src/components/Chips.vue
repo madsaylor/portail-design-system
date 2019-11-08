@@ -10,6 +10,7 @@
             tabindex="0"
             @focus="onFocusChips(index)"
             @blur="onBlurChips(index)"
+            :key="index"
             v-for="(title, index) in valueWrapper">
 
         <span class="ds-chip-title">
@@ -90,7 +91,7 @@
         event = event ? event : window.event
         let charCode = event.which ? event.which : event.keyCode
 
-        if (charCode === 32) {
+        if (charCode === 32 || charCode === 13) {
           event.preventDefault()
           this.addNewChip()
         }
@@ -172,7 +173,7 @@
         }
       },
       getIconColor() {
-        return this.active && !this.error ? '#106cc8' : 'dark'
+        return '#98A9BC'
       }
     },
     mounted() {
@@ -193,7 +194,10 @@
     .ds-chips-container {
       cursor: text;
       padding-bottom: 5px;
-      box-shadow: 0 1px @color-gray-500;
+      border: solid 1px #E8ECEF;
+      border-radius: 3px;
+      padding: 0 10px;
+      box-sizing: border-box;
 
       .ds-chips-label {
         color: @color-gray-500;
@@ -206,7 +210,7 @@
 
 
         &.ds-chips-label-active {
-          color: #106cc8;
+          // color: @color-primary;
         }
 
         &.ds-chips-label-error {
@@ -218,9 +222,10 @@
         display: inline-block;
         cursor: default;
         padding: 4px 8px 4px 10px;
-        margin: 5px 10px 5px 0;
-        border-radius: 20px;
+        margin: 4px 10px 4px 0;
+        border-radius: 2px;
         background-color: @color-gray-300;
+        color: @color-gray-500;
 
         .ds-chip-title {
           font-size: 16px;
@@ -238,7 +243,6 @@
 
         &:focus {
           color: @color-white;
-          background-color: #106cc8;
           outline: none;
         }
       }
@@ -256,11 +260,11 @@
       }
 
       &.ds-chips-container-active {
-        box-shadow: 0 2px #106cc8;
+        border: solid 1px @color-primary;
       }
 
       &.ds-chips-container-error {
-        box-shadow: 0 2px @color-red;
+        border: solid 1 px @color-red;
       }
     }
 

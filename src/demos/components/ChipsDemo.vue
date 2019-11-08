@@ -12,7 +12,6 @@
 
     <Chips v-model="chips"
            :removable="true"
-           :label="label"
            :placeholder="placeholder"
            :validators="validators">
     </Chips>

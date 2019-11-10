@@ -17,19 +17,28 @@
         <label :for="lang">{{ lang }}</label>
       </span>
 
-      <br/>
-
-      Selected date: {{ dateSelected }}
-
+      <div class="ds-datepicker-selected-date">
+        Selected date: {{ dateSelected }}
+      </div>
       <Datepicker
         :min="new Date('2002-02-10')"
         :max="new Date('2018-12-21')"
+        :dateUnset.sync="dateUnset"
         v-model="dateSelected"
       ></Datepicker>
 
+      <div class="ds-datepicker-selected-date">
+        <div>
+          Selected date: {{ dateSelected2 }}
+        </div>
+        <div v-if="secondDate">
+          Second selected date: {{secondDate}}
+        </div>
+      </div>
       <Datepicker
         v-model="dateSelected2"
         :secondDate.sync="secondDate"
+        :dateUnset.sync="dateUnsetRange"
         rangeAvailable
       ></Datepicker>
     </div>
@@ -54,11 +63,15 @@ export default {
       secondDate: null,
       usage: DatepickerData.usage,
       openUsage: true,
+      dateUnset: false,
+      dateUnsetRange: false
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-
+  .ds-datepicker-selected-date {
+    margin: 20px 0 10px;
+  }
 </style>

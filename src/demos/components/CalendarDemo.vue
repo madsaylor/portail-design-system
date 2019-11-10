@@ -85,6 +85,8 @@
       :secondDate.sync="dateValue9"
       rangeAvailable
       selectDayList
+      shortMonthFormat
+      iconLeft
     />
   </div>
 </template>

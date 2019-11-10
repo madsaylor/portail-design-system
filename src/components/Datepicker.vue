@@ -41,7 +41,32 @@
       </div>
 
       <div class="ds-datepicker-sidebar-content">
-        {{additionalHeaderDate}}
+        <div v-if="!dateUnset">
+          <div class="ds-datepicker-sidebar-week-day">
+            {{getWeekDay(minDate)}},
+          </div>
+          <div>
+            {{minDateHeader}}
+          </div>
+          <div>
+            {{minFullYear}}
+          </div>
+        </div>
+
+        <div v-if="maxDateHeader">
+          <div>
+            -
+          </div>
+          <div class="ds-datepicker-sidebar-week-day">
+            {{getWeekDay(maxDate)}},
+          </div>
+          <div>
+            {{maxDateHeader}}
+          </div>
+          <div>
+            {{maxFullYear}}
+          </div>
+        </div>
       </div>
 
       <div class="ds-datepicker-sidebar-footer-wrapper">
@@ -154,7 +179,7 @@ export default {
     min: Date,
     value: {
       type: Date,
-      default: () => new Date(),
+      default: () => new Date()
     },
     fullWidth: {
       type: Boolean,
@@ -163,15 +188,19 @@ export default {
     secondDate: null,
     rangeAvailable: Boolean,
     selectDayList: Boolean,
-    isMobile: Boolean
+    isMobile: Boolean,
+    dateUnset: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
       displayed: new Date(this.value),
       view: 'day',
       ie: window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv:11\./),
-      dateUnset: false,
-      defaultMultiplicateur: 15
+      defaultMultiplicateur: 15,
+      defaultDay: true
     }
   },
   created () {
@@ -179,17 +208,19 @@ export default {
   },
   computed: {
     additionalHeaderDate() {
-      // if (this.dateUnset) {
-      //   return `Pick a date`
-      // } else
-
-      if (!this.secondDate) {
-        return `${this.getMonth} ${this.getDay}`
-      } else if (this.value < this.secondDate) {
-        return `${this.getMonth} ${this.getDay} - ${this.getSecondMonth} ${this.getSecondDay}`
+      if (this.dateUnset) {
+        return `Pick a date`
+      } else if (this.secondDate) {
+        return `${this.minDateHeader} ${this.minFullYear} - ${this.maxDateHeader} ${this.maxFullYear}`
       } else {
-        return `${this.getSecondMonth} ${this.getSecondDay} - ${this.getMonth} ${this.getDay}`
+        return `${this.minDateHeader}`
       }
+    },
+    minFullYear() {
+      return this.minMaxFullYear('min') || ''
+    },
+    maxFullYear() {
+      return this.minMaxFullYear('max') || ''
     },
     locale() {
       return this.lang || this.$root.locale || 'fr-fr'
@@ -240,18 +271,6 @@ export default {
         days.push(week)
       }
       return days
-    },
-    getDay() {
-      return this.value && this.value.getDate()
-    },
-    getMonth() {
-      return this.value && this.capitalize(this.value.toLocaleString(this.locale, {month: 'long'}))
-    },
-    getSecondDay() {
-      return this.secondDate && this.secondDate.getDate()
-    },
-    getSecondMonth() {
-      return this.secondDate && this.capitalize(this.secondDate.toLocaleString(this.locale, {month: 'long'}))
     },
     /**
      * Months for the month selection grid for the displayed year
@@ -336,7 +355,7 @@ export default {
       let date = new Date()
       date.setDate(date.getDate() - date.getDay() + 1)  // set date to Monday
       for (let i = 1; i < 8; i++) {
-        labels.push(moment(date).locale(this.locale).format('ddd').slice(0, 3).toLowerCase())
+        labels.push(this.getWeekDay(date))
         date.setDate(date.getDate() + 1)
       }
       return labels
@@ -379,12 +398,33 @@ export default {
         return true
       }
       return this.bounds.min.getTime() > this.min.getTime()
+    },
+    maxDateHeader() {
+      if (!this.secondDate) {
+        return undefined
+      } else if (this.value > this.secondDate) {
+        return `${this.getDay(this.value)} ${this.getMonth(this.value, 'short', 1)}`
+      } else {
+        return `${this.getDay(this.secondDate)} ${this.getMonth(this.secondDate, 'short', 1)}`
+      }
+    },
+    minDateHeader() {
+      if (!this.secondDate || this.value < this.secondDate) {
+        return `${this.getDay(this.value)} ${this.getMonth(this.value, 'short', 1)}`
+      } else {
+        return `${this.getDay(this.secondDate)} ${this.getMonth(this.secondDate, 'short', 1)}`
+      }
+    },
+    minDate() {
+      return !this.secondDate || this.value < this.secondDate ? this.value : this.secondDate
+    },
+    maxDate() {
+      return !this.secondDate ? undefined : this.value > this.secondDate ? this.value : this.secondDate
     }
   },
   methods: {
     select(item) {
       this.displayed = item
-      this.dateUnset = false
       if (this.view === 'year') {
         this.view = 'month'
       }
@@ -392,8 +432,9 @@ export default {
         this.view = 'day'
       }
       else if (this.view === 'day') {
-        this.selectDay(item)
+        this.selectDay(new Date(item.valueOf()))
       }
+      this.$emit('update:dateUnset', false)
     },
     shift(delta) {
       if (this.view === 'day') {
@@ -421,8 +462,8 @@ export default {
       this.$emit('save')
     },
     onClear() {
-      this.dateUnset = true
-      this.$emit('input', undefined)
+      this.$emit('update:dateUnset', true)
+      this.$emit('input', null)
       if (this.rangeAvailable) {
         this.$emit('update:secondDate', undefined)
       }
@@ -434,7 +475,7 @@ export default {
       }
     },
     selectDay(item) {
-      if (this.value && this.secondDate && this.rangeAvailable) {
+      if (this.value && this.secondDate && this.rangeAvailable && !this.dateUnset) {
         let dateMin, dateMax
 
         if (this.value - this.secondDate < 0) {
@@ -459,11 +500,13 @@ export default {
         } else {
           this.$emit(dateMax.id, item)
         }
-      } else if (this.value && this.rangeAvailable) {
+      } else if (this.value && this.rangeAvailable && !this.dateUnset && !this.defaultDay) {
         this.$emit('update:secondDate', item)
       } else {
         this.$emit('input', item)
       }
+
+      this.defaultDay = false
     },
     dateKey(date) {
       if (date) {
@@ -477,6 +520,34 @@ export default {
       let valueCopy = new Date(this.value.getTime())
       valueCopy.setDate(valueCopy.getDate() + this.defaultMultiplicateur * multiplicateur - 1)
       this.$emit('update:secondDate', valueCopy)
+    },
+    getMonth(value, monthFormat, sliceEnd) {
+      if (value) {
+        let month = this.capitalize(value.toLocaleString(this.locale, {month: monthFormat}))
+        return sliceEnd ? month.slice(0, month.length - sliceEnd) : month
+      } else {
+        return void 0
+      }
+    },
+    getDay(value) {
+      return value && value.getDate()
+    },
+    getWeekDay(date) {
+      return moment(date).locale(this.locale).format('ddd').slice(0, 3).toLowerCase()
+    },
+    minMaxFullYear(id) {
+      if (this.minDate && this.maxDate) {
+        let minFullYear = this.minDate.getFullYear()
+        let maxFullYear = this.maxDate.getFullYear()
+
+        if (minFullYear !== maxFullYear) {
+          if (id === 'min') {
+            return minFullYear
+          } else if (id === 'max') {
+            return maxFullYear
+          }
+        }
+      }
     }
   },
   watch: {
@@ -486,6 +557,9 @@ export default {
     secondDate(date) {
       this.dateKey(date)
     }
+  },
+  mounted() {
+    this.$emit('input', this.value)
   }
 }
 </script>
@@ -703,13 +777,7 @@ export default {
     .ds-datepicker-body {
       height: 261px;
       .ds-grid-select-row {
-
         height: 32px;
-        .ds-item-cell {
-          .ds-item {
-            min-width: 59%;
-          }
-        }
       }
     }
 
@@ -745,6 +813,7 @@ export default {
     display: flex;
     flex-direction: row;
     height: 300px;
+    width: 583px;
 
     .ds-datepicker-header-additional {
       display: none;
@@ -765,8 +834,19 @@ export default {
 
       .ds-datepicker-sidebar-content {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
         height: 60%;
+
+        color: #252631;
+        font-family: Roboto;
+        font-size: 20px;
+        letter-spacing: 0.2px;
+        line-height: 24px;
+
+        .ds-datepicker-sidebar-week-day {
+          text-transform: capitalize;
+        }
       }
 
       .ds-datepicker-sidebar-footer-wrapper {

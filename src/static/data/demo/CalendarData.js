@@ -44,6 +44,40 @@ let usage = `
   placeholder="Date"
   v-model="dateValue5"
 />
+
+<Calendar
+  md
+  label="Changeable Range datepicker"
+  position="default modal"
+  :backgroundColor="backgroundColor"
+  :backdropOpacity="backdropOpacity"
+  :wrapperStyleObject="wrapperStyleObject"
+  :fullWidth="fullWidth"
+  :borderColorDesktop="borderColor"
+  positionChangeable
+  placeholder="Date"
+  v-model="dateValue6"
+  :secondDate.sync="dateValue7"
+  rangeAvailable
+/>
+
+<Calendar
+  md
+  label="Changeable Range datepicker with select list"
+  position="default modal"
+  :backgroundColor="backgroundColor"
+  :backdropOpacity="backdropOpacity"
+  :wrapperStyleObject="wrapperStyleObject"
+  :fullWidth="fullWidth"
+  :borderColorDesktop="borderColor"
+  positionChangeable
+  placeholder="Date"
+  v-model="dateValue8"
+  :secondDate.sync="dateValue9"
+  rangeAvailable
+  selectDayList
+  shortMonthFormat
+/>
 `.slice(1)
 
 export default {

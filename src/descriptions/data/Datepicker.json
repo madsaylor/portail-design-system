@@ -31,6 +31,27 @@
       "name": "isMobile",
       "type": "Boolean",
       "description": "Responsible for displaying mobile view when set as true"
+    },
+    {
+      "name": "secondDate",
+      "type": "null",
+      "description": "Second date for select and creating a date range"
+    },
+    {
+      "name": "rangeAvailable",
+      "type": "Boolean",
+      "description": "Allowed select date range"
+    },
+    {
+      "name": "selectDayList",
+      "type": "Boolean",
+      "description": "Allowed display on desktop version of datepicker sidebar on right side with list days for select of date range"
+    },
+    {
+      "name": "dateUnset",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Responsible for unset date status of datepicker"
     }
   ],
   "events": []

@@ -103,7 +103,7 @@ export default {
     getSelected(item) {
       if (this.dateRangeExist) {
         return this.getSingleSelected(item, this.value, this.initDate) ||
-               this.getSingleSelected(item, this.secondValue, this.secondInitDate)
+          this.getSingleSelected(item, this.secondValue, this.secondInitDate)
       } else {
         return this.getSingleSelected(item, this.value, this.initDate)
       }
@@ -142,11 +142,8 @@ export default {
       } else {
         return item === date
       }
-    },
-    getSelectedRange(item) {
-      return this.dateRangeExist && this.getSelected(item)
     }
-  },
+  }
 }
 </script>
 
@@ -209,7 +206,7 @@ export default {
         &.ds-range {
           .ds-item {
             width: 100%;
-            padding: 1px;
+            padding: 0 1px;
             background-color: rgba(30, 179, 134, 0.1);
             color: @color-primary;
           }
@@ -218,7 +215,7 @@ export default {
         &.ds-selected-range-end {
           .ds-item {
             width: 100%;
-            padding: 1px;
+            padding: 0 1px;
             color: @color-primary;
 
             span {

@@ -29,7 +29,7 @@
     <div class="ds-datepicker-sidebar">
 
       <div class="ds-datepicker-sidebar-header">
-          <div>
+          <div class="ds-datepicker-sidebar-title">
             Pick a date
           </div>
           <Icon class="ds-close-icon"
@@ -830,6 +830,15 @@ export default {
         display: flex;
         justify-content: space-between;
         height: 20%;
+
+        .ds-datepicker-sidebar-title {
+          height: 19px;
+          color: #252631;
+          font-family: Roboto;
+          font-size: 16px;
+          letter-spacing: 0.2px;
+          line-height: 19px;
+        }
       }
 
       .ds-datepicker-sidebar-content {
@@ -856,6 +865,7 @@ export default {
         height: 20%;
 
         .ds-datepicker-sidebar-footer {
+          display: flex;
           .ds-datepicker-sidebar-clear {
             margin-right: 30px;
           }

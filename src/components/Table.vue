@@ -19,10 +19,12 @@
           v-for="(header, index) in headers"
           :style="getFlex(header)"
           :key="index"
-          @click="sorting(header)"
         >
-          <span class="ds-header-title">{{header.title}}</span>
-          <Icon v-if="sortKey === header.key" :source="sortType === '+' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
+          <div class="ds-title-wrapper" @click="sorting(header)">
+            <span class="ds-header-title">{{header.title}}</span>
+            <Icon v-if="sortKey === header.key" :source="sortType === '+' ? 'arrow_upward' : 'arrow_downward'" size="20px" />
+          </div>
+          <slot :name="getFilterSlotName(header)"></slot>
         </div>
       </Card>
     </div>
@@ -34,20 +36,20 @@
         :key="dataIndex"
         @click="onClick(row, dataIndex)"
       >
-        <Card class="ds-data-wrapper">
+        <div class="ds-data-wrapper">
           <span
             v-for="(header, index) in headers"
             :style="getFlex(header)"
             :key="index"
           >
-            <slot :name="getSlotName(header)" :value="getCellValue(row, header)" :orgValue="getOrgValue(row, header)">
+            <slot :name="getSlotName(header)" :value="getCellValue(row, header)" :orgValue="getOrgValue(row, header)" :row="row">
             </slot>
 
             <template v-if="!hasSlot(header)">
               {{ getCellValue(row, header) }}
             </template>
           </span>
-        </Card>
+        </div>
       </div>
     </div>
   </div>
@@ -82,6 +84,9 @@
     methods: {
       getSlotName(header) {
         return `cell-${header.key}`
+      },
+      getFilterSlotName(header) {
+        return `filter-${header.key}`
       },
       hasSlot(header) {
         const slotName = `cell-${header.key}`
@@ -135,6 +140,8 @@
   @import '../styles/vars';
 
   .ds-table-wrapper {
+    color: @color-gray-600;
+
     .ds-table-header {
       @media screen and (max-width: 551px) {
         display: none;
@@ -142,33 +149,36 @@
 
       .ds-header-wrapper {
         display: flex;
-        height: 20px;
-        color: @color-gray-500;
         font-family: Lato;
         font-size: 14px;
         line-height: 20px;
-        padding: 0 24px 16px;
+        padding: 0 0 16px;
         cursor: default;
         background-color: transparent;
         box-shadow: none;
 
         .ds-header {
-          text-align: right;
           display: flex;
-          justify-content: flex-end;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
           cursor: pointer;
+          padding-right: 16px;
+          box-sizing: border-box;
 
-          &:first-child {
-            text-align: left;
-            justify-content: flex-start;
+          .ds-title-wrapper {
+            width: 100%;
+            margin-bottom: 8px;
+          }
+
+          > * {
+            width: 100% !important;
           }
         }
       }
     }
 
     .ds-table-body-wrapper {
-      color: @color-dark;
+      color: @color-gray-600;
       font-family: Lato;
       font-size: 14px;
       line-height: 20px;
@@ -177,9 +187,10 @@
       .ds-table-body {
         .ds-data-wrapper {
           display: flex;
-          padding: 22px 24px;
+          padding: 10px 0;
           margin-bottom: 6px;
-          text-align: right;
+          background-color: white;
+          align-items: center;
 
           @media screen and (max-width: 551px) {
             flex-wrap: wrap;
@@ -188,23 +199,18 @@
           }
 
           span {
-            &:first-child {
-              text-align: left;
-            }
+            box-sizing: border-box;
 
             @media screen and (max-width: 551px) {
               font-size: 14px;
+            }
 
-              &:first-child {
-                flex-basis: 100% !important;
-                font-size: 16px;
-                line-height: 24px;
-                margin-bottom: 16px;
-              }
+            &:first-child {
+              padding-left: 12px;
+            }
 
-              &:nth-child(2) {
-                text-align: left;
-              }
+            &:last-child {
+              padding-right: 12px;
             }
           }
         }

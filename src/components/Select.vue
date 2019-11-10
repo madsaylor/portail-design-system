@@ -13,9 +13,6 @@
       @click="toggleDropList"
       readonly="readonly"
     />
-    <Icon :source="openDropDownList && reversibleIcon ? 'expand_less' : 'expand_more'"
-          color="gray-400"
-          class="ds-drop-icon"/>
     <div class="ds-select-error-message-wrapper" v-if="checkError">
       {{selectErrors[0]}}
     </div>
@@ -221,7 +218,7 @@
 
     .ds-select {
       .font-desktop-small-regular-dark();
-      padding: 7px 25px 7px 12px;
+      padding: 10px 25px 10px 12px;
       box-sizing: border-box;
       border: 1px solid @color-gray-300;
       border-radius: 2px;
@@ -246,7 +243,7 @@
       position: absolute;
       pointer-events: none;
       right: 5px;
-      bottom: 5px;
+      bottom: 8px;
     }
 
     .ds-select-error-message-wrapper {

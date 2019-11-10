@@ -33,6 +33,22 @@
       </ul>
     </Collapser>
 
+    <Collapser
+      :opened.sync="openedSlots"
+      v-if="description[compnentName].slots && description[compnentName].slots.length"
+      label="Slots">
+      <ul>
+        <li v-for="property in description[compnentName].slots">
+          <b>{{property.name}}</b>: <i>{{property.type}}</i> <span v-if="property.type">-</span> {{property.description}}
+          <ul v-if="property.subProperty">
+            <li v-for="subProperty in property.subProperty">
+              <b>{{subProperty.name}}</b>: <i>{{subProperty.type}}</i> - {{subProperty.description}}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </Collapser>
+
   </div>
 </template>
 
@@ -49,7 +65,8 @@
         data: () => ({
           description,
           openedProps: false,
-          openedEvents: false
+          openedEvents: false,
+          openedSlots: false
         })
     }
 </script>

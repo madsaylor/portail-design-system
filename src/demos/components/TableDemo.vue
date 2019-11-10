@@ -12,6 +12,8 @@
     <Table
       v-model="clients"
       :headers="headers"
+      :pagination="true"
+      :pageSize="10"
     >
       <template slot="filter-name">
         <div class="filter-wrapper">
@@ -125,6 +127,8 @@
 </script>
 
 <style lang="less" scoped>
+  @import '../../styles/vars';
+
   .name-wrapper {
     display: flex;
     align-items: center;
@@ -141,6 +145,7 @@
 
       .number {
         font-size: 14px;
+        color: @color-gray-400;
       }
     }
   }

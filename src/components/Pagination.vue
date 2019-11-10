@@ -134,7 +134,7 @@
           cursor: pointer;
 
           &.active {
-            border-color: @color-primary;
+            color: @color-primary;
           }
         }
 

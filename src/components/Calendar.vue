@@ -10,9 +10,18 @@
         {{ label }}
       </div>
 
+      <CalendarIcon v-if="iconLeft"
+                    source="today"
+                    :size="iconSize"
+                    :color="iconColor"
+                    :class="['ds-calendar-icon-left', {'active-icon': activeIcon}]"
+                    :padding="iconPadding"
+                    @click="onIconClick"
+      />
+
       <input
         type="text"
-        v-model="inputValue"
+        v-model="inputValueWrapper"
         :class="['ds-has-icon', {
           'ds-error': inputErrors.length && touched && showErrors,
           'ds-slide-input': slideLabel,
@@ -28,12 +37,13 @@
         @mousedown="onInputPrevent($event)"
         readonly/>
 
-      <CalendarIcon source="today"
-            :size="iconSize"
-            :color="iconColor"
-            :class="{'active-icon': activeIcon}"
-            :padding="iconPadding"
-            @click="onIconClick"
+      <CalendarIcon v-if="!iconLeft"
+                    source="today"
+                    :size="iconSize"
+                    :color="iconColor"
+                    :class="{'active-icon': activeIcon}"
+                    :padding="iconPadding"
+                    @click="onIconClick"
       />
 
       <div class="ds-drawer">
@@ -58,6 +68,12 @@
         :min="datepickerMin"
         :max="datepickerMax"
         v-model="calendarValue"
+        :secondDate.sync="calendarSecondValue"
+        :rangeAvailable="rangeAvailable"
+        :selectDayList="selectDayList"
+        :isMobile="isMobile"
+        :dateUnset.sync="dateUnset"
+        @save="onSave"
       ></Datepicker>
     </CalendarDropdown>
 
@@ -78,12 +94,20 @@
         :max="datepickerMax"
         :fullWidth="fullWidth"
         v-model="calendarValue"
+        :secondDate.sync="calendarSecondValue"
+        :rangeAvailable="rangeAvailable"
+        :selectDayList="selectDayList"
+        :isMobile="isMobile"
+        :dateUnset.sync="dateUnset"
+        @save="onSave"
       ></Datepicker>
     </CalendarDialog>
   </div>
 </template>
 
 <script>
+  import _ from 'lodash'
+
   import Datepicker from './Datepicker'
   import CalendarDropdown from './calendarComponents/CalendarDropdown'
   import CalendarIcon from './calendarComponents/CalendarIcon'
@@ -144,6 +168,11 @@
         type: Boolean,
         default: true
       },
+      secondDate: null,
+      rangeAvailable: Boolean,
+      selectDayList: Boolean,
+      shortMonthFormat: Boolean,
+      iconLeft: Boolean
     },
     data: () => ({
       calendarVisible: false,
@@ -152,20 +181,26 @@
       touched: false,
       windowWidth: window.innerWidth,
       positions: Array,
-      id: Math.random().toString(36).substring(7)
+      id: Math.random().toString(36).substring(7),
+      dateUnset: false
     }),
     computed: {
-      inputValue: {
-        get() {
-          if (!this.value || isNaN(this.value)) {
-            return ''
-          }
-
-          return this.value.toLocaleDateString(this.locale)
-        },
-        set(value) {
-          this.$emit('input', value)
+      inputValueWrapper() {
+        if (this.dateUnset) {
+          return ''
+        } else if (!this.secondDate) {
+          return this.inputValue
+        } else if (this.value < this.secondDate) {
+          return `${this.inputValue} - ${this.secondInputValue}`
+        } else {
+          return `${this.secondInputValue} - ${this.inputValue}`
         }
+      },
+      inputValue() {
+        return this.getValue(this.value)
+      },
+      secondInputValue() {
+        return this.getValue(this.calendarSecondValue)
       },
       locale() {
         if (this.$root === this) {
@@ -188,8 +223,15 @@
           return date
         },
         set(value) {
-          this.calendarVisible = false
           this.$emit('input', value)
+        }
+      },
+      calendarSecondValue: {
+        get() {
+          return this.secondDate && !isNaN(this.secondDate) ? this.secondDate : null
+        },
+        set(value) {
+          this.$emit('update:secondDate', value)
         }
       },
       dateRangeStart_() {
@@ -325,6 +367,27 @@
       validate() {
         this.touched = true
         this.$emit('validation', this.validation)
+      },
+      onSave() {
+        this.calendarVisible = false
+      },
+      buildShortMonthFormatDate(value) {
+        let day = value.getDate()
+        let year = value.getFullYear()
+
+        let month = value.toLocaleDateString('fr-fr', {month: 'short'}).slice(0, 3)
+        month = month.charAt(0).toUpperCase() + month.slice(1)
+
+        return `${day} ${month} ${year}`
+      },
+      getValue(value) {
+        if (!value || isNaN(value) || _.isNull(value)) {
+          return ''
+        } else if (this.shortMonthFormat) {
+          return this.buildShortMonthFormatDate(value)
+        } else {
+          return value.toLocaleDateString(this.locale)
+        }
       }
     },
     watch: {
@@ -533,6 +596,18 @@
         .placeholder-font-size(16px);
         font-size: 16px;
       }
+    }
+
+    .ds-calendar-icon-left {
+      pointer-events: none;
+      position: absolute;
+      bottom: 5px;
+      left: 6px;
+      height: 50% !important;
+    }
+
+    .ds-calendar-icon-left + input {
+      padding-left: 40px;
     }
   }
 </style>

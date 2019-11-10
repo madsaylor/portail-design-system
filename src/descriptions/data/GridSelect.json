@@ -14,6 +14,16 @@
       "name": "value",
       "type": "null",
       "description": "Selected value is updated through v-model directive on mouse click, enter or space key. During rendering \"selected\" class is added to item that satisfies === comparison with the v-model. Value for the check can be overridden with selectedKey property"
+    },
+    {
+      "name": "secondValue",
+      "type": "null",
+      "description": "Second date for select and creating a date range"
+    },
+    {
+      "name": "rangeAvailable",
+      "type": "Boolean",
+      "description": "Allowed select date range"
     }
   ],
   "events": []

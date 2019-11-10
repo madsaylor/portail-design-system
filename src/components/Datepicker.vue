@@ -25,59 +25,136 @@
 -->
 
 <template>
-  <div :class="['ds-datepicker', {'ds-full-width': fullWidth}]">
-    <div class="ds-datepicker-header">
-      <div class="ds-datepicker-labels">
-        <div
-          :class="{
-            'ds-hidden': view === 'day' || view === 'month',
-            'ds-label-main': view === 'year',
-          }"
-          @click="view = 'month'"
-        >
-          {{ decade }}
-        </div>
-        <div
-          :class="{
-            'ds-hidden': view === 'year',
-            'ds-label-sup': view === 'day',
-            'ds-label-main': view === 'month',
-          }"
-          @click="view = 'year'"
-        >
-          {{ year }}
+  <div :class="['ds-datepicker', {'ds-full-width': fullWidth, 'ds-datepicker-select-day-list': selectDayList && !isMobile}]">
+    <div class="ds-datepicker-sidebar">
+
+      <div class="ds-datepicker-sidebar-header">
+          <div>
+            Pick a date
+          </div>
+          <Icon class="ds-close-icon"
+                times_circle
+                color="gray-600"
+                size="16px"
+                @click="onClear()">
+          </Icon>
+      </div>
+
+      <div class="ds-datepicker-sidebar-content">
+        <div v-if="!dateUnset">
+          <div class="ds-datepicker-sidebar-week-day">
+            {{getWeekDay(minDate)}},
+          </div>
+          <div>
+            {{minDateHeader}}
+          </div>
+          <div>
+            {{minFullYear}}
+          </div>
         </div>
 
-        <div
-          :class="{
-            'ds-hidden': view === 'month' || view === 'year',
-            'ds-label-main': view === 'day',
-          }"
-          @click="view = 'month'"
-        >
-          {{ monthName }}
+        <div v-if="maxDateHeader">
+          <div>
+            -
+          </div>
+          <div class="ds-datepicker-sidebar-week-day">
+            {{getWeekDay(maxDate)}},
+          </div>
+          <div>
+            {{maxDateHeader}}
+          </div>
+          <div>
+            {{maxFullYear}}
+          </div>
         </div>
       </div>
-      <div class="ds-buttons">
-        <button @click="shift(-1)" :disabled="!canShiftBack">
-          <Icon arrow_left color="dark" size="32px"></Icon>
-        </button>
-        <button @click="shift(1)" :disabled="!canShiftForward">
-          <Icon arrow_right color="dark" size="32px"></Icon>
-        </button>
+
+      <div class="ds-datepicker-sidebar-footer-wrapper">
+        <div class="ds-datepicker-sidebar-footer">
+          <Button plain-two
+                  class="ds-datepicker-sidebar-clear" @click="onClear()">
+            Clear
+          </Button>
+          <Button @click="onSave()">
+            Save
+          </Button>
+        </div>
       </div>
+
     </div>
+    <div class="ds-main-content">
+      <div class="ds-datepicker-header-additional">
+      <span class="ds-additional-title">
+        {{additionalHeaderDate}}
+      </span>
+        <Icon class="ds-close-icon"
+              times_circle
+              color="gray-600"
+              size="16px"
+              @click="onClear()">
+        </Icon>
+      </div>
+      <div class="ds-datepicker-header">
+        <div class="ds-datepicker-labels">
+        <span class="ds-month"
+              @click="onMonth()">
+          {{ monthName }}
+        </span>
+          <span class="ds-year">
+          {{ year }}
+        </span>
+          <Icon @click="onYear()"
+                :source="view === 'year' ? 'angle_up_solid' : 'angle_down_solid'"
+                color="gray-600"
+                size="16px"
+                class="ds-year-icon">
+          </Icon>
+        </div>
+        <div class="ds-buttons">
+          <button @click="shift(-1)" :disabled="!canShiftBack">
+            <Icon angle_left_solid color="gray-600" size="16px"></Icon>
+          </button>
+          <button @click="shift(1)" :disabled="!canShiftForward">
+            <Icon angle_right_solid color="gray-600" size="16px"></Icon>
+          </button>
+        </div>
+      </div>
 
-    <div :class="['ds-datepicker-body', {'ds-full-width': fullWidth}]">
-      <GridSelect
-        :items="{'day': days, 'month': months, 'year': years}[view]"
-        :labels-top="view === 'day' ? weekLabels : null"
-        :value="value"
-        @input="select"
-        #default="{item}"
-      >
-        <span :class="{'ds-grid-item-big': view !== 'day'}">{{item.title}}</span>
-      </GridSelect>
+      <div :class="['ds-datepicker-body', {'ds-full-width': fullWidth,
+                  'ds-datepicker-body-select-day-list': selectDayList && !isMobile}]">
+        <GridSelect
+          :items="{'day': days, 'month': months, 'year': years}[view]"
+          :labels-top="view === 'day' ? weekLabels : null"
+          :value="value"
+          :secondValue="secondDate"
+          :rangeAvailable="rangeAvailable"
+          @input="select"
+          #default="{item}"
+        >
+          <span :class="{'ds-grid-item-big': view !== 'day'}">{{item.title}}</span>
+        </GridSelect>
+
+        <div v-if="selectDayList && !isMobile"
+             class="ds-select-day-list-wrapper">
+          <div class="ds-select-day-list">
+            <div @click="setInitDay">À la réception</div>
+            <div v-for="i in 6"
+                 @click="setDayRange(i)">
+              Dans les {{ i * defaultMultiplicateur}} jours
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="ds-datepicker-footer">
+        <Button plain-two
+                class="ds-datepicker-clear" @click="onClear()">
+          Clear
+        </Button>
+        <Button @click="onSave()">
+          Save
+        </Button>
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +162,7 @@
 <script>
 import GridSelect from './GridSelect'
 import Icon from './Icon'
+import Button from './Button'
 
 import moment from 'moment'
 
@@ -93,6 +171,7 @@ export default {
   components: {
     GridSelect,
     Icon,
+    Button
   },
   props: {
     lang: String,
@@ -100,9 +179,17 @@ export default {
     min: Date,
     value: {
       type: Date,
-      default: () => new Date(),
+      default: () => new Date()
     },
     fullWidth: {
+      type: Boolean,
+      default: false
+    },
+    secondDate: null,
+    rangeAvailable: Boolean,
+    selectDayList: Boolean,
+    isMobile: Boolean,
+    dateUnset: {
       type: Boolean,
       default: false
     }
@@ -111,19 +198,32 @@ export default {
     return {
       displayed: new Date(this.value),
       view: 'day',
-      ie: window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv:11\./)
+      ie: window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv:11\./),
+      defaultMultiplicateur: 15,
+      defaultDay: true
     }
   },
   created () {
     this.range && this.setRange()
   },
   computed: {
+    additionalHeaderDate() {
+      if (this.dateUnset) {
+        return `Pick a date`
+      } else if (this.secondDate) {
+        return `${this.minDateHeader} ${this.minFullYear} - ${this.maxDateHeader} ${this.maxFullYear}`
+      } else {
+        return `${this.minDateHeader}`
+      }
+    },
+    minFullYear() {
+      return this.minMaxFullYear('min') || ''
+    },
+    maxFullYear() {
+      return this.minMaxFullYear('max') || ''
+    },
     locale() {
       return this.lang || this.$root.locale || 'fr-fr'
-    },
-    decade() {
-      let start = Math.floor(this.displayed.getFullYear() / 10) * 10
-      return `${start} — ${start + 9}`
     },
     year() {
       return this.displayed.getFullYear()
@@ -217,11 +317,11 @@ export default {
      */
     years() {
       let date = new Date(this.displayed)
-      date.setFullYear(Math.floor(date.getFullYear() / 10) * 10)
+      date.setFullYear(Math.floor(date.getFullYear() / 30) * 30)
       let years = []
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 6; i++) {
         let row = []
-        for (let j = 0; j < 3; j++) {
+        for (let j = 0; j < 5; j++) {
           let year = new Date(date)
           year.key = year.title = year.getFullYear()
 
@@ -247,11 +347,7 @@ export default {
         }
         years.push(row)
       }
-      years[3] = [
-        {title: '', disabled: true, key: -Infinity},
-        years[3][0],
-        {title: '', disabled: true, key: Infinity},
-      ]
+
       return years
     },
     weekLabels() {
@@ -259,7 +355,7 @@ export default {
       let date = new Date()
       date.setDate(date.getDate() - date.getDay() + 1)  // set date to Monday
       for (let i = 1; i < 8; i++) {
-        labels.push(moment(date).locale(this.locale).format('dddd')[0])
+        labels.push(this.getWeekDay(date))
         date.setDate(date.getDate() + 1)
       }
       return labels
@@ -303,6 +399,28 @@ export default {
       }
       return this.bounds.min.getTime() > this.min.getTime()
     },
+    maxDateHeader() {
+      if (!this.secondDate) {
+        return undefined
+      } else if (this.value > this.secondDate) {
+        return `${this.getDay(this.value)} ${this.getMonth(this.value, 'short', 1)}`
+      } else {
+        return `${this.getDay(this.secondDate)} ${this.getMonth(this.secondDate, 'short', 1)}`
+      }
+    },
+    minDateHeader() {
+      if (!this.secondDate || this.value < this.secondDate) {
+        return `${this.getDay(this.value)} ${this.getMonth(this.value, 'short', 1)}`
+      } else {
+        return `${this.getDay(this.secondDate)} ${this.getMonth(this.secondDate, 'short', 1)}`
+      }
+    },
+    minDate() {
+      return !this.secondDate || this.value < this.secondDate ? this.value : this.secondDate
+    },
+    maxDate() {
+      return !this.secondDate ? undefined : this.value > this.secondDate ? this.value : this.secondDate
+    }
   },
   methods: {
     select(item) {
@@ -314,8 +432,9 @@ export default {
         this.view = 'day'
       }
       else if (this.view === 'day') {
-        this.$emit('input', item)
+        this.selectDay(new Date(item.valueOf()))
       }
+      this.$emit('update:dateUnset', false)
     },
     shift(delta) {
       if (this.view === 'day') {
@@ -325,20 +444,123 @@ export default {
         this.displayed.setFullYear(this.year + delta)
       }
       else if (this.view === 'year') {
-        this.displayed.setFullYear(this.year + delta * 10)
+        this.displayed.setFullYear(this.year + delta * 30)
       }
       this.displayed = new Date(this.displayed)
     },
     capitalize(text) {
       let index = this.ie ? 1 : 0
       return text.charAt(index).toUpperCase() + text.slice(++index)
+    },
+    onYear() {
+      this.view = this.view === 'day' ? 'year' : 'day'
+    },
+    onMonth() {
+      this.view = this.view === 'day' ? 'month' : 'day'
+    },
+    onSave() {
+      this.$emit('save')
+    },
+    onClear() {
+      this.$emit('update:dateUnset', true)
+      this.$emit('input', null)
+      if (this.rangeAvailable) {
+        this.$emit('update:secondDate', undefined)
+      }
+    },
+    _dateMinMaxInternal(id, value) {
+      return {
+        id: id,
+        value: value
+      }
+    },
+    selectDay(item) {
+      if (this.value && this.secondDate && this.rangeAvailable && !this.dateUnset) {
+        let dateMin, dateMax
+
+        if (this.value - this.secondDate < 0) {
+          dateMin = this._dateMinMaxInternal('input', this.value)
+          dateMax = this._dateMinMaxInternal('update:secondDate', this.secondDate)
+        } else {
+          dateMin = this._dateMinMaxInternal('update:secondDate', this.secondDate)
+          dateMax = this._dateMinMaxInternal('input', this.value)
+        }
+
+        if (dateMin.value < item && item < dateMax.value) {
+          let diffValue = Math.abs(this.value - item)
+          let diffSecondValue = Math.abs(this.secondDate - item)
+
+          if (diffValue < diffSecondValue) {
+            this.$emit('input', item)
+          } else {
+            this.$emit('update:secondDate', item)
+          }
+        } else if (dateMax.value > item) {
+          this.$emit(dateMin.id, item)
+        } else {
+          this.$emit(dateMax.id, item)
+        }
+      } else if (this.value && this.rangeAvailable && !this.dateUnset && !this.defaultDay) {
+        this.$emit('update:secondDate', item)
+      } else {
+        this.$emit('input', item)
+      }
+
+      this.defaultDay = false
+    },
+    dateKey(date) {
+      if (date) {
+        date.key = date.getTime()
+      }
+    },
+    setInitDay() {
+      this.$emit('update:secondDate', undefined)
+    },
+    setDayRange(multiplicateur) {
+      let valueCopy = new Date(this.value.getTime())
+      valueCopy.setDate(valueCopy.getDate() + this.defaultMultiplicateur * multiplicateur - 1)
+      this.$emit('update:secondDate', valueCopy)
+    },
+    getMonth(value, monthFormat, sliceEnd) {
+      if (value) {
+        let month = this.capitalize(value.toLocaleString(this.locale, {month: monthFormat}))
+        return sliceEnd ? month.slice(0, month.length - sliceEnd) : month
+      } else {
+        return void 0
+      }
+    },
+    getDay(value) {
+      return value && value.getDate()
+    },
+    getWeekDay(date) {
+      return moment(date).locale(this.locale).format('ddd').slice(0, 3).toLowerCase()
+    },
+    minMaxFullYear(id) {
+      if (this.minDate && this.maxDate) {
+        let minFullYear = this.minDate.getFullYear()
+        let maxFullYear = this.maxDate.getFullYear()
+
+        if (minFullYear !== maxFullYear) {
+          if (id === 'min') {
+            return minFullYear
+          } else if (id === 'max') {
+            return maxFullYear
+          }
+        }
+      }
     }
   },
   watch: {
     value(date) {
-      date.key = date.getTime()
+      this.dateKey(date)
+    },
+    secondDate(date) {
+      this.dateKey(date)
     }
   },
+  mounted() {
+    this.$emit('input', this.value)
+  }
 }
 </script>
 
@@ -348,20 +570,26 @@ export default {
 .ds-datepicker {
   background-color: @color-white;
   border-radius: 4px;
-  box-shadow: @card-shadow;
+  box-shadow: @datepicker-shadow;
   box-sizing: border-box;
-  height: 336px;
-  padding: 20px 13.5px;
-  width: 336px;
+  height: 332px;
+  width: 353px;
   display: flex;
   flex-direction: column;
 
+  .ds-datepicker-header-additional {
+    display: none;
+  }
+
   .ds-datepicker-header {
-    padding: 0 10.5px;
-    height: 64px;
+    height: 60px;
     display: flex;
+    padding: 0 20px;
+    background-color: @color-gray-050;
 
     .ds-datepicker-labels {
+      display: flex;
+      align-items: center;
       flex: 1 0 auto;
       position: relative;
 
@@ -369,74 +597,85 @@ export default {
         transition: all .1s ease;
       }
 
-      .ds-hidden {
-        display: none;
-      }
-
-      .ds-label-sup {
-        .font-desktop-small-regular-gray();
-        position: absolute;
-        top: 0px;
+      .ds-month {
+        .font-components-datepicker-header-text();
         cursor: pointer;
       }
 
-      .ds-label-main {
-        .font-desktop-body-medium-dark();
-        position: absolute;
-        top: 20px;
+      .ds-year {
+        .font-components-datepicker-header-text();
+        cursor: default;
+        margin-left: 5px;
+      }
+
+      .ds-year-icon {
         cursor: pointer;
+        margin-left: 8px;
       }
     }
 
     .ds-buttons {
-      margin-top: 6px;
+      display: flex;
+      align-items: center;
 
       button {
-        height: 32px;
-        width: 32px;
+        height: 18px;
+        width: 18px;
         box-sizing: border-box;
         padding: 0;
-        margin-left: 12px;
-        border: 1px solid @color-gray-300;
-        background-color: @color-gray-200;
+        margin-left: 14px;
+        border: none;
+        background-color: transparent;
         border-radius: 0;
-
-        .ds-icon {
-          margin: -1px;
-        }
+        cursor: pointer;
 
         &:focus {
-          background-color: darken(@color-gray-200, 2%);
           outline: none;
         }
 
-        &:not(:disabled) {
-          &:hover {
-            background-color: @color-gray-300;
-          }
-
-          &:active {
-            background-color: darken(@color-gray-300, 2%);
-          }
-        }
-
         &:disabled {
-          opacity: 0.5;
-          .ds-icon {
-            fill: @color-dark;
-          }
+          cursor: default;
+        }
+      }
+    }
+
+    &.ds-datepicker-header-mobile {
+      background-color: @color-white;
+      height: 40px;
+    }
+  }
+
+  .ds-grid-select-row {
+    .ds-item-cell {
+      > .ds-item {
+        box-sizing: content-box;
+        line-height: 30px;
+        min-width: 26px;
+
+        > span {
+          font-family: Roboto;
         }
       }
     }
   }
 
   .ds-datepicker-body {
-    height: 232px;
-    width: 308px;
+    height: 272px;
+    width: 353px;
+    padding: 21px 15px;
+    box-sizing: border-box;
 
     .ds-labels-top {
       th {
-        color: @color-primary;
+        color: @color-gray-600;
+        height: 16px;
+        width: 29px;
+        text-transform: capitalize;
+        font-family: Roboto;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+        line-height: 16px;
+        padding-bottom: 12px;
       }
     }
 
@@ -455,40 +694,186 @@ export default {
       color: @color-white;
     }
 
+    .ds-select-day-list-wrapper {
+      width: 190px;
+      display: flex;
+      justify-content: center;
+      margin-left: 25px;
+
+      .ds-select-day-list {
+        width: 110px;
+        color: @color-primary;
+        font-family: "Roboto Medium";
+        font-size: 14px;
+        line-height: 21px;
+        border-left: 1px solid #E8ECEF;
+        padding-left: 25px;
+
+        > div {
+          cursor: pointer;
+          margin-bottom: 13px;
+        }
+      }
+    }
+
     &.ds-full-width {
       width: 100%;
     }
+
+    &.ds-datepicker-body-select-day-list {
+      display: flex;
+      width: 526px;
+    }
+  }
+
+  .ds-datepicker-footer {
+    display: none;
   }
 
   &.ds-full-width {
     width: 100%;
   }
+
+  &.ds-datepicker-select-day-list {
+    width: 526px;
+  }
+
+  .ds-datepicker-sidebar {
+    display: none;
+  }
 }
 
 @media @screen-medium, @screen-small {
   .ds-datepicker {
-    height: 428px;
+    height: 411px;
     border-radius: 0;
 
-    .ds-datepicker-header {
-      padding: 0 3.5%;
+    .ds-datepicker-header-additional {
+      .font-components-datepicker-header-text();
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      height: 60px;
+      box-sizing: border-box;
+      background-color: @color-gray-050;
 
-      .ds-buttons {
-        button {
-          margin-left: 36px;
-        }
+      .ds-additional-title {
+        cursor: default;
+      }
+    }
+
+    .ds-datepicker-header {
+      background-color: @color-white;
+      height: 40px;
+      padding: 0 20px;
+
+      .ds-year,
+      .ds-month {
+        color: @color-gray-600 !important;
       }
     }
 
     .ds-datepicker-body {
+      height: 261px;
       .ds-grid-select-row {
+        height: 32px;
+      }
+    }
 
-        height: 48px;
-        .ds-item-cell {
-          .ds-item {
-            min-width: 59%;
+    .ds-datepicker-footer {
+      display: flex;
+      justify-content: flex-end;
+      box-sizing: border-box;
+      padding: 0 20px 14px;
+      height: 50px;
+
+      .ds-datepicker-clear {
+        margin-right: 12px;
+
+        button {
+          color: @color-gray-600;
+          font-family: "Roboto Medium";
+          height: 14px;
+          font-size: 12px;
+          line-height: 14px;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .ds-close-icon {
+      cursor: pointer;
+    }
+  }
+}
+
+@media @screen-medium and (orientation: landscape), @screen-small and (orientation: landscape) {
+  .ds-datepicker {
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+    width: 583px;
+
+    .ds-datepicker-header-additional {
+      display: none;
+    }
+
+    .ds-datepicker-sidebar {
+      display: flex;
+      flex-direction: column;
+      min-width: 190px;
+      padding: 20px;
+      background-color: @color-gray-050;
+
+      .ds-datepicker-sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        height: 20%;
+      }
+
+      .ds-datepicker-sidebar-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 60%;
+
+        color: #252631;
+        font-family: Roboto;
+        font-size: 20px;
+        letter-spacing: 0.2px;
+        line-height: 24px;
+
+        .ds-datepicker-sidebar-week-day {
+          text-transform: capitalize;
+        }
+      }
+
+      .ds-datepicker-sidebar-footer-wrapper {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        height: 20%;
+
+        .ds-datepicker-sidebar-footer {
+          .ds-datepicker-sidebar-clear {
+            margin-right: 30px;
           }
         }
+      }
+    }
+
+    .ds-main-content {
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      .ds-datepicker-body {
+        height: 225px;
+      }
+
+      .ds-datepicker-footer {
+        display: none;
       }
     }
   }

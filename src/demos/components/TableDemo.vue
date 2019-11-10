@@ -15,7 +15,7 @@
     >
       <template slot="filter-name">
         <div class="filter-wrapper">
-          <Chips v-model="nameFilter" />
+          <Chips v-model="nameFilter" :removable="true" />
         </div>
       </template>
 

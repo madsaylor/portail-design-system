@@ -40,11 +40,6 @@
           "name": "filter",
           "type": "String",
           "description": "Filter function of the cell in the current column"
-        },
-        {
-          "name": "badge",
-          "type": "Boolean",
-          "description": "If this value is true, value of the cell will be put in Badge component. Defult is False"
         }
       ]
     },

@@ -10,10 +10,10 @@
       </Collapser>
 
       <Pagination
-        :count="count"
-        :size="size"
+        :total="total"
+        :pageSize="pageSize"
         :current="current"
-        @getCurrent="updatePage"
+        @page:change="updatePage"
       />
     </div>
 </template>
@@ -30,9 +30,9 @@
     data: () => ({
       usage: PaginationData.usage,
       openUsage: true,
-      size: 10,
+      pageSize: 10,
       current: 1,
-      count: 25
+      total: 301
     }),
     methods: {
       updatePage(page) {

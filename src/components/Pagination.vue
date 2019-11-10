@@ -4,29 +4,51 @@
   Usage:
 
   <Pagination
-    :count="count"        - Length of data array
-    :size="size"          - Size of records which is displaying on one page
-    :current="current"    - Current page which is displayed
-    @getCurrent           - Emitted event on local change of current page value in pagination component and take back local current page value
   />
 -->
 
 <template>
   <div class="ds-pagination-wrapper">
-    <div class="ds-pagination-count">
-      <span class="ds-count">
-        {{this.startNumber}}-{{this.endNumber}} of {{count}}
-      </span>
-      <Icon source="left-arrow"
-            size="12px"
-            padding="8px 12px"
-            @click="previous"
-            :disabled="currentPage === 1"/>
-      <Icon source="right-arrow"
-            size="12px"
-            padding="8px 12px"
-            @click="next"
-            :disabled="currentPage * size >= count"/>
+    <div class="ds-page-items">
+      <template v-if="pageCount <= 5">
+        <div class="page-item-wrapper" v-for="page of pageCount" :key="page">
+          <div
+            class="page-item"
+            :class="{'active': current === page}"
+            @click="changePage(page)"
+          >{{ startPage + page - 1 }}</div>
+        </div>
+      </template>
+
+      <template v-else>
+        <div class="page-item-wrapper" v-for="page of 5" :key="page">
+          <div
+            class="page-item"
+            :class="{'active': current === startPage + page - 1}"
+            @click="changePage(startPage + page - 1)"
+          >
+            {{ startPage + page - 1 }}
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <div class="ds-next-previous-wrapper">
+      <div class="previous" :class="{'disabled': current === 1}" @click="previous">
+        <Icon
+          source="left-arrow"
+          size="18px"
+          padding="0"
+        />
+      </div>
+
+      <div class="next" :class="{'disabled': current === pageCount}" @click="next">
+        <Icon
+          source="right-arrow"
+          size="18px"
+          padding="0"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -38,46 +60,45 @@
       name: 'Pagination',
       components: {Icon},
       props: {
-        count: Number,
-        size: Number,
+        total: Number,
+        pageSize: {
+          default: 10,
+          type: Number
+        },
         current: Number
       },
       data: () => ({
         paginationCurrent: undefined
       }),
       computed: {
-        startNumber() {
-          return (this.currentPage - 1) * this.size + 1
+        pageCount() {
+          return Math.ceil(this.total / this.pageSize)
         },
-        endNumber() {
-          let temporaryCount = this.currentPage * this.size
-          return temporaryCount > this.count ? this.count : temporaryCount
-        },
-        currentPage: {
-          get() {
-            return this.paginationCurrent
-          },
-          set(value) {
-            this.paginationCurrent = value
+        startPage() {
+          if (this.pageCount <= 5 || this.current - 1 <= 2) {
+            return 1
+          } else if (this.current + 3 >= this.pageCount){
+            return this.pageCount - 4
+          } else {
+            return this.current - 2
           }
+        },
+        differenceWithFirstPage() {
+          return this.current - 1
+        },
+        differenceWithLastpage() {
+          return this.pageCount - this.current
         }
       },
       methods: {
         previous() {
-          this.currentPage--
-          this.$emit('getCurrent', this.currentPage)
+          this.$emit('page:change', this.current - 1)
         },
         next() {
-          this.currentPage++
-          this.$emit('getCurrent', this.currentPage)
-        }
-      },
-      mounted() {
-        this.currentPage = this.current
-      },
-      watch: {
-        current(newValue) {
-          this.currentPage = newValue
+          this.$emit('page:change', this.current + 1)
+        },
+        changePage(page) {
+          this.$emit('page:change', page)
         }
       }
     }
@@ -87,26 +108,62 @@
   @import '../styles/vars';
 
   .ds-pagination-wrapper {
-    .ds-pagination-count {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
+    display: inline-flex;
 
-      .ds-count {
-        cursor: default;
-        padding: 0;
-        margin: 2px 0;
-        height: 20px;
-        color: @color-gray-500;
+    .ds-page-items {
+      display: flex;
+      margin-right: 32px;
+
+      .page-item-wrapper {
+        margin-right: 4px;
+
+        .page-item {
+          box-sizing: border-box;
+          height: 40px;
+          width: 40px;
+          border: 1px solid #E8ECEF;
+          border-radius: 4px;
+          font-size: 14px;
+          line-height: 32px;
+          letter-spacing: 0.21px;
+          color: #778CA2;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          &.active {
+            border-color: @color-primary;
+          }
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .ds-next-previous-wrapper {
+      display: flex;
+
+      .previous, .next {
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        background-color: #DDD;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.disabled {
+          background-color: #F2F4F6;
+          pointer-events: none;
+        }
       }
 
-      .ds-icon {
-        cursor: pointer;
-
-        &[disabled] {
-          pointer-events: none;
-          fill: @color-gray-400;
-        }
+      .previous {
+        margin-right: 22px;
       }
     }
   }

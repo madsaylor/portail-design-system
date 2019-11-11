@@ -567,6 +567,42 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
+.linear-gradient-datepicker(@first, @last) {
+  &:first-child.ds-range {
+    .ds-item {
+      background: linear-gradient(90deg, @color-white @first, rgba(30, 179, 134, 0.1) @first);
+    }
+  }
+
+  &:last-child.ds-range {
+    .ds-item {
+      background: linear-gradient(90deg, rgba(30, 179, 134, 0.1) @last, @color-white @last);
+    }
+  }
+
+  &:first-child .ds-range + .ds-selected-range-start, &:first-child .ds-range + .ds-selected-range-end {
+    .ds-item {
+      background: linear-gradient(90deg, @color-white @first, rgba(30, 179, 134, 0.1) @first, @color-white @last);
+    }
+  }
+
+  &:last-child .ds-range + .ds-selected-range-start, &:last-child .ds-range + .ds-selected-range-end {
+    .ds-item {
+      background: linear-gradient(90deg, @color-white @first, rgba(30, 179, 134, 0.1) @last, @color-white @last);
+    }
+  }
+}
+
+.linear-gradient-datepicker-dialog(@first, @last) {
+  .ds-dialog-datepicker-container {
+    .ds-grid-select-row {
+      .ds-item-cell {
+        .linear-gradient-datepicker(@first, @last)
+      }
+    }
+  }
+}
+
 .ds-datepicker {
   background-color: @color-white;
   border-radius: 4px;
@@ -651,11 +687,19 @@ export default {
         box-sizing: content-box;
         line-height: 30px;
         min-width: 26px;
+        color: #252631;
 
         > span {
           font-family: Roboto;
         }
+
+        &.ds-disabled {
+          color: #98A9BC;
+          font-family: "Roboto Light";
+        }
       }
+
+      .linear-gradient-datepicker(16%, 84%);
     }
   }
 
@@ -888,4 +932,37 @@ export default {
     }
   }
 }
+
+@media screen and (min-width: 900px) and (max-width: 1000px) {
+  .linear-gradient-datepicker-dialog(38%, 62%);
+}
+
+@media screen and (min-width: 800px) and (max-width: 900px) {
+  .linear-gradient-datepicker-dialog(36%, 64%);
+}
+
+@media screen and (min-width: 700px) and (max-width: 800px) {
+  .linear-gradient-datepicker-dialog(34%, 66%);
+}
+
+@media only screen and (min-width: 600px) and (max-width: 700px) {
+  .linear-gradient-datepicker-dialog(32%, 68%);
+}
+
+@media only screen and (min-width: 500px) and (max-width: 600px) {
+  .linear-gradient-datepicker-dialog(30%, 70%);
+}
+
+@media only screen and (min-width: 400px) and (max-width: 500px) {
+  .linear-gradient-datepicker-dialog(26%, 74%);
+}
+
+@media only screen and (min-width: 300px) and (max-width: 400px) {
+  .linear-gradient-datepicker-dialog(16%, 84%);
+}
+
+@media only screen and (max-width: 300px) {
+  .linear-gradient-datepicker-dialog(8%, 92%);
+}
+
 </style>

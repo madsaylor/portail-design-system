@@ -2,8 +2,16 @@ let usage = `
 <Datepicker
   :min="new Date('2002-02-10')"
   :max="new Date('2018-12-21')"
-  v-model="dateSelected"
-></Datepicker>
+  :dateUnset.sync="dateUnset"
+  v-model="dateSelected">
+</Datepicker>
+
+<Datepicker
+  v-model="dateSelected2"
+  :secondDate.sync="secondDate"
+  :dateUnset.sync="dateUnsetRange"
+  rangeAvailable>
+</Datepicker>
 `.slice(1)
 
 export default {

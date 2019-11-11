@@ -163,6 +163,31 @@
       "type": "Boolean",
       "default": "true",
       "description": "Responsible for showing error message"
+    },
+    {
+      "name": "secondDate",
+      "type": "null",
+      "description": "Binds secondDate property to input with value property when rangeAvailable set as true"
+    },
+    {
+      "name": "rangeAvailable",
+      "type": "Boolean",
+      "description": "Allowed select date range"
+    },
+    {
+      "name": "selectDayList",
+      "type": "Boolean",
+      "description": "Allowed display on desktop version of calendar sidebar on right side with list days for select of date range"
+    },
+    {
+      "name": "shortMonthFormat",
+      "type": "Boolean",
+      "description": "Set as true for displaying date in next format: 23 Nov 2019"
+    },
+    {
+      "name": "iconLeft",
+      "type": "Boolean",
+      "description": "Display the icon on the left side instead of default right side"
     }
   ],
   "events": [

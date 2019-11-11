@@ -163,7 +163,7 @@
   @import '../styles/vars';
 
   .ds-table-wrapper {
-    color: @color-gray-500;
+    color: @color-gray-600;
 
     .ds-table-header {
       @media screen and (max-width: 551px) {

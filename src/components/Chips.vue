@@ -86,6 +86,7 @@
       onRemove(index) {
         this.valueWrapper.splice(index, 1)
         this.setTouchEmitValidation()
+        this.$emit('update:chips', this.valueWrapper)
       },
       onKeyPress(event) {
         event = event ? event : window.event
@@ -101,6 +102,7 @@
           this.valueWrapper = this.valueWrapper.concat(this.newChip)
           this.newChip = ''
           this.setTouchEmitValidation()
+          this.$emit('update:chips', this.valueWrapper)
         }
       },
       validate() {

@@ -57,6 +57,10 @@
     {
       "name": "validate",
       "description": "Listening event 'validate' for running validation even if chips items wasn't touched"
+    },
+    {
+      "name": "update:chips",
+      "description": "Emitted when the chips are increased or decreased"
     }
   ]
 }

@@ -14,6 +14,9 @@
       :headers="headers"
       :pagination="true"
       :pageSize="10"
+      :total="clients.length"
+      :current="selectedPage"
+      @update:page="updatePage"
     >
       <template slot="filter-name">
         <div class="filter-wrapper">
@@ -113,6 +116,7 @@
         { key: 'actions', title: '', width: '70px'}
       ],
       colors: COLORS_BY_STATUS,
+      selectedPage: 1,
       nameFilter: [],
       typeFilter: '',
       typeOptions: [
@@ -122,7 +126,12 @@
       financialFilter: '',
       invoiceDateFilter: '',
       statusFilter: []
-    })
+    }),
+    methods: {
+      updatePage(page) {
+        this.selectedPage = page
+      }
+    }
   }
 </script>
 

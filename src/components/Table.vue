@@ -56,9 +56,9 @@
     <div class="ds-table-footer">
       <div v-if="pagination" class="pagination-wrapper">
         <Pagination
-          :total="value.length"
+          :total="total"
           :pageSize="pageSize"
-          :current="selectedPage"
+          :current="current"
           @page:change="updatePage"
         />
       </div>
@@ -89,12 +89,13 @@
       },
       pagination: Boolean,
       pageSize: Number,
+      total: Number,
+      current: Number,
       identifierField: String,
     },
     data: () => ({
       sortType: null,
       sortKey: null,
-      selectedPage: 1,
       pageItems: []
     }),
     methods: {
@@ -149,12 +150,12 @@
         this.$emit('sort', sortCombinationKey)
       },
       updatePage(page) {
-        this.selectedPage = page
         this.pageItems = this.value.slice((page - 1) * this.pageSize, page * this.pageSize)
+        this.$emit('update:page', page)
       }
     },
     mounted() {
-      this.pageItems = this.value.slice((this.selectedPage - 1) * this.pageSize, this.selectedPage * this.pageSize)
+      this.pageItems = this.value.slice((this.current - 1) * this.pageSize, this.current * this.pageSize)
     }
   }
 </script>

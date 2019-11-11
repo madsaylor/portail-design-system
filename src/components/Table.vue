@@ -32,7 +32,7 @@
     <div class="ds-table-body-wrapper">
       <div
         class="ds-table-body"
-        v-for="(row, dataIndex) in value"
+        v-for="(row, dataIndex) in pageItems"
         :key="dataIndex"
         @click="onClick(row, dataIndex)"
       >
@@ -52,6 +52,17 @@
         </div>
       </div>
     </div>
+
+    <div class="ds-table-footer">
+      <div v-if="pagination" class="pagination-wrapper">
+        <Pagination
+          :total="value.length"
+          :pageSize="pageSize"
+          :current="selectedPage"
+          @page:change="updatePage"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -64,22 +75,27 @@
 
   import Card from './Card'
   import Icon from './Icon'
+  import Pagination from './Pagination'
   import { get } from 'lodash'
 
   export default {
     name: 'Table',
-    components: {Card, Icon},
+    components: {Card, Icon, Pagination},
     props: {
       value: Array,
       headers: {
         type: Array,
         default: () => []
       },
+      pagination: Boolean,
+      pageSize: Number,
       identifierField: String,
     },
     data: () => ({
       sortType: null,
-      sortKey: null
+      sortKey: null,
+      selectedPage: 1,
+      pageItems: []
     }),
     methods: {
       getSlotName(header) {
@@ -131,7 +147,14 @@
 
         const sortCombinationKey = (this.sortType + this.sortKey).replace('+', '')
         this.$emit('sort', sortCombinationKey)
+      },
+      updatePage(page) {
+        this.selectedPage = page
+        this.pageItems = this.value.slice((page - 1) * this.pageSize, page * this.pageSize)
       }
+    },
+    mounted() {
+      this.pageItems = this.value.slice((this.selectedPage - 1) * this.pageSize, this.selectedPage * this.pageSize)
     }
   }
 </script>
@@ -220,6 +243,14 @@
             margin-bottom: 24px;
           }
         }
+      }
+    }
+
+    .ds-table-footer {
+      .pagination-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 45px;
       }
     }
   }

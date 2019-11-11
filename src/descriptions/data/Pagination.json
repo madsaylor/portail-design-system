@@ -1,12 +1,12 @@
 {
   "properties": [
     {
-      "name": "count",
+      "name": "total",
       "type": "Number",
       "description": "Length of data array"
     },
     {
-      "name": "size",
+      "name": "pageSize",
       "type": "Number",
       "description": "Size of records which is displaying on one page"
     },
@@ -18,7 +18,7 @@
   ],
   "events": [
     {
-      "name": "getCurrent",
+      "name": "page:change",
       "description": "Emitted event on local change of current page value in pagination component and take back local current page value"
     }
   ]

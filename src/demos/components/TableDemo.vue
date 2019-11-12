@@ -14,7 +14,7 @@
       :headers="headers"
       :pagination="true"
       :pageSize="10"
-      :total="clients.length"
+      :total="25"
       :current="selectedPage"
       @update:page="updatePage"
     >

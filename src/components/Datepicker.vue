@@ -122,17 +122,18 @@
 
       <div :class="['ds-datepicker-body', {'ds-full-width': fullWidth,
                   'ds-datepicker-body-select-day-list': selectDayList && !isMobile}]">
-        <GridSelect
+        <CalendarGridSelect
           :items="{'day': days, 'month': months, 'year': years}[view]"
           :labels-top="view === 'day' ? weekLabels : null"
           :value="value"
           :secondValue="secondDate"
           :rangeAvailable="rangeAvailable"
+          :view="view"
           @input="select"
           #default="{item}"
         >
           <span :class="{'ds-grid-item-big': view !== 'day'}">{{item.title}}</span>
-        </GridSelect>
+        </CalendarGridSelect>
 
         <div v-if="selectDayList && !isMobile"
              class="ds-select-day-list-wrapper">
@@ -160,7 +161,7 @@
 </template>
 
 <script>
-import GridSelect from './GridSelect'
+import CalendarGridSelect from './calendarComponents/CalendarGridSelect'
 import Icon from './Icon'
 import Button from './Button'
 
@@ -169,7 +170,7 @@ import moment from 'moment'
 export default {
   name: 'Datepicker',
   components: {
-    GridSelect,
+    CalendarGridSelect,
     Icon,
     Button
   },
@@ -650,7 +651,7 @@ export default {
       > .ds-item {
         box-sizing: content-box;
         line-height: 30px;
-        min-width: 26px;
+        min-width: 28px;
         color: #252631;
 
         > span {
@@ -759,7 +760,7 @@ export default {
 
 @media @screen-medium, @screen-small {
   .ds-datepicker {
-    height: 411px;
+    height: 425px;
     border-radius: 0;
 
     .ds-datepicker-header-additional {
@@ -789,7 +790,7 @@ export default {
     }
 
     .ds-datepicker-body {
-      height: 261px;
+      height: 280px;
       .ds-grid-select-row {
         height: 32px;
       }
@@ -799,7 +800,7 @@ export default {
       display: flex;
       justify-content: flex-end;
       box-sizing: border-box;
-      padding: 0 20px 14px;
+      padding: 0 14px 14px;
       height: 50px;
 
       .ds-datepicker-clear {
@@ -826,7 +827,7 @@ export default {
   .ds-datepicker {
     display: flex;
     flex-direction: row;
-    height: 300px;
+    height: 335px;
     width: 583px;
 
     .ds-datepicker-header-additional {
@@ -893,7 +894,7 @@ export default {
       margin-bottom: 10px;
 
       .ds-datepicker-body {
-        height: 225px;
+        height: 280px;
       }
 
       .ds-datepicker-footer {

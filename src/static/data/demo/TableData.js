@@ -1,7 +1,12 @@
 let usage = `
 <Table
-v-model="clients"
-:headers="headers"
+  v-model="clients"
+  :headers="headers"
+  :pagination="true"
+  :pageSize="10"
+  :total="clients.length"
+  :current="selectedPage"
+  @update:page="updatePage"
 >
   <template slot="filter-name">
     <div class="filter-wrapper">

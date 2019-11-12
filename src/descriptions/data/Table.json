@@ -40,11 +40,6 @@
           "name": "filter",
           "type": "String",
           "description": "Filter function of the cell in the current column"
-        },
-        {
-          "name": "badge",
-          "type": "Boolean",
-          "description": "If this value is true, value of the cell will be put in Badge component. Defult is False"
         }
       ]
     },
@@ -52,9 +47,33 @@
       "name": "identifierField",
       "type": "String",
       "description": "Field which is identifier for emit data from pickup event"
+    },
+    {
+      "name": "pagination",
+      "type": "Boolean",
+      "description": "Show or Hide Pagination"
+    },
+    {
+      "name": "pageSize",
+      "type": "Number",
+      "description": "Number of items in one page"
+    },
+    {
+      "name": "total",
+      "type": "Number",
+      "description": "Number of total items"
+    },
+    {
+      "name": "current",
+      "type": "Number",
+      "description": "Page Number of the current page"
     }
   ],
   "events": [
+    {
+      "name": "update:page",
+      "description": "Emitted when the page is changed"
+    },
     {
       "name": "pickup",
       "description": "Emitted when click on record, will emit current record data or identifier data with index on current page."

@@ -12,10 +12,15 @@
     <Table
       v-model="clients"
       :headers="headers"
+      :pagination="true"
+      :pageSize="10"
+      :total="clients.length"
+      :current="selectedPage"
+      @update:page="updatePage"
     >
       <template slot="filter-name">
         <div class="filter-wrapper">
-          <Chips v-model="nameFilter" />
+          <Chips v-model="nameFilter" :removable="true" />
         </div>
       </template>
 
@@ -111,6 +116,7 @@
         { key: 'actions', title: '', width: '70px'}
       ],
       colors: COLORS_BY_STATUS,
+      selectedPage: 1,
       nameFilter: [],
       typeFilter: '',
       typeOptions: [
@@ -120,11 +126,18 @@
       financialFilter: '',
       invoiceDateFilter: '',
       statusFilter: []
-    })
+    }),
+    methods: {
+      updatePage(page) {
+        this.selectedPage = page
+      }
+    }
   }
 </script>
 
 <style lang="less" scoped>
+  @import '../../styles/vars';
+
   .name-wrapper {
     display: flex;
     align-items: center;
@@ -141,6 +154,7 @@
 
       .number {
         font-size: 14px;
+        color: @color-gray-400;
       }
     }
   }

@@ -5,7 +5,8 @@ let usage = `
        :removable="true"
        :label="label"
        :placeholder="placeholder"
-       :validators="validators">
+       :validators="validators"
+       @update:chips="updateChips">
 </Chips>
 `.slice(1)
 

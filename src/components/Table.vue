@@ -150,12 +150,16 @@
         this.$emit('sort', sortCombinationKey)
       },
       updatePage(page) {
-        this.pageItems = this.value.slice((page - 1) * this.pageSize, page * this.pageSize)
         this.$emit('update:page', page)
       }
     },
     mounted() {
-      this.pageItems = this.value.slice((this.current - 1) * this.pageSize, this.current * this.pageSize)
+      this.pageItems = this.value
+    },
+    watch: {
+      value(val) {
+        this.pageItems = val
+      }
     }
   }
 </script>

@@ -690,14 +690,22 @@ export default {
     }
 
     .ds-item-cell .ds-grid-item-big {
-      .font-desktop-body-medium-dark();
+      height: 18px;
+      width: 32px;
+      color: #252631;
+      font-family: Roboto;
+      font-size: 14px;
+      line-height: 18px;
+      text-align: center;
       padding: 4px;
     }
+
     .ds-item-cell.ds-disabled .ds-grid-item-big {
-      color: @color-gray-400;
+      color: #98A9BC;
+      font-family: "Roboto Light";
     }
     .ds-item-cell.selected .ds-grid-item-big {
-      color: @color-white;
+      color: @color-primary;
     }
 
     .ds-select-day-list-wrapper {

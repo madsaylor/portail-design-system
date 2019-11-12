@@ -204,7 +204,7 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      height: 42px;
+      min-height: 42px;
 
       .ds-chips-label {
         color: @color-gray-600;

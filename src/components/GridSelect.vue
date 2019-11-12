@@ -220,22 +220,10 @@ export default {
 
             span {
               display: inline-block;
-              min-width: 30px;
+              width: 100%;
               color: @color-white;
               background-color: @color-primary;
             }
-          }
-        }
-
-        &.ds-selected-range-start {
-          .ds-item {
-            background: linear-gradient(90deg, @color-white 50%, rgba(30, 179, 134, 0.1) 50%);
-          }
-        }
-
-        &.ds-selected-range-end {
-          .ds-item {
-            background: linear-gradient(90deg, rgba(30, 179, 134, 0.1) 50%, @color-white 50%);
           }
         }
       }

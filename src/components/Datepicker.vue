@@ -651,9 +651,15 @@ export default {
         box-sizing: content-box;
         line-height: 30px;
         min-width: 26px;
+        color: #252631;
 
         > span {
           font-family: Roboto;
+        }
+
+        &.ds-disabled {
+          color: #98A9BC;
+          font-family: "Roboto Light";
         }
       }
     }
@@ -888,4 +894,5 @@ export default {
     }
   }
 }
+
 </style>

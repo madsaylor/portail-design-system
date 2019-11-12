@@ -133,7 +133,7 @@ export default {
   border-collapse: collapse;
 
   .ds-labels-top {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     span {
       display: inline-block;

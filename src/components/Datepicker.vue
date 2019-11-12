@@ -760,7 +760,7 @@ export default {
 
 @media @screen-medium, @screen-small {
   .ds-datepicker {
-    height: 425px;
+    height: 411px;
     border-radius: 0;
 
     .ds-datepicker-header-additional {
@@ -790,7 +790,8 @@ export default {
     }
 
     .ds-datepicker-body {
-      height: 280px;
+      padding-top: 10px;
+      height: 261px;
       .ds-grid-select-row {
         height: 32px;
       }
@@ -827,7 +828,7 @@ export default {
   .ds-datepicker {
     display: flex;
     flex-direction: row;
-    height: 335px;
+    height: 315px;
     width: 583px;
 
     .ds-datepicker-header-additional {
@@ -894,7 +895,7 @@ export default {
       margin-bottom: 10px;
 
       .ds-datepicker-body {
-        height: 280px;
+        height: 260px;
       }
 
       .ds-datepicker-footer {

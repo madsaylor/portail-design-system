@@ -150,24 +150,15 @@
         this.$emit('sort', sortCombinationKey)
       },
       updatePage(page) {
-        if (this.pagination) {
-          this.pageItems = this.value.slice((page - 1) * this.pageSize, page * this.pageSize)
-        }
         this.$emit('update:page', page)
       }
     },
     mounted() {
-      if (this.pagination) {
-        this.pageItems = this.value.slice((this.current - 1) * this.pageSize, this.current * this.pageSize)
-      } else {
-        this.pageItems = this.value
-      }
+      this.pageItems = this.value
     },
     watch: {
       value(val) {
-        if (!this.pagination) {
-          this.pageItems = val
-        }
+        this.pageItems = val
       }
     }
   }

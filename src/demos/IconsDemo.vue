@@ -50,6 +50,11 @@ export default {
     height: 24px;
     width: 24px;
     padding-right: 24px;
+
+    > svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>

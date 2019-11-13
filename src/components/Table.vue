@@ -206,7 +206,7 @@
     }
 
     .ds-table-body-wrapper {
-      color: @color-gray-600;
+      color: @color-gray-700;
       font-family: Lato;
       font-size: 14px;
       line-height: 20px;

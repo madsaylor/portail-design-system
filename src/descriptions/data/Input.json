@@ -217,6 +217,10 @@
   ],
   "events": [
     {
+      "name": "change",
+      "description": "Emitted when the model value is changed"
+    },
+    {
       "name": "validation",
       "description": "Emitted when the input value changes."
     },

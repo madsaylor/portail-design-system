@@ -14,6 +14,7 @@ let usage = `
     help="This is an explanation of what the select is used for."
     :options="options"
     :idMode="true"
+    @change="changeSelect"
   />
 `.slice(1)
 

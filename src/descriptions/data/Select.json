@@ -74,6 +74,10 @@
   ],
   "events": [
     {
+      "name": "change",
+      "description": "Emitted when model-value is changed"
+    },
+    {
       "name": "validation",
       "description": "Emitted when the multi select value changes and after component initialize"
     }

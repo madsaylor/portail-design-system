@@ -63,8 +63,8 @@
       </template>
 
       <template v-slot:cell-actions="{ row }">
-        <Icon source="edit" color="#888" />
-        <Icon source="delete" color="#888" />
+        <Icon source="edit" color="#778ca2" />
+        <Icon source="delete" color="#778ca2" />
       </template>
     </Table>
   </div>
@@ -154,7 +154,7 @@
 
       .number {
         font-size: 14px;
-        color: @color-gray-400;
+        color: @color-gray-600;
       }
     }
   }

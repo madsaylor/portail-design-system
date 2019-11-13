@@ -28,7 +28,8 @@
 -->
 
 <template>
-  <span v-if="tooltip">
+  <div class="icon-wrapper" :class="type">
+    <span v-if="tooltip">
       <span
         class="ds-icon"
         v-html="code"
@@ -36,18 +37,21 @@
         :style="stylesObject"
         ref="tooltipIcon"
         @mouseover="tooltipVisible = true"
-      >
+      ></span>
+
+      <Dropdown :target="$refs.tooltipIcon" :opened.sync="tooltipVisible" just-fade mouseoutClose>
+        <Tooltip v-html="tooltip" dynamicWidth/>
+      </Dropdown>
     </span>
-    <Dropdown :target="$refs.tooltipIcon" :opened.sync="tooltipVisible" just-fade mouseoutClose>
-      <Tooltip v-html="tooltip" dynamicWidth/>
-    </Dropdown>
-  </span>
-  <span v-else-if="!tooltip"
-    class="ds-icon"
-    v-html="code"
-    v-on="$listeners"
-    :style="stylesObject"
-  ></span>
+
+    <span
+      v-else
+      class="ds-icon"
+      v-html="code"
+      v-on="$listeners"
+      :style="stylesObject"
+    ></span>
+  </div>
 </template>
 
 <script>
@@ -77,6 +81,10 @@ export default {
     noSize: {
       type: Boolean,
       default: false
+    },
+    type: {
+      type: String,
+      default: null
     }
   },
   data: () => ({
@@ -116,16 +124,28 @@ export default {
 <style lang="less">
 @import '../styles/vars';
 
-.ds-icon {
-  display: inline-block;
-  vertical-align: bottom;
+.icon-wrapper {
+  &.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #d1ece4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-  svg {
-    height: 100%;
-    width: 100%;
-    vertical-align: top;
-    user-drag: none;
-    user-select: none;
+  .ds-icon {
+    display: inline-block;
+    vertical-align: bottom;
+
+    svg {
+      height: 100%;
+      width: 100%;
+      vertical-align: top;
+      user-select: none;
+    }
   }
 }
+
 </style>

@@ -61,6 +61,7 @@
     data: () => ({
       selectedChips: -1,
       newChip: '',
+      valueWrapper: [],
       active: false,
       touched: false
     }),
@@ -86,6 +87,7 @@
       onRemove(index) {
         this.valueWrapper.splice(index, 1)
         this.setTouchEmitValidation()
+        this.$emit('input', this.valueWrapper)
         this.$emit('update:chips', this.valueWrapper)
       },
       onKeyPress(event) {
@@ -102,6 +104,7 @@
           this.valueWrapper = this.valueWrapper.concat(this.newChip)
           this.newChip = ''
           this.setTouchEmitValidation()
+          this.$emit('input', this.valueWrapper)
           this.$emit('update:chips', this.valueWrapper)
         }
       },
@@ -161,14 +164,6 @@
 
         return errors
       },
-      valueWrapper: {
-        get() {
-          return this.value
-        },
-        set(value) {
-          this.$emit('input', value)
-        }
-      },
       inputAttrs() {
         return {
           placeholder: this.placeholder
@@ -184,6 +179,11 @@
     },
     beforeDestroy() {
       document.removeEventListener('validate', this.validate)
+    },
+    watch: {
+      value(val) {
+        this.valueWrapper = val
+      }
     }
   }
 </script>

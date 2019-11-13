@@ -134,10 +134,8 @@ export default {
   border-collapse: collapse;
 
   .ds-calendar-labels-top {
-    margin-bottom: 10px;
 
     .ds-calendar-label {
-      display: inline-block;
       min-width: 31.5px;
       color: @color-gray-500;
       font-family: @font-family;
@@ -145,7 +143,6 @@ export default {
       font-weight: 500;
       line-height: 24px;
       padding-top: 2px;
-      padding-bottom: 8px;
       text-align: center;
       text-transform: capitalize;
       user-select: none;
@@ -265,5 +262,12 @@ export default {
       margin-bottom: 10px;
     }
   }
+
+  /*.ds-grid-select-row {*/
+
+    /*:first-of-type  {*/
+      /*margin-top: 18px;*/
+    /*}*/
+  /*}*/
 }
 </style>

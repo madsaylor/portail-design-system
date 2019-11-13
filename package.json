@@ -1,6 +1,6 @@
 {
   "name": "@betao/ds",
-  "version": "0.3.403",
+  "version": "0.3.404",
   "private": false,
   "publishConfig": {
     "access": "public"

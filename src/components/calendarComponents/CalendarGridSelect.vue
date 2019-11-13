@@ -1,7 +1,8 @@
 <template>
   <div class="ds-calendar-grid-select">
-    <div v-if="labelsTop" class="ds-labels-top">
+    <div v-if="labelsTop" class="ds-calendar-labels-top">
       <span v-for="label in labelsTop"
+            class="ds-calendar-label"
             :style="{paddingLeft: `calc((100% - 32 * ${items[0].length}px) / ${items[0].length - 1})`}">
         {{ label }}
       </span>
@@ -132,10 +133,10 @@ export default {
   height: 100%;
   border-collapse: collapse;
 
-  .ds-labels-top {
+  .ds-calendar-labels-top {
     margin-bottom: 10px;
 
-    span {
+    .ds-calendar-label {
       display: inline-block;
       min-width: 31.5px;
       color: @color-gray-500;

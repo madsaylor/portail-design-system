@@ -113,6 +113,7 @@
       selectValue(option) {
         this.setInputSelectValue(option)
         this.$emit('input', option)
+        this.$emit('change', option)
         this.openDropDownList = false
       },
       validate() {

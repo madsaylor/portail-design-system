@@ -514,6 +514,7 @@ export default {
         }
 
         this.$emit('input', value)
+        this.$emit('change', value)
       }
     },
     datepickerValue: {
@@ -533,6 +534,7 @@ export default {
       set(value) {
         this.datepickerVisible = false
         this.$emit('input', value)
+        this.$emit('change', value)
       }
     },
     dateRangeStart_() {
@@ -646,6 +648,7 @@ export default {
     },
     changeRadio() {
       this.$emit('input', this.radioVal)
+      this.$emit('change', this.radioVal)
     },
     slideInit() {
       if (this.slideLabel && this.value) {

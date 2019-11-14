@@ -125,14 +125,16 @@ export default {
 @import '../styles/vars';
 
 .icon-wrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+
   &.circle {
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    background-color: #d1ece4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: @color-gray-200;
   }
 
   .ds-icon {

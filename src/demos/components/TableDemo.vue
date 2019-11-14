@@ -19,38 +19,28 @@
       @update:page="updatePage"
     >
       <template slot="filter-name">
-        <div class="filter-wrapper">
-          <Chips v-model="nameFilter" :removable="true" />
-        </div>
+        <Chips v-model="nameFilter" :removable="true" />
       </template>
 
       <template slot="filter-type.name">
-        <div class="filter-wrapper">
-          <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
-        </div>
+        <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
       </template>
 
       <template slot="filter-earned">
-        <div class="filter-wrapper">
-          <Input v-model="financialFilter" />
-        </div>
+        <Input v-model="financialFilter" />
       </template>
 
       <template slot="filter-invoice_date">
-        <div class="filter-wrapper">
-          <Input v-model="invoiceDateFilter" />
-        </div>
+        <Input v-model="invoiceDateFilter" />
       </template>
 
       <template slot="filter-status">
-        <div class="filter-wrapper">
-          <Chips v-model="statusFilter" />
-        </div>
+        <Chips v-model="statusFilter" />
       </template>
 
       <template v-slot:cell-name="{row, value}">
         <div class="name-wrapper">
-          <Icon :source="row.type.name === 'Person' ? 'account_circle' : 'group_outline'" />
+          <Icon type="circle" size="18px" color="#1eb386" :source="row.type.name === 'Person' ? 'user-solid' : 'building'" />
           <div class="name-number">
             <div class="name">{{ value }}</div>
             <div class="number">Client ID: {{ row.number }}</div>
@@ -63,8 +53,8 @@
       </template>
 
       <template v-slot:cell-actions="{ row }">
-        <Icon source="edit" color="#778ca2" />
-        <Icon source="delete" color="#778ca2" />
+        <Button plain icon="pen-solid" iconSize="18px" iconColor="#778ca2" padding="8px" />
+        <Button plain icon="trash-alt" iconSize="18px" iconColor="#778ca2" padding="8px" />
       </template>
     </Table>
   </div>
@@ -154,16 +144,8 @@
 
       .number {
         font-size: 14px;
-        color: @color-gray-600;
+        color: @color-gray-500;
       }
-    }
-  }
-
-  .filter-wrapper {
-    width: 100%;
-
-    > * {
-      width: 100%;
     }
   }
 </style>

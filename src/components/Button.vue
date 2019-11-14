@@ -156,10 +156,12 @@ export default {
   border: none;
   box-sizing: border-box;
   cursor: pointer;
-  display: inline-block;
   margin: 0;
   text-decoration: none !important;
   padding: 10px 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
   &.ds-button-big {
     padding: 14px 24px;

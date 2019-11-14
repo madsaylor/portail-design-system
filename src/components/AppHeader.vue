@@ -34,7 +34,8 @@ export default {
   height: @app-header-height;
   box-shadow: inset 0 -1px 0 0 @color-gray-200;
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  justify-content: stretch;
 
   .ds-title {
     flex: 1 0 auto;

@@ -36,7 +36,7 @@
     <div class="ds-next-previous-wrapper">
       <div class="previous" :class="{'disabled': current === 1}" @click="previous">
         <Icon
-          source="left-arrow"
+          source="angle_left_solid"
           size="18px"
           padding="0"
         />
@@ -44,7 +44,7 @@
 
       <div class="next" :class="{'disabled': current === pageCount}" @click="next">
         <Icon
-          source="right-arrow"
+          source="angle_right_solid"
           size="18px"
           padding="0"
         />
@@ -121,12 +121,12 @@
           box-sizing: border-box;
           height: 40px;
           width: 40px;
-          border: 1px solid #E8ECEF;
+          border: 1px solid @color-gray-300;
           border-radius: 4px;
           font-size: 14px;
           line-height: 32px;
           letter-spacing: 0.21px;
-          color: #778CA2;
+          color: @color-gray-500;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -151,13 +151,13 @@
         width: 40px;
         height: 40px;
         border-radius: 4px;
-        background-color: #DDD;
+        background-color: @color-gray-300;
         display: flex;
         justify-content: center;
         align-items: center;
 
         &.disabled {
-          background-color: #F2F4F6;
+          background-color: @color-gray-200;
           pointer-events: none;
         }
       }

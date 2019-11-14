@@ -134,7 +134,7 @@ export default {
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    background-color: @color-gray-300;
+    background-color: @color-gray-200;
   }
 
   .ds-icon {

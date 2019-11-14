@@ -40,7 +40,7 @@
 
       <template v-slot:cell-name="{row, value}">
         <div class="name-wrapper">
-          <Icon :source="row.type.name === 'Person' ? 'account_circle' : 'group_outline'" />
+          <Icon type="circle" size="18px" color="#1eb386" :source="row.type.name === 'Person' ? 'user-solid' : 'building'" />
           <div class="name-number">
             <div class="name">{{ value }}</div>
             <div class="number">Client ID: {{ row.number }}</div>
@@ -53,8 +53,8 @@
       </template>
 
       <template v-slot:cell-actions="{ row }">
-        <Icon source="edit" color="#778ca2" />
-        <Icon source="delete" color="#778ca2" />
+        <Button plain icon="pen-solid" iconSize="18px" iconColor="#778ca2" padding="8px" />
+        <Button plain icon="trash-alt" iconSize="18px" iconColor="#778ca2" padding="8px" />
       </template>
     </Table>
   </div>
@@ -146,12 +146,6 @@
         font-size: 14px;
         color: @color-gray-500;
       }
-    }
-  }
-
-  .filter-wrapper {
-    > * {
-      width: 100%;
     }
   }
 </style>

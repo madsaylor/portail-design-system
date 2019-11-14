@@ -219,7 +219,7 @@
           display: flex;
           padding: 10px 0;
           margin-bottom: 6px;
-          background-color: white;
+          background-color: @color-white;
           align-items: center;
 
           @media screen and (max-width: 551px) {

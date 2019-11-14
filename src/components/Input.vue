@@ -925,26 +925,26 @@ export default {
       background-color: white;
     }
 
-    .ds-select-placeholder + .ds-icon {
-      pointer-events: none;
-      position: absolute;
-      bottom: 10%;
-      right: 6px;
+    .ds-select-placeholder + .icon-wrapper {
+        pointer-events: none;
+        position: absolute;
+        bottom: 10%;
+        right: 6px;
     }
 
-    select + .ds-icon {
-      pointer-events: none;
-      position: absolute;
-      bottom: 10%;
-      right: 6px;
+    select + .icon-wrapper {
+        pointer-events: none;
+        position: absolute;
+        bottom: 10%;
+        right: 6px;
     }
 
-    input + .ds-icon {
-      pointer-events: none;
-      position: absolute;
-      bottom: 8%;
-      right: 6px;
-      height: 50% !important;
+    input + .icon-wrapper {
+        pointer-events: none;
+        position: absolute;
+        bottom: 8%;
+        right: 6px;
+        height: 50% !important;
     }
 
     .ds-icon-left {

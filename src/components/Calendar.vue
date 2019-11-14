@@ -182,7 +182,8 @@
       windowWidth: window.innerWidth,
       positions: Array,
       id: Math.random().toString(36).substring(7),
-      dateUnset: false
+      dateUnset: false,
+      oldValue: undefined
     }),
     computed: {
       inputValueWrapper() {
@@ -197,6 +198,10 @@
         }
       },
       inputValue() {
+        if (!this.rangeAvailable && this.oldValue !== null) {
+          this.onSave()
+        }
+
         return this.getValue(this.value)
       },
       secondInputValue() {
@@ -391,7 +396,8 @@
       }
     },
     watch: {
-      value(newValue) {
+      value(newValue, oldValue) {
+        this.oldValue = oldValue
         if (this.slideLabel && !this.labelFocus && !newValue) {
           this.slideActive = false
         }
@@ -552,7 +558,7 @@
       opacity: 0;
     }
 
-    input + .ds-icon {
+    input + .ds-calendar-icon {
       pointer-events: none;
       position: absolute;
       bottom: 8%;

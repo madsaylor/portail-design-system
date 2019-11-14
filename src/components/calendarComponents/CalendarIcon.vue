@@ -1,5 +1,5 @@
 <template>
-  <span class="ds-icon"
+  <span class="ds-calendar-icon"
     v-html="code"
     v-on="$listeners"
     :style="stylesObject">
@@ -67,7 +67,7 @@ export default {
 <style lang="less">
 @import '../../styles/vars';
 
-.ds-icon {
+.ds-calendar-icon {
   display: inline-block;
   vertical-align: bottom;
 

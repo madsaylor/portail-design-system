@@ -1,4 +1,35 @@
 {
-  "properties": [],
-  "events": []
+  "properties": [
+    {
+      "name": "min",
+      "type": "Number",
+      "description": "Min value of the range"
+    },
+    {
+      "name": "max",
+      "type": "Number",
+      "description": "Max value of the range" 
+    },
+    {
+      "name": "minLimit",
+      "type": "Number",
+      "description": "Min limit of the range"
+    },
+    {
+      "name": "maxLimit",
+      "type": "Number",
+      "description": "Max limit of the range" 
+    },
+    {
+      "name": "prefix",
+      "type": "String",
+      "description": "Prefix of Numbers"
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emit the Object when Min or Max value is changed (ex: {min: 15, max: 200})"
+    }
+  ]
 }

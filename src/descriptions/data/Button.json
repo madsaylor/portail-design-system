@@ -66,5 +66,10 @@
       "description": "Set button padding"
     }
   ],
-  "events": []
+  "events": [
+    {
+      "name": "click",
+      "description": "Emitted when button is clicked"
+    }
+  ]
 }

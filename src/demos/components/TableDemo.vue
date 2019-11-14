@@ -154,7 +154,7 @@
 
       .number {
         font-size: 14px;
-        color: @color-gray-600;
+        color: @color-gray-500;
       }
     }
   }

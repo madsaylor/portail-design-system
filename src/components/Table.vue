@@ -168,7 +168,7 @@
   @import '../styles/vars';
 
   .ds-table-wrapper {
-    color: @color-gray-600;
+    color: @color-gray-500;
 
     .ds-table-header {
       @media screen and (max-width: 551px) {
@@ -206,7 +206,7 @@
     }
 
     .ds-table-body-wrapper {
-      color: @color-gray-700;
+      color: @color-dark;
       font-family: Lato;
       font-size: 14px;
       line-height: 20px;

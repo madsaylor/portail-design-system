@@ -207,7 +207,7 @@
       min-height: 42px;
 
       .ds-chips-label {
-        color: @color-gray-600;
+        color: @color-gray-500;
         font-family: Lato, Arial, Helvetica, sans-serif;
         font-size: 12px;
         cursor: default;
@@ -234,7 +234,7 @@
         margin: 4px 10px 4px 0;
         border-radius: 2px;
         background-color: @color-gray-300;
-        color: @color-gray-600;
+        color: @color-gray-500;
 
         .ds-chip-title {
           font-size: 16px;

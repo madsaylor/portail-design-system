@@ -125,12 +125,14 @@ export default {
 @import '../styles/vars';
 
 .icon-wrapper {
+  display: inline-flex;
+
   &.circle {
     width: 40px;
     height: 40px;
     border-radius: 20px;
     background-color: #d1ece4;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
   }

@@ -170,7 +170,9 @@ const ICONS_TO_GET = [
   ['upload-solid', 'baseline'],
   ['upload-solid', 'outline'],
   ['user-solid', 'baseline'],
-  ['user-solid', 'outline']
+  ['user-solid', 'outline'],
+  ['clipboard-list-solid', 'baseline'],
+  ['clipboard-list-solid', 'outline']
 ]
 
 // Get svg download link

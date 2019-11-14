@@ -242,6 +242,8 @@ export default {
      */
     days() {
       let date = new Date(this.displayed)
+      let displayedMonth = new Date(this.displayed).getMonth()
+
       date.setDate(1)
       date.setDate(2 - (date.getDay() || 7))  // first displayed Monday
       let days = []
@@ -251,20 +253,25 @@ export default {
           let day = new Date(date)
           day.title = day.getDate()
           day.key = day.getTime()
+          day.class = []
 
           if (this.min != null) {
             day.setHours(23, 59, 59, 999)
             if (day.getTime() < this.min.getTime()) {
               day.disabled = true
-              day.class = 'ds-disabled'
+              day.class.push('ds-disabled')
             }
           }
           if (this.max != null) {
             day.setHours(0, 0, 0, 0)
             if (day.getTime() > this.max.getTime()) {
               day.disabled = true
-              day.class = 'ds-disabled'
+              day.class.push('ds-disabled')
             }
+          }
+
+          if (day.getMonth() !== displayedMonth) {
+            day.class.push('ds-another-month')
           }
 
           week.push(day)
@@ -303,6 +310,10 @@ export default {
             if (month.getTime() > this.max.getTime()) {
               month.disabled = true
             }
+          }
+
+          if (this.value && this.value.getMonth() === month.getMonth()) {
+            month.class = 'ds-selected-month'
           }
 
           month.title = this.capitalize(month.title)
@@ -664,11 +675,12 @@ export default {
         }
 
         &.ds-disabled {
-          color: #98A9BC;
+          color: @color-gray-300;
           font-family: "Roboto Light";
         }
 
-        &.ds-selected-year {
+        &.ds-selected-year,
+        &.ds-selected-month {
           span {
             color: @color-white;
             background-color: @color-primary;
@@ -698,8 +710,8 @@ export default {
       }
     }
 
-    .grid-select .ds-item-cell .ds-disabled {
-      color: @color-gray-400;
+    .ds-item-cell .ds-disabled {
+      color: @color-gray-300;
     }
 
     .ds-item-cell .ds-grid-item-big {
@@ -714,9 +726,10 @@ export default {
     }
 
     .ds-item-cell.ds-disabled .ds-grid-item-big {
-      color: #98A9BC;
+      color: @color-gray-300;
       font-family: "Roboto Light";
     }
+
     .ds-item-cell.selected .ds-grid-item-big {
       color: @color-primary;
     }

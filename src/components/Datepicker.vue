@@ -586,7 +586,7 @@ export default {
     height: 60px;
     display: flex;
     padding: 0 20px;
-    background-color: @color-gray-050;
+    background-color: @color-gray-100;
 
     .ds-datepicker-labels {
       display: flex;
@@ -674,7 +674,7 @@ export default {
 
     .ds-labels-top {
       th {
-        color: @color-gray-600;
+        color: @color-gray-500;
         height: 16px;
         width: 29px;
         text-transform: capitalize;
@@ -771,7 +771,7 @@ export default {
       padding: 20px;
       height: 60px;
       box-sizing: border-box;
-      background-color: @color-gray-050;
+      background-color: @color-gray-100;
 
       .ds-additional-title {
         cursor: default;
@@ -785,7 +785,7 @@ export default {
 
       .ds-year,
       .ds-month {
-        color: @color-gray-600 !important;
+        color: @color-gray-500 !important;
       }
     }
 
@@ -808,7 +808,7 @@ export default {
         margin-right: 12px;
 
         button {
-          color: @color-gray-600;
+          color: @color-gray-500;
           font-family: "Roboto Medium";
           height: 14px;
           font-size: 12px;
@@ -840,7 +840,7 @@ export default {
       flex-direction: column;
       min-width: 190px;
       padding: 20px;
-      background-color: @color-gray-050;
+      background-color: @color-gray-100;
 
       .ds-datepicker-sidebar-header {
         display: flex;

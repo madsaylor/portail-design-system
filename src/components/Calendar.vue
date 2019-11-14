@@ -198,7 +198,7 @@
         }
       },
       inputValue() {
-        if (!this.rangeAvailable && this.oldValue !== null) {
+        if (!this.rangeAvailable && !_.isNull(this.oldValue) && !_.isUndefined(this.oldValue)) {
           this.onSave()
         }
 

@@ -42,6 +42,7 @@ import StarData from './data/demo/StarData'
 import ChipsData from './data/demo/ChipsData'
 import SelectData from './data/demo/SelectData'
 import CalendarData from  './data/demo/CalendarData'
+import NumberRangeData from './data/demo/NumberRangeData'
 
 export {
   CountriesArray,
@@ -87,5 +88,6 @@ export {
   StarData,
   ChipsData,
   SelectData,
-  CalendarData
+  CalendarData,
+  NumberRangeData
 }

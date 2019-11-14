@@ -177,15 +177,6 @@ export default {
       &:not(.ds-disabled) {
         cursor: pointer;
 
-        &:hover > .ds-item,
-        &:focus > .ds-item {
-          /*background: darken(@color-white, 5%);*/
-        }
-
-        &:active > .ds-item {
-          /*background: darken(@color-white, 10%);*/
-        }
-
         &.ds-selected {
           .ds-item {
             span {
@@ -199,7 +190,6 @@ export default {
 
         &.ds-range {
           .ds-item {
-
             background-color: rgba(30, 179, 134, 0.1);
             color: @color-primary;
           }
@@ -256,6 +246,89 @@ export default {
 
     &.ds-grid-select-row-day {
       margin-bottom: 1px;
+
+      .ds-item-cell {
+        .ds-another-month {
+          color: @color-gray-400;
+        }
+
+        .ds-disabled {
+          color: @color-gray-300;
+        }
+
+        > .ds-item {
+          > span {
+            display: inline-block;
+            width: 28px;
+            font-family: Roboto;
+            &:hover {
+              background-color: darken(@color-white, 10%);
+            }
+          }
+        }
+
+        &.ds-range {
+          > .ds-item {
+            > span {
+              &:hover {
+                background-color: rgba(30, 179, 134, 0.2);
+              }
+            }
+          }
+        }
+
+        &.ds-selected {
+          > .ds-item {
+            > span {
+              &:hover {
+                background-color: darken(@color-primary, 10%);
+              }
+            }
+          }
+        }
+
+        &.ds-disabled {
+          > .ds-item {
+            > span {
+              &:hover {
+                background-color: transparent;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.ds-grid-select-row-month,
+    &.ds-grid-select-row-year {
+      .ds-item-cell {
+        > .ds-item {
+          > span {
+            &:hover {
+              background-color: darken(@color-white, 10%);
+            }
+          }
+
+          &.ds-selected-year,
+          &.ds-selected-month {
+            > span {
+              &:hover {
+                background-color: darken(@color-primary, 10%);
+              }
+            }
+          }
+        }
+
+        &.ds-disabled {
+          > .ds-item {
+            > span {
+              &:hover {
+                background-color: transparent;
+              }
+            }
+          }
+        }
+      }
     }
 
     &.ds-grid-select-row-month {

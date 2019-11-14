@@ -19,33 +19,23 @@
       @update:page="updatePage"
     >
       <template slot="filter-name">
-        <div class="filter-wrapper">
-          <Chips v-model="nameFilter" :removable="true" />
-        </div>
+        <Chips v-model="nameFilter" :removable="true" />
       </template>
 
       <template slot="filter-type.name">
-        <div class="filter-wrapper">
-          <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
-        </div>
+        <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
       </template>
 
       <template slot="filter-earned">
-        <div class="filter-wrapper">
-          <Input v-model="financialFilter" />
-        </div>
+        <Input v-model="financialFilter" />
       </template>
 
       <template slot="filter-invoice_date">
-        <div class="filter-wrapper">
-          <Input v-model="invoiceDateFilter" />
-        </div>
+        <Input v-model="invoiceDateFilter" />
       </template>
 
       <template slot="filter-status">
-        <div class="filter-wrapper">
-          <Chips v-model="statusFilter" />
-        </div>
+        <Chips v-model="statusFilter" />
       </template>
 
       <template v-slot:cell-name="{row, value}">
@@ -160,8 +150,6 @@
   }
 
   .filter-wrapper {
-    width: 100%;
-
     > * {
       width: 100%;
     }

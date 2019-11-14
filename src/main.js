@@ -11,6 +11,7 @@ import GlobalFilters from './plugins/GlobalFilters'
 
 import './utils/patch-ios-safari-click'
 import './fonts/lato.css'
+import './fonts/roboto.css'
 import App from './App.vue'
 
 

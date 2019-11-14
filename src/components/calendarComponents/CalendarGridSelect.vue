@@ -142,7 +142,7 @@ export default {
     .ds-calendar-label {
       min-width: 31.5px;
       color: @color-gray-500;
-      font-family: Roboto;
+      font-family: "Roboto Regular";
       font-size: 16px;
       font-weight: 500;
       line-height: 24px;
@@ -260,7 +260,7 @@ export default {
           > span {
             display: inline-block;
             width: 28px;
-            font-family: Roboto;
+            font-family: "Roboto Regular";
             &:hover {
               background-color: darken(@color-white, 10%);
             }

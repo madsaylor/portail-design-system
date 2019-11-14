@@ -671,7 +671,7 @@ export default {
         color: #252631;
 
         > span {
-          font-family: Roboto;
+          font-family: "Roboto Regular";
         }
 
         &.ds-disabled {
@@ -702,7 +702,7 @@ export default {
         height: 16px;
         width: 29px;
         text-transform: capitalize;
-        font-family: Roboto;
+        font-family: "Roboto Regular";
         font-size: 14px;
         letter-spacing: 0.2px;
         line-height: 16px;
@@ -718,7 +718,7 @@ export default {
       height: 18px;
       width: 32px;
       color: #252631;
-      font-family: Roboto;
+      font-family: "Roboto Regular";
       font-size: 14px;
       line-height: 18px;
       text-align: center;
@@ -880,7 +880,7 @@ export default {
         .ds-datepicker-sidebar-title {
           height: 19px;
           color: #252631;
-          font-family: Roboto;
+          font-family: "Roboto Regular";
           font-size: 16px;
           letter-spacing: 0.2px;
           line-height: 19px;
@@ -894,7 +894,7 @@ export default {
         height: 60%;
 
         color: #252631;
-        font-family: Roboto;
+        font-family: "Roboto Regular";
         font-size: 20px;
         letter-spacing: 0.2px;
         line-height: 24px;

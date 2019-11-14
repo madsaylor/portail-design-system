@@ -23,16 +23,6 @@
           "description": "This indicates what values should be shown from the Object array in the column"
         }
       ]
-    },
-    {
-      "name": "identifierField",
-      "type": "String",
-      "description": "Field which is identifier for emit data from pickup event"
-    },
-    {
-      "name": "range",
-      "type": "Object",
-      "description": "Object is provide start and end data range points for displaying on current page"
     }
   ],
   "events": [

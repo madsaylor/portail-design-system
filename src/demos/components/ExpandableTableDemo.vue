@@ -29,13 +29,13 @@
   import ExpandableTable from '../../components/ExpandableTable'
   import Collapser from '../../components/Collapser'
   import Description from '../../descriptions/Description'
-  import {TableData, GeneralData} from '../../static/index'
+  import {GeneralData} from '../../static/index'
 
   export default {
     name: 'ExpandableTableDemo',
     components: { ExpandableTable, Collapser, Description },
     data: () => ({
-      usage: TableData.usage,
+      usage: '',
       openUsage: true,
       clients: GeneralData.clients,
       columns: [

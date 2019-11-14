@@ -3,7 +3,7 @@
     <div v-if="labelsTop" class="ds-calendar-labels-top">
       <span v-for="label in labelsTop"
             class="ds-calendar-label"
-            :style="{paddingLeft: `calc((100% - 32 * ${items[0].length}px) / ${items[0].length - 1})`}">
+            :style="{paddingLeft: `calc((100% - 30 * ${items[0].length}px) / ${items[0].length - 1})`}">
         {{ label }}
       </span>
     </div>
@@ -133,19 +133,20 @@ export default {
   height: 100%;
   border-collapse: collapse;
 
+  :nth-child(2) {
+    margin-top: 18px;
+  }
+
   .ds-calendar-labels-top {
-    margin-bottom: 10px;
 
     .ds-calendar-label {
-      display: inline-block;
       min-width: 31.5px;
       color: @color-gray-500;
-      font-family: @font-family;
+      font-family: Roboto;
       font-size: 16px;
       font-weight: 500;
       line-height: 24px;
       padding-top: 2px;
-      padding-bottom: 8px;
       text-align: center;
       text-transform: capitalize;
       user-select: none;
@@ -259,9 +260,14 @@ export default {
 
     &.ds-grid-select-row-month {
       margin-bottom: 32px;
+
+      span {
+        margin-top: 0 !important;
+      }
     }
 
     &.ds-grid-select-row-year {
+      margin-top: 0 !important;
       margin-bottom: 10px;
     }
   }

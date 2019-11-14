@@ -25,7 +25,8 @@
 -->
 
 <template>
-  <div :class="['ds-datepicker', {'ds-full-width': fullWidth, 'ds-datepicker-select-day-list': selectDayList && !isMobile}]">
+  <div :class="['ds-datepicker', {'ds-full-width': fullWidth, 'ds-datepicker-select-day-list': selectDayList && !isMobile,
+                                  'ds-datepicker-range': !rangeAvailable}]">
     <div class="ds-datepicker-sidebar">
 
       <div class="ds-datepicker-sidebar-header">
@@ -69,7 +70,7 @@
         </div>
       </div>
 
-      <div class="ds-datepicker-sidebar-footer-wrapper">
+      <div class="ds-datepicker-sidebar-footer-wrapper" v-if="rangeAvailable">
         <div class="ds-datepicker-sidebar-footer">
           <Button plain-two
                   class="ds-datepicker-sidebar-clear" @click="onClear()">
@@ -147,7 +148,7 @@
         </div>
 
       </div>
-      <div class="ds-datepicker-footer">
+      <div class="ds-datepicker-footer" v-if="rangeAvailable">
         <Button plain-two
                 class="ds-datepicker-clear" @click="onClear()">
           Clear
@@ -341,6 +342,10 @@ export default {
             if (year.getTime() > this.max.getTime()) {
               year.disabled = true
             }
+          }
+
+          if (this.value && this.value.getFullYear() === year.getFullYear()) {
+            year.class = 'ds-selected-year'
           }
 
           row.push(year)
@@ -662,6 +667,13 @@ export default {
           color: #98A9BC;
           font-family: "Roboto Light";
         }
+
+        &.ds-selected-year {
+          span {
+            color: @color-white;
+            background-color: @color-primary;
+          }
+        }
       }
     }
   }
@@ -669,7 +681,7 @@ export default {
   .ds-datepicker-body {
     height: 272px;
     width: 353px;
-    padding: 21px 15px;
+    padding: 21px 20px;
     box-sizing: border-box;
 
     .ds-labels-top {
@@ -821,6 +833,10 @@ export default {
     .ds-close-icon {
       cursor: pointer;
     }
+
+    &.ds-datepicker-range {
+      height: 365px;
+    }
   }
 }
 
@@ -845,6 +861,7 @@ export default {
       .ds-datepicker-sidebar-header {
         display: flex;
         justify-content: space-between;
+        align-items: flex-start;
         height: 20%;
 
         .ds-datepicker-sidebar-title {
@@ -901,6 +918,10 @@ export default {
       .ds-datepicker-footer {
         display: none;
       }
+    }
+
+    &.ds-datepicker-range {
+      height: 315px;
     }
   }
 }

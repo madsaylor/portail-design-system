@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import { VueMaskDirective } from 'v-mask'
 import VueSignaturePad from 'vue-signature-pad'
+
 import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/monokai.css'
+import 'vue-slider-component/theme/antd.css'
+
 import Internationalization from './plugins/Internationalization'
 import GlobalFilters from './plugins/GlobalFilters'
 
 import './utils/patch-ios-safari-click'
-
 import './fonts/lato.css'
 import App from './App.vue'
 

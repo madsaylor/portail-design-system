@@ -31,9 +31,9 @@
         </div>
 
         <div class="min-max-input-wrapper">
-          <Input v-model="sliderModel[0]" width="100px" />
+          <Input placeholder="Montant min." v-model="sliderModel[0]" width="100px" />
           <div class="between">To</div>
-          <Input v-model="sliderModel[1]" width="100px" />
+          <Input placeholder="Montant max." v-model="sliderModel[1]" width="100px" />
         </div>
       </div>
     </Dropdown>
@@ -79,7 +79,7 @@ export default {
   }),
   computed: {
     inputData() {
-      return this.min + ' - ' + this.max
+      return this.sliderModel[0] + ' - ' + this.sliderModel[1]
     }
   },
   methods: {

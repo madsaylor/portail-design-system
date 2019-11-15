@@ -150,10 +150,12 @@
       </div>
       <div class="ds-datepicker-footer" v-if="rangeAvailable">
         <Button plain-two
-                class="ds-datepicker-clear" @click="onClear()">
+                class="ds-datepicker-clear"
+                @click="onClear()">
           Clear
         </Button>
-        <Button @click="onSave()">
+        <Button class="ds-datepicker-save"
+                @click="onSave()">
           Save
         </Button>
       </div>
@@ -537,6 +539,7 @@ export default {
       let valueCopy = new Date(this.value.getTime())
       valueCopy.setDate(valueCopy.getDate() + this.defaultMultiplicateur * multiplicateur - 1)
       this.$emit('update:secondDate', valueCopy)
+      this.onSave()
     },
     getMonth(value, monthFormat, sliceEnd) {
       if (value) {
@@ -675,7 +678,7 @@ export default {
         }
 
         &.ds-disabled {
-          color: @color-gray-300;
+          color: @color-gray-400;
           font-family: "Roboto Light";
         }
 
@@ -711,7 +714,7 @@ export default {
     }
 
     .ds-item-cell .ds-disabled {
-      color: @color-gray-300;
+      color: @color-gray-400;
     }
 
     .ds-item-cell .ds-grid-item-big {
@@ -726,7 +729,7 @@ export default {
     }
 
     .ds-item-cell.ds-disabled .ds-grid-item-big {
-      color: @color-gray-300;
+      color: @color-gray-400;
       font-family: "Roboto Light";
     }
 
@@ -746,7 +749,7 @@ export default {
         font-family: "Roboto Medium";
         font-size: 14px;
         line-height: 21px;
-        border-left: 1px solid #E8ECEF;
+        border-left: 1px solid @color-gray-300;
         padding-left: 25px;
 
         > div {
@@ -914,6 +917,11 @@ export default {
           display: flex;
           .ds-datepicker-sidebar-clear {
             margin-right: 30px;
+
+            button {
+              font-family: "Roboto Medium";
+              color: @color-gray-500;
+            }
           }
         }
       }

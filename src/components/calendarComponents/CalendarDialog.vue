@@ -87,7 +87,7 @@
       window.addEventListener('resize', this.onResize)
       document.addEventListener('keydown', this.escapePress)
       document.addEventListener('keydown', this.tabPress, true)
-      document.addEventListener('touchmove', this.touchMove, { passive: false })
+      // document.addEventListener('touchmove', this.touchMove, { passive: false })
     },
 
     directives: {
@@ -176,11 +176,11 @@
       onResize() {
         this.windowWidth = window.innerWidth
       },
-      touchMove(event) {
-        if (this.opened) {
-          event.preventDefault()
-        }
-      },
+      // touchMove(event) {
+      //   if (this.opened) {
+      //     event.preventDefault()
+      //   }
+      // },
       openedDispatchWrapper(backdropClick) {
         if (backdropClick && !this.clickOutsideToClose) {
           return
@@ -251,7 +251,7 @@
       window.removeEventListener('resize', this.onResize)
       document.removeEventListener('keydown', this.escapePress)
       document.removeEventListener('keydown', this.tabPress, true)
-      document.removeEventListener('touchmove', this.touchMove, { passive: false })
+      // document.removeEventListener('touchmove', this.touchMove, { passive: false })
     },
   }
 </script>

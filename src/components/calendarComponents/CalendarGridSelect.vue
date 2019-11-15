@@ -3,7 +3,7 @@
     <div v-if="labelsTop" class="ds-calendar-labels-top">
       <span v-for="label in labelsTop"
             class="ds-calendar-label"
-            :style="{paddingLeft: `calc((100% - 30 * ${items[0].length}px) / ${items[0].length - 1})`}">
+            :style="{paddingLeft: `calc((100% - 32 * ${items[0].length}px) / ${items[0].length - 1})`}">
         {{ label }}
       </span>
     </div>
@@ -38,7 +38,7 @@
 const cellWidth = {
   'day': 29,
   'month': 40,
-  'year': 38
+  'year': 40
 }
 
 export default {
@@ -216,7 +216,7 @@ export default {
       }
 
       &.ds-disabled > .ds-item {
-        color: @color-gray-300;
+        color: @color-gray-400;
       }
 
       &:focus {
@@ -249,11 +249,11 @@ export default {
 
       .ds-item-cell {
         .ds-another-month {
-          color: @color-gray-400;
+          color: @color-gray-500;
         }
 
         .ds-disabled {
-          color: @color-gray-300;
+          color: @color-gray-400;
         }
 
         > .ds-item {

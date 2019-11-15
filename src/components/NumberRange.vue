@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="range-input-wrapper" @click="dropdownOpened = !dropdownOpened">
-      <Input :value="inputData" ref="inputDrop" />
+      <Input disabled :value="inputData" ref="inputDrop" />
+      <Button plain padding="12px" class="close-btn" icon="close" iconColor="#778CA2" iconSize="24px" @click="clearModel" />
     </div>
 
     <Dropdown
@@ -26,14 +27,14 @@
         </div>
 
         <div class="limit-values">
-          <div class="min-limit">{{ currency }}{{ minLimit }}</div>
-          <div class="max-limit">{{ currency }}{{ maxLimit }}</div>
+          <div class="min-limit">{{ prefix }}{{ minLimit }}</div>
+          <div class="max-limit">{{ prefix }}{{ maxLimit }}</div>
         </div>
 
         <div class="min-max-input-wrapper">
-          <Input v-model="sliderModel[0]" width="100px" />
+          <Input placeholder="Montant min." v-model="sliderModel[0]" width="100px" />
           <div class="between">To</div>
-          <Input v-model="sliderModel[1]" width="100px" />
+          <Input placeholder="Montant max." v-model="sliderModel[1]" width="100px" />
         </div>
       </div>
     </Dropdown>
@@ -43,11 +44,12 @@
 <script>
 import VueSlider from 'vue-slider-component'
 import Input from './Input'
+import Button from './Button'
 import Dropdown from './Dropdown'
 
 export default {
   name: 'NumberRange',
-  components: { Input, Dropdown, VueSlider },
+  components: { Input, Dropdown, Button, VueSlider },
   props: {
     minLimit: {
       type: Number,
@@ -65,7 +67,7 @@ export default {
       type: Number,
       default: 0
     },
-    currency: {
+    prefix: {
       type: String,
       default: '€'
     }
@@ -79,12 +81,18 @@ export default {
   }),
   computed: {
     inputData() {
-      return this.min + ' - ' + this.max
+      return this.sliderModel[0] + ' - ' + this.sliderModel[1]
     }
   },
   methods: {
     modelChange(value) {
       this.$emit('chage:range', {min: value[0], max: value[1]})
+    },
+    clearModel(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.sliderModel = [0, 0],
+      this.$emit('change:range', [0, 0])
     }
   },
   mounted() {
@@ -106,6 +114,28 @@ export default {
 
 .range-input-wrapper {
   display: inline-block;
+  position: relative;
+
+  .close-btn {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+
+    &::v-deep {
+      .ds-button {
+        &:hover, &:focus, &:active {
+          background-color: @color-white !important;
+        }
+      }
+    }
+  }
+
+  &::v-deep {
+    input {
+      color: @color-dark !important;
+      border: solid 1px @color-gray-300 !important;
+    }
+  }
 }
 
 .range-selection-wrapper {

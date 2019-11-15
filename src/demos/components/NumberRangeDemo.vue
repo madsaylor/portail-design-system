@@ -9,7 +9,13 @@
         <pre v-highlightjs="usage"><code class="html"></code></pre>
       </Collapser>
 
-      <NumberRange :minLimit="0" :maxLimit="200" :min="10" :max="100" />
+      <NumberRange
+        :minLimit="0"
+        :maxLimit="200"
+        :min="10"
+        :max="100"
+        prefix="€"
+      />
     </div>
 </template>
 

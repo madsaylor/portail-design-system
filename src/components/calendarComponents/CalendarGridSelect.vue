@@ -341,6 +341,7 @@ export default {
       .ds-item-cell {
         .ds-grid-item-big {
           display: inline-block;
+          box-sizing: content-box;
           width: 70px;
           padding: 6px 4px;
         }
@@ -354,6 +355,7 @@ export default {
       .ds-item-cell {
         .ds-grid-item-big {
           display: inline-block;
+          box-sizing: content-box;
           width: 42px;
           padding: 6px 4px;
         }

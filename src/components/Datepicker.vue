@@ -290,6 +290,7 @@ export default {
     months() {
       let date = new Date(this.displayed)
       date.setMonth(0)
+      date.setDate(1)
       let months = []
       for (let i = 0; i < 4; i++) {
         let quarter = []

@@ -38,7 +38,7 @@
 const cellWidth = {
   'day': 29,
   'month': 40,
-  'year': 40
+  'year': 50
 }
 
 export default {
@@ -337,11 +337,27 @@ export default {
       span {
         margin-top: 0 !important;
       }
+
+      .ds-item-cell {
+        .ds-grid-item-big {
+          display: inline-block;
+          width: 70px;
+          padding: 6px 4px;
+        }
+      }
     }
 
     &.ds-grid-select-row-year {
       margin-top: 0 !important;
       margin-bottom: 10px;
+
+      .ds-item-cell {
+        .ds-grid-item-big {
+          display: inline-block;
+          width: 42px;
+          padding: 6px 4px;
+        }
+      }
     }
   }
 }

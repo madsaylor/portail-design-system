@@ -16,7 +16,8 @@
           'ds-selected': getSelected(item),
           'ds-range': getRange(item),
           'ds-selected-range-start': getSelectedRangeStart(item),
-          'ds-selected-range-end': getSelectedRangeEnd(item)
+          'ds-selected-range-end': getSelectedRangeEnd(item),
+          'ds-date-range-equality': dateRangeEquality
         }]"
         :tabindex="!item.disabled && 0"
         @click="!item.disabled && select(item)"
@@ -72,6 +73,9 @@ export default {
     },
     dateRangeExist() {
       return this.value && this.secondValue && this.rangeAvailable
+    },
+    dateRangeEquality() {
+      return this.value && this.secondValue && this.value.getTime() === this.secondValue.getTime()
     }
   },
   methods: {
@@ -211,6 +215,12 @@ export default {
         &.ds-selected-range-end {
           .ds-item {
             background-color: rgba(30, 179, 134, 0.1);
+          }
+        }
+
+        &.ds-date-range-equality {
+          .ds-item {
+            background-color: transparent;
           }
         }
       }

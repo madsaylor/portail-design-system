@@ -23,21 +23,32 @@
               v-if="removable"
               @click="onRemove(index)">
         </Icon>
-    </span>
+      </span>
 
-      <input class="ds-chips-input"
-             v-bind="inputAttrs"
-             type="text"
-             v-model="newChip"
-             @focus="onFocusInput"
-             @blur="onBlurInput"
-             @keypress="onKeyPress"/>
+      <input
+        class="ds-chips-input"
+        v-bind="inputAttrs"
+        type="text"
+        ref="chip-input"
+        v-model="newChip"
+        @focus="onFocusInput"
+        @blur="onBlurInput"
+        @keypress="onKeyPress"
+        @click="onInputClick"
+      />
     </div>
     <div v-if="error" class="ds-chips-errors">
         <span v-if="error" class="ds-error-message">
           {{ inputErrors[0] }}
         </span>
     </div>
+
+    <template v-if="searchable">
+      <div class="ds-search-wrapper">
+        <slot name="search"></slot>
+      </div>
+    </template>
+    
   </div>
 </template>
 
@@ -52,6 +63,10 @@
       label: String,
       placeholder: String,
       removable: Boolean,
+      searchable: {
+        default: false,
+        type: Boolean
+      },
       validators: Array,
       showErrors: {
         type: Boolean,
@@ -79,6 +94,25 @@
         this.touched = true
         this.active = false
         this.addNewChip()
+      },
+      hasElement(el) {
+        while (el.parentNode) {
+          if (el === this.$el || el === this.targetElement) {
+            return true
+          }
+          el = el.parentNode
+        }
+        return false
+      },
+      outSideClick(e) {
+        if (this.hasElement(e.target)) {
+          return
+        }
+
+        this.$emit('update:searchable', false)
+      },
+      onInputClick() {
+        this.$emit('update:searchable', true)
       },
       setTouchEmitValidation() {
         this.touched = true
@@ -175,6 +209,7 @@
     },
     mounted() {
       document.addEventListener('validate', this.validate)
+      document.addEventListener('click', this.outSideClick, true)
       this.$emit('validation', this.validation)
     },
     beforeDestroy() {
@@ -192,6 +227,7 @@
   @import '../styles/vars';
 
   .ds-chips-wrapper {
+    position: relative;
 
     .ds-chips-container {
       cursor: text;
@@ -283,6 +319,13 @@
     .ds-chips-errors {
       font-size: 12px;
       color: @color-red;
+    }
+
+    .ds-search-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
     }
   }
 </style>

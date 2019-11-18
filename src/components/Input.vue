@@ -110,9 +110,10 @@
 -->
 
 <template>
-  <div :class="['ds-input', getType, {'ds-disabled': disabled, 'ds-sm': sm, 'ds-md': md, 'ds-lg': lg,
-                preventScroll: datepickerVisible}]"
-        :style="{width}">
+  <div :class="['ds-input', getType, {'ds-disabled': disabled, 'ds-sm': sm, 'ds-md': md, 'ds-lg': lg, preventScroll: datepickerVisible}]"
+    :style="{width}"
+    @click="onInputClick"
+  >
     <label>
       <div v-if="label"
            :id="id"
@@ -605,6 +606,9 @@ export default {
     }
   },
   methods: {
+    onInputClick(e) {
+      this.$emit('click', e)
+    },
     onCheckboxRadioClick() {
       if (this.getType === 'ds-checkbox' || this.getType === 'ds-radio') {
         this.inputFocus();

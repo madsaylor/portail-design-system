@@ -19,7 +19,7 @@
 -->
 
 <template>
-  <div :class="['ds-button-link-wrapper', {'ds-mobile-bottom': mobileBottom}]" @click="onClick">
+  <div :class="['ds-button-link-wrapper', {'ds-mobile-bottom': mobileBottom}]">
     <template v-if="link">
       <a
         v-on="$listeners"
@@ -102,11 +102,6 @@ export default {
   },
   data: () => ({
   }),
-  methods: {
-    onClick(e) {
-      this.$emit('click', e)
-    }
-  },
   computed: {
     primary() {
       return !(this.alt || this.plain || this.plainTwo || this.linkIco)

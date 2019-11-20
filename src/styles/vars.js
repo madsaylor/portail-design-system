@@ -4,19 +4,18 @@
  */
 
 export const COLORS = {
-  'gray-050': '#f8fafb',
-  'gray-100': '#f7f8fa',
-  'gray-200': '#e6e7eb',
-  'gray-300': '#cfd0d4',
-  'gray-400': '#babcc2',
-  'gray-500': '#838795',
-  'gray-600': '#778ca2',
+  'gray-100': '#f8fafb',
+  'gray-200': '#f2f4f6',
+  'gray-300': '#e8ecef',
+  'gray-400': '#98a9bc',
+  'gray-500': '#778ca2',
 
-  'dark': '#3f4352',
+  'dark': '#252631',
   'primary': '#1eb386',
   'white': '#ffffff',
 
-  'blue': '#4a7a91',
-  'red': '#fb4545',
-  'yellow': '#fcc138',
+  'blue': '#4d7cfe',
+  'red': '#fe4d97',
+  'yellow': '#ffab2b',
+  'green': '#2CE5F6'
 }

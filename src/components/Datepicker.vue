@@ -35,7 +35,7 @@
           </div>
           <Icon class="ds-close-icon"
                 times_circle
-                color="gray-600"
+                color="gray-500"
                 size="16px"
                 @click="onClear()">
           </Icon>
@@ -90,7 +90,7 @@
       </span>
         <Icon class="ds-close-icon"
               times_circle
-              color="gray-600"
+              color="gray-500"
               size="16px"
               @click="onClear()">
         </Icon>
@@ -106,17 +106,17 @@
         </span>
           <Icon @click="onYear()"
                 :source="view === 'year' ? 'angle_up_solid' : 'angle_down_solid'"
-                color="gray-600"
+                color="gray-500"
                 size="16px"
                 class="ds-year-icon">
           </Icon>
         </div>
         <div class="ds-buttons">
           <button @click="shift(-1)" :disabled="!canShiftBack">
-            <Icon angle_left_solid color="gray-600" size="16px"></Icon>
+            <Icon angle_left_solid color="gray-500" size="16px"></Icon>
           </button>
           <button @click="shift(1)" :disabled="!canShiftForward">
-            <Icon angle_right_solid color="gray-600" size="16px"></Icon>
+            <Icon angle_right_solid color="gray-500" size="16px"></Icon>
           </button>
         </div>
       </div>

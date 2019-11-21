@@ -28,7 +28,7 @@
 -->
 
 <template>
-  <div class="icon-wrapper" :class="type">
+  <div class="icon-wrapper" :style="wrapperStyle" :class="type">
     <span v-if="tooltip">
       <span
         class="ds-icon"
@@ -114,6 +114,20 @@ export default {
         styles.height = this.size
         styles.width = this.size
       }
+      return styles
+    },
+    wrapperStyle() {
+      let styles = {
+        width: this.size,
+        height: this.size
+      }
+
+      if (this.type === 'circle') {
+        styles.width = '40px'
+        styles.height = '40px'
+        styles.borderRadius = '20px'
+        styles.backgroundColor = '#F2F4F6'
+      }
 
       return styles
     }
@@ -128,14 +142,6 @@ export default {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
-
-  &.circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: @color-gray-200;
-  }
 
   .ds-icon {
     display: inline-block;

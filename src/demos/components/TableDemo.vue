@@ -53,8 +53,8 @@
       </template>
 
       <template v-slot:cell-actions="{ row }">
-        <Button plain icon="pen-solid" iconSize="18px" iconColor="#778ca2" padding="8px" />
-        <Button plain icon="trash-alt" iconSize="18px" iconColor="#778ca2" padding="8px" />
+        <Button plain icon="pen-solid" iconSize="14px" iconColor="#778ca2" padding="8px" />
+        <Button plain icon="trash-alt" iconSize="14px" iconColor="#778ca2" padding="8px" />
       </template>
     </Table>
   </div>
@@ -103,7 +103,7 @@
         { key: 'earned', title: 'Earned', prefix: '€', sortable: true },
         { key: 'invoice_date', title: 'Date', sortable: true, filter: (value) => moment(value).format('DD-MM-YYYY') },
         { key: 'status', title: 'Status', badge: true },
-        { key: 'actions', title: '', width: '70px'}
+        { key: 'actions', title: '', width: '80px'}
       ],
       colors: COLORS_BY_STATUS,
       selectedPage: 1,

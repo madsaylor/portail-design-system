@@ -56,10 +56,7 @@
       name: String,
       rows: Number,
       disabled: Boolean,
-      maxCharacters: {
-        type: Number,
-        default: 200
-      },
+      maxCharacters: Number,
       validators: Array,
       showErrors: {
         type: Boolean,
@@ -95,7 +92,7 @@
             return ''
           }
 
-          if (this.value.length < this.maxCharacters) {
+          if (!this.maxCharacters || this.value.length < this.maxCharacters) {
             return this.value
           } else {
             return this.value.substring(0, this.maxCharacters)
@@ -124,7 +121,7 @@
       textareaErrors() {
         let errors = []
 
-        if (this.textareaValue && this.textareaValue.length > this.maxCharacters) {
+        if (this.textareaValue && this.maxCharacters && this.textareaValue.length > this.maxCharacters) {
           errors.push(this.dsTranslateComplex(['Can input less characters (1/2)', 'Can input less characters (2/2)'],
                                               [`${this.maxCharacters}`]))
           this.$emit('validation', [['max-charactor', false]])
@@ -140,7 +137,9 @@
       }
     },
     mounted() {
-      this.notificationStr = `${this.value ? this.value.length : 0}/${this.maxCharacters}`
+      if (this.maxCharacters) {
+        this.notificationStr = `${this.value ? this.value.length : 0}/${this.maxCharacters}`
+      }
 
       this.$nextTick(() => {
         if (this.initValidation) {
@@ -165,7 +164,9 @@
     watch: {
       textareaValue(val) {
         this.$emit('validation', this.validation)
-        this.notificationStr = `${val.length}/${this.maxCharacters}`
+        if (this.maxCharacters) {
+          this.notificationStr = `${val.length}/${this.maxCharacters}`
+        }
       },
       initialTouched(value) {
         this.touched = value
@@ -182,9 +183,11 @@
       display: block;
 
       .ds-label-text {
-        .font-desktop-x-small-regular-gray();
-        height: 16px;
-        margin-bottom: 4px;
+        color: @color-dark;
+        font-family: "Roboto Light";
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom: 14px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -192,17 +195,23 @@
 
       textarea {
         .font-desktop-small-regular-dark();
-        padding: 7px 12px;
+        padding: 18px 16px;
         box-sizing: border-box;
         border: 1px solid @color-gray-300;
-        border-radius: 2px;
+        border-radius: 4px;
         background-color: @color-white;
         width: 100%;
         resize: none;
         box-sizing: border-box;
 
         &::placeholder {
-          .font-desktop-small-regular-gray();
+          color: @color-gray-400;
+          font-family: Roboto;
+          font-size: 14px;
+          line-height: 16px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         &:focus:not(.ds-error) {

@@ -183,14 +183,12 @@ export default {
   }
 
   .ds-icon-left {
-    margin-left: -10px;
-    margin-right: 5px;
+    margin-right: 8px;
     vertical-align: middle;
   }
 
   .ds-icon-right {
-    margin-right: -10px;
-    margin-left: 5px;
+    margin-left: 8px;
     vertical-align: middle;
   }
 

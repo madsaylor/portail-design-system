@@ -28,7 +28,7 @@
 -->
 
 <template>
-  <div class="icon-wrapper" :class="type">
+  <div class="icon-wrapper" :style="{width: size, height: size}" :class="type">
     <span v-if="tooltip">
       <span
         class="ds-icon"

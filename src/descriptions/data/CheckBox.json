@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "null",
+      "description": "Binds value property to checkbox"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label of the checkbox"
+    }
+  ],
+  "events": []
+}

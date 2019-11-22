@@ -3,12 +3,12 @@
     {
       "name": "value",
       "type": "Boolean",
-      "description": "Binds value property to checkbox"
+      "description": "Binds value property to toggle"
     },
     {
       "name": "label",
       "type": "String",
-      "description": "Label of the checkbox"
+      "description": "Label of the toggle"
     }
   ],
   "events": []

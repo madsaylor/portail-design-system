@@ -5,8 +5,10 @@
                      'ds-checkbox-container-active': checkboxValue}]">
       </span>
 
-      <Icon check_box size="12px"
-            :class="['ds-checkbox-icon', {'ds-checkbox-icon-inactive': !checkboxValue}]">
+      <Icon check_box
+            size="11px"
+            v-if="checkboxValue"
+            class="ds-checkbox-icon">
       </Icon>
 
       <span :class="['ds-checkbox-text', {'ds-checkbox-text-active': checkboxValue,
@@ -51,6 +53,7 @@
     .ds-checkbox-wrapper {
       display: inline-flex;
       align-items: center;
+      position: relative;
 
       .ds-checkbox-container {
         display: inline-block;
@@ -68,12 +71,8 @@
       }
 
       .ds-checkbox-icon {
-        position: relative;
-        right: 15px;
-
-        &.ds-checkbox-icon-inactive {
-          visibility: hidden;
-        }
+        position: absolute;
+        left: 5px;
       }
 
       .ds-checkbox-text {
@@ -81,6 +80,7 @@
         font-family: "Roboto Light";
         font-size: 14px;
         line-height: 16px;
+        margin-left: 10px;
 
         &.ds-checkbox-text-active {
           color: @color-dark;

@@ -25,7 +25,7 @@
     data: () => ({
       openUsage: true,
       usage: CheckBoxData.usage,
-      value: false
+      value: true
     })
   }
 </script>

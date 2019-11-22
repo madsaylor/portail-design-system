@@ -10,13 +10,15 @@
 
     <div class="row-col">
       <Select
+        lg
         class="ds-select-demo"
         v-model="selectValue"
         label="Select"
         :options="options"
         :validators="selectValidators"
         :placeholder="'Input Value'"
-        :idMode="true"/>
+        :idMode="true"
+      />
 
       <Select
         class="ds-select-demo"

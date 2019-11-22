@@ -103,13 +103,11 @@
 
       Date inputs:<br />
       <Input
-        sm
         type="date"
         label="Date input"
         v-model="dateValue"
       />
       <Input
-        sm
         type="date"
         label="Min and max dates"
         placeholder="Date"
@@ -118,7 +116,6 @@
         v-model="dateValue2"
       />
       <Input
-        sm
         type="date"
         label="N days min/max range"
         :datepickerBorderColorDesktop="borderColor"
@@ -127,7 +124,6 @@
         v-model="dateValue3"
       />
       <Input
-        sm
         type="date"
         label="Modal"
         datepickerPosition="modal"
@@ -135,7 +131,6 @@
         v-model="dateValue"
       />
       <Input
-        sm
         type="date"
         label="Changeable datepicker"
         datepickerPosition="default modal"

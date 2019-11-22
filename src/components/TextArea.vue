@@ -184,7 +184,7 @@
 
       .ds-label-text {
         color: @color-dark;
-        font-family: "Roboto Light";
+        font-family: "Lato";
         font-size: 14px;
         line-height: 16px;
         margin-bottom: 14px;

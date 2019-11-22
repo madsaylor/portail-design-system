@@ -25,7 +25,7 @@
       <Button icon="add_circle" plain-two>Add New Item</Button>
       <Button link="https://github.com/highqualitycode" plain>Click here</Button>
       <Button link="https://github.com/highqualitycode" icon="account_circle">Github</Button>&nbsp;
-      <Button link="https://github.com/highqualitycode" icon="insert_chart" small link-ico>Full Report</Button>&nbsp;
+      <Button  color="red" link="https://github.com/highqualitycode" icon="insert_chart" small link-ico>Full Report</Button>&nbsp;
       <!-- OR -->
       <button class="ds-button ds-button-primary">
         Button Label

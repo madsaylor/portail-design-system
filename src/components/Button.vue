@@ -29,7 +29,7 @@
                                'ds-button-link-ico': linkIco}]"
         :disabled="disabled"
         :target="target"
-        :style="{padding}"
+        :style="{padding, color}"
       >
         <Icon
           v-if="icon"
@@ -55,7 +55,7 @@
         :class="['ds-button', {'ds-button-primary': primary, 'ds-button-big': big, 'ds-button-small': small,
                                'ds-button-alt': alt, 'ds-button-plain': plain, 'ds-button-plain-two': plainTwo}]"
         :disabled="disabled"
-        :style="{padding}"
+        :style="{padding, color}"
       >
         <Icon
           v-if="icon"
@@ -98,7 +98,8 @@ export default {
     link: String,
     target: String,
     mobileBottom: Boolean,
-    padding: String
+    padding: String,
+    color: String,
   },
   data: () => ({
   }),

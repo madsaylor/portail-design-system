@@ -1,5 +1,5 @@
 <template>
-  <div class="ds-select-wrapper">
+  <div :class="['ds-select-wrapper', {'ds-lg': lg, 'ds-md': md, 'ds-sm': sm}]">
     <div v-if="label" class="ds-label">{{ label }}</div>
     <Icon :source="openDropDownList && reversibleIcon ? 'expand_less' : 'expand_more'"
           color="gray-400"
@@ -60,6 +60,9 @@
       options: Array,
       label: String,
       placeholder: String,
+      sm: Boolean,
+      md: Boolean,
+      lg: Boolean,
       validators: Array,
       optionsOverflow: String,
       help: String,
@@ -207,6 +210,27 @@
     position: relative;
     width: 252px;
     text-align: left;
+
+    &.ds-lg {
+      .ds-label {
+        font-size: 14px;
+        margin-bottom: 14px;
+      }
+
+      input {
+        height: 50px;
+      }
+
+      .icon-wrapper {
+        bottom: 12px;
+      }
+    }
+
+    &.ds-sm {
+      input {
+        height: 30px;
+      }
+    }
 
     .ds-label {
       .font-desktop-x-small-regular-gray();

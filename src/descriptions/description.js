@@ -38,6 +38,7 @@ import Select from './data/Select'
 import Calendar from './data/Calendar'
 import NumberRange from './data/NumberRange'
 import CheckBox from './data/CheckBox'
+import Toggle from './data/Toggle'
 
 export default {
   AppHeader,
@@ -79,5 +80,6 @@ export default {
   Select,
   Calendar,
   NumberRange,
-  CheckBox
+  CheckBox,
+  Toggle
 }

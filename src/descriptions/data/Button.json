@@ -73,7 +73,6 @@
     {
       "name": "color",
       "type": "String",
-<<<<<<< e2fdfe3f181de4887f944f9c73c1842ca86f2ea6
       "description": "Set text color"
     },
     {
@@ -81,9 +80,6 @@
       "type": "String",
       "default": "8px",
       "description": "Set space between icons and text of button"
-=======
-      "description": "Set button color"
->>>>>>> Update button description and demo
     }
   ],
   "events": [

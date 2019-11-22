@@ -37,6 +37,7 @@ import Chips from './data/Chips'
 import Select from './data/Select'
 import Calendar from './data/Calendar'
 import NumberRange from './data/NumberRange'
+import CheckBox from './data/CheckBox'
 
 export default {
   AppHeader,
@@ -77,5 +78,6 @@ export default {
   Chips,
   Select,
   Calendar,
-  NumberRange
+  NumberRange,
+  CheckBox
 }

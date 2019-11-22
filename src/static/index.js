@@ -43,6 +43,7 @@ import ChipsData from './data/demo/ChipsData'
 import SelectData from './data/demo/SelectData'
 import CalendarData from  './data/demo/CalendarData'
 import NumberRangeData from './data/demo/NumberRangeData'
+import CheckBoxData from './data/demo/CheckBoxData'
 
 export {
   CountriesArray,
@@ -89,5 +90,6 @@ export {
   ChipsData,
   SelectData,
   CalendarData,
-  NumberRangeData
+  NumberRangeData,
+  CheckBoxData
 }

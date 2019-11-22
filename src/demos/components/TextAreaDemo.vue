@@ -22,8 +22,7 @@
         <TextArea v-model="messageText"
                   :label="secondlabelText"
                   :placeholder="placeholder"
-                  :rows="5"
-                  :validators="validators">
+                  :rows="5">
         </TextArea>
       </div>
     </div>

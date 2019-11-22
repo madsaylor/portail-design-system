@@ -117,14 +117,14 @@ export default {
   position: relative;
 
   .close-btn {
-    position: absolute;
-    right: 1px;
-    top: 1px;
+    position: relative;
+    right: 45px;
+    bottom: 5px;
 
     &::v-deep {
       .ds-button {
         &:hover, &:focus, &:active {
-          background-color: @color-white !important;
+          background-color: transparent !important;
         }
       }
     }

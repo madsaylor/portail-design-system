@@ -795,13 +795,31 @@ export default {
 
   &.ds-sm {
     width: 144px;
+
+    input {
+      height: 30px;
+    }
   }
+
   &.ds-md {
     width: 252px;
   }
+
   &.ds-lg {
-    width: 464px;
+
+    &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-number-dot, &.ds-payment-card, &.ds-tel {
+      .ds-label-text {
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom: 14px;
+      }
+    }
+
+    input {
+      height: 50px;
+    }
   }
+
   @media @screen-small {
     &.ds-lg {
       width: 296px;

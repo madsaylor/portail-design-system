@@ -22,10 +22,12 @@
       <Button mobile-bottom>Mobile Button</Button>&nbsp;
       <Button icon="menu" plain></Button>&nbsp;
       <Button icon="menu"></Button>&nbsp;
-      <Button icon="add_circle" plain-two>Add New Item</Button>
       <Button link="https://github.com/highqualitycode" plain>Click here</Button>
       <Button link="https://github.com/highqualitycode" icon="account_circle">Github</Button>&nbsp;
       <Button link="https://github.com/highqualitycode" icon="insert_chart" small link-ico>Full Report</Button>&nbsp;
+      <Button padding="15px 40px">Add</Button>&nbsp;
+      <Button padding="13px 40px" alt-two>Cancel</Button>&nbsp;
+      <Button icon="add_circle" icon-color="primary" color="primary" plain-two space-between="4px">Add New Item</Button>&nbsp;
       <!-- OR -->
       <button class="ds-button ds-button-primary">
         Button Label

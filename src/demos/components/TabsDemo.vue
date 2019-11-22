@@ -13,36 +13,50 @@
           :active="active"
           :enableLoader="enableLoader"
           :disabled="disabled"
+          :additional-content-styles="styles"
+          tabs-align="flex-start"
+          alt-tabs
           @tab:click="onTabClick">
+      <template #tabs-header-additional-content>
+        <Toggle v-model="toggleValue" label="A company"></Toggle>
+      </template>
       <template #tabs-1>
-        <h4 class="body-title">MES FACTURES</h4>
-        <Card class="ds-dashboard-report">
-          <div class="report-title">
-            Chiffre d'affaires réalisé en 2018
-          </div>
-          <div class="ds-report-amount green">
-            <Icon arrow_upward></Icon>95,00 €
-          </div>
-          <div class="ds-report-subtitle">
-            dont 0,00 € ce mois-ci
-          </div>
-        </Card>
+        <div class="body-title">Infos personelles</div>
+        <div class="ds-demo-tabs-body">
+          <Card class="ds-dashboard-report">
+            <div class="report-title">
+              Chiffre d'affaires réalisé en 2018
+            </div>
+            <div class="ds-report-amount green">
+              <Icon arrow_upward></Icon>95,00 €
+            </div>
+            <div class="ds-report-subtitle">
+              dont 0,00 € ce mois-ci
+            </div>
+          </Card>
+        </div>
       </template>
       <template #tabs-2>
-        <h4 class="body-title">MES DEVIS</h4>
-        <Icon account_circle size="12px" padding="30px 2px" />
-        <Icon account_circle size="16px" padding="28px 2px" color="primary" />
-        <Icon account_circle padding="24px 2px" color="blue"/>
-        <Icon account_circle size="36px" padding="18px 2px" color="red" />
-        <Icon account_circle size="52px" padding="10px 2px" color="gray-400" />
-        <Icon account_circle size="72px" color="#55aaff" />
+        <div class="body-title">Adresse</div>
+        <div class="ds-demo-tabs-body">
+          <div class="ds-demo-tab-icons">
+            <Icon account_circle size="12px" padding="30px 2px"/>
+            <Icon account_circle size="16px" padding="28px 2px" color="primary"/>
+            <Icon account_circle padding="24px 2px" color="blue"/>
+            <Icon account_circle size="36px" padding="18px 2px" color="red"/>
+            <Icon account_circle size="52px" padding="10px 2px" color="gray-400"/>
+            <Icon account_circle size="72px" color="#55aaff"/>
+          </div>
+        </div>
       </template>
       <template #tabs-3>
-        <h4 class="body-title">MES AVOIRS</h4>
-        <div class="tab-inputs">
-          <Input sm label="Small"/>
-          <Input md label="Medium"/>
-          <Input lg label="Large"/>
+        <div class="body-title">Commentaires</div>
+        <div class="ds-demo-tabs-body">
+          <div class="ds-demo-tab-inputs">
+            <Input sm label="Small"/>
+            <Input md label="Medium"/>
+            <Input lg label="Large"/>
+          </div>
         </div>
       </template>
     </Tabs>
@@ -57,13 +71,14 @@
   import Icon from '../../components/Icon'
   import Input from '../../components/Input'
   import Button from '../../components/Button'
+  import Toggle from '../../components/Toggle'
   import Description from '../../descriptions/Description'
   import Collapser from '../../components/Collapser.vue'
   import {TabsData} from '../../static/index'
 
   export default {
     name: 'TabsDemo',
-    components: { Tabs, Card, Icon, Input, Description, Collapser, Button},
+    components: { Tabs, Card, Icon, Input, Description, Collapser, Button, Toggle},
     data() {
       return ({
         openUsage: true,
@@ -72,7 +87,12 @@
         tabs: TabsData.tabs,
         enableLoader: false,
         loaderMode: false,
-        disabled: false
+        disabled: false,
+        toggleValue: true,
+        styles: {
+          left: 'calc(100% - 148px)',
+          top: '17px'
+        }
       })
     },
     methods: {
@@ -96,12 +116,22 @@
 <style scoped lang="less">
   @import '../../styles/vars';
   .body-title {
+    background-color: @color-white;
     text-align: center;
+    padding: 10px 0;
   }
 
-  .tab-inputs {
-    display: flex;
-    justify-content: space-between;
+  .ds-demo-tabs-body {
+    background-color: @color-white;
+    height: 150px;
+    padding: 0 24px;
+
+    .ds-demo-tab-inputs,
+    .ds-demo-tab-icons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   .loader-mode-button {

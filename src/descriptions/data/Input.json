@@ -18,7 +18,7 @@
     {
       "name": "helpLabel",
       "type": "String",
-      "default": "? explication",
+      "default": "Explication",
       "description": "Text for the tooltip label."
     },
     {

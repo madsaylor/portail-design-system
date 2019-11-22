@@ -5,8 +5,10 @@ Basic inputs:<br />
 <Input lg label="Large" v-model="textValue"/>
 <Input
   md
-  help="This is an explation of what the field is used for."
-  icon="search"
+  help="This is an explanation of what the field is used for."
+  icon="search-solid"
+  icon-color="gray-500"
+  icon-size="18px"
   label="Icon, placeholder and help text"
   placeholder="Search"
   v-model="textValue"

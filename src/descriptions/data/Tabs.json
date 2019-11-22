@@ -38,6 +38,11 @@
       "description": "When setup as true, turning on styles mode for tabs different from the default styles"
     },
     {
+      "name": "altTabs",
+      "type": "Boolean",
+      "description": "Alternative design of tabs"
+    },
+    {
       "name": "tabsAlign",
       "type": "String",
       "default": "center",
@@ -48,6 +53,11 @@
       "type": "Boolean",
       "default": "false",
       "description": "Control displaying of Loader component above the content of Tabs component"
+    },
+    {
+      "name": "additionalContentStyles",
+      "type": "Object",
+      "description": "Object of styles for additional container"
     }
   ],
   "events": [

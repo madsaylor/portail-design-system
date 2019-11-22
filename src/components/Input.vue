@@ -239,6 +239,7 @@
           ref="helpLabel"
           @mouseover="helpVisible = true"
         >
+          <Icon help_outline color="gray-500" size="18px"></Icon>
           {{ helpLabel }}
           <Dropdown :target="$refs.helpLabel" :opened.sync="helpVisible" just-fade>
             <Tooltip v-html="help" />
@@ -308,7 +309,7 @@ export default {
     name:  String,
     helpLabel: {
       type: String,
-      default: '? explication'
+      default: 'Explication'
     },
     icon: String,
     iconLeft: String,
@@ -816,7 +817,7 @@ export default {
     }
 
     input {
-      height: 50px;
+      height: 52px;
     }
   }
 
@@ -874,11 +875,14 @@ export default {
     }
 
     input, select {
-      .font-desktop-small-regular-dark();
+      color: #1B1E24;
+      font-family: Roboto;
+      font-size: 14px;
+      line-height: 16px;
       padding: 10px 12px;
       box-sizing: border-box;
       border: 1px solid @color-gray-300;
-      border-radius: 2px;
+      border-radius: 4px;
       background-color: @color-white;
       width: 100%;
 
@@ -910,6 +914,8 @@ export default {
       &.ds-error {
         border-color: @color-red;
       }
+
+      .placeholder-input(14px, Roboto, @color-gray-400, 16px);
 
       &:disabled {
         border: 1px solid #f2f4f7;
@@ -1136,19 +1142,18 @@ export default {
   .ds-help-label, .ds-sub-label {
     cursor: pointer;
     color: @color-gray-500;
-    font-family: @font-family;
-    padding-left: 12px;
-    padding-right: 12px;
+    font-family: Roboto;
+    font-size: 12px;
+    line-height: 14px;
   }
 
   .ds-help-label {
-    text-decoration: underline dashed;
+    line-height: 18px;
   }
 
   &.ds-lg {
     input {
-      .placeholder-font-size(16px);
-      font-size: 16px;
+      padding: 14px 16px 16px;
     }
   }
 

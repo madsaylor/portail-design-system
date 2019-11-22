@@ -22,3 +22,30 @@
   &:-ms-input-placeholder {font-size: @arguments !important;}
   &::placeholder {font-size: @arguments !important;}
 }
+
+.placeholder-input(@fontSize, @fontFamily, @color, @lineHeight) {
+  &::-webkit-input-placeholder {
+    font-size: @fontSize !important;
+    font-family: @fontFamily !important;
+    color: @color !important;
+    line-height: @lineHeight !important;
+  };
+  &::-moz-placeholder {
+    font-size: @fontSize !important;
+    font-family: @fontFamily !important;
+    color: @color !important;
+    line-height: @lineHeight !important;
+  };
+  &:-ms-input-placeholder {
+    font-size: @fontSize !important;
+    font-family: @fontFamily !important;
+    color: @color !important;
+    line-height: @lineHeight !important;
+  };
+  &::placeholder {
+    font-size: @fontSize !important;
+    font-family: @fontFamily !important;
+    color: @color !important;
+    line-height: @lineHeight !important;
+  };
+}

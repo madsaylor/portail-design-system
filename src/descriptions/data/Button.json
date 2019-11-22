@@ -64,6 +64,11 @@
       "name": "padding",
       "type": "String",
       "description": "Set button padding"
+    },
+    {
+      "name": "color",
+      "type": "String",
+      "description": "Set button color"
     }
   ],
   "events": [

@@ -35,24 +35,27 @@
 -->
 <template>
   <div class="ds-tabs-container">
-    <div :class="[simpleTabs ? 'ds-simple-tabs-header' : 'ds-tabs-header']" :style="{'justify-content': tabsAlign}">
+    <div :class="{'ds-simple-tabs-header': simpleTabs, 'ds-alt-tabs-header': altTabs,
+                  'ds-tabs-header': !simpleTabs && !altTabs}"
+         :style="{'justify-content': tabsAlign}">
+
       <div class="ds-tabs-row">
         <template v-for="(tab, index) in tabs">
           <div
             v-if="!tab.hidden"
             :key="index"
-            :class="[
-              simpleTabs ? 'ds-simple-tab' : 'ds-tab',
-              activeTabClass(index),
-              {'ds-disabled': disabled || tab.disabled}
-            ]"
-            @click="onTabClick(tab, index)"
-          >
+            :class="[activeTabClass(index), {'ds-simple-tab': simpleTabs, 'ds-alt-tab' : altTabs,
+                    'ds-tab': !simpleTabs && !altTabs, 'ds-disabled': disabled || tab.disabled}]"
+            @click="onTabClick(tab, index)">
+
             {{tab.text}}
           </div>
         </template>
       </div>
     </div>
+    <span class="ds-tabs-header-additional-content" :style="additionalContentStyles">
+      <slot name="tabs-header-additional-content"></slot>
+    </span>
     <div class="ds-tabs-body" :id="idContent">
       <slot :name="activeTabBody"></slot>
       <Loader v-if="enableLoader" v-model="enableLoader" :target="idContent"></Loader>
@@ -75,13 +78,12 @@
         }
       },
       simpleTabs: Boolean,
+      altTabs: Boolean,
       active: {
         required: true,
         type: Number
       },
-
       disabled: Boolean,
-
       tabs: {
         required: true,
         type: Array
@@ -89,7 +91,8 @@
       enableLoader: {
         type: Boolean,
         default: false
-      }
+      },
+      additionalContentStyles: Object
     },
     data: () => ({
       startX: undefined,
@@ -129,7 +132,13 @@
       },
       activeTabClass(index) {
         if (this.activeTab(index)) {
-          return this.simpleTabs ? 'ds-simple-active' : 'ds-active'
+          if (this.simpleTabs) {
+            return 'ds-simple-active'
+          } else if (this.altTabs) {
+            return 'ds-alt-active'
+          } else {
+            return 'ds-active'
+          }
         }
       }
     },
@@ -146,7 +155,10 @@
   @import '../styles/vars';
 
   .ds-tabs-container {
-    .ds-tabs-header, .ds-simple-tabs-header {
+    position: relative;
+
+    .ds-tabs-header,
+    .ds-simple-tabs-header {
       display: flex;
       width: 100%;
       height: auto;
@@ -163,11 +175,30 @@
       }
     }
 
-    .ds-tabs-header {
+    .ds-tabs-header,
+    .ds-alt-tabs-header {
       background-color: @color-white;
     }
 
-    .ds-tab, .ds-simple-tab {
+    .ds-alt-tabs-header {
+      display: flex;
+      padding: 0 24px;
+      border-bottom: 1px solid @color-gray-200;
+
+      .ds-tabs-row {
+        display: flex;
+
+         .ds-alt-tab > {
+           margin-right: 26px;
+
+           &:last-child {
+             margin-right: 0;
+           }
+         }
+      }
+    }
+
+    .ds-tab, .ds-simple-tab, .ds-alt-tab {
       display: flex;
       cursor: pointer;
       flex: 1 1 auto;
@@ -203,13 +234,33 @@
       font-size: 14px;
       line-height: 20px;
 
-
       &:not(.ds-disabled) {
         &.ds-simple-active {
           color: @color-primary;
           background-color: @color-white;
         }
       }
+    }
+
+    .ds-alt-tab {
+      height: 54.5px;
+      color: @color-gray-500;
+      font-family: "Roboto Medium";
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+
+      &:not(.ds-disabled) {
+        &.ds-alt-active {
+          color: @color-dark;
+          border-bottom: 1.5px solid @color-dark;
+        }
+      }
+    }
+
+    .ds-tabs-header-additional-content {
+      display: inline-block;
+      position: absolute;
     }
 
     .ds-tabs-body {

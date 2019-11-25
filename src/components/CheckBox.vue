@@ -57,6 +57,7 @@
 
       .ds-checkbox-container {
         display: inline-block;
+        cursor: pointer;
         height: 20px;
         width: 20px;
         border-radius: 2px;

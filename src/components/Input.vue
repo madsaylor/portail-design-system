@@ -138,6 +138,7 @@
         v-bind="inputAttrs"
         :[checkMaxLength]="maxlength"
         :[checkPasswordType]="type"
+        :name="name"
         :class="{
           'ds-has-icon': icon_,
           'ds-error': inputErrors.length && touched && showErrors,
@@ -163,6 +164,7 @@
         v-bind="inputAttrs"
         :[checkMaxLength]="maxlength"
         :[checkPasswordType]="type"
+        :name="name"
         :class="{
           'ds-has-icon': icon_,
           'ds-error': inputErrors.length && touched && showErrors,
@@ -189,6 +191,7 @@
         v-bind="inputAttrs"
         :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         :checked="inputValue === radioVal"
+        :name="name"
         @change="changeRadio"
         @blur="touched = true"
       />
@@ -202,6 +205,7 @@
         v-if="getType === 'ds-select'"
         v-bind="inputAttrs"
         :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
+        :name="name"
         v-model="inputValue"
         placeholder="placeholder"
         @blur="touched = true"

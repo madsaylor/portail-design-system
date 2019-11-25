@@ -45,6 +45,7 @@ import CalendarData from  './data/demo/CalendarData'
 import NumberRangeData from './data/demo/NumberRangeData'
 import CheckBoxData from './data/demo/CheckBoxData'
 import ToggleData from './data/demo/ToggleData'
+import FormData from './data/demo/FormData'
 
 export {
   CountriesArray,
@@ -93,5 +94,6 @@ export {
   CalendarData,
   NumberRangeData,
   CheckBoxData,
-  ToggleData
+  ToggleData,
+  FormData
 }

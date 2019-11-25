@@ -52,6 +52,7 @@
 
       .ds-toggle-container {
         display: inline-block;
+        cursor: pointer;
         height: 22px;
         width: 40px;
         border-radius: 12px;

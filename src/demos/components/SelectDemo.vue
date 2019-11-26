@@ -45,7 +45,7 @@
     data: () => ({
       openUsage: true,
       usage: SelectData.usage,
-      selectValue: { id: 2 },
+      selectValue: '',
       selectValue2: { id: 1 },
       options: [
         { id: 1, value: 'Espèces' },

@@ -122,9 +122,8 @@
         this.openDropDownList = false
       },
       validate() {
-        if (this.initValidation || this.touched) {
-          this.$emit('validation', this.validation)
-        }
+        this.touched = true
+        this.$emit('validation', this.validation)
       },
       setInputSelectValue(value) {
         if (this.idMode) {
@@ -184,6 +183,14 @@
     },
     mounted() {
       this.setInputSelectValue(this.value)
+
+      if (this.name) {
+        this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
+        document.addEventListener(this.validateEventName, this.validate);
+      }
+
+      document.addEventListener('validate', this.validate);
+      this.$emit('validation', this.validation)
     },
     watch: {
       value(val) {

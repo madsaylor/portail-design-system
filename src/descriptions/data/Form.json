@@ -1,4 +1,9 @@
 {
   "properties": [],
-  "events": []
+  "events": [
+    {
+      "name": "submit",
+      "description": "Event emitted if user clicks submit button"
+    }
+  ]
 }

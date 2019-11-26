@@ -21,6 +21,7 @@
       />
 
       <Select
+        md
         class="ds-select-demo"
         v-model="selectValue2"
         label="Select"

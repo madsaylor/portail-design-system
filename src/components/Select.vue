@@ -5,7 +5,7 @@
           color="gray-400"
           class="ds-drop-icon"/>
     <input
-      :class="['ds-select', {'ds-select-error': checkError}]"
+      :class="['ds-select', {'ds-error': checkError}]"
       type="text"
       ref="dsSelect"
       v-model="inputSelectValue"
@@ -14,7 +14,7 @@
       @click="toggleDropList"
       readonly="readonly"
     />
-    <div class="ds-select-error-message-wrapper" v-if="checkError">
+    <div class="ds-error-message-wrapper" v-if="checkError">
       {{selectErrors[0]}}
     </div>
     <div v-if="help && !checkError"
@@ -259,14 +259,14 @@
       cursor: pointer;
       width: 100%;
 
-      &:focus:not(.ds-select-error) {
+      &:focus:not(.ds-error) {
         border-color: @color-primary;
       }
       &:focus {
         outline: none;
       }
 
-      &.ds-select-error {
+      &.ds-error {
         border: 1px solid @color-red;
       }
     }
@@ -279,7 +279,7 @@
       bottom: 8px;
     }
 
-    .ds-select-error-message-wrapper {
+    .ds-error-message-wrapper {
       width: 100%;
       font-size: 12px;
       color: @color-red;

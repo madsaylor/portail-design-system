@@ -98,10 +98,13 @@
               expand_more
             />
           </a>
-          <section :class="[
-            'ds-children',
-            {'ds-opened': activeKey(item, index) === active},
-          ]">
+          <section
+            :class="[
+              'ds-children',
+              {'ds-opened': activeKey(item, index) === active},
+            ]"
+            :key="index"
+          >
             <a
               v-for="(child, childIndex) in item.children"
               :key="activeKey(child, childIndex)"
@@ -247,10 +250,6 @@ export default {
     display: flex;
     transition: all .1s ease-in-out;
 
-    &.ds-child-item {
-      padding-left: 50px;
-    }
-
     .ds-icon[expand_more] {
       transition: transform .1s ease;
     }
@@ -287,6 +286,15 @@ export default {
 
     &:active {
       background: darken(@color-white, 10%);
+    }
+
+    &.ds-child-item {
+      padding-left: 64px;
+
+      &.ds-active {
+        border-left: none;
+        background-color: @color-gray-200;
+      }
     }
 
     .ds-title {

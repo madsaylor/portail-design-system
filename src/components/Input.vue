@@ -808,6 +808,10 @@ export default {
 
   &.ds-md {
     width: 252px;
+
+    input {
+      height: 42px;
+    }
   }
 
   &.ds-lg {
@@ -880,7 +884,7 @@ export default {
 
     input, select {
       color: #1B1E24;
-      font-family: Roboto;
+      font-family: Roboto, sans-serif;
       font-size: 14px;
       line-height: 16px;
       padding: 10px 12px;
@@ -919,7 +923,7 @@ export default {
         border-color: @color-red;
       }
 
-      .placeholder-input(14px, Roboto, @color-gray-400, 16px);
+      .placeholder-input(14px, @robotoFont, @color-gray-400, 16px);
 
       &:disabled {
         border: 1px solid #f2f4f7;
@@ -1146,7 +1150,7 @@ export default {
   .ds-help-label, .ds-sub-label {
     cursor: pointer;
     color: @color-gray-500;
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     font-size: 12px;
     line-height: 14px;
   }

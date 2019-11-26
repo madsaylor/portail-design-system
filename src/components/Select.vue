@@ -218,11 +218,17 @@
       }
 
       input {
-        height: 50px;
+        height: 52px;
       }
 
       .icon-wrapper {
         bottom: 12px;
+      }
+    }
+
+    &.ds-md {
+      input {
+        height: 42px;
       }
     }
 

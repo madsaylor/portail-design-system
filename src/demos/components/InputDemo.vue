@@ -68,7 +68,7 @@
       <Input sm label="Small" v-model="textValue"/>
       <Input md label="Medium" v-model="textValue"/>
       <Input lg label="Large" v-model="textValue"/>
-      <Input label="Mask: 12/20" v-mask="'##/##'" v-model="maskValue"/>
+      <Input md label="Mask: 12/20" v-mask="'##/##'" v-model="maskValue"/>
       <Input
         md
         help="This is an explanation of what the field is used for."
@@ -105,11 +105,13 @@
 
       Date inputs:<br />
       <Input
+        md
         type="date"
         label="Date input"
         v-model="dateValue"
       />
       <Input
+        md
         type="date"
         label="Min and max dates"
         placeholder="Date"
@@ -118,6 +120,7 @@
         v-model="dateValue2"
       />
       <Input
+        md
         type="date"
         label="N days min/max range"
         :datepickerBorderColorDesktop="borderColor"
@@ -126,6 +129,7 @@
         v-model="dateValue3"
       />
       <Input
+        md
         type="date"
         label="Modal"
         datepickerPosition="modal"
@@ -133,6 +137,7 @@
         v-model="dateValue"
       />
       <Input
+        md
         type="date"
         label="Changeable datepicker"
         datepickerPosition="default modal"
@@ -227,39 +232,50 @@
         v-model="currencyValue"
       />
 
-      <Input sm
-             v-model="cvvValue"
-             type="number"
-             :maxlength="3"
-             placeholder="xxx"
-             label="CVV"
-             help="This is an explanation of what the field is used for."/>
+      <Input
+        md
+        v-model="cvvValue"
+        type="number"
+        :maxlength="3"
+        placeholder="xxx"
+        label="CVV"
+        help="This is an explanation of what the field is used for."
+      />
 
 
-      <Input v-model="cardNumber"
-             type="payment-card"
-             :maxlength="19"
-             label="Card number"/>
+      <Input
+        md
+        v-model="cardNumber"
+        type="payment-card"
+        :maxlength="19"
+        label="Card number"
+      />
 
       <br/>
 
-      <Input v-model="password"
-             type="password"
-             :confirmModel="confirmPassword"
-             placeholder="Placeholder"
-             label="New Password"
-             :validators="passwordValidators"
-             :show-errors="passwordShowErrors.firstField"
-             @lastKeyDownDelay="onlastKeyDownDelay('firstField')"/>
+      <Input
+        md
+        v-model="password"
+        type="password"
+        :confirmModel="confirmPassword"
+        placeholder="Placeholder"
+        label="New Password"
+        :validators="passwordValidators"
+        :show-errors="passwordShowErrors.firstField"
+        @lastKeyDownDelay="onlastKeyDownDelay('firstField')"
+      />
 
-      <Input v-model="confirmPassword"
-             type="password"
-             :confirmModel="password"
-             placeholder="Placeholder"
-             label="Confirm the new password"
-             :validators="confirmPasswordValidators"
-             :show-errors="passwordShowErrors.secondField"
-             @lastKeyDownDelay="onlastKeyDownDelay('secondField')"/>
+      <Input
+        md
+        v-model="confirmPassword"
+        type="password"
+        :confirmModel="password"
+        placeholder="Placeholder"
+        label="Confirm the new password"
+        :validators="confirmPasswordValidators"
+        :show-errors="passwordShowErrors.secondField"
+        @lastKeyDownDelay="onlastKeyDownDelay('secondField')"
+      />
     </div>
   </div>
 </template>

@@ -138,6 +138,7 @@
         v-bind="inputAttrs"
         :[checkMaxLength]="maxlength"
         :[checkPasswordType]="type"
+        :name="name"
         :class="{
           'ds-has-icon': icon_,
           'ds-error': inputErrors.length && touched && showErrors,
@@ -163,6 +164,7 @@
         v-bind="inputAttrs"
         :[checkMaxLength]="maxlength"
         :[checkPasswordType]="type"
+        :name="name"
         :class="{
           'ds-has-icon': icon_,
           'ds-error': inputErrors.length && touched && showErrors,
@@ -189,6 +191,7 @@
         v-bind="inputAttrs"
         :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         :checked="inputValue === radioVal"
+        :name="name"
         @change="changeRadio"
         @blur="touched = true"
       />
@@ -202,6 +205,7 @@
         v-if="getType === 'ds-select'"
         v-bind="inputAttrs"
         :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
+        :name="name"
         v-model="inputValue"
         placeholder="placeholder"
         @blur="touched = true"
@@ -804,6 +808,10 @@ export default {
 
   &.ds-md {
     width: 252px;
+
+    input {
+      height: 42px;
+    }
   }
 
   &.ds-lg {
@@ -876,7 +884,7 @@ export default {
 
     input, select {
       color: #1B1E24;
-      font-family: Roboto;
+      font-family: Roboto, sans-serif;
       font-size: 14px;
       line-height: 16px;
       padding: 10px 12px;
@@ -915,7 +923,7 @@ export default {
         border-color: @color-red;
       }
 
-      .placeholder-input(14px, Roboto, @color-gray-400, 16px);
+      .placeholder-input(14px, @robotoFont, @color-gray-400, 16px);
 
       &:disabled {
         border: 1px solid #f2f4f7;
@@ -1142,7 +1150,7 @@ export default {
   .ds-help-label, .ds-sub-label {
     cursor: pointer;
     color: @color-gray-500;
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     font-size: 12px;
     line-height: 14px;
   }

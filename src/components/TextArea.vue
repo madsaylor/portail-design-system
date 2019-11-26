@@ -206,7 +206,7 @@
 
         &::placeholder {
           color: @color-gray-400;
-          font-family: Roboto;
+          font-family: Roboto, sans-serif;
           font-size: 14px;
           line-height: 16px;
           overflow: hidden;

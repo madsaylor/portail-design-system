@@ -305,6 +305,10 @@
         &:focus {
           outline: none;
         }
+
+        &::placeholder {
+          color: @color-gray-400;
+        }
       }
 
       &.ds-chips-container-active {

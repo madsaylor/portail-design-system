@@ -19,23 +19,23 @@
       @update:page="updatePage"
     >
       <template slot="filter-name">
-        <Chips v-model="nameFilter" :removable="true" />
+        <Chips md v-model="nameFilter" :removable="true" />
       </template>
 
       <template slot="filter-type.name">
-        <Select v-model="typeFilter" :options="typeOptions" :idMode="true" />
+        <Select md v-model="typeFilter" :options="typeOptions" :idMode="true" />
       </template>
 
       <template slot="filter-earned">
-        <Input v-model="financialFilter" />
+        <Input md placeholder="Price" v-model="financialFilter" />
       </template>
 
       <template slot="filter-invoice_date">
-        <Input v-model="invoiceDateFilter" />
+        <Input md v-model="invoiceDateFilter" placeholder="Search" />
       </template>
 
       <template slot="filter-status">
-        <Chips v-model="statusFilter" />
+        <Chips md placeholder="Status" v-model="statusFilter" />
       </template>
 
       <template v-slot:cell-name="{row, value}">
@@ -53,8 +53,8 @@
       </template>
 
       <template v-slot:cell-actions="{ row }">
-        <Button plain icon="pen-solid" iconSize="14px" iconColor="#778ca2" padding="8px" />
-        <Button plain icon="trash-alt" iconSize="14px" iconColor="#778ca2" padding="8px" />
+        <Button plain icon="pen-solid" iconSize="14px" iconColor="#778ca2" padding="8px" space-between="0" />
+        <Button plain icon="trash-alt" iconSize="14px" iconColor="#778ca2" padding="8px" space-between="0" />
       </template>
     </Table>
   </div>

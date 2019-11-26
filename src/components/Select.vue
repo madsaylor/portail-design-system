@@ -10,6 +10,7 @@
       ref="dsSelect"
       v-model="inputSelectValue"
       :placeholder="placeholder"
+      :name="name"
       @click="toggleDropList"
       readonly="readonly"
     />
@@ -63,6 +64,7 @@
       sm: Boolean,
       md: Boolean,
       lg: Boolean,
+      name: String,
       validators: Array,
       optionsOverflow: String,
       help: String,

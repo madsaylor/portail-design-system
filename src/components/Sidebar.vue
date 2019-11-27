@@ -257,6 +257,7 @@ export default {
     &.ds-active {
       border-left: solid 2px @color-primary;
       padding-left: 14px;
+      background-color: @color-gray-100;
 
       .ds-icon svg {
         fill: @color-primary;

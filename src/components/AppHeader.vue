@@ -41,6 +41,8 @@ export default {
     flex: 1 0 auto;
     .font-desktop-h-3-dark();
     padding: @app-header-title-padding;
+    font-size: 20px;
+    line-height: 30px;
   }
 
   @media @screen-small {

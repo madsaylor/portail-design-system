@@ -77,7 +77,7 @@
             <Icon
               v-if="item.icon"
               :source="item.icon"
-              size="18px"
+              size="22px"
               padding="6px 0"
               color="gray-400"
             />
@@ -98,10 +98,13 @@
               expand_more
             />
           </a>
-          <section :class="[
-            'ds-children',
-            {'ds-opened': activeKey(item, index) === active},
-          ]">
+          <section
+            :class="[
+              'ds-children',
+              {'ds-opened': activeKey(item, index) === active},
+            ]"
+            :key="index"
+          >
             <a
               v-for="(child, childIndex) in item.children"
               :key="activeKey(child, childIndex)"
@@ -230,10 +233,6 @@ export default {
     flex: 0 0 auto;
   }
 
-  .ds-header, .ds-items {
-    margin-bottom: 16px;
-  }
-
   ul, li {
     margin:0;
     padding: 0;
@@ -242,23 +241,23 @@ export default {
   }
 
   .ds-item {
-    .font-desktop-body-regular-dark();
+    font-family: @robotoFont;
+    font-size: 14px;
+    line-height: 16px;
+    color: @color-dark;
     align-items: center;
     cursor: pointer;
     display: flex;
     transition: all .1s ease-in-out;
-
-    &.ds-child-item {
-      .font-desktop-body-regular-gray();
-      padding-left: 50px;
-    }
 
     .ds-icon[expand_more] {
       transition: transform .1s ease;
     }
 
     &.ds-active {
-      .font-desktop-body-regular-accent();
+      border-left: solid 2px @color-primary;
+      padding-left: 14px;
+
       .ds-icon svg {
         fill: @color-primary;
       }
@@ -289,8 +288,17 @@ export default {
       background: darken(@color-white, 10%);
     }
 
+    &.ds-child-item {
+      padding-left: 64px;
+
+      &.ds-active {
+        border-left: none;
+        background-color: @color-gray-200;
+      }
+    }
+
     .ds-title {
-      padding-left: 12px;
+      padding-left: 18px;
       flex: 1 0 auto;
     }
 

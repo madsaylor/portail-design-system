@@ -244,7 +244,7 @@
 
       .ds-chips-label {
         color: @color-gray-500;
-        font-family: Lato, Arial, Helvetica, sans-serif;
+        font-family: Roboto, sans-serif;
         font-size: 12px;
         cursor: default;
         overflow: hidden;

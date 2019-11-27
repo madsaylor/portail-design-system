@@ -55,7 +55,7 @@
 -->
 
 <template>
-  <div :class="['ds-sidebar-container', {'ds-opened': opened, 'ds-disabled': disabled}]">
+  <div :class="['ds-sidebar-container', {'ds-opened': opened, 'ds-collapsed': collapsed, 'ds-disabled': disabled}]">
     <div class="ds-sidebar">
       <div class="ds-header">
         <slot name="header">Sidebar header</slot>
@@ -158,6 +158,7 @@ export default {
       default: 0,
     },
     opened: Boolean,
+    collapsed: Boolean,
     disabled: Boolean,
   },
   data: () => ({COLORS}),
@@ -187,11 +188,26 @@ export default {
   },
   mounted() {
     document.addEventListener('click', this.outsideClick, true)
-    this.$el.parentNode.classList.add('ds-sidebar-padding')
+    if (this.collapsed) {
+      this.$el.parentNode.classList.add('ds-sidebar-collpased-padding')
+    } else {
+      this.$el.parentNode.classList.add('ds-sidebar-padding')
+    }
   },
   beforeDestroy() {
     document.removeEventListener('click', this.outsideClick, true)
   },
+  watch: {
+    collapsed(value) {
+      if (value) {
+        this.$el.parentNode.classList.remove('ds-sidebar-padding')
+        this.$el.parentNode.classList.add('ds-sidebar-collpased-padding')
+      } else {
+        this.$el.parentNode.classList.remove('ds-sidebar-collpased-padding')
+        this.$el.parentNode.classList.add('ds-sidebar-padding')
+      }
+    }
+  }
 }
 </script>
 
@@ -207,6 +223,31 @@ export default {
   z-index: @z-index-sidebar;
   width:  @sidebar-width;
   height: @sidebar-height;
+
+  &.ds-collapsed {
+    width: 76px;
+
+    .ds-sidebar {
+      width: 100%;
+      overflow-y: auto;
+
+      .ds-header, .ds-item {
+        width: 100%;
+
+        .ds-title {
+          display: none;
+        }
+
+        .ds-badge {
+          display: none;
+        }
+      }
+
+      .ds-child-item {
+        display: none;
+      }
+    }
+  }
 }
 
 .ds-sidebar {
@@ -229,7 +270,7 @@ export default {
     box-shadow: @sidebar-item-shadow;
     box-sizing: border-box;
     height: @sidebar-item-height;
-    padding: @sidebar-item-padding;
+    padding: 21px 26px 21px 28px;
     flex: 0 0 auto;
   }
 
@@ -256,7 +297,7 @@ export default {
 
     &.ds-active {
       border-left: solid 2px @color-primary;
-      padding-left: 14px;
+      padding-left: 26px;
       background-color: @color-gray-100;
 
       .ds-icon svg {
@@ -352,6 +393,11 @@ export default {
   .ds-sidebar-padding {
     padding-left: @sidebar-width;
   }
+
+  .ds-sidebar-collpased-padding {
+    padding-left: 76px;
+  }
+
   #ds-open-sidebar-button {
     display: none;
   }

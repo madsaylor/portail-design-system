@@ -3,7 +3,29 @@
     {
       "name": "items",
       "type": "Array",
-      "description": "Array<Object>, required. Items to display on the Menu."
+      "description": "Array<Object>, required. Items to display on the Menu.",
+      "subProperty": [
+        {
+          "name": "title",
+          "type": "String",
+          "description": "Title of each menu item"
+        },
+        {
+          "name": "icon",
+          "type": "String",
+          "description": "Icon of Each menu Item"
+        },
+        {
+          "name": "disabled",
+          "type": "String",
+          "description": "Disable Menu Item or Not"
+        },
+        {
+          "name": "href",
+          "type": "String",
+          "description": "If this value is set, Menu Item will work like a Link"
+        }
+      ]
     },
     {
       "name": "width",
@@ -24,17 +46,22 @@
       "name": "opened",
       "type": "Boolean",
       "description": "Set variable for close menu on icon close"
-    },
-    {
-      "name": "menuSelectMode",
-      "type": "Boolean",
-      "description": "Set mode in that items will be scrollable"
-    },
-    {
-      "name": "searchMode",
-      "type": "Boolean",
-      "description": "Set search mode in that items won't be scrollable, will displaying only 4 items and available search by items title field"
     }
   ],
-  "events": []
+  "events": [
+    {
+      "name": "item:click",
+      "description": "Emitted when clicking menu items"
+    }
+  ],
+  "slots": [
+    {
+      "name": "header",
+      "description": "Enable to add header"
+    },
+    {
+      "name": "footer",
+      "description": "Enable to add footer"
+    }
+  ]
 }

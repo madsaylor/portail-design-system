@@ -174,7 +174,11 @@ const ICONS_TO_GET = [
   ['clipboard-list-solid', 'baseline'],
   ['clipboard-list-solid', 'outline'],
   ['file-csv-solid', 'baseline'],
-  ['file-csv-solid', 'outline']
+  ['file-csv-solid', 'outline'],
+  ['tags-solid', 'baseline'],
+  ['tags-solid', 'outline'],
+  ['portail-logo', 'baseline'],
+  ['portail-logo', 'outline']
 ]
 
 // Get svg download link

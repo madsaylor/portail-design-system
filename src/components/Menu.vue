@@ -31,44 +31,30 @@
 
 <template>
   <div class="ds-menu-wrapper" :style="stylesWrapper">
-    <div class="ds-header-content" v-if="title">
-      <span class="ds-header-title">{{title}}</span>
-      <Button class="ds-header-icon" icon="close" plain @click="closeMenu()" icon-color="gray-400"></Button>
+    <div class="ds-menu-header">
+      <slot name="header"></slot>
     </div>
-    <div class="ds-search-wrapper" v-if="searchMode">
-      <Input
-        md
-        icon="search"
-        icon-size="24px !important"
-        icon-padding="0 0 2px 0"
-        placeholder="Search"
-        v-model="searchValue"
-      />
-    </div>
-    <div :class="['ds-item-wrapper', {'ds-item-wrapper-menu-select': menuSelectMode && !searchMode, 'ds-item-wrapper-menu-search': menuSelectMode && searchMode}]">
-      <template  v-for="(item, index) in menuItem">
+
+    <div class="ds-item-wrapper">
+      <template  v-for="(item, index) in items">
         <a
-          :class="['ds-item-container', {
-        'ds-disabled': item.disabled
-      }]"
+          class="ds-item"
+          :class="{ 'ds-disabled': item.disabled }"
           :key="index"
           :href="item.href"
           @click="itemClick(item, index)"
         >
-          <div v-if="index !== 0" class="ds-divider"/>
-
-          <div class="ds-item">
-            <Icon
-              v-if="item.icon"
-              :source="item.icon"
-              size="24px"
-              color="gray-400"
-            />
-            <span class="ds-title">{{ item.title }}</span>
-          </div>
+          <Icon
+            v-if="item.icon"
+            :source="item.icon"
+            size="18px"
+            color="gray-400"
+          />
+          <span class="ds-menu-title">{{ item.title }}</span>
         </a>
       </template>
     </div>
+
     <div class="ds-menu-footer">
       <slot name="footer"></slot>
     </div>
@@ -77,13 +63,11 @@
 
 <script>
 import Icon from './Icon.vue'
-import Input from './Input.vue'
-import Button from './Button.vue'
 
 export default {
   name: 'Menu',
   components: {
-    Icon, Button, Input
+    Icon
   },
   props: {
     items: {
@@ -93,15 +77,9 @@ export default {
     width: String,
     height: String,
     title: String,
-    opened: Boolean,
-    menuSelectMode: Boolean,
-    searchMode: Boolean
+    opened: Boolean
   },
-  data: () => ({
-    searchValue: undefined,
-    searchResult: undefined,
-    searchId: undefined
-  }),
+  data: () => ({}),
   methods: {
     itemClick(item, index) {
       if (item.disabled) return
@@ -110,13 +88,6 @@ export default {
     },
     closeMenu() {
       this.$emit('update:opened', false)
-    },
-    searchItems() {
-      let res = this.items.filter((item) => ~item.title.toLowerCase().indexOf(this.searchValue.toLowerCase()))
-      // res = res.slice(0, 5)
-
-      this.searchResult = res
-      this.searchId = undefined
     }
   },
   computed: {
@@ -126,21 +97,7 @@ export default {
         height: this.height
       }
     },
-    menuItem() {
-      return !this.searchMode ? this.items : this.searchResult
-    }
   },
-  watch: {
-    searchValue() {
-      if (!this.searchId) {
-        this.searchId = setTimeout(() => this.searchItems(), 300)
-      }
-    }
-  },
-  mounted() {
-    // this.searchResult = this.items.slice(0, 4)
-    this.searchResult = this.items
-  }
 }
 </script>
 
@@ -151,6 +108,7 @@ export default {
   background-color: @color-white;
   box-shadow: @card-shadow;
   overflow: hidden;
+  font-family: Roboto Medium;
 
   .ds-header-content {
     display: flex;
@@ -177,39 +135,20 @@ export default {
       }
     }
   }
-  .ds-search-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-  }
 
   .ds-item-wrapper {
 
-    &.ds-item-wrapper-menu-select {
-      overflow-y: auto;
-      height: calc(100% - 104px);
-    }
-
-    &.ds-item-wrapper-menu-search {
-      height: calc(100% - 154px);
-      overflow-y: auto;
-
-      > .ds-item-container {
-        &:first-child {
-          box-shadow: inset 0 1px 0 0 @color-gray-300;
-        }
-      }
-    }
-
-    .ds-item-container {
-      display: block;
+    .ds-item {
       text-decoration: none;
       color: @color-dark;
-      font-size: @font-desktop-body-medium-dark-font-size;
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      cursor: pointer;
 
       &:hover {
         text-decoration: none;
+        background-color: @color-gray-200;
       }
 
       &.ds-disabled {
@@ -222,19 +161,11 @@ export default {
         background: @color-gray-300;
       }
 
-      .ds-item {
-        display: flex;
-        align-items: center;
-        padding: @app-menu-padding;
-        cursor: pointer;
-
-        &:hover {
-          background-color: @color-gray-200;
-        }
-
-        .ds-title {
-          margin-left: @app-menu-spacing;
-        }
+      .ds-menu-title {
+        margin-left: 8px;
+        font-size: 12px;
+        line-height: 14px;
+        padding: 0;
       }
     }
   }

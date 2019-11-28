@@ -47,9 +47,8 @@
                     @click="onIconClick"
       />
 
-      <div class="ds-drawer">
-        <span v-if="inputErrors.length && touched && showErrors"
-              class="ds-error-message">
+      <div class="ds-drawer" v-if="inputErrors.length && touched && showErrors">
+        <span class="ds-error-message">
           {{ inputErrors[0] }}
         </span>
       </div>

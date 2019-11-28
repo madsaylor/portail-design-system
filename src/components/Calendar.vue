@@ -25,7 +25,8 @@
         :class="['ds-has-icon', {
           'ds-error': inputErrors.length && touched && showErrors,
           'ds-slide-input': slideLabel,
-          'ds-text-right': textAlign === 'right'
+          'ds-text-right': textAlign === 'right',
+          'ds-placeholder-md': placeholderMd
         }]"
         ref="input"
         :style="getStyle"
@@ -123,6 +124,7 @@
       lg: Boolean,
       md: Boolean,
       sm: Boolean,
+      placeholderMd: Boolean,
       width: String,
       lang: String,
       label: String,
@@ -530,6 +532,10 @@
         text-align: right;
       }
 
+      &.ds-placeholder-md {
+        .placeholder-font-size(14px);
+      }
+
       .input-placeholder();
 
       &:focus {
@@ -601,6 +607,10 @@
       input {
         .placeholder-font-size(16px);
         font-size: 16px;
+
+        &.ds-placeholder-md {
+          .placeholder-font-size(14px);
+        }
       }
     }
 

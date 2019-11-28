@@ -76,7 +76,10 @@ export default {
       type: String,
       default: '0'
     },
-    color: String,
+    color: {
+      type: String,
+      default: '#778CA2'
+    },
     tooltip: String,
     noSize: {
       type: Boolean,

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="43px" height="28px" viewBox="0 0 43 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 60.1 (101010) - https://sketch.com -->
+    <title>DE031A84-0B97-4263-8C3E-DD45DC80705B</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Asset-Artboard-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons/Master-Card-Icons/Payment/Master-Card" fill-rule="nonzero">
+            <rect id="bg" fill="#F8FAFB" x="0.881889764" y="0" width="41.6692913" height="28" rx="4"></rect>
+            <g id="Master-Card" transform="translate(13.000000, 9.000000)">
+                <circle id="Oval" fill="#EE0005" cx="4.98188679" cy="4.98301887" r="4.97962264"></circle>
+                <circle id="Oval" fill="#F9A000" cx="11.1686792" cy="4.98301887" r="4.97962264"></circle>
+                <path d="M6.18913208,4.9829434 C6.18913208,6.56407547 6.92618868,7.9729434 8.07532075,8.88509434 C9.22441509,7.97290566 9.96150943,6.56407547 9.96150943,4.9829434 C9.96150943,3.40181132 9.22445283,1.9929434 8.07532075,1.08079245 C6.92622642,1.99301887 6.18913208,3.40184906 6.18913208,4.9829434 Z" id="Shape" fill="#FF6300"></path>
+            </g>
+        </g>
+    </g>
+</svg>

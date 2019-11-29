@@ -20,7 +20,7 @@
       />
 
       <input
-        type="text"
+        type="tel"
         v-model="inputValueWrapper"
         :class="['ds-has-icon', {
           'ds-error': inputErrors.length && touched && showErrors,

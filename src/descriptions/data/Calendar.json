@@ -21,6 +21,11 @@
       "description": "Small size -  144px"
     },
     {
+      "name": "placeholderMd",
+      "type": "Boolean",
+      "description": "Set placeholder smaller size than usual as 14px"
+    },
+    {
       "name": "width",
       "type": "String",
       "description": "Setup the width"

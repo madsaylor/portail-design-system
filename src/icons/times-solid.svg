@@ -1,14 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: sketchtool 60.1 (101010) - https://sketch.com -->
-    <title>641E52E5-1D3F-44A0-BE49-9BDFE2129118</title>
-    <desc>Created with sketchtool.</desc>
-    <g id="UI-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="[UI]-Icons" transform="translate(-591.000000, -446.000000)">
-            <g id="times-solid" transform="translate(587.000000, 442.000000)">
-                <polygon id="Path" fill="#000000" fill-rule="nonzero" points="4.9882263 4 4 4.9882263 10.0367737 11.025 4 17.0617737 4.9882263 18.05 11.025 12.0132263 17.0617737 18.05 18.05 17.0617737 12.0132263 11.025 18.05 4.9882263 17.0617737 4 11.025 10.0367737"></polygon>
-                <polygon id="Path" points="0 0 22 0 22 22 0 22"></polygon>
-            </g>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <polygon points="2.219 .781 .781 2.219 9.563 11 .781 19.781 2.219 21.219 11 12.438 19.781 21.219 21.219 19.781 12.438 11 21.219 2.219 19.781 .781 11 9.563"/>
 </svg>

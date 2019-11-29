@@ -1,14 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="14px" height="18px" viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: sketchtool 60.1 (101010) - https://sketch.com -->
-    <title>2F9765AD-1117-4B40-9CAE-2B39DBB43AB5</title>
-    <desc>Created with sketchtool.</desc>
-    <g id="UI-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="[UI]-Icons" transform="translate(-591.000000, -382.000000)">
-            <g id="file-invoice-solid" transform="translate(587.000000, 380.000000)">
-                <path d="M4,2 L4,19.875 L17.75,19.875 L17.75,6.53723146 L17.5432131,6.33178707 L13.4182131,2.20678707 L13.2127688,2 L4,2 Z M5.375,3.375 L12.25,3.375 L12.25,7.5 L16.375,7.5 L16.375,18.5 L5.375,18.5 L5.375,3.375 Z M13.625,4.33776854 L15.4122312,6.125 L13.625,6.125 L13.625,4.33776854 Z M6.75,8.875 L6.75,10.25 L15,10.25 L15,8.875 L6.75,8.875 Z M6.75,12.3125 L6.75,13.6875 L11.5625,13.6875 L11.5625,12.3125 L6.75,12.3125 Z M12.9375,12.3125 L12.9375,13.6875 L15,13.6875 L15,12.3125 L12.9375,12.3125 Z M6.75,15.0625 L6.75,16.4375 L11.5625,16.4375 L11.5625,15.0625 L6.75,15.0625 Z M12.9375,15.0625 L12.9375,16.4375 L15,16.4375 L15,15.0625 L12.9375,15.0625 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
-                <polygon id="Path" points="0 0 22 0 22 22 0 22"></polygon>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M 6 3 L 6 29 L 26 29 L 26 9.5996094 L 25.699219 9.3007812 L 19.699219 3.3007812 L 19.400391 3 L 6 3 z M 8 5 L 18 5 L 18 11 L 24 11 L 24 27 L 8 27 L 8 5 z M 20 6.4003906 L 22.599609 9 L 20 9 L 20 6.4003906 z M 10 13 L 10 15 L 22 15 L 22 13 L 10 13 z M 10 18 L 10 20 L 17 20 L 17 18 L 10 18 z M 19 18 L 19 20 L 22 20 L 22 18 L 19 18 z M 10 22 L 10 24 L 17 24 L 17 22 L 10 22 z M 19 22 L 19 24 L 22 24 L 22 22 L 19 22 z"/></svg>

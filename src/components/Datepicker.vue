@@ -34,7 +34,7 @@
             Pick a date
           </div>
           <Icon class="ds-close-icon"
-                times-circle
+                times_circle
                 color="gray-500"
                 size="16px"
                 @click="onClear()">
@@ -89,7 +89,7 @@
         {{additionalHeaderDate}}
       </span>
         <Icon class="ds-close-icon"
-              times-circle
+              times_circle
               color="gray-500"
               size="16px"
               @click="onClear()">
@@ -105,7 +105,7 @@
           {{ year }}
         </span>
           <Icon @click="onYear()"
-                :source="view === 'year' ? 'angle-up-solid' : 'angle-down-solid'"
+                :source="view === 'year' ? 'angle_up_solid' : 'angle_down_solid'"
                 color="gray-500"
                 size="16px"
                 class="ds-year-icon">
@@ -113,10 +113,10 @@
         </div>
         <div class="ds-buttons">
           <button @click="shift(-1)" :disabled="!canShiftBack">
-            <Icon angle-left-solid color="gray-500" size="16px"></Icon>
+            <Icon angle_left_solid color="gray-500" size="16px"></Icon>
           </button>
           <button @click="shift(1)" :disabled="!canShiftForward">
-            <Icon angle-right-solid color="gray-500" size="16px"></Icon>
+            <Icon angle_right_solid color="gray-500" size="16px"></Icon>
           </button>
         </div>
       </div>

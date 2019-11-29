@@ -1,14 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="17px" height="13px" viewBox="0 0 17 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: sketchtool 60.1 (101010) - https://sketch.com -->
-    <title>7298D2EF-45B9-43DB-A0B4-CB750FB65976</title>
-    <desc>Created with sketchtool.</desc>
-    <g id="UI-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="[UI]-Icons" transform="translate(-590.000000, -323.000000)">
-            <g id="arrow-left-solid" transform="translate(587.000000, 318.000000)">
-                <polygon id="Path" fill="#000000" fill-rule="nonzero" transform="translate(11.220000, 11.339608) rotate(-180.000000) translate(-11.220000, -11.339608) " points="13.1218824 5 12.1333333 5.98854902 16.7967059 10.6519216 3 10.6519216 3 12.0272941 16.7967059 12.0272941 12.1333333 16.6906667 13.1218824 17.6792157 18.9672157 11.8338824 19.44 11.3396078 18.9672157 10.8453333"></polygon>
-                <polygon id="Path" points="0 0 22 0 22 22 0 22"></polygon>
-            </g>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20">
+  <polygon points="9.281 .781 .781 9.281 .094 10 .781 10.719 9.281 19.219 10.719 17.781 3.938 11 24 11 24 9 3.938 9 10.719 2.219"/>
 </svg>

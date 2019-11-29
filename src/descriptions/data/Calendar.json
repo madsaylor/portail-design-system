@@ -193,6 +193,12 @@
       "name": "iconLeft",
       "type": "Boolean",
       "description": "Display the icon on the left side instead of default right side"
+    },
+    {
+      "name": "marginDropdown",
+      "type": "Number",
+      "default": "4",
+      "description": "Set a space between input and dropdown of calendar"
     }
   ],
   "events": [

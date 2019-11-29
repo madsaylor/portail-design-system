@@ -62,6 +62,7 @@
       :borderColor="!isMobile && borderColorDesktop"
       :labelId="id"
       :activeDatepickerComponent="activeCalendarComponent"
+      :margin="marginDropdown"
       just-fade
     >
       <Datepicker
@@ -139,6 +140,7 @@
         default: 'bottom-middle',
       },
       positionChangeable: Boolean,
+      marginDropdown: Number,
       fullWidth: {
         type: Boolean,
         default: false

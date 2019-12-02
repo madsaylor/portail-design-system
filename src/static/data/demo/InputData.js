@@ -3,6 +3,8 @@ Basic inputs:<br />
 <Input sm label="Small" v-model="textValue"/>
 <Input md label="Medium" v-model="textValue"/>
 <Input lg label="Large" v-model="textValue"/>
+<Input md label="Mask: 12/20" v-mask="'##/##'" v-model="maskValue"/>
+
 <Input
   md
   help="This is an explanation of what the field is used for."
@@ -13,6 +15,19 @@ Basic inputs:<br />
   placeholder="Search"
   v-model="textValue"
 />
+
+<Input
+  md
+  label="Clear content example:"
+  placeholder="Search"
+  v-model="textValue"
+  icon="close"
+  icon-color="gray-500"
+  icon-size="16px"
+  :active-icon="true"
+  @icon-click="clearContent"
+/>
+
 <Input
   sm
   disabled
@@ -20,6 +35,7 @@ Basic inputs:<br />
   placeholder="Disabled"
   v-model="textValue"
 />
+
 <Input
   md
   label="Input with errors"
@@ -34,6 +50,7 @@ Date inputs:
   label="Date input"
   v-model="dateValue"
 />
+
 <Input
   sm
   type="date"
@@ -43,6 +60,7 @@ Date inputs:
   :maxDate="new Date('2019-02-25')"
   v-model="dateValue2"
 />
+
 <Input
   sm
   type="date"
@@ -52,6 +70,7 @@ Date inputs:
   :dateRange="{min: 5, max: 10}"
   v-model="dateValue3"
 />
+
 <Input
   md
   type="select"
@@ -64,11 +83,13 @@ Date inputs:
     value: 'World',
   }]"
 />
+
 <Input
   type="checkbox"
   label="Checkbox"
   v-model="textValue"
 />
+
 <Input
   type="radio"
   label="First"
@@ -76,36 +97,44 @@ Date inputs:
   v-model="radioValue"
 />
 
-<Input sm
-       v-model="cvvValue"
-       type="number"
-       :maxlength="3"
-       placeholder="xxx"
-       label="CVV"
-       help="This is an explanation of what the field is used for."/>
+<Input
+  sm
+  v-model="cvvValue"
+  type="number"
+  :maxlength="3"
+  placeholder="xxx"
+  label="CVV"
+  help="This is an explanation of what the field is used for."
+/>
        
-<Input v-model="cardNumber"
-       type="payment-card"
-       :maxlength="19"
-       label="Card number"/>
+<Input
+  v-model="cardNumber"
+  type="payment-card"
+  :maxlength="19"
+  label="Card number"
+/>
 
-<Input v-model="password"
-       type="password"
-       :confirmModel="confirmPassword"
-       placeholder="Placeholder"
-       label="New Password"
-       :validators="passwordValidators"
-       :show-errors="passwordShowErrors.firstField"
-       @lastKeyDownDelay="onlastKeyDownDelay('firstField')"/>
+<Input
+  v-model="password"
+  type="password"
+  :confirmModel="confirmPassword"
+  placeholder="Placeholder"
+  label="New Password"
+  :validators="passwordValidators"
+  :show-errors="passwordShowErrors.firstField"
+  @lastKeyDownDelay="onlastKeyDownDelay('firstField')"
+/>
 
-<Input v-model="confirmPassword"
-       type="password"
-       :confirmModel="password"
-       placeholder="Placeholder"
-       label="Confirm the new password"
-       :validators="confirmPasswordValidators"
-       :show-errors="passwordShowErrors.secondField"
-       @lastKeyDownDelay="onlastKeyDownDelay('secondField')"/>
+<Input
+  v-model="confirmPassword"
+  type="password"
+  :confirmModel="password"
+  placeholder="Placeholder"
+  label="Confirm the new password"
+  :validators="confirmPasswordValidators"
+  :show-errors="passwordShowErrors.secondField"
+  @lastKeyDownDelay="onlastKeyDownDelay('secondField')"
+/>
 `.slice(1)
 
 export default {

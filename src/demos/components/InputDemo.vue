@@ -79,6 +79,19 @@
         placeholder="Search"
         v-model="textValue"
       />
+
+      <Input
+        md
+        label="Clear content example:"
+        placeholder="Search"
+        v-model="textValue"
+        icon="close"
+        icon-color="gray-500"
+        icon-size="16px"
+        :active-icon="true"
+        @icon-click="clearContent"
+      />
+
       <Input
         md
         help="This is an explanation of what the field is used for."
@@ -377,6 +390,9 @@ export default {
       if (firstField === true && secondField === true) {
         err.firstField = err.secondField = true
       }
+    },
+    clearContent() {
+      this.textValue = ''
     }
   }
 }

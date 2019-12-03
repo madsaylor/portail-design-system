@@ -219,11 +219,13 @@
 
             this.$_defaultStyles.body = {
               position: bodyStyle.position || 'static',
-              overflow: 'auto'
+              overflow: 'auto',
+              width: bodyStyle.width
             }
 
             bodyStyle.overflow = 'hidden'
             bodyStyle.position = this.isMobile ? 'fixed' : 'relative'
+            bodyStyle.width = '100%'
 
             this.$_defaultStyles.html = {
               position: htmlStyle.position || 'static',

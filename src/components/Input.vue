@@ -910,8 +910,6 @@ export default {
         text-align: right;
       }
 
-      .input-placeholder();
-
       &:focus:not(.ds-error) {
         border-color: @color-primary;
       }

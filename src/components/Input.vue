@@ -147,6 +147,7 @@
           'ds-has-left-icon': iconLeft,
           'ds-text-right': textAlign === 'right'
         }"
+        :key="inputId"
         v-model="inputValue"
         ref="input"
         :style="getStyle"
@@ -173,6 +174,7 @@
           'ds-has-left-icon': iconLeft,
           'ds-text-right': textAlign === 'right'
         }"
+        :key="inputId"
         v-model="inputValue"
         ref="input"
         :style="getStyle"
@@ -206,6 +208,7 @@
         v-bind="inputAttrs"
         :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
         :name="name"
+        :key="inputId"
         v-model="inputValue"
         placeholder="placeholder"
         @blur="touched = true"
@@ -409,7 +412,8 @@ export default {
     windowWidth: window.innerWidth,
     positions: Array,
     timeoutId: undefined,
-    id: Math.random().toString(36).substring(7)
+    id: Math.random().toString(36).substring(7),
+    inputId: Math.random().toString(36).substring(7)
   }),
   mounted() {
     if (this.name) {

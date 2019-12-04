@@ -28,6 +28,7 @@
       <div class="ds-label-text" v-if="label">{{label}}</div>
       <textarea
         v-model="textareaValue"
+        :key="textAreaId"
         :placeholder="placeholder"
         :name="name"
         :rows="rows"
@@ -74,7 +75,8 @@
     data: () => ({
       validateEventName: undefined,
       touched: false,
-      notificationStr: ''
+      notificationStr: '',
+      textAreaId: Math.random().toString(36).substring(7)
     }),
     methods: {
       onBlur() {

@@ -802,37 +802,6 @@ export default {
     position: relative;
   }
 
-  &.ds-sm {
-    width: 144px;
-
-    input {
-      height: 30px;
-    }
-  }
-
-  &.ds-md {
-    width: 252px;
-
-    input {
-      height: 42px;
-    }
-  }
-
-  &.ds-lg {
-
-    &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-number-dot, &.ds-payment-card, &.ds-tel {
-      .ds-label-text {
-        font-size: 14px;
-        line-height: 16px;
-        margin-bottom: 14px;
-      }
-    }
-
-    input {
-      height: 52px;
-    }
-  }
-
   @media @screen-small {
     &.ds-lg {
       width: 296px;
@@ -1171,6 +1140,45 @@ export default {
     input {
       color: @color-red !important;
       border-color: @color-red !important;
+    }
+  }
+
+    &.ds-sm {
+    width: 144px;
+
+    input {
+      height: 30px;
+    }
+  }
+
+  &.ds-md {
+    width: 252px;
+
+    input {
+      height: 42px;
+    }
+  }
+
+  &.ds-lg {
+
+    &.ds-text, &.ds-date, &.ds-select, &.ds-password, &.ds-number, &.ds-number-dot, &.ds-payment-card, &.ds-tel {
+      .ds-label-text {
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom: 14px;
+      }
+    }
+
+    input {
+      height: 52px;
+    }
+
+    input + .icon-wrapper {
+      pointer-events: none;
+      position: absolute;
+      bottom: 6%;
+      right: 15px;
+      height: 50% !important;
     }
   }
 }

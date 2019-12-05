@@ -42,7 +42,10 @@
             :style="getFlex(header)"
             :key="index"
           >
-            <slot :name="getSlotName(header)" :value="getCellValue(row, header)" :orgValue="getOrgValue(row, header)" :row="row">
+            <slot :name="getSlotName(header)"
+                  :value="getCellValue(row, header)"
+                  :orgValue="getOrgValue(row, header)"
+                  :row="row">
             </slot>
 
             <template v-if="!hasSlot(header)">
@@ -255,6 +258,10 @@
             &:last-child {
               padding-right: 12px;
             }
+          }
+
+          &:hover {
+            background-color: rgba(30, 179, 134, 0.05);
           }
         }
 

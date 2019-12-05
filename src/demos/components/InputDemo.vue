@@ -67,7 +67,7 @@
       Basic inputs:<br />
       <Input sm label="Small" v-model="textValue"/>
       <Input md label="Medium" v-model="textValue"/>
-      <Input lg label="Large" v-model="textValue"/>
+      <Input lg icon="search-solid" icon-size="16px" label="Large" v-model="textValue"/>
       <Input md label="Mask: 12/20" v-mask="'##/##'" v-model="maskValue"/>
       <Input
         md

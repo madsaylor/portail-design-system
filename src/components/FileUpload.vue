@@ -16,7 +16,7 @@
 
 <template>
   <div class="ds-upload-wrapper">
-    <vue-dropzone v-if="multiple" :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
+    <vue-dropzone v-if="multiple" :options="fileUploadOptions" id="ds-file-upload" :style="wrapperStyles" :useCustomSlot="true">
       <div v-if="inputValue.length === 0 || !preview " class="ds-dropzone-custom-content">
         <div class="ds-icon-wrapper">
           <Icon
@@ -34,12 +34,14 @@
       <div v-else class="ds-selected-files-wrapper">
         <div v-for="(f, index) in inputValue" :key="index" class="ds-file-wrapper">
           <img width="100" height="100" :src="f.dataURL" />
-          <Icon source="close" color="#ddd" size="24px" @click.native="removeFile(f)" />
+          <div class="remove-icon-wrapper">
+            <Icon source="close" color="#ddd" size="24px" @click.native="removeFile(f)" />
+          </div>
         </div>
       </div>
     </vue-dropzone>
 
-    <vue-dropzone v-else :options="fileUploadOptions" id="ds-file-upload" :useCustomSlot="true">
+    <vue-dropzone v-else :options="fileUploadOptions" id="ds-file-upload" :style="wrapperStyles" :useCustomSlot="true">
       <div v-if="!inputValue || !preview " class="ds-dropzone-custom-content">
         <div class="ds-icon-wrapper">
           <Icon
@@ -57,8 +59,15 @@
       <div v-else class="ds-selected-files-wrapper">
         <div class="ds-file-wrapper">
           <img width="100" height="100" :src="typeof inputValue === 'object' ? inputValue.dataURL : inputValue" />
-          <Icon source="close" color="#ddd" size="24px" @click.prevent="removeFile(inputValue)" />
+          <div class="cloud-icon-wrapper">
+            <Icon source="cloud-upload-alt-solid" color="white" size="18px" />
+          </div>
+          <div class="remove-icon-wrapper">
+            <Icon source="close" color="#ddd" size="24px" @click.prevent="removeFile(inputValue)" />
+          </div>
         </div>
+
+        <div class="ds-title-wrapper">{{ title }}</div>
       </div>
     </vue-dropzone>
 
@@ -98,6 +107,14 @@ export default {
     multiple: {
       type: Boolean,
       default: true
+    },
+    bgColor: {
+      type: String,
+      default: '#F8FAFB'
+    },
+    borderColor: {
+      type: String,
+      default: '#F8FAFB'
     }
   },
   data() {
@@ -203,6 +220,12 @@ export default {
       }
 
       return errors
+    },
+    wrapperStyles() {
+      return {
+        backgroundColor: this.bgColor,
+        borderColor: this.borderColor
+      }
     }
   },
   watch: {
@@ -227,7 +250,8 @@ export default {
     width: 100%;
     position: relative;
     min-height: @file-upload-panel-height; 
-    background-color: @color-gray-300;
+    background-color: @color-gray-100;
+    padding: 26px;
 
     .ds-dropzone-custom-content {
       position: absolute;
@@ -255,16 +279,45 @@ export default {
         margin-left: 10px;
         margin-right: 10px;
         position: relative;
+        height: 67px;
 
         img {
           object-fit: cover;
+          height: 67px;
+          width: auto;
         }
 
-        .ds-icon {
+        .cloud-icon-wrapper {
           position: absolute;
-          top: 0;
-          right: 0;
+          bottom: -5px;
+          right: -5px;
+          background-color: @color-primary;
+          width: 26px;
+          height: 26px;
+          border-radius: 13px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
+
+        .remove-icon-wrapper {
+          display: none;
+        }
+
+        &:hover {
+          .remove-icon-wrapper {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+        }
+      }
+
+      .ds-title-wrapper {
+        font-size: 18px;
+        line-height: 21px;
+        color: @color-dark;
       }
     }
   }

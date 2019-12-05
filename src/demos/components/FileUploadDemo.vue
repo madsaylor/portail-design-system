@@ -2,14 +2,14 @@
   <div class="row-col">
     <h3>FileUpload</h3>
 
-    FileUplaod with showing an icon and title
+    FileUpload with showing an icon and title
     <Description compnent-name="FileUpload"></Description>
     <Collapser :opened.sync="openUsage" label="Usage">
       <pre v-highlightjs="usage"><code class="html"></code></pre>
     </Collapser>
     
     <div class="ds-grid">
-      <div class="row">
+      <div class="row demo-wrapper">
         <div class="col-6">
           <div>
             <div>Multi File Upload</div>
@@ -70,3 +70,10 @@ export default {
   })
 }
 </script>
+
+<style lang="less" scoped>
+.demo-wrapper {
+  padding: 40px;
+  background-color: white;
+}
+</style>

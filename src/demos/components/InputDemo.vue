@@ -101,7 +101,7 @@
         v-model="textValue"
       />
       <Input
-        sm
+        lg
         disabled
         label="Disabled input"
         placeholder="Disabled"

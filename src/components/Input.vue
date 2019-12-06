@@ -119,7 +119,7 @@
            :id="id"
            @click="onInputPrevent($event, true); onCheckboxRadioClick();"
            :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus, 'ds-slide-label-date': getType === 'ds-date',
-                    'ds-label-error': inputErrors.length && touched && showErrors},
+                    'ds-label-error': inputErrors.length && touched && showValidations},
                     slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']">
           {{ label }}
       </div>
@@ -141,7 +141,8 @@
         :name="name"
         :class="{
           'ds-has-icon': icon_,
-          'ds-error': inputErrors.length && touched && showErrors,
+          'ds-error': inputErrors.length && touched && showValidations,
+          'ds-valid': inputErrors.length == 0 && touched && showValidations,
           'ds-slide-input': slideLabel,
           'date': getType === 'ds-date',
           'ds-has-left-icon': iconLeft,
@@ -168,7 +169,8 @@
         :name="name"
         :class="{
           'ds-has-icon': icon_,
-          'ds-error': inputErrors.length && touched && showErrors,
+          'ds-error': inputErrors.length && touched && showValidations,
+          'ds-valid': inputErrors.length == 0 && touched && showValidations,
           'ds-slide-input': slideLabel,
           'date': getType === 'ds-date',
           'ds-has-left-icon': iconLeft,
@@ -191,7 +193,12 @@
       <input
         v-if="getType == 'ds-radio'"
         v-bind="inputAttrs"
-        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
+        :class="{
+          'ds-has-icon': icon_,
+          'ds-error': inputErrors.length && touched,
+          'ds-valid': inputErrors.length == 0 && touched && showValidations,
+          'ds-has-left-icon': iconLeft
+        }"
         :checked="inputValue === radioVal"
         :name="name"
         @change="changeRadio"
@@ -206,7 +213,12 @@
       <select
         v-if="getType === 'ds-select'"
         v-bind="inputAttrs"
-        :class="{'ds-has-icon': icon_, 'ds-error': inputErrors.length && touched, 'ds-has-left-icon': iconLeft}"
+        :class="{
+          'ds-has-icon': icon_,
+          'ds-error': inputErrors.length && touched,
+          'ds-valid': inputErrors.length == 0 && touched && showValidations,
+          'ds-has-left-icon': iconLeft
+        }"
         :name="name"
         :key="inputId"
         v-model="inputValue"
@@ -224,17 +236,32 @@
 
       <div v-if="getType === 'ds-select' && inputValue !== 0 &&!inputValue" class="ds-select-placeholder">{{ placeholder }}</div>
 
-      <Icon :size="iconSize"
-            v-if="icon_ && showIcon"
-            :color="iconColor"
-            :class="{'active-icon': activeIcon}"
-            :source="icon_"
-            :padding="iconPadding"
-            @click="onIconClick"
+      <Icon
+        v-if="icon_ && showIcon"
+        :size="iconSize"
+        :color="iconColor"
+        :class="{'active-icon': activeIcon}"
+        :source="icon_"
+        :padding="iconPadding"
+        @click="onIconClick"
+      />
+
+      <Icon
+        v-else-if="!icon_ && touched && inputErrors.length == 0 && getType != 'ds-radio' && getType != 'ds-select' && getType != 'ds-checkbox'"
+        :size="iconSize"
+        color="#1EB386"
+        source="done"
+      />
+
+      <Icon
+        v-else-if="!icon_ && touched && inputErrors.length > 0 && getType != 'ds-radio' && getType != 'ds-select' && getType != 'ds-checkbox'"
+        :size="iconSize"
+        color="#FB4544"
+        source="block"
       />
 
       <div class="ds-drawer">
-        <span v-if="inputErrors.length && touched && showErrors" class="ds-error-message">
+        <span v-if="inputErrors.length && touched && showValidations" class="ds-error-message">
           {{ inputErrors[0] }}
         </span>
         <span v-if="subLabel && !(inputErrors.length && touched)" class="ds-sub-label">
@@ -351,7 +378,7 @@ export default {
     datepickerBackdropOpacity: String,
     datepickerWrapperStyleObject: Object,
     slideLabel: Boolean,
-    showErrors: {
+    showValidations: {
       type: Boolean,
       default: true
     },
@@ -892,12 +919,27 @@ export default {
 
       &.ds-error {
         border-color: @color-red;
+        background-color: #ffedec;
+      }
+
+      &.ds-error + .ds-select-placeholder {
+        background-color: #ffedec;
+      }
+
+      &.ds-valid {
+        border-color: @color-primary;
+        background-color: #e9f8f3;
+      }
+
+      &.ds-valid + .ds-select-placeholder {
+        background-color: #e9f8f3;
       }
 
       .placeholder-input(14px, @robotoFont, @color-gray-400, 16px);
 
       &:disabled {
-        border: 1px solid #f2f4f7;
+        border: 1px solid #E8ECEF;
+        background-color: @color-gray-100;
       }
       &:disabled, &:disabled::placeholder {
         .font-desktop-small-regular-light-gray-base();

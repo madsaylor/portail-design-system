@@ -5,7 +5,10 @@
           color="gray-400"
           class="ds-drop-icon"/>
     <input
-      :class="['ds-select', {'ds-error': checkError}]"
+      :class="['ds-select', {
+        'ds-error': checkError,
+        'ds-valid': !checkError && touched,
+      }]"
       type="text"
       ref="dsSelect"
       v-model="inputSelectValue"
@@ -275,6 +278,12 @@
 
       &.ds-error {
         border: 1px solid @color-red;
+        background-color: #ffedec;
+      }
+
+      &.ds-valid {
+        border-color: @color-primary;
+        background-color: #e9f8f3;
       }
     }
 

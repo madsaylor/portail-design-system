@@ -32,7 +32,10 @@
         :placeholder="placeholder"
         :name="name"
         :rows="rows"
-        :class="{'ds-error': textareaErrors.length && touched && showErrors}"
+        :class="{
+          'ds-error': textareaErrors.length && touched && showErrors,
+          'ds-valid': textareaErrors.length == 0 && touched && showErrors
+        }"
         :disabled="disabled"
         @blur="onBlur"
       />
@@ -225,6 +228,12 @@
 
         &.ds-error {
           border-color: @color-red;
+          background-color: #ffedec;
+        }
+
+        &.ds-valid {
+          border-color: @color-primary;
+          background-color: #e9f8f3;
         }
       }
     }

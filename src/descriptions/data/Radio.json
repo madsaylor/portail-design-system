@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "Boolean",
+      "description": "Binds value property to radio"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Label of the radio"
+    }
+  ],
+  "events": []
+}

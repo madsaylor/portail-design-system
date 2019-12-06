@@ -247,14 +247,14 @@
       />
 
       <Icon
-        v-else-if="!icon_ && touched && inputErrors.length == 0 && getType != 'ds-radio' && getType != 'ds-select' && getType != 'ds-checkbox'"
+        v-else-if="showValidCheck"
         :size="iconSize"
         color="#1EB386"
         source="done"
       />
 
       <Icon
-        v-else-if="!icon_ && touched && inputErrors.length > 0 && getType != 'ds-radio' && getType != 'ds-select' && getType != 'ds-checkbox'"
+        v-else-if="showInvalidBlock"
         :size="iconSize"
         color="#FB4544"
         source="block"
@@ -639,6 +639,12 @@ export default {
       }
 
       return style
+    },
+    showValidCheck() {
+      return this.showValidations && !this.icon_ && this.touched && this.inputErrors.length == 0 && this.getType != 'ds-radio' && this.getType != 'ds-select' && this.getType != 'ds-checkbox'
+    },
+    showInvalidBlock() {
+      return this.showValidations && !this.icon_ && this.touched && this.inputErrors.length > 0 && this.getType != 'ds-radio' && this.getType != 'ds-select' && this.getType != 'ds-checkbox'
     }
   },
   methods: {

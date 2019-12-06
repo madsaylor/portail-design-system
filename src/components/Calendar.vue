@@ -422,6 +422,10 @@
       }
     },
     mounted() {
+      if (this.minDate && this.maxDate && this.value < this.minDate || this.value > this.maxDate) {
+        this.$emit('input', new Date(this.minDate))
+      }
+
       if (this.positionChangeable) {
         this.positions = this.position.split(' ')
         window.addEventListener('resize', this.onResize)

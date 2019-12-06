@@ -315,7 +315,7 @@ export default {
             }
           }
 
-          if (this.value && this.value.getMonth() === month.getMonth()) {
+          if (this.value && this.value.getMonth() === month.getMonth() && this.value.getFullYear() === month.getFullYear()) {
             month.class = 'ds-selected-month'
           }
 

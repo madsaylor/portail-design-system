@@ -121,7 +121,7 @@
            :class="['ds-label-text', {'ds-slide-label': slideLabel, 'ds-label-focus': labelFocus, 'ds-slide-label-date': getType === 'ds-date',
                     'ds-label-error': inputErrors.length && touched && showValidations},
                     slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']">
-          {{ label }}
+          {{ label  }} {{required ? '*' : ''}}
       </div>
 
       <Icon :size="iconSize"
@@ -371,7 +371,10 @@ export default {
       },
       default: 'text'
     },
-    validators: Array,
+    validators: {
+      type: Array,
+      default: () => []
+    },
     value: null,
     datepickerBorderColorDesktop: String,
     datepickerBackgroundColor: String,
@@ -427,7 +430,11 @@ export default {
       type: Number,
       default: 1
     },
-    mask: String
+    mask: String,
+    required: {
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     validateEventName: undefined,
@@ -445,8 +452,15 @@ export default {
   mounted() {
     if (this.name) {
       this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
-
       document.addEventListener(this.validateEventName, this.validate);
+    }
+
+    if (this.required) {
+      this.validators.push({
+        name: 'required',
+        message: 'This field is required',
+        validator: (value) => !!value
+      })
     }
 
     this.checkValuePattern()

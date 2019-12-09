@@ -1,6 +1,6 @@
 <template>
   <div :class="['ds-select-wrapper', {'ds-lg': lg, 'ds-md': md, 'ds-sm': sm}]">
-    <div v-if="label" class="ds-label">{{ label }}</div>
+    <div v-if="label" class="ds-label">{{ label }} {{ required ? '*' : ''}}</div>
     <Icon :source="openDropDownList && reversibleIcon ? 'expand_less' : 'expand_more'"
           color="gray-400"
           class="ds-drop-icon"/>
@@ -68,12 +68,19 @@
       md: Boolean,
       lg: Boolean,
       name: String,
-      validators: Array,
+      validators: {
+        type: Array,
+        default: () => []
+      },
       optionsOverflow: String,
       help: String,
       helpLabel: {
         type: String,
         default: '? explication'
+      },
+      required: {
+        type: Boolean,
+        default: false
       },
       dropdownPosition: {
         type: String,
@@ -190,6 +197,14 @@
       if (this.name) {
         this.validateEventName = `validate${this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()}`;
         document.addEventListener(this.validateEventName, this.validate);
+      }
+
+      if (this.required) {
+        this.validators.push({
+          name: 'required',
+          message: 'This field is required',
+          validator: (value) => !!value
+        })
       }
 
       document.addEventListener('validate', this.validate);

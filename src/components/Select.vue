@@ -80,7 +80,7 @@
       },
       required: {
         type: Array,
-        default: () => []
+        default: false
       },
       dropdownPosition: {
         type: String,

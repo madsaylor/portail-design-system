@@ -1,7 +1,7 @@
 <template>
   <div class="row-col">
     <h3>Radio</h3>
-    <p>Radio component</p>
+    <p>Radio component is used to create a group of radio buttons</p>
 
     <Description compnent-name="Radio"></Description>
 
@@ -28,11 +28,9 @@
       value: undefined,
       radioList: [
         {
-          value: false,
           title: 'Madame'
         },
         {
-          value: false,
           title: 'Monsieur'
         }
       ]

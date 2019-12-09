@@ -6,9 +6,15 @@
       "description": "Binds value property to radio"
     },
     {
-      "name": "label",
+      "name": "list",
+      "type": "Array",
+      "description": "List of objects with title property that reflect titles for radio buttons"
+    },
+    {
+      "name": "spaceBetweenItems",
       "type": "String",
-      "description": "Label of the radio"
+      "default": "30px",
+      "description": "Setup space after each radio item except the last one"
     }
   ],
   "events": []

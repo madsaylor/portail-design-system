@@ -2,19 +2,22 @@
   <span class="ds-radio-component">
     <span class="ds-radio-wrapper" v-for="radio in list">
       <label class="ds-radio-body">
-        <span :class="['ds-radio-container', {'ds-radio-container-inactive': !radio.value,
-                       'ds-radio-container-active': radio.value}]">
+        <span :class="['ds-radio-container', {'ds-radio-container-inactive': !radioActive(radio.title),
+                       'ds-radio-container-active': radioActive(radio.title)}]">
         </span>
 
-        <span :class="[{'ds-radio-circle': radio.value}]"></span>
+        <span :class="[{'ds-radio-circle': radioActive(radio.title)}]"></span>
 
-        <span :class="['ds-radio-text', {'ds-radio-text-active': radio.value,
-                       'ds-radio-text-inactive': !radio.value}]">
+        <span :class="['ds-radio-text', {'ds-radio-text-active': radioActive(radio.title),
+                       'ds-radio-text-inactive': !radioActive(radio.title)}]"
+              :style="{marginRight: spaceBetweenItems}">
           {{radio.title}}
         </span>
 
-        <input type="checkbox"
-               v-model="radio.value"
+        <input type="radio"
+               name="default"
+               :value="radio.title"
+               v-model="radioValue"
                class="ds-radio-input"/>
       </label>
     </span>
@@ -26,9 +29,27 @@
     name: 'Radio',
     props: {
       value: null,
-      list: Array
+      list: Array,
+      spaceBetweenItems: {
+        type: String,
+        default: '30px'
+      }
     },
-    computed: {}
+    computed: {
+      radioValue: {
+        get() {
+          return this.value
+        },
+        set(value) {
+          this.$emit('input', value)
+        }
+      }
+    },
+    methods: {
+      radioActive(itemValue) {
+        return this.value === itemValue
+      }
+    }
   }
 </script>
 
@@ -73,6 +94,7 @@
           font-family: "Roboto Light";
           font-size: 14px;
           line-height: 16px;
+          margin-left: 10px;
 
           .ds-radio-text-active {
             color: @color-gray-500;
@@ -85,6 +107,14 @@
 
         .ds-radio-input {
           display: none;
+        }
+      }
+
+      &:last-child {
+        .ds-radio-body {
+          .ds-radio-text {
+            margin-right: 0 !important;
+          }
         }
       }
     }

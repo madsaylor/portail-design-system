@@ -40,6 +40,7 @@ import NumberRange from './data/NumberRange'
 import CheckBox from './data/CheckBox'
 import Toggle from './data/Toggle'
 import Form from './data/Form'
+import Radio from './data/Radio'
 
 export default {
   AppHeader,
@@ -83,5 +84,6 @@ export default {
   NumberRange,
   CheckBox,
   Toggle,
-  Form
+  Form,
+  Radio
 }

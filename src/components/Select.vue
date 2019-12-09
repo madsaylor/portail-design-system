@@ -79,7 +79,7 @@
         default: '? explication'
       },
       required: {
-        type: Array,
+        type: Boolean,
         default: false
       },
       dropdownPosition: {

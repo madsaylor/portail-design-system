@@ -65,8 +65,8 @@
 
     <div class="input-component-demo">
       Basic inputs:<br />
-      <Input sm label="Small" v-model="textValue"/>
-      <Input md label="Medium" v-model="textValue"/>
+      <Input sm label="Small" v-model="textValue" required/>
+      <Input md label="Medium" v-model="textValue" required/>
       <Input lg icon="search-solid" icon-size="16px" label="Large" v-model="textValue"/>
       <Input md label="Mask: 12/20" v-mask="'##/##'" v-model="maskValue"/>
       <Input

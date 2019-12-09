@@ -68,7 +68,10 @@
       md: Boolean,
       lg: Boolean,
       name: String,
-      validators: Array,
+      validators: {
+        type: Array,
+        default: () => []
+      },
       optionsOverflow: String,
       help: String,
       helpLabel: {

@@ -151,7 +151,7 @@
         :key="inputId"
         v-model="inputValue"
         ref="input"
-        :style="getStyle"
+        :style="{...getStyle, borderRadius}"
         @focus.prevent="inputFocus"
         @[checkSetClickEvent].prevent="inputFocus"
         @blur="inputBlur"
@@ -179,7 +179,7 @@
         :key="inputId"
         v-model="inputValue"
         ref="input"
-        :style="getStyle"
+        :style="{...getStyle, borderRadius}"
         v-mask="mask"
         @focus.prevent="inputFocus"
         @[checkSetClickEvent].prevent="inputFocus"
@@ -397,6 +397,10 @@ export default {
       default: true
     },
     width: String,
+    borderRadius: {
+      type: String,
+      default: '4px'
+    },
 
     // For type="radio"
     radioVal: String,
@@ -910,7 +914,6 @@ export default {
       padding: 10px 12px;
       box-sizing: border-box;
       border: 1px solid @color-gray-300;
-      border-radius: 4px;
       background-color: @color-white;
       width: 100%;
 

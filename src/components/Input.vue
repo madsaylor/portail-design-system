@@ -128,7 +128,8 @@
             v-if="iconLeft && showIcon"
             :color="iconColor"
             :source="iconLeft"
-            :class="['ds-icon-left', {'active-icon': activeIcon}]"
+            :class="['ds-general-icon', 'ds-icon-left', {'active-icon': activeIcon}]"
+            :style="generalIconStyle"
             :padding="iconPadding"
             @click="onIconClick"
       />
@@ -240,7 +241,8 @@
         v-if="icon_ && showIcon"
         :size="iconSize"
         :color="iconColor"
-        :class="{'active-icon': activeIcon}"
+        :class="['ds-general-icon', {'active-icon': activeIcon}]"
+        :style="generalIconStyle"
         :source="icon_"
         :padding="iconPadding"
         @click="onIconClick"
@@ -401,6 +403,7 @@ export default {
       type: String,
       default: '4px'
     },
+    generalIconStyle: Object,
 
     // For type="radio"
     radioVal: String,
@@ -645,11 +648,11 @@ export default {
     },
     getStyle() {
       const style = {}
-      const padding = parseInt(this.iconSize) + 6
+
       if (this.icon) {
-        style.paddingRight = padding + 'px'
+        style.paddingRight = this.calcIconPadding(_.get(this, 'generalIconStyle.right', '6px'))
       } else if (this.iconLeft) {
-        style.paddingLeft = padding + 'px'
+        style.paddingLeft = this.calcIconPadding(_.get(this, 'generalIconStyle.left', '6px'))
       }
 
       if (this.width) {
@@ -658,14 +661,27 @@ export default {
 
       return style
     },
+    validationIconShown() {
+      return this.getType != 'ds-radio' && this.getType != 'ds-select' && this.getType != 'ds-checkbox' &&
+             this.showValidations && !this.icon_ && this.touched
+    },
     showValidCheck() {
-      return this.showValidations && !this.icon_ && this.touched && this.inputErrors.length == 0 && this.getType != 'ds-radio' && this.getType != 'ds-select' && this.getType != 'ds-checkbox'
+      return this.validationIconShown && this.inputErrors.length == 0
     },
     showInvalidBlock() {
-      return this.showValidations && !this.icon_ && this.touched && this.inputErrors.length > 0 && this.getType != 'ds-radio' && this.getType != 'ds-select' && this.getType != 'ds-checkbox'
+      return this.validationIconShown && this.inputErrors.length > 0
     }
   },
   methods: {
+    getNumberFromStringPX(strPX) {
+      return +strPX.substring(0, strPX.length - 2)
+    },
+    calcIconPadding(iconPadding) {
+      let padding = this.getNumberFromStringPX(iconPadding)
+      let iconSize = this.getNumberFromStringPX(this.iconSize)
+
+      return `${padding + iconSize}px`
+    },
     onInputClick(e) {
       this.$emit('click', e)
     },

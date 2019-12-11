@@ -110,7 +110,7 @@
 -->
 
 <template>
-  <div :class="['ds-input', getType, {'ds-disabled': disabled, 'ds-sm': sm, 'ds-md': md, 'ds-lg': lg, preventScroll: datepickerVisible}]"
+  <div :class="['ds-input', getType, {'ds-disabled': disabled, 'ds-sm': sm, 'ds-md': md, 'ds-lg': lg, 'ds-has-label': label, preventScroll: datepickerVisible}]"
     :style="{width}"
     @click="onInputClick"
   >
@@ -1030,7 +1030,7 @@ export default {
     input + .icon-wrapper {
         pointer-events: none;
         position: absolute;
-        bottom: 8%;
+        bottom: 24%;
         right: 6px;
         height: 50% !important;
     }
@@ -1046,6 +1046,12 @@ export default {
     input + .active-icon {
       cursor: pointer;
       pointer-events: auto;
+    }
+  }
+
+  &.ds-has-label {
+    input + .icon-wrapper {
+      bottom: 8%;
     }
   }
   
@@ -1257,9 +1263,17 @@ export default {
     input + .icon-wrapper {
       pointer-events: none;
       position: absolute;
-      bottom: 6%;
+      bottom: 24%;
       right: 15px;
       height: 50% !important;
+    }
+  }
+
+  &.ds-lg {
+    &.ds-has-label {
+      input + .icon-wrapper {
+        bottom: 6%;
+      }
     }
   }
 }

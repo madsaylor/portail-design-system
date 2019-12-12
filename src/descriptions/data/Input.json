@@ -178,6 +178,17 @@
       "description": "Set icon padding"
     },
     {
+      "name": "labelIcon",
+      "type": "String",
+      "description": "Icon name for icons from src/icons folder or an svg code for label of Input"
+    },
+    {
+      "name": "labelIconColor",
+      "type": "String",
+      "default": "gray-500",
+      "description": "Set up color for label Icon of Input"
+    },
+    {
       "name": "maxlength",
       "type": "Number",
       "description": "Setup max count characters for Input component with type text"

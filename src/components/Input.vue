@@ -122,6 +122,13 @@
                     'ds-label-error': inputErrors.length && touched && showValidations},
                     slideActive ? 'ds-slide-label-active' : slideLabel ? 'ds-slide-label-inactive' : '']">
           {{ label  }} {{required ? '*' : ''}}
+
+        <Icon class="ds-input-label-icon"
+              v-if="labelIcon"
+              size="16px"
+              :color="labelIconColor"
+              :source="labelIcon"
+        />
       </div>
 
       <Icon :size="iconSize"
@@ -358,6 +365,11 @@ export default {
       default: 'gray-400'
     },
     iconPadding: String,
+    labelIcon: String,
+    labelIconColor: {
+      type: String,
+      default: 'gray-500'
+    },
     label: String,
     subLabel: String,
     lang: String,
@@ -884,6 +896,10 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      .ds-input-label-icon {
+        margin-left: 2px;
+      }
     }
 
     .ds-slide-label {

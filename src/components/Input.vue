@@ -152,7 +152,7 @@
         :key="inputId"
         v-model="inputValue"
         ref="input"
-        :style="{...getStyle, borderRadius}"
+        :style="{...getStyle, borderRadius, ...inputStyle}"
         @focus.prevent="inputFocus"
         @[checkSetClickEvent].prevent="inputFocus"
         @blur="inputBlur"
@@ -180,7 +180,7 @@
         :key="inputId"
         v-model="inputValue"
         ref="input"
-        :style="{...getStyle, borderRadius}"
+        :style="{...getStyle, borderRadius, ...inputStyle}"
         v-mask="mask"
         @focus.prevent="inputFocus"
         @[checkSetClickEvent].prevent="inputFocus"
@@ -404,6 +404,7 @@ export default {
       default: '4px'
     },
     generalIconStyle: Object,
+    inputStyle: Object,
 
     // For type="radio"
     radioVal: String,

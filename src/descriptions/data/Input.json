@@ -213,6 +213,11 @@
       "name": "generalIconStyle",
       "type": "Object",
       "description": "Set styles for general Icons"
+    },
+    {
+      "name": "inputStyle",
+      "type": "Object",
+      "description": "Set styles for input element"
     }
   ],
   "events": [

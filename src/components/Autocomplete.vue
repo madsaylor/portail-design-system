@@ -14,6 +14,7 @@
            :iconColor="iconColor"
            :showIcon="showIcon"
            :type="getInputType"
+           :inputStyle="inputStyle"
            v-model="inputValue"
            ref="autocomplete"
            @validation="onValidate"
@@ -87,7 +88,10 @@
       searchResults: undefined,
       id: undefined,
       timeoutId: undefined,
-      minWidth: undefined
+      minWidth: undefined,
+      inputStyle: {
+        backgroundColor: '#FFF'
+      }
     }),
     computed: {
       getInputLabel() {

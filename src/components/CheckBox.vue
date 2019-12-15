@@ -7,6 +7,7 @@
 
       <Icon check_box
             size="11px"
+            :color="getIconColor"
             v-if="checkboxValue"
             class="ds-checkbox-icon">
       </Icon>
@@ -41,6 +42,9 @@
         set(value) {
           this.$emit('input', value)
         }
+      },
+      getIconColor() {
+        return this.checkboxValue ? 'primary' : 'white'
       }
     }
   }
@@ -63,7 +67,7 @@
         border-radius: 2px;
 
         &.ds-checkbox-container-active {
-          background-color: @color-gray-400;
+          background-color: rgba(30, 179, 134, 0.15);
         }
 
         &.ds-checkbox-container-inactive {

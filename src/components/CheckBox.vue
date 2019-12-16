@@ -7,7 +7,6 @@
 
       <Icon check_box
             size="11px"
-            :color="getIconColor"
             v-if="checkboxValue"
             class="ds-checkbox-icon">
       </Icon>
@@ -42,9 +41,6 @@
         set(value) {
           this.$emit('input', value)
         }
-      },
-      getIconColor() {
-        return this.checkboxValue ? 'primary' : 'white'
       }
     }
   }

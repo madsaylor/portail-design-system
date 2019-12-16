@@ -63,7 +63,7 @@
         border-radius: 2px;
 
         &.ds-checkbox-container-active {
-          background-color: @color-gray-400;
+          background-color: rgba(30, 179, 134, 0.15);
         }
 
         &.ds-checkbox-container-inactive {

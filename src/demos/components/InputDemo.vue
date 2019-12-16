@@ -167,75 +167,6 @@
 
       <Input
         md
-        type="select"
-        placeholder="Select a value"
-        label="Select"
-        v-model="selectValue"
-        :disabled="false"
-        :validators="demoValidatorForSelect"
-        :valueModeSelect="true"
-        :selectOptionFormat="2"
-        :options="[{
-          value: 'Hello',
-          id: 1,
-        }, {
-          value: 'World',
-          id: 2
-        }]"
-      />
-
-      <Button alt @click="validate()">
-        VALIDATE
-      </Button>
-
-      <br />
-
-      Checkbox:<br />
-      <Input
-        type="checkbox"
-        label="Checkbox"
-        v-model="textValue"
-      />
-      <Input
-        type="checkbox"
-        label="Disabled unchecked"
-        disabled
-        :value="false"
-      />
-      <Input
-        type="checkbox"
-        label="Disabled checked"
-        disabled
-        :value="true"
-      />
-      <br />
-
-      Radio:<br />
-      <Input
-        type="radio"
-        label="First"
-        radioVal="first"
-        v-model="radioValue"
-      />
-
-      <Input
-        type="radio"
-        label="Second"
-        radioVal="second"
-        v-model="radioValue"
-      />
-
-      <Input
-        type="radio"
-        label="Disabled"
-        radioVal="third"
-        disabled
-        v-model="radioValue"
-      />
-      <br />
-
-      <Input
-        md
         icon="euro_symbol"
         iconSize="16px"
         iconColor="#3f4352"
@@ -289,6 +220,11 @@
         :show-errors="passwordShowErrors.secondField"
         @lastKeyDownDelay="onlastKeyDownDelay('secondField')"
       />
+      <br />
+
+      <Button alt @click="validate()">
+        VALIDATE
+      </Button>
     </div>
   </div>
 </template>
@@ -311,9 +247,7 @@ export default {
     textValue: '',
     maskValue: '',
     currencyValue: 20,
-    selectValue: null,
     slideTextValue: 'Test text',
-    radioValue: 'first',
     dateValue: new Date(),
     dateValue2: null,
     dateValue3: null,

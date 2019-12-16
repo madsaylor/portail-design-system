@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="range-input-wrapper" @click="dropdownOpened = !dropdownOpened">
-      <Input disabled :value="inputData" ref="inputDrop" />
+      <Input disabled :value="inputData" :show-validations="false" ref="inputDrop" />
       <Button plain padding="12px" class="close-btn" icon="close" iconColor="#778CA2" iconSize="24px" @click="clearModel" />
     </div>
 

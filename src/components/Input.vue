@@ -48,8 +48,8 @@
         :name="name"
         :class="{
           'ds-has-icon': icon_,
-          'ds-error': inputErrors.length && touched && showValidations,
-          'ds-valid': inputErrors.length == 0 && touched && showValidations,
+          'ds-error': showInvalidBlock && invalidBacklight,
+          'ds-valid': showValidCheck && validBacklight,
           'ds-slide-input': slideLabel,
           'date': getType === 'ds-date',
           'ds-has-left-icon': iconLeft,
@@ -76,8 +76,8 @@
         :name="name"
         :class="{
           'ds-has-icon': icon_,
-          'ds-error': inputErrors.length && touched && showValidations,
-          'ds-valid': inputErrors.length == 0 && touched && showValidations,
+          'ds-error': showInvalidBlock && invalidBacklight,
+          'ds-valid': showValidCheck && validBacklight,
           'ds-slide-input': slideLabel,
           'date': getType === 'ds-date',
           'ds-has-left-icon': iconLeft,
@@ -106,20 +106,6 @@
         :source="icon_"
         :padding="iconPadding"
         @click="onIconClick"
-      />
-
-      <Icon
-        v-else-if="showValidCheck"
-        :size="iconSize"
-        color="#1EB386"
-        source="done"
-      />
-
-      <Icon
-        v-else-if="showInvalidBlock"
-        :size="iconSize"
-        color="#FB4544"
-        source="block"
       />
 
       <div class="ds-drawer">
@@ -305,6 +291,9 @@ export default {
     windowWidth: window.innerWidth,
     positions: Array,
     timeoutId: undefined,
+    validationTimeoutId: undefined,
+    validBacklight: false,
+    invalidBacklight: false,
     id: Math.random().toString(36).substring(7),
     inputId: Math.random().toString(36).substring(7)
   }),
@@ -499,14 +488,14 @@ export default {
 
       return style
     },
-    validationIconShown() {
-      return this.showValidations && !this.icon_ && this.touched
+    validationShown() {
+      return this.showValidations && this.touched
     },
     showValidCheck() {
-      return this.validationIconShown && this.inputErrors.length == 0
+      return this.validationShown && this.inputErrors.length == 0
     },
     showInvalidBlock() {
-      return this.validationIconShown && this.inputErrors.length > 0
+      return this.validationShown && this.inputErrors.length > 0
     }
   },
   methods: {
@@ -637,12 +626,30 @@ export default {
     },
     setTouched(touched) {
       this.touched = touched
+    },
+    validationBacklight(activeValidation, inactiveValidation) {
+      this[inactiveValidation] = false;
+      this[activeValidation] = true;
+
+      if (this.validationTimeoutId) {
+        clearTimeout(this.validationTimeoutId)
+      }
+
+      this.validationTimeoutId = setTimeout(() => {
+        this[activeValidation] = false;
+      }, 2000)
     }
   },
   watch: {
     value(newValue) {
       if (this.slideLabel && !this.labelFocus && !newValue) {
         this.slideActive = false;
+      }
+
+      if (this.showValidCheck) {
+        this.validationBacklight('validBacklight', 'invalidBacklight')
+      } else if (this.showInvalidBlock) {
+        this.validationBacklight('invalidBacklight', 'validBacklight')
       }
 
       this.slideInit()
@@ -659,6 +666,16 @@ export default {
       }
       this.setOverflow(this.isMobile);
       this.$emit('datepickerVisible', value);
+    },
+    showValidCheck(value) {
+      if (value) {
+        this.validationBacklight('validBacklight', 'invalidBacklight')
+      }
+    },
+    showInvalidBlock(value) {
+      if (value) {
+        this.validationBacklight('invalidBacklight', 'validBacklight')
+      }
     }
   },
   beforeDestroy() {

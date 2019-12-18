@@ -23,7 +23,9 @@
         type="tel"
         v-model="inputValueWrapper"
         :class="['ds-has-icon', {
-          'ds-error': inputErrors.length && touched && showErrors,
+          'ds-error-backlight': showInvalidBacklight,
+          'ds-valid-backlight': showValidBacklight,
+          'ds-error': inputErrors.length && validateAvailable,
           'ds-slide-input': slideLabel,
           'ds-text-right': textAlign === 'right',
           'ds-placeholder-md': placeholderMd
@@ -47,7 +49,7 @@
                     @click="onIconClick"
       />
 
-      <div class="ds-drawer" v-if="inputErrors.length && touched && showErrors">
+      <div class="ds-drawer" v-if="inputErrors.length && validateAvailable">
         <span class="ds-error-message">
           {{ inputErrors[0] }}
         </span>
@@ -175,7 +177,11 @@
       rangeAvailable: Boolean,
       selectDayList: Boolean,
       shortMonthFormat: Boolean,
-      iconLeft: Boolean
+      iconLeft: Boolean,
+      backlight: {
+        type: Boolean,
+        default: false
+      }
     },
     data: () => ({
       calendarVisible: false,
@@ -186,7 +192,10 @@
       positions: Array,
       id: Math.random().toString(36).substring(7),
       dateUnset: false,
-      oldValue: undefined
+      oldValue: undefined,
+      validationTimeoutId: undefined,
+      validBacklight: false,
+      invalidBacklight: false
     }),
     computed: {
       inputValueWrapper() {
@@ -318,6 +327,15 @@
         }
         return errors
       },
+      validateAvailable() {
+        return this.touched && this.showErrors
+      },
+      showValidBacklight() {
+        return this.inputErrors.length > 0 && this.validateAvailable && this.validBacklight && this.backlight
+      },
+      showInvalidBacklight() {
+        return this.inputErrors.length && this.validateAvailable && this.invalidBacklight && this.backlight
+      },
     },
     methods: {
       onInputPrevent(event, callInputFocus) {
@@ -373,6 +391,7 @@
         this.$emit('icon-click')
       },
       validate() {
+        this.checkBacklight()
         this.touched = true
         this.$emit('validation', this.validation)
       },
@@ -396,6 +415,25 @@
         } else {
           return value.toLocaleDateString(this.locale)
         }
+      },
+      validationBacklight(activeValidation, inactiveValidation) {
+        this[inactiveValidation] = false;
+        this[activeValidation] = true;
+
+        if (this.validationTimeoutId) {
+          clearTimeout(this.validationTimeoutId)
+        }
+
+        this.validationTimeoutId = setTimeout(() => {
+          this[activeValidation] = false;
+        }, 2000)
+      },
+      checkBacklight() {
+        if (this.showValidBacklight) {
+          this.validationBacklight('validBacklight', 'invalidBacklight')
+        } else if (this.showInvalidBacklight) {
+          this.validationBacklight('invalidBacklight', 'validBacklight')
+        }
       }
     },
     watch: {
@@ -404,6 +442,8 @@
         if (this.slideLabel && !this.labelFocus && !newValue) {
           this.slideActive = false
         }
+
+        this.checkBacklight()
 
         this.slideInit()
         this.$emit('validation', this.validation)
@@ -419,6 +459,16 @@
         }
         this.setOverflow(this.isMobile)
         this.$emit('calendarVisible', value)
+      },
+      showValidBacklight(value) {
+        if (value) {
+          this.validationBacklight('validBacklight', 'invalidBacklight')
+        }
+      },
+      showInvalidBacklight(value) {
+        if (value) {
+          this.validationBacklight('invalidBacklight', 'validBacklight')
+        }
       }
     },
     mounted() {
@@ -549,6 +599,16 @@
 
       &.ds-error {
         border-color: @color-red;
+      }
+
+      &.ds-error-backlight {
+        border-color: @color-red;
+        background-color: #ffedec;
+      }
+
+      &.ds-valid-backlight {
+        border-color: @color-primary;
+        background-color: #e9f8f3;
       }
 
       &:disabled {

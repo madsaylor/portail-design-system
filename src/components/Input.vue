@@ -544,7 +544,8 @@ export default {
       this.$emit('inputBlur')
     },
     validate() {
-      this.touched = true;
+      this.checkBacklight()
+      this.touched = true
       this.$emit('validation', this.validation)
     },
     slideInit() {
@@ -638,6 +639,13 @@ export default {
       this.validationTimeoutId = setTimeout(() => {
         this[activeValidation] = false;
       }, 2000)
+    },
+    checkBacklight() {
+      if (this.showValidCheck) {
+        this.validationBacklight('validBacklight', 'invalidBacklight')
+      } else if (this.showInvalidBlock) {
+        this.validationBacklight('invalidBacklight', 'validBacklight')
+      }
     }
   },
   watch: {
@@ -646,11 +654,7 @@ export default {
         this.slideActive = false;
       }
 
-      if (this.showValidCheck) {
-        this.validationBacklight('validBacklight', 'invalidBacklight')
-      } else if (this.showInvalidBlock) {
-        this.validationBacklight('invalidBacklight', 'validBacklight')
-      }
+      this.checkBacklight()
 
       this.slideInit()
       this.$emit('validation', this.validation)

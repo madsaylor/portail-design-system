@@ -349,6 +349,7 @@
           this.labelFocus = true
           this.slideActive = true
         }
+        this.touched = true
 
         this.calendarVisible = !this.calendarVisible
         this.$refs.input.blur()
@@ -364,7 +365,6 @@
           }
         }
 
-        this.touched = true
         this.$emit('inputBlur')
       },
       slideInit() {

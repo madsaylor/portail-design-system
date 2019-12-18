@@ -23,8 +23,8 @@
         type="tel"
         v-model="inputValueWrapper"
         :class="['ds-has-icon', {
-          'ds-error-backlight': showInvalidBacklight,
-          'ds-valid-backlight': showValidBacklight,
+          'ds-error-backlight': showInvalidBacklight && invalidBacklight,
+          'ds-valid-backlight': showValidBacklight && validBacklight,
           'ds-error': inputErrors.length && validateAvailable,
           'ds-slide-input': slideLabel,
           'ds-text-right': textAlign === 'right',
@@ -331,10 +331,10 @@
         return this.touched && this.showErrors
       },
       showValidBacklight() {
-        return this.inputErrors.length > 0 && this.validateAvailable && this.validBacklight && this.backlight
+        return this.inputErrors.length == 0 && this.validateAvailable && this.backlight
       },
       showInvalidBacklight() {
-        return this.inputErrors.length && this.validateAvailable && this.invalidBacklight && this.backlight
+        return this.inputErrors.length > 0 && this.validateAvailable && this.backlight
       },
     },
     methods: {

@@ -391,8 +391,8 @@
         this.$emit('icon-click')
       },
       validate() {
-        this.checkBacklight()
         this.touched = true
+        this.checkBacklight()
         this.$emit('validation', this.validation)
       },
       onSave() {
@@ -429,11 +429,13 @@
         }, 2000)
       },
       checkBacklight() {
-        if (this.showValidBacklight) {
-          this.validationBacklight('validBacklight', 'invalidBacklight')
-        } else if (this.showInvalidBacklight) {
-          this.validationBacklight('invalidBacklight', 'validBacklight')
-        }
+        this.$nextTick(() => {
+          if (this.showValidBacklight) {
+            this.validationBacklight('validBacklight', 'invalidBacklight')
+          } else if (this.showInvalidBacklight) {
+            this.validationBacklight('invalidBacklight', 'validBacklight')
+          }
+        })
       }
     },
     watch: {

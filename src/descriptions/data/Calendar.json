@@ -199,6 +199,12 @@
       "type": "Number",
       "default": "4",
       "description": "Set a space between input and dropdown of calendar"
+    },
+    {
+      "name": "backlight",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Allow backlight for input when this prop equal as true"
     }
   ],
   "events": [

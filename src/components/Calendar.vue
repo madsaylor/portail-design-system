@@ -28,7 +28,8 @@
           'ds-error': inputErrors.length && validateAvailable,
           'ds-slide-input': slideLabel,
           'ds-text-right': textAlign === 'right',
-          'ds-placeholder-md': placeholderMd
+          'ds-placeholder-md': placeholderMd,
+          'ds-calendar-input-focus': calendarVisible && inputBorderBacklight
         }]"
         ref="input"
         :style="getStyle"
@@ -181,7 +182,8 @@
       backlight: {
         type: Boolean,
         default: false
-      }
+      },
+      inputBorderBacklight: Boolean
     },
     data: () => ({
       calendarVisible: false,
@@ -594,6 +596,10 @@
       }
 
       .input-placeholder();
+
+      &.ds-calendar-input-focus:not(.ds-error) {
+        border-color: @color-primary;
+      }
 
       &:focus {
         outline: none;

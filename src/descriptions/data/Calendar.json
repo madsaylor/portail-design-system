@@ -205,6 +205,11 @@
       "type": "Boolean",
       "default": "false",
       "description": "Allow backlight for input when this prop equal as true"
+    },
+    {
+      "name": "inputBorderBacklight",
+      "type": "Boolean",
+      "description": "Backlight input border when calendar is open"
     }
   ],
   "events": [

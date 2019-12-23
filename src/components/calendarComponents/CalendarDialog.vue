@@ -269,7 +269,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    z-index: 1100;
+    z-index: 10000;
     top: 0;
 
     .ds-dialog-backdrop {

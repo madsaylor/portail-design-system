@@ -1,0 +1,25 @@
+{
+  "properties": [
+    {
+      "name": "header",
+      "type": "String",
+      "description": "Setup header for Slider component"
+    },
+    {
+      "name": "width",
+      "type": "String",
+      "description": "Setup width for Slider component"
+    },
+    {
+      "name": "height",
+      "type": "String",
+      "description": "Setup height for Slider component"
+    },
+    {
+      "name": "startIndex",
+      "type": "Number",
+      "description": "Set slide index of slider content from that Slider will start to display content"
+    }
+  ],
+  "events": []
+}

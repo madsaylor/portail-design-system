@@ -41,6 +41,7 @@ import CheckBox from './data/CheckBox'
 import Toggle from './data/Toggle'
 import Form from './data/Form'
 import Radio from './data/Radio'
+import Slider from './data/Slider'
 
 export default {
   AppHeader,
@@ -85,5 +86,6 @@ export default {
   CheckBox,
   Toggle,
   Form,
-  Radio
+  Radio,
+  Slider
 }

@@ -11,8 +11,8 @@
             class="ds-checkbox-icon">
       </Icon>
 
-      <span :class="['ds-checkbox-text', {'ds-checkbox-text-active': checkboxValue,
-                     'ds-checkbox-text-inactive': !checkboxValue}]">
+      <span :class="['ds-checkbox-text', {'ds-checkbox-text-active': checkboxValue && !boldLabel,
+                     'ds-checkbox-text-inactive': !checkboxValue && !boldLabel, 'ds-checkbox-text-bold': boldLabel}]">
         {{label}}
       </span>
 
@@ -31,7 +31,8 @@
     components: {Icon},
     props: {
       value: Boolean,
-      label: String
+      label: String,
+      boldLabel: Boolean
     },
     computed: {
       checkboxValue: {
@@ -78,17 +79,25 @@
 
       .ds-checkbox-text {
         height: 16px;
-        font-family: "Roboto Light";
         font-size: 14px;
         line-height: 16px;
-        margin-left: 10px;
 
         &.ds-checkbox-text-active {
+          font-family: "Roboto Light";
           color: @color-dark;
+          margin-left: 10px;
         }
 
         &.ds-checkbox-text-inactive {
+          font-family: "Roboto Light";
           color: @color-gray-500;
+          margin-left: 10px;
+        }
+
+        &.ds-checkbox-text-bold {
+          color: #1B1E24;
+          font-family: Roboto, sans-serif;
+          margin-left: 12px;
         }
       }
 

@@ -42,6 +42,7 @@ import Toggle from './data/Toggle'
 import Form from './data/Form'
 import Radio from './data/Radio'
 import Slider from './data/Slider'
+import MultiSelect from './data/MultiSelect'
 
 export default {
   AppHeader,
@@ -87,5 +88,6 @@ export default {
   Toggle,
   Form,
   Radio,
-  Slider
+  Slider,
+  MultiSelect
 }

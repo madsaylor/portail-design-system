@@ -48,6 +48,7 @@ import ToggleData from './data/demo/ToggleData'
 import FormData from './data/demo/FormData'
 import RadioData from './data/demo/RadioData'
 import SliderData from './data/demo/SliderData'
+import MultiSelectData from './data/demo/MultiSelectData'
 
 export {
   CountriesArray,
@@ -99,5 +100,6 @@ export {
   ToggleData,
   FormData,
   RadioData,
-  SliderData
+  SliderData,
+  MultiSelectData
 }

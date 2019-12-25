@@ -74,7 +74,7 @@
             } else {
               this.sliderStartIndex += value
             }
-          }, 500)
+          }, 200)
         }
       }
     }
@@ -134,7 +134,7 @@
 
       .slide-active {
         animation-name:slider;
-        animation-duration:0.5s;
+        animation-duration:0.2s;
         animation-timing-function: ease-in-out;
         animation-iteration-count:infinite;
       }

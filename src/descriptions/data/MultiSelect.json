@@ -1,0 +1,38 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "Array",
+      "default": "[]",
+      "description": "Reflected selected options"
+    },
+    {
+      "name": "options",
+      "type": "Array<Object>",
+      "description": "Data for selecting active checkbox"
+    },
+    {
+      "name": "title",
+      "type": "String",
+      "description": "Title of component that will be displayed after additional icon and before selected list value options"
+    },
+    {
+      "name": "titleIcon",
+      "type": "String",
+      "description": "Set additional Icon by the provided name"
+    },
+    {
+      "name": "titleIconSize",
+      "type": "String",
+      "default": "18px",
+      "description": "Must be valid css value. Size for the inner svg element for additional Icon"
+    },
+    {
+      "name": "titleIconColor",
+      "type": "String",
+      "default": "gray-500",
+      "description": "Color variable name or a CSS value for additional Icon"
+    }
+  ],
+  "events": []
+}

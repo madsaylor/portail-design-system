@@ -9,6 +9,11 @@
       "name": "label",
       "type": "String",
       "description": "Label of the checkbox"
+    },
+    {
+      "name": "boldLabel",
+      "type": "Boolean",
+      "description": "Set label is bold"
     }
   ],
   "events": []

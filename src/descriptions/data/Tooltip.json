@@ -24,6 +24,32 @@
       "name": "margin",
       "type": "String",
       "description": "Set margin of tooltip"
+    },
+    {
+      "name": "popoverWidth",
+      "type": "String",
+      "description": "Setup tooltip width"
+    },
+
+    {
+      "name": "poperHeight",
+      "type": "String",
+      "description": "Setup tooltip height"
+    },
+    {
+      "name": "poperPadding",
+      "type": "String",
+      "description": "Setup tooltip padding"
+    },
+    {
+      "name": "poperMargin",
+      "type": "String",
+      "description": "Setup tooltip margin"
+    },
+    {
+      "name": "poperBoxSizing",
+      "type": "String",
+      "description": "Setup tooltip box-sizing"
     }
   ],
   "events": [

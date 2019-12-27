@@ -18,7 +18,8 @@
     :style="stylesObject"
   >
     <template v-if="type === 'mini'">
-      <div class="ds-mini">
+      <div class="ds-mini"
+           :style="{width: popoverWidth, height: poperHeight, padding: poperPadding, margin: poperMargin, boxSizing: poperBoxSizing}">
         <slot></slot>
       </div>
     </template>
@@ -46,7 +47,9 @@
             }"
             :force-show="true"
           >
-            <div class="popper" :style="{width: popoverWidth}">
+            <div :class="['popper', {'custom-poper': type === 'custom'}]"
+                 :style="{width: popoverWidth, height: poperHeight, padding: poperPadding, margin: poperMargin,
+                          boxSizing: poperBoxSizing}">
               <slot name="popover"></slot>
             </div>
         
@@ -72,7 +75,9 @@
               modifiers: { offset: offset }
             }"
           >
-            <div class="popper" :style="{width: popoverWidth}">
+            <div :class="['popper', {'custom-poper': type === 'custom'}]"
+                 :style="{width: popoverWidth, height: poperHeight, padding: poperPadding, margin: poperMargin,
+                          boxSizing: poperBoxSizing}">
               <slot name="popover"></slot>
             </div>
         
@@ -120,6 +125,10 @@ export default {
       default: false
     },
     popoverWidth: String,
+    poperHeight: String,
+    poperPadding: String,
+    poperMargin: String,
+    poperBoxSizing: String,
     margin: {
       type: String
     }
@@ -281,6 +290,49 @@ export default {
           border-top: 10px solid transparent;
           border-bottom: 10px solid transparent;
           z-index: 2;
+        }
+      }
+    }
+
+    &.custom-poper {
+      background-color: @color-gray-200 !important;
+      border: none;
+      color: @color-dark;
+      font-family: "Roboto Light";
+      font-size: 14px;
+      line-height: 21px;
+
+      &[x-placement="bottom"] {
+        [x-arrow] {
+          &:before, &:after {
+            border-bottom-color: @color-gray-200;
+          }
+        }
+      }
+
+      &[x-placement="top"] {
+        [x-arrow] {
+          &:before, &:after {
+            border-top-color: @color-gray-200;
+          }
+        }
+      }
+
+
+      &[x-placement="left"] {
+        [x-arrow] {
+          &:before, &:after {
+            border-left-color: @color-gray-200;
+          }
+        }
+      }
+
+
+      &[x-placement="right"] {
+        [x-arrow] {
+          &:before, &:after {
+            border-right-color: @color-gray-200;
+          }
         }
       }
     }

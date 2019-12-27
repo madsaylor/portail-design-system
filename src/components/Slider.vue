@@ -61,12 +61,8 @@
         let nextSlideIndex = this.sliderStartIndex + value
         let slideCount = Object.keys(this.$slots).length
 
-        if (slideCount) {
-          this.slideActive = true
-
-          setTimeout(() => {
-            this.slideActive = false
-
+        if (slideCount && !this.slideActive) {
+          this.slideActive = setTimeout(() => {
             if (nextSlideIndex < 1) {
               this.sliderStartIndex = slideCount
             } else if (nextSlideIndex > slideCount) {
@@ -74,7 +70,9 @@
             } else {
               this.sliderStartIndex += value
             }
-          }, 200)
+
+            this.slideActive = undefined
+          }, 400)
         }
       }
     }
@@ -134,7 +132,7 @@
 
       .slide-active {
         animation-name:slider;
-        animation-duration:0.2s;
+        animation-duration:0.4s;
         animation-timing-function: ease-in-out;
         animation-iteration-count:infinite;
       }

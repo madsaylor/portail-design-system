@@ -19,9 +19,7 @@
 
       <span v-if="!allOptionSelected"
             class="ds-usv3-multi-select-value">
-        <span v-for="itemValue in value">
-          {{itemValue.value}}
-        </span>
+        {{selectedItems}}
       </span>
 
       <Icon expand_more
@@ -82,6 +80,11 @@
       allOptionSelected: false,
       optionsWrapper: []
     }),
+    computed: {
+      selectedItems() {
+        return this.value.map((item) => item.value).join(', ')
+      }
+    },
     methods: {
       updateOpenState() {
         this.openDropDownList = !this.openDropDownList

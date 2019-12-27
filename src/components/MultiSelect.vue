@@ -99,14 +99,18 @@
       }
     },
     mounted() {
-      this.value.forEach((val) => {
-        this.optionsWrapper = this.options.map((option) => {
-          return {
-            ...option,
-            state: val.value === option.value
-          }
+      if (this.value.length) {
+        this.value.forEach((val) => {
+          this.optionsWrapper = this.options.map((option) => {
+            return {
+              ...option,
+              state: val.value === option.value
+            }
+          })
         })
-      })
+      } else {
+        this.optionsWrapper = this.options.slice()
+      }
 
       this.allOptionSelected = this.value.length === this.options.length
     }

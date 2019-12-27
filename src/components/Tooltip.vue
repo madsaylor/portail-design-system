@@ -18,7 +18,8 @@
     :style="stylesObject"
   >
     <template v-if="type === 'mini'">
-      <div class="ds-mini">
+      <div class="ds-mini"
+           :style="{width: popoverWidth, height: poperHeight, padding: poperPadding, margin: poperMargin, boxSizing: poperBoxSizing}">
         <slot></slot>
       </div>
     </template>
@@ -46,7 +47,9 @@
             }"
             :force-show="true"
           >
-            <div class="popper" :style="{width: popoverWidth}">
+            <div :class="['popper', {'custom-poper': type === 'custom'}]"
+                 :style="{width: popoverWidth, height: poperHeight, padding: poperPadding, margin: poperMargin,
+                          boxSizing: poperBoxSizing}">
               <slot name="popover"></slot>
             </div>
         
@@ -72,7 +75,9 @@
               modifiers: { offset: offset }
             }"
           >
-            <div class="popper" :style="{width: popoverWidth}">
+            <div :class="['popper', {'custom-poper': type === 'custom'}]"
+                 :style="{width: popoverWidth, height: poperHeight, padding: poperPadding, margin: poperMargin,
+                          boxSizing: poperBoxSizing}">
               <slot name="popover"></slot>
             </div>
         
@@ -120,6 +125,10 @@ export default {
       default: false
     },
     popoverWidth: String,
+    poperHeight: String,
+    poperPadding: String,
+    poperMargin: String,
+    poperBoxSizing: String,
     margin: {
       type: String
     }
@@ -181,7 +190,7 @@ export default {
     margin-top: 10px;
     margin-bottom: 10px;
 
-    &[x-placement="bottom"] {
+    &[x-placement^="bottom"] {
       [x-arrow] {
         &:before {
           content: '';
@@ -207,7 +216,7 @@ export default {
       }
     }
 
-    &[x-placement="top"] {
+    &[x-placement^="top"] {
       [x-arrow] {
         &:before {
           content: '';
@@ -233,7 +242,7 @@ export default {
       }
     }
 
-    &[x-placement="left"] {
+    &[x-placement^="left"] {
       [x-arrow] {
         &:before {
           content: '';
@@ -259,7 +268,7 @@ export default {
       }
     }
 
-    &[x-placement="right"] {
+    &[x-placement^="right"] {
       [x-arrow] {
         &:before {
           content: '';
@@ -281,6 +290,90 @@ export default {
           border-top: 10px solid transparent;
           border-bottom: 10px solid transparent;
           z-index: 2;
+        }
+      }
+    }
+
+    &.custom-poper {
+      background-color: @color-gray-200 !important;
+      border: none;
+      color: @color-dark;
+      font-family: "Roboto Light";
+      font-size: 14px;
+      line-height: 21px;
+
+      &[x-placement^="bottom"],
+      &[x-placement^="top"],
+      &[x-placement^="left"],
+      &[x-placement^="right"] {
+        [x-arrow] {
+          &:before {
+            display: none;
+          }
+        }
+      }
+
+      &[x-placement^="bottom"] {
+        [x-arrow] {
+          &:after {
+            top: -15px;
+            border-bottom: 20px solid @color-gray-200;
+            border-right: 10px solid transparent;
+            border-left: 20px solid transparent;
+          }
+        }
+      }
+
+      &[x-placement^="top"] {
+        [x-arrow] {
+          &:after {
+            bottom: -15px;
+            border-top: 20px solid @color-gray-200;
+            border-right: 10px solid transparent;
+            border-left: 20px solid transparent;
+          }
+        }
+      }
+
+      &[x-placement^="left"] {
+        [x-arrow] {
+          &:after {
+            right: -15px;
+            border-left: 20px solid @color-gray-200;
+            border-top: 10px solid transparent;
+            border-bottom: 20px solid transparent;
+          }
+        }
+      }
+
+      &[x-placement^="right"] {
+        [x-arrow] {
+          &:after {
+            left: -15px;
+            border-right: 20px solid @color-gray-200;
+            border-top: 10px solid transparent;
+            border-bottom: 20px solid transparent;
+          }
+        }
+      }
+
+      &[x-placement="right-end"],
+      &[x-placement="left-end"] {
+        [x-arrow] {
+          &:after {
+            top: -17px;
+          }
+        }
+      }
+
+      &[x-placement="top-start"],
+      &[x-placement="top-end"],
+      &[x-placement="bottom-start"],
+      &[x-placement="bottom-end"] {
+        [x-arrow] {
+          &:after {
+            left: -15px;
+          }
         }
       }
     }

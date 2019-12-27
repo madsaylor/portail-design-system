@@ -190,7 +190,7 @@ export default {
     margin-top: 10px;
     margin-bottom: 10px;
 
-    &[x-placement="bottom"] {
+    &[x-placement^="bottom"] {
       [x-arrow] {
         &:before {
           content: '';
@@ -216,7 +216,7 @@ export default {
       }
     }
 
-    &[x-placement="top"] {
+    &[x-placement^="top"] {
       [x-arrow] {
         &:before {
           content: '';
@@ -242,7 +242,7 @@ export default {
       }
     }
 
-    &[x-placement="left"] {
+    &[x-placement^="left"] {
       [x-arrow] {
         &:before {
           content: '';
@@ -268,7 +268,7 @@ export default {
       }
     }
 
-    &[x-placement="right"] {
+    &[x-placement^="right"] {
       [x-arrow] {
         &:before {
           content: '';
@@ -302,36 +302,77 @@ export default {
       font-size: 14px;
       line-height: 21px;
 
-      &[x-placement="bottom"] {
+      &[x-placement^="bottom"],
+      &[x-placement^="top"],
+      &[x-placement^="left"],
+      &[x-placement^="right"] {
         [x-arrow] {
-          &:before, &:after {
-            border-bottom-color: @color-gray-200;
+          &:before {
+            display: none;
           }
         }
       }
 
-      &[x-placement="top"] {
+      &[x-placement^="bottom"] {
         [x-arrow] {
-          &:before, &:after {
-            border-top-color: @color-gray-200;
+          &:after {
+            top: -15px;
+            border-bottom: 20px solid @color-gray-200;
+            border-right: 10px solid transparent;
+            border-left: 20px solid transparent;
           }
         }
       }
 
-
-      &[x-placement="left"] {
+      &[x-placement^="top"] {
         [x-arrow] {
-          &:before, &:after {
-            border-left-color: @color-gray-200;
+          &:after {
+            bottom: -15px;
+            border-top: 20px solid @color-gray-200;
+            border-right: 10px solid transparent;
+            border-left: 20px solid transparent;
           }
         }
       }
 
-
-      &[x-placement="right"] {
+      &[x-placement^="left"] {
         [x-arrow] {
-          &:before, &:after {
-            border-right-color: @color-gray-200;
+          &:after {
+            right: -15px;
+            border-left: 20px solid @color-gray-200;
+            border-top: 10px solid transparent;
+            border-bottom: 20px solid transparent;
+          }
+        }
+      }
+
+      &[x-placement^="right"] {
+        [x-arrow] {
+          &:after {
+            left: -15px;
+            border-right: 20px solid @color-gray-200;
+            border-top: 10px solid transparent;
+            border-bottom: 20px solid transparent;
+          }
+        }
+      }
+
+      &[x-placement="right-end"],
+      &[x-placement="left-end"] {
+        [x-arrow] {
+          &:after {
+            top: -17px;
+          }
+        }
+      }
+
+      &[x-placement="top-start"],
+      &[x-placement="top-end"],
+      &[x-placement="bottom-start"],
+      &[x-placement="bottom-end"] {
+        [x-arrow] {
+          &:after {
+            left: -15px;
           }
         }
       }

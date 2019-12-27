@@ -31,7 +31,7 @@
         poperPadding="20px 40px 50px 30px"
         poperMargin="0 0 0 30px"
         poperBoxSizing="border-box"
-        placement="left"
+        placement="right-start"
         class="default-tooltip"
         type="custom"
         :forceShow="forceShow"
@@ -39,14 +39,12 @@
         @update:forceShow="forceShowUpdate"
       >
         <div slot="popover">
-          <div class="ds-tooltip-content-custom">
-            C'est vraiment pratique, l’utilisation du mini TPE est très complète (en plus d’être beaucoup moins cher
-            qu'un TPE classique en location). Pouvoir faire en même temps caisse enregistreuse et avoir immédiatement
-            les statistiques des ventes, c'est un vrai plus !
-          </div>
+          C'est vraiment pratique, l’utilisation du mini TPE est très complète (en plus d’être beaucoup moins cher
+          qu'un TPE classique en location). Pouvoir faire en même temps caisse enregistreuse et avoir immédiatement
+          les statistiques des ventes, c'est un vrai plus !
         </div>
         <div slot="reference">
-          <Button>Custom Tooltip</Button>
+          <Button padding="40px 10px">Custom Tooltip</Button>
         </div>
       </Tooltip>
     </div>
